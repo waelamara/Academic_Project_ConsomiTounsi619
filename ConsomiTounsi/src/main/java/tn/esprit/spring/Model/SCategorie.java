@@ -17,11 +17,47 @@ public class SCategorie implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long Id;
-	public String NomSCategorie;
+	private Long Id;
+	private String NomSCategorie;
 	@ManyToOne
-	public Categorie IdCategorie;
+	private Categorie IdCategorie;
 	@OneToMany(mappedBy="IdSCategorie")
-	public Set<SsCategorie> SsCategories;
+	private Set<SsCategorie> SsCategories;
+	
+	public SCategorie() {
+	}
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getNomSCategorie() {
+		return NomSCategorie;
+	}
+
+	public void setNomSCategorie(String nomSCategorie) {
+		NomSCategorie = nomSCategorie;
+	}
+
+	public Categorie getIdCategorie() {
+		return IdCategorie;
+	}
+
+	public void setIdCategorie(Categorie idCategorie) {
+		IdCategorie = idCategorie;
+	}
+
+	public Set<SsCategorie> getSsCategories() {
+		return SsCategories;
+	}
+
+	public void setSsCategories(Set<SsCategorie> ssCategories) {
+		SsCategories = ssCategories;
+	}
+	
 	
 }
