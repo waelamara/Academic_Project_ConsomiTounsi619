@@ -1,17 +1,15 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 @Entity
-@Table(name="Commande")
-public class Commande implements Serializable  {
+@Table(name="LigneCommande")
+public class LigneCommande implements Serializable  {
 
 	/**
 	 * 
@@ -19,26 +17,26 @@ public class Commande implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	private Date date;
-	private float montant;
-	private String status;
+	 private int quantity;
+	 private double price;
+	 private String status;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getDate() {
-		return date;
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-	public float getMontant() {
-		return montant;
+	public double getPrice() {
+		return price;
 	}
-	public void setMontant(float montant) {
-		this.montant = montant;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public String getStatus() {
 		return status;
@@ -46,5 +44,7 @@ public class Commande implements Serializable  {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	 
+	
 
 }
