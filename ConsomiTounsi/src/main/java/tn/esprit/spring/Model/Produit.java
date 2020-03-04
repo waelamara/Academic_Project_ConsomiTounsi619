@@ -36,6 +36,9 @@ public class Produit implements Serializable {
 	@OneToMany(mappedBy="idproduit")
 	public Set<LigneCommande> ligneCommande;
 	
+	@ManyToOne
+	Rayon Idrayon;
+	
 
 
 
