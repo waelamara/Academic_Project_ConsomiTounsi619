@@ -8,28 +8,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
 @Entity
-public class Image implements Serializable  {
+public class Image implements Serializable {
 	/*
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long Id;
-	public float NomImage;
+	private Long Id;
+	private float NomImage;
 	@ManyToOne
-	public Produit Idproduit;
-	
-	
-	
-	
-	
-	
+	private Produit Idproduit;
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public float getNomImage() {
+		return NomImage;
+	}
+
+	public void setNomImage(float nomImage) {
+		NomImage = nomImage;
+	}
+
+	public Produit getIdproduit() {
+		return Idproduit;
+	}
+
+	public void setIdproduit(Produit idproduit) {
+		Idproduit = idproduit;
+	}
+
 	public Image() {
 	}
 
-
-	
 }
