@@ -21,25 +21,98 @@ public class Produit implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long Id;
-	public String NomProduit;
-	public float Prix;
-	public String Description;
-	public int Barcode;
-	public float Poids;
-	public float PrixAchat;
+	private Long Id;
+	private String NomProduit;
+	private float Prix;
+	private String Description;
+	private int Barcode;
+	private float Poids;
+	private float PrixAchat;
 	
 	@ManyToOne
-	public SsCategorie IdSsCategorie;
+	private SsCategorie IdSsCategorie;
 	@OneToMany(mappedBy="Idproduit")
 	public Set<Image> Images;
+	@OneToMany(mappedBy="idproduit")
+	public Set<LigneCommande> ligneCommande;
 	
-	
-	
-	
+
+
 
 	public Produit() {
 
+	}
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getNomProduit() {
+		return NomProduit;
+	}
+
+	public void setNomProduit(String nomProduit) {
+		NomProduit = nomProduit;
+	}
+
+	public float getPrix() {
+		return Prix;
+	}
+
+	public void setPrix(float prix) {
+		Prix = prix;
+	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+
+	public int getBarcode() {
+		return Barcode;
+	}
+
+	public void setBarcode(int barcode) {
+		Barcode = barcode;
+	}
+
+	public float getPoids() {
+		return Poids;
+	}
+
+	public void setPoids(float poids) {
+		Poids = poids;
+	}
+
+	public float getPrixAchat() {
+		return PrixAchat;
+	}
+
+	public void setPrixAchat(float prixAchat) {
+		PrixAchat = prixAchat;
+	}
+
+	public SsCategorie getIdSsCategorie() {
+		return IdSsCategorie;
+	}
+
+	public void setIdSsCategorie(SsCategorie idSsCategorie) {
+		IdSsCategorie = idSsCategorie;
+	}
+
+	public Set<Image> getImages() {
+		return Images;
+	}
+
+	public void setImages(Set<Image> images) {
+		Images = images;
 	}
 	
 	
