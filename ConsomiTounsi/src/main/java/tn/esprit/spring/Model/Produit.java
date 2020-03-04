@@ -33,6 +33,8 @@ public class Produit implements Serializable {
 	public SsCategorie IdSsCategorie;
 	@OneToMany(mappedBy="Idproduit")
 	public Set<Image> Images;
+	@OneToMany(mappedBy="idproduit")
+	public Set<LigneCommande> ligneCommande;
 	
 	
 	

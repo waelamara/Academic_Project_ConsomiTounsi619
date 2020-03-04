@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="LigneCommande")
@@ -20,6 +21,11 @@ public class LigneCommande implements Serializable  {
 	 private int quantity;
 	 private double price;
 	 private String status;
+	 @ManyToOne
+	private Produit idproduit;
+	 @ManyToOne
+private Commande idcommande ;
+	 
 	public Long getId() {
 		return id;
 	}
