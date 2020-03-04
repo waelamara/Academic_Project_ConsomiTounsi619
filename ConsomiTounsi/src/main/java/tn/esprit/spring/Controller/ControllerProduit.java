@@ -18,7 +18,7 @@ import tn.esprit.spring.DAO.ProduitDAO;
 import tn.esprit.spring.Model.Produit;
 
 @RestController
-@RequestMapping("/controller")
+@RequestMapping("/produit")
 public class ControllerProduit {
 	@Autowired
 	ProduitDAO produitDAO;
