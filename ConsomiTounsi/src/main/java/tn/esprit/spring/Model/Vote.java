@@ -17,5 +17,5 @@ public class Vote implements Serializable {
     private int nbLike;
 	private int nbDislike;
 	@ManyToOne
-	Commentaire idcommentaire;
+	Commentaire idCommentaire;
 }
