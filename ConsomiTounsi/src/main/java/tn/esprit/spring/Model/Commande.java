@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +27,8 @@ public class Commande implements Serializable  {
 	private String status;
 	@OneToMany(mappedBy="idcommande")
 	public Set<LigneCommande> ligneCommande;
+	@OneToOne
+	Facture factureid;
 	public Long getId() {
 		return id;
 	}
