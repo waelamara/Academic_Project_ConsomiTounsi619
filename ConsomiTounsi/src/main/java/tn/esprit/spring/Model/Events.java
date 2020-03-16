@@ -36,6 +36,74 @@ public class Events implements Serializable {
 	private Set<Endroit> endroit;
 	@OneToMany(mappedBy="idevents")
 	public Set<Charite> charite;
-
+	public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	public String getTitre() {
+		return titre;
+	}
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+	public Date getDateE() {
+		return DateE;
+	}
+	public void setDateE(Date dateE) {
+		DateE = dateE;
+	}
+	public int getNbplace() {
+		return nbplace;
+	}
+	public void setNbplace(int nbplace) {
+		this.nbplace = nbplace;
+	}
+	public int getNbparticipant() {
+		return nbparticipant;
+	}
+	public void setNbparticipant(int nbparticipant) {
+		this.nbparticipant = nbparticipant;
+	}
+	public Pub getPublicite() {
+		return publicite;
+	}
+	public void setPublicite(Pub publicite) {
+		this.publicite = publicite;
+	}
+	public Set<Endroit> getEndroit() {
+		return endroit;
+	}
+	public void setEndroit(Set<Endroit> endroit) {
+		this.endroit = endroit;
+	}
+	public Set<Charite> getCharite() {
+		return charite;
+	}
+	public void setCharite(Set<Charite> charite) {
+		this.charite = charite;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	@Override
+	public String toString() {
+		return "Events [Id=" + Id + ", titre=" + titre + ", DateE=" + DateE + ", nbplace=" + nbplace
+				+ ", nbparticipant=" + nbparticipant + ", publicite=" + publicite + ", endroit=" + endroit
+				+ ", charite=" + charite + "]";
+	}
+ public Events(String titre,Date DateE,int nbplace,int nbparticipant,Pub publicite,Set<Endroit> endroit,Set<Charite> charite){
+	 super();
+	 this.titre = titre;
+	 this.DateE = DateE;
+	 this.nbplace=nbplace;
+	 this.nbparticipant=nbparticipant;
+	 this.publicite=publicite;
+	 this.endroit=endroit;
+	 this.charite=charite;
+	
+	 
+ }
 
 }
