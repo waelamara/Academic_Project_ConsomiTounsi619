@@ -1,7 +1,6 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "T_ENDROIT")
@@ -28,6 +25,46 @@ public class Endroit implements Serializable {
 	private String emplacement;
 	private int nbplace;
 	@ManyToOne 
-	Events eventss; 
+	Events eventss;
+	public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	public int getPrix() {
+		return prix;
+	}
+	public void setPrix(int prix) {
+		this.prix = prix;
+	}
+	public String getStatu() {
+		return statu;
+	}
+	public void setStatu(String statu) {
+		this.statu = statu;
+	}
+	public String getEmplacement() {
+		return emplacement;
+	}
+	public void setEmplacement(String emplacement) {
+		this.emplacement = emplacement;
+	}
+	public int getNbplace() {
+		return nbplace;
+	}
+	public void setNbplace(int nbplace) {
+		this.nbplace = nbplace;
+	}
+	public Events getEventss() {
+		return eventss;
+	}
+	public void setEventss(Events eventss) {
+		this.eventss = eventss;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	} 
+	
 
 }

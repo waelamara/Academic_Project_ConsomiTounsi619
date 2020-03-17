@@ -31,5 +31,45 @@ public class Pub implements Serializable {
 	private String Image;
 	@OneToOne(mappedBy="publicite") 
 	private Events events;
+	public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	public String getNom() {
+		return Nom;
+	}
+	public void setNom(String nom) {
+		Nom = nom;
+	}
+	public Date getDateDebut() {
+		return DateDebut;
+	}
+	public void setDateDebut(Date dateDebut) {
+		DateDebut = dateDebut;
+	}
+	public Date getDateFin() {
+		return DateFin;
+	}
+	public void setDateFin(Date dateFin) {
+		DateFin = dateFin;
+	}
+	public String getImage() {
+		return Image;
+	}
+	public void setImage(String image) {
+		Image = image;
+	}
+	public Events getEvents() {
+		return events;
+	}
+	public void setEvents(Events events) {
+		this.events = events;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 
 }

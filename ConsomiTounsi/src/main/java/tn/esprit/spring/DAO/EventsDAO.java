@@ -1,39 +1,18 @@
 package tn.esprit.spring.DAO;
 
+import java.util.Optional;
 import java.util.List;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import tn.esprit.spring.Model.Events;
-import tn.esprit.spring.Model.Produit;
-import tn.esprit.spring.Repository.EventsRepository;
 
-@Service
-public class EventsDAO {
-	@Autowired
-	EventsRepository eventsRepository;
-	public Events save(Events e) {
-		return eventsRepository.save(e);
-	}
+public interface EventsDAO {
+	Events saveEvents(Events Events);
 
-	public List<Events> findAll() {
-		return eventsRepository.findAll();
-	}
+	Events upsateEvents(Events Events);
 
-	public void Delete(Events e) {
-		eventsRepository.delete(e);
-	}
+	List<Events> getAllEventsList();
 
-	public Events findOne(Long id) {
-		return eventsRepository.getOne(id);
-	}
-	public List<Events> findLikeName(String titre) {
-		return eventsRepository.findLikeName(titre);
+	Optional<Events> findEventsById(long Id);
 
-	}
-
-
+	void deleteEventsById(long Id);
 }

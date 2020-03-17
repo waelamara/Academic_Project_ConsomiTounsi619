@@ -28,5 +28,33 @@ public class Charite implements Serializable {
 	private User iduser;
 	 @ManyToOne
 private Events idevents ;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getTypeCharite() {
+		return TypeCharite;
+	}
+	public void setTypeCharite(String typeCharite) {
+		TypeCharite = typeCharite;
+	}
+	public User getIduser() {
+		return iduser;
+	}
+	public void setIduser(User iduser) {
+		this.iduser = iduser;
+	}
+	public Events getIdevents() {
+		return idevents;
+	}
+	public void setIdevents(Events idevents) {
+		this.idevents = idevents;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	 
 
 }
