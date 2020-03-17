@@ -13,6 +13,8 @@ public interface EventsDAO {
 	List<Events> getAllEventsList();
 
 	Optional<Events> findEventsById(long Id);
+	List<Events> findLikeName(String titre);
+
 
 	void deleteEventsById(long Id);
 }

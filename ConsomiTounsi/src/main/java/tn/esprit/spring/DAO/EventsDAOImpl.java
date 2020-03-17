@@ -49,4 +49,10 @@ public class EventsDAOImpl implements EventsDAO {
 
 	}
 
+	public List<Events> findLikeName(String titre) {
+		return eventsRepository.findLikeName(titre);
+
+	}
+
+	
 }
