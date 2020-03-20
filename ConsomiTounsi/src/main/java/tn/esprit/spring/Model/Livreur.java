@@ -68,10 +68,6 @@ public class Livreur implements Serializable {
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 
 	public String getNom() {
 		return Nom;
