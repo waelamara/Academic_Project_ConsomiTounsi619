@@ -2,7 +2,6 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -116,6 +115,20 @@ public class Produit implements Serializable {
 
 	public void setImages(Set<Image> images) {
 		Images = images;
+	}
+
+	public Produit(String nomProduit, float prix, String description, int barcode, float poids, float prixAchat,
+			SsCategorie idSsCategorie, Set<Image> images, Set<LigneCommande> ligneCommande) {
+		super();
+		NomProduit = nomProduit;
+		Prix = prix;
+		Description = description;
+		Barcode = barcode;
+		Poids = poids;
+		PrixAchat = prixAchat;
+		IdSsCategorie = idSsCategorie;
+		Images = images;
+		this.ligneCommande = ligneCommande;
 	}
 	
 	
