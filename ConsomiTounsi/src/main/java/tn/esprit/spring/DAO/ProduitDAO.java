@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.Model.Produit;
+import tn.esprit.spring.Model.GestionProduit.Produit;
 import tn.esprit.spring.Repository.ProduitRepository;
 
 @Service

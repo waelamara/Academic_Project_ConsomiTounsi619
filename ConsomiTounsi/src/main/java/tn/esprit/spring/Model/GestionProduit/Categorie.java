@@ -1,4 +1,4 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.GestionProduit;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -17,51 +17,44 @@ public class Categorie implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private String NomCategorie;
-	@OneToMany(mappedBy="IdCategorie")
+	private String nomCategorie;
+	@OneToMany(mappedBy = "IdCategorie")
 	private Set<SCategorie> Categories;
-	
-	
+
 	public Categorie() {
+		super();
 	}
 
-
-	public Categorie(Long id, String nomCategorie, Set<SCategorie> categories) {
+	public Categorie(Long id, String nomCategorie) {
 		super();
 		Id = id;
-		NomCategorie = nomCategorie;
-		Categories = categories;
+		this.nomCategorie = nomCategorie;
 	}
-
 
 	public Long getId() {
 		return Id;
 	}
 
-
 	public void setId(Long id) {
 		Id = id;
 	}
 
-
 	public String getNomCategorie() {
-		return NomCategorie;
+		return nomCategorie;
 	}
-
 
 	public void setNomCategorie(String nomCategorie) {
-		NomCategorie = nomCategorie;
+		this.nomCategorie = nomCategorie;
 	}
-
 
 	public Set<SCategorie> getCategories() {
 		return Categories;
 	}
 
-
 	public void setCategories(Set<SCategorie> categories) {
 		Categories = categories;
 	}
+
 
 
 }

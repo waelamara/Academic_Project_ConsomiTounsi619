@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import tn.esprit.spring.Model.Produit;
+import tn.esprit.spring.Model.GestionProduit.Produit;
 
 public interface ProduitRepository extends JpaRepository<Produit, Long>{
 	@Query(value = "SELECT * FROM produit WHERE nom_produit LIKE ?1%", nativeQuery = true)

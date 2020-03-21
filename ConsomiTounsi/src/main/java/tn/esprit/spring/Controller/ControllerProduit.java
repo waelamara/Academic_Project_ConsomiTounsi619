@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.ProduitDAO;
-import tn.esprit.spring.Model.Produit;
+import tn.esprit.spring.Model.GestionProduit.Produit;
 
 @RestController
 @RequestMapping("/produit")
@@ -44,8 +44,7 @@ public class ControllerProduit {
 	}
 
 	@PutMapping("/edit/{id}")
-	public ResponseEntity<Produit> EditProduit(@PathVariable(value = "id") Long idProduit,
-			@Valid @RequestBody Produit p) {
+	public ResponseEntity<Produit> EditProduit(@PathVariable(value = "id") Long idProduit, @Valid @RequestBody Produit p) {
 		Produit p2 = produitDAO.findOne(idProduit);
 		if (p == null) {
 			return ResponseEntity.notFound().build();

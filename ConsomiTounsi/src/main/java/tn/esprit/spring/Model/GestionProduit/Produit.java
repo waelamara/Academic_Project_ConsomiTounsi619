@@ -1,13 +1,19 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.GestionProduit;
 
 import java.io.Serializable;
 import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import tn.esprit.spring.Model.LigneCommande;
+import tn.esprit.spring.Model.Rayon;
+import tn.esprit.spring.Model.Stock;
 
 
 
@@ -31,13 +37,14 @@ public class Produit implements Serializable {
 	@ManyToOne
 	private SsCategorie IdSsCategorie;
 	@OneToMany(mappedBy="Idproduit")
-	public Set<Image> Images;
+	private Set<Image> Images;
 	@OneToMany(mappedBy="idproduit")
-	public Set<LigneCommande> ligneCommande;
+	private Set<LigneCommande> ligneCommande;
 	
 	@ManyToOne
 	Rayon Idrayon;
-	
+	@OneToOne
+	private Stock IdStock;
 
 
 
