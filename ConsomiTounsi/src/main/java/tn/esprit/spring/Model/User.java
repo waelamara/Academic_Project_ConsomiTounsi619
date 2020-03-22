@@ -1,5 +1,7 @@
 package tn.esprit.spring.Model;
 
+import tn.esprit.spring.Model.Forum.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -32,5 +34,14 @@ public class User implements Serializable {
 	private String lastName;
 	@OneToMany(mappedBy="iduser")
 	public Set<Charite> charite;
-
+	/******ayed*******/
+	@OneToMany(mappedBy="idUser")
+	public Set<Commentaire> commentaires;
+	@OneToMany(mappedBy="idUser")
+	public Set<Sujet> Sujets;
+	@OneToMany(mappedBy="idUser")
+	public Set<Vote> Votes;
+	@OneToMany(mappedBy="idUser")
+	public Set<VoteSujet> VotesSujet;
+	/*********ayed*********/
 }
