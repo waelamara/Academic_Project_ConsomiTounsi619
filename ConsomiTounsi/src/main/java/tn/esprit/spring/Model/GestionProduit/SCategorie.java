@@ -3,6 +3,7 @@ package tn.esprit.spring.Model.GestionProduit;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +20,21 @@ public class SCategorie implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String NomSCategorie;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Categorie IdCategorie;
-	@OneToMany(mappedBy="IdSCategorie")
+	@OneToMany(mappedBy="IdSCategorie",cascade = CascadeType.ALL)
 	private Set<SsCategorie> SsCategories;
 	
 	public SCategorie() {
 	}
+
+	
+	public SCategorie(String nomSCategorie, Categorie idCategorie) {
+		super();
+		NomSCategorie = nomSCategorie;
+		IdCategorie = idCategorie;
+	}
+
 
 	public Long getId() {
 		return Id;
