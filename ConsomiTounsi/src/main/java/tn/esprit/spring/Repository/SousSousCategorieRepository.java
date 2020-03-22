@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import tn.esprit.spring.Model.GestionProduit.SsCategorie;
 
-public interface SousSousCategorie extends JpaRepository<SsCategorie, Long> {
+public interface SousSousCategorieRepository extends JpaRepository<SsCategorie, Long> {
 
 }
