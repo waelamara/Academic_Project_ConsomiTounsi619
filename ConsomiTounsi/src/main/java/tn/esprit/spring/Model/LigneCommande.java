@@ -24,9 +24,9 @@ public class LigneCommande implements Serializable  {
 	 private double price;
 	 private String status;
 	 @ManyToOne
-	private Produit idproduit;
+	private Produit produit;
 	 @ManyToOne
-private Commande idcommande ;
+private Commande commande ;
 	 
 	public Long getId() {
 		return id;
