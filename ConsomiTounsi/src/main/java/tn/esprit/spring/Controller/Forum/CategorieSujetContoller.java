@@ -18,7 +18,7 @@ public class CategorieSujetContoller {
 	 ICategorieSujetService  icategorieSujetService;
 	
 	@PostMapping("/ajouter")
-	public int AjouterCategorie( CategorieSujet c) {
+	public int AjouterCategorie( @Valid @RequestBody CategorieSujet c) {
 		return icategorieSujetService.ajouterCategorieSujet(c);
 	}
 }

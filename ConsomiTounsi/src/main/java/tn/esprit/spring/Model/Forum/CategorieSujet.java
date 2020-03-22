@@ -21,9 +21,15 @@ public class CategorieSujet implements Serializable {
 	private String NomCategorie;
 	@OneToMany(mappedBy="CategorieSujet")
 	private Set<Sujet> sujets ;
+	
 	 
 
 	
+	public CategorieSujet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public CategorieSujet(Long id, String nomCategorie) {
 		super();
 		this.id = id;
