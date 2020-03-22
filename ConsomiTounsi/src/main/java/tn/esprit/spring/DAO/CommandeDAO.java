@@ -31,6 +31,28 @@ public class CommandeDAO {
         }
         return sum;
     }*/
+	public List<Commande> CommandeparType(String type) {
+		return commandeRepository.CommandeparType(type);
+
+	}
+	public List<Commande> CommandeparClient(int id) {
+		return commandeRepository.CommandeparClient(id);
+
+	}
+	public List<Commande> findAll() {
+		return commandeRepository.findAll();
+	}
+	public void Delete(Commande c) {
+		commandeRepository.delete(c);
+	}
+
+	public Commande findOne(Long id) {
+		return commandeRepository.getOne(id);
+	}
+	public List< Commande> Commandeparcode( int code) {
+		return commandeRepository.Commandeparcode(code);
+
+	}
  
 
 }

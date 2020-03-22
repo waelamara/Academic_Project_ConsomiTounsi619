@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.Rayon;
 import tn.esprit.spring.Model.Stock;
@@ -38,7 +40,8 @@ public class Produit implements Serializable {
 	private SsCategorie IdSsCategorie;
 	@OneToMany(mappedBy="Idproduit")
 	private Set<Image> Images;
-	@OneToMany(mappedBy="idproduit")
+	@OneToMany(mappedBy="produit")
+	@JsonIgnore
 	private Set<LigneCommande> ligneCommande;
 	
 	@ManyToOne
