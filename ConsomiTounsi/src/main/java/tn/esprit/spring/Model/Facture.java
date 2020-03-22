@@ -1,6 +1,7 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Facture implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String Type;
-	private Date date;
+	private LocalDate date;
 	@OneToOne(mappedBy="factureid")
 	Commande commandeid;
 	public Long getId() {
@@ -33,11 +34,18 @@ public class Facture implements Serializable{
 	public void setType(String type) {
 		Type = type;
 	}
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+	public Commande getCommandeid() {
+		return commandeid;
+	}
+	public void setCommandeid(Commande commandeid) {
+		this.commandeid = commandeid;
+	}
+
 
 }

@@ -15,49 +15,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.CommandeDAO;
+import tn.esprit.spring.DAO.FactureDAO;
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.Facture;
+import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.GestionProduit.Produit;
 
+
 @RestController
-@RequestMapping("/commande")
-public class ControllerCommande {
+@RequestMapping("/facture")
+public class FactureController {
+	@Autowired
+	FactureDAO factureDAO;
 	@Autowired
 	CommandeDAO commandeDao;
 	@PostMapping("/ajouter")
-	public Commande AjouterCommande(@Valid @RequestBody Commande c)
+	public Facture AjouterFacture(@Valid @RequestBody Facture f) 
+			
 	{
-		return commandeDao.save(c);
+		
+		return	factureDAO.save(f);
+	
 	}
 	@GetMapping("/afficher")
-	public List<Commande> getAllCommande() {
-		return commandeDao.findAll();
+	public List<Facture > getAllFacture(){
+		
+		return factureDAO.findAll();
+		
 	}
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Commande> DeleteCommande(@PathVariable(value = "id") Long idCommande) {
-		Commande c =commandeDao.findOne(idCommande);
-		if ( c == null) {
+	public ResponseEntity<Facture> DeleteProduit(@PathVariable(value = "id") Long idFacture) {
+		Facture p = factureDAO.findOne(idFacture);
+		if (p == null) {
 			return ResponseEntity.notFound().build();
 		}
-		commandeDao.Delete(c);
+		factureDAO.Delete(p);
 		return ResponseEntity.ok().build();
 	}
-	@GetMapping("rechercheparcode/{code}")
-	public List<Commande>Commandeparcode(@PathVariable(value = "code") int code) {
-	
-		return commandeDao.Commandeparcode(code);
-	}
-	 
-
-	
-	@GetMapping("/recherchetype/{type}")
-	public List<Commande> CommandeparType(@PathVariable(value = "type") String type) {
-		return commandeDao.CommandeparType(type);
-	}
-	@GetMapping("/recherche/{idClient}")
-	public List<Commande> CommandeparClient(@PathVariable(value = "idClient") int id) {
-		return commandeDao.CommandeparClient(id);
-	}
-
 	
 
 }
