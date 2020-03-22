@@ -1,13 +1,18 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.Forum;
 
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import tn.esprit.spring.Model.*;
+
 @Entity
 public class Commentaire implements Serializable  {
 	
@@ -19,7 +24,10 @@ public class Commentaire implements Serializable  {
 		private String description;
 		private int nbLike;
 		private int nbDislike;
+		
+		@ManyToOne  
+		@JoinColumn(name = "idUser", referencedColumnName = "USER_ID")
+		User idUser;
 		@OneToMany(mappedBy="idCommentaire")
-		private Set<Vote>votes;
-
+		public Set<Vote> Votes;
 }
