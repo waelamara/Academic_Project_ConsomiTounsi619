@@ -45,11 +45,11 @@ public class FactureController {
 	}
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Facture> DeleteProduit(@PathVariable(value = "id") Long idFacture) {
-		Facture p = factureDAO.findOne(idFacture);
-		if (p == null) {
+		Facture f = factureDAO.findOne(idFacture);
+		if (f == null) {
 			return ResponseEntity.notFound().build();
 		}
-		factureDAO.Delete(p);
+		factureDAO.Delete(f);
 		return ResponseEntity.ok().build();
 	}
 	
