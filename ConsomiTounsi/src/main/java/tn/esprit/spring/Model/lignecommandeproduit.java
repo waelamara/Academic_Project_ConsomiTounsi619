@@ -14,7 +14,7 @@ public class lignecommandeproduit implements Serializable{
 	private int quantity;
 	private float price;
 	private float total;
-
+private String name ;
 	private LocalDate date;
 	private float montant;
 
@@ -66,6 +66,28 @@ public class lignecommandeproduit implements Serializable{
 	public lignecommandeproduit(LocalDate date, float montant) {
 		this.date = date;
 		this.montant = montant;
+	}
+	public lignecommandeproduit( LocalDate date,String nomProduit,int quantity, float price,float total,String name) {
+		super();
+		this.date = date;
+		this.nomProduit = nomProduit;
+		this.quantity = quantity;
+		this.price = price;
+		this.total = total;
+		this.name=name;
+		
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	

@@ -20,8 +20,8 @@ public class Facture implements Serializable{
 	private Long Id;
 	private String Type;
 	private LocalDate date;
-	@OneToOne(mappedBy="factureid")
-	Commande commandeid;
+	@OneToOne
+	Commande commande;
 	public Long getId() {
 		return Id;
 	}
@@ -40,12 +40,13 @@ public class Facture implements Serializable{
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public Commande getCommandeid() {
-		return commandeid;
+	public Commande getCommande() {
+		return commande;
 	}
-	public void setCommandeid(Commande commandeid) {
-		this.commandeid = commandeid;
+	public void setCommande(Commande commande) {
+		this.commande = commande;
 	}
+
 
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.LigneCommande;
+import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Repository.FactureRepository;
 
 @Service
@@ -30,6 +31,10 @@ public Facture  save ( Facture f)
 }
 public void Delete(Facture f) {
 	factureRepository.delete(f);
+}
+public List<lignecommandeproduit> FactureParIdUser( long id) {
+	return factureRepository.FactureParIdUser(id);
+
 }
 
 }

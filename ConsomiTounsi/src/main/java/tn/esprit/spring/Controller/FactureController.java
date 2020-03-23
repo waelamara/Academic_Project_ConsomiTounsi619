@@ -19,6 +19,7 @@ import tn.esprit.spring.DAO.FactureDAO;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.Livreur;
+import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.GestionProduit.Produit;
 
 
@@ -29,12 +30,15 @@ public class FactureController {
 	FactureDAO factureDAO;
 	@Autowired
 	CommandeDAO commandeDao;
-	@PostMapping("/ajouter")
-	public Facture AjouterFacture(@Valid @RequestBody Facture f) 
+	@PostMapping("/ajouter/{idCommande}")
+	public ResponseEntity <Facture> AjouterFacture(@PathVariable(value = "idCommande") Long idCommande,@Valid @RequestBody Facture f) 
 			
 	{
+		Commande c =  commandeDao.findOne( idCommande);
+		f.setCommande(c);
 		
-		return	factureDAO.save(f);
+			factureDAO.save(f);
+			return ResponseEntity.ok().build();
 	
 	}
 	@GetMapping("/afficher")
@@ -52,6 +56,10 @@ public class FactureController {
 		factureDAO.Delete(f);
 		return ResponseEntity.ok().build();
 	}
+	@GetMapping("/{idUser}")
+	public List<lignecommandeproduit> panierParIdclient(@PathVariable(value = "idUser") long id) {
 	
+		return factureDAO.FactureParIdUser(id);
+	}
 
 }
