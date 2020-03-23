@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "T_PUB")
 public class Pub implements Serializable {
@@ -30,6 +32,7 @@ public class Pub implements Serializable {
 	private Date DateFin;
 	private String Image;
 	@OneToOne(mappedBy="publicite") 
+	@JsonIgnore
 	private Events events;
 	public Long getId() {
 		return Id;
