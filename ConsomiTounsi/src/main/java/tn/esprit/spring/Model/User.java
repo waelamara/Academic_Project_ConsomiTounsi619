@@ -55,7 +55,6 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="idUser")
 	public Set<VoteSujet> VotesSujet;
 	/*********ayed*********/
-<<<<<<< HEAD
 	public Long getId() {
 		return id;
 	}
@@ -122,7 +121,6 @@ public class User implements Serializable {
 		this.id=iduser;
 
 	}
-=======
 	
 	
 	/***************Oussama********/
@@ -136,6 +134,4 @@ public class User implements Serializable {
 	public void setReclamation(Set<reclamation> reclamation) {
 		this.reclamation = reclamation;
 	}
-	/***************relation avec reclamation*/
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
 }
