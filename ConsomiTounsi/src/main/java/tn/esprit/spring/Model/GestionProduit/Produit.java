@@ -3,6 +3,7 @@ package tn.esprit.spring.Model.GestionProduit;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,15 +36,15 @@ public class Produit implements Serializable {
 	private int Barcode;
 	private float Poids;
 	private float PrixAchat;
-	
 	@ManyToOne
 	private SsCategorie IdSsCategorie;
-	@OneToMany(mappedBy="Idproduit")
-	private Set<Image> Images;
+	
+	
+	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
+	private Set<ImageProduit> Images;
 	@OneToMany(mappedBy="produit")
 	@JsonIgnore
 	private Set<LigneCommande> ligneCommande;
-	
 	@ManyToOne
 	Rayon Idrayon;
 	@OneToOne
@@ -119,16 +120,16 @@ public class Produit implements Serializable {
 		IdSsCategorie = idSsCategorie;
 	}
 
-	public Set<Image> getImages() {
+	public Set<ImageProduit> getImages() {
 		return Images;
 	}
 
-	public void setImages(Set<Image> images) {
+	public void setImages(Set<ImageProduit> images) {
 		Images = images;
 	}
 
 	public Produit(String nomProduit, float prix, String description, int barcode, float poids, float prixAchat,
-			SsCategorie idSsCategorie, Set<Image> images, Set<LigneCommande> ligneCommande) {
+			SsCategorie idSsCategorie) {
 		super();
 		NomProduit = nomProduit;
 		Prix = prix;
@@ -137,9 +138,21 @@ public class Produit implements Serializable {
 		Poids = poids;
 		PrixAchat = prixAchat;
 		IdSsCategorie = idSsCategorie;
-		Images = images;
-		this.ligneCommande = ligneCommande;
 	}
+
+	public Produit(String nomProduit, float prix, String description, int barcode, float poids, float prixAchat,
+			Set<ImageProduit> images) {
+		super();
+		NomProduit = nomProduit;
+		Prix = prix;
+		Description = description;
+		Barcode = barcode;
+		Poids = poids;
+		PrixAchat = prixAchat;
+		Images = images;
+	}
+
+	
 	
 	
 

@@ -41,7 +41,7 @@ public class Commande implements Serializable  {
 	@JsonIgnore
 	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	public Set<LigneCommande> ligneCommande;
-	@OneToOne
+	@OneToOne(mappedBy="commande")
 	Facture factureid;
 	 @ManyToOne
 	  @JoinColumn(name="idUser")

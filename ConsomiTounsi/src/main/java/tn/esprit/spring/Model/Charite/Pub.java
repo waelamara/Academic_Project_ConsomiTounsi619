@@ -1,4 +1,4 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.Charite;
 
 import java.io.Serializable;
 import java.util.Date;

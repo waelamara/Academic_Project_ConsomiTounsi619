@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Image implements Serializable {
+public class ImageProduit implements Serializable {
 	/*
 	 *
 	 */
@@ -17,7 +17,7 @@ public class Image implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private float NomImage;
+	private String Image;
 	@ManyToOne
 	private Produit Idproduit;
 
@@ -29,12 +29,12 @@ public class Image implements Serializable {
 		Id = id;
 	}
 
-	public float getNomImage() {
-		return NomImage;
+	public String getImage() {
+		return Image;
 	}
 
-	public void setNomImage(float nomImage) {
-		NomImage = nomImage;
+	public void setImage(String image) {
+		Image = image;
 	}
 
 	public Produit getIdproduit() {
@@ -45,7 +45,24 @@ public class Image implements Serializable {
 		Idproduit = idproduit;
 	}
 
-	public Image() {
+	public ImageProduit() {
 	}
 
+	
+	public ImageProduit(String image) {
+		super();
+		Image = image;
+	}
+
+	public ImageProduit(String image, Produit idproduit) {
+		super();
+		Image = image;
+		Idproduit = idproduit;
+	}
+
+
+
+	
+	
+	
 }

@@ -1,8 +1,8 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.DAO.Charite;
 
 import java.util.List;
 
-import tn.esprit.spring.Model.Events;
+import tn.esprit.spring.Model.Charite.Events;
 
 public interface EventsDAO {
 	Events saveEvents(Events Events);
