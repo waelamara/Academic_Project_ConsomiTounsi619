@@ -140,6 +140,18 @@ public class Produit implements Serializable {
 		IdSsCategorie = idSsCategorie;
 	}
 
+	public Produit(String nomProduit, float prix, String description, int barcode, float poids, float prixAchat,
+			Set<ImageProduit> images) {
+		super();
+		NomProduit = nomProduit;
+		Prix = prix;
+		Description = description;
+		Barcode = barcode;
+		Poids = poids;
+		PrixAchat = prixAchat;
+		Images = images;
+	}
+
 	
 	
 	
