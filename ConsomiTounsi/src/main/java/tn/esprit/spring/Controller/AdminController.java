@@ -19,13 +19,36 @@ public class AdminController {
 	@Autowired
 	ReclamationDAO ReclamationDAO;
 
-@PutMapping("reclamation/traiter/{rec_id}")
+@PutMapping("reclamation/rembourser/{rec_id}")
 	
-	public reclamation traiterrec(@PathVariable(value="rec_id") long rec_id,@Valid @RequestBody reclamation rec)
+	public reclamation Rembourser_rec(@PathVariable(value="rec_id") long rec_id,@Valid @RequestBody reclamation rec)
 	{   
 	    reclamation rec1 = ReclamationDAO.findbyid(rec_id);
 	    rec1.setTraiter(true);
+	    rec1.setEtat("Remboursé");
 	    rec1.setReponse(rec.getReponse());
 		return ReclamationDAO.traiter(rec1);
 	}
+
+@PutMapping("reclamation/Echange/{rec_id}")
+
+public reclamation Echange_rec(@PathVariable(value="rec_id") long rec_id,@Valid @RequestBody reclamation rec)
+{   
+    reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+    rec1.setTraiter(true);
+    rec1.setEtat("Echange");
+    rec1.setReponse(rec.getReponse());
+	return ReclamationDAO.traiter(rec1);
+}
+
+@PutMapping("reclamation/reparation/{rec_id}")
+
+public reclamation reparation_rec(@PathVariable(value="rec_id") long rec_id,@Valid @RequestBody reclamation rec)
+{   
+    reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+    rec1.setTraiter(true);
+    rec1.setEtat("Reparation");
+    rec1.setReponse(rec.getReponse());
+	return ReclamationDAO.traiter(rec1);
+}
 }

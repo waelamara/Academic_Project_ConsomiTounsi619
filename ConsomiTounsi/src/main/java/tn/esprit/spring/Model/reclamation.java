@@ -29,6 +29,8 @@ public class reclamation implements Serializable {
 	
 	private boolean Traiter ;
 	
+	private String Etat ;
+	
 	public long getId() {
 		return id;
 	}
@@ -96,6 +98,15 @@ public class reclamation implements Serializable {
 		Description = description;
 		
 	}
+
+	public String getEtat() {
+		return Etat;
+	}
+
+	public void setEtat(String etat) {
+		Etat = etat;
+	}
+	
 	
 	
 

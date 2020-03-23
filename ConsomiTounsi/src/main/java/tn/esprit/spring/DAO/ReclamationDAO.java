@@ -28,6 +28,7 @@ public class ReclamationDAO {
 		User us = UserDAO.findOne(u);
 		rec.setReponse(null);
 		rec.setTraiter(false); 
+		rec.setEtat("En_attente");
 		rec.setUser(us);
 		return reclamationRepository.save(rec);
 
