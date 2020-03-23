@@ -1,4 +1,4 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.Charite;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Model.Charite.Events;
 
 @Entity
 @Table(name = "T_CHARITE")
