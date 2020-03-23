@@ -15,16 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.ProduitDAO;
+import tn.esprit.spring.DAO.SousSousCategorieDAO;
 import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.GestionProduit.SsCategorie;
 
 @RestController
 @RequestMapping("/produit")
 public class ControllerProduit {
 	@Autowired
 	ProduitDAO produitDAO;
+	@Autowired
+	SousSousCategorieDAO sousSousCategorieDAO;
 
-	@PostMapping("/ajouter")
-	public Produit AjouterProduit(@Valid @RequestBody Produit p) {
+	@PostMapping("/ajouter/{idSsCategorie}")
+	public Produit AjouterProduit(@PathVariable(value = "idSsCategorie") Long idSsCategorie,
+			@Valid @RequestBody Produit p) {
+		SsCategorie ssc = sousSousCategorieDAO.findOne(idSsCategorie);
+		p.setIdSsCategorie(ssc);
 		return produitDAO.save(p);
 	}
 
@@ -43,17 +50,23 @@ public class ControllerProduit {
 		return ResponseEntity.ok().build();
 	}
 
-	@PutMapping("/edit/{id}")
-	public ResponseEntity<Produit> EditProduit(@PathVariable(value = "id") Long idProduit, @Valid @RequestBody Produit p) {
+	@PutMapping("/edit/{id}/{idSsCategorie}")
+	public ResponseEntity<Produit> EditProduit(@PathVariable(value = "idSsCategorie") Long idSsCategorie,
+			@PathVariable(value = "id") Long idProduit, @Valid @RequestBody Produit p) {
 		Produit p2 = produitDAO.findOne(idProduit);
+		SsCategorie ssc = sousSousCategorieDAO.findOne(idSsCategorie);
 		if (p == null) {
 			return ResponseEntity.notFound().build();
 		}
-//		p2.setNomProduit(p.getNomProduit());
-//		p2.setPrix(p.getPrix());
-//		p2.setDescription(p.getDescription());
-		Produit EditProduit = produitDAO.save(p2);
-		return ResponseEntity.ok().body(EditProduit);
+		p2.setNomProduit(p.getNomProduit());
+		p2.setPrix(p.getPrix());
+		p2.setDescription(p.getDescription());
+		p2.setBarcode(p.getBarcode());
+		p2.setPoids(p.getPoids());
+		p2.setPrixAchat(p.getPrixAchat());
+		p2.setIdSsCategorie(ssc);
+		produitDAO.save(p2);
+		return ResponseEntity.ok().build();
 
 	}
 
