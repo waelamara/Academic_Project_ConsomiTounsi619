@@ -118,7 +118,6 @@ public class ControllerEvents {
 		e1.setCharite(e1.getCharite());
 		eventDAO.saveEvents(e1);
 		return "Successful";
-		//return ResponseEntity.ok().build();
 
 		}
 		else{
