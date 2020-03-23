@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Forum.Commentaire;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Forum.Vote;

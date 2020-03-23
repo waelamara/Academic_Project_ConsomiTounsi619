@@ -1,12 +1,12 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.DAO.Charite;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.Model.Events;
-import tn.esprit.spring.Repository.EventsRepository;
+import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Repository.Charite.EventsRepository;
 
 @Service("EventsDAO")
 public class EventsDAOImpl implements EventsDAO {

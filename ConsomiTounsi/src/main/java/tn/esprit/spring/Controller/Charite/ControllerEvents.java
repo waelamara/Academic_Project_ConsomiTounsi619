@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Charite;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.EventsDAO;
-import tn.esprit.spring.Model.Events;
+import tn.esprit.spring.DAO.Charite.EventsDAO;
+import tn.esprit.spring.Model.Charite.Events;
 
 @RestController
 @RequestMapping("/event")
