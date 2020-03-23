@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,4 +54,18 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="idUser")
 	public Set<VoteSujet> VotesSujet;
 	/*********ayed*********/
+	
+	
+	/***************Oussama********/
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="User")
+	private Set<reclamation> reclamation;
+
+	public Set<reclamation> getReclamation() {
+		return reclamation;
+	}
+
+	public void setReclamation(Set<reclamation> reclamation) {
+		this.reclamation = reclamation;
+	}
+	/***************relation avec reclamation*/
 }

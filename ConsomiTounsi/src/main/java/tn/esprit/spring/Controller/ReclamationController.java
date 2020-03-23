@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import tn.esprit.spring.DAO.ReclamationDAO;
 import tn.esprit.spring.Model.reclamation;
 
@@ -26,11 +27,13 @@ public class ReclamationController {
 
 	/*Enregistrer une reclamation*/
 	
-	@PostMapping("/ajout")
+@PostMapping("/ajout/{user_id}")
 	
-	public reclamation createLivreur(@Valid @RequestBody reclamation rec)
-	{
-		return ReclamationDAO.save(rec);
+	public reclamation create(@PathVariable(value = "user_id") Long user_id, @Valid @RequestBody reclamation rec )
+	{ 
+		
+       
+		return ReclamationDAO.save(rec, user_id);
 	}
 	
 	/*get all employees*/

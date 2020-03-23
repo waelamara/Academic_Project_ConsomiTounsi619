@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Repository.reclamationRepository;
 
@@ -17,16 +18,23 @@ public class ReclamationDAO {
 	@Autowired
 	reclamationRepository reclamationRepository;
 	
+	@Autowired
+	UserDAO UserDAO;
+	
 	private static final Logger L =LogManager.getLogger(LivreurDAO.class);
 	
 	/* Ajouter une reclamation */
-	public reclamation save(reclamation rec) {
+	public reclamation save(reclamation rec, long u) {
+		User us = UserDAO.findOne(u);
+		rec.setReponse(null);
+		rec.setTraiter(false); 
+		rec.setUser(us);
 		return reclamationRepository.save(rec);
 
 	}
 	
 
-	/* voir tous les livreurs */
+	/* voir tous les reclamations */
 	public List <reclamation> findall(){
 		List<reclamation> a = reclamationRepository.findAll();
 		
@@ -37,9 +45,9 @@ public class ReclamationDAO {
 		}
 		return a;
 		}
-	/*Chercher un livreur*/
-//	public Livreur findOne(Integer liv){
-//		return livreurRepository.getOne(liv);}
+	/*Chercher ue reclamation*/
+	public reclamation findbyid(long rec_id){
+return reclamationRepository.getOne(rec_id);}
 		
 		
 	
@@ -47,10 +55,18 @@ public class ReclamationDAO {
 	public void delete (long id ){
 		reclamationRepository.deleteById(id);}
 	
-	/*Update d'un Livreur*/
+	/*Update d'un reclamation*/
 	public  reclamation updateLiv(reclamation rec)	{
 		return reclamationRepository.save(rec);
 		
+	}
+	
+	
+	/* traiter une reclamation */
+	public reclamation traiter(reclamation rec) {
+		
+		return reclamationRepository.save(rec);
+
 	}
 	
 	

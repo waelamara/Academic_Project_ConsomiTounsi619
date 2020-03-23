@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -73,6 +74,28 @@ public class reclamation implements Serializable {
 	}
 
 	private String Reponse ;
+	@ManyToOne
+	User User ;
+
+
+	public User getUser() {
+		return User;
+	}
+
+	public void setUser(User user) {
+		User = user;
+	}
+
+	public reclamation() {
+		super();
+	}
+	public reclamation(long id, String titre, String description) {
+		super();
+		this.id = id;
+		Titre = titre;
+		Description = description;
+		
+	}
 	
 	
 
