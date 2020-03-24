@@ -30,7 +30,7 @@ public class Endroit implements Serializable {
 	private int nbplace;
 	@ManyToOne 
 	@JsonIgnore
-	Events eventss;
+	private Events eventss;
 	public Long getId() {
 		return Id;
 	}
