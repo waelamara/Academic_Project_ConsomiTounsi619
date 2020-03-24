@@ -12,4 +12,6 @@ public interface ICategorieSujetService {
 	public List<CategorieSujet> getAllCategorieSujets();
 	public void deleteCategorieSujetById(long CategId);
 	public List<CategorieSujet> findCategbyName(String name);
+	public CategorieSujet findOne(Long id);
+	public void modifierNom(String name, long CategId);
 }

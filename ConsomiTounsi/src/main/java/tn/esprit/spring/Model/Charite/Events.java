@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "T_EVENTS")
 public class Events implements Serializable {
@@ -32,8 +34,10 @@ public class Events implements Serializable {
 	private int nbplace;
 	private int nbparticipant;
 	@OneToOne
+	@JsonIgnore
 	private Pub publicite;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "eventss")
+	@JsonIgnore
 	private Set<Endroit> endroit;
 	@OneToMany(mappedBy = "idevents")
 	public Set<Charite> charite;
@@ -121,6 +125,11 @@ public class Events implements Serializable {
 
 	public Events() {
 		super();
+
+	}
+	public Events(long idevents) {
+		super();
+		this.Id=idevents;
 
 	}
 

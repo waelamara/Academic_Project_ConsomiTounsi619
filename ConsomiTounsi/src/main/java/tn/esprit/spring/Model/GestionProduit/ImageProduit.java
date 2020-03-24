@@ -48,6 +48,12 @@ public class ImageProduit implements Serializable {
 	public ImageProduit() {
 	}
 
+	
+	public ImageProduit(String image) {
+		super();
+		Image = image;
+	}
+
 	public ImageProduit(String image, Produit idproduit) {
 		super();
 		Image = image;
