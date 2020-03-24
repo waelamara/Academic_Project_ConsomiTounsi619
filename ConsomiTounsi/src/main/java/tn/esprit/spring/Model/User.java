@@ -53,4 +53,40 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="idUser")
 	public Set<VoteSujet> VotesSujet;
 	/*********ayed*********/
+	public Long getId() {
+		return id;
+	}
+	public Set<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+	public void setCommentaires(Set<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+	public Set<Sujet> getSujets() {
+		return Sujets;
+	}
+	public void setSujets(Set<Sujet> sujets) {
+		Sujets = sujets;
+	}
+	public Set<Vote> getVotes() {
+		return Votes;
+	}
+	public void setVotes(Set<Vote> votes) {
+		Votes = votes;
+	}
+	public Set<VoteSujet> getVotesSujet() {
+		return VotesSujet;
+	}
+	public void setVotesSujet(Set<VoteSujet> votesSujet) {
+		VotesSujet = votesSujet;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 }

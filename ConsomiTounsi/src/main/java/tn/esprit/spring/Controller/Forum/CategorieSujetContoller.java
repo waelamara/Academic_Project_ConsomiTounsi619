@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.Forum.ICategorieSujetService;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
-import tn.esprit.spring.Model.GestionProduit.Produit;
 
-
-;
 
 @RestController
 @RequestMapping("/categorieSujet")

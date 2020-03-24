@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import tn.esprit.spring.Model.Forum.Sujet;
 
 public interface SujetRepository extends JpaRepository<Sujet, Long> {
-	@Query(value = "SELECT * FROM sujet WHERE nom_sujet LIKE ?1%", nativeQuery = true)
+	@Query(value = "SELECT DISTINCT * FROM sujet WHERE nom_sujet LIKE ?1%", nativeQuery = true)
 	public List<Sujet> findSujetbyName(String name);
 }

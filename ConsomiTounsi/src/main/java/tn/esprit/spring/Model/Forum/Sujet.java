@@ -32,7 +32,7 @@ public class Sujet implements Serializable {
 	private int nbDislike;
 	
 	@OneToMany(mappedBy="idSujet")
-	public Set<VoteSujet> VotesSujet;
+	public Set<VoteSujet> votesSujet;
 	@ManyToOne
 	@JoinColumn(name = "idCategorieSujet", referencedColumnName = "id")
 	CategorieSujet CategorieSujet;
@@ -97,10 +97,10 @@ public class Sujet implements Serializable {
 		this.nbDislike = nbDislike;
 	}
 	public Set<VoteSujet> getVotesSujet() {
-		return VotesSujet;
+		return votesSujet;
 	}
-	public void setVotesSujet(Set<VoteSujet> votesSujet) {
-		VotesSujet = votesSujet;
+	public void setVotesSujet(Set<VoteSujet> votesSujet1) {
+		votesSujet = votesSujet1;
 	}
 	public CategorieSujet getCategorieSujet() {
 		return CategorieSujet;
