@@ -40,5 +40,8 @@ public class EventsDAOImpl implements EventsDAO {
 		return eventsRepository.findLikeName(titre);
 
 	}
+	public Events findOne(Long id) {
+		return eventsRepository.getOne(id);
+	}
 
 }

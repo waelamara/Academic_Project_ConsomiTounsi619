@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import tn.esprit.spring.Model.Charite.Events;
 
 @Entity
@@ -27,6 +29,7 @@ public class Endroit implements Serializable {
 	private String emplacement;
 	private int nbplace;
 	@ManyToOne 
+	@JsonIgnore
 	Events eventss;
 	public Long getId() {
 		return Id;
