@@ -148,7 +148,7 @@ public class ControllerEvents {
 			@PathVariable(value = "ideventss") Long ideventss, @Valid @RequestBody Endroit e) {
 		Endroit e2 = endroitDAO.findOne(idendroit);
 		Events d1 = eventDAO.findOne(ideventss);
-		String message="this place is reserved";
+		String message="this place is reserved ";
 		String message1="Successful";
 		String message2="number of places less than number of places in its event";
 
