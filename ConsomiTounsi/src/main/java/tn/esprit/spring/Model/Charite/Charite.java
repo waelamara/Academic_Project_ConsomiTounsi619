@@ -1,7 +1,6 @@
 package tn.esprit.spring.Model.Charite;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Events;
@@ -28,9 +27,11 @@ public class Charite implements Serializable {
 	 
 	 private String TypeCharite;
 	 @ManyToOne
+	 @JsonIgnore
 	private User iduser;
 	 @ManyToOne
-private Events idevents ;
+	 @JsonIgnore
+    private Events idevents ;
 	public Long getId() {
 		return id;
 	}
@@ -57,6 +58,17 @@ private Events idevents ;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Charite() {
+		super();
+
+	}
+	public Charite(String TypeCharite,User iduser,Events idevents ) {
+		super();
+		this.TypeCharite=TypeCharite;
+		this.idevents=idevents;
+		this.iduser=iduser;
+
 	}
 	 
 
