@@ -53,6 +53,14 @@ public class CommandeDAO {
 		return commandeRepository.Commandeparcode(code);
 
 	}
+	public void PayerEnLigne(int idCommande)
+	{
+		commandeRepository.PayerEnLigne(idCommande);
+	}
+	public void PayerPorteaPorte(int idCommande)
+	{
+		commandeRepository.PayerPorteaPorte(idCommande);
+	}
  
 
 }
