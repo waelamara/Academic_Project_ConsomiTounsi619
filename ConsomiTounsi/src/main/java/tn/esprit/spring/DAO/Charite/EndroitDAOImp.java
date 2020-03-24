@@ -27,7 +27,7 @@ public class EndroitDAOImp implements EndroitDAO{
 	public int saveEndroit(Long ideventss, Endroit Endroit) {
 		Events events = eventsRepository.findById(ideventss).get();
 		Endroit.setEventss(events);
-		endroitRepository.save(Endroit);
+		endroitRepository.saveAndFlush(Endroit);
 		return Endroit.getId().intValue();
 	}
 

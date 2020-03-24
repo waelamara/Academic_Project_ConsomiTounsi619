@@ -142,12 +142,51 @@ public class ControllerEvents {
 		return endroitDAO.getAllEndroitList();
 	}
 	/* reservation Endoit*/
-	@PostMapping("/reserve/{ideventss}")
+	@PostMapping("/reserve/{idendroit}/{ideventss}")
 	@ResponseBody
-	public int addChar(@PathVariable(value = "ideventss") Long ideventss,
-			@Valid @RequestBody Endroit Endroit){
-		
-		return endroitDAO.saveEndroit(ideventss,Endroit);
+	public String addChar(@PathVariable(value = "idendroit") Long idendroit,
+			@PathVariable(value = "ideventss") Long ideventss, @Valid @RequestBody Endroit e) {
+		Endroit e2 = endroitDAO.findOne(idendroit);
+		Events d1 = eventDAO.findOne(ideventss);
+		String message="this place is reserved";
+		String message1="Successful";
+		String message2="number of places less than number of places in its event";
+
+		int nbPEndroit = e2.getNbplace();
+		int nbPEvent = d1.getNbplace();
+		if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent )) {
+			e2.setPrix(e2.getPrix());
+			e2.setNbplace(e2.getNbplace());
+			e2.setEmplacement(e2.getEmplacement());
+			e2.setEventss(e2.getEventss());
+			e2.setStatu("Reservé");
+			endroitDAO.saveEndroit(ideventss, e2);
+			return message1;
+		} 
+		else if (nbPEndroit < nbPEvent ){
+			return message2;
+		}
+		else {
+			return message;
+		}
+
+
 	}
+	/* add events*/
+	@PostMapping("/ajouter/{publicite}")
+	@ResponseBody
+	public int addPub(@PathVariable(value = "publicite") Long publicite,
+			@Valid @RequestBody Events Events){
+		
+		return eventDAO.saveEvent(publicite,Events);
+	}
+	/* add endroit*/
+	/*@PostMapping("/ajouter/{publicite}")
+	@ResponseBody
+	public int addPub(@PathVariable(value = "publicite") Long publicite,
+			@Valid @RequestBody Events Events){
+		
+		return eventDAO.saveEvent(publicite,Events);
+	}*/
 
 }
