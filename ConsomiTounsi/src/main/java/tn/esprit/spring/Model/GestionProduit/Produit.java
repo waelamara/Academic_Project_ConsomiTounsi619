@@ -15,8 +15,9 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.LigneCommande;
-import tn.esprit.spring.Model.Rayon;
+
 import tn.esprit.spring.Model.Stock;
+import tn.esprit.spring.Model.Rayon.Rayon;
 
 
 
