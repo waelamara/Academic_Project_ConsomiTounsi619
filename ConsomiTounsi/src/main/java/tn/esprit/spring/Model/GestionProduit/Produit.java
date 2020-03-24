@@ -16,8 +16,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tn.esprit.spring.Model.LigneCommande;
-import tn.esprit.spring.Model.Rayon;
+
 import tn.esprit.spring.Model.Stock;
+import tn.esprit.spring.Model.Rayon.Rayon;
 
 
 
