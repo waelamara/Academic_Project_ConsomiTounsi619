@@ -91,24 +91,14 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+
 	public Set<Charite> getCharite() {
 		return charite;
 	}
@@ -121,30 +111,7 @@ public class User implements Serializable {
 	public void setCommandes(Collection<Commande> commandes) {
 		this.commandes = commandes;
 	}
-	public Set<Commentaire> getCommentaires() {
-		return commentaires;
-	}
-	public void setCommentaires(Set<Commentaire> commentaires) {
-		this.commentaires = commentaires;
-	}
-	public Set<Sujet> getSujets() {
-		return Sujets;
-	}
-	public void setSujets(Set<Sujet> sujets) {
-		Sujets = sujets;
-	}
-	public Set<Vote> getVotes() {
-		return Votes;
-	}
-	public void setVotes(Set<Vote> votes) {
-		Votes = votes;
-	}
-	public Set<VoteSujet> getVotesSujet() {
-		return VotesSujet;
-	}
-	public void setVotesSujet(Set<VoteSujet> votesSujet) {
-		VotesSujet = votesSujet;
-	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
