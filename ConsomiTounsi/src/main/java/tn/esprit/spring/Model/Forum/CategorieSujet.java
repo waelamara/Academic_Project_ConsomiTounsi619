@@ -1,15 +1,18 @@
 package tn.esprit.spring.Model.Forum;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class CategorieSujet implements Serializable {
 
@@ -18,8 +21,10 @@ public class CategorieSujet implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	@Column(unique=true) 
 	private String NomCategorie;
-	@OneToMany(mappedBy="CategorieSujet")
+	@OneToMany(mappedBy="CategorieSujet",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Sujet> sujets ;
 	
 	 

@@ -27,7 +27,7 @@ public class CategorieSujetContoller {
 	 ICategorieSujetService  icategorieSujetService;
 	
 	@PostMapping("/ajouter")
-	public ResponseEntity AjouterCategorie( @Valid @RequestBody CategorieSujet c) {
+	public ResponseEntity<?>AjouterCategorie( @Valid @RequestBody CategorieSujet c) {
 		 icategorieSujetService.ajouterCategorieSujet(c);
 			return ResponseEntity.created(null).build();
 	}
