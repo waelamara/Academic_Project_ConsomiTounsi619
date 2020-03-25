@@ -61,7 +61,7 @@ public class ControllerEvents {
 		return ResponseEntity.ok().build();
 	}*/
 	
-	/* ajouter charité*/
+	/* ajouter charité si vous avez ajouter un charité vous avez participer*/
 	@PostMapping("/Participer/{idevents}/{iduser}")
 	@ResponseBody
 	public String addChar(@PathVariable(value = "idevents") Long idevents,
