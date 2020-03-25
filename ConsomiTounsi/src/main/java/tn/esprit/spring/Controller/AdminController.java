@@ -36,6 +36,8 @@ public class AdminController {
 			@Valid @RequestBody reclamation rec) {
 		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
 
+		
+		
 //		try {
 //			A = sdf.parse(rec1.getCommande().getDate().toString());
 //			B = sdf.parse(LocalDate.now().toString());
