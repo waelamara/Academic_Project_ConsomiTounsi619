@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.DAO.CommandeDAO;
 import tn.esprit.spring.DAO.ReclamationDAO;
+import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.reclamation;
 
 @RestController
@@ -24,6 +26,9 @@ public class ReclamationController {
 	@Autowired
 	ReclamationDAO ReclamationDAO;
 	
+	@Autowired
+	CommandeDAO CommandeDAO;
+	
 
 	/*Enregistrer une reclamation*/
 	
@@ -31,14 +36,21 @@ public class ReclamationController {
 	
 	public reclamation create(@PathVariable(value = "user_id") Long user_id, @Valid @RequestBody reclamation rec )
 	{ 
+	
+	if(rec.getCommande_id()!=0){
+		Commande c = CommandeDAO.findOne(rec.getCommande_id());
+		rec.setCommande(c);
+		return ReclamationDAO.save(rec, user_id);
+	}
+	else
 		
-       
+        
 		return ReclamationDAO.save(rec, user_id);
 	}
 	
-	/*get all employees*/
+	/*get all reclamation*/
 	@GetMapping("/affichall")
-	public List<reclamation> getAllLivreur(){
+	public List<reclamation> getAllrec(){
 		
 		return ReclamationDAO.findall();
 		
@@ -47,7 +59,7 @@ public class ReclamationController {
 	
   @PutMapping("/modifier")
 	
-	public reclamation updateLiv(@RequestBody reclamation rec)
+	public reclamation updaterec(@RequestBody reclamation rec)
 	{
 		return ReclamationDAO.updateLiv(rec );
 	}
