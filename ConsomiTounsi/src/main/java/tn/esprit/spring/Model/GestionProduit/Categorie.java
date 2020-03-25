@@ -10,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties
 public class Categorie implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +23,9 @@ public class Categorie implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String nomCategorie;
+	
 	@OneToMany(mappedBy = "IdCategorie",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<SCategorie> Categories;
 
 	public Categorie() {
@@ -39,7 +45,6 @@ public class Categorie implements Serializable {
 	public void setId(Long id) {
 		Id = id;
 	}
-
 	public String getNomCategorie() {
 		return nomCategorie;
 	}

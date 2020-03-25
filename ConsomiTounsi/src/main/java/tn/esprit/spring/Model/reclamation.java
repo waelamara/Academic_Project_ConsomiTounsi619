@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table (name ="reclamation")
@@ -30,6 +32,9 @@ public class reclamation implements Serializable {
 	private boolean Traiter ;
 	
 	private String Etat ;
+	
+	@Transient
+	long commande_id;
 	
 	public long getId() {
 		return id;
@@ -77,6 +82,7 @@ public class reclamation implements Serializable {
 
 	private String Reponse ;
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	User User ;
 
 
@@ -91,13 +97,7 @@ public class reclamation implements Serializable {
 	public reclamation() {
 		super();
 	}
-	public reclamation(long id, String titre, String description) {
-		super();
-		this.id = id;
-		Titre = titre;
-		Description = description;
-		
-	}
+
 
 	public String getEtat() {
 		return Etat;
@@ -106,7 +106,44 @@ public class reclamation implements Serializable {
 	public void setEtat(String etat) {
 		Etat = etat;
 	}
-	
+	@ManyToOne
+	@JoinColumn(name = "commande_id")
+	Commande Commande;
+
+	public Commande getCommande() {
+		return Commande;
+	}
+
+	public void setCommande(Commande commande) {
+		
+		Commande = commande;
+	}
+
+	public long getCommande_id() {
+		return commande_id;
+	}
+
+	public void setCommande_id(int commande_id) {
+		this.commande_id = commande_id;
+	}
+
+	public reclamation(long id, String titre, String description, long commande_id) {
+		super();
+		this.id = id;
+		Titre = titre;
+		Description = description;
+		this.commande_id = commande_id;
+	}
+
+	public reclamation(long id, String titre, String description) {
+		super();
+		this.id = id;
+		Titre = titre;
+		Description = description;
+	}
+
+
+
 	
 	
 

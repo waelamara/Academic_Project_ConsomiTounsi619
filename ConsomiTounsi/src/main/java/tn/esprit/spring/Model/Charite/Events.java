@@ -16,9 +16,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "T_EVENTS")
+@JsonIgnoreProperties
 public class Events implements Serializable {
 
 	/**
@@ -33,14 +35,16 @@ public class Events implements Serializable {
 	private Date DateE;
 	private int nbplace;
 	private int nbparticipant;
+	private String description;
 	@OneToOne
 	@JsonIgnore
 	private Pub publicite;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "eventss")
-	@JsonIgnore
 	private Set<Endroit> endroit;
 	@OneToMany(mappedBy = "idevents")
 	public Set<Charite> charite;
+
+	
 
 	public Long getId() {
 		return Id;
@@ -105,11 +109,31 @@ public class Events implements Serializable {
 	public void setCharite(Set<Charite> charite) {
 		this.charite = charite;
 	}
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	public Events(String titre, Date DateE, int nbplace, int nbparticipant, Pub publicite, Set<Endroit> endroit,
+			Set<Charite> charite,String description) {
+		super();
+		this.titre = titre;
+		this.DateE = DateE;
+		this.nbplace = nbplace;
+		this.nbparticipant = nbparticipant;
+		this.publicite = publicite;
+		this.endroit = endroit;
+		this.charite = charite;
+		this.description = description;
+
+	}
 	public Events(String titre, Date DateE, int nbplace, int nbparticipant, Pub publicite, Set<Endroit> endroit,
 			Set<Charite> charite) {
 		super();
