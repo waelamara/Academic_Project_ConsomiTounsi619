@@ -62,13 +62,36 @@ public class ControllerEvents {
 	}*/
 	
 	/* ajouter charité*/
-	@PostMapping("/addChar/{idevents}/{iduser}")
+	@PostMapping("/Participer/{idevents}/{iduser}")
 	@ResponseBody
-	public int addChar(@PathVariable(value = "idevents") Long idevents,
+	public String addChar(@PathVariable(value = "idevents") Long idevents,
 			@PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody Charite Charite){
+Events e1 = eventDAO.findOne(idevents);
 		
-		return chariteDAO.saveCharite(idevents,iduser,Charite);
+		if(e1.getNbplace()>0){
+			int nb = e1.getNbplace();
+			int nbP = e1.getNbparticipant();
+		e1.setTitre(e1.getTitre());
+		e1.setDateE(e1.getDateE());
+		e1.setEndroit(e1.getEndroit());
+		e1.setNbplace(nb-1);
+		e1.setNbparticipant(nbP+1);
+		e1.setPublicite(e1.getPublicite());
+		e1.setCharite(e1.getCharite());
+		e1.setDescription(e1.getDescription());
+		e1.setImage(e1.getImage());
+		eventDAO.saveEvents(e1);
+		chariteDAO.saveCharite(idevents,iduser,Charite);
+		return "Successful";
+
+		}
+		else{
+			return "insufficient space";
+			
+		}
+		
+		//return chariteDAO.saveCharite(idevents,iduser,Charite);
 	}
 	/* ajouter event*/
 	@PostMapping("/addEvent")
@@ -109,10 +132,7 @@ public class ControllerEvents {
 	@PutMapping("/participer/{id}")
 	public String  EditEvents(@PathVariable(value = "id") Long idevent, @Valid @RequestBody Events e) {
 		Events e1 = eventDAO.findOne(idevent);
-		/*if (e == null) {
-			return "pas d'evenement de cette id ";
-		//	return ResponseEntity.notFound().build();
-		}*/
+		
 		if(e1.getNbplace()>0){
 			int nb = e1.getNbplace();
 			int nbP = e1.getNbparticipant();
