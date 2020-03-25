@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import tn.esprit.spring.Model.*;
 @Entity
 public class Sujet implements Serializable {
@@ -32,15 +35,27 @@ public class Sujet implements Serializable {
 	private int nbDislike;
 	
 	@OneToMany(mappedBy="idSujet")
+	@JsonIgnore
 	public Set<VoteSujet> votesSujet;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idCategorieSujet", referencedColumnName = "id")
 	CategorieSujet CategorieSujet;
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idUser", referencedColumnName = "USER_ID")
 	User idUser;
+	@OneToMany(mappedBy="idSujet")
+	@JsonIgnore
+	public Set<Commentaire> commentarie;
 	
-	
+	public Set<Commentaire> getCommentarie() {
+		return commentarie;
+	}
+	public void setCommentarie(Set<Commentaire> commentarie) {
+		this.commentarie = commentarie;
+	}
 	public Sujet() {
 		super();
 	}

@@ -73,6 +73,18 @@ public class Pub implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+	public Pub() {
+		super();
+
+	}
+	public Pub(String Nom,Date DateDebut,Date DateFin,String Image,Events events) {
+		super();
+		this.Nom=Nom;
+		this.DateDebut=DateDebut;
+		this.DateFin=DateFin;
+		this.Image=Image;
+		this.events=events;
+
+	}
 
 }

@@ -1,4 +1,4 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.Rayon;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -17,14 +17,14 @@ public class Rayon implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Idrayon;
+	private long Idrayon;
 	private String nom_rayon;
 	public Type_rayon type_rayon;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Idrayon")
 	private Set<Produit> produits;
 
-	public int getIdrayon() {
+	public long getIdrayon() {
 		return Idrayon;
 	}
 

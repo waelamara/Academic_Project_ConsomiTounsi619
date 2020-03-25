@@ -47,12 +47,16 @@ public class User implements Serializable {
 	private Collection<Commande> commandes;
 	/******ayed*******/
 	@OneToMany(mappedBy="idUser")
+	@JsonIgnore
 	public Set<Commentaire> commentaires;
 	@OneToMany(mappedBy="idUser")
+	@JsonIgnore
 	public Set<Sujet> Sujets;
 	@OneToMany(mappedBy="idUser")
+	@JsonIgnore
 	public Set<Vote> Votes;
 	@OneToMany(mappedBy="idUser")
+	@JsonIgnore
 	public Set<VoteSujet> VotesSujet;
 	/*********ayed*********/
 	public Long getId() {
@@ -112,14 +116,14 @@ public class User implements Serializable {
 		this.commandes = commandes;
 	}
 
-	public static long getSerialversionuid() {
+	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	public User() {
 		super();
 
 	}
-	public User(long iduser) {
+	public User(Long iduser) {
 		super();
 		this.id=iduser;
 

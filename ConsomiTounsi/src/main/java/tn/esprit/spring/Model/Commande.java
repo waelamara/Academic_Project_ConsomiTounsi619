@@ -87,6 +87,9 @@ public class Commande implements Serializable  {
 		this.montant = montant;
 		this.status = status;
 	}
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="Commande")
+	private Set<reclamation> reclamation;
+	
 	
 
 }

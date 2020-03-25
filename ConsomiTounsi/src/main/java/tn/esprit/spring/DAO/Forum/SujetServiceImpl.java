@@ -81,7 +81,7 @@ public class SujetServiceImpl implements ISujetService {
 		List<String> sujetNames = new ArrayList<>();
 		for(Sujet suj : categS.getSujets())
 			sujetNames.add(suj.getNomSujet());
-		return sujetNames;
+			return sujetNames;
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class SujetServiceImpl implements ISujetService {
 		List<Sujet> sujets = new ArrayList<>();
 		for(Sujet suj :user.getSujets())
 			sujets.add(suj);
-		return sujets;
+			return sujets;
 	}
 
 }
