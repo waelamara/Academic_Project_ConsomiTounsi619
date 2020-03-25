@@ -33,5 +33,14 @@ public class ProduitDAO  {
 		return produitRepository.findLikeName(name);
 
 	}
+	public List<Produit> findProduitSsCategorie(Long idSsCategorie) {
+		return produitRepository.findProduitSsCategorie(idSsCategorie);
+	}
+	public List<Produit> findProduitSCategorie(Long idSCategorie) {
+		return produitRepository.findProduitSCategorie(idSCategorie);
+	}
+	public List<Produit> findProduitCategorie(Long idCategorie) {
+		return produitRepository.findProduitCategorie(idCategorie);
+	}
 
 }

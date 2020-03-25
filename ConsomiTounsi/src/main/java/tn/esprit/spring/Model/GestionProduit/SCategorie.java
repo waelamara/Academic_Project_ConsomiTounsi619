@@ -25,6 +25,7 @@ public class SCategorie implements Serializable {
 	private Long Id;
 	private String NomSCategorie;
 	@ManyToOne(cascade = CascadeType.REMOVE)
+	@JsonIgnore
 	private Categorie IdCategorie;
 	@OneToMany(mappedBy="IdSCategorie",cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -65,9 +66,7 @@ public class SCategorie implements Serializable {
 		IdCategorie = idCategorie;
 	}
 
-	public Set<SsCategorie> getSsCategories() {
-		return SsCategories;
-	}
+
 
 	public void setSsCategories(Set<SsCategorie> ssCategories) {
 		SsCategories = ssCategories;
