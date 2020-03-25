@@ -193,7 +193,7 @@ Events e1 = eventDAO.findOne(idevents);
 
 
 	}
-	/* add events*/
+	/* add events avec publicité*/
 	@PostMapping("/ajouter/{publicite}")
 	@ResponseBody
 	public int addPub(@PathVariable(value = "publicite") Long publicite,
