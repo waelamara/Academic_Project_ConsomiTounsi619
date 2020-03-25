@@ -124,6 +124,7 @@ public class ControllerEvents {
 		e1.setPublicite(e1.getPublicite());
 		e1.setCharite(e1.getCharite());
 		e1.setDescription(e1.getDescription());
+		e1.setImage(e1.getImage());
 		eventDAO.saveEvents(e1);
 		return "Successful";
 
