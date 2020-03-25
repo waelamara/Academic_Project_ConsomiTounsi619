@@ -33,6 +33,33 @@ public class Publicite implements Serializable {
 	
 	public Publicite() {
 	}
+ 
+	public Publicite(String nom, String canal, Date dateDebut, Date dateFin, int nbrInitialVueCible, int nbrFinalVue,
+			float cout, String video, String image) {
+		super();
+		Nom = nom;
+		Canal = canal;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
+		NbrInitialVueCible = nbrInitialVueCible;
+		NbrFinalVue = nbrFinalVue;
+		Cout = cout;
+		Video = video;
+		Image = image;
+	}
+	
+
+	public Publicite(String nom, String canal, Date dateDebut, Date dateFin, int nbrInitialVueCible, int nbrFinalVue,
+			float cout) {
+		super();
+		Nom = nom;
+		Canal = canal;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
+		NbrInitialVueCible = nbrInitialVueCible;
+		NbrFinalVue = nbrFinalVue;
+		Cout = cout;
+	}
 
 	public Long getId() {
 		return Id;

@@ -13,16 +13,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tn.esprit.spring.Model.LigneCommande;
-import tn.esprit.spring.Model.Rayon;
+
 import tn.esprit.spring.Model.Stock;
+import tn.esprit.spring.Model.Rayon.Rayon;
 
 
 
 
 
 @Entity
+@JsonIgnoreProperties
 public class Produit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,7 +36,7 @@ public class Produit implements Serializable {
 	private String NomProduit;
 	private float Prix;
 	private String Description;
-	private int Barcode;
+	private Long Barcode;
 	private float Poids;
 	private float PrixAchat;
 	@ManyToOne
@@ -41,6 +44,7 @@ public class Produit implements Serializable {
 	
 	
 	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
+	@JsonIgnore
 	private Set<ImageProduit> Images;
 	@OneToMany(mappedBy="produit")
 	@JsonIgnore
@@ -88,11 +92,13 @@ public class Produit implements Serializable {
 		Description = description;
 	}
 
-	public int getBarcode() {
+	
+
+	public Long getBarcode() {
 		return Barcode;
 	}
 
-	public void setBarcode(int barcode) {
+	public void setBarcode(Long barcode) {
 		Barcode = barcode;
 	}
 
@@ -128,7 +134,7 @@ public class Produit implements Serializable {
 		Images = images;
 	}
 
-	public Produit(String nomProduit, float prix, String description, int barcode, float poids, float prixAchat,
+	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
 			SsCategorie idSsCategorie) {
 		super();
 		NomProduit = nomProduit;
@@ -140,7 +146,7 @@ public class Produit implements Serializable {
 		IdSsCategorie = idSsCategorie;
 	}
 
-	public Produit(String nomProduit, float prix, String description, int barcode, float poids, float prixAchat,
+	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
 			Set<ImageProduit> images) {
 		super();
 		NomProduit = nomProduit;
@@ -152,8 +158,16 @@ public class Produit implements Serializable {
 		Images = images;
 	}
 
-	
-	
+
+
+	public Boolean BarcodeIsvalid(long barcode){
+		long c =10000000000L;
+		long b=barcode/c;
+		if(b==619){
+			return true;
+		}
+		return false;
+	}
 	
 
 }

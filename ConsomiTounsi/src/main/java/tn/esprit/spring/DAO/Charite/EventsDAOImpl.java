@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Charite.Pub;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
+import tn.esprit.spring.Repository.Charite.PubRepository;
 
 @Service("EventsDAO")
 public class EventsDAOImpl implements EventsDAO {
 	@Autowired
 	private EventsRepository eventsRepository;
+	@Autowired
+	PubRepository publiciteRepository;
 
 	@Override
 	public Events saveEvents(Events Events) {
@@ -42,6 +46,14 @@ public class EventsDAOImpl implements EventsDAO {
 	}
 	public Events findOne(Long id) {
 		return eventsRepository.getOne(id);
+	}
+
+	@Override
+	public int saveEvent(Long publicite, Events Events) {
+		Pub p = publiciteRepository.findById(publicite).get();
+		Events.setPublicite(p);
+		eventsRepository.save(Events);
+		return Events.getId().intValue();
 	}
 
 }

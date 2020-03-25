@@ -11,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties
 public class SCategorie implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,6 +27,7 @@ public class SCategorie implements Serializable {
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Categorie IdCategorie;
 	@OneToMany(mappedBy="IdSCategorie",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<SsCategorie> SsCategories;
 	
 	public SCategorie() {

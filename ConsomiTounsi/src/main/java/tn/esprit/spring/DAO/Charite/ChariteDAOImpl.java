@@ -5,13 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
+import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Forum.CategorieSujet;
+import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Charite.ChariteRepository;
+import tn.esprit.spring.Repository.Charite.EventsRepository;
 
 @Service("ChariteDAO")
 public class ChariteDAOImpl implements ChariteDAO {
 	@Autowired
 	private ChariteRepository chariteRepository;
+	@Autowired
+	private EventsRepository eventsRepository;
+	@Autowired
+	private UserRepository userRepository;
+	
 
 	@Override
 	public boolean saveCharit(Charite Charite) {
@@ -27,8 +37,14 @@ public class ChariteDAOImpl implements ChariteDAO {
 	}
 
 	@Override
-	public Charite saveCharite(Charite Charite) {
-		return chariteRepository.save(Charite);
+	public int saveCharite(Long idevents,Long iduser,Charite Charite) {
+		Events events = eventsRepository.findById(idevents).get();
+		User user= userRepository.findById(iduser).get();
+		Charite.setIdevents(events);
+		Charite.setIduser(user);
+		chariteRepository.save(Charite);
+		return Charite.getId().intValue();
+		//return chariteRepository.save(Charite);
 
 	}
 

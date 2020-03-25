@@ -30,7 +30,7 @@ public class Endroit implements Serializable {
 	private int nbplace;
 	@ManyToOne 
 	@JsonIgnore
-	Events eventss;
+	private Events eventss;
 	public Long getId() {
 		return Id;
 	}
@@ -70,6 +70,25 @@ public class Endroit implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	} 
+	public Endroit() {
+		super();
+
+	}
+	public Endroit(int prix,int nbplace,String emplacement,String statu,Events eventss) {
+		super();
+		this.prix=prix;
+		this.nbplace=nbplace;
+		this.emplacement=emplacement;
+		this.statu=statu;
+		this.eventss=eventss;
+
+	}
+	public Endroit(long id) {
+
+		super();
+		this.Id=id;
+		}
+
 	
 
 }

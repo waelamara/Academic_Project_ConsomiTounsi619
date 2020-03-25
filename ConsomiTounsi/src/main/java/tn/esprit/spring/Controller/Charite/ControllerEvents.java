@@ -1,13 +1,11 @@
 package tn.esprit.spring.Controller.Charite;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.Charite.ChariteDAO;
+import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Charite;
+import tn.esprit.spring.Model.Charite.Endroit;
 
 
 @RestController
@@ -32,6 +32,8 @@ public class ControllerEvents {
 	
 	@Autowired
 	ChariteDAO chariteDAO;
+	@Autowired
+	EndroitDAO endroitDAO;
 	
 	/*@PostMapping("/Paritciper/{id}")
 	@ResponseBody
@@ -59,30 +61,33 @@ public class ControllerEvents {
 		return ResponseEntity.ok().build();
 	}*/
 	
-
-	@PostMapping("/addChar")
+	/* ajouter charité*/
+	@PostMapping("/addChar/{idevents}/{iduser}")
 	@ResponseBody
-	public Charite addChar(@RequestBody Charite Charite){
+	public int addChar(@PathVariable(value = "idevents") Long idevents,
+			@PathVariable(value = "iduser") Long iduser,
+			@Valid @RequestBody Charite Charite){
 		
-		return chariteDAO.saveCharite(Charite);
+		return chariteDAO.saveCharite(idevents,iduser,Charite);
 	}
+	/* ajouter event*/
 	@PostMapping("/addEvent")
 	@ResponseBody
 	public Events addEvents(@RequestBody Events Events) {
 		return eventDAO.saveEvents(Events);
 	}
-
+	/* affiche les events*/
 	@RequestMapping(value = "/allEvent")
 	public List<Events> getAllEvents() {
 		return eventDAO.getAllEventsList();
 	}
-
+	/* modifier event*/
 	@PutMapping("/editEvent")
 	@ResponseBody
 	public Events modifEvents(@RequestBody Events Events) {
 		return eventDAO.upsateEvents(Events);
 	}
-
+	/* delete un event*/
 	@DeleteMapping("/delete/{id}")
 
 	public void delete(@PathVariable(name = "id") long Id) {
@@ -90,15 +95,17 @@ public class ControllerEvents {
 		eventDAO.deleteEventsById(Id);
 
 	}
-
+       /*recherche par titre */
 	@GetMapping("/find/{titre}")
 	public List<Events> findLikeNameM(@PathVariable(value = "titre") String titre) {
 		return eventDAO.findLikeName(titre);
 	}
+	/* affiche les charites*/
 	@RequestMapping(value = "/allCharite")
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
 	}
+	/* Participer a un evenement*/
 	@PutMapping("/participer/{id}")
 	public String  EditEvents(@PathVariable(value = "id") Long idevent, @Valid @RequestBody Events e) {
 		Events e1 = eventDAO.findOne(idevent);
@@ -116,6 +123,7 @@ public class ControllerEvents {
 		e1.setNbparticipant(nbP+1);
 		e1.setPublicite(e1.getPublicite());
 		e1.setCharite(e1.getCharite());
+		e1.setDescription(e1.getDescription());
 		eventDAO.saveEvents(e1);
 		return "Successful";
 
@@ -128,5 +136,57 @@ public class ControllerEvents {
 		//eventDAO.getAllEventsList();
 
 	}
+	/* affiche les endroits*/
+	@RequestMapping(value = "/allEndroit")
+	public List<Endroit> getAllEndroit() {
+		return endroitDAO.getAllEndroitList();
+	}
+	/* reservation Endoit*/
+	@PostMapping("/reserve/{idendroit}/{ideventss}")
+	@ResponseBody
+	public String addChar(@PathVariable(value = "idendroit") Long idendroit,
+			@PathVariable(value = "ideventss") Long ideventss, @Valid @RequestBody Endroit e) {
+		Endroit e2 = endroitDAO.findOne(idendroit);
+		Events d1 = eventDAO.findOne(ideventss);
+		String message="this place is reserved ";
+		String message1="Successful";
+		String message2="number of places less than number of places in its event";
+
+		int nbPEndroit = e2.getNbplace();
+		int nbPEvent = d1.getNbplace();
+		if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent )) {
+			e2.setPrix(e2.getPrix());
+			e2.setNbplace(e2.getNbplace());
+			e2.setEmplacement(e2.getEmplacement());
+			e2.setEventss(e2.getEventss());
+			e2.setStatu("Reservé");
+			endroitDAO.saveEndroit(ideventss, e2);
+			return message1;
+		} 
+		else if (nbPEndroit < nbPEvent ){
+			return message2;
+		}
+		else {
+			return message;
+		}
+
+
+	}
+	/* add events*/
+	@PostMapping("/ajouter/{publicite}")
+	@ResponseBody
+	public int addPub(@PathVariable(value = "publicite") Long publicite,
+			@Valid @RequestBody Events Events){
+		
+		return eventDAO.saveEvent(publicite,Events);
+	}
+	/* add endroit*/
+	/*@PostMapping("/ajouter/{publicite}")
+	@ResponseBody
+	public int addPub(@PathVariable(value = "publicite") Long publicite,
+			@Valid @RequestBody Events Events){
+		
+		return eventDAO.saveEvent(publicite,Events);
+	}*/
 
 }

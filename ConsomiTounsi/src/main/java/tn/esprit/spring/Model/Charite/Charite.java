@@ -25,12 +25,12 @@ public class Charite implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	 
-	 private String TypeCharite;
-	 @ManyToOne
-	 @JsonIgnore
+	private String TypeCharite;
+	@ManyToOne
+	@JsonIgnore
 	private User iduser;
-	 @ManyToOne
-	 @JsonIgnore
+	@ManyToOne
+	@JsonIgnore
     private Events idevents ;
 	public Long getId() {
 		return id;
