@@ -42,7 +42,7 @@ public class SujetController {
 	}
 	
 	@DeleteMapping("/delete/{id}/{userId}")
-	public ResponseEntity<CategorieSujet> DeleteProduit(@PathVariable(value = "id") Long id,
+	public ResponseEntity<CategorieSujet> DeleteSujet(@PathVariable(value = "id") Long id,
 														@PathVariable(value = "userId") Long userid) {
 		Sujet s = isujetservice.findOne(id);
 		if (s== null) {
@@ -53,13 +53,19 @@ public class SujetController {
 	return ResponseEntity.ok().build();
 	}
 	@GetMapping("/recherche/{nom}")
-	public ResponseEntity<?> findLikeNameM(@PathVariable(value = "nom") String name) {
+	public ResponseEntity<?> findLikeName(@PathVariable(value = "nom") String name) {
 	      List<Sujet> sujets = new ArrayList<>();
 		sujets=isujetservice.findSujetbyName(name);
 		if(sujets.isEmpty())
 			return ResponseEntity.notFound().build();
 	return 	ResponseEntity.ok().body(sujets);
 	}
+	
+	@GetMapping("/NameUser/{sujetId}")
+	public ResponseEntity<?> findNamebySujet(@PathVariable(value = "sujetId") Long sujetId) {
+	return 	ResponseEntity.ok().body(isujetservice.findNamebySujet(sujetId));
+	}
+	
 	
 	@GetMapping("/recherchecatg/{catgId}")
 	public  ResponseEntity <?>findNamebyCateg(@PathVariable(value = "catgId") Long catgId) {

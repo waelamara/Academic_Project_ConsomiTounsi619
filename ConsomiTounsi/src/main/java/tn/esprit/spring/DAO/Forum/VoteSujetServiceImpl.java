@@ -1,5 +1,6 @@
 package tn.esprit.spring.DAO.Forum;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,45 +46,72 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 	}
 
 	@Override
-	public List<VoteSujet> getAllVote(Long sujetId, Long userId) {
+	public VoteSujet getVote(Long sujetId, Long userId) {
 		return voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
 	}
+	
+	@Override
+	public List<VoteSujet> getVoteOfSujet(Long sujetId) {
+		Sujet sujet = sujetRepository.findById(sujetId).get();
+		List<VoteSujet> votes = new ArrayList<>();
+		for(VoteSujet v :sujet.getVotesSujet())
+			votes.add(v);
+			return votes;
+	}
+
 
 	@Override
 	public void deletevoteById(Long sujetId, Long userId) {
-		 voteSujetRepository.deletevoteById(sujetId, userId);
+		VoteSujet v=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
+		v.setNbLike(0);
+		v.setNbDislike(0);
+	voteSujetRepository.save(v);
 	}
 
 	@Override
 	public void Updatelike( Long sujetId,Long userId) {
-		 voteSujetRepository.Updatelike(sujetId,userId);
+		VoteSujet v=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
+		v.setNbLike(1);
+		v.setNbDislike(0);
+		voteSujetRepository.save(v);
 	
 	}
 
 	@Override
 	public void Updatedislike(Long sujetId,Long userId) {
-		 voteSujetRepository.Updatedislike(userId, sujetId);
+		VoteSujet v=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
+		v.setNbLike(0);
+		v.setNbDislike(1);
+		voteSujetRepository.save(v);
 	}
 
 	@Override
 	public Boolean verificationvote(Long userId, Long sujetId) {
-		List<VoteSujet> vote=new ArrayList<VoteSujet>();
-	  vote=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
-		if (vote.isEmpty())
+	 List <VoteSujet> votes=new ArrayList<>();
+	 VoteSujet v=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
+		 votes.add(v);
+		if (votes.isEmpty())
 			return false;
 		return true;
 	}
 
 	@Override
 	public int countlike(Long sujetId) {
-		
 		return  voteSujetRepository.countlike(sujetId);
 	}
 
 	@Override
 	public int countdislik(Long sujetId) {
-		
 		return voteSujetRepository.countdislik(sujetId);
+	}
+
+	@Override
+	public List<String> findNomdesUsersVoter(Long sujetId) {
+		Sujet sujet=sujetRepository.findById(sujetId).get();	
+		List<String> noms = new ArrayList<>();
+		for(VoteSujet v :sujet.getVotesSujet())
+			noms.add(v.getIdUser().getFirstName()+" "+v.getIdUser().getLastName());
+			return noms;	
 	}
 
 	

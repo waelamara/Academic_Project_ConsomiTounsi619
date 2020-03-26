@@ -3,7 +3,6 @@ package tn.esprit.spring.Model.Forum;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,6 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.*;
-
 @Entity
 public class Commentaire implements Serializable  {
 	
@@ -28,9 +26,11 @@ public class Commentaire implements Serializable  {
 		private int nbLike;
 		private int nbDislike;
 		
-		@ManyToOne  
+		@JsonIgnore
+		@ManyToOne  	
 		@JoinColumn(name = "idUser", referencedColumnName = "USER_ID")
 		User idUser;
+		@JsonIgnore
 		@ManyToOne  
 		@JoinColumn(name = "idSujet", referencedColumnName = "id")
 		Sujet idSujet;

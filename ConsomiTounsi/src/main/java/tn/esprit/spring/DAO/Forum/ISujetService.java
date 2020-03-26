@@ -15,4 +15,5 @@ public interface ISujetService {
 	public void affecterSujetACategS(Long sujId, Long categId);
 	public List<String> getAllSujetNamesByCategorie(Long categId);
 	public List<Sujet> findSujetbyUser(Long userid);
+	public String findNamebySujet (Long sujetid);
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -59,7 +58,8 @@ public class Sujet implements Serializable {
 	public Sujet() {
 		super();
 	}
-	public Sujet(Long id, String nomSujet, String description, Date dateAjout, int nbVue, int nbLike, int nbDislike) {
+
+	public Sujet(Long id, String nomSujet, String description, Date dateAjout, int nbVue, int nbLike, int nbDislike ) {
 		super();
 		this.id = id;
 		this.nomSujet = nomSujet;

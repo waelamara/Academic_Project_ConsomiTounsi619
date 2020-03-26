@@ -1,5 +1,7 @@
 package tn.esprit.spring.Controller.Forum;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,35 +24,67 @@ import tn.esprit.spring.Model.Forum.VoteSujet;
 @RestController
 @RequestMapping("/voteSujet")
 public class VoteSujetController {
+
 @Autowired
 IVoteSujetService ivoteSujetservice;
+
 @PostMapping("/ajouter/{sujetId}/{userId}")
 public ResponseEntity<?> ajouterSujet( @PathVariable(value = "sujetId") Long sujetid,
 		                              @PathVariable(value = "userId") Long userid,
 		                              @Valid @RequestBody VoteSujet v ) {
 	ivoteSujetservice.ajouterlike( v,sujetid, userid);
 	  return ResponseEntity.created(null).body(v);}
+
+
 @GetMapping("/countl/{sujetId}")
-public ResponseEntity<?> countlike(@PathVariable(value = "sujetId") Long sujetId) {
+public ResponseEntity<?> countLike(@PathVariable(value = "sujetId") Long sujetId) {
 	int x =ivoteSujetservice.countlike(sujetId);
 	return 	ResponseEntity.ok().body(x);
 }
 @GetMapping("/countd/{sujetId}")
-public ResponseEntity<?> countedislike(@PathVariable(value = "sujetId") Long sujetId) {
+public ResponseEntity<?> counteDislike(@PathVariable(value = "sujetId") Long sujetId) {
 	int x =ivoteSujetservice.countdislik(sujetId);
 	return 	ResponseEntity.ok().body(x);
 }
-@GetMapping("/afficher/{sujetId}/{iduser}")
-public ResponseEntity<?> affichervote(@PathVariable(value = "sujetId") Long sujetId,
+
+@GetMapping("/verification/{sujetId}/{iduser}")
+public ResponseEntity<?> verificationVote(@PathVariable(value = "sujetId") Long sujetId,
 									 @PathVariable("iduser") Long iduser) {
-	List<VoteSujet> vote = new ArrayList<>();
-	vote=ivoteSujetservice.getAllVote(sujetId, iduser) ;
+	return 	ResponseEntity.ok().body(ivoteSujetservice.verificationvote(sujetId, iduser));
+}
+@GetMapping("/afficher/{sujetId}/{iduser}")
+public ResponseEntity<?> afficherVote(@PathVariable(value = "sujetId") Long sujetId,
+									 @PathVariable("iduser") Long iduser) {
+	VoteSujet vote;
+	vote=ivoteSujetservice.getVote(sujetId, iduser) ;
 	return 	ResponseEntity.ok().body(vote);
 }
+
+@GetMapping("/afficher/{sujetId}")
+public ResponseEntity<?> affichervVoteOfSujet(@PathVariable(value = "sujetId") Long sujetId){
+	List<VoteSujet> vote=new ArrayList<>();
+	vote=ivoteSujetservice.getVoteOfSujet(sujetId) ;
+	return 	ResponseEntity.ok().body(vote);
+}
+
+@GetMapping("/afficherNomsUser/{sujetId}")
+public ResponseEntity<?> afficherNomdesUserVote(@PathVariable(value = "sujetId") Long sujetId){
+	List<String> noms=new ArrayList<>();
+	noms=ivoteSujetservice.findNomdesUsersVoter(sujetId);
+	return 	ResponseEntity.ok().body(noms);
+}
+
 @PutMapping(value = "/editvotel/{idsujet}/{iduser}") 
 @ResponseBody
-public ResponseEntity<?> updatelike(@PathVariable("idsujet") Long idsujet, @PathVariable("iduser") Long iduser) {
+public ResponseEntity<?> updateLike(@PathVariable("idsujet") Long idsujet, @PathVariable("iduser") Long iduser) {
 	ivoteSujetservice.Updatelike(idsujet,iduser);
+	return ResponseEntity.ok().build();
+}
+
+@PutMapping(value = "/editvoted/{idsujet}/{iduser}") 
+@ResponseBody
+public ResponseEntity<?> updateDislike(@PathVariable("idsujet") Long idsujet, @PathVariable("iduser") Long iduser) {
+	ivoteSujetservice.Updatedislike(idsujet,iduser);
 	return ResponseEntity.ok().build();
 }
 

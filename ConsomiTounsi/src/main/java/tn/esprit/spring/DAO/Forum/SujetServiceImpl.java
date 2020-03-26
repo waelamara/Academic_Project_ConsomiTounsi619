@@ -93,4 +93,10 @@ public class SujetServiceImpl implements ISujetService {
 			return sujets;
 	}
 
+	@Override
+	public String findNamebySujet(Long sujetId) {
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		return sujet.getIdUser().getFirstName()+" "+sujet.getIdUser().getLastName();
+	}
+
 }
