@@ -53,9 +53,7 @@ public class Categorie implements Serializable {
 		this.nomCategorie = nomCategorie;
 	}
 
-	public Set<SCategorie> getCategories() {
-		return Categories;
-	}
+
 
 	public void setCategories(Set<SCategorie> categories) {
 		Categories = categories;

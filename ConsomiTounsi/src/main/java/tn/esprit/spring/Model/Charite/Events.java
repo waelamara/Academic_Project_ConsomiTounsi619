@@ -36,6 +36,7 @@ public class Events implements Serializable {
 	private int nbplace;
 	private int nbparticipant;
 	private String description;
+	private String image;
 	@OneToOne
 	@JsonIgnore
 	private Pub publicite;
@@ -45,6 +46,14 @@ public class Events implements Serializable {
 	public Set<Charite> charite;
 
 	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public Long getId() {
 		return Id;
@@ -122,7 +131,7 @@ public class Events implements Serializable {
 	}
 
 	public Events(String titre, Date DateE, int nbplace, int nbparticipant, Pub publicite, Set<Endroit> endroit,
-			Set<Charite> charite,String description) {
+			Set<Charite> charite,String description,String image) {
 		super();
 		this.titre = titre;
 		this.DateE = DateE;
@@ -132,11 +141,13 @@ public class Events implements Serializable {
 		this.endroit = endroit;
 		this.charite = charite;
 		this.description = description;
+		this.image=image;
 
 	}
-	public Events(String titre, Date DateE, int nbplace, int nbparticipant, Pub publicite, Set<Endroit> endroit,
-			Set<Charite> charite) {
+	public Events(long id,String titre, Date DateE, int nbplace, int nbparticipant, Pub publicite, Set<Endroit> endroit,
+			Set<Charite> charite,String description,String image) {
 		super();
+		this.Id=id;
 		this.titre = titre;
 		this.DateE = DateE;
 		this.nbplace = nbplace;
@@ -144,6 +155,8 @@ public class Events implements Serializable {
 		this.publicite = publicite;
 		this.endroit = endroit;
 		this.charite = charite;
+		this.description = description;
+		this.image=image;
 
 	}
 

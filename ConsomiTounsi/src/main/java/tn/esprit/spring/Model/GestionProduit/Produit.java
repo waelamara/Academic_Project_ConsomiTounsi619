@@ -40,6 +40,7 @@ public class Produit implements Serializable {
 	private float Poids;
 	private float PrixAchat;
 	@ManyToOne
+	@JsonIgnore
 	private SsCategorie IdSsCategorie;
 	
 	
@@ -126,9 +127,6 @@ public class Produit implements Serializable {
 		IdSsCategorie = idSsCategorie;
 	}
 
-	public Set<ImageProduit> getImages() {
-		return Images;
-	}
 
 	public void setImages(Set<ImageProduit> images) {
 		Images = images;

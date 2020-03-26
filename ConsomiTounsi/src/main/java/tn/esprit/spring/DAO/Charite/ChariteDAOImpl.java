@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Events;
-import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Repository.Charite.EventsRepository;

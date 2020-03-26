@@ -45,7 +45,7 @@ public class ControllerProduit {
 	ImagesProduitDAO imagesProduitDAO;
 
 	ObjectMapper objectMapper = new ObjectMapper();
-	
+
 	@PostMapping(value = "/ajouter/{idSsCategorie}")
 	public ResponseEntity<String> AjouterProduit(@PathVariable(value = "idSsCategorie") Long idSsCategorie,
 			@RequestParam(value = "produit", required = true) String ProduitJson,
@@ -56,7 +56,6 @@ public class ControllerProduit {
 		if (!p.BarcodeIsvalid(p.getBarcode())) {
 			return ResponseEntity.ok("Ce n'est pas un produit tunsien désolé");
 		}
-		
 		p.setIdSsCategorie(ssc);
 		produitDAO.save(p);
 
@@ -70,11 +69,8 @@ public class ControllerProduit {
 			image.setIdproduit(p);
 			imagesProduitDAO.save(image);
 		}
-		
 		return ResponseEntity.ok("Produit Ajouter avec succes");
 	}
-
-
 
 	@GetMapping("/afficher")
 	public List<Produit> getAllProduit() {
@@ -114,6 +110,21 @@ public class ControllerProduit {
 	@GetMapping("/recherche/{nom}")
 	public List<Produit> findLikeNameM(@PathVariable(value = "nom") String name) {
 		return produitDAO.findLikeName(name);
+	}
+
+	@GetMapping("/ssCategorie/{idSsCategorie}")
+	public List<Produit> findProduitSsCategorie(@PathVariable(value = "idSsCategorie") Long idSsCategorie) {
+		return produitDAO.findProduitSsCategorie(idSsCategorie);
+	}
+
+	@GetMapping("/sCategorie/{idSCategorie}")
+	public List<Produit> findProduitSCategorie(@PathVariable(value = "idSCategorie") Long idSCategorie) {
+		return produitDAO.findProduitSCategorie(idSCategorie);
+	}
+
+	@GetMapping("/Categorie/{idSCategorie}")
+	public List<Produit> findProduitCategorie(@PathVariable(value = "idSCategorie") Long idCategorie) {
+		return produitDAO.findProduitCategorie(idCategorie);
 	}
 
 }

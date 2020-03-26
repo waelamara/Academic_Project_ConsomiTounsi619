@@ -55,5 +55,20 @@ public class Rayon implements Serializable{
 	public void setProduits(Set<Produit> produits) {
 		this.produits = produits;
 	}
+
+	public Rayon() {
+		super();
+	}
+
+	public Rayon(long idrayon, String nom_rayon, Type_rayon type_rayon) {
+		super();
+		Idrayon = idrayon;
+		this.nom_rayon = nom_rayon;
+		this.type_rayon = type_rayon;
+	}
+
+	
+	
+	
 	
 }
