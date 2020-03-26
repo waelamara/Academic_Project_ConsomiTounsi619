@@ -27,4 +27,6 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	   @Modifying
 	  @Transactional
 	public void PayerPorteaPorte( @Param("id")int idCommande);
+	@Query(value = "SELECT * FROM commande WHERE id_user=?1 and status='en cours'", nativeQuery = true)
+	public Commande CommandeencoursparClient(long id);
 }
