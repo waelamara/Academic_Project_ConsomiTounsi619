@@ -8,7 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties
 public class ImageProduit implements Serializable {
 	/*
 	 *
@@ -19,6 +23,7 @@ public class ImageProduit implements Serializable {
 	private Long Id;
 	private String Image;
 	@ManyToOne
+	@JsonIgnore
 	private Produit Idproduit;
 
 	public Long getId() {

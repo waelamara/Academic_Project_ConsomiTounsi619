@@ -1,5 +1,6 @@
 package tn.esprit.spring.Controller.Charite;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,8 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Utils.AppConstants;
+import tn.esprit.spring.DAO.FileStorageServiceImpl;
 import tn.esprit.spring.DAO.Charite.PubDAO;
 import tn.esprit.spring.Model.Charite.Pub;
 
@@ -23,10 +33,25 @@ import tn.esprit.spring.Model.Charite.Pub;
 public class ControllerPub {
 	@Autowired
 	PubDAO publiciteDAO;
+	@Autowired
+	FileStorageServiceImpl fileStorageServiceImpl;
+	ObjectMapper objectMapper = new ObjectMapper();
 	
 	@PostMapping("/ajouter")
-	public Pub AjouterPub(@Valid @RequestBody Pub p) {
-		return publiciteDAO.save(p);
+	public String AjouterPub(@RequestParam(value = "Pub", required = true) String PubJson,
+			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file) 
+					throws JsonParseException, JsonMappingException,IOException{
+		Pub p = objectMapper.readValue(PubJson, Pub.class);
+
+		for (MultipartFile i : file) {
+			String fileName = fileStorageServiceImpl.storeFile(i);
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
+			p.setImage(fileDownloadUri);
+			publiciteDAO.save(p);
+
+		}
+		return"Successful"; 
 	}
 	
 	@GetMapping("/afficher")

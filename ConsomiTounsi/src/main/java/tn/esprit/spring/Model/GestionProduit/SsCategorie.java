@@ -28,6 +28,7 @@ public class SsCategorie implements Serializable {
 	@JsonIgnore
 	private Set<Produit> Produits;
 	@ManyToOne
+	@JsonIgnore
 	private SCategorie IdSCategorie;
 
 
@@ -58,9 +59,7 @@ public class SsCategorie implements Serializable {
 		NomSsCategorie = nomSsCategorie;
 	}
 
-	public Set<Produit> getProduits() {
-		return Produits;
-	}
+
 
 	public void setProduits(Set<Produit> produits) {
 		Produits = produits;
