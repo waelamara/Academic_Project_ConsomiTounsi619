@@ -13,6 +13,8 @@ public interface RayonDAO {
 	List<Rayon> getAllRayon();
 
 	void deleteRayonById(long Idrayon);
+	
+	public List<Rayon> findRayonbyName(String name);
 
-	public List<Rayon> findRayonbyName(String nom_rayon);
+
 }

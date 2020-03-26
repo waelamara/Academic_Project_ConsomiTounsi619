@@ -39,9 +39,11 @@ public class RayonDAOImpl implements RayonDAO {
 	}
 
 	@Override
-	public List<Rayon> findRayonbyName(String nom_rayon) {
+	public List<Rayon> findRayonbyName(String name) {
 		
-		return null;
+		return rayonRepository.findRayonbyName(name);
 	}
+
+	
 
 }
