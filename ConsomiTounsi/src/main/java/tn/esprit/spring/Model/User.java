@@ -38,6 +38,8 @@ public class User implements Serializable {
 	private String firstName;
 	@Column(name = "LAST_NAME")
 	private String lastName;
+	@Column(name = "Solde")
+	private float solde;
 	@OneToMany(mappedBy="iduser")
 	@JsonIgnore
 	public Set<Charite> charite;
@@ -115,7 +117,14 @@ public class User implements Serializable {
 	public void setCommandes(Collection<Commande> commandes) {
 		this.commandes = commandes;
 	}
+	
 
+	public float getSolde() {
+		return solde;
+	}
+	public void setSolde(float solde) {
+		this.solde = solde;
+	}
 	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}

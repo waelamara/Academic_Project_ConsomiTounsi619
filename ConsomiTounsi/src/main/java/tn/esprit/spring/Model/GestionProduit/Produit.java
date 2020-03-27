@@ -55,6 +55,8 @@ public class Produit implements Serializable {
 	@OneToOne
 	private Stock IdStock;
 
+	
+
 
 
 	public Produit() {
