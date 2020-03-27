@@ -51,24 +51,7 @@ public class ControllerEvents {
 	ObjectMapper objectMapper = new ObjectMapper();
 
 
-	/*
-	 * @PostMapping("/Paritciper/{id}")
-	 * 
-	 * @ResponseBody public ResponseEntity<Charite>
-	 * addCharite(@PathVariable(value = "id") Long idevents,@RequestBody Charite
-	 * c,@RequestBody Events e) { Events e1 = eventDAO.findOne(idevents); if (c
-	 * == null) { return ResponseEntity.notFound().build(); } if (e == null) {
-	 * return ResponseEntity.notFound().build(); }
-	 * if(chariteDAO.saveCharit(c)==true){ e1.setTitre(e.getTitre());
-	 * e1.setDateE(e.getDateE()); e1.setEndroit(e.getEndroit());
-	 * e1.setNbparticipant(e.getNbplace()-1);
-	 * e1.setNbparticipant(e.getNbparticipant()+1);
-	 * e1.setPublicite(e.getPublicite()); e1.setCharite(e.getCharite());
-	 * eventDAO.saveEvents(e1); chariteDAO.saveCharit(c);
-	 * 
-	 * } //return chariteDAO.saveCharite(Charite); return
-	 * ResponseEntity.ok().build(); }
-	 */
+	
 
 	/* ajouter charité si vous avez ajouter un charité vous avez participer */
 	@PostMapping("/Participer/{idevents}/{iduser}")
@@ -107,9 +90,6 @@ public class ControllerEvents {
 
 		}
 		
-
-
-		// return chariteDAO.saveCharite(idevents,iduser,Charite);
 	}
 
 	/* ajouter event avec photo*/
@@ -201,7 +181,7 @@ public class ControllerEvents {
 	}
 
 	/* reservation Endoit */
-	@PostMapping("/reserve/{idendroit}/{ideventss}")
+	@PostMapping("/reserve/{ideventss}/{idendroit}")
 	@ResponseBody
 	public String addChar(@PathVariable(value = "idendroit") Long idendroit,
 			@PathVariable(value = "ideventss") Long ideventss, @Valid @RequestBody Endroit e) {
@@ -237,15 +217,13 @@ public class ControllerEvents {
 		return eventDAO.saveEvent(publicite, Events);
 	}
 	/* add endroit */
-	/*
-	 * @PostMapping("/ajouter/{publicite}")
-	 * 
-	 * @ResponseBody public int addPub(@PathVariable(value = "publicite") Long
-	 * publicite,
-	 * 
-	 * @Valid @RequestBody Events Events){
-	 * 
-	 * return eventDAO.saveEvent(publicite,Events); }
-	 */
+	@PostMapping("/addEndroit")
+	@ResponseBody
+	public Endroit addEndroit( @Valid @RequestBody Endroit Endroit) {
+
+		return endroitDAO.saveEndroit1(Endroit);
+	}
+	
+	
 
 }
