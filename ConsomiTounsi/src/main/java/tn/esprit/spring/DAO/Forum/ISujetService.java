@@ -11,7 +11,7 @@ public interface ISujetService {
 	public int deleteSujetById(Long sujetId,Long userId);
 	public List<Sujet> findSujetbyName(String name);
 	public Sujet findOne(Long id);
-	public void modifierDescription(String desc, Long sujetId);
+	public int modifierDescription(String desc, Long sujetId,Long userId);
 	public void affecterSujetACategS(Long sujId, Long categId);
 	public List<String> getAllSujetNamesByCategorie(Long categId);
 	public List<Sujet> findSujetbyUser(Long userid);

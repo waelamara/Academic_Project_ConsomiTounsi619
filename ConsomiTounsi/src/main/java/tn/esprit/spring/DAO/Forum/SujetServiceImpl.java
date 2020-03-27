@@ -1,5 +1,6 @@
 package tn.esprit.spring.DAO.Forum;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +29,15 @@ public class SujetServiceImpl implements ISujetService {
 		User user= userRepository.findById(userId).get();
 		s.setCategorieSujet(categS);
 		s.setIdUser(user);
+		LocalDate localDate = LocalDate.now();
+		s.setDateAjout(java.sql.Date.valueOf(localDate));
+		s.setNbLike(0);
+		s.setNbDislike(0);
 		sujetRepository.save(s);
 		return s.getId().intValue();	
 	}
-
+	
+	
 	@Override
 	public List<Sujet> getAllSujets() {
 		return sujetRepository.findAll();
@@ -54,16 +60,21 @@ public class SujetServiceImpl implements ISujetService {
 	}
 
 	@Override
-	public Sujet findOne(Long id) {
-
-		return sujetRepository.getOne(id);
+	public Sujet findOne(Long sujetId) {
+		return sujetRepository.findById(sujetId).get();
 	}
 
 	@Override
-	public void modifierDescription(String desc, Long sujetId ) {
+	public int modifierDescription(String desc, Long sujetId,Long userId ) {
 	Sujet sujet =sujetRepository.findById(sujetId).get();
+	if(sujet.getIdUser().getId()== userId)
+	{
 		sujet.setDescription(desc);
-		sujetRepository.save(sujet);
+		sujetRepository.save(sujet);	 
+		 return 1;
+	}
+		 return 0;  
+	
 		
 	}
 
