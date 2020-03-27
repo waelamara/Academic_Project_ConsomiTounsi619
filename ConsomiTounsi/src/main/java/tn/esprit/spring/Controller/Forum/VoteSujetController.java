@@ -28,13 +28,19 @@ public class VoteSujetController {
 @Autowired
 IVoteSujetService ivoteSujetservice;
 
-@PostMapping("/ajouter/{sujetId}/{userId}")
-public ResponseEntity<?> ajouterSujet( @PathVariable(value = "sujetId") Long sujetid,
+@PostMapping("/ajouterl/{sujetId}/{userId}")
+public ResponseEntity<?> ajouterLike( @PathVariable(value = "sujetId") Long sujetid,
 		                              @PathVariable(value = "userId") Long userid,
 		                              @Valid @RequestBody VoteSujet v ) {
 	ivoteSujetservice.ajouterlike( v,sujetid, userid);
 	  return ResponseEntity.created(null).body(v);}
 
+@PostMapping("/ajouterd/{sujetId}/{userId}")
+public ResponseEntity<?> ajouterDislike( @PathVariable(value = "sujetId") Long sujetid,
+		                              @PathVariable(value = "userId") Long userid,
+		                              @Valid @RequestBody VoteSujet v ) {
+	ivoteSujetservice.ajouterdislike( v,sujetid, userid);
+	  return ResponseEntity.created(null).body(v);}
 
 @GetMapping("/countl/{sujetId}")
 public ResponseEntity<?> countLike(@PathVariable(value = "sujetId") Long sujetId) {

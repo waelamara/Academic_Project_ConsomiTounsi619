@@ -35,6 +35,9 @@ public class Vote implements Serializable {
 	
 	
 	
+	public Vote() {
+		super();
+	}
 	public Vote(Long id, int nbLike, int nbDislike) {
 		super();
 		this.id = id;
