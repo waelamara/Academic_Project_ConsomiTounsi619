@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.DAO.Rayon.RayonDAO;
+import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Rayon.Rayon;
 
 @RestController
@@ -53,10 +54,10 @@ public class RayonController {
 	}
 	
 //////////////////////////////////////////////////////////////////////////////
+	
 	@GetMapping("/findrayon/{nom_rayon}")
-	@ResponseBody
-	public List<Rayon> rechercherrayon(@PathVariable(value ="nom_rayon") String nom_rayon){
-		return rayonDAO.findRayonbyName(nom_rayon);
+	public List<Rayon> findLikeNameR(@PathVariable(value = "nom_rayon") String name) {
+		return rayonDAO.findRayonbyName(name);
 	}
 	
 }

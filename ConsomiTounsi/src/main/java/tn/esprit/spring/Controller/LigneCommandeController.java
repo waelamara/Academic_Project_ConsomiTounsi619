@@ -2,13 +2,19 @@ package tn.esprit.spring.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import tn.esprit.spring.DAO.LigneCommandeDao;
+import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
 
 
@@ -21,6 +27,26 @@ public class LigneCommandeController {
 	public List<lignecommandeproduit> panierParIdclient(@PathVariable(value = "idUser") long id) {
 	
 		return ligneCommandeDao.panierParIdclient(id);
+	}
+	@GetMapping("/{idprod}/{idUser}")
+	public LigneCommande findLigneCommande(@PathVariable(value = "idprod") long idprod,@PathVariable(value = "idUser") long iduser) {
+	
+		return ligneCommandeDao.findLigneCommande(idprod,iduser);
+	}
+	@PostMapping("/ajouter/{idprod}/{iduser}")
+	public List<lignecommandeproduit> AjouterLigne (@PathVariable(value = "idprod") Long idprod,@PathVariable(value = "iduser") Long iduser,
+			@Valid @RequestBody LigneCommande lc) {
+		LigneCommande l=ligneCommandeDao.findLigneCommande(idprod, iduser);
+		
+		if(l!=null){
+			l.setQuantity(l.getQuantity()+1);
+			ligneCommandeDao.save(l);
+			 return ligneCommandeDao.panierParIdclient(iduser);
+		}
+		else 
+			ligneCommandeDao.addBookToCartItem(idprod, iduser, lc);
+		
+		return ligneCommandeDao.panierParIdclient(iduser);
 	}
 
 

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
@@ -23,9 +24,9 @@ public class AdminController {
 
 	@Autowired
 	ReclamationDAO ReclamationDAO;
-	private Date A;
-	private Date B;
-	private float res;
+	private int A;
+	private int B;
+	private int res;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -36,25 +37,38 @@ public class AdminController {
 			@Valid @RequestBody reclamation rec) {
 		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
 
-		
-		
-//		try {
-//			A = sdf.parse(rec1.getCommande().getDate().toString());
-//			B = sdf.parse(LocalDate.now().toString());
-//		} catch (ParseException e) {
-//
-//		}
+		//
+		// try {
+		// A = sdf.parse(rec1.getCommande().getDate().toString());
+		// B = sdf.parse(LocalDate.now().toString());
+		// } catch (ParseException e) {
+		//
+		// }
 
-//		long diff = A.getTime() - B.getTime();
-//		res = (diff / (1000 * 60 * 60 * 24));
+		// long diff = A.getTime() - B.getTime();
+		// res = (diff / (1000 * 60 * 60 * 24));
 
-//		if (res < 15) {
-			rec1.setTraiter(true);
-			rec1.setEtat("Remboursé");
-			rec1.setReponse(rec.getReponse());
-			return ReclamationDAO.traiter(rec1);
-//		} else
-//			return null;
+		// if (res < 15) {
+		/* x */
+		// } else
+		// return null;
+	
+		A = rec1.getCommande().getDate().getDayOfYear();
+		int yearA = rec1.getCommande().getDate().getYear();
+		int yearB = LocalDate.now().getYear();
+		int diffY = yearB-yearA;
+		B = LocalDate.now().getDayOfYear();
+		res=B-A;
+
+    
+    if ((res < 15) && (diffY<1)) {
+		rec1.setTraiter(true);
+		rec1.setEtat("Remboursé");
+		rec1.setReponse(rec.getReponse());
+		return ReclamationDAO.traiter(rec1);
+	    }
+	    else
+	    	return null;
 
 	}
 
@@ -62,10 +76,22 @@ public class AdminController {
 
 	public reclamation Echange_rec(@PathVariable(value = "rec_id") long rec_id, @Valid @RequestBody reclamation rec) {
 		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+		
+		A = rec1.getCommande().getDate().getDayOfYear();
+		int yearA = rec1.getCommande().getDate().getYear();
+		int yearB = LocalDate.now().getYear();
+		int diffY = yearB-yearA;
+		B = LocalDate.now().getDayOfYear();
+		res=B-A;
+
+    
+    if ((res < 15) && (diffY<1)) {
 		rec1.setTraiter(true);
 		rec1.setEtat("Echange");
 		rec1.setReponse(rec.getReponse());
-		return ReclamationDAO.traiter(rec1);
+		return ReclamationDAO.traiter(rec1);}
+    else
+    	return null;
 	}
 
 	@PutMapping("reclamation/reparation/{rec_id}")
@@ -73,9 +99,20 @@ public class AdminController {
 	public reclamation reparation_rec(@PathVariable(value = "rec_id") long rec_id,
 			@Valid @RequestBody reclamation rec) {
 		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+		A = rec1.getCommande().getDate().getDayOfYear();
+		int yearA = rec1.getCommande().getDate().getYear();
+		int yearB = LocalDate.now().getYear();
+		int diffY = yearB-yearA;
+		B = LocalDate.now().getDayOfYear();
+		res=B-A;
+
+    
+    if ((res < 15) && (diffY<1)) {
 		rec1.setTraiter(true);
 		rec1.setEtat("Reparation");
 		rec1.setReponse(rec.getReponse());
-		return ReclamationDAO.traiter(rec1);
+		return ReclamationDAO.traiter(rec1);}
+	    else
+	    	return null;
 	}
 }
