@@ -36,15 +36,7 @@ public class LigneCommandeController {
 	@PostMapping("/ajouter/{idprod}/{iduser}")
 	public List<lignecommandeproduit> AjouterLigne (@PathVariable(value = "idprod") Long idprod,@PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody LigneCommande lc) {
-		//LigneCommande l=ligneCommandeDao.findLigneCommande(idprod, iduser);
-		//System.out.println(l);
-		
-		/*if(l!=null){
-			l.setQuantity(l.getQuantity()+1);
-			ligneCommandeDao.save(l);*/
-			// return ligneCommandeDao.panierParIdclient(iduser);
-		//}
-		//else 
+	
 			ligneCommandeDao.addBookToCartItem(idprod, iduser, lc);
 		
 		return ligneCommandeDao.panierParIdclient(iduser);

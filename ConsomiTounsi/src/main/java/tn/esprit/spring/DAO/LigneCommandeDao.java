@@ -65,23 +65,23 @@ public class LigneCommandeDao {
 		 lc.setCommande(c1);
 		 lc.setProduit(p);
 		 ligneCommandeRepository.save(lc);
-			/*if(l!=null){
-				l.setQuantity(l.getQuantity()+1);
-				ligneCommandeRepository.save(l);
-		 }*/
+
 		 }
-		 else if ((c!=null)&&(l==null))
+		 else if ((c!=null))
 		 {
+				if(l!=null){
+					l.setQuantity(l.getQuantity()+1);
+					ligneCommandeRepository.save(l);
+			 }
+				else
+				{
 			 lc.setCommande(c);
 				lc.setPrice(p.getPrix());
 				 lc.setStatus("en cours");
 				 lc.setProduit(p);
 				 ligneCommandeRepository.save(lc);
-					if(l!=null){
-						l.setQuantity(l.getQuantity()+1);
-						ligneCommandeRepository.save(l);
-				 }
-			 long idCommande=c.getId();
+				}
+			/* long idCommande=c.getId();
 				LigneCommande l2=ligneCommandeRepository.findLigneCommande(idprod, iduser,idCommande);
 				if(l2!=null)
 				{
@@ -94,8 +94,11 @@ public class LigneCommandeDao {
 				if(l!=null){
 					l.setQuantity(l.getQuantity()+1);
 					ligneCommandeRepository.save(l);
-			 }
-				}	 
+			 }*/
+				}
+	
+	
+		 
 		 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;
 	}
