@@ -28,22 +28,23 @@ public class LigneCommandeController {
 	
 		return ligneCommandeDao.panierParIdclient(id);
 	}
-	@GetMapping("/{idprod}/{idUser}")
-	public LigneCommande findLigneCommande(@PathVariable(value = "idprod") long idprod,@PathVariable(value = "idUser") long iduser) {
+	@GetMapping("/{idprod}/{idUser}/{idCommande}")
+	public LigneCommande findLigneCommande(@PathVariable(value = "idprod") long idprod,@PathVariable(value = "idUser") long iduser,@PathVariable(value = "idCommande") long idCommande) {
 	
-		return ligneCommandeDao.findLigneCommande(idprod,iduser);
+		return ligneCommandeDao.findLigneCommande(idprod,iduser,idCommande);
 	}
 	@PostMapping("/ajouter/{idprod}/{iduser}")
 	public List<lignecommandeproduit> AjouterLigne (@PathVariable(value = "idprod") Long idprod,@PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody LigneCommande lc) {
-		LigneCommande l=ligneCommandeDao.findLigneCommande(idprod, iduser);
+		//LigneCommande l=ligneCommandeDao.findLigneCommande(idprod, iduser);
+		//System.out.println(l);
 		
-		if(l!=null){
+		/*if(l!=null){
 			l.setQuantity(l.getQuantity()+1);
-			ligneCommandeDao.save(l);
-			 return ligneCommandeDao.panierParIdclient(iduser);
-		}
-		else 
+			ligneCommandeDao.save(l);*/
+			// return ligneCommandeDao.panierParIdclient(iduser);
+		//}
+		//else 
 			ligneCommandeDao.addBookToCartItem(idprod, iduser, lc);
 		
 		return ligneCommandeDao.panierParIdclient(iduser);

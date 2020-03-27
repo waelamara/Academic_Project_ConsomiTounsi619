@@ -37,14 +37,17 @@ public class LigneCommandeDao {
 	public List<LigneCommande> findAll() {
 		return ligneCommandeRepository.findAll();
 	}
-	public LigneCommande findLigneCommande(Long idProduit,Long idClient){
-		return ligneCommandeRepository.findLigneCommande(idProduit, idClient);
+	public LigneCommande findLigneCommande(Long idProduit,Long idClient,Long idCommande){
+		return ligneCommandeRepository.findLigneCommande(idProduit, idClient,idCommande);
 	}
 	public List<lignecommandeproduit> addBookToCartItem(long idprod, long iduser,LigneCommande lc )
 	{
 		List<lignecommandeproduit>List=ligneCommandeRepository.panierParIdclient(iduser);
+		System.out.println(List);
 		Produit p = produitRepository.getOne(idprod);
 		Commande c=commandeRepository.CommandeencoursparClient(iduser);
+		LigneCommande l=ligneCommandeRepository.findLigneCommande(idprod, iduser);
+		
 		System.out.println(c);
 		
 		 User cl= userRepository.getOne(iduser);
@@ -62,19 +65,39 @@ public class LigneCommandeDao {
 		 lc.setCommande(c1);
 		 lc.setProduit(p);
 		 ligneCommandeRepository.save(lc);
+			/*if(l!=null){
+				l.setQuantity(l.getQuantity()+1);
+				ligneCommandeRepository.save(l);
+		 }*/
 		 }
-		 else if (c!=null)
+		 else if ((c!=null)&&(l==null))
 		 {
 			 lc.setCommande(c);
 				lc.setPrice(p.getPrix());
 				 lc.setStatus("en cours");
 				 lc.setProduit(p);
-				 ligneCommandeRepository.save(lc);		 
-		 }
-
-
-
-		return ligneCommandeRepository.panierParIdclient(iduser) ;
+				 ligneCommandeRepository.save(lc);
+					if(l!=null){
+						l.setQuantity(l.getQuantity()+1);
+						ligneCommandeRepository.save(l);
+				 }
+			 long idCommande=c.getId();
+				LigneCommande l2=ligneCommandeRepository.findLigneCommande(idprod, iduser,idCommande);
+				if(l2!=null)
+				{
+			 lc.setCommande(c);
+				lc.setPrice(p.getPrix());
+				 lc.setStatus("en cours");
+				 lc.setProduit(p);
+				 ligneCommandeRepository.save(lc);
+				}		 
+				if(l!=null){
+					l.setQuantity(l.getQuantity()+1);
+					ligneCommandeRepository.save(l);
+			 }
+				}	 
+		 
+			return ligneCommandeRepository.panierParIdclient(iduser) ;
 	}
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
