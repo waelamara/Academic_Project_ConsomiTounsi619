@@ -15,8 +15,9 @@ public class PubDAO {
 
 	public Pub save(Pub p) {
 		return publiciteRepository.save(p);
+	
 	}
-
+	
 	public List<Pub> findAll() {
 		return publiciteRepository.findAll();
 	}

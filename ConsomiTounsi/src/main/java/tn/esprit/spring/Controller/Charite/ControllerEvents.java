@@ -25,10 +25,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.DAO.FileStorageServiceImpl;
+import tn.esprit.spring.DAO.UserDAO;
 import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 
@@ -42,6 +44,8 @@ public class ControllerEvents {
 	ChariteDAO chariteDAO;
 	@Autowired
 	EndroitDAO endroitDAO;
+	@Autowired
+	UserDAO userDAO;
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();
@@ -72,8 +76,9 @@ public class ControllerEvents {
 	public String addChar(@PathVariable(value = "idevents") Long idevents, @PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody Charite Charite) {
 		Events e1 = eventDAO.findOne(idevents);
-
-		if (e1.getNbplace() > 0) {
+		User u1= userDAO.findOne(iduser);
+		if ((e1.getNbplace() > 0)&&(u1.getSolde()>Charite.getMontantPaye())) {
+			float S ;
 			int nb = e1.getNbplace();
 			int nbP = e1.getNbparticipant();
 			e1.setTitre(e1.getTitre());
@@ -85,14 +90,24 @@ public class ControllerEvents {
 			e1.setCharite(e1.getCharite());
 			e1.setDescription(e1.getDescription());
 			e1.setImage(e1.getImage());
+			S=u1.getSolde()-Charite.getMontantPaye();
+			u1.setSolde(S);
+			userDAO.save(u1);
 			eventDAO.saveEvents(e1);
 			chariteDAO.saveCharite(idevents, iduser, Charite);
 			return "Successful";
 
-		} else {
+		} 
+		else if(u1.getSolde()<Charite.getMontantPaye()){
+			return "your insufficient balance";
+			
+		}
+		else {
 			return "insufficient space";
 
 		}
+		
+
 
 		// return chariteDAO.saveCharite(idevents,iduser,Charite);
 	}
