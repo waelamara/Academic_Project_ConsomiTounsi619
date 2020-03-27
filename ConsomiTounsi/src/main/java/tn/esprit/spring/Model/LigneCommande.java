@@ -2,7 +2,9 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class LigneCommande implements Serializable  {
 	 private String status;
 	 @ManyToOne
 	private Produit produit;
-	 @ManyToOne
+	 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 private Commande commande ;
 	 
 	public Long getId() {

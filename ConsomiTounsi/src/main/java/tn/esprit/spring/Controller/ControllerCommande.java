@@ -43,7 +43,7 @@ public class ControllerCommande {
 		return ResponseEntity.ok().build();
 	}
 	@GetMapping("rechercheparcode/{code}")
-	public List<Commande>Commandeparcode(@PathVariable(value = "code") int code) {
+	public List<Commande>Commandeparcode(@PathVariable(value = "code") long code) {
 	
 		return commandeDao.Commandeparcode(code);
 	}
