@@ -82,8 +82,6 @@ public class LigneCommandeDao {
 		 else if ((c!=null))
 		 {
 			
-		
-			 
 				if(l!=null){
 					l.setQuantity(l.getQuantity()+1);
 					ligneCommandeRepository.save(l);
@@ -96,20 +94,6 @@ public class LigneCommandeDao {
 				 lc.setProduit(p);
 				 ligneCommandeRepository.save(lc);
 				}
-			/* long idCommande=c.getId();
-				LigneCommande l2=ligneCommandeRepository.findLigneCommande(idprod, iduser,idCommande);
-				if(l2!=null)
-				{
-			 lc.setCommande(c);
-				lc.setPrice(p.getPrix());
-				 lc.setStatus("en cours");
-				 lc.setProduit(p);
-				 ligneCommandeRepository.save(lc);
-				}		 
-				if(l!=null){
-					l.setQuantity(l.getQuantity()+1);
-					ligneCommandeRepository.save(l);
-			 }*/
 				}
 	
 	

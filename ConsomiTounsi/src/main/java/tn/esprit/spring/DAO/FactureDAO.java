@@ -3,6 +3,8 @@ package tn.esprit.spring.DAO;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,6 +21,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -56,7 +59,7 @@ public List<lignecommandeproduit> FactureParIdUser( long id) {
 	return factureRepository.FactureParIdUser(id);
 
 }
-public boolean CreePdf(List<lignecommandeproduit>commandes ,ServletContext context,HttpServletRequest request ,HttpServletResponse reponse )
+public boolean CreePdf(List<lignecommandeproduit>commandes ,ServletContext context,HttpServletRequest request ,HttpServletResponse reponse ) throws MalformedURLException, IOException
 {
 	try {
 	Document d = new Document(PageSize.A4,15,15,45,30);
@@ -81,6 +84,7 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
     paragraph.setIndentationRight(50);
     paragraph.setSpacingAfter(200);
     d.add(paragraph);
+    d.add(Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.png"));
 
     PdfPTable table = new PdfPTable(4);//column amount
     table.setWidthPercentage(100);
