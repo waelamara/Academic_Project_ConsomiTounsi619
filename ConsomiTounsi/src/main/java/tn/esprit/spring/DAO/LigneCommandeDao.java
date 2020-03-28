@@ -48,27 +48,42 @@ public class LigneCommandeDao {
 		Commande c=commandeRepository.CommandeencoursparClient(iduser);
 		LigneCommande l=ligneCommandeRepository.findLigneCommande(idprod, iduser);
 		
-		System.out.println(c);
 		
+		 float sum=0;
+		/*for (lignecommandeproduit lp :  List)
+		 {
+			
+			 sum+=lp.getTotal();
+			 System.out.println(sum);
+			 c.setMontant(c.getMontant()+sum);
+		 }*/
 		 User cl= userRepository.getOne(iduser);
 		 if(List.isEmpty())
 		 {
+			 float total=0;
+			
 		Commande  c1= new Commande(); 
 		c1.setIdUser(cl);
 		c1.setDate(LocalDate.now());
 		c1.setStatus("en cours");
 		c1.setTypedePayment("en cours");
-		commandeRepository.save(c1);
-		double sum = 0;
+		//total=(float) (lc.getPrice()*lc.getQuantity());
+		
 		lc.setPrice(p.getPrix());
+		
+		//c1.setMontant(total);
 		 lc.setStatus("en cours");
 		 lc.setCommande(c1);
 		 lc.setProduit(p);
+		 commandeRepository.save(c1);
 		 ligneCommandeRepository.save(lc);
 
 		 }
 		 else if ((c!=null))
 		 {
+			
+		
+			 
 				if(l!=null){
 					l.setQuantity(l.getQuantity()+1);
 					ligneCommandeRepository.save(l);
