@@ -1,4 +1,4 @@
-package tn.esprit.spring.Model;
+package tn.esprit.spring.Model.Stock;
 
 import java.io.Serializable;
 
@@ -15,6 +15,7 @@ public class Stock implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idstock;
+	
 	private int quantite;
 	@OneToOne(mappedBy="IdStock")
 	private Produit idProduit;

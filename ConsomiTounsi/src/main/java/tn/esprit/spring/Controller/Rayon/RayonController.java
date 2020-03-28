@@ -55,8 +55,9 @@ public class RayonController {
 	
 //////////////////////////////////////////////////////////////////////////////
 	
-	@GetMapping("/findrayon/{nom_rayon}")
-	public List<Rayon> findLikeNameR(@PathVariable(value = "nom_rayon") String name) {
+	@GetMapping("/rechercherayon/{nom_rayon}")
+	
+	public List<Rayon> rechercherayon(@PathVariable(value = "nom_rayon") String name) {
 		return rayonDAO.findRayonbyName(name);
 	}
 	
