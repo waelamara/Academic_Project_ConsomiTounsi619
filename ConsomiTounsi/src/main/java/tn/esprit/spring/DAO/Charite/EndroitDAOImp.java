@@ -37,4 +37,10 @@ public class EndroitDAOImp implements EndroitDAO{
 		return endroitRepository.getOne(id);
 	}
 
+	@Override
+	public Endroit saveEndroit1(Endroit Endroit) {
+		return endroitRepository.save(Endroit);
+
+	}
+
 }

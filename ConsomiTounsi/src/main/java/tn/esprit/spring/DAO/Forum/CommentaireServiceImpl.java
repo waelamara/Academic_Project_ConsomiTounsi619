@@ -36,8 +36,10 @@ public class CommentaireServiceImpl implements ICommentaireService{
 	}
 
 	@Override
-	public Commentaire getCommentaire(Long sujetId, Long userId) {
-		return commentairesRepository.getCommentaire(sujetId, userId);
+	public List <Commentaire> getCommentaire(Long sujetId, Long userId) {
+		List<Commentaire> commentaires=new ArrayList<>();
+		commentaires= commentairesRepository.getCommentaire(sujetId, userId);
+		return commentaires;
 	}
 	@Override
 	public Commentaire getCommentairebyId(Long comId) {
@@ -63,9 +65,6 @@ public class CommentaireServiceImpl implements ICommentaireService{
 			 return 0;  
 	}
 
-
-			 	 
-			
 
 	@Override
 	public void modifierCommentaire(String desc,Long comId) {

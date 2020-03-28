@@ -25,10 +25,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.DAO.FileStorageServiceImpl;
+import tn.esprit.spring.DAO.UserDAO;
 import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 
@@ -43,28 +45,13 @@ public class ControllerEvents {
 	@Autowired
 	EndroitDAO endroitDAO;
 	@Autowired
+	UserDAO userDAO;
+	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();
 
 
-	/*
-	 * @PostMapping("/Paritciper/{id}")
-	 * 
-	 * @ResponseBody public ResponseEntity<Charite>
-	 * addCharite(@PathVariable(value = "id") Long idevents,@RequestBody Charite
-	 * c,@RequestBody Events e) { Events e1 = eventDAO.findOne(idevents); if (c
-	 * == null) { return ResponseEntity.notFound().build(); } if (e == null) {
-	 * return ResponseEntity.notFound().build(); }
-	 * if(chariteDAO.saveCharit(c)==true){ e1.setTitre(e.getTitre());
-	 * e1.setDateE(e.getDateE()); e1.setEndroit(e.getEndroit());
-	 * e1.setNbparticipant(e.getNbplace()-1);
-	 * e1.setNbparticipant(e.getNbparticipant()+1);
-	 * e1.setPublicite(e.getPublicite()); e1.setCharite(e.getCharite());
-	 * eventDAO.saveEvents(e1); chariteDAO.saveCharit(c);
-	 * 
-	 * } //return chariteDAO.saveCharite(Charite); return
-	 * ResponseEntity.ok().build(); }
-	 */
+	
 
 	/* ajouter charité si vous avez ajouter un charité vous avez participer */
 	@PostMapping("/Participer/{idevents}/{iduser}")
@@ -72,8 +59,9 @@ public class ControllerEvents {
 	public String addChar(@PathVariable(value = "idevents") Long idevents, @PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody Charite Charite) {
 		Events e1 = eventDAO.findOne(idevents);
-
-		if (e1.getNbplace() > 0) {
+		User u1= userDAO.findOne(iduser);
+		if ((e1.getNbplace() > 0)&&(u1.getSolde()>Charite.getMontantPaye())) {
+			float S ;
 			int nb = e1.getNbplace();
 			int nbP = e1.getNbparticipant();
 			e1.setTitre(e1.getTitre());
@@ -85,16 +73,23 @@ public class ControllerEvents {
 			e1.setCharite(e1.getCharite());
 			e1.setDescription(e1.getDescription());
 			e1.setImage(e1.getImage());
+			S=u1.getSolde()-Charite.getMontantPaye();
+			u1.setSolde(S);
+			userDAO.save(u1);
 			eventDAO.saveEvents(e1);
 			chariteDAO.saveCharite(idevents, iduser, Charite);
 			return "Successful";
 
-		} else {
+		} 
+		else if(u1.getSolde()<Charite.getMontantPaye()){
+			return "your insufficient balance";
+			
+		}
+		else {
 			return "insufficient space";
 
 		}
-
-		// return chariteDAO.saveCharite(idevents,iduser,Charite);
+		
 	}
 
 	/* ajouter event avec photo*/
@@ -186,7 +181,7 @@ public class ControllerEvents {
 	}
 
 	/* reservation Endoit */
-	@PostMapping("/reserve/{idendroit}/{ideventss}")
+	@PostMapping("/reserve/{ideventss}/{idendroit}")
 	@ResponseBody
 	public String addChar(@PathVariable(value = "idendroit") Long idendroit,
 			@PathVariable(value = "ideventss") Long ideventss, @Valid @RequestBody Endroit e) {
@@ -222,15 +217,13 @@ public class ControllerEvents {
 		return eventDAO.saveEvent(publicite, Events);
 	}
 	/* add endroit */
-	/*
-	 * @PostMapping("/ajouter/{publicite}")
-	 * 
-	 * @ResponseBody public int addPub(@PathVariable(value = "publicite") Long
-	 * publicite,
-	 * 
-	 * @Valid @RequestBody Events Events){
-	 * 
-	 * return eventDAO.saveEvent(publicite,Events); }
-	 */
+	@PostMapping("/addEndroit")
+	@ResponseBody
+	public Endroit addEndroit( @Valid @RequestBody Endroit Endroit) {
+
+		return endroitDAO.saveEndroit1(Endroit);
+	}
+	
+	
 
 }

@@ -25,7 +25,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.DAO.FileStorageServiceImpl;
+import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.DAO.Charite.PubDAO;
+import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
 
 @RestController
@@ -34,21 +36,27 @@ public class ControllerPub {
 	@Autowired
 	PubDAO publiciteDAO;
 	@Autowired
+	EventsDAO eventDAO;
+	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	@PostMapping("/ajouter")
-	public String AjouterPub(@RequestParam(value = "Pub", required = true) String PubJson,
+	@PostMapping("/ajouter/{idevents}")
+	public String AjouterPub(@PathVariable(value = "idevents") Long idevents,
+			@RequestParam(value = "Pub", required = true) String PubJson,
 			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file) 
 					throws JsonParseException, JsonMappingException,IOException{
 		Pub p = objectMapper.readValue(PubJson, Pub.class);
+		Events e1 = eventDAO.findOne(idevents);
 
 		for (MultipartFile i : file) {
 			String fileName = fileStorageServiceImpl.storeFile(i);
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
-			p.setImage(fileDownloadUri);
+			p.setImage(fileDownloadUri);			
 			publiciteDAO.save(p);
+			e1.setPublicite(p);
+			eventDAO.saveEvents(e1);
 
 		}
 		return"Successful"; 

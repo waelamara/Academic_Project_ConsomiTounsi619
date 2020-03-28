@@ -47,4 +47,10 @@ public class ChariteDAOImpl implements ChariteDAO {
 
 	}
 
+	@Override
+	public Charite findOne(Long id) {
+		return chariteRepository.getOne(id);
+
+	}
+
 }

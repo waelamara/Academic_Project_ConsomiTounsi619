@@ -15,5 +15,8 @@ public class UserDAO {
 	/*Chercher un utilisateur*/
 	public User findOne(long id){
 	return UserRepository.getOne(id);}
+	public User save(User u) {
+		return UserRepository.save(u);
+	}
 
 }

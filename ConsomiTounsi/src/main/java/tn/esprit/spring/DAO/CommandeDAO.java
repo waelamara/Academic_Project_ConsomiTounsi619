@@ -49,7 +49,7 @@ public class CommandeDAO {
 	public Commande findOne(Long id) {
 		return commandeRepository.getOne(id);
 	}
-	public List< Commande> Commandeparcode( int code) {
+	public List< Commande> Commandeparcode( long code) {
 		return commandeRepository.Commandeparcode(code);
 
 	}
