@@ -83,8 +83,9 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
     paragraph.setIndentationLeft(50);
     paragraph.setIndentationRight(50);
     paragraph.setSpacingAfter(200);
+    d.add(Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.jpg"));
     d.add(paragraph);
-    d.add(Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.png"));
+  
 
     PdfPTable table = new PdfPTable(4);//column amount
     table.setWidthPercentage(100);

@@ -50,13 +50,7 @@ public class LigneCommandeDao {
 		
 		
 		 float sum=0;
-		/*for (lignecommandeproduit lp :  List)
-		 {
-			
-			 sum+=lp.getTotal();
-			 System.out.println(sum);
-			 c.setMontant(c.getMontant()+sum);
-		 }*/
+	
 		 User cl= userRepository.getOne(iduser);
 		 if(List.isEmpty())
 		 {
@@ -67,17 +61,15 @@ public class LigneCommandeDao {
 		c1.setDate(LocalDate.now());
 		c1.setStatus("en cours");
 		c1.setTypedePayment("en cours");
-		//total=(float) (lc.getPrice()*lc.getQuantity());
-		
 		lc.setPrice(p.getPrix());
-		
-		//c1.setMontant(total);
+		c1.setMontant(total);
 		 lc.setStatus("en cours");
 		 lc.setCommande(c1);
 		 lc.setProduit(p);
-		 commandeRepository.save(c1);
 		 ligneCommandeRepository.save(lc);
-
+		 total=(float) (lc.getPrice()*lc.getQuantity());
+		c1.setMontant(total);
+		 commandeRepository.save(c1);
 		 }
 		 else if ((c!=null))
 		 {
@@ -92,11 +84,23 @@ public class LigneCommandeDao {
 				lc.setPrice(p.getPrix());
 				 lc.setStatus("en cours");
 				 lc.setProduit(p);
+			
 				 ligneCommandeRepository.save(lc);
 				}
+			/*	for (lignecommandeproduit lp :  List)
+				 {
+					
+					 sum+=lp.getTotal();
+				System.out.println(sum);
+					 c.setMontant(c.getMontant()+sum);
+					 commandeRepository.save(c);
+					 
+				 }*/
+				 
 				}
 	
-	
+		
+			
 		 
 		 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;
