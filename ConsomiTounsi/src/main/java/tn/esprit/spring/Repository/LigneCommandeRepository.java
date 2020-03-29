@@ -24,7 +24,7 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Lo
 	public List<lignecommandeproduit> panierParIdclient(@Param("idc")long i);
 	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND l.status='en cours' and c.id !=?3 ", nativeQuery = true)
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient,Long idCommande);
-	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND l.status='en cours'", nativeQuery = true)
+	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND c.status='en cours'", nativeQuery = true)
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient);
 	
 

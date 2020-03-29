@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -78,7 +80,7 @@ public class FactureController {
 		return factureDAO.FactureParIdUser(id);
 	}
 	@GetMapping("/afficherPDF//{idUser}")
-	public void createpdf(HttpServletRequest request ,HttpServletResponse reponse,@PathVariable(value = "idUser") long id) 
+	public void createpdf(HttpServletRequest request ,HttpServletResponse reponse,@PathVariable(value = "idUser") long id) throws MalformedURLException, IOException 
 	{
 	List<lignecommandeproduit> commandes =factureDAO.FactureParIdUser(id);
 	boolean flag = factureDAO.CreePdf(commandes, context, request, reponse);
