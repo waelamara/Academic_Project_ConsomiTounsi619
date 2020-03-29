@@ -132,6 +132,15 @@ public class Produit implements Serializable {
 	public void setImages(Set<ImageProduit> images) {
 		Images = images;
 	}
+	
+
+	public Rayon getIdrayon() {
+		return Idrayon;
+	}
+
+	public void setIdrayon(Rayon idrayon) {
+		Idrayon = idrayon;
+	}
 
 	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
 			SsCategorie idSsCategorie) {
