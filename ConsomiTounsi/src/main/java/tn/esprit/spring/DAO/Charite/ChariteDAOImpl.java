@@ -53,4 +53,15 @@ public class ChariteDAOImpl implements ChariteDAO {
 
 	}
 
+	@Override
+	public int saveCharite1(Long idevents,Long iduser,Charite Charite) {
+		Events events = eventsRepository.findById(idevents).get();
+		User user= userRepository.findById(iduser).get();
+		Charite.setIdevents(events);
+		Charite.setIduser(user);
+		chariteRepository.save(Charite);
+		return Charite.getId().intValue();
+		//return chariteRepository.save(Charite);
+
+	}
 }

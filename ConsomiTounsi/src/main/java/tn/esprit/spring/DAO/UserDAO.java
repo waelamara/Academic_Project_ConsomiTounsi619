@@ -1,9 +1,12 @@
 package tn.esprit.spring.DAO;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Model.GestionProduit.Produit;
 import tn.esprit.spring.Repository.UserRepository;
 
 
@@ -17,6 +20,9 @@ public class UserDAO {
 	return UserRepository.getOne(id);}
 	public User save(User u) {
 		return UserRepository.save(u);
+	}
+	public List<User> findAll() {
+		return UserRepository.findAll();
 	}
 
 }

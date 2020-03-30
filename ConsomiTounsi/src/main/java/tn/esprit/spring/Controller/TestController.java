@@ -1,5 +1,8 @@
 package tn.esprit.spring.Controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.DAO.UserDAO;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/")
 public class TestController {
+	@Autowired
+	UserDAO userDAO;
+	
 	@GetMapping("/all")
 	public String allAccess() {
 		return "Public Content.";
@@ -47,5 +55,9 @@ public class TestController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public String adminAccess() {
 		return "Admin Board.";
+	}
+	@GetMapping("/afficher")
+	public List<User> getAllUser() {
+		return userDAO.findAll();
 	}
 }

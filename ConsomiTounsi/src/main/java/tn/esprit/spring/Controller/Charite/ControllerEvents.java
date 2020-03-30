@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.security.core.Authentication;
+
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -30,6 +32,7 @@ import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.security.services.UserDetailsImpl;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
@@ -224,6 +227,49 @@ public class ControllerEvents {
 		return endroitDAO.saveEndroit1(Endroit);
 	}
 	
+	
+	/* ajouter charité avec token si vous avez ajouter un charité vous avez participer */
+	@PostMapping("/Participer/{idevents}")
+	@ResponseBody
+	public String addCharit(Authentication authentication,@PathVariable(value = "idevents") Long idevents,
+			@Valid @RequestBody Charite Charite) {
+		Events e1 = eventDAO.findOne(idevents);
+		
+		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
+		u1.getId();
+		User u2= userDAO.findOne(u1.getId());
+		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())) {
+			float S ;
+			int nb = e1.getNbplace();
+			int nbP = e1.getNbparticipant();
+			e1.setTitre(e1.getTitre());
+			e1.setDateE(e1.getDateE());
+			e1.setEndroit(e1.getEndroit());
+			e1.setNbplace(nb - 1);
+			e1.setNbparticipant(nbP + 1);
+			e1.setPublicite(e1.getPublicite());
+			e1.setCharite(e1.getCharite());
+			e1.setDescription(e1.getDescription());
+			e1.setImage(e1.getImage());
+			S=u2.getSolde()-Charite.getMontantPaye();
+			u2.setSolde(S);
+			userDAO.save(u2);
+			eventDAO.saveEvents(e1);
+			chariteDAO.saveCharite1(idevents,u1.getId(), Charite);
+			return "Successful";
+
+		} 
+		else if(u2.getSolde()<Charite.getMontantPaye()){
+			return "your insufficient balance";
+			
+		}
+		
+		else {
+			return "insufficient space";
+
+		}
+		
+	}
 	
 
 }
