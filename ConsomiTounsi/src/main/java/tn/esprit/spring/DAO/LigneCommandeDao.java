@@ -92,8 +92,7 @@ public class LigneCommandeDao {
 					
 					 sum+=lp.getTotal();
 				System.out.println(sum);
-					 c.setMontant(c.getMontant()+sum);
-					 commandeRepository.save(c);
+					
 					 
 				 }*/
 				 
