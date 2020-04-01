@@ -24,10 +24,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
-import tn.esprit.spring.DAO.FileStorageServiceImpl;
 import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Produit.SsCategorie;
+import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.Service.Produit.IImageProduitService;
 import tn.esprit.spring.Service.Produit.IProduitService;
 import tn.esprit.spring.Service.Produit.ISousSousCategorieService;

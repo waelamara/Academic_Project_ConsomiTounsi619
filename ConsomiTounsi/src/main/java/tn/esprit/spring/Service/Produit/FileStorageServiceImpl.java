@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.Produit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

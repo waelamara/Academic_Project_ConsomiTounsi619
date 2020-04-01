@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.Model.Publicite.Publicite;
 import tn.esprit.spring.Service.Publicite.IPubliciteService;
-import tn.esprit.spring.Service.Publicite.PubliciteServiceImpl;
+
 
 @RestController
 @RequestMapping("/publicite")
