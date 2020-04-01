@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.Forum.IVoteSujetService;
 import tn.esprit.spring.Model.Forum.VoteSujet;
+import tn.esprit.spring.Service.Forum.IVoteSujetService;
 
 @RestController
 @RequestMapping("/voteSujet")

@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO.Forum;
+package tn.esprit.spring.Service.Forum;
 
 import java.util.ArrayList;
 import java.util.List;

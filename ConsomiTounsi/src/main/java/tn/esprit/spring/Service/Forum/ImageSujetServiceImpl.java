@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO.Forum;
+package tn.esprit.spring.Service.Forum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,8 @@ public class ImageSujetServiceImpl implements IImageSujetService {
 	@Override
 	public ImageSujet ajouterImage(ImageSujet image) {
 		return imageSujetRepository.save(image);
+		
+		}
 	}
 
-}
+

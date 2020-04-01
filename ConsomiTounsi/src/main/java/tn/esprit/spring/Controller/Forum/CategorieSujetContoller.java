@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.Forum.ICategorieSujetService;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
+import tn.esprit.spring.Service.Forum.ICategorieSujetService;
 
 
 @RestController
