@@ -15,6 +15,8 @@ public interface RayonDAO {
 	void deleteRayonById(long Idrayon);
 	
 	public List<Rayon> findRayonbyName(String name);
+	
+	public void affecterProduitARayon(long Idrayon, long Idproduit);
 
 
 }

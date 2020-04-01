@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.Forum.IVoteSujetService;
 import tn.esprit.spring.Model.Forum.VoteSujet;
+import tn.esprit.spring.Service.Forum.IVoteSujetService;
 
 @RestController
 @RequestMapping("/voteSujet")
@@ -28,13 +28,19 @@ public class VoteSujetController {
 @Autowired
 IVoteSujetService ivoteSujetservice;
 
-@PostMapping("/ajouter/{sujetId}/{userId}")
-public ResponseEntity<?> ajouterSujet( @PathVariable(value = "sujetId") Long sujetid,
+@PostMapping("/ajouterl/{sujetId}/{userId}")
+public ResponseEntity<?> ajouterLike( @PathVariable(value = "sujetId") Long sujetid,
 		                              @PathVariable(value = "userId") Long userid,
 		                              @Valid @RequestBody VoteSujet v ) {
 	ivoteSujetservice.ajouterlike( v,sujetid, userid);
 	  return ResponseEntity.created(null).body(v);}
 
+@PostMapping("/ajouterd/{sujetId}/{userId}")
+public ResponseEntity<?> ajouterDislike( @PathVariable(value = "sujetId") Long sujetid,
+		                              @PathVariable(value = "userId") Long userid,
+		                              @Valid @RequestBody VoteSujet v ) {
+	ivoteSujetservice.ajouterdislike( v,sujetid, userid);
+	  return ResponseEntity.created(null).body(v);}
 
 @GetMapping("/countl/{sujetId}")
 public ResponseEntity<?> countLike(@PathVariable(value = "sujetId") Long sujetId) {

@@ -2,17 +2,13 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.Charite.Charite;
@@ -30,14 +26,135 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
 	private Long id; 
+	
 	@Column(name = "FIRST_NAME")
 	private String firstName;
+	
 	@Column(name = "LAST_NAME")
 	private String lastName;
+	
+	@Column(name = "username")
+	private String username;
+	
+	@Column(name = "password")
+	private String password;
+
+    @Transient
+    private String passwordConfirm;
+    
+    @Column(name = "email")
+	private String email;
+    
+    @Column(name = "address")
+	private String address;
+    
+    @Temporal (TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dateN;
+    
+    @Column(name = "tel")
+	private String tel;
+
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles", 
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+    
+    
+    
+    
+    
+   
+	public User(String username, String email, String password, String firstName, String lastName, String address,
+			Date dateN, String tel) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.dateN = dateN;
+		this.tel = tel;
+	}
+	public User(String username, String email, String password, String firstName, String lastName, String address, String tel
+			) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.tel = tel;
+
+	}
+	public User(String username, String email, String password) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Date getDateN() {
+		return dateN;
+	}
+	public void setDateN(Date dateN) {
+		this.dateN = dateN;
+	}
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+
+	@Column(name = "Solde")
+	private float solde;
 	@OneToMany(mappedBy="iduser")
 	@JsonIgnore
 	public Set<Charite> charite;
@@ -115,7 +232,14 @@ public class User implements Serializable {
 	public void setCommandes(Collection<Commande> commandes) {
 		this.commandes = commandes;
 	}
+	
 
+	public float getSolde() {
+		return solde;
+	}
+	public void setSolde(float solde) {
+		this.solde = solde;
+	}
 	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}

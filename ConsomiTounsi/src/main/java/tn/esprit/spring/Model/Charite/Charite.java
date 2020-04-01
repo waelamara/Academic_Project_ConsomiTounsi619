@@ -26,12 +26,23 @@ public class Charite implements Serializable {
     private Long id;
 	 
 	private String TypeCharite;
+	private float MontantPaye;
 	@ManyToOne
 	@JsonIgnore
 	private User iduser;
 	@ManyToOne
 	@JsonIgnore
     private Events idevents ;
+	
+	
+	
+	public float getMontantPaye() {
+		return MontantPaye;
+	}
+	public void setMontantPaye(float montantPaye) {
+		MontantPaye = montantPaye;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -63,9 +74,10 @@ public class Charite implements Serializable {
 		super();
 
 	}
-	public Charite(String TypeCharite,User iduser,Events idevents ) {
+	public Charite(String TypeCharite,float MontantPaye,User iduser,Events idevents) {
 		super();
 		this.TypeCharite=TypeCharite;
+		this.MontantPaye=MontantPaye;
 		this.idevents=idevents;
 		this.iduser=iduser;
 

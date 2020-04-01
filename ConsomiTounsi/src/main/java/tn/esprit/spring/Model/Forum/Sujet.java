@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import tn.esprit.spring.Model.*;
+import tn.esprit.spring.Model.User;
 @Entity
 public class Sujet implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -40,7 +41,6 @@ public class Sujet implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idCategorieSujet", referencedColumnName = "id")
 	CategorieSujet CategorieSujet;
-
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idUser", referencedColumnName = "USER_ID")
@@ -48,6 +48,9 @@ public class Sujet implements Serializable {
 	@OneToMany(mappedBy="idSujet")
 	@JsonIgnore
 	public Set<Commentaire> commentarie;
+	@OneToMany(mappedBy="sujetId",cascade=CascadeType.ALL)
+	@JsonIgnore
+	private Set<ImageSujet> Images;
 	
 	public Set<Commentaire> getCommentarie() {
 		return commentarie;
@@ -59,6 +62,11 @@ public class Sujet implements Serializable {
 		super();
 	}
 
+	public Sujet(String nomSujet, String description) {
+		super();
+		this.nomSujet = nomSujet;
+		this.description = description;
+	}
 	public Sujet(Long id, String nomSujet, String description, Date dateAjout, int nbVue, int nbLike, int nbDislike ) {
 		super();
 		this.id = id;
@@ -88,6 +96,7 @@ public class Sujet implements Serializable {
 		this.description = description;
 	}
 	public Date getDateAjout() {
+	   
 		return dateAjout;
 	}
 	public void setDateAjout(Date dateAjout) {

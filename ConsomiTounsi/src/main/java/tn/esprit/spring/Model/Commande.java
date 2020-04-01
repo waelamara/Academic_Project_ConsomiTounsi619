@@ -89,6 +89,19 @@ public class Commande implements Serializable  {
 	}
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Commande")
 	private Set<reclamation> reclamation;
+
+	public String getTypedePayment() {
+		return TypedePayment;
+	}
+	public void setTypedePayment(String typedePayment) {
+		TypedePayment = typedePayment;
+	}
+	public User getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(User idUser) {
+		this.idUser = idUser;
+	}
 	
 	
 

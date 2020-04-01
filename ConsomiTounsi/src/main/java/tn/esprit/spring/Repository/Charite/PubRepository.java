@@ -6,4 +6,6 @@ import tn.esprit.spring.Model.Charite.Pub;
 
 public interface PubRepository extends JpaRepository<Pub, Long>{
 
+
+
 }

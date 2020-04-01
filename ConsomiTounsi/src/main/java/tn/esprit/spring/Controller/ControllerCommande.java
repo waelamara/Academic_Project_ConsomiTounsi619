@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.CommandeDAO;
 import tn.esprit.spring.Model.Commande;
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 
 @RestController
 @RequestMapping("/commande")
@@ -43,7 +43,7 @@ public class ControllerCommande {
 		return ResponseEntity.ok().build();
 	}
 	@GetMapping("rechercheparcode/{code}")
-	public List<Commande>Commandeparcode(@PathVariable(value = "code") int code) {
+	public List<Commande>Commandeparcode(@PathVariable(value = "code") long code) {
 	
 		return commandeDao.Commandeparcode(code);
 	}
