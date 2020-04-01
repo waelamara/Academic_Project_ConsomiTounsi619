@@ -23,8 +23,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
-import tn.esprit.spring.DAO.Forum.IImageSujetService;
-import tn.esprit.spring.DAO.Forum.ISujetService;
+import tn.esprit.spring.Service.Forum.IImageSujetService;
+import tn.esprit.spring.Service.Forum.ISujetService;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.ImageSujet;
 import tn.esprit.spring.Model.Forum.Sujet;

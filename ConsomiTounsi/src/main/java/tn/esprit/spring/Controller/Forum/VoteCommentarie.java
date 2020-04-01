@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.spring.DAO.Forum.IVoteCommentaire;
+
 import tn.esprit.spring.Model.Forum.Vote;
+import tn.esprit.spring.Service.Forum.IVoteCommentaire;
 
 @RestController
 @RequestMapping("/voteCom")

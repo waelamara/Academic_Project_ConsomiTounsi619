@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.spring.DAO.Forum.ICommentaireService;
+
 import tn.esprit.spring.Model.Forum.Commentaire;
+import tn.esprit.spring.Service.Forum.ICommentaireService;
 
 
 @RestController
