@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.LivreurDAO;
+import tn.esprit.spring.Livreur.LivreurService;
 import tn.esprit.spring.Model.Livreur;
 
 @RestController
@@ -22,7 +22,7 @@ import tn.esprit.spring.Model.Livreur;
 public class LivreurController {
 	
 	@Autowired
-	LivreurDAO livreurDAO;
+	LivreurService livreurDAO;
 	
 	/*Enregistrer un livreur*/
 	@PostMapping("/ajout")

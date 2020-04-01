@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Reclamation;
 
 import java.util.List;
 
@@ -7,14 +7,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.DAO.UserDAO;
+import tn.esprit.spring.Livreur.LivreurService;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Repository.reclamationRepository;
 
 
 @Service
-public class ReclamationDAO {
+public class ReclamationService {
 	
 	@Autowired
 	reclamationRepository reclamationRepository;
@@ -22,7 +23,7 @@ public class ReclamationDAO {
 	@Autowired
 	UserDAO UserDAO;
 	
-	private static final Logger L =LogManager.getLogger(LivreurDAO.class);
+	private static final Logger L =LogManager.getLogger(LivreurService.class);
 	
 	/* Ajouter une reclamation */
 	public reclamation save(reclamation rec, long u) {

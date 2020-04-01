@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Livreur;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import tn.esprit.spring.Repository.LivreurRepository;
 
 
 @Service
-public class LivreurDAO {
+public class LivreurService {
 
 	@Autowired
 	LivreurRepository livreurRepository;
 	
-	private static final Logger L =LogManager.getLogger(LivreurDAO.class);
+	private static final Logger L =LogManager.getLogger(LivreurService.class);
 
 	/* Ajouter un livreur */
 	public Livreur save(Livreur liv) {

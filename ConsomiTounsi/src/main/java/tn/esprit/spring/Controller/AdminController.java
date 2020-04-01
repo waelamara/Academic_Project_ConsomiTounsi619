@@ -1,10 +1,7 @@
 package tn.esprit.spring.Controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
@@ -15,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.ReclamationDAO;
 import tn.esprit.spring.Model.reclamation;
+import tn.esprit.spring.Reclamation.ReclamationService;
 
 @RestController
 @RequestMapping()
 public class AdminController {
 
 	@Autowired
-	ReclamationDAO ReclamationDAO;
+	ReclamationService ReclamationService;
 	private int A;
 	private int B;
 	private int res;
@@ -35,7 +32,7 @@ public class AdminController {
 
 	public reclamation Rembourser_rec(@PathVariable(value = "rec_id") long rec_id,
 			@Valid @RequestBody reclamation rec) {
-		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+		reclamation rec1 = ReclamationService.findbyid(rec_id);
 
 		//
 		// try {
@@ -65,7 +62,7 @@ public class AdminController {
 		rec1.setTraiter(true);
 		rec1.setEtat("Remboursé");
 		rec1.setReponse(rec.getReponse());
-		return ReclamationDAO.traiter(rec1);
+		return ReclamationService.traiter(rec1);
 	    }
 	    else
 	    	return null;
@@ -75,7 +72,7 @@ public class AdminController {
 	@PutMapping("reclamation/Echange/{rec_id}")
 
 	public reclamation Echange_rec(@PathVariable(value = "rec_id") long rec_id, @Valid @RequestBody reclamation rec) {
-		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+		reclamation rec1 = ReclamationService.findbyid(rec_id);
 		
 		A = rec1.getCommande().getDate().getDayOfYear();
 		int yearA = rec1.getCommande().getDate().getYear();
@@ -89,7 +86,7 @@ public class AdminController {
 		rec1.setTraiter(true);
 		rec1.setEtat("Echange");
 		rec1.setReponse(rec.getReponse());
-		return ReclamationDAO.traiter(rec1);}
+		return ReclamationService.traiter(rec1);}
     else
     	return null;
 	}
@@ -98,7 +95,7 @@ public class AdminController {
 
 	public reclamation reparation_rec(@PathVariable(value = "rec_id") long rec_id,
 			@Valid @RequestBody reclamation rec) {
-		reclamation rec1 = ReclamationDAO.findbyid(rec_id);
+		reclamation rec1 = ReclamationService.findbyid(rec_id);
 		A = rec1.getCommande().getDate().getDayOfYear();
 		int yearA = rec1.getCommande().getDate().getYear();
 		int yearB = LocalDate.now().getYear();
@@ -111,7 +108,7 @@ public class AdminController {
 		rec1.setTraiter(true);
 		rec1.setEtat("Reparation");
 		rec1.setReponse(rec.getReponse());
-		return ReclamationDAO.traiter(rec1);}
+		return ReclamationService.traiter(rec1);}
 	    else
 	    	return null;
 	}

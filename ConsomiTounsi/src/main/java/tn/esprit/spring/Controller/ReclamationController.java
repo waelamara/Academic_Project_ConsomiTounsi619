@@ -13,18 +13,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tn.esprit.spring.DAO.CommandeDAO;
-import tn.esprit.spring.DAO.ReclamationDAO;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.reclamation;
+import tn.esprit.spring.Reclamation.ReclamationService;
 
 @RestController
 @RequestMapping("/Reclamation")
 public class ReclamationController {
 	
 	@Autowired
-	ReclamationDAO ReclamationDAO;
+	ReclamationService ReclamationService;
 	
 	@Autowired
 	CommandeDAO CommandeDAO;
@@ -40,19 +39,19 @@ public class ReclamationController {
 	if(rec.getCommande_id()!=0){
 		Commande c = CommandeDAO.findOne(rec.getCommande_id());
 		rec.setCommande(c);
-		return ReclamationDAO.save(rec, user_id);
+		return ReclamationService.save(rec, user_id);
 	}
 	else
 		
         
-		return ReclamationDAO.save(rec, user_id);
+		return ReclamationService.save(rec, user_id);
 	}
 	
 	/*get all reclamation*/
 	@GetMapping("/affichall")
 	public List<reclamation> getAllrec(){
 		
-		return ReclamationDAO.findall();
+		return ReclamationService.findall();
 		
 	}
 	
@@ -61,14 +60,14 @@ public class ReclamationController {
 	
 	public reclamation updaterec(@RequestBody reclamation rec)
 	{
-		return ReclamationDAO.updateLiv(rec );
+		return ReclamationService.updateLiv(rec );
 	}
   
   @DeleteMapping("/delete/{id}")
 	
 	public void  delete(@PathVariable(value="id") long id)
 	{
-	  ReclamationDAO.delete(id);
+	  ReclamationService.delete(id);
 	}
 	
 	
