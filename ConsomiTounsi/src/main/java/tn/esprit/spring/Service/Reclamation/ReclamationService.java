@@ -1,4 +1,4 @@
-package tn.esprit.spring.Reclamation;
+package tn.esprit.spring.Service.Reclamation;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.DAO.UserDAO;
-import tn.esprit.spring.Livreur.LivreurService;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Repository.reclamationRepository;
+import tn.esprit.spring.Service.Livreur.LivreurService;
 
 
 @Service

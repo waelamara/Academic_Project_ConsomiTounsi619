@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.DAO.CommandeDAO;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.reclamation;
-import tn.esprit.spring.Reclamation.ReclamationService;
+import tn.esprit.spring.Service.Reclamation.ReclamationService;
 
 @RestController
 @RequestMapping("/Reclamation")
