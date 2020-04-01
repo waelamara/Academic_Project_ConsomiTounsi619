@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 @Entity
 @Table(name="LigneCommande")
 public class LigneCommande implements Serializable  {

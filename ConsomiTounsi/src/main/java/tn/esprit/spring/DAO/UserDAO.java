@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.UserRepository;
 
 

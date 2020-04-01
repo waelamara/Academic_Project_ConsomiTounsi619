@@ -1,15 +1,15 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.Produit;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.Model.GestionProduit.Categorie;
+import tn.esprit.spring.Model.Produit.Categorie;
 import tn.esprit.spring.Repository.CategorieRepository;
 
 @Service
-public class CategorieDAO {
+public class CategorieServiceImpl implements ICategorieService {
 	@Autowired
 	CategorieRepository categorieRepository;
 	

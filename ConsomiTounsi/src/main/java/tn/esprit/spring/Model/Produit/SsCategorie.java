@@ -1,4 +1,4 @@
-package tn.esprit.spring.Model.GestionProduit;
+package tn.esprit.spring.Model.Produit;
 
 import java.io.Serializable;
 import java.util.Set;

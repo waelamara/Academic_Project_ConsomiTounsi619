@@ -1,15 +1,15 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.Produit;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.ProduitRepository;
 
 @Service
-public class ProduitDAO  {
+public class ProduitServiceImpl implements IProduitService {
 	@Autowired
 	ProduitRepository produitRepository;
 

@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Publicite;
 
 import java.util.List;
 
@@ -15,37 +15,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.PubliciteDAO;
 import tn.esprit.spring.Model.Publicite.Publicite;
+import tn.esprit.spring.Service.Publicite.IPubliciteService;
+import tn.esprit.spring.Service.Publicite.PubliciteServiceImpl;
 
 @RestController
 @RequestMapping("/publicite")
-public class ControllerPublicite {
+public class RestControllerPublicite {
 	@Autowired
-	PubliciteDAO publiciteDAO;
+	IPubliciteService ipubliciteService;
 	
 	@PostMapping("/ajouter")
 	public Publicite AjouterCategorie(@Valid @RequestBody Publicite p) {
-		return publiciteDAO.save(p);
+		return ipubliciteService.save(p);
 	}
 	
 	@GetMapping("/afficher")
 	public List<Publicite> AfficherCategorie() {
-		return publiciteDAO.findAll();
+		return ipubliciteService.findAll();
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Publicite> DeleteCategorie(@PathVariable(value = "id") Long idPub) {
-		Publicite p = publiciteDAO.findOne(idPub);
+		Publicite p = ipubliciteService.findOne(idPub);
 		if (p == null) {
 			return ResponseEntity.notFound().build();
 		}
-		publiciteDAO.Delete(p);
+		ipubliciteService.Delete(p);
 		return ResponseEntity.ok().build();
 	}
 	@PutMapping("/edit/{id}")
 	public ResponseEntity<Publicite> EditProduit(@PathVariable(value = "id") Long idPub,@Valid @RequestBody Publicite p) {
-		Publicite p2 = publiciteDAO.findOne(idPub);
+		Publicite p2 = ipubliciteService.findOne(idPub);
 		if (p == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -56,7 +57,7 @@ public class ControllerPublicite {
 		p2.setNbrInitialVueCible(p.getNbrInitialVueCible());
 		p2.setNbrFinalVue(p.getNbrFinalVue());
 		p2.setCout(p.getCout());
-		Publicite PubliciteModifier = publiciteDAO.save(p2);
+		Publicite PubliciteModifier = ipubliciteService.save(p2);
 		return ResponseEntity.ok().body(PubliciteModifier);
 
 	}

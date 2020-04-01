@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Produit;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,24 +25,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.DAO.FileStorageServiceImpl;
-import tn.esprit.spring.DAO.ImagesProduitDAO;
-import tn.esprit.spring.DAO.ProduitDAO;
-import tn.esprit.spring.DAO.SousSousCategorieDAO;
-import tn.esprit.spring.Model.GestionProduit.ImageProduit;
-import tn.esprit.spring.Model.GestionProduit.Produit;
-import tn.esprit.spring.Model.GestionProduit.SsCategorie;
+import tn.esprit.spring.Model.Produit.ImageProduit;
+import tn.esprit.spring.Model.Produit.Produit;
+import tn.esprit.spring.Model.Produit.SsCategorie;
+import tn.esprit.spring.Service.Produit.IImageProduitService;
+import tn.esprit.spring.Service.Produit.IProduitService;
+import tn.esprit.spring.Service.Produit.ISousSousCategorieService;
 
 @RestController
 @RequestMapping("/produit")
-public class ControllerProduit {
+public class RestControllerProduit {
 	@Autowired
-	ProduitDAO produitDAO;
+	IProduitService iproduitService;
 	@Autowired
-	SousSousCategorieDAO sousSousCategorieDAO;
+	ISousSousCategorieService isousSousCategorieService;
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	@Autowired
-	ImagesProduitDAO imagesProduitDAO;
+	IImageProduitService iImagesProduitService;
 
 	ObjectMapper objectMapper = new ObjectMapper();
 
@@ -52,12 +52,12 @@ public class ControllerProduit {
 			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file)
 			throws JsonParseException, JsonMappingException, IOException {
 		Produit p = objectMapper.readValue(ProduitJson, Produit.class);
-		SsCategorie ssc = sousSousCategorieDAO.findOne(idSsCategorie);
+		SsCategorie ssc = isousSousCategorieService.findOne(idSsCategorie);
 		if (!p.BarcodeIsvalid(p.getBarcode())) {
 			return ResponseEntity.ok("Ce n'est pas un produit tunsien désolé");
 		}
 		p.setIdSsCategorie(ssc);
-		produitDAO.save(p);
+		iproduitService.save(p);
 
 		for (MultipartFile i : file) {
 			String fileName = fileStorageServiceImpl.storeFile(i);
@@ -67,31 +67,31 @@ public class ControllerProduit {
 			ImageProduit image = new ImageProduit();
 			image.setImage(fileDownloadUri);
 			image.setIdproduit(p);
-			imagesProduitDAO.save(image);
+			iImagesProduitService.save(image);
 		}
 		return ResponseEntity.ok("Produit Ajouter avec succes");
 	}
 
 	@GetMapping("/afficher")
 	public List<Produit> getAllProduit() {
-		return produitDAO.findAll();
+		return iproduitService.findAll();
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> DeleteProduit(@PathVariable(value = "id") Long idProduit) {
-		Produit p = produitDAO.findOne(idProduit);
+		Produit p = iproduitService.findOne(idProduit);
 		if (p == null) {
 			return ResponseEntity.ok("Veuillez choisir un Produit");
 		}
-		produitDAO.Delete(p);
+		iproduitService.Delete(p);
 		return ResponseEntity.ok("Produit Supprimer avec succes");
 	}
 
 	@PutMapping("/edit/{id}/{idSsCategorie}")
 	public ResponseEntity<Produit> EditProduit(@PathVariable(value = "idSsCategorie") Long idSsCategorie,
 			@PathVariable(value = "id") Long idProduit, @Valid @RequestBody Produit p) {
-		Produit p2 = produitDAO.findOne(idProduit);
-		SsCategorie ssc = sousSousCategorieDAO.findOne(idSsCategorie);
+		Produit p2 = iproduitService.findOne(idProduit);
+		SsCategorie ssc = isousSousCategorieService.findOne(idSsCategorie);
 		if (p == null || !p2.BarcodeIsvalid(p.getBarcode())) {
 			return ResponseEntity.notFound().build();
 		}
@@ -102,29 +102,29 @@ public class ControllerProduit {
 		p2.setPoids(p.getPoids());
 		p2.setPrixAchat(p.getPrixAchat());
 		p2.setIdSsCategorie(ssc);
-		produitDAO.save(p2);
+		iproduitService.save(p2);
 		return ResponseEntity.ok().build();
 
 	}
 
 	@GetMapping("/recherche/{nom}")
 	public List<Produit> findLikeNameM(@PathVariable(value = "nom") String name) {
-		return produitDAO.findLikeName(name);
+		return iproduitService.findLikeName(name);
 	}
 
 	@GetMapping("/ssCategorie/{idSsCategorie}")
 	public List<Produit> findProduitSsCategorie(@PathVariable(value = "idSsCategorie") Long idSsCategorie) {
-		return produitDAO.findProduitSsCategorie(idSsCategorie);
+		return iproduitService.findProduitSsCategorie(idSsCategorie);
 	}
 
 	@GetMapping("/sCategorie/{idSCategorie}")
 	public List<Produit> findProduitSCategorie(@PathVariable(value = "idSCategorie") Long idSCategorie) {
-		return produitDAO.findProduitSCategorie(idSCategorie);
+		return iproduitService.findProduitSCategorie(idSCategorie);
 	}
 
 	@GetMapping("/Categorie/{idSCategorie}")
 	public List<Produit> findProduitCategorie(@PathVariable(value = "idSCategorie") Long idCategorie) {
-		return produitDAO.findProduitCategorie(idCategorie);
+		return iproduitService.findProduitCategorie(idCategorie);
 	}
 
 }

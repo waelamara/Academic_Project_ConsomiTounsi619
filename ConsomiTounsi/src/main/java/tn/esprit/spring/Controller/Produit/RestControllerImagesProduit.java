@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Produit;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,24 +23,24 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import Utils.AppConstants;
 import tn.esprit.spring.DAO.FileStorageServiceImpl;
-import tn.esprit.spring.DAO.ImagesProduitDAO;
-import tn.esprit.spring.Model.GestionProduit.ImageProduit;
+import tn.esprit.spring.Model.Produit.ImageProduit;
+import tn.esprit.spring.Service.Produit.IImageProduitService;
+import tn.esprit.spring.Service.Produit.ImagesProduitServiceImpl;
 
 @RestController
-public class ImagesProduitController {
+public class RestControllerImagesProduit {
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	@Autowired
-	ImagesProduitDAO imagesProduitDAO;
+	IImageProduitService iImagesProduitService;
 
 	@RequestMapping(value = AppConstants.EMPLOYEE_URI, method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void createEmployee(
+	public void createImage(
 			// @RequestParam(value = AppConstants.EMPLOYEE_JSON_PARAM, required
 			// = true) String empJson,
 			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file)
 			throws JsonParseException, JsonMappingException, IOException {
 
-		
 		for(MultipartFile i :file){
 			String fileName = fileStorageServiceImpl.storeFile(i);
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
@@ -48,7 +48,7 @@ public class ImagesProduitController {
 
 			ImageProduit image = new ImageProduit();
 			image.setImage(fileDownloadUri);
-			imagesProduitDAO.save(image);
+			iImagesProduitService.save(image);
 		}
 		
 		

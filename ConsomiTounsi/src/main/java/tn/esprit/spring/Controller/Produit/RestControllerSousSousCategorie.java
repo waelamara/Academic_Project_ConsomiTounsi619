@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Produit;
 
 import java.util.List;
 
@@ -15,57 +15,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DAO.SousCategorieDAO;
-import tn.esprit.spring.DAO.SousSousCategorieDAO;
-import tn.esprit.spring.Model.GestionProduit.SCategorie;
-import tn.esprit.spring.Model.GestionProduit.SsCategorie;
+import tn.esprit.spring.Model.Produit.SCategorie;
+import tn.esprit.spring.Model.Produit.SsCategorie;
+import tn.esprit.spring.Service.Produit.ISousCategorieService;
+import tn.esprit.spring.Service.Produit.ISousSousCategorieService;
 
 @RestController
 @RequestMapping("/SsCategorie")
-public class ControllerSousSousCategorie {
+public class RestControllerSousSousCategorie {
 	@Autowired
-	SousCategorieDAO sousCategorieDAO;
+	ISousCategorieService isousCategorieService;
 	@Autowired
-	SousSousCategorieDAO sousSousCategorieDAO;
-	
+	ISousSousCategorieService isousSousCategorieService;
+
 	@PostMapping("/ajouter/{idSCategorie}")
 	public ResponseEntity<SsCategorie> AjouterSousCategorie(@PathVariable(value = "idSCategorie") Long idSCategorie,
 			@Valid @RequestBody SsCategorie ssc) {
-		SCategorie sc = sousCategorieDAO.findOne(idSCategorie);
+		SCategorie sc = isousCategorieService.findOne(idSCategorie);
 		ssc.setIdSCategorie(sc);
-		sousSousCategorieDAO.save(ssc);
+		isousSousCategorieService.save(ssc);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/afficher")
 	public List<SsCategorie> getAllProduit() {
-		return sousSousCategorieDAO.findAll();
+		return isousSousCategorieService.findAll();
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<SsCategorie> DeleteProduit(@PathVariable(value = "id") Long idSscategorie) {
-		SsCategorie ssc = sousSousCategorieDAO.findOne(idSscategorie);
+		SsCategorie ssc = isousSousCategorieService.findOne(idSscategorie);
 		if (ssc == null) {
 			return ResponseEntity.notFound().build();
 		}
-		sousSousCategorieDAO.Delete(ssc);
+		isousSousCategorieService.Delete(ssc);
 		return ResponseEntity.ok().build();
 	}
-	
-	
+
 	@PutMapping("/edit/{id}/{idSCategorie}")
 	public ResponseEntity<SsCategorie> EditProduit(@PathVariable(value = "id") Long idSscategorie,
 			@PathVariable(value = "idSCategorie") Long idSCategorie, @Valid @RequestBody SsCategorie ssc) {
-		SsCategorie ssc2 = sousSousCategorieDAO.findOne(idSscategorie);
-		SCategorie sc = sousCategorieDAO.findOne(idSCategorie);
+		SsCategorie ssc2 = isousSousCategorieService.findOne(idSscategorie);
+		SCategorie sc = isousCategorieService.findOne(idSCategorie);
 		if (ssc2 == null) {
 			return ResponseEntity.notFound().build();
 		}
 		ssc2.setNomSsCategorie(ssc.getNomSsCategorie());
 		ssc2.setIdSCategorie(sc);
-		sousSousCategorieDAO.save(ssc2);
+		isousSousCategorieService.save(ssc2);
 		return ResponseEntity.ok().build();
 
 	}
-	
+
 }

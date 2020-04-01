@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.Publicite;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import tn.esprit.spring.Model.Publicite.Publicite;
 import tn.esprit.spring.Repository.PubliciteRepository;
 
 @Service
-public class PubliciteDAO {
+public class PubliciteServiceImpl implements IPubliciteService {
 	@Autowired
 	PubliciteRepository publiciteRepository;
 

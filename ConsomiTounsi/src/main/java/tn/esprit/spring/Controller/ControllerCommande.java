@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.DAO.CommandeDAO;
 import tn.esprit.spring.Model.Commande;
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 
 @RestController
 @RequestMapping("/commande")

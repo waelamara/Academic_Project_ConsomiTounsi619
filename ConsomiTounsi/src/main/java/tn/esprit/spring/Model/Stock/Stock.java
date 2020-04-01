@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 @Entity
 public class Stock implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -36,7 +36,7 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.lignecommandeproduit;
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 
 
 @RestController

@@ -1,15 +1,15 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.Produit;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.Model.GestionProduit.SCategorie;
+import tn.esprit.spring.Model.Produit.SCategorie;
 import tn.esprit.spring.Repository.SousCategorieRepository;
 
 @Service
-public class SousCategorieDAO {
+public class SousCategorieServiceImpl implements ISousCategorieService {
 	@Autowired
 	SousCategorieRepository sousCategorieRepository;
 

@@ -40,8 +40,6 @@ public class FileStorageServiceImpl {
 	}
 
 	public String storeFile(MultipartFile file) throws IOException {
-
-
 		File f = new File(AppConstants.TEMP_DIR + file.getOriginalFilename());
 
 		f.createNewFile();
@@ -74,8 +72,7 @@ public class FileStorageServiceImpl {
 		}
 
 	}
-	
-	
+
 	public Resource loadFileAsResource(String fileName) {
 		try {
 			Path filePath = this.fileStorageLocation.resolve(fileName).normalize();

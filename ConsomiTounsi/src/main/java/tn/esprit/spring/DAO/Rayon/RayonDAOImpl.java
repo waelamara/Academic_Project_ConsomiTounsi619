@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.Forum.CategorieSujet;
-import tn.esprit.spring.Model.GestionProduit.Produit;
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
 import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.Rayon.RayonRepository;
