@@ -73,4 +73,9 @@ public class SsCategorie implements Serializable {
 		IdSCategorie = idSCategorie;
 	}
 
+
+	public Set<Produit> getProduits() {
+		return Produits;
+	}
+
 }

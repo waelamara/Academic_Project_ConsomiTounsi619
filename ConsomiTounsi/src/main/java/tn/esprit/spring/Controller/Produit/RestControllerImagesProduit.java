@@ -25,7 +25,6 @@ import Utils.AppConstants;
 import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.Service.Produit.IImageProduitService;
-import tn.esprit.spring.Service.Produit.ImagesProduitServiceImpl;
 
 @RestController
 public class RestControllerImagesProduit {
@@ -41,17 +40,15 @@ public class RestControllerImagesProduit {
 			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file)
 			throws JsonParseException, JsonMappingException, IOException {
 
-		for(MultipartFile i :file){
+		for (MultipartFile i : file) {
 			String fileName = fileStorageServiceImpl.storeFile(i);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
-					.path(fileName).toUriString();
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
 
 			ImageProduit image = new ImageProduit();
 			image.setImage(fileDownloadUri);
 			iImagesProduitService.save(image);
 		}
-		
-		
 
 	}
 

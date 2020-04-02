@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.Produit.Categorie;
 import tn.esprit.spring.Model.Produit.SCategorie;
 import tn.esprit.spring.Repository.SousCategorieRepository;
 
@@ -12,9 +13,13 @@ import tn.esprit.spring.Repository.SousCategorieRepository;
 public class SousCategorieServiceImpl implements ISousCategorieService {
 	@Autowired
 	SousCategorieRepository sousCategorieRepository;
+	@Autowired
+	ICategorieService iCategorieService;
 
-	public SCategorie save(SCategorie c) {
-		return sousCategorieRepository.save(c);
+	public SCategorie save(SCategorie sc, Long idCategorie) {
+		Categorie c = iCategorieService.findOne(idCategorie);
+		sc.setIdCategorie(c);
+		return sousCategorieRepository.save(sc);
 	}
 
 	public List<SCategorie> findAll() {
@@ -25,7 +30,16 @@ public class SousCategorieServiceImpl implements ISousCategorieService {
 		return sousCategorieRepository.getOne(id);
 	}
 
-	public void Delete(SCategorie sc) {
+	public void Delete(Long id) {
+		SCategorie sc = findOne(id);
 		sousCategorieRepository.delete(sc);
+	}
+
+	public SCategorie Update(SCategorie sc, Long idScategorie, Long idCategorie) {
+		SCategorie sc2 = findOne(idScategorie);
+		Categorie c = iCategorieService.findOne(idCategorie);
+		sc2.setNomSCategorie(sc.getNomSCategorie());
+		sc2.setIdCategorie(c);
+		return sousCategorieRepository.save(sc);
 	}
 }

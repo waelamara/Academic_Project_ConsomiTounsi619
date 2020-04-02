@@ -71,6 +71,11 @@ public class SCategorie implements Serializable {
 	public void setSsCategories(Set<SsCategorie> ssCategories) {
 		SsCategories = ssCategories;
 	}
+
+
+	public Set<SsCategorie> getSsCategories() {
+		return SsCategories;
+	}
 	
 	
 }
