@@ -103,6 +103,7 @@ public class Commande implements Serializable  {
 		this.idUser = idUser;
 	}
 	
-	
+	@OneToOne (mappedBy="Commande")
+	Livraison Livraison;
 
 }
