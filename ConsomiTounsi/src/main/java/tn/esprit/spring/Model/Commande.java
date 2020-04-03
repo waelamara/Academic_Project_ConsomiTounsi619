@@ -38,6 +38,7 @@ public class Commande implements Serializable  {
 	private float montant;
 	private String status;
 	private String TypedePayment;
+	private String Remise;
 	@JsonIgnore
 	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	public Set<LigneCommande> ligneCommande;
@@ -102,6 +103,13 @@ public class Commande implements Serializable  {
 	public void setIdUser(User idUser) {
 		this.idUser = idUser;
 	}
+	public String getRemise() {
+		return Remise;
+	}
+	public void setRemise(String remise) {
+		Remise = remise;
+	}
+	
 	
 	
 

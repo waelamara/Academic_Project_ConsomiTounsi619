@@ -1,6 +1,7 @@
 package tn.esprit.spring.Service.Panier;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,19 +48,17 @@ public class LigneCommandeDao {
 		Produit p = produitRepository.getOne(idprod);
 		Commande c=commandeRepository.CommandeencoursparClient(iduser);
 		LigneCommande l=ligneCommandeRepository.findLigneCommande(idprod, iduser);
-		
-		
-		
-	
 		 User cl= userRepository.getOne(iduser);
 		 if(List.isEmpty())
 		 {
-			 float total=0;
+			 float total=0; 
 		Commande  c1= new Commande(); 
 		c1.setIdUser(cl);
-		c1.setDate(LocalDate.now());
+		ZoneId zid = ZoneId.of("Africa/Tunis");
+		c1.setDate(LocalDate.now(zid));
 		c1.setStatus("en cours");
 		c1.setTypedePayment("en cours");
+		c1.setRemise("non");
 		lc.setPrice(p.getPrix());
 		c1.setMontant(total);
 		 lc.setStatus("en cours");
@@ -72,7 +71,7 @@ public class LigneCommandeDao {
 		 }
 		 else if ((c!=null))
 		 {
-			
+				double nombre =commandeRepository.NombreDeCommandeParUser(iduser);
 				if(l!=null){
 					l.setQuantity(l.getQuantity()+1);
 					ligneCommandeRepository.save(l);
@@ -85,10 +84,23 @@ public class LigneCommandeDao {
 				 lc.setProduit(p);
 				 ligneCommandeRepository.save(lc);
 				}
+			
+				if(nombre>5000)
+				{
 				double a= PrixTotalCommande(iduser);
-				System.out.println(a);
-				c.setMontant((float) a);
-				commandeRepository.save(c);	 
+				System.out.println(nombre);
+			
+				c.setMontant((float) ((float) a-(0.3*a)));
+				commandeRepository.remise(iduser);
+				commandeRepository.save(c);
+				}
+				else
+				{
+					double a= PrixTotalCommande(iduser);
+					c.setMontant((float) a);
+				
+					commandeRepository.save(c);
+				}
 				} 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;
 	}
@@ -103,4 +115,7 @@ public class LigneCommandeDao {
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
 	}
+
+		
+	
 }
