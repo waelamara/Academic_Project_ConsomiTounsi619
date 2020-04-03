@@ -111,6 +111,7 @@ public class Commande implements Serializable  {
 	}
 	
 	
-	
+	@OneToOne (mappedBy="Commande")
+	Livraison Livraison;
 
 }

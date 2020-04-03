@@ -37,8 +37,8 @@ public class LivreurService {
 		return a;
 		}
 	/*Chercher un livreur*/
-//	public Livreur findOne(Integer liv){
-//		return livreurRepository.getOne(liv);}
+	public Livreur findOne(long liv){
+		return livreurRepository.getOne(liv);}
 		
 		
 	
