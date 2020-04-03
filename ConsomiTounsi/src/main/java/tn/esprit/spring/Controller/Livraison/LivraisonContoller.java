@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import tn.esprit.spring.DAO.CommandeDAO;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Livraison;
 import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Service.Livraison.LivraisonService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
+import tn.esprit.spring.Service.Panier.CommandeDAO;
 
 @RestController
 @RequestMapping("/livraison")
@@ -27,10 +26,10 @@ public class LivraisonContoller {
 
 	@Autowired
 	LivraisonService livraisonService;
-	
+
 	@Autowired
 	CommandeDAO CommandeDAO;
-	
+
 	@Autowired
 	LivreurService LivreurService;
 
@@ -38,14 +37,13 @@ public class LivraisonContoller {
 	@PostMapping("/ajout")
 
 	public Livraison createLivreur(@Valid @RequestBody Livraison liv) {
-		if((liv.getCommande_id()!=0)&&(liv.getLivreur_id()!=0)){
+		if ((liv.getCommande_id() != 0) && (liv.getLivreur_id() != 0)) {
 			Commande c = CommandeDAO.findOne(liv.getCommande_id());
 			liv.setCommande(c);
 			Livreur L = LivreurService.findOne(liv.getLivreur_id());
 			liv.setLivreur(L);
-		return livraisonService.save(liv);
-		}
-		else
+			return livraisonService.save(liv);
+		} else
 			return null;
 	}
 
