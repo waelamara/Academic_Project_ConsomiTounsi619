@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.LigneCommande;
+import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Repository.CommandeRepository;
 @Service
 public class CommandeDAO {
@@ -23,14 +24,7 @@ public class CommandeDAO {
 		return commandeRepository.save(c);
 	}
 	//@Transient
-    /*public Double getTotalOrderPrice() {
-        double sum = 0D;
-        List<LigneCommande> LigneCommandes = new ArrayList<LigneCommande>() ;//getOrderProducts()
-        for (LigneCommande l : LigneCommandes) {
-            sum += l.getPrice();
-        }
-        return sum;
-    }*/
+    
 	public List<Commande> CommandeparType(String type) {
 		return commandeRepository.CommandeparType(type);
 
