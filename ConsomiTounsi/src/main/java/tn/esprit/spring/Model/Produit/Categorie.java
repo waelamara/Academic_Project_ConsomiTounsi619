@@ -59,6 +59,10 @@ public class Categorie implements Serializable {
 		Categories = categories;
 	}
 
+	public Set<SCategorie> getCategories() {
+		return Categories;
+	}
+
 
 
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.Model.Produit.Categorie;
 import tn.esprit.spring.Model.Produit.SCategorie;
 import tn.esprit.spring.Service.Produit.ICategorieService;
 import tn.esprit.spring.Service.Produit.ISousCategorieService;
@@ -29,12 +28,9 @@ public class RestControllerSousCategorie {
 	ISousCategorieService isousCategorieService;
 
 	@PostMapping("/ajouter/{idCategorie}")
-	public ResponseEntity<SCategorie> AjouterSousCategorie(@PathVariable(value = "idCategorie") Long idCategorie,
-			@Valid @RequestBody SCategorie sc) {
-		Categorie c = icategorieService.findOne(idCategorie);
-		sc.setIdCategorie(c);
-		isousCategorieService.save(sc);
-		return ResponseEntity.ok().build();
+	public SCategorie AjouterSousCategorie(@PathVariable(value = "idCategorie") Long idCategorie,
+			@Valid @RequestBody SCategorie scategorie) {
+		return isousCategorieService.save(scategorie, idCategorie);
 	}
 
 	@GetMapping("/afficher")
@@ -43,28 +39,15 @@ public class RestControllerSousCategorie {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<SCategorie> DeleteProduit(@PathVariable(value = "id") Long idScategorie) {
-		SCategorie sc = isousCategorieService.findOne(idScategorie);
-		if (sc == null) {
-			return ResponseEntity.notFound().build();
-		}
-		isousCategorieService.Delete(sc);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<String> DeleteProduit(@PathVariable(value = "id") Long idScategorie) {
+		isousCategorieService.Delete(idScategorie);
+		return ResponseEntity.ok("Sous Categorie Supprimer avec succes");
 	}
 
 	@PutMapping("/edit/{id}/{idCategorie}")
-	public ResponseEntity<SCategorie> EditProduit(@PathVariable(value = "id") Long idScategorie,
+	public SCategorie EditProduit(@PathVariable(value = "id") Long idScategorie,
 			@PathVariable(value = "idCategorie") Long idCategorie, @Valid @RequestBody SCategorie sc) {
-		SCategorie sc2 = isousCategorieService.findOne(idScategorie);
-		Categorie c = icategorieService.findOne(idCategorie);
-		if (sc2 == null) {
-			return ResponseEntity.notFound().build();
-		}
-		sc2.setNomSCategorie(sc.getNomSCategorie());
-		sc2.setIdCategorie(c);
-		isousCategorieService.save(sc2);
-		return ResponseEntity.ok().build();
-
+		return isousCategorieService.Update(sc, idScategorie, idCategorie);
 	}
 
 }

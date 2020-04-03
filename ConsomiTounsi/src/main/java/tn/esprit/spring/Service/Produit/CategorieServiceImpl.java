@@ -21,12 +21,19 @@ public class CategorieServiceImpl implements ICategorieService {
 		return categorieRepository.findAll();
 	}
 	
-	public void Delete(Categorie c) {
+	public void Delete(Long id) {
+		Categorie c =findOne(id);
 		 categorieRepository.delete(c);
 	}
 	
 	public Categorie findOne(Long id) {
 		return categorieRepository.getOne(id);
+	}
+
+	public Categorie Update(Categorie c, Long id) {
+		Categorie c2 = findOne(id);
+		c2.setNomCategorie(c.getNomCategorie());
+		return categorieRepository.save(c2);
 	}
 	
 }

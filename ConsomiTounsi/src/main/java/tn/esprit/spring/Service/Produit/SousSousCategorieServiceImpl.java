@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.Produit.SCategorie;
 import tn.esprit.spring.Model.Produit.SsCategorie;
 import tn.esprit.spring.Repository.SousSousCategorieRepository;
 
@@ -12,8 +13,13 @@ import tn.esprit.spring.Repository.SousSousCategorieRepository;
 public class SousSousCategorieServiceImpl implements ISousSousCategorieService {
 	@Autowired
 	SousSousCategorieRepository sousSousCategorieRepository;
-	public SsCategorie save(SsCategorie c) {
-		return sousSousCategorieRepository.save(c);
+	@Autowired
+	ISousCategorieService iSousCategorieService;
+
+	public SsCategorie save(SsCategorie ssc, Long idSCategorie) {
+		SCategorie sc = iSousCategorieService.findOne(idSCategorie);
+		ssc.setIdSCategorie(sc);
+		return sousSousCategorieRepository.save(ssc);
 	}
 
 	public List<SsCategorie> findAll() {
@@ -24,7 +30,16 @@ public class SousSousCategorieServiceImpl implements ISousSousCategorieService {
 		return sousSousCategorieRepository.getOne(id);
 	}
 
-	public void Delete(SsCategorie sc) {
-		sousSousCategorieRepository.delete(sc);
+	public void Delete(Long id) {
+		SsCategorie ssc = findOne(id);
+		sousSousCategorieRepository.delete(ssc);
+	}
+
+	public SsCategorie Update(SsCategorie ssc, Long idSscategorie, Long idSCategorie) {
+		SsCategorie ssc2 = findOne(idSscategorie);
+		SCategorie sc = iSousCategorieService.findOne(idSCategorie);
+		ssc2.setNomSsCategorie(ssc.getNomSsCategorie());
+		ssc2.setIdSCategorie(sc);
+		return sousSousCategorieRepository.save(ssc2);
 	}
 }

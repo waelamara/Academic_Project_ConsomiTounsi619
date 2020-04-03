@@ -21,11 +21,25 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		return publiciteRepository.findAll();
 	}
 
-	public void Delete(Publicite c) {
-		publiciteRepository.delete(c);
+	public void Delete(Long id) {
+		Publicite p2 = findOne(id);
+		publiciteRepository.delete(p2);
 	}
 
 	public Publicite findOne(Long id) {
 		return publiciteRepository.getOne(id);
+	}
+
+	public Publicite Update(Publicite p, Long id) {
+		Publicite p2 = findOne(id);
+		p2.setCanal(p.getCanal());
+		p2.setNom(p.getNom());
+		p2.setDateDebut(p.getDateDebut());
+		p2.setDateFin(p.getDateFin());
+		p2.setNbrInitialVueCible(p.getNbrInitialVueCible());
+		p2.setNbrFinalVue(p.getNbrFinalVue());
+		p2.setCout(p.getCout());
+		Publicite PubliciteUpdated = save(p2);
+		return PubliciteUpdated;
 	}
 }

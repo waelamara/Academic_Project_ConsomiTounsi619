@@ -5,8 +5,9 @@ import java.util.List;
 import tn.esprit.spring.Model.Produit.SCategorie;
 
 public interface ISousCategorieService {
-	public SCategorie save(SCategorie c);
+	public SCategorie save(SCategorie sc,Long idCategorie);
 	public List<SCategorie> findAll();
 	public SCategorie findOne(Long id);
-	public void Delete(SCategorie sc);
+	public void Delete(Long id);
+	public SCategorie Update(SCategorie sc,Long idScategorie,Long idCategorie);
 }

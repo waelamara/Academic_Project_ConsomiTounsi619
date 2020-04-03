@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.Panier;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -40,7 +40,7 @@ public class LigneCommandeDao {
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient,Long idCommande){
 		return ligneCommandeRepository.findLigneCommande(idProduit, idClient,idCommande);
 	}
-	public List<lignecommandeproduit> addBookToCartItem(long idprod, long iduser,LigneCommande lc )
+	public List<lignecommandeproduit> AjouterAuPanier(long idprod, long iduser,LigneCommande lc )
 	{
 		List<lignecommandeproduit>List=ligneCommandeRepository.panierParIdclient(iduser);
 		System.out.println(List);
@@ -49,13 +49,12 @@ public class LigneCommandeDao {
 		LigneCommande l=ligneCommandeRepository.findLigneCommande(idprod, iduser);
 		
 		
-		 float sum=0;
+		
 	
 		 User cl= userRepository.getOne(iduser);
 		 if(List.isEmpty())
 		 {
 			 float total=0;
-			
 		Commande  c1= new Commande(); 
 		c1.setIdUser(cl);
 		c1.setDate(LocalDate.now());
@@ -84,26 +83,23 @@ public class LigneCommandeDao {
 				lc.setPrice(p.getPrix());
 				 lc.setStatus("en cours");
 				 lc.setProduit(p);
-			
 				 ligneCommandeRepository.save(lc);
 				}
-			/*	for (lignecommandeproduit lp :  List)
-				 {
-					
-					 sum+=lp.getTotal();
-				System.out.println(sum);
-					
-					 
-				 }*/
-				 
-				}
-	
-		
-			
-		 
-		 
+				double a= PrixTotalCommande(iduser);
+				System.out.println(a);
+				c.setMontant((float) a);
+				commandeRepository.save(c);	 
+				} 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;
 	}
+	public Double PrixTotalCommande(long iduser) {
+        double sum = 0D;
+        List<lignecommandeproduit>List=ligneCommandeRepository.panierParIdclient(iduser);
+        for (lignecommandeproduit l : List) {
+            sum += l.getTotal();
+        }
+        return sum;
+    }
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
 	}

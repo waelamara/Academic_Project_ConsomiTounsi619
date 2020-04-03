@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import tn.esprit.spring.DAO.LigneCommandeDao;
+
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Service.Panier.LigneCommandeDao;
 
 
 @RestController
@@ -37,7 +38,7 @@ public class LigneCommandeController {
 	public List<lignecommandeproduit> AjouterLigne (@PathVariable(value = "idprod") Long idprod,@PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody LigneCommande lc) {
 	
-			ligneCommandeDao.addBookToCartItem(idprod, iduser, lc);
+			ligneCommandeDao.AjouterAuPanier(idprod, iduser, lc);
 		
 		return ligneCommandeDao.panierParIdclient(iduser);
 	}

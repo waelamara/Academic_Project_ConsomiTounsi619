@@ -133,6 +133,11 @@ public class Produit implements Serializable {
 		Images = images;
 	}
 	
+	
+
+	public Set<ImageProduit> getImages() {
+		return Images;
+	}
 
 	public Rayon getIdrayon() {
 		return Idrayon;

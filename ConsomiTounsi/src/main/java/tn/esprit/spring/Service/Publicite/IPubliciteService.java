@@ -7,6 +7,8 @@ import tn.esprit.spring.Model.Publicite.Publicite;
 public interface IPubliciteService {
 	public Publicite save(Publicite p);
 	public List<Publicite> findAll();
-	public void Delete(Publicite c);
+	public Publicite Update(Publicite p,Long id);
+	public void Delete(Long id);
 	public Publicite findOne(Long id);
+	
 }
