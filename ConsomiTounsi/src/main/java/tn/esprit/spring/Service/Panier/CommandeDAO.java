@@ -20,7 +20,7 @@ public class CommandeDAO {
 	CommandeRepository commandeRepository;
 	public Commande save (Commande c)
 	{
-		c.setDate(LocalDate.now());
+	//	c.setDate(LocalDate.now());
 		return commandeRepository.save(c);
 	}
 	//@Transient
