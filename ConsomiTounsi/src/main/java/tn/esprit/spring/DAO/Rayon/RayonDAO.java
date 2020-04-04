@@ -12,11 +12,11 @@ public interface RayonDAO {
 
 	List<Rayon> getAllRayon();
 
-	void deleteRayonById(long Idrayon);
+	void deleteRayonById(Long Idrayon);
 	
 	public List<Rayon> findRayonbyName(String name);
 	
-	public void affecterProduitARayon(long Idrayon, long Idproduit);
+	public void affecterProduitARayon(Long Idrayon, Long Idproduit);
 
 
 }

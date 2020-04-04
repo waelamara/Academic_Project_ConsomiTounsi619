@@ -1,11 +1,15 @@
 package tn.esprit.spring.Model.Charite;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -13,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Commande;
+
 
 @Entity
 @Table(name = "T_CHARITE")
@@ -33,9 +39,19 @@ public class Charite implements Serializable {
 	@ManyToOne
 	@JsonIgnore
     private Events idevents ;
+	@ManyToMany(cascade = CascadeType.ALL) 
+	@JsonIgnore
+	private Set<Commande> CommandeCharite ; 
 	
 	
 	
+	
+	public Set<Commande> getCommandeCharite() {
+		return CommandeCharite;
+	}
+	public void setCommandeCharite(Set<Commande> commandeCharite) {
+		CommandeCharite = commandeCharite;
+	}
 	public float getMontantPaye() {
 		return MontantPaye;
 	}
@@ -72,6 +88,15 @@ public class Charite implements Serializable {
 	}
 	public Charite() {
 		super();
+
+	}
+	public Charite(String TypeCharite,float MontantPaye,User iduser,Events idevents,Set<Commande> CommandeCharite) {
+		super();
+		this.TypeCharite=TypeCharite;
+		this.MontantPaye=MontantPaye;
+		this.idevents=idevents;
+		this.iduser=iduser;
+		this.CommandeCharite=CommandeCharite;
 
 	}
 	public Charite(String TypeCharite,float MontantPaye,User iduser,Events idevents) {

@@ -1,7 +1,9 @@
 package tn.esprit.spring.DAO.Charite;
 
 import java.util.List;
+import java.util.Optional;
 
+import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Charite.Charite;
 
 public interface ChariteDAO {
@@ -11,6 +13,8 @@ public interface ChariteDAO {
 	Charite findOne(Long id);
 	public int saveCharite1(Long idevents,Long iduser,Charite Charite);
 
+	public List<Commande> getCommande(Long idCommande);
+	public Optional<Commande> findCommandeById(Long idCommande);
 
 	
 }

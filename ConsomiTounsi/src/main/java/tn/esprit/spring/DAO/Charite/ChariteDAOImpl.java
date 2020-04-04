@@ -1,13 +1,18 @@
 package tn.esprit.spring.DAO.Charite;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
@@ -20,6 +25,8 @@ public class ChariteDAOImpl implements ChariteDAO {
 	private EventsRepository eventsRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	CommandeRepository commandeRepository;
 	
 
 	@Override
@@ -63,5 +70,22 @@ public class ChariteDAOImpl implements ChariteDAO {
 		return Charite.getId().intValue();
 		//return chariteRepository.save(Charite);
 
+	}
+
+	
+
+	@Override
+	public List<Commande> getCommande(Long idCommande) {
+		Commande c= commandeRepository.findById(idCommande).get();
+		List<Commande> Commande=new ArrayList<>();
+		for(Commande com : Commande)
+			Commande.add(com);
+		return Commande;
+	}
+	
+	@Override
+	public Optional<Commande> findCommandeById(Long idCommande) {
+		
+		return commandeRepository.findById(idCommande);
 	}
 }

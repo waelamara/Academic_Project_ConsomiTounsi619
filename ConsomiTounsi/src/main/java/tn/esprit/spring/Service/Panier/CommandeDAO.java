@@ -6,6 +6,7 @@ import java.beans.Transient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,6 @@ public class CommandeDAO {
 	{
 		commandeRepository.PayerPorteaPorte(idCommande);
 	}
- 
+	
 
 }

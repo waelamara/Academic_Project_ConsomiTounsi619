@@ -1,7 +1,10 @@
 package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -31,8 +34,11 @@ import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Produit.ImageProduit;
+import tn.esprit.spring.Service.Panier.CommandeDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
+import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
@@ -42,7 +48,8 @@ import tn.esprit.spring.Model.Charite.Endroit;
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
-
+	@Autowired
+	CommandeDAO commandeDao;
 	@Autowired
 	ChariteDAO chariteDAO;
 	@Autowired
@@ -57,7 +64,7 @@ public class ControllerEvents {
 	
 
 	/* ajouter charité si vous avez ajouter un charité vous avez participer */
-	@PostMapping("/Participer/{idevents}/{iduser}")
+	@PostMapping("/Part/{idevents}/{iduser}")
 	@ResponseBody
 	public String addChar(@PathVariable(value = "idevents") Long idevents, @PathVariable(value = "iduser") Long iduser,
 			@Valid @RequestBody Charite Charite) {
@@ -270,6 +277,56 @@ public class ControllerEvents {
 		}
 		
 	}
+	/**********************************************/
+	
+/*	@PostMapping("/Participer/{idevents}/{idcommande}")
+	@ResponseBody
+	public String addCharitee(Authentication authentication,@PathVariable(value = "idevents") Long idevents,
+			@PathVariable(value = "idcommande") Long idCommande,
+			@Valid @RequestBody Charite Charite) {
+		Events e1 = eventDAO.findOne(idevents);
+		Commande c2=commandeDao.findOne(idCommande);
+		Optional<Commande> c3=chariteDAO.findCommandeById(idCommande);
+		Set<Commande> c4 = c3.;
+		
+		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
+		u1.getId();
+		User u2= userDAO.findOne(u1.getId());
+		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())) {
+			float S ;
+			int nb = e1.getNbplace();
+			int nbP = e1.getNbparticipant();
+			e1.setTitre(e1.getTitre());
+			e1.setDateE(e1.getDateE());
+			e1.setEndroit(e1.getEndroit());
+			e1.setNbplace(nb - 1);
+			e1.setNbparticipant(nbP + 1);
+			e1.setPublicite(e1.getPublicite());
+			e1.setCharite(e1.getCharite());
+			e1.setDescription(e1.getDescription());
+			e1.setImage(e1.getImage());
+			S=u2.getSolde()-Charite.getMontantPaye();
+			u2.setSolde(S);
+			
+			Charite.setCommandeCharite(c4);
+			userDAO.save(u2);
+			eventDAO.saveEvents(e1);
+		commandeDao.save(c2);
+			chariteDAO.saveCharite1(idevents, u1.getId(), Charite);
+			return "Successful";
+
+		} 
+		else if(u2.getSolde()<Charite.getMontantPaye()){
+			return "your insufficient balance";
+			
+		}
+		
+		else {
+			return "insufficient space";
+
+		}
+		
+	}*/
 	
 
 }
