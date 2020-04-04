@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,6 +32,14 @@ public class Endroit implements Serializable {
 	@ManyToOne 
 	@JsonIgnore
 	private Events eventss;
+	@Transient
+	long event_id;
+	public long getEvent_id() {
+		return event_id;
+	}
+	public void setEvent_id(long event_id) {
+		this.event_id = event_id;
+	}
 	public Long getId() {
 		return Id;
 	}

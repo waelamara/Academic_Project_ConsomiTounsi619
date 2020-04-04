@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,10 +43,25 @@ public class Charite implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL) 
 	@JsonIgnore
 	private Set<Commande> CommandeCharite = new HashSet<>() ; 
+	@Transient
+	long commande_id;
+	@Transient
+	long event_id;
 	
 	
 	
-	
+	public long getCommande_id() {
+		return commande_id;
+	}
+	public void setCommande_id(long commande_id) {
+		this.commande_id = commande_id;
+	}
+	public long getEvent_id() {
+		return event_id;
+	}
+	public void setEvent_id(long event_id) {
+		this.event_id = event_id;
+	}
 	public Set<Commande> getCommandeCharite() {
 		return CommandeCharite;
 	}

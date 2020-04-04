@@ -49,6 +49,7 @@ import tn.esprit.spring.Model.Charite.Endroit;
 @RestController
 @RequestMapping("/event")
 public class ControllerEvents {
+	private static final long Null = 0;
 	@Autowired
 	EventsDAO eventDAO;
 	@Autowired
@@ -105,7 +106,7 @@ public class ControllerEvents {
 		
 	}
 
-	/* ajouter event avec photo*/
+	/* ajouter event avec image*/
 	//http://localhost:8081/event/addEvent
 	@PostMapping("/addEvent")
 	@ResponseBody
@@ -136,8 +137,21 @@ public class ControllerEvents {
 	//http://localhost:8081/event/editEvent
 	@PutMapping("/editEvent")
 	@ResponseBody
-	public Events modifEvents(@RequestBody Events Events) {
-		return eventDAO.upsateEvents(Events);
+	public String modifEvents(@RequestParam(value = "Events", required = true) String EventsJson,
+			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file) 
+			throws JsonParseException, JsonMappingException,IOException {
+		Events e = objectMapper.readValue(EventsJson, Events.class);
+
+		for (MultipartFile i : file) {
+			String fileName = fileStorageServiceImpl.storeFile(i);
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
+			e.setImage(fileDownloadUri);
+			eventDAO.upsateEvents(e);
+
+		}
+		return "Successful";
+		
 	}
 
 	/* delete un event */
@@ -164,35 +178,6 @@ public class ControllerEvents {
 		return chariteDAO.getAllChariteList();
 	}
 
-	/* Participer a un evenement */
-	//http://localhost:8081/event/participer/{id}
-	@PutMapping("/participer/{id}")
-	public String EditEvents(@PathVariable(value = "id") Long idevent, @Valid @RequestBody Events e) {
-		Events e1 = eventDAO.findOne(idevent);
-
-		if (e1.getNbplace() > 0) {
-			int nb = e1.getNbplace();
-			int nbP = e1.getNbparticipant();
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			eventDAO.saveEvents(e1);
-			return "Successful";
-
-		} else {
-			return "insufficient space";
-			// eventDAO.getAllEventsList();
-			// return ResponseEntity.notFound().build();
-		}
-		// eventDAO.getAllEventsList();
-
-	}
 
 	/* affiche les endroits */
 	//http://localhost:8081/event/allEndroit
@@ -328,7 +313,7 @@ public class ControllerEvents {
 			userDAO.save(u2);
 			eventDAO.saveEvents(e1);
 			chariteDAO.saveCharite1(idevents, u1.getId(), Charite);
-			return "Successful Donate money";
+			return "Successful Donate money thank you";
 
 		} 
 		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("dons"))) {
@@ -352,11 +337,11 @@ public class ControllerEvents {
 			eventDAO.saveEvents(e1);
 			commandeDao.save(c1);
 			chariteDAO.saveCharitee(idevents, u1.getId(),c1.getId(), Charite);
-			return "Successful Donated a product";
+			return "Successful Donated a product thank you";
 
 		} 
 		else if(u2.getSolde()<Charite.getMontantPaye()){
-			return "your insufficient balance";
+			return "your insufficient balance thank you";
 			
 		}
 		
@@ -364,8 +349,105 @@ public class ControllerEvents {
 			return "insufficient space";
 
 		}
+    }
 		
+		//http://localhost:8081/event/Participer
+	    @PostMapping("/Participer")
+		@ResponseBody
+		public String addCharitees(Authentication authentication,@Valid @RequestBody Charite Charite) {
+			Events e1 = eventDAO.findOne(Charite.getEvent_id());
+	  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
+			u1.getId();
+
+			User u2= userDAO.findOne(u1.getId());
+			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("cagnotte"))) {
+				float S ;
+				int nb = e1.getNbplace();
+				int nbP = e1.getNbparticipant();
+				e1.setTitre(e1.getTitre());
+				e1.setDateE(e1.getDateE());
+				e1.setEndroit(e1.getEndroit());
+				e1.setNbplace(nb - 1);
+				e1.setNbparticipant(nbP + 1);
+				e1.setPublicite(e1.getPublicite());
+				e1.setCharite(e1.getCharite());
+				e1.setDescription(e1.getDescription());
+				e1.setImage(e1.getImage());
+				S=u2.getSolde()-Charite.getMontantPaye();
+				u2.setSolde(S);
+				
+				userDAO.save(u2);
+				eventDAO.saveEvents(e1);
+				chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
+				return "Successful Donate money thank you";
+
+			} 
+			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("dons"))&&(Charite.getCommande_id()!=0)) {
+				Commande c1= commandeDao.findOne(Charite.getCommande_id());
+				Set<Commande> c= new HashSet<Commande>();
+				c.add(c1);
+				float S ;
+				int nb = e1.getNbplace();
+				int nbP = e1.getNbparticipant();
+				e1.setTitre(e1.getTitre());
+				e1.setDateE(e1.getDateE());
+				e1.setEndroit(e1.getEndroit());
+				e1.setNbplace(nb - 1);
+				e1.setNbparticipant(nbP + 1);
+				e1.setPublicite(e1.getPublicite());
+				e1.setCharite(e1.getCharite());
+				e1.setDescription(e1.getDescription());
+				e1.setImage(e1.getImage());
+				S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
+				u2.setSolde(S);
+				
+				Charite.setCommandeCharite(c);
+				userDAO.save(u2);
+				eventDAO.saveEvents(e1);
+				commandeDao.save(c1);
+				chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
+				return "Successful Donated a product";
+
+			} 
+			else if(u2.getSolde()<Charite.getMontantPaye()){
+				return "your insufficient balance thank you";
+				
+			}
+			
+			else {
+				return "insufficient space";
+
+			}
 	}
+	    
+	    /* reservation Endoit */
+		//http://localhost:8081/event/reserve
+		@PostMapping("/reserve")
+		@ResponseBody
+		public String reserveEndroit( @Valid @RequestBody Endroit e) {
+			Endroit e2 = endroitDAO.findOne(e.getId());
+			Events d1 = eventDAO.findOne(e.getEvent_id());
+			String message = "this place is reserved ";
+			String message1 = "Successful";
+			String message2 = "number of places less than number of places in its event";
+
+			int nbPEndroit = e2.getNbplace();
+			int nbPEvent = d1.getNbplace();
+			if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
+				e2.setPrix(e2.getPrix());
+				e2.setNbplace(e2.getNbplace());
+				e2.setEmplacement(e2.getEmplacement());
+				e2.setEventss(e2.getEventss());
+				e2.setStatu("Reservé");
+				endroitDAO.saveEndroit(d1.getId(), e2);
+				return message1;
+			} else if (nbPEndroit < nbPEvent) {
+				return message2;
+			} else {
+				return message;
+			}
+
+		}
 	
 
 }
