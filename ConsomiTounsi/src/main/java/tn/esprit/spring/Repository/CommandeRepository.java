@@ -29,4 +29,10 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public void PayerPorteaPorte( @Param("id")int idCommande);
 	@Query(value = "SELECT * FROM commande WHERE id_user=?1 and status='en cours'", nativeQuery = true)
 	public Commande CommandeencoursparClient(long id);
+	@Query(value = "SELECT SUM(c.montant) FROM commande c WHERE c.id_user=?1 and MONTH(c.date)=MONTH(NOW())and YEAR(c.date)=YEAR(NOW())and c.remise='non'", nativeQuery = true)
+	public double NombreDeCommandeParUser(long id);
+	@Query(value ="UPDATE commande c set c.remise='oui'where c.id_user=?1 and c.status!='en cours'",nativeQuery = true)
+	   @Modifying
+	  @Transactional
+	public void remise( @Param("id_user")long iduser);
 }
