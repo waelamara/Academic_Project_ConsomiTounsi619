@@ -24,8 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -37,7 +36,6 @@ import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
-import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Service.Panier.CommandeDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
@@ -49,7 +47,6 @@ import tn.esprit.spring.Model.Charite.Endroit;
 @RestController
 @RequestMapping("/event")
 public class ControllerEvents {
-	private static final long Null = 0;
 	@Autowired
 	EventsDAO eventDAO;
 	@Autowired
