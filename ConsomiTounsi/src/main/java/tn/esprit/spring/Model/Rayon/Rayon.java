@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,9 +23,10 @@ public class Rayon implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Idrayon;
+	private Long Idrayon;
 	private String nom_rayon;
 	@Enumerated(EnumType.STRING)
+	@Column(length = 50)
 	public Type_rayon type_rayon;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Idrayon")
@@ -33,13 +35,17 @@ public class Rayon implements Serializable{
 
 	
 
-	public long getIdrayon() {
+	
+
+	public Long getIdrayon() {
 		return Idrayon;
 	}
 
-	public void setIdrayon(long idrayon) {
+	public void setIdrayon(Long idrayon) {
 		Idrayon = idrayon;
 	}
+
+	
 
 	public String getNom_rayon() {
 		return nom_rayon;
@@ -69,11 +75,14 @@ public class Rayon implements Serializable{
 		super();
 	}
 
-	public Rayon(long idrayon, String nom_rayon, Type_rayon type_rayon) {
+	public Rayon(Long idrayon, String nom_rayon, Type_rayon type_rayon) {
 		super();
 		Idrayon = idrayon;
 		this.nom_rayon = nom_rayon;
 		this.type_rayon = type_rayon;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	

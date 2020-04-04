@@ -39,7 +39,7 @@ public class RayonDAOImpl implements RayonDAO {
 	}
 
 	@Override
-	public void deleteRayonById(long Idrayon) {
+	public void deleteRayonById(Long Idrayon) {
 		rayonRepository.deleteById(Idrayon);
 
 	}
@@ -54,7 +54,7 @@ public class RayonDAOImpl implements RayonDAO {
 	}
 	
 	@Override
-	public void affecterProduitARayon(long Idrayon, long Idproduit) {
+	public void affecterProduitARayon(Long Idrayon, Long Idproduit) {
 		Rayon rayon = rayonRepository.findById(Idrayon).get();
 		Produit produit = produitRepository.findById(Idproduit).get();
 		

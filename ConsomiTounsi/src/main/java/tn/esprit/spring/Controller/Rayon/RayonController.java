@@ -49,7 +49,7 @@ public class RayonController {
 	////////////////////////////////////////////////////////////////////////////////
 
 	@DeleteMapping("/deleterayon/{Idrayon}")
-	public void deleterayon(@PathVariable(name = "Idrayon") long Idrayon) {
+	public void deleterayon(@PathVariable(name = "Idrayon") Long Idrayon) {
 
 		rayonDAO.deleteRayonById(Idrayon);
 
@@ -70,8 +70,8 @@ public class RayonController {
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	@PutMapping("/affecterProduitARayon/{Idr}/{Idp}")
-	public void affecterProduitARayon(@PathVariable(value = "Idr") long Idrayon,
-			@PathVariable(value = "Idp") long Idproduit) {
+	public void affecterProduitARayon(@PathVariable(value = "Idr") Long Idrayon,
+			@PathVariable(value = "Idp") Long Idproduit) {
 
 		rayonDAO.affecterProduitARayon(Idrayon, Idproduit);
 	}
