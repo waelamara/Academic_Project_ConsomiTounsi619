@@ -1,9 +1,11 @@
 package tn.esprit.spring.DAO.Charite;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,10 +84,23 @@ public class ChariteDAOImpl implements ChariteDAO {
 			Commande.add(com);
 		return Commande;
 	}
-	
+
 	@Override
-	public Optional<Commande> findCommandeById(Long idCommande) {
-		
-		return commandeRepository.findById(idCommande);
+	public int saveCharitee(Long idevents, Long iduser, Long idcommande, Charite Charite) {
+		Events events = eventsRepository.findById(idevents).get();
+		User user= userRepository.findById(iduser).get();
+		Commande c1=commandeRepository.findById(idcommande).get();
+		Set<Commande> c= new HashSet<Commande>();
+		c.add(c1);
+		//c1.stream().collect(Collectors.toSet()); 
+		Charite.setIdevents(events);
+		Charite.setIduser(user);
+		Charite.setCommandeCharite(c);
+		chariteRepository.save(Charite);
+		return Charite.getId().intValue();
 	}
+	
+
+	
+	
 }

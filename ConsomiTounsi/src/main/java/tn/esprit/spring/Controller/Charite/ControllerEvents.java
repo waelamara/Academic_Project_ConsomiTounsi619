@@ -1,10 +1,12 @@
 package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -22,7 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.core.Authentication;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -103,6 +106,7 @@ public class ControllerEvents {
 	}
 
 	/* ajouter event avec photo*/
+	//http://localhost:8081/event/addEvent
 	@PostMapping("/addEvent")
 	@ResponseBody
 	public String addEvents(@RequestParam(value = "Events", required = true) String EventsJson,
@@ -122,12 +126,14 @@ public class ControllerEvents {
 	}
 
 	/* affiche les events */
+	//http://localhost:8081/event/allEvent
 	@RequestMapping(value = "/allEvent")
 	public List<Events> getAllEvents() {
 		return eventDAO.getAllEventsList();
 	}
 
 	/* modifier event */
+	//http://localhost:8081/event/editEvent
 	@PutMapping("/editEvent")
 	@ResponseBody
 	public Events modifEvents(@RequestBody Events Events) {
@@ -135,6 +141,7 @@ public class ControllerEvents {
 	}
 
 	/* delete un event */
+	//http://localhost:8081/event/delete/{id}
 	@DeleteMapping("/delete/{id}")
 
 	public void delete(@PathVariable(name = "id") long Id) {
@@ -144,18 +151,21 @@ public class ControllerEvents {
 	}
 
 	/* recherche par titre */
+	//http://localhost:8081/event/find/{titre}
 	@GetMapping("/find/{titre}")
 	public List<Events> findLikeNameM(@PathVariable(value = "titre") String titre) {
 		return eventDAO.findLikeName(titre);
 	}
 
 	/* affiche les charites */
+	//http://localhost:8081/event/allCharite
 	@RequestMapping(value = "/allCharite")
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
 	}
 
 	/* Participer a un evenement */
+	//http://localhost:8081/event/participer/{id}
 	@PutMapping("/participer/{id}")
 	public String EditEvents(@PathVariable(value = "id") Long idevent, @Valid @RequestBody Events e) {
 		Events e1 = eventDAO.findOne(idevent);
@@ -185,12 +195,14 @@ public class ControllerEvents {
 	}
 
 	/* affiche les endroits */
+	//http://localhost:8081/event/allEndroit
 	@RequestMapping(value = "/allEndroit")
 	public List<Endroit> getAllEndroit() {
 		return endroitDAO.getAllEndroitList();
 	}
 
 	/* reservation Endoit */
+	//http://localhost:8081/event/reserve/{ideventss}/{idendroit}
 	@PostMapping("/reserve/{ideventss}/{idendroit}")
 	@ResponseBody
 	public String addChar(@PathVariable(value = "idendroit") Long idendroit,
@@ -220,6 +232,7 @@ public class ControllerEvents {
 	}
 
 	/* add events avec publicité */
+	//http://localhost:8081/event/ajouter/{publicite}
 	@PostMapping("/ajouter/{publicite}")
 	@ResponseBody
 	public int addPub(@PathVariable(value = "publicite") Long publicite, @Valid @RequestBody Events Events) {
@@ -227,6 +240,7 @@ public class ControllerEvents {
 		return eventDAO.saveEvent(publicite, Events);
 	}
 	/* add endroit */
+	//http://localhost:8081/event/addEndroit
 	@PostMapping("/addEndroit")
 	@ResponseBody
 	public Endroit addEndroit( @Valid @RequestBody Endroit Endroit) {
@@ -236,6 +250,7 @@ public class ControllerEvents {
 	
 	
 	/* ajouter charité avec token si vous avez ajouter un charité vous avez participer */
+	//http://localhost:8081/event/Participer/{idevents}
 	@PostMapping("/Participer/{idevents}")
 	@ResponseBody
 	public String addCharit(Authentication authentication,@PathVariable(value = "idevents") Long idevents,
@@ -278,21 +293,23 @@ public class ControllerEvents {
 		
 	}
 	/**********************************************/
-	
-/*	@PostMapping("/Participer/{idevents}/{idcommande}")
+	//http://localhost:8081/event/Participer/{idevents}/{idcommande}
+    @PostMapping("/Participer/{idevents}/{idcommande}")
 	@ResponseBody
 	public String addCharitee(Authentication authentication,@PathVariable(value = "idevents") Long idevents,
 			@PathVariable(value = "idcommande") Long idCommande,
 			@Valid @RequestBody Charite Charite) {
 		Events e1 = eventDAO.findOne(idevents);
-		Commande c2=commandeDao.findOne(idCommande);
-		Optional<Commande> c3=chariteDAO.findCommandeById(idCommande);
-		Set<Commande> c4 = c3.;
+		Commande c1= commandeDao.findOne(idCommande);
+		Set<Commande> c= new HashSet<Commande>();
+		c.add(c1);
 		
-		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
+       
+  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
 		u1.getId();
+
 		User u2= userDAO.findOne(u1.getId());
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())) {
+		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("cagnotte"))) {
 			float S ;
 			int nb = e1.getNbplace();
 			int nbP = e1.getNbparticipant();
@@ -308,12 +325,34 @@ public class ControllerEvents {
 			S=u2.getSolde()-Charite.getMontantPaye();
 			u2.setSolde(S);
 			
-			Charite.setCommandeCharite(c4);
 			userDAO.save(u2);
 			eventDAO.saveEvents(e1);
-		commandeDao.save(c2);
 			chariteDAO.saveCharite1(idevents, u1.getId(), Charite);
-			return "Successful";
+			return "Successful Donate money";
+
+		} 
+		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("dons"))) {
+			float S ;
+			int nb = e1.getNbplace();
+			int nbP = e1.getNbparticipant();
+			e1.setTitre(e1.getTitre());
+			e1.setDateE(e1.getDateE());
+			e1.setEndroit(e1.getEndroit());
+			e1.setNbplace(nb - 1);
+			e1.setNbparticipant(nbP + 1);
+			e1.setPublicite(e1.getPublicite());
+			e1.setCharite(e1.getCharite());
+			e1.setDescription(e1.getDescription());
+			e1.setImage(e1.getImage());
+			S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
+			u2.setSolde(S);
+			
+			Charite.setCommandeCharite(c);
+			userDAO.save(u2);
+			eventDAO.saveEvents(e1);
+			commandeDao.save(c1);
+			chariteDAO.saveCharitee(idevents, u1.getId(),c1.getId(), Charite);
+			return "Successful Donated a product";
 
 		} 
 		else if(u2.getSolde()<Charite.getMontantPaye()){
@@ -326,7 +365,7 @@ public class ControllerEvents {
 
 		}
 		
-	}*/
+	}
 	
 
 }

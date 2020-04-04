@@ -41,7 +41,7 @@ public class Charite implements Serializable {
     private Events idevents ;
 	@ManyToMany(cascade = CascadeType.ALL) 
 	@JsonIgnore
-	private Set<Commande> CommandeCharite ; 
+	private Set<Commande> CommandeCharite = new HashSet<>() ; 
 	
 	
 	
@@ -107,6 +107,11 @@ public class Charite implements Serializable {
 		this.iduser=iduser;
 
 	}
-	 
+	public Charite(Set<Commande> CommandeCharite) {
+		super();
+		
+		this.CommandeCharite=CommandeCharite;
+
+	}
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -113,5 +114,10 @@ public class Commande implements Serializable  {
 	
 	@OneToOne (mappedBy="Commande")
 	Livraison Livraison;
+
+	public Stream<Commande> stream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
