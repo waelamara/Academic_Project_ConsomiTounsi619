@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,6 +26,7 @@ public class Rayon implements Serializable{
 	private Long Idrayon;
 	private String nom_rayon;
 	@Enumerated(EnumType.STRING)
+	@Column(length = 50)
 	public Type_rayon type_rayon;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Idrayon")
