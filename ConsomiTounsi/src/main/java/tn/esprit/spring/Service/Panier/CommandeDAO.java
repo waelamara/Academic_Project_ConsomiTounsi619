@@ -6,6 +6,7 @@ import java.beans.Transient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class CommandeDAO {
 	CommandeRepository commandeRepository;
 	public Commande save (Commande c)
 	{
-		c.setDate(LocalDate.now());
+	//	c.setDate(LocalDate.now());
 		return commandeRepository.save(c);
 	}
 	//@Transient
@@ -55,6 +56,6 @@ public class CommandeDAO {
 	{
 		commandeRepository.PayerPorteaPorte(idCommande);
 	}
- 
+	
 
 }

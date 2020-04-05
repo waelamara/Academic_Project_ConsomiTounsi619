@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,6 +39,7 @@ public class Commande implements Serializable  {
 	private float montant;
 	private String status;
 	private String TypedePayment;
+	private String Remise;
 	@JsonIgnore
 	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	public Set<LigneCommande> ligneCommande;
@@ -102,8 +104,20 @@ public class Commande implements Serializable  {
 	public void setIdUser(User idUser) {
 		this.idUser = idUser;
 	}
+	public String getRemise() {
+		return Remise;
+	}
+	public void setRemise(String remise) {
+		Remise = remise;
+	}
+	
 	
 	@OneToOne (mappedBy="Commande")
 	Livraison Livraison;
+
+	public Stream<Commande> stream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
