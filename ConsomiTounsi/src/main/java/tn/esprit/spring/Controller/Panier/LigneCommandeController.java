@@ -1,4 +1,4 @@
-package tn.esprit.Controller.Panier;
+package tn.esprit.spring.Controller.Panier;
 
 import java.util.List;
 
@@ -41,6 +41,11 @@ public class LigneCommandeController {
 			ligneCommandeDao.AjouterAuPanier(idprod, iduser, lc);
 		
 		return ligneCommandeDao.panierParIdclient(iduser);
+	}
+	@GetMapping("/Categories")
+	public int NumCategorie()
+	{
+		return ligneCommandeDao.NumCategorie();
 	}
 
 

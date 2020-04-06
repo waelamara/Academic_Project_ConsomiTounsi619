@@ -1,4 +1,4 @@
-package tn.esprit.Controller.Panier;
+package tn.esprit.spring.Controller.Panier;
 
 import java.util.List;
 
