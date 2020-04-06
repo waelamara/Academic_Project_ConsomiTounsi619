@@ -37,7 +37,7 @@ import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.FactureRepository;
 
 @Service
-public class FactureDAO {
+public class FactureDAO implements IFacture {
 @Autowired
 FactureRepository factureRepository;
 @Autowired

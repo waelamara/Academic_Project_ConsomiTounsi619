@@ -17,7 +17,7 @@ import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Repository.CommandeRepository;
 @Service
-public class CommandeDAO {
+public class CommandeDAO implements ICommande {
 	@Autowired
 	CommandeRepository commandeRepository;
 	public Commande save (Commande c)

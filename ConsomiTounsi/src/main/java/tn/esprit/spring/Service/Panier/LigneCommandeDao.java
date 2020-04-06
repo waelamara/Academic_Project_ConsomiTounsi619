@@ -19,7 +19,7 @@ import tn.esprit.spring.Repository.UserRepository;
 
 
 @Service
-public class LigneCommandeDao {
+public class LigneCommandeDao implements ILigneCommande {
 	@Autowired
 	LigneCommandeRepository ligneCommandeRepository;
 	@Autowired
