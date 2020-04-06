@@ -25,7 +25,6 @@ public class Endroit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private int prix;
 	private String statu;
 	private String emplacement;
 	private int nbplace;
@@ -46,12 +45,7 @@ public class Endroit implements Serializable {
 	public void setId(Long id) {
 		Id = id;
 	}
-	public int getPrix() {
-		return prix;
-	}
-	public void setPrix(int prix) {
-		this.prix = prix;
-	}
+	
 	public String getStatu() {
 		return statu;
 	}
@@ -83,9 +77,8 @@ public class Endroit implements Serializable {
 		super();
 
 	}
-	public Endroit(int prix,int nbplace,String emplacement,String statu,Events eventss) {
+	public Endroit(int nbplace,String emplacement,String statu,Events eventss) {
 		super();
-		this.prix=prix;
 		this.nbplace=nbplace;
 		this.emplacement=emplacement;
 		this.statu=statu;
