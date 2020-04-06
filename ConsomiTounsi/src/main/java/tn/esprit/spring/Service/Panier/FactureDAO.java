@@ -194,11 +194,7 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
          addressValue.setBackgroundColor(BaseColor.WHITE);
          addressValue.setExtraParagraphSpace(5f);
          table.addCell(addressValue);
-         boolean firstTime2 = true;
-    
-		
-	
-		
+   	
 	}
 
 	
