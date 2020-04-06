@@ -198,7 +198,6 @@ public class ControllerEvents {
 		int nbPEndroit = e2.getNbplace();
 		int nbPEvent = d1.getNbplace();
 		if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
-			e2.setPrix(e2.getPrix());
 			e2.setNbplace(e2.getNbplace());
 			e2.setEmplacement(e2.getEmplacement());
 			e2.setEventss(e2.getEventss());
@@ -431,7 +430,6 @@ public class ControllerEvents {
 			int nbPEndroit = e2.getNbplace();
 			int nbPEvent = d1.getNbplace();
 			if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
-				e2.setPrix(e2.getPrix());
 				e2.setNbplace(e2.getNbplace());
 				e2.setEmplacement(e2.getEmplacement());
 				e2.setEventss(e2.getEventss());
