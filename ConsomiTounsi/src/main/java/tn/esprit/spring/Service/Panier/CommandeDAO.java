@@ -4,6 +4,7 @@ package tn.esprit.spring.Service.Panier;
 
 import java.beans.Transient;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +22,11 @@ public class CommandeDAO {
 	CommandeRepository commandeRepository;
 	public Commande save (Commande c)
 	{
-	//	c.setDate(LocalDate.now());
+	ZoneId zid = ZoneId.of("Africa/Tunis");
+		c.setDate(LocalDate.now(zid));
 		return commandeRepository.save(c);
 	}
-	//@Transient
+	
     
 	public List<Commande> CommandeparType(String type) {
 		return commandeRepository.CommandeparType(type);

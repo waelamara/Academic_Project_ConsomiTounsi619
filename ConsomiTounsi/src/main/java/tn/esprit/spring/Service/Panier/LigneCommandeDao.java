@@ -89,7 +89,9 @@ public class LigneCommandeDao {
 				if(nombre>5000)
 				{
 				double a= PrixTotalCommande(iduser);
-				c.setMontant((float) ((float) a-(0.3*a)));
+				c.setMontant((float)a);
+				//c.setPourcentageDeRemise(0.3);
+				c.setPourcentageDeRemise(a-c.getMontant()*0.3);
 				ZoneId zid = ZoneId.of("Africa/Tunis");
 				c.setDate(LocalDate.now(zid));
 				commandeRepository.remise(iduser);
@@ -98,10 +100,22 @@ public class LigneCommandeDao {
 				else
 				{
 					double a= PrixTotalCommande(iduser);
-					c.setMontant((float) a);
+					if(a>5000)
+					{
+						c.setMontant((float)a);
+					//c.setMontant((float) ((float) a-(c.getPourcentageDeRemise()*a)));
+						c.setPourcentageDeRemise(a-c.getMontant()*0.3);
 					ZoneId zid = ZoneId.of("Africa/Tunis");
 					c.setDate(LocalDate.now(zid));
 					commandeRepository.save(c);
+				}
+					else
+					{
+						c.setMontant((float) a);
+						ZoneId zid = ZoneId.of("Africa/Tunis");
+						c.setDate(LocalDate.now(zid));
+						commandeRepository.save(c);
+					}
 				}
 				} 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;

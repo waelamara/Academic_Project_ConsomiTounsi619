@@ -33,12 +33,15 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.FactureRepository;
 
 @Service
 public class FactureDAO {
 @Autowired
 FactureRepository factureRepository;
+@Autowired
+CommandeRepository commandeRepository;
 public Facture findOne(Long id) {
 	return factureRepository.getOne(id);
 }
@@ -61,6 +64,7 @@ public List<lignecommandeproduit> FactureParIdUser( long id) {
 }
 public boolean CreePdf(List<lignecommandeproduit>commandes ,ServletContext context,HttpServletRequest request ,HttpServletResponse reponse ) throws MalformedURLException, IOException
 {
+	List<Commande>cs=commandeRepository.findAll();
 	try {
 	Document d = new Document(PageSize.A4,15,15,45,30);
 	
@@ -134,15 +138,18 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
     table.addCell(address);
 	
 	boolean firstTime = true;
-	
+	double sum=0;
 	for(lignecommandeproduit c : commandes)
 	{
 		
-		
+	            //sum += c.getTotal();
+	        
+	      
+
 		
 		if(firstTime){
 		
-			Phrase PH = new Phrase("Nom:    "+c.getName()+"\nDateCommande:   "+c.getDate());
+			Phrase PH = new Phrase("Nom:    "+c.getName()+"\nDateCommande:   "+c.getDate()+"\n"+c.getMontant());
 			Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
 			PH.setFont(mainFont2);
 			d.add(PH);  
@@ -187,11 +194,25 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
          addressValue.setBackgroundColor(BaseColor.WHITE);
          addressValue.setExtraParagraphSpace(5f);
          table.addCell(addressValue);
-		
+         boolean firstTime2 = true;
+    
 		
 	
 		
 	}
+
+	
+	/*boolean firstTime2 = true;
+    for(Commande c1: cs)
+			if(firstTime2){
+				
+				Phrase PH = new Phrase("\nMontant "+	c1.getMontant()+"\nPourcentage"+30+ "%\nMontant apres remise "+(c1.getPourcentageDeRemise()));
+				Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
+				PH.setFont(mainFont2);
+				d.add(PH);  
+				firstTime2 = false;
+				
+			}*/
 	
 	   d.add(table);
 	  d.close();
