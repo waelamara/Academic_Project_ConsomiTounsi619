@@ -37,7 +37,7 @@ import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.FactureRepository;
 
 @Service
-public class FactureDAO {
+public class FactureDAO implements IFacture {
 @Autowired
 FactureRepository factureRepository;
 @Autowired
@@ -194,11 +194,7 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
          addressValue.setBackgroundColor(BaseColor.WHITE);
          addressValue.setExtraParagraphSpace(5f);
          table.addCell(addressValue);
-         boolean firstTime2 = true;
-    
-		
-	
-		
+   	
 	}
 
 	

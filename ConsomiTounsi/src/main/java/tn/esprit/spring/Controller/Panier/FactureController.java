@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Panier;
 
 import java.io.File;
 import java.io.FileInputStream;

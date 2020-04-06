@@ -19,7 +19,7 @@ import tn.esprit.spring.Repository.UserRepository;
 
 
 @Service
-public class LigneCommandeDao {
+public class LigneCommandeDao implements ILigneCommande {
 	@Autowired
 	LigneCommandeRepository ligneCommandeRepository;
 	@Autowired
@@ -130,6 +130,10 @@ public class LigneCommandeDao {
     }
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
+	}
+	public int NumCategorie()
+	{
+		return ligneCommandeRepository.NumCategorie();
 	}
 
 		

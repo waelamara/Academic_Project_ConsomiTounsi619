@@ -96,6 +96,13 @@ private String name ;
 	public void setMontant(float montant) {
 		this.montant = montant;
 	}
+	public lignecommandeproduit( float price,String nomProduit) {
+		super();
+		this.price = price;
+		this.nomProduit = nomProduit;
+		
+	}
+	
 	
 	
 	
