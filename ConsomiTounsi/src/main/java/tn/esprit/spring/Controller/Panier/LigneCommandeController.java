@@ -43,7 +43,7 @@ public class LigneCommandeController {
 		return ligneCommandeDao.panierParIdclient(iduser);
 	}
 	@GetMapping("/Categories")
-	public int NumCategorie()
+	public List<Object[]> NumCategorie()
 	{
 		return ligneCommandeDao.NumCategorie();
 	}

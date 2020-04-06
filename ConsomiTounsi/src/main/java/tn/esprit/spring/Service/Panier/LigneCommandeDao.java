@@ -131,7 +131,7 @@ public class LigneCommandeDao implements ILigneCommande {
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
 	}
-	public int NumCategorie()
+	public List<Object[]> NumCategorie()
 	{
 		return ligneCommandeRepository.NumCategorie();
 	}

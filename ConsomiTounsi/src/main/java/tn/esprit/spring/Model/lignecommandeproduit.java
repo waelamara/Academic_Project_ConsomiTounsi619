@@ -96,9 +96,9 @@ private String name ;
 	public void setMontant(float montant) {
 		this.montant = montant;
 	}
-	public lignecommandeproduit( float price,String nomProduit) {
+	public lignecommandeproduit( int quantity,String nomProduit) {
 		super();
-		this.price = price;
+		this.quantity = quantity;
 		this.nomProduit = nomProduit;
 		
 	}
