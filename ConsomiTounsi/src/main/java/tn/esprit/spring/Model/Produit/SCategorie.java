@@ -24,7 +24,7 @@ public class SCategorie implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String NomSCategorie;
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JsonIgnore
 	private Categorie IdCategorie;
 	@OneToMany(mappedBy="IdSCategorie",cascade = CascadeType.ALL)
