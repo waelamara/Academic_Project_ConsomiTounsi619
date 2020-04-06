@@ -9,8 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import tn.esprit.spring.Model.User;
 
 @Entity
 public class Publicite implements Serializable {
@@ -33,11 +36,30 @@ public class Publicite implements Serializable {
 	private float Cout;
 	private String Video;
 	private String Image;
+	@ManyToOne
+	private User IdUser;
 
 	public Publicite() {
 	}
+
 	
 	
+	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
+			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image, User idUser) {
+		super();
+		Nom = nom;
+		Canal = canal;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
+		NbrInitialVueCible = nbrInitialVueCible;
+		NbrFinalVue = nbrFinalVue;
+		Cout = cout;
+		Video = video;
+		Image = image;
+		IdUser = idUser;
+	}
+
+
 
 	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
 			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image) {
@@ -52,8 +74,6 @@ public class Publicite implements Serializable {
 		Video = video;
 		Image = image;
 	}
-
-
 
 	public Long getId() {
 		return Id;
@@ -133,6 +153,14 @@ public class Publicite implements Serializable {
 
 	public void setImage(String image) {
 		Image = image;
+	}
+
+	public User getIdUser() {
+		return IdUser;
+	}
+
+	public void setIdUser(User idUser) {
+		IdUser = idUser;
 	}
 
 }
