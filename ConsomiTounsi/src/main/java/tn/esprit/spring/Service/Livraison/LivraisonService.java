@@ -44,4 +44,10 @@ public class LivraisonService {
 
 	}
 
+	/* Chercher un livraison */
+	public Livraison findOne(long liv) {
+		return LivraisonRepository.getOne(liv);
+	}
+
+	
 }
