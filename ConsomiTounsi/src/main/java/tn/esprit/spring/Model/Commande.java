@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.Transient;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -40,6 +42,8 @@ public class Commande implements Serializable  {
 	private String status;
 	private String TypedePayment;
 	private String Remise;
+	
+	private double PourcentageDeRemise;
 	@JsonIgnore
 	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	public Set<LigneCommande> ligneCommande;
@@ -119,5 +123,13 @@ public class Commande implements Serializable  {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public double getPourcentageDeRemise() {
+		return PourcentageDeRemise;
+	}
+	public void setPourcentageDeRemise(double pourcentageDeRemise) {
+		PourcentageDeRemise = pourcentageDeRemise;
+	}
+	
+	
 
 }

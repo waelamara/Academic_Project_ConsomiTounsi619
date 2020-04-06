@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,22 +22,25 @@ public class Publicite implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String Nom;
-	private String Canal;
-	@Temporal (TemporalType.DATE)
+	@Enumerated(EnumType.STRING)
+	private Canal Canal;
+	@Temporal(TemporalType.DATE)
 	private Date DateDebut;
-	@Temporal (TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	private Date DateFin;
 	private int NbrInitialVueCible;
 	private int NbrFinalVue;
 	private float Cout;
 	private String Video;
 	private String Image;
-	
+
 	public Publicite() {
 	}
- 
-	public Publicite(String nom, String canal, Date dateDebut, Date dateFin, int nbrInitialVueCible, int nbrFinalVue,
-			float cout, String video, String image) {
+	
+	
+
+	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
+			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image) {
 		super();
 		Nom = nom;
 		Canal = canal;
@@ -47,19 +52,8 @@ public class Publicite implements Serializable {
 		Video = video;
 		Image = image;
 	}
-	
 
-	public Publicite(String nom, String canal, Date dateDebut, Date dateFin, int nbrInitialVueCible, int nbrFinalVue,
-			float cout) {
-		super();
-		Nom = nom;
-		Canal = canal;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-		NbrInitialVueCible = nbrInitialVueCible;
-		NbrFinalVue = nbrFinalVue;
-		Cout = cout;
-	}
+
 
 	public Long getId() {
 		return Id;
@@ -77,11 +71,11 @@ public class Publicite implements Serializable {
 		Nom = nom;
 	}
 
-	public String getCanal() {
+	public Canal getCanal() {
 		return Canal;
 	}
 
-	public void setCanal(String canal) {
+	public void setCanal(Canal canal) {
 		Canal = canal;
 	}
 
@@ -140,7 +134,5 @@ public class Publicite implements Serializable {
 	public void setImage(String image) {
 		Image = image;
 	}
-	
-	
-	
+
 }

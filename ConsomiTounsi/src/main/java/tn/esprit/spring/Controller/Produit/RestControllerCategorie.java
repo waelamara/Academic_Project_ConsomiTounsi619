@@ -24,6 +24,8 @@ public class RestControllerCategorie {
 	@Autowired
 	ICategorieService icategorieService;
 
+	//http://localhost:8081/categorie/ajouter
+	//{"nomCategorie":"Vetemment"}
 	@PostMapping("/ajouter")
 	public Categorie AjouterCategorie(@Valid @RequestBody Categorie c) {
 		return icategorieService.save(c);
@@ -34,12 +36,15 @@ public class RestControllerCategorie {
 		return icategorieService.findAll();
 	}
 
+	//http://localhost:8081/categorie/delete/5
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> DeleteCategorie(@PathVariable(value = "id") Long idCategorie) {
 		icategorieService.Delete(idCategorie);
 		return ResponseEntity.ok("Categorie Supprimer avec succes");
 	}
 
+	//http://localhost:8081/categorie/edit/5
+	//{"nomCategorie":"Vetemments"}
 	@PutMapping("/edit/{id}")
 	public Categorie EditProduit(@PathVariable(value = "id") Long idCategorie, @Valid @RequestBody Categorie c) {
 		return icategorieService.Update(c, idCategorie);

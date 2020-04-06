@@ -19,7 +19,7 @@ import tn.esprit.spring.Repository.UserRepository;
 
 
 @Service
-public class LigneCommandeDao {
+public class LigneCommandeDao implements ILigneCommande {
 	@Autowired
 	LigneCommandeRepository ligneCommandeRepository;
 	@Autowired
@@ -49,6 +49,7 @@ public class LigneCommandeDao {
 		Commande c=commandeRepository.CommandeencoursparClient(iduser);
 		LigneCommande l=ligneCommandeRepository.findLigneCommande(idprod, iduser);
 		 User cl= userRepository.getOne(iduser);
+		
 		 if(List.isEmpty())
 		 {
 			 float total=0; 
@@ -71,7 +72,7 @@ public class LigneCommandeDao {
 		 }
 		 else if ((c!=null))
 		 {
-				double nombre =commandeRepository.NombreDeCommandeParUser(iduser);
+			
 				if(l!=null){
 					l.setQuantity(l.getQuantity()+1);
 					ligneCommandeRepository.save(l);
@@ -84,22 +85,37 @@ public class LigneCommandeDao {
 				 lc.setProduit(p);
 				 ligneCommandeRepository.save(lc);
 				}
-			
+				double nombre=commandeRepository.NombreDeCommandeParUser(iduser);
 				if(nombre>5000)
 				{
 				double a= PrixTotalCommande(iduser);
-				System.out.println(nombre);
-			
-				c.setMontant((float) ((float) a-(0.3*a)));
+				c.setMontant((float)a);
+				//c.setPourcentageDeRemise(0.3);
+				c.setPourcentageDeRemise(a-c.getMontant()*0.3);
+				ZoneId zid = ZoneId.of("Africa/Tunis");
+				c.setDate(LocalDate.now(zid));
 				commandeRepository.remise(iduser);
 				commandeRepository.save(c);
 				}
 				else
 				{
 					double a= PrixTotalCommande(iduser);
-					c.setMontant((float) a);
-				
+					if(a>5000)
+					{
+						c.setMontant((float)a);
+					//c.setMontant((float) ((float) a-(c.getPourcentageDeRemise()*a)));
+						c.setPourcentageDeRemise(a-c.getMontant()*0.3);
+					ZoneId zid = ZoneId.of("Africa/Tunis");
+					c.setDate(LocalDate.now(zid));
 					commandeRepository.save(c);
+				}
+					else
+					{
+						c.setMontant((float) a);
+						ZoneId zid = ZoneId.of("Africa/Tunis");
+						c.setDate(LocalDate.now(zid));
+						commandeRepository.save(c);
+					}
 				}
 				} 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;
@@ -114,6 +130,10 @@ public class LigneCommandeDao {
     }
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
+	}
+	public int NumCategorie()
+	{
+		return ligneCommandeRepository.NumCategorie();
 	}
 
 		

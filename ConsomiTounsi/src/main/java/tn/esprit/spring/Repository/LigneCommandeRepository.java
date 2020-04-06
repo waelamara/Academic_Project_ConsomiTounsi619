@@ -26,6 +26,7 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Lo
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient,Long idCommande);
 	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND c.status='en cours'", nativeQuery = true)
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient);
-	
+	@Query(value = "SELECT COUNT(*)  FROM categorie c JOIN scategorie sc on c.id=sc.id_categorie_id join ss_categorie ssc on sc.id=ssc.idscategorie_id join produit p on ssc.id=p.id_ss_categorie_id join ligne_commande l ON p.id=l.produit_id GROUP BY c.id ", nativeQuery = true)
+	public int NumCategorie();
 
 }

@@ -1,6 +1,6 @@
 package tn.esprit.spring.Service.Produit;
 
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,8 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
-import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -46,15 +44,14 @@ public class FileStorageServiceImpl {
 		FileOutputStream fout = new FileOutputStream(f);
 		fout.write(file.getBytes());
 		fout.close();
-		BufferedImage image = ImageIO.read(f);
-		int height = image.getHeight();
-		int width = image.getWidth();
-		if (width > 300 || height > 300) {
-			if (f.exists())
-				f.delete();
-
-		}
-
+//		BufferedImage image = ImageIO.read(f);
+//		int height = image.getHeight();
+//		int width = image.getWidth();
+//		if (width > 300 || height > 300) {
+//			if (f.exists())
+//				f.delete();
+//
+//		}
 		if (f.exists())
 			f.delete();
 

@@ -67,7 +67,7 @@ private String name ;
 		this.date = date;
 		this.montant = montant;
 	}
-	public lignecommandeproduit( LocalDate date,String nomProduit,int quantity, float price,float total,String name) {
+	public lignecommandeproduit( LocalDate date,String nomProduit,int quantity, float price,float total,String name,float montant) {
 		super();
 		this.date = date;
 		this.nomProduit = nomProduit;
@@ -75,6 +75,7 @@ private String name ;
 		this.price = price;
 		this.total = total;
 		this.name=name;
+		this. montant = montant;
 		
 	}
 	public String getName() {
@@ -89,6 +90,19 @@ private String name ;
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+	public float getMontant() {
+		return montant;
+	}
+	public void setMontant(float montant) {
+		this.montant = montant;
+	}
+	public lignecommandeproduit( float price,String nomProduit) {
+		super();
+		this.price = price;
+		this.nomProduit = nomProduit;
+		
+	}
+	
 	
 	
 	

@@ -27,23 +27,29 @@ public class RestControllerSousSousCategorie {
 	@Autowired
 	ISousSousCategorieService isousSousCategorieService;
 
+	//http://localhost:8081/SsCategorie/ajouter/3
+	//{"nomSsCategorie":"chaussures"}
 	@PostMapping("/ajouter/{idSCategorie}")
 	public SsCategorie AjouterSousCategorie(@PathVariable(value = "idSCategorie") Long idSCategorie,
 			@Valid @RequestBody SsCategorie ssc) {
 		return isousSousCategorieService.save(ssc, idSCategorie);
 	}
 
+	//http://localhost:8081/SsCategorie/afficher
 	@GetMapping("/afficher")
 	public List<SsCategorie> getAllProduit() {
 		return isousSousCategorieService.findAll();
 	}
 
+	//http://localhost:8081/SsCategorie/delete/4
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> DeleteProduit(@PathVariable(value = "id") Long idSscategorie) {
 		isousSousCategorieService.Delete(idSscategorie);
 		return ResponseEntity.ok("Sous-sous-Categorie Supprimer avec succes");
 	}
 
+	//http://localhost:8081/SsCategorie/edit/3/1
+	//{"nomSsCategorie":"souris"}
 	@PutMapping("/edit/{id}/{idSCategorie}")
 	public SsCategorie EditProduit(@PathVariable(value = "id") Long idSscategorie,
 			@PathVariable(value = "idSCategorie") Long idSCategorie, @Valid @RequestBody SsCategorie ssc) {
