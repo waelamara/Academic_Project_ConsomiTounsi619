@@ -60,15 +60,15 @@ public class ControllerCommande {
 		return commandeDao.CommandeparClient(id);
 	}
 
-	@PutMapping("/payerenligne/{idCommande}")
-	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande)
+	@PutMapping("/payerenligne/{idCommande}//{idClient}")
+	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
 	{
-		commandeDao.PayerEnLigne(idCommande);
+		commandeDao.PayerEnLigne(idCommande,id);
 	}
-	@PutMapping("/payerporteaporte/{idCommande}")
-	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande)
+	@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
+	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
 	{
-		commandeDao.PayerPorteaPorte(idCommande);
+		commandeDao.PayerPorteaPorte(idCommande,id);
 	}
 	
 

@@ -50,13 +50,15 @@ public class CommandeDAO implements ICommande {
 		return commandeRepository.Commandeparcode(code);
 
 	}
-	public void PayerEnLigne(int idCommande)
+	public void PayerEnLigne(int idCommande,int iduser)
 	{
 		commandeRepository.PayerEnLigne(idCommande);
+		commandeRepository.remise(iduser);
 	}
-	public void PayerPorteaPorte(int idCommande)
+	public void PayerPorteaPorte(int idCommande,int iduser)
 	{
 		commandeRepository.PayerPorteaPorte(idCommande);
+		commandeRepository.remise(iduser);
 	}
 	
 

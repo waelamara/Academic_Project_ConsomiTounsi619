@@ -20,13 +20,13 @@ import tn.esprit.spring.Model.lignecommandeproduit;
 
 public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Long> {
 
-	@Query(value = "SELECT  NEW tn.esprit.spring.Model.lignecommandeproduit(p.NomProduit,l.quantity,p.Prix,l.quantity*p.Prix) FROM LigneCommande l join l.commande c  join l.produit p   WHERE c.idUser.id=:idc and c.status='en cours'")
+	@Query(value = "SELECT  NEW tn.esprit.spring.Model.lignecommandeproduit(p.NomProduit,l.quantity,p.Prix,l.quantity*p.Prix,c.montant) FROM LigneCommande l join l.commande c  join l.produit p   WHERE c.idUser.id=:idc and c.status='en cours'")
 	public List<lignecommandeproduit> panierParIdclient(@Param("idc")long i);
 	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND l.status='en cours' and c.id !=?3 ", nativeQuery = true)
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient,Long idCommande);
 	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND c.status='en cours'", nativeQuery = true)
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient);
-	@Query(value = "SELECT COUNT(*) as n ,c.nom_categorie  FROM categorie c JOIN scategorie sc on c.id=sc.id_categorie_id join ss_categorie ssc on sc.id=ssc.idscategorie_id join produit p on ssc.id=p.id_ss_categorie_id join ligne_commande l ON p.id=l.produit_id GROUP BY c.id ORDER BY n DESC ", nativeQuery = true)
+	@Query(value = "SELECT COUNT(*) as n ,c.nom_categorie,SUM(l.price*l.quantity) as t FROM categorie c JOIN scategorie sc on c.id=sc.id_categorie_id join ss_categorie ssc on sc.id=ssc.idscategorie_id join produit p on ssc.id=p.id_ss_categorie_id join ligne_commande l ON p.id=l.produit_id GROUP BY c.id ORDER BY t DESC ", nativeQuery = true)
 	public List<Object[]>NumCategorie();
 
 }

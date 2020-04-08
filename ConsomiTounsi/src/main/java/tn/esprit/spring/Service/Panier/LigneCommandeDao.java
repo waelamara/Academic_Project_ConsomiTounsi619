@@ -94,7 +94,7 @@ public class LigneCommandeDao implements ILigneCommande {
 				c.setPourcentageDeRemise(a-c.getMontant()*0.3);
 				ZoneId zid = ZoneId.of("Africa/Tunis");
 				c.setDate(LocalDate.now(zid));
-				commandeRepository.remise(iduser);
+				//commandeRepository.remise(iduser);
 				commandeRepository.save(c);
 				}
 				else
