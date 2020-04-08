@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Commande;
@@ -20,10 +21,13 @@ import tn.esprit.spring.Repository.CommandeRepository;
 public class CommandeDAO implements ICommande {
 	@Autowired
 	CommandeRepository commandeRepository;
+
 	public Commande save (Commande c)
 	{
+	    
 	ZoneId zid = ZoneId.of("Africa/Tunis");
 		c.setDate(LocalDate.now(zid));
+		
 		return commandeRepository.save(c);
 	}
 	

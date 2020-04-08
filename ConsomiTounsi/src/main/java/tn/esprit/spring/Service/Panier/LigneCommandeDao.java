@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Commande;
@@ -28,6 +29,9 @@ public class LigneCommandeDao implements ILigneCommande {
 	CommandeRepository commandeRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	Session session;
+	
 	public List<lignecommandeproduit> panierParIdclient( long id) {
 		return ligneCommandeRepository.panierParIdclient(id);
 
