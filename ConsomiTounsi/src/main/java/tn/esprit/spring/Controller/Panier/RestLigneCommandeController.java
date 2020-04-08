@@ -21,7 +21,7 @@ import tn.esprit.spring.Service.Panier.LigneCommandeDao;
 
 @RestController
 @RequestMapping("/Panier")
-public class LigneCommandeController {
+public class RestLigneCommandeController {
 	@Autowired
 	LigneCommandeDao ligneCommandeDao;
 	@GetMapping("/{idUser}")

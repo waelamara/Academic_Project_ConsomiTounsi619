@@ -42,7 +42,7 @@ import tn.esprit.spring.Service.Panier.FactureDAO;
 
 @RestController
 @RequestMapping("/facture")
-public class FactureController {
+public class RestFactureController {
 	@Autowired
 	FactureDAO factureDAO;
 	@Autowired

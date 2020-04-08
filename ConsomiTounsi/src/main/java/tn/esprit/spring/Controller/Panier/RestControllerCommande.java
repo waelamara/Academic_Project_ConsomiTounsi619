@@ -22,7 +22,7 @@ import tn.esprit.spring.Service.Panier.CommandeDAO;
 
 @RestController
 @RequestMapping("/commande")
-public class ControllerCommande {
+public class RestControllerCommande {
 	@Autowired
 	CommandeDAO commandeDao;
 	@PostMapping("/ajouter")
