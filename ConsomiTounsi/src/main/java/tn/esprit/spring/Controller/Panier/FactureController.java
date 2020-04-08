@@ -2,8 +2,6 @@ package tn.esprit.spring.Controller.Panier;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
@@ -16,71 +14,46 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfWriter;
-
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
-import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.lignecommandeproduit;
-import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Service.Panier.CommandeDAO;
 import tn.esprit.spring.Service.Panier.FactureDAO;
-
-
-@RestController
-@RequestMapping("/facture")
-public class RestFactureController {
+@Controller
+public class FactureController {
 	@Autowired
 	FactureDAO factureDAO;
 	@Autowired
 	CommandeDAO commandeDao;
 	@Autowired
 	ServletContext context;
-	@PostMapping("/ajouter/{idCommande}")
-	public ResponseEntity <Facture> AjouterFacture(@PathVariable(value = "idCommande") Long idCommande,@Valid @RequestBody Facture f) 
-			
+	public Facture AjouterFacture( Long idCommande, Facture f) 
+	
 	{
 		Commande c =  commandeDao.findOne( idCommande);
 		f.setCommande(c);
 		
-			factureDAO.save(f);
-			return ResponseEntity.ok().build();
-	
+		return	factureDAO.save(f);
+		
 	}
-	@GetMapping("/afficher")
 	public List<Facture > getAllFacture(){
 		
 		return factureDAO.findAll();
 		
 	}
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Facture> DeleteProduit(@PathVariable(value = "id") Long idFacture) {
+	public void DeleteProduit( Long idFacture) {
 		Facture f = factureDAO.findOne(idFacture);
-		if (f == null) {
-			return ResponseEntity.notFound().build();
-		}
 		factureDAO.Delete(f);
-		return ResponseEntity.ok().build();
+		
 	}
-	@GetMapping("/{idUser}")
-	public List<lignecommandeproduit> panierParIdclient(@PathVariable(value = "idUser") long id) {
-	
+	public List<lignecommandeproduit> panierParIdclient(long id) {
+		
 		return factureDAO.FactureParIdUser(id);
 	}
-	@GetMapping("/afficherPDF/{idUser}")
 	public void createpdf(HttpServletRequest request ,HttpServletResponse reponse,@PathVariable(value = "idUser") long id) throws MalformedURLException, IOException 
 	{
 	List<lignecommandeproduit> commandes =factureDAO.FactureParIdUser(id);
@@ -124,9 +97,5 @@ public class RestFactureController {
 		}
 				
 	}
-	
-	
-	}
-	
 
-
+}
