@@ -1,10 +1,10 @@
-package tn.esprit.spring.DAO.Stock;
+package tn.esprit.spring.Service.Stock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tn.esprit.spring.Repository.Stock.StockRepository;
 
-public class StockDAOImpl {
+public class StockServiceImpl {
 	@Autowired
 StockRepository stockRepository;
 }
