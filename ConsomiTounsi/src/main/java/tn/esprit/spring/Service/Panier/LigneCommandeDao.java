@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Commande;
@@ -28,6 +29,8 @@ public class LigneCommandeDao implements ILigneCommande {
 	CommandeRepository commandeRepository;
 	@Autowired
 	UserRepository userRepository;
+	
+	
 	public List<lignecommandeproduit> panierParIdclient( long id) {
 		return ligneCommandeRepository.panierParIdclient(id);
 
@@ -94,7 +97,7 @@ public class LigneCommandeDao implements ILigneCommande {
 				c.setPourcentageDeRemise(a-c.getMontant()*0.3);
 				ZoneId zid = ZoneId.of("Africa/Tunis");
 				c.setDate(LocalDate.now(zid));
-				commandeRepository.remise(iduser);
+				//commandeRepository.remise(iduser);
 				commandeRepository.save(c);
 				}
 				else
