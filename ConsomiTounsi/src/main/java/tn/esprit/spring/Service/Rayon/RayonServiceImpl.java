@@ -13,7 +13,7 @@ import tn.esprit.spring.Model.Rayon.Rayon;
 import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.Rayon.RayonRepository;
 
-@Service("RayonDAO")
+@Service
 public class RayonServiceImpl implements IRayonService {
 
 	@Autowired
