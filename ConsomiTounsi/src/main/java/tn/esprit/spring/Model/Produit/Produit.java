@@ -58,6 +58,14 @@ public class Produit implements Serializable {
 
 
 
+	public Stock getIdStock() {
+		return IdStock;
+	}
+
+	public void setIdStock(Stock idStock) {
+		IdStock = idStock;
+	}
+
 	public Produit() {
 
 	}
