@@ -16,11 +16,19 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Model.Produit.Produit;
+import tn.esprit.spring.Model.Stock.Stock;
 import tn.esprit.spring.Repository.CommandeRepository;
+import tn.esprit.spring.Repository.LigneCommandeRepository;
+import tn.esprit.spring.Repository.Stock.StockRepository;
 @Service
 public class CommandeDAO implements ICommande {
 	@Autowired
 	CommandeRepository commandeRepository;
+	@Autowired
+	LigneCommandeRepository ligneCommandeRepository;
+	@Autowired
+	StockRepository stockRepository;
 
 	public Commande save (Commande c)
 	{
@@ -56,14 +64,46 @@ public class CommandeDAO implements ICommande {
 	}
 	public void PayerEnLigne(int idCommande,int iduser)
 	{
+		//List<lignecommandeproduit>List=	ligneCommandeRepository.panierParIdclient(iduser);
+		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
+	int a=0;
+		 for (LigneCommande l : Linges)
+		 {
+			 if(l.getCommande().getId()==idCommande)
+			 {
+			 a= l.getProduit().getIdStock().getQuantite()-l.getQuantity();
+			 long idStock=l.getProduit().getIdStock().getIdstock();
+				System.out.println(idStock);
+				Stock c =stockRepository.getOne(idStock);
+				c.setQuantite(a);
+				 stockRepository.save(c);
+			 }
+			
+			
+			 
+		 }
 		commandeRepository.PayerEnLigne(idCommande);
 		commandeRepository.remise(iduser);
 	}
 	public void PayerPorteaPorte(int idCommande,int iduser)
 	{
+		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
+	int a=0;
+		 for (LigneCommande l : Linges)
+		 {
+			 if(l.getCommande().getId()==idCommande)
+			 {
+			 a= l.getProduit().getIdStock().getQuantite()-l.getQuantity();
+			 long idStock=l.getProduit().getIdStock().getIdstock();
+				System.out.println(idStock);
+				Stock c =stockRepository.getOne(idStock);
+				c.setQuantite(a);
+				 stockRepository.save(c);
+			 }
 		commandeRepository.PayerPorteaPorte(idCommande);
 		commandeRepository.remise(iduser);
 	}
 	
 
+}
 }

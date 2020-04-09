@@ -29,8 +29,7 @@ public class LigneCommandeDao implements ILigneCommande {
 	CommandeRepository commandeRepository;
 	@Autowired
 	UserRepository userRepository;
-	@Autowired
-	Session session;
+	
 	
 	public List<lignecommandeproduit> panierParIdclient( long id) {
 		return ligneCommandeRepository.panierParIdclient(id);

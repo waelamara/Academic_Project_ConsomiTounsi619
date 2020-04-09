@@ -146,6 +146,15 @@ public class Produit implements Serializable {
 	public void setIdrayon(Rayon idrayon) {
 		Idrayon = idrayon;
 	}
+	
+
+	public Stock getIdStock() {
+		return IdStock;
+	}
+
+	public void setIdStock(Stock idStock) {
+		IdStock = idStock;
+	}
 
 	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
 			SsCategorie idSsCategorie) {
