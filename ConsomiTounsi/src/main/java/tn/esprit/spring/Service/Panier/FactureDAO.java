@@ -86,7 +86,7 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
     paragraph.setAlignment(Element.ALIGN_CENTER);
     paragraph.setIndentationLeft(50);
     paragraph.setIndentationRight(50);
-    paragraph.setSpacingAfter(200);
+    paragraph.setSpacingAfter(20);
     d.add(Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.jpg"));
     d.add(paragraph);
   
@@ -149,9 +149,10 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
 		
 		if(firstTime){
 		
-			Phrase PH = new Phrase("Nom:    "+c.getName()+"\nDateCommande:   "+c.getDate()+"\n"+c.getMontant());
+			Phrase PH = new Phrase(                 "                                                                           Nom:  "+c.getName()+"\n\n                                                                            DateCommande: "+c.getDate());
 			Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
 			PH.setFont(mainFont2);
+			
 			d.add(PH);  
 			firstTime = false;
 			
@@ -197,20 +198,31 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
    	
 	}
 
-	
-	/*boolean firstTime2 = true;
+	  d.add(table);
+	boolean firstTime2 = true;
     for(Commande c1: cs)
 			if(firstTime2){
-				
-				Phrase PH = new Phrase("\nMontant "+	c1.getMontant()+"\nPourcentage"+30+ "%\nMontant apres remise "+(c1.getPourcentageDeRemise()));
+				if(c1.getPourcentageDeRemise()==0)
+				{
+					 Phrase PH3 = new Phrase("\nMontant "+	c1.getMontant());
+						Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
+						PH3.setFont(mainFont2);
+						d.add(PH3);
+					 
+				}
+				else
+				{
+				 Phrase PH2 = new Phrase("\nMontant "+	c1.getMontant()+"\nPourcentage"+30+ "%\nMontant apres remise "+(c1.getPourcentageDeRemise()));
 				Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
-				PH.setFont(mainFont2);
-				d.add(PH);  
-				firstTime2 = false;
+				PH2.setFont(mainFont2);
 				
-			}*/
+				d.add(PH2);
+				firstTime2 = false;
+				}
+			}
 	
-	   d.add(table);
+	 
+	 
 	  d.close();
       writer.close();
 	 
