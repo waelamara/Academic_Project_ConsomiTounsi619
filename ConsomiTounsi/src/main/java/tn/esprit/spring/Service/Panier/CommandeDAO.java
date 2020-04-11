@@ -106,4 +106,9 @@ public class CommandeDAO implements ICommande {
 	
 
 }
+	public List<Object[]> NumCommadeParMOIS()
+	{
+		
+		return commandeRepository.NumCommadeParMOIS();
+	}
 }

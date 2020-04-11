@@ -24,7 +24,7 @@ import tn.esprit.spring.Service.Panier.LigneCommandeDao;
 public class RestLigneCommandeController {
 	@Autowired
 	LigneCommandeDao ligneCommandeDao;
-	@GetMapping("/{idUser}")
+	@GetMapping("panier/{idUser}")
 	public List<lignecommandeproduit> panierParIdclient(@PathVariable(value = "idUser") long id) {
 	
 		return ligneCommandeDao.panierParIdclient(id);
@@ -46,6 +46,11 @@ public class RestLigneCommandeController {
 	public List<Object[]> NumCategorie()
 	{
 		return ligneCommandeDao.NumCategorie();
+	}
+	@GetMapping("Produit/{idprod}")
+	public int NumProduitVendu(@PathVariable(value = "idprod") Long idProduit)
+	{
+		return ligneCommandeDao.NumProduitVendu (idProduit);
 	}
 
 

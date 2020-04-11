@@ -35,4 +35,8 @@ public class LigneCommandeController {
 	{
 		return ligneCommandeDao.NumCategorie();
 	}
+	public int NumProduitVendu(Long idProduit)
+	{
+		return ligneCommandeDao.NumProduitVendu(idProduit);
+	}
 }

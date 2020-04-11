@@ -75,6 +75,11 @@ public class RestControllerCommande {
 	{
 		commandeDao.PayerPorteaPorte(idCommande,id);
 	}
+	@GetMapping("/ParMois")
+	public List<Object[]> NumCommadeParMOIS()
+	{
+		return commandeDao.NumCommadeParMOIS();
+	}
 	
 
 }

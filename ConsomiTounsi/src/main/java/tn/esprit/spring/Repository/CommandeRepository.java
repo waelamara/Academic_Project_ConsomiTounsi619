@@ -35,4 +35,6 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	   @Modifying
 	  @Transactional
 	public void remise( @Param("id_user")long iduser);
+	@Query(value = "SELECT COUNT(*),MONTH(c.date) FROM commande c WHERE c.status='payee' GROUP BY c.date", nativeQuery = true)
+	public List<Object[]> NumCommadeParMOIS();
 }

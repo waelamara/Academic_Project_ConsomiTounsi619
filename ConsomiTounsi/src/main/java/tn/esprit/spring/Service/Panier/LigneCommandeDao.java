@@ -138,6 +138,10 @@ public class LigneCommandeDao implements ILigneCommande {
 	{
 		return ligneCommandeRepository.NumCategorie();
 	}
+	public int NumProduitVendu(Long idProduit)
+	{
+		return ligneCommandeRepository.NumProduitVendu(idProduit);
+	}
 
 		
 	
