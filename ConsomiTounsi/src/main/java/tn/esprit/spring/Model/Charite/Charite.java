@@ -50,6 +50,7 @@ public class Charite implements Serializable {
 	
 	
 	
+	
 	public long getCommande_id() {
 		return commande_id;
 	}

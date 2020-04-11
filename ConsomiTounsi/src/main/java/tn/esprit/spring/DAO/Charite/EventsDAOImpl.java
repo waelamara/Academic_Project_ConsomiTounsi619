@@ -56,4 +56,9 @@ public class EventsDAOImpl implements EventsDAO {
 		return Events.getId().intValue();
 	}
 
+	/*@Override
+	public void deleteEventsByDate() {
+		eventsRepository.DeleteEventParDate();		
+	}*/
+
 }
