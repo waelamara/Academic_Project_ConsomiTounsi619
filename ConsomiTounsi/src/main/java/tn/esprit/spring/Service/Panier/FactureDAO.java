@@ -79,17 +79,17 @@ if (!exists)
 
 PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employees"+".pdf"));
 	d.open();
-	Font mainFont = FontFactory.getFont("Arial", 50, BaseColor.BLACK);
+	//Font mainFont = FontFactory.getFont("Arial", 50, BaseColor.BLACK);
+    Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 30, Font.BOLD);
 
-
-    Paragraph paragraph = new Paragraph("FACTURE", mainFont);
+    Paragraph paragraph = new Paragraph("FACTURE", boldFont);
     paragraph.setAlignment(Element.ALIGN_CENTER);
     paragraph.setIndentationLeft(50);
     paragraph.setIndentationRight(50);
     paragraph.setSpacingAfter(20);
     d.add(Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.jpg"));
     d.add(paragraph);
-  
+
 
     PdfPTable table = new PdfPTable(4);//column amount
     table.setWidthPercentage(100);
@@ -149,9 +149,11 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
 		
 		if(firstTime){
 		
+			
 			Phrase PH = new Phrase(                 "                                                                           Nom:  "+c.getName()+"\n\n                                                                            DateCommande: "+c.getDate());
-			Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
-			PH.setFont(mainFont2);
+		    Font boldFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+		
+			PH.setFont(boldFont1);
 			
 			d.add(PH);  
 			firstTime = false;
@@ -205,16 +207,17 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
 				if(c1.getPourcentageDeRemise()==0)
 				{
 					 Phrase PH3 = new Phrase("\nMontant "+	c1.getMontant());
-						Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
-						PH3.setFont(mainFont2);
+					 Font boldFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+						PH3.setFont(boldFont1);
 						d.add(PH3);
 					 
 				}
 				else
 				{
 				 Phrase PH2 = new Phrase("\nMontant "+	c1.getMontant()+"\nPourcentage"+30+ "%\nMontant apres remise "+(c1.getPourcentageDeRemise()));
-				Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
-				PH2.setFont(mainFont2);
+				//Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
+				 Font boldFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+				PH2.setFont(boldFont1);
 				
 				d.add(PH2);
 				firstTime2 = false;
