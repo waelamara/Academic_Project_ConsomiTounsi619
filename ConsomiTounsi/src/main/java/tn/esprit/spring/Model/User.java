@@ -61,7 +61,7 @@ public class User implements Serializable {
     @Column(name = "tel")
 	private String tel;
 
-    
+    private int pointFidelite;
     @ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
@@ -75,8 +75,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy="IdUser",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Publicite> pubs;
-    
-    
+    @JsonIgnore
+	@OneToMany(mappedBy="idUser",fetch = FetchType.LAZY)
+    private Set<CadeauUser> CadeauUser;
    
 	public User(String username, String email, String password, String firstName, String lastName, String address,
 			Date dateN, String tel) {
@@ -260,6 +261,21 @@ public class User implements Serializable {
 	}
 	
 	
+	
+	public int getPointFidelite() {
+		return pointFidelite;
+	}
+	public void setPointFidelite(int pointFidelite) {
+		this.pointFidelite = pointFidelite;
+	}
+	public Set<CadeauUser> getCadeauUser() {
+		return CadeauUser;
+	}
+	public void setCadeauUser(Set<CadeauUser> cadeauUser) {
+		CadeauUser = cadeauUser;
+	}
+
+
 	/***************Oussama********/
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="User")
 	private Set<reclamation> reclamation;

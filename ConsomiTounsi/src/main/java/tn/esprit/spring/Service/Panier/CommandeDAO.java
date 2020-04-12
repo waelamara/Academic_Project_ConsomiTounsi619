@@ -15,11 +15,13 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.LigneCommande;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
 import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
+import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Stock.StockRepository;
 @Service
 public class CommandeDAO implements ICommande {
@@ -29,6 +31,8 @@ public class CommandeDAO implements ICommande {
 	LigneCommandeRepository ligneCommandeRepository;
 	@Autowired
 	StockRepository stockRepository;
+	@Autowired
+	UserRepository userRepository;
 
 	public Commande save (Commande c)
 	{
@@ -100,6 +104,11 @@ public class CommandeDAO implements ICommande {
 				c.setQuantite(a);
 				 stockRepository.save(c);
 			 }
+			Commande c= commandeRepository.findById((long) idCommande).get();
+			c.getMontant();
+			User u =userRepository.findById((long) iduser).get();
+			 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+			 userRepository.save(u);
 		commandeRepository.PayerPorteaPorte(idCommande);
 		commandeRepository.remise(iduser);
 	}
