@@ -138,4 +138,13 @@ public class Sujet implements Serializable {
 	public void setIdUser(User idUser) {
 		this.idUser = idUser;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateAjout == null) ? 0 : dateAjout.hashCode());
+		return result;
+	}
+
+	
 }

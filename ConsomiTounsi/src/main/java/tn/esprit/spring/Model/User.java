@@ -71,8 +71,17 @@ public class User implements Serializable {
     @Column(name = "sexe")
     @Enumerated(EnumType.STRING)
  	private Sexe sexe;
+    private String interet;
     
-    @OneToMany(mappedBy="IdUser",cascade = CascadeType.ALL)
+    public String getInteret() {
+		return interet;
+	}
+	public void setInteret(String interet) {
+		this.interet = interet;
+	}
+
+
+	@OneToMany(mappedBy="IdUser",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Publicite> pubs;
     @JsonIgnore

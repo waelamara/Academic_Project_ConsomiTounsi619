@@ -25,14 +25,30 @@ public class CommentaireServiceImpl implements ICommentaireService{
 	
 	@Override
 	public int ajouterCommentaire(Commentaire c, Long sujetId, Long userId) {
-	 User user =userRepository.getOne(userId);
-	 Sujet sujet=sujetRepository.getOne(sujetId);
+		List<String> badwords=new ArrayList<>();
+		badwords.add("bad");
+		badwords.add("badwors");
+		badwords.add("bads");
+		String motcommentaire[]=c.getDescription().split(" ");
+		String com ="";
+		 User user =userRepository.getOne(userId);
+		 Sujet sujet=sujetRepository.getOne(sujetId);
+	for(String mots:motcommentaire){
+		if(motcommentaire.length==1 && motcommentaire.equals("b"))
+		
+			if (badwords.contains(mots)){
+			    mots="(@#à*&è)";
+				com=com+" "+mots;	
+			}
+		else
+			com=com+" "+mots;}
 	 c.setIdSujet(sujet);
 	 c.setIdUser(user);
 	 c.setNbDislike(0);
 	 c.setNbLike(0);
+	 c.setDescription(com);
 	 commentairesRepository.save(c);
-		return c.getId().intValue() ;
+	return c.getId().intValue();
 	}
 
 	@Override
@@ -56,7 +72,7 @@ public class CommentaireServiceImpl implements ICommentaireService{
 
 	@Override
 	public int deletecommentairevoteById(Long comId,Long sujetId,Long userId) {
-		Commentaire com = commentairesRepository.getOne(comId);
+		Commentaire com = commentairesRepository.findById(comId).get();
 		if(com.getIdUser().getId()== userId && com.getIdSujet().getId()==sujetId)
 		{
 			commentairesRepository.deleteById(com.getId());	 
@@ -68,8 +84,21 @@ public class CommentaireServiceImpl implements ICommentaireService{
 
 	@Override
 	public void modifierCommentaire(String desc,Long comId) {
-		Commentaire com = commentairesRepository.getOne(comId);
-		com.setDescription(desc);
+		Commentaire com = commentairesRepository.findById(comId).get();
+		List<String> badwords=new ArrayList<>();
+		badwords.add("bad");
+		badwords.add("badwors");
+		badwords.add("bads");
+		String motcommentaire[]=desc.split(" ");
+		String mot ="";
+		for(String mots:motcommentaire){
+			if (badwords.contains(mots)){
+			    mots="(@#à*&è)";
+				mot=mot+" "+mots;	
+			}
+		else
+			mot=mot+" "+mots;}
+		com.setDescription(mot);
 		commentairesRepository.save(com);
 	}
 

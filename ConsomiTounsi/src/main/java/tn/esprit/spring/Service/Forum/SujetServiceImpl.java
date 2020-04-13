@@ -2,6 +2,7 @@ package tn.esprit.spring.Service.Forum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Model.Produit.Produit;
+import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Forum.CategorieSujetRepository;
 import tn.esprit.spring.Repository.Forum.SujetRepository;
@@ -22,6 +25,8 @@ public class SujetServiceImpl implements ISujetService {
 	private  CategorieSujetRepository categorieSujetRepository; 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private ProduitRepository produitRepository;
 	
 	@Override
 	public int ajouterSujet(Sujet s,Long categId,Long userId) {
@@ -40,7 +45,7 @@ public class SujetServiceImpl implements ISujetService {
 	
 	@Override
 	public List<Sujet> getAllSujets() {
-		return sujetRepository.findAll();
+		return sujetRepository.findAllOrderbyDate();
 	}
 
 	@Override
@@ -87,12 +92,11 @@ public class SujetServiceImpl implements ISujetService {
 	}
 
 	@Override
-	public List<String> getAllSujetNamesByCategorie(Long categId) {
-		CategorieSujet categS = categorieSujetRepository.findById(categId).get();
-		List<String> sujetNames = new ArrayList<>();
-		for(Sujet suj : categS.getSujets())
-			sujetNames.add(suj.getNomSujet());
-			return sujetNames;
+	public List<Sujet> getAllSujetNamesByCategorie(Long categId) {
+		List<Sujet> sujetNames = new ArrayList<>();
+		sujetNames=sujetRepository.findSujetbycatgID(categId);
+		 return sujetNames;
+		 
 	}
 
 	@Override
@@ -102,6 +106,7 @@ public class SujetServiceImpl implements ISujetService {
 		for(Sujet suj :user.getSujets())
 			sujets.add(suj);
 			return sujets;
+			
 	}
 
 	@Override
@@ -109,5 +114,43 @@ public class SujetServiceImpl implements ISujetService {
 		Sujet sujet=sujetRepository.findById(sujetId).get();
 		return sujet.getIdUser().getFirstName()+" "+sujet.getIdUser().getLastName();
 	}
+	
+	@Override
+	public User client_gangnant() {
+		List<String> ids = userRepository.findClient_pt_100();
+		String separ = ",";
+		String res = String.join(separ, ids);
+		String motcommentaire1[] = res.split(",");
+		int r1 = (int) (Math.random() * (motcommentaire1.length));
+		String name1 = motcommentaire1[r1];
+		long random = Long.parseLong(name1);
+		User clientgagnant = userRepository.findById(random).get();
+		// a.setNum_carte_fidelity(0);
+		// clientrepository.save(a);
+		return clientgagnant;
+		}
+	
+	@Override
+	public Produit produit_gangnant()  {
+		User clientgagnant= client_gangnant();
+	
+		String interets = clientgagnant.getInteret();
 
+		String linterets[] = interets.split(",");
+		int r = (int) (Math.random() * (linterets.length));
+		String name = linterets[r];
+	
+		List<String> idproduits = produitRepository.findProduitCategorbyName(name);
+		
+		String delim2 = ",";
+		String res2 = String.join(delim2, idproduits);
+		
+		String lproduits[] = res2.split(",");
+		int r2 = (int) (Math.random() *(lproduits.length));
+			String name2 = lproduits[r2];
+			long random = Long.parseLong(name2);
+		Produit p1 = produitRepository.findById(random).get();
+		return p1;
+		
+	}
 }
