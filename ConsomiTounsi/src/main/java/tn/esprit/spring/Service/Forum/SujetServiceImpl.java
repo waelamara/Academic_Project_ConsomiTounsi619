@@ -131,7 +131,7 @@ public class SujetServiceImpl implements ISujetService {
 		}
 	
 	@Override
-	public Produit produit_gangant()  {
+	public Produit produit_gangnant()  {
 		User clientgagnant= client_gangnant();
 	
 		String interets = clientgagnant.getInteret();

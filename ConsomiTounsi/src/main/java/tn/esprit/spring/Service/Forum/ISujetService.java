@@ -19,5 +19,5 @@ public interface ISujetService {
 	public List<Sujet> findSujetbyUser(Long userid);
 	public String findNamebySujet (Long sujetid);
 	public User client_gangnant();
-	public Produit produit_gangant() ;
+	public Produit produit_gangnant();
 }
