@@ -70,18 +70,32 @@ public class CadeauUserImpl implements ICadeauUser {
 			CadeauUser cd = cadeauUserRepository.getOne(random);
 			//cd.getMontant();
 			User u = userRepository.getOne(idUser);
-			if (cd.getMontant()>u.getPointFidelite())
+			if(cd.getMontant()>u.getPointFidelite())
 			{
-				 random = Long.parseLong(name2);
-			}
-			u.setPointFidelite((int) (u.getPointFidelite()-cd.getMontant()));
+			cd.setMontant((int) (cd.getMontant()-u.getPointFidelite()));
 			cd.setIdUser(u);
+			u.setPointFidelite(0);
+			cd.setValidite(true);
+			userRepository.save(u);
 			cadeauUserRepository.save(cd);
+			}
+			else
+			{
+			u.setPointFidelite(u.getPointFidelite()-(int) (cd.getMontant()));
+			cd.setIdUser(u);
+			cd.setValidite(true);
+			userRepository.save(u);
+			cadeauUserRepository.save(cd);
+			}
 			return cd.getCode();
 				
 			
 	}
 	
+	public float montantCadeau(String code)
+	{
+		return cadeauUserRepository.montantCadeau(code);
+	}
 	
 
 
