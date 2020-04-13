@@ -104,7 +104,7 @@ public class SujetController {
 	
 	@GetMapping("/recherchecatg/{catgId}")
 	public  ResponseEntity <?>findNamebyCateg(@PathVariable(value = "catgId") Long catgId) {
-		 List<String> noms = new ArrayList<>();
+		 List<Sujet> noms = new ArrayList<>();
 		noms =isujetservice.getAllSujetNamesByCategorie(catgId);
 		if(noms.isEmpty())
 			return ResponseEntity.notFound().build();

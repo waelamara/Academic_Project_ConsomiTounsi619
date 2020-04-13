@@ -13,7 +13,7 @@ public interface ISujetService {
 	public Sujet findOne(Long id);
 	public int modifierDescription(String desc, Long sujetId,Long userId);
 	public void affecterSujetACategS(Long sujId, Long categId);
-	public List<String> getAllSujetNamesByCategorie(Long categId);
+	public List<Sujet> getAllSujetNamesByCategorie(Long categId);
 	public List<Sujet> findSujetbyUser(Long userid);
 	public String findNamebySujet (Long sujetid);
 }
