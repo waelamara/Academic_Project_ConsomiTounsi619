@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,25 +25,27 @@ public class Endroit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private int prix;
 	private String statu;
 	private String emplacement;
 	private int nbplace;
 	@ManyToOne 
 	@JsonIgnore
 	private Events eventss;
+	@Transient
+	long event_id;
+	public long getEvent_id() {
+		return event_id;
+	}
+	public void setEvent_id(long event_id) {
+		this.event_id = event_id;
+	}
 	public Long getId() {
 		return Id;
 	}
 	public void setId(Long id) {
 		Id = id;
 	}
-	public int getPrix() {
-		return prix;
-	}
-	public void setPrix(int prix) {
-		this.prix = prix;
-	}
+	
 	public String getStatu() {
 		return statu;
 	}
@@ -74,9 +77,8 @@ public class Endroit implements Serializable {
 		super();
 
 	}
-	public Endroit(int prix,int nbplace,String emplacement,String statu,Events eventss) {
+	public Endroit(int nbplace,String emplacement,String statu,Events eventss) {
 		super();
-		this.prix=prix;
 		this.nbplace=nbplace;
 		this.emplacement=emplacement;
 		this.statu=statu;

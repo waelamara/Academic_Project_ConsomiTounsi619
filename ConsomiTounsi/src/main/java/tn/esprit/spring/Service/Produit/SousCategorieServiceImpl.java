@@ -40,6 +40,6 @@ public class SousCategorieServiceImpl implements ISousCategorieService {
 		Categorie c = iCategorieService.findOne(idCategorie);
 		sc2.setNomSCategorie(sc.getNomSCategorie());
 		sc2.setIdCategorie(c);
-		return sousCategorieRepository.save(sc);
+		return sousCategorieRepository.save(sc2);
 	}
 }

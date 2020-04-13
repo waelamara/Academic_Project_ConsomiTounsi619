@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import tn.esprit.spring.Model.User;
 
 @Entity
 public class Publicite implements Serializable {
@@ -20,22 +25,27 @@ public class Publicite implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String Nom;
-	private String Canal;
-	@Temporal (TemporalType.DATE)
+	@Enumerated(EnumType.STRING)
+	private Canal Canal;
+	@Temporal(TemporalType.DATE)
 	private Date DateDebut;
-	@Temporal (TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	private Date DateFin;
 	private int NbrInitialVueCible;
 	private int NbrFinalVue;
 	private float Cout;
 	private String Video;
 	private String Image;
-	
+	@ManyToOne
+	private User IdUser;
+
 	public Publicite() {
 	}
- 
-	public Publicite(String nom, String canal, Date dateDebut, Date dateFin, int nbrInitialVueCible, int nbrFinalVue,
-			float cout, String video, String image) {
+
+	
+	
+	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
+			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image, User idUser) {
 		super();
 		Nom = nom;
 		Canal = canal;
@@ -46,11 +56,13 @@ public class Publicite implements Serializable {
 		Cout = cout;
 		Video = video;
 		Image = image;
+		IdUser = idUser;
 	}
-	
 
-	public Publicite(String nom, String canal, Date dateDebut, Date dateFin, int nbrInitialVueCible, int nbrFinalVue,
-			float cout) {
+
+
+	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
+			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image) {
 		super();
 		Nom = nom;
 		Canal = canal;
@@ -59,6 +71,8 @@ public class Publicite implements Serializable {
 		NbrInitialVueCible = nbrInitialVueCible;
 		NbrFinalVue = nbrFinalVue;
 		Cout = cout;
+		Video = video;
+		Image = image;
 	}
 
 	public Long getId() {
@@ -77,11 +91,11 @@ public class Publicite implements Serializable {
 		Nom = nom;
 	}
 
-	public String getCanal() {
+	public Canal getCanal() {
 		return Canal;
 	}
 
-	public void setCanal(String canal) {
+	public void setCanal(Canal canal) {
 		Canal = canal;
 	}
 
@@ -140,7 +154,13 @@ public class Publicite implements Serializable {
 	public void setImage(String image) {
 		Image = image;
 	}
-	
-	
-	
+
+	public User getIdUser() {
+		return IdUser;
+	}
+
+	public void setIdUser(User idUser) {
+		IdUser = idUser;
+	}
+
 }

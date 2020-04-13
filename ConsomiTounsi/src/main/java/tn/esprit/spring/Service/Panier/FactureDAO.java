@@ -33,12 +33,15 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.FactureRepository;
 
 @Service
-public class FactureDAO {
+public class FactureDAO implements IFacture {
 @Autowired
 FactureRepository factureRepository;
+@Autowired
+CommandeRepository commandeRepository;
 public Facture findOne(Long id) {
 	return factureRepository.getOne(id);
 }
@@ -61,6 +64,7 @@ public List<lignecommandeproduit> FactureParIdUser( long id) {
 }
 public boolean CreePdf(List<lignecommandeproduit>commandes ,ServletContext context,HttpServletRequest request ,HttpServletResponse reponse ) throws MalformedURLException, IOException
 {
+	List<Commande>cs=commandeRepository.findAll();
 	try {
 	Document d = new Document(PageSize.A4,15,15,45,30);
 	
@@ -75,17 +79,17 @@ if (!exists)
 
 PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employees"+".pdf"));
 	d.open();
-	Font mainFont = FontFactory.getFont("Arial", 50, BaseColor.BLACK);
+	//Font mainFont = FontFactory.getFont("Arial", 50, BaseColor.BLACK);
+    Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 30, Font.BOLD);
 
-
-    Paragraph paragraph = new Paragraph("FACTURE", mainFont);
+    Paragraph paragraph = new Paragraph("FACTURE", boldFont);
     paragraph.setAlignment(Element.ALIGN_CENTER);
     paragraph.setIndentationLeft(50);
     paragraph.setIndentationRight(50);
-    paragraph.setSpacingAfter(200);
+    paragraph.setSpacingAfter(20);
     d.add(Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.jpg"));
     d.add(paragraph);
-  
+
 
     PdfPTable table = new PdfPTable(4);//column amount
     table.setWidthPercentage(100);
@@ -134,17 +138,23 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
     table.addCell(address);
 	
 	boolean firstTime = true;
-	
+	double sum=0;
 	for(lignecommandeproduit c : commandes)
 	{
 		
-		
+	            //sum += c.getTotal();
+	        
+	      
+
 		
 		if(firstTime){
 		
-			Phrase PH = new Phrase("Nom:    "+c.getName()+"\nDateCommande:   "+c.getDate());
-			Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
-			PH.setFont(mainFont2);
+			
+			Phrase PH = new Phrase(                 "                                                                           Nom:  "+c.getName()+"\n\n                                                                            DateCommande: "+c.getDate());
+		    Font boldFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+		
+			PH.setFont(boldFont1);
+			
 			d.add(PH);  
 			firstTime = false;
 			
@@ -187,13 +197,35 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
          addressValue.setBackgroundColor(BaseColor.WHITE);
          addressValue.setExtraParagraphSpace(5f);
          table.addCell(addressValue);
-		
-		
-	
-		
+   	
 	}
+
+	  d.add(table);
+	boolean firstTime2 = true;
+    for(Commande c1: cs)
+			if(firstTime2){
+				if(c1.getPourcentageDeRemise()==0)
+				{
+					 Phrase PH3 = new Phrase("\nMontant "+	c1.getMontant());
+					 Font boldFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+						PH3.setFont(boldFont1);
+						d.add(PH3);
+					 
+				}
+				else
+				{
+				 Phrase PH2 = new Phrase("\nMontant "+	c1.getMontant()+"\nPourcentage"+30+ "%\nMontant apres remise "+(c1.getPourcentageDeRemise()));
+				//Font mainFont2 = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
+				 Font boldFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+				PH2.setFont(boldFont1);
+				
+				d.add(PH2);
+				firstTime2 = false;
+				}
+			}
 	
-	   d.add(table);
+	 
+	 
 	  d.close();
       writer.close();
 	 

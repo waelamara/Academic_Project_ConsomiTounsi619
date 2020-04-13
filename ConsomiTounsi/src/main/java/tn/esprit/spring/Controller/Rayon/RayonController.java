@@ -12,19 +12,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.spring.DAO.Rayon.RayonDAO;
-import tn.esprit.spring.DAO.Rayon.RayonDAOImpl;
+
 import tn.esprit.spring.Model.Forum.CategorieSujet;
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
+import tn.esprit.spring.Service.Rayon.IRayonService;
+import tn.esprit.spring.Service.Rayon.RayonServiceImpl;
 
 @RestController
 @RequestMapping("/rayon")
 public class RayonController {
 
 	@Autowired
-	RayonDAO rayonDAO;
-	@Autowired
-	RayonDAOImpl RayonDAOImpl;
+	IRayonService rayonDAO;
+	
+	
 	///////////////////////////////////////////////////////////////////////////////
 	@PostMapping("/addrayon")
 	@ResponseBody
@@ -49,7 +51,7 @@ public class RayonController {
 	////////////////////////////////////////////////////////////////////////////////
 
 	@DeleteMapping("/deleterayon/{Idrayon}")
-	public void deleterayon(@PathVariable(name = "Idrayon") long Idrayon) {
+	public void deleterayon(@PathVariable(name = "Idrayon") Long Idrayon) {
 
 		rayonDAO.deleteRayonById(Idrayon);
 
@@ -62,18 +64,33 @@ public class RayonController {
 		return rayonDAO.findRayonbyName(name);
 	}
 	
-	
-	@GetMapping("/rechercher/{nom}")
-	public List<Rayon> rechercherayon1(@PathVariable(value = "nom") String name) {
-		return RayonDAOImpl.findRayonbyName1(name);
+	@GetMapping("/findproduitparrayon/{idr}")
+	public List<Produit> findProduitParRayon(@PathVariable(value = "idr") Long Idrayon) {
+		return rayonDAO.findProduitParRayon(Idrayon);
 	}
+	
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	@PutMapping("/affecterProduitARayon/{Idr}/{Idp}")
-	public void affecterProduitARayon(@PathVariable(value = "Idr") long Idrayon,
-			@PathVariable(value = "Idp") long Idproduit) {
+	public void affecterProduitARayon(@PathVariable(value = "Idr") Long Idrayon,
+			@PathVariable(value = "Idp") Long Idproduit) {
 
 		rayonDAO.affecterProduitARayon(Idrayon, Idproduit);
 	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@PutMapping("/desaffecterProduitARayon/{Idr}/{Idp}")
+	public void desaffecterProduitARayon(@PathVariable(value = "Idr") Long Idrayon,
+			@PathVariable(value = "Idp") Long Idproduit) {
+
+		rayonDAO.desaffecterProduitduRayon(Idrayon, Idproduit);
+	}
+	
+	
+	
+	
 
 }

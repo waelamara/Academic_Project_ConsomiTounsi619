@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Livraison")
@@ -21,18 +23,24 @@ public class Livraison implements Serializable {
 	// @Column(name="Liv_id",length=15,nullable=false,unique=true)
 	// @Transient
 	@Column(name = "id")
-	private int id;
+	private long id;
 
 	@Column(name = "Lieu")
 	private String Lieu;
 	@Column(name = "Etat")
-	private String Etat;
+	private boolean Etat;
+	@Column(name = "MoyenLivraison")
+	private EMoyenTransportL MoyenTL;
+	@Transient
+	long commande_id;
+	@Transient
+	long livreur_id;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -44,31 +52,82 @@ public class Livraison implements Serializable {
 		Lieu = lieu;
 	}
 
-	public String getEtat() {
+	public EMoyenTransportL getMoyenTL() {
+		return MoyenTL;
+	}
+
+	public void setMoyenTL(EMoyenTransportL moyenTL) {
+		MoyenTL = moyenTL;
+	}
+
+	public Boolean getEtat() {
 		return Etat;
 	}
 
-	public void setEtat(String etat) {
+	public void setEtat(Boolean etat) {
 		Etat = etat;
 	}
 
-	
+	public long getCommande_id() {
+		return commande_id;
+	}
 
-	public Livraison(int id, String lieu, String etat) {
-		super();
-		this.id = id;
-		Lieu = lieu;
+	public void setCommande_id(long commande_id) {
+		this.commande_id = commande_id;
+	}
+
+	public Livreur getLivreur() {
+		return Livreur;
+	}
+
+	public void setLivreur(Livreur livreur) {
+		Livreur = livreur;
+	}
+
+	public Commande getCommande() {
+		return Commande;
+	}
+
+	public void setCommande(Commande commande) {
+		Commande = commande;
+	}
+
+	public void setEtat(boolean etat) {
 		Etat = etat;
+	}
+
+	public long getLivreur_id() {
+		return livreur_id;
+	}
+
+	public void setLivreur_id(long livreur_id) {
+		this.livreur_id = livreur_id;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public Livraison(int id, String lieu, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
+			tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande) {
+		super();
+		this.id = id;
+		Lieu = lieu;
+		Etat = etat;
+		MoyenTL = moyenTL;
+		this.commande_id = commande_id;
+		this.livreur_id = livreur_id;
+		Livreur = livreur;
+		Commande = commande;
+	}
+
+	public Livraison() {
+		super();
+	}
+
 	@ManyToOne
 	Livreur Livreur;
+	@OneToOne
+	Commande Commande;
 
-	
-
-
-	
 }

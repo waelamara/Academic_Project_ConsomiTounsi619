@@ -76,20 +76,26 @@ public class ControllerPub {
 		publiciteDAO.Delete(p);
 		return ResponseEntity.ok().build();
 	}
-	@PutMapping("/edit/{id}")
-	public ResponseEntity<Pub> EditProduit(@PathVariable(value = "id") Long idPub,@Valid @RequestBody Pub p) {
-		Pub p2 = publiciteDAO.findOne(idPub);
-		if (p == null) {
-			return ResponseEntity.notFound().build();
+	@PutMapping("/edit")
+	public ResponseEntity<Pub> EditPublicite(@RequestParam(value = "Pub", required = true) String PubJson,
+			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file) 
+			throws JsonParseException, JsonMappingException,IOException {
+		
+		Pub p = objectMapper.readValue(PubJson, Pub.class);
+		p.setNom(p.getNom());
+		p.setDateDebut(p.getDateDebut());
+		p.setDateFin(p.getDateFin());
+		p.setEvents(p.getEvents());
+		for (MultipartFile i : file) {
+			String fileName = fileStorageServiceImpl.storeFile(i);
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
+			p.setImage(fileDownloadUri);
+			publiciteDAO.save(p);
+
 		}
-		p2.setNom(p.getNom());
-		p2.setDateDebut(p.getDateDebut());
-		p2.setDateFin(p.getDateFin());
-		p2.setImage(p.getImage());
-		p2.setEvents(p.getEvents());
-		Pub PubliciteModifier = publiciteDAO.save(p2);
+		Pub PubliciteModifier = publiciteDAO.save(p);
 		return ResponseEntity.ok().body(PubliciteModifier);
 
 	}
-
 }
