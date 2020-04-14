@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -138,8 +139,9 @@ public class SujetController {
 	  public User client_gangant() {
 		  return isujetservice.client_gangnant();
 	  }
-	@GetMapping(value = "/produit_gangant")
-	  public Produit produit_gangant(){
+	
+	@GetMapping(value = "/produit_gangnant")
+	  public Produit produit_gangant() throws MessagingException{
 		return  isujetservice.produit_gangnant();
 	  }
 	
