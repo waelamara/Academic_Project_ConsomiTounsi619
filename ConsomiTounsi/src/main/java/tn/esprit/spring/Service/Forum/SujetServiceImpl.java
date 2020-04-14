@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
@@ -16,7 +20,8 @@ import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Forum.CategorieSujetRepository;
 import tn.esprit.spring.Repository.Forum.SujetRepository;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Service
 public class SujetServiceImpl implements ISujetService {
 	@Autowired
@@ -27,6 +32,12 @@ public class SujetServiceImpl implements ISujetService {
 	private UserRepository userRepository;
 	@Autowired
 	private ProduitRepository produitRepository;
+	private JavaMailSender javaMailSender;
+
+	@Autowired
+	public  SujetServiceImpl(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 	
 	@Override
 	public int ajouterSujet(Sujet s,Long categId,Long userId) {
@@ -129,26 +140,33 @@ public class SujetServiceImpl implements ISujetService {
 		// clientrepository.save(a);
 		return clientgagnant;
 		}
+
+	public void sendmail() throws MailException {
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+
+		mail.setTo("aymen.ayed@esprit.tn");
+		mail.setFrom("iheb.est.2015@gmail.com");
+		mail.setSubject("hello");
+		mail.setText("hi noussair");
+		javaMailSender.send(mail);
+	}
 	
 	@Override
 	public Produit produit_gangnant()  {
 		User clientgagnant= client_gangnant();
-	
 		String interets = clientgagnant.getInteret();
-
 		String linterets[] = interets.split(",");
 		int r = (int) (Math.random() * (linterets.length));
-		String name = linterets[r];
-	
+		String name = linterets[r];;
+		System.out.println("aaaaaaaa"+name+"aaaa");
 		List<String> idproduits = produitRepository.findProduitCategorbyName(name);
-		
 		String delim2 = ",";
 		String res2 = String.join(delim2, idproduits);
-		
 		String lproduits[] = res2.split(",");
 		int r2 = (int) (Math.random() *(lproduits.length));
-			String name2 = lproduits[r2];
-			long random = Long.parseLong(name2);
+		String name2 = lproduits[r2];
+		long random = Long.parseLong(name2);
 		Produit p1 = produitRepository.findById(random).get();
 		return p1;
 		
