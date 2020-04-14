@@ -257,8 +257,8 @@ public void facturepdf (int id_facture){
 		PdfWriter.getInstance(document, new FileOutputStream(file_name));
  document.open();
  ////////////////
- Image img=Image.getInstance("C:\\Users\\Iheb\\Pictures\\Saved Pictures\\iii.jpg");
- img.setAlignment(Element.ALIGN_RIGHT);
+ Image img=Image.getInstance("C:\\Users\\Iheb\\Desktop\\Nouveau dossier\\logo.png");
+ img.setAlignment(Element.ALIGN_CENTER);
  img.setIndentationLeft(10);
  img.setIndentationRight(10);
  img.setSpacingAfter(10);
