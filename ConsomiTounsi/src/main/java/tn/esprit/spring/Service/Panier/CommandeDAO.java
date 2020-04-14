@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.CadeauUser;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Repository.CadeauUserRepository;
 import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
@@ -33,6 +35,8 @@ public class CommandeDAO implements ICommande {
 	StockRepository stockRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	CadeauUserRepository cadeauUserRepository; 
 
 	public Commande save (Commande c)
 	{
@@ -66,11 +70,14 @@ public class CommandeDAO implements ICommande {
 		return commandeRepository.Commandeparcode(code);
 
 	}
-	public void PayerEnLigne(int idCommande,int iduser)
+	public void PayerEnLigne(int idCommande,int iduser,String code)
 	{
 		//List<lignecommandeproduit>List=	ligneCommandeRepository.panierParIdclient(iduser);
 		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
 	int a=0;
+	//Float montant= cadeauUserRepository.montantCadeau(code);
+	CadeauUser cd=cadeauUserRepository.verifierCode(code);
+
 		 for (LigneCommande l : Linges)
 		 {
 			 if(l.getCommande().getId()==idCommande)

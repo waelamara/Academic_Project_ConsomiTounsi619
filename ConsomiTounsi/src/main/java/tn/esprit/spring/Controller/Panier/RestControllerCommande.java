@@ -63,12 +63,12 @@ public class RestControllerCommande {
 		return commandeDao.CommandeparClient(id);
 	}
 
-	@PutMapping("/payerenligne/{idCommande}/{idClient}")
-	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
+	@PutMapping("/payerenligne/{idCommande}/{idClient}/{code}")
+	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
 	     
 	     
-		commandeDao.PayerEnLigne(idCommande,id);
+		commandeDao.PayerEnLigne(idCommande,id,code);
 	}
 	@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
 	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
