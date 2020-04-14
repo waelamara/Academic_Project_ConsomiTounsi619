@@ -124,7 +124,11 @@ public class RestFactureController {
 		}
 				
 	}
-	
+	@GetMapping("/afficherPDF2/{idFacture}")
+	public void facturepdf (@PathVariable(value = "idFacture")int id_facture)
+	{
+		factureDAO.facturepdf(id_facture);
+	}
 	
 	}
 	
