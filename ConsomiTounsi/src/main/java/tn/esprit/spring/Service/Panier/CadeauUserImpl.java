@@ -33,6 +33,10 @@ public class CadeauUserImpl implements ICadeauUser {
 	@Autowired
 	UserRepository userRepository;
 	private JavaMailSender javaMailSender;
+	@Autowired
+	public  CadeauUserImpl(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 	public void save ()
 	{
 		for(int i=0;i<=50;i++)
