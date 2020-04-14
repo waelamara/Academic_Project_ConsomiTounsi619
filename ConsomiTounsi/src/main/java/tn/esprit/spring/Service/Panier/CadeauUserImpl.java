@@ -1,17 +1,20 @@
 package tn.esprit.spring.Service.Panier;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +32,7 @@ public class CadeauUserImpl implements ICadeauUser {
 	CadeauUserRepository cadeauUserRepository;
 	@Autowired
 	UserRepository userRepository;
+	private JavaMailSender javaMailSender;
 	public void save ()
 	{
 		for(int i=0;i<=50;i++)
@@ -77,7 +81,7 @@ public class CadeauUserImpl implements ICadeauUser {
 		return random;
 	}
 	
-	public String CadeauUser(Long idUser)
+	public String CadeauUser(Long idUser) throws MessagingException
 	{
 		User u = userRepository.getOne(idUser);
 		SimpleMailMessage mail = new SimpleMailMessage();
@@ -238,17 +242,15 @@ public class CadeauUserImpl implements ICadeauUser {
 				+ "</html>\"");
 		String messaage = buf.toString();
 		//// ********************************////
-		 /*MimeMessage message = javaMailSender.createMimeMessage();
-	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
-	    helper.setTo(u.getEmail());
-	     helper.setFrom("noussairhamrit15@gmail.com");
-	    helper.setSubject("réussite à notre grand jeu");
-	    helper.setText(messaage, messaage);
-	    //helper.setText(String.format(messaage, true));
-	 // FileSystemResource file 
-	   //   = new FileSystemResource(new File(pathToAttachment));
-	    //helper.addAttachment("Invoice", file);
-	    javaMailSender.send(message);*/
+		MimeMessage message = javaMailSender.createMimeMessage();
+		   MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		   helper.setTo(u.getEmail());
+		   System.out.println(u.getEmail());
+		   helper.setFrom("consommis.toounsi.619@gmail.com");
+		   helper.setSubject("réussite à notre grand jeu");
+		   helper.setText(messaage, messaage);
+		  javaMailSender.send(message);
+		  
 	String a="";
 		
 			

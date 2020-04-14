@@ -2,6 +2,8 @@ package tn.esprit.spring.Controller.Panier;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,7 @@ public void save ()
  cadeauUserImpl.save();
 }
 @PutMapping("/choisir/{idUser}")
-public String CadeauUser(@PathVariable(value = "idUser")Long idUser)
+public String CadeauUser(@PathVariable(value = "idUser")Long idUser) throws MessagingException
 {
 	return cadeauUserImpl.CadeauUser(idUser);
 }
