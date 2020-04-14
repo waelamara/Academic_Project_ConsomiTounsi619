@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +27,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Utils.AppConstants;
 import tn.esprit.spring.Service.Forum.IImageSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.ImageSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 
@@ -129,4 +133,22 @@ public class SujetController {
 		return ResponseEntity.notFound().build();
 	   return ResponseEntity.ok().build();			
 	}
+	
+	@GetMapping(value = "/usergangnant")
+	  public User client_gangant() {
+		  return isujetservice.client_gangnant();
+	  }
+	@GetMapping(value = "/produit_gangant")
+	  public Produit produit_gangant(){
+		return  isujetservice.produit_gangnant();
+	  }
+	
+	 @RequestMapping("/sendmail")
+	  public String sendmail(){
+		  try{
+		  isujetservice.sendmail();
+		  }catch(MailException e){
+		  }
+		  return "mail envoyer";
+	  }
 }

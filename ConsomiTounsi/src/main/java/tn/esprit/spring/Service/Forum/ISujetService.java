@@ -20,4 +20,5 @@ public interface ISujetService {
 	public String findNamebySujet (Long sujetid);
 	public User client_gangnant();
 	public Produit produit_gangnant();
+	public void sendmail();
 }
