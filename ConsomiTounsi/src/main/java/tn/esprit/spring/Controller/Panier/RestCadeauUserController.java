@@ -29,5 +29,10 @@ public String CadeauUser(@PathVariable(value = "idUser")Long idUser)
 {
 	return cadeauUserImpl.CadeauUser(idUser);
 }
-}
 
+@GetMapping("/montantCadeau/{code}")
+public float montantCadeau(@PathVariable(value = "code")String code)
+{
+	return cadeauUserImpl.montantCadeau(code);
+}
+}
