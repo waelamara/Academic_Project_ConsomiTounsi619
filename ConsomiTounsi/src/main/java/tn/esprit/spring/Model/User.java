@@ -105,6 +105,19 @@ public class User implements Serializable {
 		this.dateN = dateN;
 		this.tel = tel;
 	}
+	public User(String firstName, String lastName, String username, String password, String email, String address,
+			Date dateN, String tel, Sexe sexe) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.dateN = dateN;
+		this.tel = tel;
+		this.sexe = sexe;
+	}
 	public User(String username, String email, String password, String firstName, String lastName, String address, String tel
 			) {
 		super();
