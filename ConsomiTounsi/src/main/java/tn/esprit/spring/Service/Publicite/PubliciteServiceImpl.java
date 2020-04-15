@@ -164,7 +164,7 @@ public class PubliciteServiceImpl implements IPubliciteService {
 			return "Video";
 		}
 	}
-
+ 
 	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException {
 		String fileName = fileStorageServiceImpl.storeFile(file);
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
