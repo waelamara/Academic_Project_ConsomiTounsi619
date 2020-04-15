@@ -339,16 +339,11 @@ public class CadeauUserImpl implements ICadeauUser {
 	{
 		return cadeauUserRepository.montantCadeau(code);
 	}
-	public boolean verifierCode(String code)
+	public CadeauUser verifierCode(String code,int idUser)
 	{
 		//return cadeauUserRepository.verifierCode(code);
-		CadeauUser cd=cadeauUserRepository.verifierCode(code);
-		if(cd!=null)
-		
-			return true;
-		
-		else
-			return false;
+		return cadeauUserRepository.verifierCode(code,idUser);
+	
 	}
 	public float nombreCodeValidee()
 	{
