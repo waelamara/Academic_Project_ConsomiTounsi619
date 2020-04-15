@@ -31,11 +31,13 @@ public class UserDetailsImpl implements UserDetails {
 	private String tel;
 	private Date dateN;
 
+    private Boolean EtatAcc=true;
+
 
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserDetailsImpl(Long id, String username, String email, String password,String firstName, String lastName, String address,
-			Date dateN,String tel,
+			Date dateN,String tel,Boolean EtatAcc,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
@@ -46,6 +48,7 @@ public class UserDetailsImpl implements UserDetails {
 		this.address=address;
 		this.dateN=dateN;
 		this.tel=tel;
+		this.EtatAcc=EtatAcc;
 		this.authorities = authorities;
 	}
 
@@ -64,6 +67,7 @@ public class UserDetailsImpl implements UserDetails {
 				user.getAddress(),
 				user.getDateN(),
 				user.getTel(),
+				user.getEtatAcc(),
 				authorities);
 	}
 
@@ -159,6 +163,14 @@ public class UserDetailsImpl implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	public Boolean getEtatAcc() {
+		return EtatAcc;
+	}
+
+	public void setEtatAcc(Boolean etatAcc) {
+		EtatAcc = etatAcc;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -169,4 +181,5 @@ public class UserDetailsImpl implements UserDetails {
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
 	}
+
 }

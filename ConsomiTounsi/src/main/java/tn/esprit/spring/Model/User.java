@@ -75,8 +75,6 @@ public class User implements Serializable {
     
     @Column(name = "EtatAcc")
 	private Boolean EtatAcc=true;
-
-    
     
     public Boolean getEtatAcc() {
 		return EtatAcc;
@@ -116,7 +114,9 @@ public class User implements Serializable {
 		this.dateN = dateN;
 		this.tel = tel;
 	}
-	public User(String firstName, String lastName, String username, String password, String email, String address,
+	
+	
+	public User(String username, String email, String password, String firstName, String lastName, String address,
 			Date dateN, String tel, Sexe sexe) {
 		super();
 		this.firstName = firstName;
