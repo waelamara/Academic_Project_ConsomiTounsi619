@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import tn.esprit.spring.Model.CadeauUser;
 
-
+@Repository
 public interface CadeauUserRepository extends JpaRepository<CadeauUser, Long> {
 	@Query(value = "SELECT id FROM `cadeau_user`where validite=0 and montant BETWEEN 0 AND 299 ", nativeQuery = true)
 	public List<String> idCadeauMax300();

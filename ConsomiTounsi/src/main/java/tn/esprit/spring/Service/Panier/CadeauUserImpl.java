@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +37,11 @@ public class CadeauUserImpl implements ICadeauUser {
 	public  CadeauUserImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
+	 @Scheduled(cron="0 * * ? * *")
 	public void save ()
 	{
+		 if(cadeauUserRepository.nombreCodeValidee()<10)
+		 {
 		for(int i=0;i<=50;i++)
 		{
 			CadeauUser c = new CadeauUser();
@@ -49,7 +52,7 @@ public class CadeauUserImpl implements ICadeauUser {
 		 cadeauUserRepository.save(c);
 		}
 		
-		
+		 }
 	}
 
 		
@@ -345,6 +348,7 @@ public class CadeauUserImpl implements ICadeauUser {
 		return cadeauUserRepository.verifierCode(code,idUser);
 	
 	}
+	
 	public float nombreCodeValidee()
 	{
 		return cadeauUserRepository.nombreCodeValidee();
