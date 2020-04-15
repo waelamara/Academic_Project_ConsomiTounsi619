@@ -37,9 +37,9 @@ public class CommandeController {
 	public List<Commande> CommandeparClient(int idUser) {
 		return commandeDao.CommandeparClient(idUser);
 	}
-	public void PayerEnLigne(int idCommande,int idUser)
+	public void PayerEnLigne(int idCommande,int idUser,String code)
 	{
-		commandeDao.PayerEnLigne(idCommande,idUser);
+		commandeDao.PayerEnLigne(idCommande,idUser, code);
 	}
 	public void PayerPorteaPorte(int idCommande,int idUser)
 	{

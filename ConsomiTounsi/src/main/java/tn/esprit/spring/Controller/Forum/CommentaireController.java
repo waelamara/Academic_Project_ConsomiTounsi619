@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.Model.Forum.Commentaire;
@@ -25,7 +26,9 @@ import tn.esprit.spring.Service.Forum.ICommentaireService;
 public class CommentaireController  {
 @Autowired
 ICommentaireService icommentaireService;
-
+	
+	//http://localhost:8081/commentaire/ajouter/7/1
+	//{ "description": "bon bad badwords bads zeda "}
 @PostMapping("/ajouter/{sujetId}/{userId}")
 public ResponseEntity<?>ajouterCommentaire( @PathVariable(value = "sujetId") Long sujetid,
         @PathVariable(value = "userId") Long userid,
@@ -63,8 +66,11 @@ public ResponseEntity<?> DeleteCommentaire(@PathVariable(value = "comId") Long i
 return ResponseEntity.ok().build();
 }
 
-@PutMapping("/edit/desc/comId")
-public ResponseEntity<?> ModifierCommentaire(@PathVariable("desc") String desc, @PathVariable("comId") long id) {
+@PutMapping("/edit/{desc}/{comId}")
+@ResponseBody
+public ResponseEntity<?> ModifierCommentaire(@PathVariable("desc") String desc,
+											@PathVariable("comId") Long id) {
+	icommentaireService.modifierCommentaire(desc, id);
 	return ResponseEntity.ok().build();
 	
 }
