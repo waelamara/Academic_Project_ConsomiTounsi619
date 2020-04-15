@@ -73,7 +73,18 @@ public class User implements Serializable {
  	private Sexe sexe;
     private String interet;
     
-    public String getInteret() {
+    @Column(name = "EtatAcc")
+	private Boolean EtatAcc=true;
+
+    
+    
+    public Boolean getEtatAcc() {
+		return EtatAcc;
+	}
+	public void setEtatAcc(Boolean etatAcc) {
+		EtatAcc = etatAcc;
+	}
+	public String getInteret() {
 		return interet;
 	}
 	public void setInteret(String interet) {

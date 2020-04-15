@@ -32,12 +32,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
-import tn.esprit.spring.DAO.UserDAO;
 import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Forum.Commentaire;
+import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.Service.Panier.CommandeDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
@@ -58,7 +58,7 @@ public class ControllerEvents {
 	@Autowired
 	EndroitDAO endroitDAO;
 	@Autowired
-	UserDAO userDAO;
+	UserService userDAO;
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();

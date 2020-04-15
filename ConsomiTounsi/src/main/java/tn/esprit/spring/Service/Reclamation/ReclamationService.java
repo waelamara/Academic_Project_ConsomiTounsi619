@@ -7,10 +7,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.DAO.UserDAO;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Repository.reclamationRepository;
+import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
 
 
@@ -21,7 +21,7 @@ public class ReclamationService {
 	reclamationRepository reclamationRepository;
 	
 	@Autowired
-	UserDAO UserDAO;
+	UserService UserDAO;
 	
 	private static final Logger L =LogManager.getLogger(LivreurService.class);
 	
