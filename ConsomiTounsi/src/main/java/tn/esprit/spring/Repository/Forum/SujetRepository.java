@@ -11,8 +11,8 @@ import tn.esprit.spring.Model.Forum.Sujet;
 public interface SujetRepository extends JpaRepository<Sujet, Long> {
 	@Query(value = "SELECT DISTINCT * FROM sujet WHERE nom_sujet LIKE ?1%", nativeQuery = true)
 	public List<Sujet> findSujetbyName(String name);
-	@Query(value = "SELECT DISTINCT * FROM sujet ORDER BY date_ajout Desc", nativeQuery = true)
+	@Query(value = "SELECT DISTINCT * FROM sujet ORDER BY nb_like Desc,date_ajout DESC", nativeQuery = true)
 	public List<Sujet> findAllOrderbyDate();
-	@Query(value = "SELECT * FROM sujet WHERE id_categorie_sujet= ?1 ORDER BY date_ajout Desc", nativeQuery = true)
+	@Query(value = "SELECT * FROM sujet WHERE id_categorie_sujet= ?1 ORDER BY nb_like Desc,date_ajout DESC ", nativeQuery = true)
 public List<Sujet> findSujetbycatgID(Long categId);
 }

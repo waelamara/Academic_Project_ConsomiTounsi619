@@ -34,6 +34,7 @@ public class SujetServiceImpl implements ISujetService {
 	private UserRepository userRepository;
 	@Autowired
 	private ProduitRepository produitRepository;
+	
 	private JavaMailSender javaMailSender;
 
 	@Autowired

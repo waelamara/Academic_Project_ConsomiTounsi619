@@ -102,7 +102,7 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 
 	@Override
 	public int countdislik(Long sujetId) {
-		return voteSujetRepository.countdislik(sujetId);
+		return voteSujetRepository.countdislike(sujetId);
 	}
 
 	@Override
@@ -113,6 +113,40 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 			noms.add(v.getIdUser().getFirstName()+" "+v.getIdUser().getLastName());
 			return noms;	
 	}
-
+	
+	@Override
+	public void affecterdespoints(Long sujetId){
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		User user =userRepository.findById(sujet.getIdUser().getId()).get();
+		int x=sujet.getNbLike();
+		int diffLike,i=0,inter;
+		int nbpoint=-1;
+		int nblike=voteSujetRepository.countlike(sujetId);
+		sujet.setNbLike(nblike);
+		int nbdislike=voteSujetRepository.countdislike(sujetId);
+		sujet.setNbDislike(nbdislike);
+		sujetRepository.save(sujet);
+		diffLike=sujet.getNbpoint()+(nblike-x);
+		int nbpointFd=user.getPointFidelite();
+		if(nblike-x>0){
+		inter=diffLike;
+		while(inter!=0){
+		i++;
+		inter--;
+		if(diffLike%4==0){
+		nbpoint=0;
+		nbpointFd=nbpointFd+1;}	
+		else if (i==4){
+		nbpointFd=nbpointFd+1;
+		i=0;}
+		else{
+		nbpoint=i;}
+		}
+		}
+		user.setPointFidelite(nbpointFd);
+		sujet.setNbpoint(nbpoint);
+		sujetRepository.save(sujet);
+		userRepository.save(user);
+	}
 	
 }
