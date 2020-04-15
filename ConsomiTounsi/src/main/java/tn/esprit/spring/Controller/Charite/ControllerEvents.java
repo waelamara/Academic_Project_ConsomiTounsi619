@@ -33,11 +33,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.DAO.UserDAO;
-import tn.esprit.spring.DAO.Charite.ChariteDAO;
-import tn.esprit.spring.DAO.Charite.EndroitDAO;
-import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
-import tn.esprit.spring.Model.Forum.Commentaire;
+import tn.esprit.spring.Service.Charite.ChariteDAO;
+import tn.esprit.spring.Service.Charite.EndroitDAO;
+import tn.esprit.spring.Service.Charite.EventsDAO;
 import tn.esprit.spring.Service.Panier.CommandeDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
@@ -356,11 +355,11 @@ public class ControllerEvents {
 			Events e1 = eventDAO.findOne(Charite.getEvent_id());
 	  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
 			User u2= userDAO.findOne(u1.getId());
+			int nb = e1.getNbplace();
+			int nbP = e1.getNbparticipant();
+			float S ;
 			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-					&&(Charite.getTypeCharite().equals("cagnotte"))) {
-				float S ;
-				int nb = e1.getNbplace();
-				int nbP = e1.getNbparticipant();
+					&&(Charite.getTypeCharite().equals("cagnotte"))) {			
 				e1.setTitre(e1.getTitre());
 				e1.setDateE(e1.getDateE());
 				e1.setEndroit(e1.getEndroit());
@@ -376,6 +375,7 @@ public class ControllerEvents {
 				userDAO.save(u2);
 				chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
 				
+				
 				return "Successful Donate money thank you";
 
 			} 
@@ -384,9 +384,6 @@ public class ControllerEvents {
 				Commande c1= commandeDao.findOne(Charite.getCommande_id());
 				Set<Commande> c= new HashSet<Commande>();
 				c.add(c1);
-				float S ;
-				int nb = e1.getNbplace();
-				int nbP = e1.getNbparticipant();
 				e1.setTitre(e1.getTitre());
 				e1.setDateE(e1.getDateE());
 				e1.setEndroit(e1.getEndroit());
@@ -412,6 +409,7 @@ public class ControllerEvents {
 				return "your insufficient balance thank you";
 				
 			}
+			
 			
 			else {
 				return "insufficient space";
@@ -446,7 +444,7 @@ public class ControllerEvents {
 			}
 
 		}
-		/* affiche les charites */
+		/* affiche les charites pour chaque user*/
 		//http://localhost:8081/event/allChariteUser
 		@RequestMapping(value = "/allChariteUser")
 		public ResponseEntity<?> getAllChariteUser(Authentication authentication,@Valid @RequestBody Charite C) {
