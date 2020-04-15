@@ -99,6 +99,20 @@ public class ChariteDAOImpl implements ChariteDAO {
 		chariteRepository.save(Charite);
 		return Charite.getId().intValue();
 	}
+
+	@Override
+	public List<Charite> getCharite(Long iduser) {
+		List<Charite> charite=new ArrayList<>();
+		charite= chariteRepository.getCharite(iduser);
+		return charite;
+		
+	}
+
+	@Override
+	public Charite findOnes(Long id) {
+		return chariteRepository.getChariteUser(id);
+	}
+
 	
 
 	

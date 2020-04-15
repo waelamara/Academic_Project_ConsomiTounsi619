@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ import tn.esprit.spring.DAO.Charite.ChariteDAO;
 import tn.esprit.spring.DAO.Charite.EndroitDAO;
 import tn.esprit.spring.DAO.Charite.EventsDAO;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Forum.Commentaire;
 import tn.esprit.spring.Service.Panier.CommandeDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
@@ -353,10 +355,9 @@ public class ControllerEvents {
 		public String addCharitees(Authentication authentication,@Valid @RequestBody Charite Charite) {
 			Events e1 = eventDAO.findOne(Charite.getEvent_id());
 	  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-			u1.getId();
-
 			User u2= userDAO.findOne(u1.getId());
-			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("cagnotte"))) {
+			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
+					&&(Charite.getTypeCharite().equals("cagnotte"))) {
 				float S ;
 				int nb = e1.getNbplace();
 				int nbP = e1.getNbparticipant();
@@ -371,14 +372,15 @@ public class ControllerEvents {
 				e1.setImage(e1.getImage());
 				S=u2.getSolde()-Charite.getMontantPaye();
 				u2.setSolde(S);
-				
-				userDAO.save(u2);
 				eventDAO.saveEvents(e1);
+				userDAO.save(u2);
 				chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
+				
 				return "Successful Donate money thank you";
 
 			} 
-			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())&&(Charite.getTypeCharite().equals("dons"))&&(Charite.getCommande_id()!=0)) {
+			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
+					&&(Charite.getTypeCharite().equals("dons"))&&(Charite.getCommande_id()!=0)) {
 				Commande c1= commandeDao.findOne(Charite.getCommande_id());
 				Set<Commande> c= new HashSet<Commande>();
 				c.add(c1);
@@ -398,10 +400,11 @@ public class ControllerEvents {
 				u2.setSolde(S);
 				
 				Charite.setCommandeCharite(c);
-				userDAO.save(u2);
 				eventDAO.saveEvents(e1);
+				userDAO.save(u2);
 				commandeDao.save(c1);
 				chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
+				
 				return "Successful Donated a product";
 
 			} 
@@ -443,6 +446,14 @@ public class ControllerEvents {
 			}
 
 		}
-	
-
+		/* affiche les charites */
+		//http://localhost:8081/event/allChariteUser
+		@RequestMapping(value = "/allChariteUser")
+		public ResponseEntity<?> getAllChariteUser(Authentication authentication,@Valid @RequestBody Charite C) {
+			List<Charite> com=new ArrayList<>();
+			UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
+			com = chariteDAO.getCharite(u1.getId());
+			return ResponseEntity.ok().body(com);
+		}
+		
 }

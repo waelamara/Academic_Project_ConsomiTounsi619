@@ -17,14 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
+import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Service.Panier.CommandeDAO;
 
 @RestController
 @RequestMapping("/commande")
-public class ControllerCommande {
+public class RestControllerCommande {
 	@Autowired
 	CommandeDAO commandeDao;
+	
 	@PostMapping("/ajouter")
 	public Commande AjouterCommande(@Valid @RequestBody Commande c)
 	{
@@ -60,16 +63,24 @@ public class ControllerCommande {
 		return commandeDao.CommandeparClient(id);
 	}
 
-	@PutMapping("/payerenligne/{idCommande}")
-	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande)
+	@PutMapping("/payerenligne/{idCommande}/{idClient}/{code}")
+	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
-		commandeDao.PayerEnLigne(idCommande);
+	     
+	     
+		commandeDao.PayerEnLigne(idCommande,id,code);
 	}
-	@PutMapping("/payerporteaporte/{idCommande}")
-	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande)
+	@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
+	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
 	{
-		commandeDao.PayerPorteaPorte(idCommande);
+		commandeDao.PayerPorteaPorte(idCommande,id);
 	}
+	@GetMapping("/ParMois")
+	public List<Object[]> NumCommadeParMOIS()
+	{
+		return commandeDao.NumCommadeParMOIS();
+	}
+	
 	
 
 }

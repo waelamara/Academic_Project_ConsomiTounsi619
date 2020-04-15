@@ -15,6 +15,8 @@ public interface ChariteDAO {
 	public int saveCharite1(Long idevents,Long iduser,Charite Charite);
 	public int saveCharitee(Long idevents,Long iduser,Long idcommande,Charite Charite);
 	public List<Commande> getCommande(Long idCommande);
+	public List<Charite> getCharite(Long iduser);
+	Charite findOnes(Long id);
 
 	
 }

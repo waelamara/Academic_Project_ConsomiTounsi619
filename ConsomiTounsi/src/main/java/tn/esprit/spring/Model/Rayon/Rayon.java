@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.Produit.Produit;
 
+
+
 @Entity
 public class Rayon implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -25,9 +27,10 @@ public class Rayon implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Idrayon;
 	private String nom_rayon;
-	@Enumerated(EnumType.STRING)
-	@Column(length = 50)
-	public Type_rayon type_rayon;
+	
+	//@Column(name = "type_rayon")
+	//@Enumerated(EnumType.STRING)
+	private Type_rayon type_rayon;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Idrayon")
 	@JsonIgnore
@@ -75,9 +78,8 @@ public class Rayon implements Serializable{
 		super();
 	}
 
-	public Rayon(Long idrayon, String nom_rayon, Type_rayon type_rayon) {
+	public Rayon( String nom_rayon, Type_rayon type_rayon) {
 		super();
-		Idrayon = idrayon;
 		this.nom_rayon = nom_rayon;
 		this.type_rayon = type_rayon;
 	}

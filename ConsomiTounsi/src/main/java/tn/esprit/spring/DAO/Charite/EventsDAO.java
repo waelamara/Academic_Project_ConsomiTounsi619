@@ -17,5 +17,6 @@ public interface EventsDAO {
 
 	void deleteEventsById(long Id);
 	public int saveEvent(Long publicite,Events Events);
+	//void deleteEventsByDate();
 
 }

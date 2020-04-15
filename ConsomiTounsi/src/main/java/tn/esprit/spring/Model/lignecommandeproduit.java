@@ -78,6 +78,15 @@ private String name ;
 		this. montant = montant;
 		
 	}
+	
+	public lignecommandeproduit(String nomProduit, int quantity, float price, float total, float montant) {
+		super();
+		this.nomProduit = nomProduit;
+		this.quantity = quantity;
+		this.price = price;
+		this.total = total;
+		this.montant = montant;
+	}
 	public String getName() {
 		return name;
 	}
@@ -96,9 +105,9 @@ private String name ;
 	public void setMontant(float montant) {
 		this.montant = montant;
 	}
-	public lignecommandeproduit( float price,String nomProduit) {
+	public lignecommandeproduit( int quantity,String nomProduit) {
 		super();
-		this.price = price;
+		this.quantity = quantity;
 		this.nomProduit = nomProduit;
 		
 	}
