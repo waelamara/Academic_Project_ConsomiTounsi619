@@ -62,19 +62,37 @@ public class RestControllerCommande {
 	public List<Commande> CommandeparClient(@PathVariable(value = "idClient") int id) {
 		return commandeDao.CommandeparClient(id);
 	}
-
+	@PutMapping("/payerenligne/{idCommande}/{idClient}")
+	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
+	{
+		commandeDao.PayerEnLigne( idCommande,id);
+	}
 	@PutMapping("/payerenligne/{idCommande}/{idClient}/{code}")
 	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
+		if(code==null)
+		{
+			commandeDao.PayerEnLigne( idCommande,id);
+		}
 	     
 	     
 		commandeDao.PayerEnLigne(idCommande,id,code);
 	}
 	@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
+	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
+	{
+		if(code==null)
+		{
+			commandeDao.PayerPorteaPorte( idCommande,id);
+		}	
+		commandeDao.PayerPorteaPorte(idCommande,id,code);
+	}
+	/*@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
 	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
 	{
+		
 		commandeDao.PayerPorteaPorte(idCommande,id);
-	}
+	}*/
 	@GetMapping("/ParMois")
 	public List<Object[]> NumCommadeParMOIS()
 	{
