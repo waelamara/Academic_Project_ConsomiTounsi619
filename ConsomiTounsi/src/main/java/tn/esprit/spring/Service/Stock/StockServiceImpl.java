@@ -34,7 +34,7 @@ public class StockServiceImpl implements IStockService {
 		stockRepository.deleteById(idstock);
 		
 	}
-
+/*
 	@Override
 	public void affecterProduitAStock(Long Idproduit, Long idstock) {
 		Produit produit = produitRepository.findById(Idproduit).get();
@@ -42,7 +42,9 @@ public class StockServiceImpl implements IStockService {
 		 produit.setIdStock(stock);
 		produitRepository.save(produit);
 	}
-
+*/
+	
+	
 	@Override
 	public List<Stock> allStock() {
 		

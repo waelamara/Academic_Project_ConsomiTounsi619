@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.GestionUser;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,9 +13,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +32,7 @@ import tn.esprit.spring.payload.response.JwtResponse;
 import tn.esprit.spring.payload.response.MessageResponse;
 import tn.esprit.spring.Repository.RoleRepository;
 import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.security.jwt.JwtUtils;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
@@ -41,6 +45,9 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -60,7 +67,14 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
-		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		
+		if (!userDetails.getEtatAcc()) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Your account is Disabled by Admin!"));
+		}
+		System.out.println(userDetails.getEtatAcc());
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
@@ -71,7 +85,6 @@ public class AuthController {
 												 userDetails.getEmail(), 
 												 roles));
 	}
-
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -90,7 +103,8 @@ public class AuthController {
 		User user = new User(signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()),signUpRequest.getFirstName()
-							 ,signUpRequest.getLastName(),signUpRequest.getAddress(),signUpRequest.getDateN(),signUpRequest.getTel());
+							 ,signUpRequest.getLastName(),signUpRequest.getAddress(),signUpRequest.getDateN(),signUpRequest.getTel()
+							 ,signUpRequest.getSexe());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -106,6 +120,12 @@ public class AuthController {
 					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(adminRole);
+
+					break;
+				case "chef":
+					Role chefRole = roleRepository.findByName(ERole.ROLE_CHEFRAYON)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(chefRole);
 
 					break;
 				case "mod":
@@ -127,4 +147,29 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	
+	@PutMapping("/updateUser/{username}")
+	public ResponseEntity<?> UpdateUser(@PathVariable(value = "username") String username,@Valid @RequestBody SignupRequest signUpRequest) {
+		
+		if (!userRepository.existsByUsername(signUpRequest.getUsername())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Username not found!"));
+		}
+		// update user's account
+		User U = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+		U.setFirstName(signUpRequest.getFirstName());
+		U.setLastName(signUpRequest.getLastName());
+		U.setPassword(encoder.encode(signUpRequest.getPassword()));
+		U.setAddress(signUpRequest.getAddress());
+		U.setDateN(signUpRequest.getDateN());
+		U.setTel(signUpRequest.getTel());
+		
+		userService.updateUser(U);
+
+		return ResponseEntity.ok(new MessageResponse("User updated successfully!"));
+	}
+
+	
 }
