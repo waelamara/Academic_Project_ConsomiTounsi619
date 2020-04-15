@@ -1,13 +1,19 @@
 package tn.esprit.spring.Model.Stock;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.Produit.Produit;
@@ -19,14 +25,16 @@ public class Stock implements Serializable{
 
 	private Long idstock;
 	private String nom_stock;
-
-	
-
 	private int quantite;
+	@Temporal (TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date validite;
+	private float remise;
 	
-	@JsonIgnore
-	@OneToOne(mappedBy="IdStock")
+    @ManyToOne
 	private Produit idProduit;
+    
+    
 
 	public Long getIdstock() {
 		return idstock;
@@ -51,6 +59,8 @@ public class Stock implements Serializable{
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+
+
 
 	public Produit getIdProduit() {
 		return idProduit;

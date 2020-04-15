@@ -66,8 +66,12 @@ public class CommandeDAO implements ICommande {
 		return commandeRepository.Commandeparcode(code);
 
 	}
+	
+	
 	public void PayerEnLigne(int idCommande,int iduser)
 	{
+	
+		/*
 		//List<lignecommandeproduit>List=	ligneCommandeRepository.panierParIdclient(iduser);
 		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
 	int a=0;
@@ -88,9 +92,17 @@ public class CommandeDAO implements ICommande {
 		 }
 		commandeRepository.PayerEnLigne(idCommande);
 		commandeRepository.remise(iduser);
+		
+		*/
 	}
+	
+	
+	
 	public void PayerPorteaPorte(int idCommande,int iduser)
 	{
+		
+		/*
+		
 		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
 	int a=0;
 		 for (LigneCommande l : Linges)
@@ -113,8 +125,10 @@ public class CommandeDAO implements ICommande {
 		commandeRepository.remise(iduser);
 	}
 	
-
+*/
 }
+
+
 	public List<Object[]> NumCommadeParMOIS()
 	{
 		

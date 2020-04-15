@@ -51,19 +51,21 @@ public class Produit implements Serializable {
 	private Set<LigneCommande> ligneCommande;
 	@ManyToOne
 	Rayon Idrayon;
-	@OneToOne
-	private Stock IdStock;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="idProduit")
+	private Set<Stock> Stocks;
 
 	
 
 
 
-	public Stock getIdStock() {
-		return IdStock;
+	
+	public Set<Stock> getStocks() {
+		return Stocks;
 	}
 
-	public void setIdStock(Stock idStock) {
-		IdStock = idStock;
+	public void setStocks(Set<Stock> stocks) {
+		Stocks = stocks;
 	}
 
 	public Produit() {

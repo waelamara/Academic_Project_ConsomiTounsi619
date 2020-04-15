@@ -16,5 +16,5 @@ public interface IStockService {
 	
 	List<Stock> allStock();
 	
-	public void affecterProduitAStock(Long Idproduit,Long idstock);
+	//public void affecterProduitAStock(Long Idproduit,Long idstock);
 }
