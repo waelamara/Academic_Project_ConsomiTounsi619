@@ -62,7 +62,7 @@ public class CadeauUserImpl implements ICadeauUser {
 	public String givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect() {
 	    int leftLimit = 48; // numeral '0'
 	    int rightLimit = 122; // letter 'z'
-	    int targetStringLength = 8;
+	    int targetStringLength = 7;
 	    Random random = new Random();
 	 
 	    String generatedString = random.ints(leftLimit, rightLimit + 1)
