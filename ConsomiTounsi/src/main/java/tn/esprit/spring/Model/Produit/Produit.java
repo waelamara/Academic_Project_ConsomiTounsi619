@@ -38,13 +38,12 @@ public class Produit implements Serializable {
 	private Long Barcode;
 	private float Poids;
 	private float PrixAchat;
-	@ManyToOne
 	@JsonIgnore
+	@ManyToOne
 	private SsCategorie IdSsCategorie;
 	
-	
-	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
 	@JsonIgnore
+	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
 	private Set<ImageProduit> Images;
 	@OneToMany(mappedBy="produit")
 	@JsonIgnore
