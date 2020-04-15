@@ -1,6 +1,7 @@
 package tn.esprit.spring.Controller.Publicite;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -36,7 +37,7 @@ public class RestControllerPublicite {
 	@PostMapping("/ajouter")
 	public Publicite AjouterCategorie(@RequestParam(value = "pub", required = true) String ProduitJson,
 			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) MultipartFile file) 
-					throws JsonMappingException, JsonProcessingException, IOException {
+					throws JsonMappingException, JsonProcessingException, IOException, ParseException {
 		return ipubliciteService.Add(ProduitJson, file);
 	}
 
