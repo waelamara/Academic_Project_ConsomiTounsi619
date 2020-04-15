@@ -19,5 +19,12 @@ public interface IPubliciteService {
 	public Publicite Update(Publicite p,Long id);
 	public void Delete(Long id);
 	public Publicite findOne(Long id);
-	
+	public float CalculeCoutTotalPub(String gender, String canal, int ageCibledebut, int ageCibleFin, String dateDebut,
+			String dateFin, String typePub) throws ParseException;
+	public int CoutSurLeNbrDeJour(String dateDebut, String dateFin) throws ParseException;
+	public int DifferenceJourDateDebutEtDateFin(String dateDebut, String dateFin) throws ParseException;
+	public int CoutSurCanal(String canal);
+	public int CoutSurTrancheAge(int ageCibledebut, int ageCibleFin);
+	public String TypeFile(MultipartFile file) throws IOException;
+	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException;
 }
