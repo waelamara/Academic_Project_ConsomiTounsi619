@@ -67,7 +67,14 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
-		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		
+		if (!userDetails.getEtatAcc()) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Your account is Disabled by Admin!"));
+		}
+		System.out.println(userDetails.getEtatAcc());
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
@@ -78,7 +85,6 @@ public class AuthController {
 												 userDetails.getEmail(), 
 												 roles));
 	}
-
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -97,7 +103,8 @@ public class AuthController {
 		User user = new User(signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()),signUpRequest.getFirstName()
-							 ,signUpRequest.getLastName(),signUpRequest.getAddress(),signUpRequest.getDateN(),signUpRequest.getTel());
+							 ,signUpRequest.getLastName(),signUpRequest.getAddress(),signUpRequest.getDateN(),signUpRequest.getTel()
+							 ,signUpRequest.getSexe());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -113,6 +120,12 @@ public class AuthController {
 					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(adminRole);
+
+					break;
+				case "chef":
+					Role chefRole = roleRepository.findByName(ERole.ROLE_CHEFRAYON)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(chefRole);
 
 					break;
 				case "mod":
@@ -158,7 +171,5 @@ public class AuthController {
 		return ResponseEntity.ok(new MessageResponse("User updated successfully!"));
 	}
 
-	
-	
 	
 }
