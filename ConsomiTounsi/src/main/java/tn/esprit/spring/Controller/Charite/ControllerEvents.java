@@ -30,6 +30,9 @@ import org.springframework.security.core.Authentication;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 import Utils.AppConstants;
 
@@ -65,7 +68,9 @@ public class ControllerEvents {
 
 
 	
-
+	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
+	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
+	  
 	/* ajouter charité si vous avez ajouter un charité vous avez participer */
 	@PostMapping("/Part/{idevents}/{iduser}")
 	@ResponseBody
@@ -182,6 +187,7 @@ public class ControllerEvents {
 	//http://localhost:8081/event/allEndroit
 	@RequestMapping(value = "/allEndroit")
 	public List<Endroit> getAllEndroit() {
+	
 		return endroitDAO.getAllEndroitList();
 	}
 
@@ -375,6 +381,16 @@ public class ControllerEvents {
 				eventDAO.saveEvents(e1);
 				userDAO.save(u2);
 				chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
+				Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+			    Message message = Message.creator(new PhoneNumber("+21629651973"),
+			        new PhoneNumber("+18654261966"), 
+			        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
+			        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
+			        +" , "+"donate money"+" "+Charite.getMontantPaye()+"       "+"thank you so much").create();
+
+			    System.out.println(message.getSid());
+				//eventDAO.sendSms();
 				
 				
 				return "Successful Donate money thank you";
@@ -402,8 +418,19 @@ public class ControllerEvents {
 				userDAO.save(u2);
 				commandeDao.save(c1);
 				chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
+				//eventDAO.sendSms();
 				
-				return "Successful Donated a product";
+				Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+			    Message message = Message.creator(new PhoneNumber("+21629651973"),
+			        new PhoneNumber("+18654261966"), 
+			        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
+			        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
+			        +" , "+"donate ordered ID="+" "+c1.getId()+"       "+"thank you so much").create();
+
+			    System.out.println(message.getSid());
+				
+				return "Successful Donated a ordered";
 
 			} 
 			else if(u2.getSolde()<Charite.getMontantPaye()){

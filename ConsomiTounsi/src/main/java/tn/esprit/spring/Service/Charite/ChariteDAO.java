@@ -17,6 +17,7 @@ public interface ChariteDAO {
 	public List<Commande> getCommande(Long idCommande);
 	public List<Charite> getCharite(Long iduser);
 	Charite findOnes(Long id);
+	public void facturepdf (int id_Charite);
 
 	
 }

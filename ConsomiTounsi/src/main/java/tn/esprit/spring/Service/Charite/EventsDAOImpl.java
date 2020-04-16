@@ -5,6 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -40,7 +44,6 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public List<Events> getAllEventsList() {
-
 		return eventsRepository.findAll();
 	}
 
@@ -77,31 +80,25 @@ public class EventsDAOImpl implements EventsDAO {
 	     
 	}*/
 
-	@Override
-	public void sendSms() {
-		// TODO Auto-generated method stub
-		
-	}
-	/*public class SmsSender {
-	    // Find your Account Sid and Auth Token at twilio.com/console
-	    public static final String ACCOUNT_SID =
-	            "AC25eeab7c940f79dd272d5bc2d7337437";
-	    public static final String AUTH_TOKEN =
-	            "your_auth_token";
+	
+	  public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
+	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
+	 public void sendSms(){
+			 
 
-	    public static void main(String[] args) {
-	        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-	        Message message = Message
-	                .creator(new PhoneNumber("+14159352345"), // to
-	                        new PhoneNumber("+14158141829"), // from
-	                        "Where's Wallace?")
-	                .create();
+		    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-	        System.out.println(message.getSid());
-	    }
-	}*/
+		    Message message = Message.creator(new PhoneNumber("+21629651973"),
+		        new PhoneNumber("+18654261966"), 
+		        "I registered for this event").create();
 
+		    System.out.println(message.getSid());
+		  }
+
+	
+
+	
 	
 
 

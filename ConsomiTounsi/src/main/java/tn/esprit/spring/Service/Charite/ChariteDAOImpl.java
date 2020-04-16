@@ -1,5 +1,11 @@
 package tn.esprit.spring.Service.Charite;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,8 +16,23 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Repository.CommandeRepository;
@@ -115,6 +136,9 @@ public class ChariteDAOImpl implements ChariteDAO {
 
 	
 
-	
+	public void facturepdf (int id_charite){
+		
+	}
+
 	
 }
