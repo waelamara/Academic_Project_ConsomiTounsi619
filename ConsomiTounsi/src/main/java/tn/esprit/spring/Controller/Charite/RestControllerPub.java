@@ -32,7 +32,7 @@ import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @RestController
 @RequestMapping("/pubEvent")
-public class ControllerPub {
+public class RestControllerPub {
 	@Autowired
 	PubDAO publiciteDAO;
 	@Autowired

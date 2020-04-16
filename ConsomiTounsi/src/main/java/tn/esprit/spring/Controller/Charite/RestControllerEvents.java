@@ -51,7 +51,7 @@ import tn.esprit.spring.Model.Charite.Events;
 
 @RestController
 @RequestMapping("/event")
-public class ControllerEvents {
+public class RestControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
 	@Autowired
