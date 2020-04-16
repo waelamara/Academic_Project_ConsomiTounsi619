@@ -6,13 +6,19 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
 import tn.esprit.spring.Repository.Charite.PubRepository;
+import tn.esprit.spring.security.services.UserDetailsImpl;
 
 @Service("EventsDAO")
 public class EventsDAOImpl implements EventsDAO {
@@ -20,6 +26,7 @@ public class EventsDAOImpl implements EventsDAO {
 	private EventsRepository eventsRepository;
 	@Autowired
 	PubRepository publiciteRepository;
+	private JavaMailSender javaMailSender;
 
 	@Override
 	public Events saveEvents(Events Events) {
@@ -69,6 +76,15 @@ public class EventsDAOImpl implements EventsDAO {
 		eventsRepository.removeOlderThan(oneYear);
 	     
 	}*/
+
+	@Override
+	public void sendSms() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
 
 	
 
