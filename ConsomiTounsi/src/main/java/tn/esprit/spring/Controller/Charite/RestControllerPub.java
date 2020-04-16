@@ -1,6 +1,7 @@
 package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -45,9 +46,11 @@ public class RestControllerPub {
 	public String AjouterPub(@PathVariable(value = "idevents") Long idevents,
 			@RequestParam(value = "Pub", required = true) String PubJson,
 			@RequestParam(required = true, value = AppConstants.EMPLOYEE_FILE_PARAM) List<MultipartFile> file) 
-					throws JsonParseException, JsonMappingException,IOException{
+					throws JsonParseException, JsonMappingException,IOException, ParseException{
+		
 		Pub p = objectMapper.readValue(PubJson, Pub.class);
 		Events e1 = eventDAO.findOne(idevents);
+		
 
 		for (MultipartFile i : file) {
 			String fileName = fileStorageServiceImpl.storeFile(i);
@@ -57,9 +60,12 @@ public class RestControllerPub {
 			publiciteDAO.save(p);
 			e1.setPublicite(p);
 			eventDAO.saveEvents(e1);
+			
 
 		}
-		return"Successful"; 
+		String dateDebut = p.getDateDebut().toString();
+		String dateFin = p.getDateFin().toString();
+		return"Successful"+" "+publiciteDAO.DifferenceJourDateDebutEtDateFin(dateDebut, dateFin)+" "+"days";
 	}
 	
 	@GetMapping("/afficher")
