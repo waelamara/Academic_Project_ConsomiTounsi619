@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO.Charite;
+package tn.esprit.spring.Service.Charite;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,7 @@ public interface ChariteDAO {
 	public List<Commande> getCommande(Long idCommande);
 	public List<Charite> getCharite(Long iduser);
 	Charite findOnes(Long id);
+	public void facturepdf (int id_Charite);
 
 	
 }
