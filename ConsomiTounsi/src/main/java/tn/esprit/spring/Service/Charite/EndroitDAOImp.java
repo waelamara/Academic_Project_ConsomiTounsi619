@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO.Charite;
+package tn.esprit.spring.Service.Charite;
 
 import java.util.List;
 

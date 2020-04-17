@@ -1,5 +1,5 @@
 package tn.esprit.spring.Model.Publicite;
 
 public enum Canal {
-	FACEBOOK, GOOGLE_ADDS,TWITTER
+	SITE,SITE_ET_FACEBOOK,SITE_ET_TWITTER
 }

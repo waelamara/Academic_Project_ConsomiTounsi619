@@ -70,25 +70,101 @@ public class CommandeDAO implements ICommande {
 		return commandeRepository.Commandeparcode(code);
 
 	}
-
+	public void PayerEnLigne(int idCommande,int iduser)
+	{
+		Commande c = commandeRepository.getOne((long) idCommande);
+		User u =userRepository.findById((long) iduser).get();
+		 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
+		 userRepository.save(u);
+			commandeRepository.PayerEnLigne(idCommande);
+			commandeRepository.remise(iduser);
+		
+	}
 	
 	
 	public void PayerEnLigne(int idCommande,int iduser,String code)
 
 	{
-	
-		/*
+
+		
 		//List<lignecommandeproduit>List=	ligneCommandeRepository.panierParIdclient(iduser);
 		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
 	int a=0;
 	//Float montant= cadeauUserRepository.montantCadeau(code);
-	CadeauUser cd=cadeauUserRepository.verifierCode(code);
-
-		 for (LigneCommande l : Linges)
+	CadeauUser cd=cadeauUserRepository.verifierCode(code,iduser);
+	Commande c = commandeRepository.getOne((long) idCommande);
+	
+	if(cd==null)
+	{
+		commandeRepository.PayerEnLigne(idCommande);
+		commandeRepository.remise(iduser);
+		User u =userRepository.findById((long) iduser).get();
+		 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+		 userRepository.save(u);
+	
+	}
+	else
+	{
+	
+		if(c.getPourcentageDeRemise()==0)
+		{
+			if(c.getMontant()<cd.getMontant())
+			{
+				cd.setMontant((int) (cd.getMontant()-c.getMontant()));
+				
+				cadeauUserRepository.save(cd);
+				User u =userRepository.findById((long) iduser).get();
+				 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+				 userRepository.save(u);
+			}
+			else
+			{
+		c.setMontant(c.getMontant()-cd.getMontant());
+		commandeRepository.save(c);
+		cd.setValidite(true);
+		cadeauUserRepository.save(cd);
+		commandeRepository.PayerEnLigne(idCommande);
+		commandeRepository.remise(iduser);
+		User u =userRepository.findById((long) iduser).get();
+		 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+		 userRepository.save(u);
+			}
+		}
+		else
+		{
+			if(c.getPourcentageDeRemise()<cd.getMontant())
+			{
+				cd.setMontant((int) (cd.getMontant()-c.getPourcentageDeRemise()));
+				cadeauUserRepository.save(cd);
+			}
+			else
+			{
+			c.setPourcentageDeRemise(c.getPourcentageDeRemise()-cd.getMontant());
+			commandeRepository.save(c);
+			cd.setValidite(true);
+			cadeauUserRepository.save(cd);
+			commandeRepository.PayerEnLigne(idCommande);
+			commandeRepository.remise(iduser);
+			User u =userRepository.findById((long) iduser).get();
+			 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
+			 userRepository.save(u);
+			}
+		}
+	}
+	
+	
+	}
+	
+	
+	
+	
+		
+		
+		/* for (LigneCommande l : Linges)
 		 {
 			 if(l.getCommande().getId()==idCommande)
 			 {
-			 a= l.getProduit().getIdStock().getQuantite()-l.getQuantity();
+			// a= l.getProduit().getStocks().gr.getQuantite()-l.getQuantity();
 			 long idStock=l.getProduit().getIdStock().getIdstock();
 				System.out.println(idStock);
 				Stock c =stockRepository.getOne(idStock);
@@ -98,44 +174,88 @@ public class CommandeDAO implements ICommande {
 			
 			
 			 
-		 }
-		commandeRepository.PayerEnLigne(idCommande);
-		commandeRepository.remise(iduser);
-		
-		*/
-	}
+		 }*/	
 	
 	
 	
-	public void PayerPorteaPorte(int idCommande,int iduser)
+	
+	public void PayerPorteaPorte(int idCommande,int iduser,String code)
 	{
 		
-		/*
-		
 		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
-	int a=0;
-		 for (LigneCommande l : Linges)
-		 {
-			 if(l.getCommande().getId()==idCommande)
-			 {
-			 a= l.getProduit().getIdStock().getQuantite()-l.getQuantity();
-			 long idStock=l.getProduit().getIdStock().getIdstock();
-				System.out.println(idStock);
-				Stock c =stockRepository.getOne(idStock);
-				c.setQuantite(a);
-				 stockRepository.save(c);
-			 }
-			Commande c= commandeRepository.findById((long) idCommande).get();
-			c.getMontant();
+		int a=0;
+		//Float montant= cadeauUserRepository.montantCadeau(code);
+		CadeauUser cd=cadeauUserRepository.verifierCode(code,iduser);
+		Commande c = commandeRepository.getOne((long) idCommande);
+		
+		if(cd==null)
+		{
+			commandeRepository.PayerPorteaPorte(idCommande);
+			commandeRepository.remise(iduser);
 			User u =userRepository.findById((long) iduser).get();
 			 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
 			 userRepository.save(u);
-		commandeRepository.PayerPorteaPorte(idCommande);
-		commandeRepository.remise(iduser);
-	}
-	
-*/
+		
+		}
+		else
+		{
+		
+			if(c.getPourcentageDeRemise()==0)
+			{
+				if(c.getMontant()<cd.getMontant())
+				{
+					cd.setMontant((int) (cd.getMontant()-c.getMontant()));
+					
+					cadeauUserRepository.save(cd);
+					User u =userRepository.findById((long) iduser).get();
+					 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+					 userRepository.save(u);
+				}
+				else
+				{
+			c.setMontant(c.getMontant()-cd.getMontant());
+			commandeRepository.save(c);
+			cd.setValidite(true);
+			cadeauUserRepository.save(cd);
+			commandeRepository.PayerPorteaPorte(idCommande);
+			commandeRepository.remise(iduser);
+			User u =userRepository.findById((long) iduser).get();
+			 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+			 userRepository.save(u);
+				}
+			}
+			else
+			{
+				if(c.getPourcentageDeRemise()<cd.getMontant())
+				{
+					cd.setMontant((int) (cd.getMontant()-c.getPourcentageDeRemise()));
+					cadeauUserRepository.save(cd);
+				}
+				else
+				{
+				c.setPourcentageDeRemise(c.getPourcentageDeRemise()-cd.getMontant());
+				commandeRepository.save(c);
+				cd.setValidite(true);
+				cadeauUserRepository.save(cd);
+				commandeRepository.PayerPorteaPorte(idCommande);
+				commandeRepository.remise(iduser);
+				User u =userRepository.findById((long) iduser).get();
+				 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
+				 userRepository.save(u);
+				}
+			}
+		}
 }
+	public void PayerPorteaPorte(int idCommande,int iduser)
+	{
+		Commande c = commandeRepository.getOne((long) idCommande);
+		User u =userRepository.findById((long) iduser).get();
+		 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
+		 userRepository.save(u);
+			commandeRepository.PayerPorteaPorte(idCommande);
+			commandeRepository.remise(iduser);
+		
+	}
 
 
 	public List<Object[]> NumCommadeParMOIS()

@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO;
+package tn.esprit.spring.Service.GestionUser;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import tn.esprit.spring.Repository.UserRepository;
 
 
 @Service
-public class UserDAO {
+public class UserService {
 	@Autowired
 	UserRepository  UserRepository;
 	
@@ -24,5 +24,12 @@ public class UserDAO {
 	public List<User> findAll() {
 		return UserRepository.findAll();
 	}
+	
+	/*Update d'un user*/
+	public  User updateUser(User user)	{
+		return UserRepository.save(user);
+		
+	}
+
 
 }

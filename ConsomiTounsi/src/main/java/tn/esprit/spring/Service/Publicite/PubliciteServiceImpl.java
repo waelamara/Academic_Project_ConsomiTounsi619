@@ -1,7 +1,11 @@
 package tn.esprit.spring.Service.Publicite;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.Model.Publicite.Publicite;
-import tn.esprit.spring.Repository.PubliciteRepository;
+import tn.esprit.spring.Repository.Publicite.PubliciteRepository;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Service
@@ -25,7 +29,7 @@ public class PubliciteServiceImpl implements IPubliciteService {
 	FileStorageServiceImpl fileStorageServiceImpl;
 
 	ObjectMapper objectMapper = new ObjectMapper();
-	
+
 	public Publicite save(Publicite p) {
 		return publiciteRepository.save(p);
 	}
@@ -43,6 +47,30 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		return publiciteRepository.getOne(id);
 	}
 
+	public int NbrUserFemme() {
+		return publiciteRepository.CountFemmeFromUser();
+	}
+
+	public int NbrUserHomme() {
+		return publiciteRepository.CountHommeFromUser();
+	}
+
+	public int NbrUserTotal() {
+		return publiciteRepository.CountALLUser();
+	}
+
+	public int NbrUserAgeBetwin(int ageCibledebut, int ageCibleFin) {
+		return publiciteRepository.CountUserWithAgeBetwin(ageCibledebut, ageCibleFin);
+	}
+
+	public int NbrUserFemmeAgeBetwin(int ageCibledebut, int ageCibleFin) {
+		return publiciteRepository.CountUserFemmeWithAgeBetwin(ageCibledebut, ageCibleFin);
+	}
+
+	public int NbrUserHommeAgeBetwin(int ageCibledebut, int ageCibleFin) {
+		return publiciteRepository.CountUserHommeWithAgeBetwin(ageCibledebut, ageCibleFin);
+	}
+
 	public Publicite Update(Publicite p, Long id) {
 		Publicite p2 = findOne(id);
 		p2.setCanal(p.getCanal());
@@ -56,25 +84,126 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		return PubliciteUpdated;
 	}
 
+	public Publicite Add(String ProduitJson, MultipartFile file)
+			throws JsonMappingException, JsonProcessingException, IOException, ParseException {
+		Publicite pub = objectMapper.readValue(ProduitJson, Publicite.class);
+		Publicite PubWithImg = AffecterImageVideoPub(pub, file);
+		String typefile = TypeFile(file);
 
-	public Publicite Add(String ProduitJson, MultipartFile file) throws JsonMappingException, JsonProcessingException,IOException {
-			Publicite pub = objectMapper.readValue(ProduitJson, Publicite.class);
-			String fileName = fileStorageServiceImpl.storeFile(file);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-			.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
-			
-			int length =fileName.length();
-			String typefile=fileName.substring(length-3,length);
-			if (typefile.equals("png")||typefile.equals("peg")||typefile.equals("jpg"))
-			{
-				pub.setImage(fileDownloadUri);
-			}
-			else
-			{
-				pub.setVideo(fileDownloadUri);
-			}
-				
-			return publiciteRepository.save(pub);
+		float coutPub = CalculeCoutTotalPub(pub.getGenderCible().toString(), pub.getCanal().toString(),
+				pub.getDebutAgeCible(), pub.getFinAgeCible(), pub.getDateDebut().toString(),
+				pub.getDateFin().toString(), typefile);
+		PubWithImg.setCout(coutPub);
+		PubWithImg.setNbrInitialVueCible(CountUserCible(pub.getDebutAgeCible(),pub.getFinAgeCible(),pub.getGenderCible().toString()));
+		return publiciteRepository.save(PubWithImg);
 
 	}
+
+	public int CountUserCible(int ageCibledebut, int ageCibleFin, String gender) {
+		int nbrUser = 0;
+		if (gender.equals("HOMME")) {
+			nbrUser += NbrUserHommeAgeBetwin(ageCibledebut, ageCibleFin);
+		}
+		if (gender.equals("FEMME")) {
+			nbrUser += NbrUserFemmeAgeBetwin(ageCibledebut, ageCibleFin);
+		}
+		if (gender.equals("TOUS")) {
+			nbrUser += NbrUserAgeBetwin(ageCibledebut, ageCibleFin);
+		}
+
+		return nbrUser;
+	}
+
+	public float CalculeCoutTotalPub(String gender, String canal, int ageCibledebut, int ageCibleFin, String dateDebut,
+			String dateFin, String typePub) throws ParseException {
+		float cout = CoutSurCanal(canal);
+		if (gender.equals("HOMME") || gender.equals("FEMME")) {
+			cout += 200;
+		}
+		cout += CoutSurLeNbrDeJour(dateDebut, dateFin);
+		cout += CoutSurTrancheAge(ageCibledebut, ageCibleFin);
+		if (typePub.equals("Video")) {
+			cout += 100;
+		}
+		if (typePub.equals("Image"))
+			cout += 50;
+		return cout;
+	}
+
+	public int CoutSurLeNbrDeJour(String dateDebut, String dateFin) throws ParseException {
+		int NbrJourPub = DifferenceJourDateDebutEtDateFin(dateDebut, dateFin);
+		int cout = 0;
+		if (NbrJourPub <= 30) {
+			return cout += 2 * NbrJourPub;
+		}
+		if (NbrJourPub > 30 && NbrJourPub <= 90) {
+			return cout += 3 * NbrJourPub;
+		}
+		if (NbrJourPub > 90 && NbrJourPub <= 180) {
+			return cout += 5 * NbrJourPub;
+		} else {
+			return cout += 10 * NbrJourPub;
+		}
+
+	}
+
+	public int DifferenceJourDateDebutEtDateFin(String dateDebut, String dateFin) throws ParseException {
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+		LocalDate dateD = LocalDate.parse(dateDebut, format);
+		LocalDate dateF = LocalDate.parse(dateFin, format);
+		int periodJour;
+		int yearDef = dateF.getYear() - dateD.getYear();
+		if (yearDef == 0) {
+			periodJour = dateF.getDayOfYear() - dateD.getDayOfYear();
+			return periodJour;
+		} else {
+			int nbranne = yearDef * 365;
+			periodJour = (dateF.getDayOfYear() - dateD.getDayOfYear()) + nbranne;
+			return periodJour;
+		}
+	}
+
+	public int CoutSurCanal(String canal) {
+		if (canal.equals("SITE_ET_FACEBOOK")) {
+			return 300;
+		}
+		if (canal.equals("SITE_ET_TWITTER")) {
+			return 150;
+		} else
+			return 100;
+	}
+
+	public int CoutSurTrancheAge(int ageCibledebut, int ageCibleFin) {
+		int TrancheAge = ageCibleFin - ageCibledebut;
+		int cout = 500;
+		for (int i = 1; i <= TrancheAge; i++) {
+			cout -= 10;
+		}
+		return cout;
+	}
+
+	public String TypeFile(MultipartFile file) throws IOException {
+		String fileName = fileStorageServiceImpl.storeFile(file);
+		int length = fileName.length();
+		String typefile = fileName.substring(length - 3, length);
+		if (typefile.equals("png") || typefile.equals("peg") || typefile.equals("jpg")) {
+			return "Image";
+		} else {
+			return "Video";
+		}
+	}
+
+	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException {
+		String fileName = fileStorageServiceImpl.storeFile(file);
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+				.path(fileName).toUriString();
+		String typefile = TypeFile(file);
+		if (typefile.equals("Image")) {
+			pub.setImage(fileDownloadUri);
+		} else {
+			pub.setVideo(fileDownloadUri);
+		}
+		return pub;
+	}
+
 }

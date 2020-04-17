@@ -21,7 +21,7 @@ import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.LivraisonRepository;
-import tn.esprit.spring.Repository.ProduitRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Service.Livraison.LivraisonService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
 import tn.esprit.spring.Service.Panier.CommandeDAO;

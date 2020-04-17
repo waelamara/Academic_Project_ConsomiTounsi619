@@ -3,9 +3,13 @@ package tn.esprit.spring.payload.request;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import tn.esprit.spring.Model.Sexe;
 
 public class SignupRequest {
     @NotBlank
@@ -42,9 +46,22 @@ public class SignupRequest {
     @Size(min = 8, max = 8)
     private String tel;
     
+    @Enumerated(EnumType.STRING)
+    private Sexe sexe;
+    
     
   
-    public String getTel() {
+    
+
+	public Sexe getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(Sexe sexe) {
+		this.sexe = sexe;
+	}
+
+	public String getTel() {
 		return tel;
 	}
 
