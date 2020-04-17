@@ -16,7 +16,7 @@ import Utils.AppConstants;
 import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Produit.SsCategorie;
-import tn.esprit.spring.Repository.ProduitRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 
 @Service
 public class ProduitServiceImpl implements IProduitService {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
-import tn.esprit.spring.Repository.ProduitRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Repository.Stock.StockRepository;
 
 @Service
