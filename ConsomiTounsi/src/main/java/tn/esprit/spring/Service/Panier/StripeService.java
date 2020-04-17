@@ -20,7 +20,9 @@ import com.stripe.model.Token;
 
 
 import tn.esprit.spring.Model.ChargeRequest;
+import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
 
 
@@ -31,6 +33,8 @@ public class StripeService {
 	UserRepository userRepository;
 	@Autowired
 	CommandeDAO commadeDAO;
+	@Autowired
+	CommandeRepository commandeRepository;
 	
 	@Value("${stripe.keys.secret}")
 	private String secretKey;
@@ -132,9 +136,16 @@ public class StripeService {
 		Map<String, Object> params = new HashMap<>();
 		params.put("payment_method", "pm_card_visa");
 		// params.put("customer", "cus_H1OvsnwEn1KX36");
+		Commande c =commandeRepository.getOne((long) idCommande);
+		if(c.getIdUser().getId()==iduser)
+		{
 		paymentIntent.confirm(params);
 		 commadeDAO.PayerEnLigne(idCommande, iduser);
+		
 		return paymentIntent;
+		}
+		return null;
+		
 	}
 
 

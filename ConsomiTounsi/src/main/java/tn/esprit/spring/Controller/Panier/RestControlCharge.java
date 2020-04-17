@@ -31,7 +31,7 @@ public class RestControlCharge {
 		return stripeService.createStripeCustomer(idUser);
 	}
 
-	// http://localhost:8081/dari/servlet/customer/retour_ta3_methode_create_customer/4242424242424242/11/2026/123
+	// http://localhost:8081/customer/retour_ta3_methode_create_customer/4242424242424242/11/2026/123
 	@PostMapping("/customer/{customerId}/{carta}/{expMonth}/{expYear}/{cvc}")
 	@ResponseBody
 	// @PreAuthorize("hasRole('USER')")
@@ -41,7 +41,7 @@ public class RestControlCharge {
 		return stripeService.createCustumorStripe(customerId, carta, expMonth, expYear, cvc);
 	}
 
-	// http://localhost:8081/dari/servlet/paymentintent
+	// http://localhost:8081/paymentintent
 	/*
 	 * { "description":"test la methode payment", "amount":"10000",
 	 * "currency":"eur" }
@@ -52,7 +52,7 @@ public class RestControlCharge {
 		return stripeService.paymentIntent(chargeRequest);
 	}
 
-	// http://localhost:8081/dari/servlet/confirm/{id}
+	// http://localhost:8081/confirm/{id}/{idCommande}/{idUser}
 	@PostMapping("/confirm/{id}/{idCommande}/{idUser}")
 	// @PreAuthorize("hasRole('USER')")
 	public ResponseEntity<String> confirm(@PathVariable("id") String id,@PathVariable("idCommande") int idCommande , @PathVariable("idUser") int idUser) throws StripeException {
