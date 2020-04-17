@@ -76,7 +76,19 @@ public class User implements Serializable {
     @Column(name = "EtatAcc")
 	private Boolean EtatAcc=true;
     
-    public Boolean getEtatAcc() {
+    @Column(name = "enabled")
+    private boolean enabled=false;
+    
+    
+    
+    
+    public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Boolean getEtatAcc() {
 		return EtatAcc;
 	}
 	public void setEtatAcc(Boolean etatAcc) {
