@@ -344,7 +344,6 @@ public class CadeauUserImpl implements ICadeauUser {
 	}
 	public CadeauUser verifierCode(String code,int idUser)
 	{
-		//return cadeauUserRepository.verifierCode(code);
 		return cadeauUserRepository.verifierCode(code,idUser);
 	
 	}
