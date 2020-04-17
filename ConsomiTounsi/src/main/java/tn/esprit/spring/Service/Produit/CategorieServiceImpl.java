@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Produit.Categorie;
-import tn.esprit.spring.Repository.CategorieRepository;
+import tn.esprit.spring.Repository.Produit.CategorieRepository;
 
 @Service
 public class CategorieServiceImpl implements ICategorieService {

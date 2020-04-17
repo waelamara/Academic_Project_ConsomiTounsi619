@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Produit.SCategorie;
 import tn.esprit.spring.Model.Produit.SsCategorie;
-import tn.esprit.spring.Repository.SousSousCategorieRepository;
+import tn.esprit.spring.Repository.Produit.SousSousCategorieRepository;
 
 @Service
 public class SousSousCategorieServiceImpl implements ISousSousCategorieService {

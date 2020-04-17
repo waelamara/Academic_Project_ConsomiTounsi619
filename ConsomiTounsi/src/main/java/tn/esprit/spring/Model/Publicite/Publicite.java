@@ -27,12 +27,16 @@ public class Publicite implements Serializable {
 	private String Nom;
 	@Enumerated(EnumType.STRING)
 	private Canal Canal;
+	@Enumerated(EnumType.STRING)
+	private GenderCible GenderCible;
 	@Temporal(TemporalType.DATE)
 	private Date DateDebut;
 	@Temporal(TemporalType.DATE)
 	private Date DateFin;
 	private int NbrInitialVueCible;
 	private int NbrFinalVue;
+	private int DebutAgeCible;
+	private int FinAgeCible;
 	private float Cout;
 	private String Video;
 	private String Image;
@@ -41,9 +45,29 @@ public class Publicite implements Serializable {
 
 	public Publicite() {
 	}
+	
 
-	
-	
+	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal,
+			tn.esprit.spring.Model.Publicite.GenderCible genderCible, Date dateDebut, Date dateFin,
+			int nbrInitialVueCible, int nbrFinalVue, int debutAgeCible, int finAgeCible, float cout, String video,
+			String image, User idUser) {
+		super();
+		Nom = nom;
+		Canal = canal;
+		GenderCible = genderCible;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
+		NbrInitialVueCible = nbrInitialVueCible;
+		NbrFinalVue = nbrFinalVue;
+		DebutAgeCible = debutAgeCible;
+		FinAgeCible = finAgeCible;
+		Cout = cout;
+		Video = video;
+		Image = image;
+		IdUser = idUser;
+	}
+
+
 	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
 			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image, User idUser) {
 		super();
@@ -58,8 +82,6 @@ public class Publicite implements Serializable {
 		Image = image;
 		IdUser = idUser;
 	}
-
-
 
 	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
 			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image) {
@@ -161,6 +183,30 @@ public class Publicite implements Serializable {
 
 	public void setIdUser(User idUser) {
 		IdUser = idUser;
+	}
+
+	public GenderCible getGenderCible() {
+		return GenderCible;
+	}
+
+	public void setGenderCible(GenderCible genderCible) {
+		GenderCible = genderCible;
+	}
+
+	public int getDebutAgeCible() {
+		return DebutAgeCible;
+	}
+
+	public void setDebutAgeCible(int debutAgeCible) {
+		DebutAgeCible = debutAgeCible;
+	}
+
+	public int getFinAgeCible() {
+		return FinAgeCible;
+	}
+
+	public void setFinAgeCible(int finAgeCible) {
+		FinAgeCible = finAgeCible;
 	}
 
 }

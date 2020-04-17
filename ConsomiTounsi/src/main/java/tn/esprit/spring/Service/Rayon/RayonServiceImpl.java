@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
-import tn.esprit.spring.Repository.ProduitRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Repository.Rayon.RayonRepository;
 
 @Service

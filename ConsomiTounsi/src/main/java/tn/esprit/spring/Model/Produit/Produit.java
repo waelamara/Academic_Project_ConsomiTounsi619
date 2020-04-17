@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -38,13 +38,12 @@ public class Produit implements Serializable {
 	private Long Barcode;
 	private float Poids;
 	private float PrixAchat;
-	@ManyToOne
 	@JsonIgnore
+	@ManyToOne
 	private SsCategorie IdSsCategorie;
 	
-	
-	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
 	@JsonIgnore
+	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
 	private Set<ImageProduit> Images;
 	@OneToMany(mappedBy="produit")
 	@JsonIgnore
