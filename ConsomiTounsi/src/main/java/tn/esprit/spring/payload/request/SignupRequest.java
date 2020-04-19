@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Transient;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,6 +27,9 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+    
+    @Transient
+    private String passwordConfirm;
     
     @NotBlank
     @Size(min = 3, max = 20)
@@ -93,7 +97,16 @@ public class SignupRequest {
         this.password = password;
     }
     
-    public Set<String> getRole() {
+    
+    public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Set<String> getRole() {
       return this.role;
     }
     
