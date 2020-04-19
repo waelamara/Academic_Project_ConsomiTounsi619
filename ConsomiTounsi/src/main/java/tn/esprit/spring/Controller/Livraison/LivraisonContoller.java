@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Livraison;
 import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.LivraisonRepository;
-import tn.esprit.spring.Repository.ProduitRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Service.Livraison.LivraisonService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
 import tn.esprit.spring.Service.Panier.CommandeDAO;

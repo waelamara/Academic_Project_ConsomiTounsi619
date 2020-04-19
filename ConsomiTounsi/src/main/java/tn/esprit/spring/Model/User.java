@@ -75,10 +75,20 @@ public class User implements Serializable {
     
     @Column(name = "EtatAcc")
 	private Boolean EtatAcc=true;
-
+    
+    @Column(name = "enabled")
+    private boolean enabled=false;
     
     
-    public Boolean getEtatAcc() {
+    
+    
+    public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Boolean getEtatAcc() {
 		return EtatAcc;
 	}
 	public void setEtatAcc(Boolean etatAcc) {
@@ -116,7 +126,9 @@ public class User implements Serializable {
 		this.dateN = dateN;
 		this.tel = tel;
 	}
-	public User(String firstName, String lastName, String username, String password, String email, String address,
+	
+	
+	public User(String username, String email, String password, String firstName, String lastName, String address,
 			Date dateN, String tel, Sexe sexe) {
 		super();
 		this.firstName = firstName;

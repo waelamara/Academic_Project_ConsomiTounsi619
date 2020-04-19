@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
 import tn.esprit.spring.Model.Publicite.Publicite;
-import tn.esprit.spring.Repository.PubliciteRepository;
+import tn.esprit.spring.Repository.Publicite.PubliciteRepository;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Service
@@ -47,6 +47,30 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		return publiciteRepository.getOne(id);
 	}
 
+	public int NbrUserFemme() {
+		return publiciteRepository.CountFemmeFromUser();
+	}
+
+	public int NbrUserHomme() {
+		return publiciteRepository.CountHommeFromUser();
+	}
+
+	public int NbrUserTotal() {
+		return publiciteRepository.CountALLUser();
+	}
+
+	public int NbrUserAgeBetwin(int ageCibledebut, int ageCibleFin) {
+		return publiciteRepository.CountUserWithAgeBetwin(ageCibledebut, ageCibleFin);
+	}
+
+	public int NbrUserFemmeAgeBetwin(int ageCibledebut, int ageCibleFin) {
+		return publiciteRepository.CountUserFemmeWithAgeBetwin(ageCibledebut, ageCibleFin);
+	}
+
+	public int NbrUserHommeAgeBetwin(int ageCibledebut, int ageCibleFin) {
+		return publiciteRepository.CountUserHommeWithAgeBetwin(ageCibledebut, ageCibleFin);
+	}
+
 	public Publicite Update(Publicite p, Long id) {
 		Publicite p2 = findOne(id);
 		p2.setCanal(p.getCanal());
@@ -70,20 +94,24 @@ public class PubliciteServiceImpl implements IPubliciteService {
 				pub.getDebutAgeCible(), pub.getFinAgeCible(), pub.getDateDebut().toString(),
 				pub.getDateFin().toString(), typefile);
 		PubWithImg.setCout(coutPub);
+		PubWithImg.setNbrInitialVueCible(CountUserCible(pub.getDebutAgeCible(),pub.getFinAgeCible(),pub.getGenderCible().toString()));
 		return publiciteRepository.save(PubWithImg);
 
 	}
 
-	public int NbrUserFemme() {
-		return 0;
-	}
+	public int CountUserCible(int ageCibledebut, int ageCibleFin, String gender) {
+		int nbrUser = 0;
+		if (gender.equals("HOMME")) {
+			nbrUser += NbrUserHommeAgeBetwin(ageCibledebut, ageCibleFin);
+		}
+		if (gender.equals("FEMME")) {
+			nbrUser += NbrUserFemmeAgeBetwin(ageCibledebut, ageCibleFin);
+		}
+		if (gender.equals("TOUS")) {
+			nbrUser += NbrUserAgeBetwin(ageCibledebut, ageCibleFin);
+		}
 
-	public int NbrUserHomme() {
-		return 0;
-	}
-
-	public int NbrUserTotal() {
-		return 0;
+		return nbrUser;
 	}
 
 	public float CalculeCoutTotalPub(String gender, String canal, int ageCibledebut, int ageCibleFin, String dateDebut,
@@ -96,7 +124,7 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		cout += CoutSurTrancheAge(ageCibledebut, ageCibleFin);
 		if (typePub.equals("Video")) {
 			cout += 100;
-		} 
+		}
 		if (typePub.equals("Image"))
 			cout += 50;
 		return cout;
@@ -120,7 +148,7 @@ public class PubliciteServiceImpl implements IPubliciteService {
 	}
 
 	public int DifferenceJourDateDebutEtDateFin(String dateDebut, String dateFin) throws ParseException {
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy",Locale.US);
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 		LocalDate dateD = LocalDate.parse(dateDebut, format);
 		LocalDate dateF = LocalDate.parse(dateFin, format);
 		int periodJour;
@@ -164,7 +192,7 @@ public class PubliciteServiceImpl implements IPubliciteService {
 			return "Video";
 		}
 	}
- 
+
 	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException {
 		String fileName = fileStorageServiceImpl.storeFile(file);
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)

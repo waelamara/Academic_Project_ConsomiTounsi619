@@ -15,8 +15,8 @@ import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
-import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 
 
 @Service
