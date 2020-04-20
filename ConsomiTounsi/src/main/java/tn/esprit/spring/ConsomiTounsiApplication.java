@@ -15,12 +15,13 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import Config.AppProperties;
 import Config.FileStorageProperties;
 
 
 @SpringBootApplication
 @EnableScheduling
-@EnableConfigurationProperties({ FileStorageProperties.class })
+@EnableConfigurationProperties({ FileStorageProperties.class,AppProperties.class })
 public class ConsomiTounsiApplication {
 
 	public static void main(String[] args) {
