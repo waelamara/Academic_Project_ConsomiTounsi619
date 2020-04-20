@@ -65,8 +65,6 @@ public class RestControllerEvents {
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();
-
-
 	
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
 	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
