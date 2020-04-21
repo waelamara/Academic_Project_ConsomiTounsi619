@@ -20,6 +20,6 @@ public interface EventsDAO {
 	void deleteEventsById(long Id);
 	public int saveEvent(Long publicite,Events Events);
 	public void sendSms();
-	//public void removeOldItems();
+	public void removeOldItems();
 
 }

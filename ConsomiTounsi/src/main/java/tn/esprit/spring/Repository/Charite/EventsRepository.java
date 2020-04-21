@@ -11,14 +11,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Stock.Stock;
 @Repository
 public interface EventsRepository extends JpaRepository<Events, Long> {
 	@Query(value = "SELECT * FROM t_events WHERE titre LIKE ?1%", nativeQuery = true)
 	public List<Events> findLikeName(String string);
 	
-	/*@Modifying
+	@Modifying
 	@Transactional
-	@Query("DELETE FROM t_events  e WHERE e.datee < :loca")
-	int removeOlderThan(@Param("date") java.sql.Date date);*/
+	@Query(value = "DELETE FROM t_events WHERE dateE < LOCALTIMESTAMP")
+	public int  removeOlder();
 	
 }

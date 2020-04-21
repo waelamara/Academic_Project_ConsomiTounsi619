@@ -1,5 +1,6 @@
 package tn.esprit.spring.Service.Charite;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -96,13 +99,22 @@ public class EventsDAOImpl implements EventsDAO {
 		    System.out.println(message.getSid());
 		  }
 
+// @Scheduled(cron="* * * ? * *")
+ // @Scheduled(cron="* * * * * ? *" )
+	 //@Scheduled(fixedRate = 1000)
+	 @Scheduled(fixedRate = 2000L)
+	public void removeOldItems() {
 	
+	 eventsRepository.removeOlder();
+	}
+	 @Scheduled(fixedRate = 2000L)
+	   public void cronJobSch() {
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	      Date now = new Date();
+	      String strDate = sdf.format(now);
+	      System.out.println("Java cron job expression:: " + strDate);
 
-	
-	
-
-
-	
+	 }
 
 	
 }
