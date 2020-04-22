@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
 import tn.esprit.spring.Repository.Charite.ChariteRepository;
@@ -105,10 +106,13 @@ public class EventsDAOImpl implements EventsDAO {
 // @Scheduled(cron="* * * ? * *")
 	 @Scheduled(fixedRate = 2000L)
 	public void removeOldItems() {
-		//chariteRepository.deleteById(id);
+	//Events e	= (Events) eventsRepository.findAll();
+	//Charite c =	(Charite) chariteRepository.findAll();
+			eventsRepository.removeOlder();
+
 
 	
-	 eventsRepository.removeOlder();
+	 
 	}
 	 @Scheduled(fixedRate = 2000L)
 	   public void cronJobSch() {

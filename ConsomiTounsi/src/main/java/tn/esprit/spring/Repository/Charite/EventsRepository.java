@@ -19,7 +19,7 @@ public interface EventsRepository extends JpaRepository<Events, Long> {
 	/***delete par date*/
 	@Modifying
 	@Transactional
-	@Query(value = "DELETE FROM tn.esprit.spring.Model.Charite.Events WHERE datee < LOCALTIMESTAMP")
+	@Query(value = "DELETE FROM tn.esprit.spring.Model.Charite.Events  WHERE datee < LOCALTIMESTAMP ")
 	public int  removeOlder();
 	
 }
