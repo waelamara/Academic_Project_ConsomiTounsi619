@@ -14,6 +14,8 @@ public interface LivraisonRepository extends JpaRepository <Livraison, Long> {
 	
 	
 	
+	
+	
 	//SELECT COUNT(*) FROM livraison WHERE `livreur_id` =1
 
 
