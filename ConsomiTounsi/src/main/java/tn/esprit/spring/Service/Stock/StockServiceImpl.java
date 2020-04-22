@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
@@ -66,6 +67,12 @@ stockRepository.save(s);
 
 		}
 
+	}
+
+	@Override
+	public void effectuerCommande(Long idlignecommande) {
+		List<LigneCommande> l=stockRepository.findLigneCommandePayee(idlignecommande);
+		
 	}
 
 
