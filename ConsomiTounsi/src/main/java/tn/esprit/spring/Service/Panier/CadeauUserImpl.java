@@ -37,11 +37,8 @@ public class CadeauUserImpl implements ICadeauUser {
 	public  CadeauUserImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
-<<<<<<< HEAD
+
 	 //@Scheduled(cron="0 * * ? * *")
-=======
-	// @Scheduled(cron="0 * * ? * *")
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
 	public void save ()
 	{
 		 if(cadeauUserRepository.nombreCodeValidee()<10)
