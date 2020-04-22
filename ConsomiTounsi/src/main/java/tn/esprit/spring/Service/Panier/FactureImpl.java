@@ -40,16 +40,23 @@ import tn.esprit.spring.Repository.FactureRepository;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
 
 @Service
-public class FactureDAO implements IFacture {
+public class FactureImpl implements IFacture {
+
 @Autowired
 FactureRepository factureRepository;
+
 @Autowired
 CommandeRepository commandeRepository;
+
 @Autowired
 LigneCommandeRepository ligneCommandeRepository;
+
+
 public Facture findOne(Long id) {
 	return factureRepository.getOne(id);
 }
+
+
 public List<Facture> findAll() {
 	return factureRepository.findAll();
 }
@@ -60,13 +67,19 @@ public Facture  save ( Facture f)
 	f.setDate(LocalDate.now());
 	return factureRepository.save(f);
 }
+
+
 public void Delete(Facture f) {
 	factureRepository.delete(f);
 }
+
+
 public List<lignecommandeproduit> FactureParIdUser( long id) {
 	return factureRepository.FactureParIdUser(id);
 
 }
+
+
 public boolean CreePdf(List<lignecommandeproduit>commandes ,ServletContext context,HttpServletRequest request ,HttpServletResponse reponse ) throws MalformedURLException, IOException
 {
 	List<Commande>cs=commandeRepository.findAll();
@@ -244,6 +257,7 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
 	
 	return true;
 }
+
 
 public void facturepdf (int id_facture){
 	try {

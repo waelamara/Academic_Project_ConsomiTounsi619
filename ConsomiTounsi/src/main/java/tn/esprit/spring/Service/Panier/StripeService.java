@@ -31,8 +31,10 @@ public class StripeService {
 
 	@Autowired
 	UserRepository userRepository;
+	
 	@Autowired
-	CommandeDAO commadeDAO;
+	CommandeImpl commadeDAO;
+	
 	@Autowired
 	CommandeRepository commandeRepository;
 	

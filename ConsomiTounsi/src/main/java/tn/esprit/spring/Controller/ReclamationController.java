@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Service.Reclamation.ReclamationService;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 
 @RestController
 @RequestMapping("/Reclamation")
@@ -27,7 +27,7 @@ public class ReclamationController {
 	ReclamationService ReclamationService;
 	
 	@Autowired
-	CommandeDAO CommandeDAO;
+	CommandeImpl CommandeDAO;
 	
 
 	/*Enregistrer une reclamation*/

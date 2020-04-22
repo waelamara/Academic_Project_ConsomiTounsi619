@@ -24,7 +24,7 @@ import tn.esprit.spring.Repository.LivraisonRepository;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Service.Livraison.LivraisonService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Produit.ProduitServiceImpl;
 
 @RestController
@@ -35,7 +35,7 @@ public class LivraisonContoller {
 	LivraisonService livraisonService;
 
 	@Autowired
-	CommandeDAO CommandeDAO;
+	CommandeImpl CommandeDAO;
 
 	@Autowired
 	LivreurService LivreurService;

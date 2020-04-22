@@ -20,13 +20,17 @@ import tn.esprit.spring.Repository.Produit.ProduitRepository;
 
 
 @Service
-public class LigneCommandeDao implements ILigneCommande {
+public class LigneCommandeImpl implements ILigneCommande {
+	
 	@Autowired
 	LigneCommandeRepository ligneCommandeRepository;
+	
 	@Autowired
 	ProduitRepository produitRepository;
+	
 	@Autowired
 	CommandeRepository commandeRepository;
+	
 	@Autowired
 	UserRepository userRepository;
 	
@@ -35,15 +39,23 @@ public class LigneCommandeDao implements ILigneCommande {
 		return ligneCommandeRepository.panierParIdclient(id);
 
 	}
+	
+	
 	public LigneCommande findOne(Long id) {
 		return ligneCommandeRepository.getOne(id);
 	}
+	
+	
 	public List<LigneCommande> findAll() {
 		return ligneCommandeRepository.findAll();
 	}
+	
+	
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient,Long idCommande){
 		return ligneCommandeRepository.findLigneCommande(idProduit, idClient,idCommande);
 	}
+	
+	
 	public List<lignecommandeproduit> AjouterAuPanier(long idprod, long iduser,LigneCommande lc )
 	{
 		List<lignecommandeproduit>List=ligneCommandeRepository.panierParIdclient(iduser);
@@ -123,6 +135,8 @@ public class LigneCommandeDao implements ILigneCommande {
 				} 
 			return ligneCommandeRepository.panierParIdclient(iduser) ;
 	}
+	
+	
 	public Double PrixTotalCommande(long iduser) {
         double sum = 0D;
         List<lignecommandeproduit>List=ligneCommandeRepository.panierParIdclient(iduser);
@@ -131,13 +145,19 @@ public class LigneCommandeDao implements ILigneCommande {
         }
         return sum;
     }
+	
+	
 	public LigneCommande save(LigneCommande lc) {
 		return ligneCommandeRepository.save(lc);
 	}
+	
+	
 	public List<Object[]> NumCategorie()
 	{
 		return ligneCommandeRepository.NumCategorie();
 	}
+	
+	
 	public int NumProduitVendu(Long idProduit)
 	{
 		return ligneCommandeRepository.NumProduitVendu(idProduit);

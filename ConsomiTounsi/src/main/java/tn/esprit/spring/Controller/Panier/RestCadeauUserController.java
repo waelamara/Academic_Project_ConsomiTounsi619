@@ -18,23 +18,30 @@ import tn.esprit.spring.Service.Panier.CadeauUserImpl;
 @RestController
 @RequestMapping("/Cadeau")
 public class RestCadeauUserController {
+
 @Autowired
 CadeauUserImpl cadeauUserImpl;
+
 @PostMapping("/ajouter")
+//http://localhost:8081/Cadeau/ajouter
 public void save ()
 {
 	
  cadeauUserImpl.save();
 }
+
+//http://localhost:8081/Cadeau/choisir/{idUser}
 @PutMapping("/choisir/{idUser}")
 public String CadeauUser(@PathVariable(value = "idUser")Long idUser) throws MessagingException
 {
 	return cadeauUserImpl.CadeauUser(idUser);
 }
 
+//http://localhost:8081/Cadeau/montantCadeau/{code}
 @GetMapping("/montantCadeau/{code}")
 public float montantCadeau(@PathVariable(value = "code")String code)
 {
 	return cadeauUserImpl.montantCadeau(code);
 }
+
 }
