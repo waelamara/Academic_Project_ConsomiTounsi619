@@ -12,11 +12,17 @@ import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.lignecommandeproduit;
 
 public interface IFacture {
+	
 	public Facture findOne(Long id);
+	
 	public List<Facture> findAll();
+	
 	public Facture  save ( Facture f);
+	
 	public void Delete(Facture f);
+	
 	public List<lignecommandeproduit> FactureParIdUser( long id);
+	
 	public boolean CreePdf(List<lignecommandeproduit>commandes ,ServletContext context,HttpServletRequest request ,HttpServletResponse reponse ) throws MalformedURLException, IOException;
 	
 }

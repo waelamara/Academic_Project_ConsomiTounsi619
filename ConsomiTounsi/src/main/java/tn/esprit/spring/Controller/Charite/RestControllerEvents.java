@@ -40,7 +40,7 @@ import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
 import tn.esprit.spring.Service.GestionUser.UserService;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 import tn.esprit.spring.Model.Commande;
@@ -55,7 +55,7 @@ public class RestControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
 	@Autowired
-	CommandeDAO commandeDao;
+	CommandeImpl commandeDao;
 	@Autowired
 	ChariteDAO chariteDAO;
 	@Autowired
@@ -65,8 +65,6 @@ public class RestControllerEvents {
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();
-
-
 	
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
 	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
@@ -481,5 +479,6 @@ public class RestControllerEvents {
 			com = chariteDAO.getCharite(u1.getId());
 			return ResponseEntity.ok().body(com);
 		}
+		
 		
 }

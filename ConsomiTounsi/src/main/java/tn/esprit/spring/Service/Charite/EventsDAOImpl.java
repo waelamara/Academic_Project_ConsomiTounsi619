@@ -1,5 +1,6 @@
 package tn.esprit.spring.Service.Charite;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,13 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
+import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
 import tn.esprit.spring.Repository.Charite.PubRepository;
 import tn.esprit.spring.security.services.UserDetailsImpl;
@@ -30,6 +35,8 @@ public class EventsDAOImpl implements EventsDAO {
 	private EventsRepository eventsRepository;
 	@Autowired
 	PubRepository publiciteRepository;
+	@Autowired
+	private ChariteRepository chariteRepository;
 	private JavaMailSender javaMailSender;
 
 	@Override
@@ -96,13 +103,25 @@ public class EventsDAOImpl implements EventsDAO {
 		    System.out.println(message.getSid());
 		  }
 
-	
+// @Scheduled(cron="* * * ? * *")
+	 @Scheduled(fixedRate = 2000L)
+	public void removeOldItems() {
+	//Events e	= (Events) eventsRepository.findAll();
+	//Charite c =	(Charite) chariteRepository.findAll();
+			eventsRepository.removeOlder();
+
 
 	
-	
+	 
+	}
+	 @Scheduled(fixedRate = 2000L)
+	   public void cronJobSch() {
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	      Date now = new Date();
+	      String strDate = sdf.format(now);
+	      System.out.println("Java cron job expression:: " + strDate);
 
-
-	
+	 }
 
 	
 }

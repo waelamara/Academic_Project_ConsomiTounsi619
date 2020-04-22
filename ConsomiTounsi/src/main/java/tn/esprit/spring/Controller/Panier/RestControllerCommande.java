@@ -20,23 +20,30 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 
 @RestController
-@RequestMapping("/commande")
+@RequestMapping("/Commande")
 public class RestControllerCommande {
+	
 	@Autowired
-	CommandeDAO commandeDao;
+	CommandeImpl commandeDao;
 	
 	@PostMapping("/ajouter")
 	public Commande AjouterCommande(@Valid @RequestBody Commande c)
 	{
 		return commandeDao.save(c);
 	}
+	
+	
+	//http://localhost:8081/Commande/afficher
 	@GetMapping("/afficher")
 	public List<Commande> getAllCommande() {
 		return commandeDao.findAll();
 	}
+	
+	
+	//http://localhost:8081/Commande/delete/{id}
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Commande> DeleteCommande(@PathVariable(value = "id") Long idCommande) {
 		Commande c =commandeDao.findOne(idCommande);
@@ -46,27 +53,39 @@ public class RestControllerCommande {
 		commandeDao.Delete(c);
 		return ResponseEntity.ok().build();
 	}
+	
+	
 	@GetMapping("rechercheparcode/{code}")
+	//http://localhost:8081/Commande/rechercheparcode/{code}
 	public List<Commande>Commandeparcode(@PathVariable(value = "code") long code) {
 	
 		return commandeDao.Commandeparcode(code);
 	}
 	 
 
-	
+	//http://localhost:8081/Commande/rechercheparcode/{type}
 	@GetMapping("/recherchetype/{type}")
 	public List<Commande> CommandeparType(@PathVariable(value = "type") String type) {
 		return commandeDao.CommandeparType(type);
 	}
-	@GetMapping("/recherche/{idClient}")
+	
+	
+	//http://localhost:8081/Commande/rechercheparclient/{idClient}
+	@GetMapping("/rechercheparclient/{idClient}")
 	public List<Commande> CommandeparClient(@PathVariable(value = "idClient") int id) {
 		return commandeDao.CommandeparClient(id);
 	}
+	
+	
+	//http://localhost:8081/Commande/payerenligne/{idCommande}/{idClient}
 	@PutMapping("/payerenligne/{idCommande}/{idClient}")
 	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
 	{
 		commandeDao.PayerEnLigne( idCommande,id);
 	}
+	
+	
+	//http://localhost:8081/Commande/payerenligne/{idCommande}/{idClient}/{code}
 	@PutMapping("/payerenligne/{idCommande}/{idClient}/{code}")
 	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
@@ -74,10 +93,12 @@ public class RestControllerCommande {
 		{
 			commandeDao.PayerEnLigne( idCommande,id);
 		}
-	     
-	     
+	          
 		commandeDao.PayerEnLigne(idCommande,id,code);
 	}
+	
+	
+	//http://localhost:8081/Commande/payerporteaporte/{idCommande}/{idClient}
 	@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
 	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
@@ -87,13 +108,18 @@ public class RestControllerCommande {
 		}	
 		commandeDao.PayerPorteaPorte(idCommande,id,code);
 	}
+	
+	
 	/*@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
 	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
 	{
 		
 		commandeDao.PayerPorteaPorte(idCommande,id);
 	}*/
-	@GetMapping("/ParMois")
+	
+	
+	@GetMapping("/commandeParMois")
+	//http://localhost:8081/Commande//commandeParMois
 	public List<Object[]> NumCommadeParMOIS()
 	{
 		return commandeDao.NumCommadeParMOIS();
