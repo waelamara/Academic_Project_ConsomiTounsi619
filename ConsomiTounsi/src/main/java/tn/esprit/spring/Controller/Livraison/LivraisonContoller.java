@@ -1,5 +1,6 @@
 package tn.esprit.spring.Controller.Livraison;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Livraison;
@@ -58,12 +58,13 @@ public class LivraisonContoller {
 	/* Enregistrer un livreur */
 	@PostMapping("/ajout")
 
-	public Livraison createLivreur(@Valid @RequestBody Livraison liv) {
+	public Livraison createLivrison(@Valid @RequestBody Livraison liv) {
 		if ((liv.getCommande_id() != 0) && (liv.getLivreur_id() != 0)) {
 			Commande c = CommandeDAO.findOne(liv.getCommande_id());
 			liv.setCommande(c);
 			Livreur L = LivreurService.findOne(liv.getLivreur_id());
 			liv.setLivreur(L);
+			liv.setDateAffecLivr(LocalDate.now());
 			return livraisonService.save(liv);
 		} else
 			return null;
@@ -106,8 +107,11 @@ public class LivraisonContoller {
 		}
 		float PrixpoidTotal = Totalpoid * 2;
 		float prixliv = 10;
-		float fraistotalliv = prixliv + PrixpoidTotal;
-		System.out.println("aaaaaaaaaaaaaaaaa" + fraistotalliv);
+		float prixMoyenT=0;
+		String typeMoyenT =Liv1.getMoyenTL().toString();
+		if (typeMoyenT=="Voiture"){prixMoyenT=5;}else prixMoyenT=3;
+		float fraistotalliv = prixliv + PrixpoidTotal+prixMoyenT;
+	    
 		return fraistotalliv;
 		
 	}
