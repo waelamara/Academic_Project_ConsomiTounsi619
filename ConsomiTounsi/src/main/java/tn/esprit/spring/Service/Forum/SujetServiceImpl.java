@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Model.Forum.VoteSujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.UserRepository;
@@ -34,7 +35,7 @@ public class SujetServiceImpl implements ISujetService {
 	private UserRepository userRepository;
 	@Autowired
 	private ProduitRepository produitRepository;
-	
+
 	private JavaMailSender javaMailSender;
 
 	@Autowired
@@ -61,6 +62,8 @@ public class SujetServiceImpl implements ISujetService {
 	public List<Sujet> getAllSujets() {
 		return sujetRepository.findAllOrderbyDate();
 	}
+	
+	
 
 	@Override
 	public int deleteSujetById(Long sujetId,Long userId) {

@@ -100,6 +100,7 @@ public ResponseEntity<?> deleteVote(@PathVariable("idsujet") Long idsujet, @Path
 	ivoteSujetservice.deletevoteById(idsujet, iduser);
 	return ResponseEntity.ok().build();	
 }
+//http://localhost:8081/voteSujet/affecterpoint/3
 @PutMapping(value = "/affecterpoint/{idsujet}") 
 @ResponseBody
 public ResponseEntity<?> affecterpoint(@PathVariable("idsujet") Long idsujet) {
