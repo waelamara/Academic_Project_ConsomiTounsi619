@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import tn.esprit.spring.security.oauth2.UserPrincipal;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 
@@ -24,6 +25,7 @@ public class JwtUtils {
 	public String generateJwtToken(Authentication authentication) {
 
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+       // UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
 		return Jwts.builder()
 				.setSubject((userPrincipal.getUsername()))

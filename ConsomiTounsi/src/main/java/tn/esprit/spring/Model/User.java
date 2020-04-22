@@ -62,7 +62,7 @@ public class User implements Serializable {
 	private String tel;
 
     private int pointFidelite;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -73,7 +73,44 @@ public class User implements Serializable {
  	private Sexe sexe;
     private String interet;
     
-    public String getInteret() {
+    @Column(name = "EtatAcc")
+	private Boolean EtatAcc=true;
+    
+    @Column(name = "enabled")
+    private boolean enabled=false;
+    
+    
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+    
+    private String providerId;
+    
+   
+	public AuthProvider getProvider() {
+		return provider;
+	}
+	public void setProvider(AuthProvider provider) {
+		this.provider = provider;
+	}
+	public String getProviderId() {
+		return providerId;
+	}
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Boolean getEtatAcc() {
+		return EtatAcc;
+	}
+	public void setEtatAcc(Boolean etatAcc) {
+		EtatAcc = etatAcc;
+	}
+	public String getInteret() {
 		return interet;
 	}
 	public void setInteret(String interet) {
@@ -105,7 +142,9 @@ public class User implements Serializable {
 		this.dateN = dateN;
 		this.tel = tel;
 	}
-	public User(String firstName, String lastName, String username, String password, String email, String address,
+	
+	
+	public User(String username, String email, String password, String firstName, String lastName, String address,
 			Date dateN, String tel, Sexe sexe) {
 		super();
 		this.firstName = firstName;

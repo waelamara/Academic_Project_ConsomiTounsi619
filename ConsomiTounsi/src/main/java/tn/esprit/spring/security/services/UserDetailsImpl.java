@@ -1,19 +1,24 @@
 package tn.esprit.spring.security.services;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import tn.esprit.spring.Model.User;
+import tn.esprit.spring.security.oauth2.UserPrincipal;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements OAuth2User, UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -31,23 +36,29 @@ public class UserDetailsImpl implements UserDetails {
 	private String tel;
 	private Date dateN;
 
+    private Boolean EtatAcc=true;
+
 
 	private Collection<? extends GrantedAuthority> authorities;
+	private Map<String, Object> attributes;
 
 	public UserDetailsImpl(Long id, String username, String email, String password,String firstName, String lastName, String address,
-			Date dateN,String tel,
+			Date dateN,String tel,Boolean EtatAcc,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.firstName= firstName;
-		this.lastName=address;
+		this.lastName=lastName;
 		this.address=address;
 		this.dateN=dateN;
 		this.tel=tel;
+		this.EtatAcc=EtatAcc;
 		this.authorities = authorities;
 	}
+	
+	
 
 	public static UserDetailsImpl build(User user) {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
@@ -64,7 +75,20 @@ public class UserDetailsImpl implements UserDetails {
 				user.getAddress(),
 				user.getDateN(),
 				user.getTel(),
+				user.getEtatAcc(),
 				authorities);
+	}
+	
+	public static UserDetailsImpl create(User user, Map<String, Object> attributes) {
+		UserDetailsImpl userDetailsImpl = UserDetailsImpl.build(user);
+		userDetailsImpl.setAttributes(attributes);
+        return userDetailsImpl;
+    }
+	
+	
+
+	public void setAttributes(Map<String, Object> attributes) {
+		this.attributes = attributes;
 	}
 
 	@Override
@@ -159,6 +183,14 @@ public class UserDetailsImpl implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	public Boolean getEtatAcc() {
+		return EtatAcc;
+	}
+
+	public void setEtatAcc(Boolean etatAcc) {
+		EtatAcc = etatAcc;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -169,4 +201,17 @@ public class UserDetailsImpl implements UserDetails {
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
 	}
+
+	@Override
+	public Map<String, Object> getAttributes() {
+		// TODO Auto-generated method stub
+		return attributes;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return String.valueOf(id);
+	}
+
 }

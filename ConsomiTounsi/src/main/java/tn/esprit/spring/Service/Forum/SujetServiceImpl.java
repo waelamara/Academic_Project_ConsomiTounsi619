@@ -20,10 +20,10 @@ import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Forum.VoteSujet;
 import tn.esprit.spring.Model.Produit.Produit;
-import tn.esprit.spring.Repository.ProduitRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Forum.CategorieSujetRepository;
 import tn.esprit.spring.Repository.Forum.SujetRepository;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 
 @Service
 public class SujetServiceImpl implements ISujetService {

@@ -1,4 +1,4 @@
-package tn.esprit.spring.DAO.Charite;
+package tn.esprit.spring.Service.Charite;
 
 import java.util.List;
 
@@ -9,4 +9,5 @@ public interface EndroitDAO {
 	public int saveEndroit(Long ideventss,Endroit Endroit);
 	Endroit findOne(Long id);
 	Endroit saveEndroit1(Endroit Endroit);
+	
 }

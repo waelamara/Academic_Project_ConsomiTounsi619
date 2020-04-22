@@ -1,9 +1,23 @@
 package tn.esprit.spring.Repository.Stock;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.Stock.Stock;
 
 public interface StockRepository extends JpaRepository <Stock, Long>  {
+	
+	@Query(value = "SELECT * FROM Stock WHERE id_produit_id LIKE ?1% AND MONTH(NOW())-MONTH(validite)<2 and YEAR(validite)=YEAR(NOW())", nativeQuery = true)
+	public List<Stock> findStockbyProduit(Long idstock);
+	
+	
+	
+
+	@Query(value = "SELECT * FROM LigneCommande WHERE status='payee' AND produit_id LIKE ?1%", nativeQuery = true)
+	public List<LigneCommande> findLigneCommandePayee(Long idlignecommande);
+	
 
 }

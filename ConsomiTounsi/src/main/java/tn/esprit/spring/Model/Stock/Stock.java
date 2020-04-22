@@ -30,11 +30,45 @@ public class Stock implements Serializable{
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date validite;
 	private float remise;
+	private float prixdevente;
+	private float prixremise;
 	
     @ManyToOne
 	private Produit idProduit;
     
     
+
+	public Date getValidite() {
+		return validite;
+	}
+
+	public void setValidite(Date validite) {
+		this.validite = validite;
+	}
+
+	public float getRemise() {
+		return remise;
+	}
+
+	public void setRemise(float remise) {
+		this.remise = remise;
+	}
+
+	public float getPrixdevente() {
+		return prixdevente;
+	}
+
+	public void setPrixdevente(float prixdevente) {
+		this.prixdevente = prixdevente;
+	}
+
+	public float getPrixremise() {
+		return prixremise;
+	}
+
+	public void setPrixremise(float prixremise) {
+		this.prixremise = prixremise;
+	}
 
 	public Long getIdstock() {
 		return idstock;
@@ -79,6 +113,16 @@ public class Stock implements Serializable{
 		this.idstock = idstock;
 		this.nom_stock = nom_stock;
 		this.quantite = quantite;
+	}
+
+	public Stock( String nom_stock, int quantite, Date validite, float prixdevente, Produit idProduit) {
+		super();
+		
+		this.nom_stock = nom_stock;
+		this.quantite = quantite;
+		this.validite = validite;
+		this.prixdevente = prixdevente;
+		this.idProduit = idProduit;
 	}
 
 	
