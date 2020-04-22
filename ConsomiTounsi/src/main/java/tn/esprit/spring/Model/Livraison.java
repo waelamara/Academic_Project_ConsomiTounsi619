@@ -1,7 +1,7 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
-
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +35,9 @@ public class Livraison implements Serializable {
 	long commande_id;
 	@Transient
 	long livreur_id;
+	@Column(name = "DateAffecLivr")
+	// @Temporal(TemporalType.DATE)
+	private LocalDate DateAffecLivr;
 
 	public long getId() {
 		return id;
@@ -104,12 +107,20 @@ public class Livraison implements Serializable {
 		this.livreur_id = livreur_id;
 	}
 
+	public LocalDate getDateAffecLivr() {
+		return DateAffecLivr;
+	}
+
+	public void setDateAffecLivr(LocalDate dateAffecLivr) {
+		DateAffecLivr = dateAffecLivr;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Livraison(int id, String lieu, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
-			tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande) {
+	public Livraison(long id, String lieu, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
+			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande) {
 		super();
 		this.id = id;
 		Lieu = lieu;
@@ -117,6 +128,7 @@ public class Livraison implements Serializable {
 		MoyenTL = moyenTL;
 		this.commande_id = commande_id;
 		this.livreur_id = livreur_id;
+		DateAffecLivr = dateAffecLivr;
 		Livreur = livreur;
 		Commande = commande;
 	}

@@ -54,8 +54,18 @@ public List<Stock> allStock() {
 }
 
 ////////////////////////////////////////////////////////////////////////
-
-
+@PutMapping("/affecterStockAProduit/{ids}/{idp}")
+public void affecterStockAProduit(@PathVariable(value = "ids") Long idstock,@PathVariable(value = "idp") Long Idproduit){
+	
+	stockservice.affecterStockAProduit(idstock, Idproduit);
+}
+///////////////////////////////////////////
+@PutMapping("/PrixVenteParStock/{idp}")
+public void PrixVenteParStock(@PathVariable(value = "idp") Long idproduit){
+	
+	stockservice.PrixVenteParStock(idproduit);
+	
+}
 
 
 /////////////////////////////////////////////////////////////////////////////

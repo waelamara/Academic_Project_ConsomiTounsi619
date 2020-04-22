@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.Model.Livreur;
+import tn.esprit.spring.Repository.LivreurRepository;
 import tn.esprit.spring.Service.Livreur.LivreurService;
 
 @RestController
@@ -22,21 +23,23 @@ import tn.esprit.spring.Service.Livreur.LivreurService;
 public class LivreurController {
 	
 	@Autowired
-	LivreurService livreurDAO;
+	LivreurService LivreurService;
+	@Autowired
+	LivreurRepository LivreurRepository;
 	
 	/*Enregistrer un livreur*/
 	@PostMapping("/ajout")
 	
 	public Livreur createLivreur(@Valid @RequestBody Livreur liv)
 	{
-		return livreurDAO.save(liv);
+		return LivreurService.save(liv);
 	}
 	
 	/*get all employees*/
 	@GetMapping("/affichall")
 	public List<Livreur> getAllLivreur(){
 		
-		return livreurDAO.findall();
+		return LivreurService.findall();
 		
 	}
 	
@@ -45,15 +48,25 @@ public class LivreurController {
 	
 	public Livreur updateLiv(@RequestBody Livreur liv)
 	{
-		return livreurDAO.updateLiv(liv);
+		return LivreurService.updateLiv(liv);
 	}
   
   @DeleteMapping("/delete/{id}")
 	
 	public void  delete(@PathVariable(value="id") long id)
 	{
-		 livreurDAO.delete(id);
+	  LivreurService.delete(id);
 	}
+  
+  @GetMapping("/Prime/{id}")
+  public int  Prime(@PathVariable(value="id") int id)
+	{
+	  int NbMission =LivreurRepository.NbMission_livreur(id);
+	  
+	  return NbMission;
+	  
+	}
+  
 	
 	
 	

@@ -14,15 +14,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 import tn.esprit.spring.security.jwt.AuthEntryPointJwt;
 import tn.esprit.spring.security.jwt.AuthTokenFilter;
+import tn.esprit.spring.security.oauth2.CustomOAuth2UserService;
+import tn.esprit.spring.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import tn.esprit.spring.security.oauth2.OAuth2AuthenticationFailureHandler;
+import tn.esprit.spring.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import tn.esprit.spring.security.services.UserDetailsServiceImpl;
+
+import org.springframework.security.config.BeanIds;
+
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-		// securedEnabled = true,
-		// jsr250Enabled = true,
+		securedEnabled = true,
+		jsr250Enabled = true,
 		prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -30,22 +38,43 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
+	
+	 @Autowired
+	    private CustomOAuth2UserService customOAuth2UserService;
+
+	    @Autowired
+	    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+	    @Autowired
+	    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+	    
+	    @Autowired
+	    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+	
 
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
 	}
+	
+	 @Bean
+	 public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+	        return new HttpCookieOAuth2AuthorizationRequestRepository();
+	 }
 
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
-	@Bean
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+	
+   
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -59,8 +88,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/**").permitAll()
 			.antMatchers("/api/test/**").permitAll()
-			.anyRequest().authenticated();
+			.anyRequest().authenticated()
+			.and()
+            .oauth2Login()
+                .authorizationEndpoint()
+                    .baseUri("/oauth2/authorize")
+                    .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                    .and()
+                .redirectionEndpoint()
+                    .baseUri("/oauth2/callback/*")
+                    .and()
+                .userInfoEndpoint()
+                    .userService(customOAuth2UserService)
+                    .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
+	
+	
 }

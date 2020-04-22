@@ -62,7 +62,7 @@ public class User implements Serializable {
 	private String tel;
 
     private int pointFidelite;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -76,7 +76,35 @@ public class User implements Serializable {
     @Column(name = "EtatAcc")
 	private Boolean EtatAcc=true;
     
-    public Boolean getEtatAcc() {
+    @Column(name = "enabled")
+    private boolean enabled=false;
+    
+    
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+    
+    private String providerId;
+    
+   
+	public AuthProvider getProvider() {
+		return provider;
+	}
+	public void setProvider(AuthProvider provider) {
+		this.provider = provider;
+	}
+	public String getProviderId() {
+		return providerId;
+	}
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Boolean getEtatAcc() {
 		return EtatAcc;
 	}
 	public void setEtatAcc(Boolean etatAcc) {
