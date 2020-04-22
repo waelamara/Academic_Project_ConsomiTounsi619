@@ -26,15 +26,20 @@ import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Stock.StockRepository;
 @Service
-public class CommandeDAO implements ICommande {
+public class CommandeImpl implements ICommande {
+	
 	@Autowired
 	CommandeRepository commandeRepository;
+	
 	@Autowired
 	LigneCommandeRepository ligneCommandeRepository;
+	
 	@Autowired
 	StockRepository stockRepository;
+	
 	@Autowired
 	UserRepository userRepository;
+	
 	@Autowired
 	CadeauUserRepository cadeauUserRepository; 
 
@@ -42,9 +47,8 @@ public class CommandeDAO implements ICommande {
 	{
 	    
 	ZoneId zid = ZoneId.of("Africa/Tunis");
-		c.setDate(LocalDate.now(zid));
-		
-		return commandeRepository.save(c);
+	c.setDate(LocalDate.now(zid));
+	return commandeRepository.save(c);
 	}
 	
     
@@ -52,13 +56,19 @@ public class CommandeDAO implements ICommande {
 		return commandeRepository.CommandeparType(type);
 
 	}
+	
+	
 	public List<Commande> CommandeparClient(int id) {
 		return commandeRepository.CommandeparClient(id);
 
 	}
+	
+	
 	public List<Commande> findAll() {
 		return commandeRepository.findAll();
 	}
+	
+	
 	public void Delete(Commande c) {
 		commandeRepository.delete(c);
 	}
@@ -66,10 +76,14 @@ public class CommandeDAO implements ICommande {
 	public Commande findOne(Long id) {
 		return commandeRepository.getOne(id);
 	}
+	
+	
 	public List< Commande> Commandeparcode( long code) {
 		return commandeRepository.Commandeparcode(code);
 
 	}
+	
+	
 	public void PayerEnLigne(int idCommande,int iduser)
 	{
 		Commande c = commandeRepository.getOne((long) idCommande);
@@ -154,10 +168,6 @@ public class CommandeDAO implements ICommande {
 	
 	
 	}
-	
-	
-	
-	
 		
 		
 		/* for (LigneCommande l : Linges)

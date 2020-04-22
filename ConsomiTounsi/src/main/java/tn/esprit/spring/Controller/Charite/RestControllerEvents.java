@@ -40,7 +40,7 @@ import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
 import tn.esprit.spring.Service.GestionUser.UserService;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 import tn.esprit.spring.Model.Commande;
@@ -55,7 +55,7 @@ public class RestControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
 	@Autowired
-	CommandeDAO commandeDao;
+	CommandeImpl commandeDao;
 	@Autowired
 	ChariteDAO chariteDAO;
 	@Autowired

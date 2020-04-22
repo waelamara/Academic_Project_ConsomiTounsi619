@@ -30,15 +30,19 @@ public class CadeauUserImpl implements ICadeauUser {
 	
 	@Autowired
 	CadeauUserRepository cadeauUserRepository;
+	
 	@Autowired
 	UserRepository userRepository;
+	
 	private JavaMailSender javaMailSender;
+	
 	@Autowired
 	public  CadeauUserImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
 
-	 //@Scheduled(cron="0 * * ? * *")
+
+	//@Scheduled(cron="0 * * ? * *")
 	public void save ()
 	{
 		 if(cadeauUserRepository.nombreCodeValidee()<10)
@@ -48,18 +52,13 @@ public class CadeauUserImpl implements ICadeauUser {
 			CadeauUser c = new CadeauUser();
 	   c.setMontant((int) (Math.random() * (1000 - 0 )));
 	   c.setCode(givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect());
-
-		
-		 cadeauUserRepository.save(c);
+	   cadeauUserRepository.save(c);
 		}
 		
 		 }
 	}
 
-		
-		
 	
-
 	public String givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect() {
 	    int leftLimit = 48; // numeral '0'
 	    int rightLimit = 122; // letter 'z'
@@ -74,6 +73,8 @@ public class CadeauUserImpl implements ICadeauUser {
 	 
 	    return generatedString;
 	}
+	
+	
 	public long random(List<String> pp )
 	{
 		long random=0;
@@ -89,17 +90,13 @@ public class CadeauUserImpl implements ICadeauUser {
 		return random;
 	}
 	
+	
 	public String CadeauUser(Long idUser) throws MessagingException
 	{
-		User u = userRepository.getOne(idUser);
-	
-		  
+		User u = userRepository.getOne(idUser);  
 	String a="";
 	float montant =0;
-		
-			
-		
-			
+				
 			if (u.getPointFidelite()<=299)
 			{
 				long random1 =  random(cadeauUserRepository.idCadeauMax300());
@@ -343,11 +340,14 @@ public class CadeauUserImpl implements ICadeauUser {
 	{
 		return cadeauUserRepository.montantCadeau(code);
 	}
+	
+	
 	public CadeauUser verifierCode(String code,int idUser)
 	{
 		return cadeauUserRepository.verifierCode(code,idUser);
 	
 	}
+	
 	
 	public float nombreCodeValidee()
 	{

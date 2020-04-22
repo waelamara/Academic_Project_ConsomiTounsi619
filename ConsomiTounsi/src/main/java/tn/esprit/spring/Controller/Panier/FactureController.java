@@ -21,39 +21,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.lignecommandeproduit;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
-import tn.esprit.spring.Service.Panier.FactureDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
+import tn.esprit.spring.Service.Panier.FactureImpl;
 @Controller
 public class FactureController {
+
 	@Autowired
-	FactureDAO factureDAO;
+	FactureImpl factureDAO;
+	
 	@Autowired
-	CommandeDAO commandeDao;
+	CommandeImpl commandeDao;
+	
 	@Autowired
 	ServletContext context;
+	
+	
 	public Facture AjouterFacture( Long idCommande, Facture f) 
 	
 	{
 		Commande c =  commandeDao.findOne( idCommande);
 		f.setCommande(c);
-		
 		return	factureDAO.save(f);
-		
 	}
+	
+	
 	public List<Facture > getAllFacture(){
 		
 		return factureDAO.findAll();
 		
 	}
+	
+	
 	public void DeleteProduit( Long idFacture) {
 		Facture f = factureDAO.findOne(idFacture);
 		factureDAO.Delete(f);
-		
 	}
+	
+	
 	public List<lignecommandeproduit> panierParIdclient(long id) {
 		
 		return factureDAO.FactureParIdUser(id);
 	}
+	
+	
 	public void createpdf(HttpServletRequest request ,HttpServletResponse reponse,@PathVariable(value = "idUser") long id) throws MalformedURLException, IOException 
 	{
 	List<lignecommandeproduit> commandes =factureDAO.FactureParIdUser(id);
