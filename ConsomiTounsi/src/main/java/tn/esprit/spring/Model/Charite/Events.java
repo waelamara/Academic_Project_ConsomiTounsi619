@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class Events implements Serializable {
 	private Pub publicite;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "eventss")
 	private Set<Endroit> endroit;
-	@OneToMany(mappedBy = "idevents")
+	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER,mappedBy = "idevents")
 	public Set<Charite> charite;
 
 	

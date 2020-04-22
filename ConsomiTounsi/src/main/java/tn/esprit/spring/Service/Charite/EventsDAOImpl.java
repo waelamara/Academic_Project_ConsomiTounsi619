@@ -23,6 +23,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
+import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
 import tn.esprit.spring.Repository.Charite.PubRepository;
 import tn.esprit.spring.security.services.UserDetailsImpl;
@@ -33,6 +34,8 @@ public class EventsDAOImpl implements EventsDAO {
 	private EventsRepository eventsRepository;
 	@Autowired
 	PubRepository publiciteRepository;
+	@Autowired
+	private ChariteRepository chariteRepository;
 	private JavaMailSender javaMailSender;
 
 	@Override
@@ -100,10 +103,10 @@ public class EventsDAOImpl implements EventsDAO {
 		  }
 
 // @Scheduled(cron="* * * ? * *")
- // @Scheduled(cron="* * * * * ? *" )
-	 //@Scheduled(fixedRate = 1000)
 	 @Scheduled(fixedRate = 2000L)
 	public void removeOldItems() {
+		//chariteRepository.deleteById(id);
+
 	
 	 eventsRepository.removeOlder();
 	}
