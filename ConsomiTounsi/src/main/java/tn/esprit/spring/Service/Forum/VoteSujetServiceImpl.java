@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
@@ -102,7 +103,7 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 
 	@Override
 	public int countdislik(Long sujetId) {
-		return voteSujetRepository.countdislik(sujetId);
+		return voteSujetRepository.countdislike(sujetId);
 	}
 
 	@Override
@@ -113,6 +114,45 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 			noms.add(v.getIdUser().getFirstName()+" "+v.getIdUser().getLastName());
 			return noms;	
 	}
+	
 
+	@Override
+	public void affecterdespoints(Long sujetId){
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		User user =userRepository.findById(sujet.getIdUser().getId()).get();
+		int nblikeP=sujet.getNbLike();
+		int rest;
+		int nblike=voteSujetRepository.countlike(sujetId);
+		sujet.setNbLike(nblike);
+		int nbdislike=voteSujetRepository.countdislike(sujetId);
+		sujet.setNbDislike(nbdislike);
+		sujetRepository.save(sujet);
+		int nbpoint=sujet.getNbpoint();
+		int nbpointFd=user.getPointFidelite(); 
+     	if(nblike-nblikeP>0){
+   		nbpoint=nbpoint+(nblike-nblikeP);
+   		nbpointFd=nbpointFd+(nbpoint/4);			
+   		if( nbpoint>=4){
+   		rest=nbpoint%4;
+   		nbpoint=rest;}
+   		/*if(//nbpoint%4==0)
+  		nbpoint=0;*/
+   		}
+		user.setPointFidelite(nbpointFd);
+		sujet.setNbpoint(nbpoint);
+		sujetRepository.save(sujet);
+		userRepository.save(user);
+	}
+	
+	//@Scheduled(cron="0 * * ? * *")
+	public List<Sujet> Testaffectation (){
+		List<Sujet>sujets= new ArrayList<>();
+		List<Sujet>sujets2= new ArrayList<>();
+		sujets=sujetRepository.findAllOrderbyDate();	
+		for(Sujet v :sujets)
+		affecterdespoints(v.getId());
+		sujets2=sujetRepository.findAllOrderbyDate();
+		return sujets2;	
+	}
 	
 }

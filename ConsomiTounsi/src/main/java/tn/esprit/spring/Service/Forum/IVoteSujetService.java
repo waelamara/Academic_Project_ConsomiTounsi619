@@ -18,4 +18,5 @@ public interface IVoteSujetService {
     public int countlike(Long sujetId);    
     public int countdislik(Long sujetId);
     public List<String> findNomdesUsersVoter(Long sujetId);
+    public void affecterdespoints(Long sujetId);
 }
