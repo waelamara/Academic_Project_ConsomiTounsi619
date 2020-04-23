@@ -236,7 +236,7 @@ section
 .button
 {
 	display: inline-block;
-	background: #0e8ce4;
+	background: #eb141a;
 	border-radius: 5px;
 	height: 48px;
 	-webkit-transition: all 200ms ease;
@@ -386,7 +386,7 @@ section
 }
 .standard_dropdown li a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .standard_dropdown li a i
 {
@@ -527,7 +527,7 @@ section
 {
 	font-size: 36px;
 	font-weight: 500;
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .header_search
 {
@@ -699,7 +699,7 @@ section
 }
 .custom_list li a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 select
 {
@@ -770,7 +770,7 @@ select option
 }
 .wishlist_text a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .wishlist_count
 {
@@ -785,7 +785,7 @@ select option
 	right: -14px;
 	width: 23px;
 	height: 23px;
-	background: #0e8ce4;
+	background: #eb141a;
 	border-radius: 50%;
 	text-align: center;
 }
@@ -822,7 +822,7 @@ select option
 }
 .cart_text a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .cart_price
 {
@@ -862,7 +862,7 @@ select option
 {
 	width: 293px;
 	height: 100%;
-	background: #0e8ce4;
+	background: #eb141a;
 	padding-left: 35px;
 	cursor: pointer;
 	z-index: 1;
@@ -958,7 +958,7 @@ select option
 }
 .cat_menu li a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .cat_menu li a i
 {
@@ -1055,7 +1055,7 @@ select option
 .page_menu_content
 {
 	height: 0px;
-	background: #0e8ce4;
+	background: #eb141a;
 	padding-left: 15px;
 	padding-right: 15px;
 	overflow: hidden;
@@ -1428,7 +1428,7 @@ select option
 	left: 0;
 	height: 100%;
 	border-radius: 5px;
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .deals_timer
 {
@@ -1602,7 +1602,7 @@ select option
 	left: 0;
 	width: 80px;
 	height: 2px;
-	background: #0e8ce4;
+	background: #eb141a;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
@@ -1717,7 +1717,7 @@ select option
 }
 .product_name div a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .product_color
 {
@@ -1792,7 +1792,7 @@ select option
 	opacity: 0;
 	width: 100%;
 	height: 48px;
-	background: #0e8ce4;
+	background: #eb141a;
 	border: none;
 	outline: none;
 	font-size: 18px;
@@ -1849,11 +1849,11 @@ select option
 }
 .featured_slider .slick-dots li:hover
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .featured_slider .slick-dots li.slick-active
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .featured_slider .slick-dots li:last-child
 {
@@ -1969,7 +1969,7 @@ select option
 .product_new
 {
 	display: none;
-	background: #0e8ce4;
+	background: #eb141a;
 	visibility: hidden;
 	opacity: 0;
 }
@@ -2047,7 +2047,7 @@ select option
 	font-size: 10px;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .popular_category
 {
@@ -2196,7 +2196,7 @@ select option
 }
 .banner_2_dots .owl-dot.active
 {
-	background: #0e8ce4;
+	background: #eb141a;
 	box-shadow: none;
 }
 
@@ -2295,11 +2295,11 @@ select option
 }
 .arrivals_slider .slick-dots li:hover
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .arrivals_slider .slick-dots li.slick-active
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .arrivals_slider .slick-dots li:last-child
 {
@@ -2353,7 +2353,7 @@ select option
 	left: 0px;
 	width: 100%;
 	height: 48px;
-	background: #0e8ce4;
+	background: #eb141a;
 	border: none;
 	outline: none;
 	font-size: 18px;
@@ -2388,7 +2388,7 @@ select option
 }
 .arrivals_single_category a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .arrivals_single_name_container
 {
@@ -2411,7 +2411,7 @@ select option
 }
 .arrivals_single_name a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .arrivals_single_price
 {
@@ -2449,7 +2449,7 @@ select option
 .arrivals_single_marks .product_new
 {
 	display: block;
-	background: #0e8ce4;
+	background: #eb141a;
 	visibility: visible;
 	opacity: 1;
 }
@@ -2579,7 +2579,7 @@ select option
 }
 .bestsellers_category a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .bestsellers_name
 {
@@ -2598,7 +2598,7 @@ select option
 }
 .bestsellers_name a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .bestsellers_rating
 {
@@ -2684,7 +2684,7 @@ select option
 }
 .bestsellers_new
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .bestsellers_slider .slick-dots
 {
@@ -2719,11 +2719,11 @@ select option
 }
 .bestsellers_slider .slick-dots li:hover
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .bestsellers_slider .slick-dots li.slick-active
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .bestsellers_slider .slick-dots li:last-child
 {
@@ -2769,13 +2769,13 @@ select option
 }
 .advert_title a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .advert_title_2 a
 {
 	font-size: 18px;
 	font-weight: 500;
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .advert_title_2 a:hover
 {
@@ -2905,7 +2905,7 @@ select option
 }
 .trends_category a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .trends_content
 {
@@ -2922,7 +2922,7 @@ select option
 }
 .trends_name a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .trends_price
 {
@@ -3022,7 +3022,7 @@ select option
 }
 .trends_new
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 
 /*********************************
@@ -3052,7 +3052,7 @@ select option
 .reviews_all a
 {
 	font-size: 10px;
-	color: #0e8ce4;
+	color: #eb141a;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 }
@@ -3144,7 +3144,7 @@ select option
 }
 .reviews_dots .owl-dot.active
 {
-	background: #0e8ce4;
+	background: #eb141a;
 	box-shadow: none;
 }
 
@@ -3270,7 +3270,7 @@ select option
 }
 .viewed_name a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .item_marks
 {
@@ -3297,7 +3297,7 @@ select option
 }
 .item_new
 {
-	background: #0e8ce4;
+	background: #eb141a;
 }
 .viewed_item.discount .item_discount
 {
@@ -3437,7 +3437,7 @@ select option
 	padding-left: 25px;
 	font-size: 16px;
 	outline: none;
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .newsletter_input:focus
 {
@@ -3476,7 +3476,7 @@ select option
 	right: 0;
 	width: 153px;
 	height: 50px;
-	background: #0e8ce4;
+	background: #eb141a;
 	color: #FFFFFF;
 	line-height: 50px;
 	font-size: 18px;
@@ -3499,7 +3499,7 @@ select option
 .newsletter_unsubscribe_link a
 {
 	font-size: 10px;
-	color: #0e8ce4;
+	color: #eb141a;
 	font-weight: 500;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
@@ -3548,7 +3548,7 @@ select option
 {
 	font-size: 18px;
 	font-weight: 500;
-	color: #0e8ce4;
+	color: #eb141a;
 	margin-top: 13px;
 }
 .footer_contact_text
@@ -3587,7 +3587,7 @@ select option
 }
 .footer_social ul li:hover i
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .footer_subtitle
 {
@@ -3619,7 +3619,7 @@ select option
 }
 .footer_list li a:hover
 {
-	color: #0e8ce4;
+	color: #eb141a;
 }
 .footer_list_2
 {
