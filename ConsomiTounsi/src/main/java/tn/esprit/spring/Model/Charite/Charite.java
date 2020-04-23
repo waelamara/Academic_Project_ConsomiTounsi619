@@ -38,7 +38,7 @@ public class Charite implements Serializable {
 	@ManyToOne
 	@JsonIgnore
 	private User iduser;
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+	@ManyToOne
 	@JsonIgnore
     private Events idevents ;
 	@ManyToMany(cascade = CascadeType.ALL) 
