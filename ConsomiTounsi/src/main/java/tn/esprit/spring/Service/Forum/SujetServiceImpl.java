@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
-import tn.esprit.spring.Model.Forum.VoteSujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Forum.CategorieSujetRepository;
@@ -26,7 +25,7 @@ import tn.esprit.spring.Repository.Forum.SujetRepository;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
 
 @Service
-public class SujetServiceImpl implements ISujetService {
+public  class SujetServiceImpl implements ISujetService {
 	@Autowired
 	private  SujetRepository sujetRepository ;
 	@Autowired
@@ -146,7 +145,7 @@ public class SujetServiceImpl implements ISujetService {
 		// clientrepository.save(a);
 		return clientgagnant;
 		}
-
+	@Override
 	public void sendmail() throws MailException {
 
 		SimpleMailMessage mail = new SimpleMailMessage();

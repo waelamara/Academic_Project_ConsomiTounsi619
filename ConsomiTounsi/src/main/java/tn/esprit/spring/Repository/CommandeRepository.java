@@ -22,7 +22,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public List<Commande> CommandeparClient(int id);
 	
 	
-	@Query(value = "SELECT NEW tn.esprit.spring.Model.Commande(c.id,c.date,c.montant,c.status)FROM LigneCommande l join  l.commande c join l.produit p WHERE p.Barcode=:code")
+	@Query(value = "SELECT NEW tn.esprit.spring.Model.Commande(c.id,c.date,c.montant,c.status)FROM LigneCommande l join  l.commande c join l.produit p WHERE p.barcode=:code")
 	public List<Commande> Commandeparcode(@Param("code")long code);
 
 	@Query(value ="UPDATE commande c set c.status='payee',c.typede_payment='en ligne'where c.id=?1",nativeQuery = true)
