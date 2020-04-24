@@ -104,7 +104,7 @@ public class EventsDAOImpl implements EventsDAO {
 		  }
 
 // @Scheduled(cron="* * * ? * *")
-	 @Scheduled(fixedRate = 2000L)
+	 //@Scheduled(fixedRate = 2000L)
 	public void removeOldItems() {
 	//Events e	= (Events) eventsRepository.findAll();
 	//Charite c =	(Charite) chariteRepository.findAll();
@@ -114,7 +114,7 @@ public class EventsDAOImpl implements EventsDAO {
 	
 	 
 	}
-	 @Scheduled(fixedRate = 2000L)
+	 //@Scheduled(fixedRate = 2000L)
 	   public void cronJobSch() {
 	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	      Date now = new Date();

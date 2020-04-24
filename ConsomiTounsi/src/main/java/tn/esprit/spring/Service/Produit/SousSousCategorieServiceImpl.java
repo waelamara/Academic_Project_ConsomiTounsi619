@@ -29,6 +29,9 @@ public class SousSousCategorieServiceImpl implements ISousSousCategorieService {
 	public SsCategorie findOne(Long id) {
 		return sousSousCategorieRepository.getOne(id);
 	}
+	public List<SsCategorie> findSsousCategorieByIdSCategorie(Long id){
+		return sousSousCategorieRepository.findByIdSCategorie(id);
+	}
 
 	public void Delete(Long id) {
 		SsCategorie ssc = findOne(id);

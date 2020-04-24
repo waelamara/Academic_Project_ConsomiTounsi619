@@ -31,13 +31,13 @@ public class Produit implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
-	private String NomProduit;
-	private float Prix;
-	private String Description;
-	private Long Barcode;
-	private float Poids;
-	private float PrixAchat;
+	private Long id;
+	private String nomProduit;
+	private float prix;
+	private String description;
+	private Long barcode;
+	private float poids;
+	private float prixAchat;
 	@JsonIgnore
 	@ManyToOne
 	private SsCategorie IdSsCategorie;
@@ -72,61 +72,61 @@ public class Produit implements Serializable {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNomProduit() {
-		return NomProduit;
+		return nomProduit;
 	}
 
 	public void setNomProduit(String nomProduit) {
-		NomProduit = nomProduit;
+		this.nomProduit = nomProduit;
 	}
 
 	public float getPrix() {
-		return Prix;
+		return prix;
 	}
 
 	public void setPrix(float prix) {
-		Prix = prix;
+		this.prix = prix;
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
 	
 
 	public Long getBarcode() {
-		return Barcode;
+		return barcode;
 	}
 
 	public void setBarcode(Long barcode) {
-		Barcode = barcode;
+		this.barcode = barcode;
 	}
 
 	public float getPoids() {
-		return Poids;
+		return poids;
 	}
 
 	public void setPoids(float poids) {
-		Poids = poids;
+		this.poids = poids;
 	}
 
 	public float getPrixAchat() {
-		return PrixAchat;
+		return prixAchat;
 	}
 
 	public void setPrixAchat(float prixAchat) {
-		PrixAchat = prixAchat;
+		this.prixAchat = prixAchat;
 	}
 
 	public SsCategorie getIdSsCategorie() {
@@ -162,25 +162,25 @@ public class Produit implements Serializable {
 	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
 			SsCategorie idSsCategorie) {
 		super();
-		NomProduit = nomProduit;
-		Prix = prix;
-		Description = description;
-		Barcode = barcode;
-		Poids = poids;
-		PrixAchat = prixAchat;
-		IdSsCategorie = idSsCategorie;
+		this.nomProduit = nomProduit;
+		this.prix = prix;
+		this.description = description;
+		this.barcode = barcode;
+		this.poids = poids;
+		this.prixAchat = prixAchat;
+		this.IdSsCategorie = idSsCategorie;
 	}
 
 	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
 			Set<ImageProduit> images) {
 		super();
-		NomProduit = nomProduit;
-		Prix = prix;
-		Description = description;
-		Barcode = barcode;
-		Poids = poids;
-		PrixAchat = prixAchat;
-		Images = images;
+		this.nomProduit = nomProduit;
+		this.prix = prix;
+		this.description = description;
+		this.barcode = barcode;
+		this.poids = poids;
+		this.prixAchat = prixAchat;
+		this.Images = images;
 	}
 
 

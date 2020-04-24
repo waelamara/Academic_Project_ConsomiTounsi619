@@ -137,31 +137,25 @@
 								</div>
 
 								<ul class="cat_menu">
-									<li><a href="/shop">Computers  Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-									<li><a href="#">Cameras  Photos<i class="fas fa-chevron-right"></i></a></li>
-									<li class="hassubs">
-										<a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
+								<h:dataTable value="#{shopController.getAllCategorie()}" var="categorie" >
+									<h:column><li class="hassubs">
+										<a href="#"><h:outputText  value="#{categorie.nomCategorie}"/><i class="fas fa-chevron-right"></i></a>
 										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
+										<h:dataTable value="#{shopController.getSousCategorie(categorie.id)}" var="SousCategorie" >
+											<h:column><li class="hassubs">
+												<a href="#"><h:outputText  value="#{SousCategorie.nomSCategorie}"/><i class="fas fa-chevron-right"></i></a>
 												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+												<h:dataTable value="#{shopController.getSousSousCategorie(SousCategorie.id)}" var="SousSousCategorie" >
+													<h:column><li><a href="#"><h:outputText  value="#{SousSousCategorie.nomSsCategorie}"/><i class="fas fa-chevron-right"></i></a></li></h:column></h:dataTable>
+				
 												</ul>
 											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+											</h:column>
+											</h:dataTable>
 										</ul>
 									</li>
-									<li><a href="#">Smartphones  Tablets<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">TV  Audio<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Video Games  Consoles<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+									</h:column>
+								</h:dataTable>
 								</ul>
 							</div>
 
