@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
@@ -6,7 +6,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
-  	<ui:param name="page_name" value="Connexion"  />
 	<ui:define name="blog">
 	
 <head>
@@ -81,6 +80,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="blog_left_sidebar">
+                    <ui:repeat var="sujet" value="#{blogController.getAllSujets()}" varStatus="status"> 
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
@@ -92,27 +92,30 @@
                                     </div>
                                     <ul class="blog_meta list">
                                         <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2018<i class="lnr lnr-calendar-full"></i></a></li>
+                                        <li><a href="#"><h:outputText value="#{blogController.convertireDate(sujet.dateAjout)}"/><i class="lnr lnr-calendar-full"></i></a></li>
                                         <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
                                         <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="col-md-9">
                                 <div class="blog_post">
                                     <img src="img/blog/main-blog/m-blog-1.jpg" alt=""/>
                                     <div class="blog_details">
                                         <a href="single-blog.html">
-                                            <h2>Astronomy Binoculars A Great Alternative</h2>
+                                         <h2><h:outputText value="#{sujet.nomSujet}"/></h2>
                                         </a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
+              								<p><h:outputText value="#{sujet.description}MCSE boot camps have its supporters and its detractors. Some people do not
                                             understand why you should have to spend money on boot camp when you can get
-                                            the MCSE study materials yourself at a fraction.</p>
+                                            the MCSE study ma"/></p>
+                                         
                                         <a href="single-blog.html" class="white_bg_btn">View More</a>
                                     </div>
+                                    <br></br>
                                 </div>
                             </div>
                         </article>
+                     </ui:repeat>
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
@@ -145,6 +148,7 @@
                                 </div>
                             </div>
                         </article>
+                       
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
