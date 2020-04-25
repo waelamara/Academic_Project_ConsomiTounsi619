@@ -47,26 +47,24 @@
 						    </thead>
 						    <tbody>
 						      <tr class="text-center">
-						      
-						      	<h:dataTable value="#{cartController. panierParIdclient(1)}" var="panier" >
-						     <h:column>   <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td></h:column>	
+						       <ui:repeat var="panier" value="#{cartController. panierParIdclient(1)}" varStatus="status"> 
+						      	
+						  <td class="product-remove"><a  value="#{cartController.deleteLigne(106)}"><span class="ion-ios-close"></span></a></td>>	
 						        	        	 
 			        
 				
-						     	<h:column>  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td> </h:column>
+						     	  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td> 
   
 						        <td class="product-name">
  						              
- 						        	 <h:column>
-			        	<h:outputText class="product-name" value="#{panier.nomProduit}"/>
-				</h:column>	
+ 				<h:outputText value="#{panier.nomProduit}"/>
 				
 
 						        </td>
 						        
-						        <td class="price">	        	 <h:column>
-			        	<h:outputText class="product-name" value="#{panier.price}"/>
-				</h:column>	</td>
+						        <td class="price">	        	
+			        	<h:outputText  value="#{panier.price}"/>
+			</td>
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -74,8 +72,8 @@
 					          	</div>
 					          </td>
 						        
-						        <td class="total">$4.90</td>
-						        </h:dataTable>
+						        <td class="total"><h:outputText  value="#{panier.total}"/></td>
+						   </ui:repeat>
 						      </tr><!-- END TR-->
 
 								    

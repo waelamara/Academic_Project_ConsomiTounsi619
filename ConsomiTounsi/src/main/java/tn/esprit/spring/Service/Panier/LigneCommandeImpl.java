@@ -162,7 +162,10 @@ public class LigneCommandeImpl implements ILigneCommande {
 	{
 		return ligneCommandeRepository.NumProduitVendu(idProduit);
 	}
-
+	public void DeleteLigne( Long idLigneCommande) {
+		LigneCommande lc = ligneCommandeRepository.getOne(idLigneCommande);
+		ligneCommandeRepository.delete(lc);
+	}
 		
 	
 }
