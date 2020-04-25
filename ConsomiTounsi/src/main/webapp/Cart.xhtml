@@ -46,8 +46,9 @@
 						      </tr>
 						    </thead>
 						    <tbody>
+						     <ui:repeat var="panier" value="#{cartController. panierParIdclient(1)}" varStatus="status"> 
 						      <tr class="text-center">
-						       <ui:repeat var="panier" value="#{cartController. panierParIdclient(1)}" varStatus="status"> 
+						      
 						      	
 						  <td class="product-remove"><a  value="#{cartController.deleteLigne(106)}"><span class="ion-ios-close"></span></a></td>>	
 						        	        	 
@@ -71,11 +72,12 @@
 					             <h:column>	<input type="text" name="quantity" class="quantity form-control input-number" value="#{panier.quantity}" min="1" max="100"/></h:column>
 					          	</div>
 					          </td>
-						        
+					        
 						        <td class="total"><h:outputText  value="#{panier.total}"/></td>
-						   </ui:repeat>
+						     
+						
 						      </tr><!-- END TR-->
-
+   </ui:repeat>
 								    
 						    </tbody>
 				
@@ -101,24 +103,31 @@
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
+    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(1)}" varStatus="status"> 
     					<p class="d-flex">
+    					 
     						<span>Subtotal</span>
-    						<span>$20.60</span>
+    						<span><h:outputText  value="#{Commande.montant}"/></span>
+    						 
     					</p>
+    					
     					<p class="d-flex">
     						<span>Delivery</span>
-    						<span>$0.00</span>
+    						<span><h:outputText  value="#{Commande.montant}"/></span>
     					</p>
     					<p class="d-flex">
     						<span>Discount</span>
-    						<span>$3.00</span>
+    						<span><h:outputText  value="#{Commande.pourcentageDeRemise}"/></span>
     					</p>
 <!--     					</hr> -->
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>$17.60</span>
+    						<span><h:outputText  value="#{Commande.montant-Commande.pourcentageDeRemise}"/></span>
+    						
     					</p>
+    					 </ui:repeat>
     				</div>
+    				 
     				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
     			</div>
     		</div>
