@@ -21,10 +21,10 @@ public class Categorie implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	private String nomCategorie;
 	
-	@OneToMany(mappedBy = "IdCategorie",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "idCategorie",cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<SCategorie> Categories;
 
@@ -34,16 +34,16 @@ public class Categorie implements Serializable {
 
 	public Categorie(Long id, String nomCategorie) {
 		super();
-		Id = id;
+		this.id = id;
 		this.nomCategorie = nomCategorie;
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getNomCategorie() {
 		return nomCategorie;

@@ -29,7 +29,11 @@ public class SousCategorieServiceImpl implements ISousCategorieService {
 	public SCategorie findOne(Long id) {
 		return sousCategorieRepository.getOne(id);
 	}
-
+	
+	public List<SCategorie> findSCategorieByCategorie(Long id){
+	return  sousCategorieRepository.findByIdCategorie(id);
+			
+	}
 	public void Delete(Long id) {
 		SCategorie sc = findOne(id);
 		sousCategorieRepository.delete(sc);
