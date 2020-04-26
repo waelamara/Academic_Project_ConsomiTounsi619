@@ -18,7 +18,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public List<Commande> CommandeparType(String string);
 	
 	
-	@Query(value = "SELECT * FROM commande WHERE id_user=?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM commande WHERE id_user=?1 where c.status='en cours' ", nativeQuery = true)
 	public List<Commande> CommandeparClient(int id);
 	
 	
