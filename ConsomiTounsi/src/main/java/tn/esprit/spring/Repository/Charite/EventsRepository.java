@@ -22,4 +22,7 @@ public interface EventsRepository extends JpaRepository<Events, Long> {
 	@Query(value = "DELETE FROM tn.esprit.spring.Model.Charite.Events  WHERE datee < LOCALTIMESTAMP ")
 	public int  removeOlder();
 	
+	@Query(value = "SELECT * FROM t_events WHERE datee = DATE(NOW( )) ", nativeQuery = true)
+	public List<Events> findLikeDate();
+	
 }
