@@ -20,26 +20,26 @@ public class ImageProduit implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
-	private String Image;
+	private Long id;
+	private String image;
 	@ManyToOne
 	@JsonIgnore
 	private Produit Idproduit;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getImage() {
-		return Image;
+		return image;
 	}
 
 	public void setImage(String image) {
-		Image = image;
+		this.image = image;
 	}
 
 	public Produit getIdproduit() {
@@ -56,12 +56,12 @@ public class ImageProduit implements Serializable {
 	
 	public ImageProduit(String image) {
 		super();
-		Image = image;
+		this.image = image;
 	}
 
 	public ImageProduit(String image, Produit idproduit) {
 		super();
-		Image = image;
+		this.image = image;
 		Idproduit = idproduit;
 	}
 

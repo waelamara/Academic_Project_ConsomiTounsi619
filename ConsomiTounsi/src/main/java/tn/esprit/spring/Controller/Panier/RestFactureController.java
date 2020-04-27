@@ -36,36 +36,47 @@ import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
-import tn.esprit.spring.Service.Panier.CommandeDAO;
-import tn.esprit.spring.Service.Panier.FactureDAO;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
+import tn.esprit.spring.Service.Panier.FactureImpl;
 
 
 @RestController
-@RequestMapping("/facture")
+@RequestMapping("/Facture")
 public class RestFactureController {
+	
 	@Autowired
-	FactureDAO factureDAO;
+	FactureImpl factureDAO;
+	
 	@Autowired
-	CommandeDAO commandeDao;
+	CommandeImpl commandeDao;
+	
 	@Autowired
 	ServletContext context;
+	
+	
+	//http://localhost:8081/Facture/ajouter/{idCommande}
 	@PostMapping("/ajouter/{idCommande}")
 	public ResponseEntity <Facture> AjouterFacture(@PathVariable(value = "idCommande") Long idCommande,@Valid @RequestBody Facture f) 
 			
 	{
 		Commande c =  commandeDao.findOne( idCommande);
 		f.setCommande(c);
-		
-			factureDAO.save(f);
-			return ResponseEntity.ok().build();
+		factureDAO.save(f);
+		return ResponseEntity.ok().build();
 	
 	}
+	
+	
+	//http://localhost:8081/Facture/afficher
 	@GetMapping("/afficher")
 	public List<Facture > getAllFacture(){
 		
 		return factureDAO.findAll();
 		
 	}
+	
+	
+	//http://localhost:8081/Facture/delete/{id}
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Facture> DeleteProduit(@PathVariable(value = "id") Long idFacture) {
 		Facture f = factureDAO.findOne(idFacture);
@@ -75,11 +86,17 @@ public class RestFactureController {
 		factureDAO.Delete(f);
 		return ResponseEntity.ok().build();
 	}
+	
+	
+	//http://localhost:8081/Facture/{idUser}
 	@GetMapping("/{idUser}")
-	public List<lignecommandeproduit> panierParIdclient(@PathVariable(value = "idUser") long id) {
+	public List<lignecommandeproduit>FactureParIdUser(@PathVariable(value = "idUser") long id) {
 	
 		return factureDAO.FactureParIdUser(id);
 	}
+	
+	
+	//http://localhost:8081/Facture/afficherPDF/{idUser}
 	@GetMapping("/afficherPDF/{idUser}")
 	public void createpdf(HttpServletRequest request ,HttpServletResponse reponse,@PathVariable(value = "idUser") long id) throws MalformedURLException, IOException 
 	{
@@ -92,6 +109,8 @@ public class RestFactureController {
 	
 	}
 	}
+	
+	
 	private void fileDownload(String fullpath,HttpServletResponse reponse,String fileName)
 	{
 		File f = new File(fullpath);
@@ -124,6 +143,9 @@ public class RestFactureController {
 		}
 				
 	}
+	
+	
+	//http://localhost:8081/Facture/afficherPDF2/{idFacture}
 	@GetMapping("/afficherPDF2/{idFacture}")
 	public void facturepdf (@PathVariable(value = "idFacture")int id_facture)
 	{

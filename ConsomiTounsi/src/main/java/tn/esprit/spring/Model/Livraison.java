@@ -1,3 +1,4 @@
+
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
@@ -25,8 +26,8 @@ public class Livraison implements Serializable {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "Lieu")
-	private String Lieu;
+	@Column(name = "Lieux")
+	private String Lieux;
 	@Column(name = "Etat")
 	private boolean Etat;
 	@Column(name = "MoyenLivraison")
@@ -47,12 +48,12 @@ public class Livraison implements Serializable {
 		this.id = id;
 	}
 
-	public String getLieu() {
-		return Lieu;
+	public String getLieux() {
+		return Lieux;
 	}
 
-	public void setLieu(String lieu) {
-		Lieu = lieu;
+	public void setLieux(String lieux) {
+		Lieux = lieux;
 	}
 
 	public EMoyenTransportL getMoyenTL() {
@@ -119,11 +120,11 @@ public class Livraison implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Livraison(long id, String lieu, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
+	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
 			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande) {
 		super();
 		this.id = id;
-		Lieu = lieu;
+		Lieux = lieux;
 		Etat = etat;
 		MoyenTL = moyenTL;
 		this.commande_id = commande_id;
@@ -143,3 +144,4 @@ public class Livraison implements Serializable {
 	Commande Commande;
 
 }
+

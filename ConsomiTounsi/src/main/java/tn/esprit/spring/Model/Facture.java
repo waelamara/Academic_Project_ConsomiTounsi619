@@ -15,34 +15,46 @@ public class Facture implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
+	
 	private String Type;
+	
 	private LocalDate date;
+	
 	@OneToOne
 	Commande commande;
+	
 	public Long getId() {
 		return Id;
 	}
+	
 	public void setId(Long id) {
 		Id = id;
 	}
+	
 	public String getType() {
 		return Type;
 	}
+	
 	public void setType(String type) {
 		Type = type;
 	}
+	
 	public LocalDate getDate() {
 		return date;
 	}
+	
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+	
 	public Commande getCommande() {
 		return commande;
 	}
+	
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}

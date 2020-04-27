@@ -34,49 +34,66 @@ public class Commande implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
 	//@Temporal(TemporalType.DATE)
 	private LocalDate date;
+	
 	private float montant;
+	
 	private String status;
+	
 	private String TypedePayment;
+	
 	private String Remise;
 	
-	private double PourcentageDeRemise;
+	private double pourcentageDeRemise;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	public Set<LigneCommande> ligneCommande;
+	
 	@OneToOne(mappedBy="commande")
 	Facture factureid;
-	 @ManyToOne
-	  @JoinColumn(name="idUser")
+	
+	@ManyToOne
+	@JoinColumn(name="idUser")
 	  private User idUser;
 	
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public LocalDate  getDate() {
 		return date;
 	}
+	
 	public void setDate(LocalDate  date) {
 		this.date = date;
 	}
+	
 	public float getMontant() {
 		return montant;
 	}
+	
 	public void setMontant(float montant) {
 		this.montant = montant;
 	}
+	
 	public String getStatus() {
 		return status;
 	}
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	public Commande(Long id, LocalDate date, float montant, String status) {
 		super();
 		this.id = id;
@@ -84,33 +101,41 @@ public class Commande implements Serializable  {
 		this.montant = montant;
 		this.status = status;
 	}
+	
 	public Commande() {
 		super();
 	}
+	
 	public Commande(LocalDate date, float montant, String status) {
 		super();
 		this.date = date;
 		this.montant = montant;
 		this.status = status;
 	}
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Commande")
 	private Set<reclamation> reclamation;
 
 	public String getTypedePayment() {
 		return TypedePayment;
 	}
+	
 	public void setTypedePayment(String typedePayment) {
 		TypedePayment = typedePayment;
 	}
+	
 	public User getIdUser() {
 		return idUser;
 	}
+	
 	public void setIdUser(User idUser) {
 		this.idUser = idUser;
 	}
+	
 	public String getRemise() {
 		return Remise;
 	}
+	
 	public void setRemise(String remise) {
 		Remise = remise;
 	}
@@ -124,10 +149,10 @@ public class Commande implements Serializable  {
 		return null;
 	}
 	public double getPourcentageDeRemise() {
-		return PourcentageDeRemise;
+		return pourcentageDeRemise;
 	}
 	public void setPourcentageDeRemise(double pourcentageDeRemise) {
-		PourcentageDeRemise = pourcentageDeRemise;
+		this.pourcentageDeRemise = pourcentageDeRemise;
 	}
 	
 	

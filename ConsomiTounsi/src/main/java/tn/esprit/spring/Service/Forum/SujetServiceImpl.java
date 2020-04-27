@@ -25,7 +25,7 @@ import tn.esprit.spring.Repository.Forum.SujetRepository;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
 
 @Service
-public class SujetServiceImpl implements ISujetService {
+public  class SujetServiceImpl implements ISujetService {
 	@Autowired
 	private  SujetRepository sujetRepository ;
 	@Autowired
@@ -34,6 +34,7 @@ public class SujetServiceImpl implements ISujetService {
 	private UserRepository userRepository;
 	@Autowired
 	private ProduitRepository produitRepository;
+
 	private JavaMailSender javaMailSender;
 
 	@Autowired
@@ -60,6 +61,8 @@ public class SujetServiceImpl implements ISujetService {
 	public List<Sujet> getAllSujets() {
 		return sujetRepository.findAllOrderbyDate();
 	}
+	
+	
 
 	@Override
 	public int deleteSujetById(Long sujetId,Long userId) {
@@ -142,7 +145,7 @@ public class SujetServiceImpl implements ISujetService {
 		// clientrepository.save(a);
 		return clientgagnant;
 		}
-
+	@Override
 	public void sendmail() throws MailException {
 
 		SimpleMailMessage mail = new SimpleMailMessage();

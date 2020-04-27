@@ -33,6 +33,7 @@ public class Sujet implements Serializable {
 	private int nbVue;
 	private int nbLike;
 	private int nbDislike;
+	private int nbpoint;
 	
 	@OneToMany(mappedBy="idSujet")
 	@JsonIgnore
@@ -137,6 +138,13 @@ public class Sujet implements Serializable {
 	}
 	public void setIdUser(User idUser) {
 		this.idUser = idUser;
+	}
+	
+	public int getNbpoint() {
+		return nbpoint;
+	}
+	public void setNbpoint(int nbpoint) {
+		this.nbpoint = nbpoint;
 	}
 	@Override
 	public int hashCode() {
