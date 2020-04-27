@@ -52,7 +52,7 @@ public class Commande implements Serializable  {
 	private double pourcentageDeRemise;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="commande")
 	public Set<LigneCommande> ligneCommande;
 	
 	@OneToOne(mappedBy="commande")

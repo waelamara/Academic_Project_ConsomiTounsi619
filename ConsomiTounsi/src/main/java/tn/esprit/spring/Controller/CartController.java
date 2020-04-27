@@ -30,9 +30,9 @@ public class CartController {
 		
 		return ligneCommandeDao.panierParIdclient(id);
 	}
-	public void deleteLigne( Long idLigneCommande) {
-		LigneCommande lc = ligneCommandeDao.findOne(idLigneCommande);
-		ligneCommandeDao.DeleteLigne(idLigneCommande);
+	public void deleteLigne( long idLigneCommande) {
+	
+		ligneCommandeDao.deleteLigne(idLigneCommande);
 	}
 	public List<Commande> commandeparClient(int id) {
 		return commandeDao.CommandeparClient(id);
