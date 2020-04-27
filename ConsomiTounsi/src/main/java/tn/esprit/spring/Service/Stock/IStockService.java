@@ -20,5 +20,5 @@ public interface IStockService {
     
     public void PrixVenteParStock(Long idproduit);
     
-    public void effectuerCommande(Long idlignecommande);
+    public void effectuerCommande(Long idcommande);
 }
