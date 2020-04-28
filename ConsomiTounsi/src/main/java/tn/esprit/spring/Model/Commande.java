@@ -49,10 +49,10 @@ public class Commande implements Serializable  {
 	
 	private String Remise;
 	
-	private double PourcentageDeRemise;
+	private double pourcentageDeRemise;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="commande",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="commande")
 	public Set<LigneCommande> ligneCommande;
 	
 	@OneToOne(mappedBy="commande")
@@ -149,10 +149,10 @@ public class Commande implements Serializable  {
 		return null;
 	}
 	public double getPourcentageDeRemise() {
-		return PourcentageDeRemise;
+		return pourcentageDeRemise;
 	}
 	public void setPourcentageDeRemise(double pourcentageDeRemise) {
-		PourcentageDeRemise = pourcentageDeRemise;
+		this.pourcentageDeRemise = pourcentageDeRemise;
 	}
 	
 	
