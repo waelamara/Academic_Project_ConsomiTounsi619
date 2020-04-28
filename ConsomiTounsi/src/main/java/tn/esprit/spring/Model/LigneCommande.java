@@ -33,7 +33,7 @@ public class LigneCommande implements Serializable  {
 	@ManyToOne
 	private Produit produit;
 	 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST})
     private Commande commande ;
 	 
 	public Long getId() {

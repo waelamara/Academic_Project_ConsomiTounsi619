@@ -46,7 +46,7 @@ public  class SujetServiceImpl implements ISujetService {
 	public int ajouterSujet(Sujet s,Long categId,Long userId) {
 		CategorieSujet categS = categorieSujetRepository.findById(categId).get();
 		User user= userRepository.findById(userId).get();
-		s.setCategorieSujet(categS);
+		s.setIdCategorieSujet(categS);
 		s.setIdUser(user);
 		LocalDate localDate = LocalDate.now();
 		s.setDateAjout(java.sql.Date.valueOf(localDate));
@@ -103,7 +103,7 @@ public  class SujetServiceImpl implements ISujetService {
 	public void affecterSujetACategS(Long sujId, Long categId) {
 		CategorieSujet categS = categorieSujetRepository.findById(categId).get();
 		Sujet sujet=sujetRepository.findById(sujId).get();
-		sujet.setCategorieSujet(categS);
+		sujet.setIdCategorieSujet(categS);
 		sujetRepository.save(sujet);	
 	}
 

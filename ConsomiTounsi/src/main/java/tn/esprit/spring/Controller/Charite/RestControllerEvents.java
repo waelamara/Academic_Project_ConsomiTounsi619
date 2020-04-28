@@ -480,5 +480,13 @@ public class RestControllerEvents {
 			return ResponseEntity.ok().body(com);
 		}
 		
+		/* affiche les events de jour */
+		//http://localhost:8081/event/EventJour
+		@RequestMapping(value = "/EventJour")
+		public List<Events> getEventsParDate() {
+			return eventDAO.getEventsParDate();
+		}
+
+		
 		
 }

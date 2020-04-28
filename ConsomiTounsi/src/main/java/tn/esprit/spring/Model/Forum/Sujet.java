@@ -41,7 +41,7 @@ public class Sujet implements Serializable {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idCategorieSujet", referencedColumnName = "id")
-	CategorieSujet CategorieSujet;
+	CategorieSujet idCategorieSujet;
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idUser", referencedColumnName = "USER_ID")
@@ -127,11 +127,11 @@ public class Sujet implements Serializable {
 	public void setVotesSujet(Set<VoteSujet> votesSujet1) {
 		votesSujet = votesSujet1;
 	}
-	public CategorieSujet getCategorieSujet() {
-		return CategorieSujet;
+	public CategorieSujet getIdCategorieSujet() {
+		return idCategorieSujet;
 	}
-	public void setCategorieSujet(CategorieSujet categorieSujet) {
-		CategorieSujet = categorieSujet;
+	public void setIdCategorieSujet(CategorieSujet categorieSujet) {
+		idCategorieSujet = categorieSujet;
 	}
 	public User getIdUser() {
 		return idUser;

@@ -12,6 +12,8 @@ public class lignecommandeproduit implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private long id;
+	
 	private String nomProduit;
 	
 	private int quantity;
@@ -25,6 +27,16 @@ public class lignecommandeproduit implements Serializable{
 	private LocalDate date;
 	
 	private float montant;
+	
+	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getNomProduit() {
 		return nomProduit;
@@ -72,6 +84,7 @@ public class lignecommandeproduit implements Serializable{
 	
 	public lignecommandeproduit( String nomProduit,int quantity, float price,float total) {
 		super();
+		
 		this.nomProduit = nomProduit;
 		this.quantity = quantity;
 		this.price = price;
@@ -97,8 +110,9 @@ public class lignecommandeproduit implements Serializable{
 		
 	}
 	
-	public lignecommandeproduit(String nomProduit, int quantity, float price, float total, float montant) {
+	public lignecommandeproduit(long id,String nomProduit, int quantity, float price, float total, float montant) {
 		super();
+		this.id = id;
 		this.nomProduit = nomProduit;
 		this.quantity = quantity;
 		this.price = price;
