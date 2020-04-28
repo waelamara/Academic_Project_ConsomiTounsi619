@@ -32,7 +32,6 @@ public class Stock implements Serializable{
 	private float remise;
 	private float prixdevente;
 	private float prixremise;
-	
     @ManyToOne
 	private Produit idProduit;
     

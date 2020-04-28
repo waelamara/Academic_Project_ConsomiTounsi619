@@ -21,5 +21,6 @@ public interface EventsDAO {
 	public int saveEvent(Long publicite,Events Events);
 	public void sendSms();
 	public void removeOldItems();
+	List<Events> getEventsParDate();
 
 }

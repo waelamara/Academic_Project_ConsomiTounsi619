@@ -22,8 +22,8 @@ public class CategorieSujet implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	@Column(unique=true) 
-	private String NomCategorie;
-	@OneToMany(mappedBy="CategorieSujet",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private String nomCategorie;
+	@OneToMany(mappedBy="idCategorieSujet",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Sujet> sujets ;
 	
@@ -38,7 +38,7 @@ public class CategorieSujet implements Serializable {
 	public CategorieSujet(Long id, String nomCategorie) {
 		super();
 		this.id = id;
-		NomCategorie = nomCategorie;
+		this.nomCategorie = nomCategorie;
 	}
 
 	public Long getId() {
@@ -48,10 +48,10 @@ public class CategorieSujet implements Serializable {
 		this.id = id;
 	}
 	public String getNomCategorie() {
-		return NomCategorie;
+		return nomCategorie;
 	}
 	public void setNomCategorie(String nomCategorie) {
-		NomCategorie = nomCategorie;
+		this.nomCategorie = nomCategorie;
 	}
 	public Set<Sujet> getSujets() {
 		return sujets;

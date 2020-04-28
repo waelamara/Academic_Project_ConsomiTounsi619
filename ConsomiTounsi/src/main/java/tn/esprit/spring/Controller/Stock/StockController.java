@@ -1,3 +1,4 @@
+
 package tn.esprit.spring.Controller.Stock;
 
 import java.util.List;
@@ -66,7 +67,12 @@ public void PrixVenteParStock(@PathVariable(value = "idp") Long idproduit){
 	stockservice.PrixVenteParStock(idproduit);
 	
 }
-
+//////////////////////////////////////////////////////////////////////////////
+@PutMapping("/effectuerCommande/{idc}")
+public void effectuerCommande(@PathVariable(value = "idc") Long idcommande){
+	stockservice.effectuerCommande(idcommande);
+	
+}
 
 /////////////////////////////////////////////////////////////////////////////
 }

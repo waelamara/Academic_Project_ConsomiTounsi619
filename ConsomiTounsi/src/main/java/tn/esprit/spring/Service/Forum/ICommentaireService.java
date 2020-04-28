@@ -15,4 +15,5 @@ public interface ICommentaireService {
 	public int  deletecommentairevoteById(Long  comId,Long userId,Long sujetId);
 	public void modifierCommentaire(String desc,Long comId);
     public String findNamebyCommentaire(Long comId);
+    public int countNbcommentaire(Long id);
 }
