@@ -165,9 +165,9 @@ public class LigneCommandeImpl implements ILigneCommande {
 	public void deleteLigne(long idLigneCommande) {
 		LigneCommande lc = ligneCommandeRepository.getOne(idLigneCommande);
 		
-		Commande c=commandeRepository.getOne(lc.getCommande().getId());
-		c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
-		commandeRepository.save(c);
+//		Commande c=commandeRepository.findById(lc.getCommande().getId()).get();
+//		c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
+//		commandeRepository.save(c);
 		ligneCommandeRepository.delete(lc);
 	}
 		
