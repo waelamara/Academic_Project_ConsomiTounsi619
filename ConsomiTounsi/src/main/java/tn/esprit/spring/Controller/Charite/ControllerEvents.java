@@ -2,18 +2,28 @@ package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -33,7 +43,8 @@ import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
-@Controller
+@Controller(value = "ControllerEvents")
+@ELBeanName(value = "ControllerEvents")
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
@@ -45,65 +56,45 @@ public class ControllerEvents {
 	EndroitDAO endroitDAO;
 	@Autowired
 	UserService userDAO;
-	@Autowired
-	FileStorageServiceImpl fileStorageServiceImpl;
-	ObjectMapper objectMapper = new ObjectMapper();
-
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
 	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
+	
+	private Long Id;
+	private String titre;
+	private Date DateE;
+	private int nbplace;
+	private int nbparticipant;
+	private String description;
+	private String image;
 	
 	public String addEvents(Events e) {
 		eventDAO.saveEvents(e);
 		return "Successful";
 	}
+
 	public List<Events> getAllEvents() {
 		return eventDAO.getAllEventsList();
 	}
-	public String ModifEvents(Events e) {
+
+	public String modifEvents(Events e) {
 		eventDAO.upsateEvents(e);
 		return "Successful";
+
 	}
+	
 	public void delete(long Id) {
 
 		eventDAO.deleteEventsById(Id);
 
 	}
-	
-	public String addChar( Long idevents, Long iduser, Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-		User u1= userDAO.findOne(iduser);
-		if ((e1.getNbplace() > 0)&&(u1.getSolde()>Charite.getMontantPaye())) {
-			float S ;
-			int nb = e1.getNbplace();
-			int nbP = e1.getNbparticipant();
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			S=u1.getSolde()-Charite.getMontantPaye();
-			u1.setSolde(S);
-			userDAO.save(u1);
-			eventDAO.saveEvents(e1);
-			chariteDAO.saveCharite(idevents, iduser, Charite);
-			return "Successful";
-
-		} 
-		else if(u1.getSolde()<Charite.getMontantPaye()){
-			return "your insufficient balance";
-			
-		}
-		else {
-			return "insufficient space";
-
-		}
-		
+	public List<Events> findLikeNameM(String titre) {
+		return eventDAO.findLikeName(titre);
 	}
-/***************************/
+	
+	public List<Events> getEventsParDate() {
+		return eventDAO.getEventsParDate();
+	}
+	
 	public String addCharitees(Authentication authentication,Charite Charite) {
 		Events e1 = eventDAO.findOne(Charite.getEvent_id());
   		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
@@ -166,7 +157,7 @@ public class ControllerEvents {
 			chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
 			//eventDAO.sendSms();
 			
-		/*	Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 		    Message message = Message.creator(new PhoneNumber("+21629651973"),
 		        new PhoneNumber("+18654261966"), 
@@ -190,8 +181,8 @@ public class ControllerEvents {
 
 		}
 }
-	
-	public String reserveEndroit( Endroit e) {
+	public String reserveEndroit( Long idendroit,
+			Long ideventss, Endroit e) {
 		Endroit e2 = endroitDAO.findOne(e.getId());
 		Events d1 = eventDAO.findOne(e.getEvent_id());
 		String message = "this place is reserved ";
@@ -214,43 +205,55 @@ public class ControllerEvents {
 		}
 
 	}
-	/* affiche les charites pour chaque user*/
-	
-	public ResponseEntity<?> getAllChariteUser(Authentication authentication,Charite C) {
-		List<Charite> com=new ArrayList<>();
-		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
-		com = chariteDAO.getCharite(u1.getId());
-		return ResponseEntity.ok().body(com);
-	}
-	
-	/* add endroit */
-	public Endroit addEndroit( Endroit Endroit) {
-
-		return endroitDAO.saveEndroit1(Endroit);
-	}
-	/* add events avec publicité */
-	public int addPub(Long publicite,Events Events) {
-
-		return eventDAO.saveEvent(publicite, Events);
-	}
-	
-
-	/* affiche les charites */
-
-	public List<Charite> getAllCharite() {
-		return chariteDAO.getAllChariteList();
-	}
-
-
-	/* affiche les endroits */
 	public List<Endroit> getAllEndroit() {
-	
+		
 		return endroitDAO.getAllEndroitList();
 	}
-	/**************recherche par titre***************/
-	public List<Events> findLikeNameM(String titre) {
-		return eventDAO.findLikeName(titre);
+	
+	public Long getId() {
+		return Id;
 	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	public String getTitre() {
+		return titre;
+	}
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+	public Date getDateE() {
+		return DateE;
+	}
+	public void setDateE(Date dateE) {
+		DateE = dateE;
+	}
+	public int getNbplace() {
+		return nbplace;
+	}
+	public void setNbplace(int nbplace) {
+		this.nbplace = nbplace;
+	}
+	public int getNbparticipant() {
+		return nbparticipant;
+	}
+	public void setNbparticipant(int nbparticipant) {
+		this.nbparticipant = nbparticipant;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	
     
 
 }

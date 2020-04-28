@@ -131,7 +131,7 @@ public class EventsDAOImpl implements EventsDAO {
 	 }
 	   /* affiche les events de jour */
 	@Override
-	@Scheduled(fixedRate = 2000L)
+	//@Scheduled(fixedRate = 2000L)
 	public List<Events> getEventsParDate() {
 		// TODO Auto-generated method stub
 		return eventsRepository.findLikeDate();
