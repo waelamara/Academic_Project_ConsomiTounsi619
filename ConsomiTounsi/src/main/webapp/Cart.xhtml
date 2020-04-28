@@ -46,11 +46,11 @@
 						      </tr>
 						    </thead>
 						    <tbody>
-						     <ui:repeat var="panier" value="#{cartController. panierParIdclient(1)}" varStatus="status"> 
+						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(1)}" varStatus="status"> 
 						      <tr class="text-center">
 						      
 <!-- 						      	panier.id -->
-  <td class="product-remove"><a><span class="ion-ios-close"></span></a></td>	 
+   <td class="product-remove"><a href="" action="#{cartController.deleteLigne(panier.id)}"><span class="ion-ios-close"></span></a></td>
 						        	        	 
 
 						     	  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td> 
@@ -79,7 +79,6 @@
    </ui:repeat>
 								    
 						    </tbody>
-				
 						  </table>
 					  </div>
     			</div>
