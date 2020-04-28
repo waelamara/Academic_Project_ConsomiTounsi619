@@ -72,7 +72,12 @@ public ResponseEntity<?> ModifierCommentaire(@PathVariable("desc") String desc,
 											@PathVariable("comId") Long id) {
 	icommentaireService.modifierCommentaire(desc, id);
 	return ResponseEntity.ok().build();
-	
+}
+
+@GetMapping("/afficherNbcomment/{sujetId}")
+public ResponseEntity<?> afficherNbCommentaireOfSujet(@PathVariable(value = "sujetId") Long sujetId) {
+	int com =icommentaireService.countNbcommentaire(sujetId);
+	return 	ResponseEntity.ok().body(com);
 }
 
 

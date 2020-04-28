@@ -109,4 +109,10 @@ public class CommentaireServiceImpl implements ICommentaireService{
 		return nom;
 	}
 
+	@Override
+	public int countNbcommentaire(Long sujetId) {
+		return  commentairesRepository.countNbCommentaire(sujetId);
+		
+	}
+
 }
