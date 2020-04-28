@@ -13,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Service.Forum.ICategorieSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
+import tn.esprit.spring.Service.GestionUser.UserService;
+import tn.esprit.spring.Service.Produit.ICategorieService;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
@@ -22,7 +26,10 @@ import tn.esprit.spring.Service.Forum.ISujetService;
 public class IBlogControllerImpl{
 	@Autowired
 	ISujetService iSujetService;
-
+	@Autowired
+	 ICategorieSujetService  icategorieSujetService;
+	
+	
 	private Long id;
 	private String nomSujet;
 	private String description;
@@ -35,7 +42,14 @@ public class IBlogControllerImpl{
 	private List<Sujet> sujets;
 	private Sujet sujet;
 	User idUser;
+	CategorieSujet idCategorieSujet;
 	
+	public CategorieSujet getIdCategorieSujet() {
+		return idCategorieSujet;
+	}
+	public void setIdCategorieSujet(CategorieSujet categorieSujet) {
+		idCategorieSujet = categorieSujet;
+	}
 	public User getIdUser() {
 		return idUser;
 	}
@@ -107,6 +121,7 @@ public class IBlogControllerImpl{
 	}
 	
 
+	
 	public String convertireDate(Date D){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
 		return formatter.format(D);
