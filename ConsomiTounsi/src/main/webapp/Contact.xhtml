@@ -10,6 +10,7 @@
 			<head>
 <title>Contact</title>
 <meta charset="utf-8" />
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="description" content="OneTech shop project" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +47,7 @@
 											</div>
 											<div class="contact_info_content">
 												<div class="contact_info_title">Phone</div>
-												<div class="contact_info_text">+38 068 005 3570</div>
+												<div class="contact_info_text">+216 23755144</div>
 											</div>
 										</div>
 
@@ -58,7 +59,7 @@
 											</div>
 											<div class="contact_info_content">
 												<div class="contact_info_title">Email</div>
-												<div class="contact_info_text">fastsales@gmail.com</div>
+												<div class="contact_info_text">ConsomiTounsi@Esprit.tn</div>
 											</div>
 										</div>
 
@@ -70,8 +71,7 @@
 											</div>
 											<div class="contact_info_content">
 												<div class="contact_info_title">Address</div>
-												<div class="contact_info_text">10 Suffolk at Soho,
-													London, UK</div>
+												<div class="contact_info_text">Arriana,Ghazella</div>
 											</div>
 										</div>
 
@@ -90,30 +90,24 @@
 									<div class="contact_form_container">
 										<div class="contact_form_title">Get in Touch</div>
 
-										<form action="#" id="contact_form">
+										<form>
 											<div
 												class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
-												<input type="text" id="contact_form_name"
-													class="contact_form_name input_field"
-													placeholder="Your name" required="required"
-													data-error="Name is required." /><input type="text"
-													id="contact_form_email"
-													class="contact_form_email input_field"
-													placeholder="Your email" required="required"
-													data-error="Email is required." /><input type="text"
-													id="contact_form_phone"
-													class="contact_form_phone input_field"
-													placeholder="Your phone number" />
+												<h:inputText type="text"
+													class="contact_form_name input_field" placeholder="Title"
+													required="required" value="#{ContactController.titre}"
+													data-error="Name is required." />
 											</div>
 											<div class="contact_form_text">
-												<textarea id="contact_form_message"
-													class="text_field contact_form_message" name="message"
-													rows="4" placeholder="Message" required="required"
-													data-error="Please, write us a message."></textarea>
+												<h:inputText class="text_field contact_form_message"
+													name="message" rows="4" placeholder="Message"
+													required="required"
+													value="#{ContactController.description}"
+													data-error="Please, write us a message." />
 											</div>
-											<div class="contact_form_button">
-												<button type="submit" class="button contact_submit_button">Send
-													Message</button>
+											<div >
+												<h:commandButton value="Envoyer"
+													action="#{ContactController.addreclamation()}" />
 											</div>
 										</form>
 
