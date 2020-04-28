@@ -3,12 +3,14 @@ package tn.esprit.spring.Controller;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Reclamation.ReclamationService;
 
-
+@Scope(value = "session")
 @Controller(value = "ContactController")
 @ELBeanName(value = "ContactController")
 @Join(path = "/Contact", to = "/Contact.jsf")
@@ -38,12 +40,13 @@ public class ContactController {
 		this.description = description;
 	}
 
-	public  String  addreclamation() {
-		String navigateTo = "/acceuil.xhtml";
+	public  void  addreclamation() {
+		
 		reclamation rec= new reclamation (titre,description);
-		System.out.println(rec);
+		System.out.println(titre);
+		System.out.println(description);
 		ReclamationService.save1(rec);
-		return navigateTo; 
+		
 	}
 
 	public reclamation getRec() {
