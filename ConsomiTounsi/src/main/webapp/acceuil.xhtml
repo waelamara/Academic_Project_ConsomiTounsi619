@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/SansTemplate.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:head>
 
 	
@@ -137,25 +136,41 @@
 								</div>
 
 								<ul class="cat_menu">
-								<h:dataTable value="#{shopController.getAllCategorie()}" var="categorie" >
-									<h:column><li class="hassubs">
-										<a href="#"><h:outputText  value="#{categorie.nomCategorie}"/><i class="fas fa-chevron-right"></i></a>
+								
+								<ui:repeat value="#{shopController.getAllCategorie()}" var="categorie" >	
+									<li class="hassubs">
+										<h:link outcome="/pages/shop" value="#{categorie.nomCategorie}">
+										<f:param name="idRecherhceProduit" value="#{categorie.id}"/>
+										<f:param name="filtrageProduit" value="0"/>
+										<i class="fas fa-chevron-right"></i>
+										</h:link>
+									
 										<ul>
-										<h:dataTable value="#{shopController.getSousCategorie(categorie.id)}" var="SousCategorie" >
-											<h:column><li class="hassubs">
-												<a href="#"><h:outputText  value="#{SousCategorie.nomSCategorie}"/><i class="fas fa-chevron-right"></i></a>
+										<ui:repeat value="#{shopController.getSousCategorie(categorie.id)}" var="SousCategorie" >	
+											<li class="hassubs">
+												<h:link outcome="/pages/shop" value="#{SousCategorie.nomSCategorie}">
+												<f:param name="idRecherhceProduit" value="#{SousCategorie.id}"/>
+												<f:param name="filtrageProduit" value="1"/>
+												<i class="fas fa-chevron-right"></i>
+												</h:link>
 												<ul>
-												<h:dataTable value="#{shopController.getSousSousCategorie(SousCategorie.id)}" var="SousSousCategorie" >
-													<h:column><li><a href="#"><h:outputText  value="#{SousSousCategorie.nomSsCategorie}"/><i class="fas fa-chevron-right"></i></a></li></h:column></h:dataTable>
-				
+												<ui:repeat value="#{shopController.getSousSousCategorie(SousCategorie.id)}" var="SousSousCategorie" >	
+													<li>
+													<h:link outcome="/pages/shop" value="#{SousSousCategorie.nomSsCategorie}">
+													<f:param name="idRecherhceProduit" value="#{SousSousCategorie.id}"/>
+													<f:param name="filtrageProduit" value="2"/>
+													<i class="fas fa-chevron-right"></i>
+													</h:link></li>
+													</ui:repeat>
 												</ul>
 											</li>
-											</h:column>
-											</h:dataTable>
+											</ui:repeat>
 										</ul>
 									</li>
-									</h:column>
-								</h:dataTable>
+									
+									</ui:repeat>
+								
+								
 								</ul>
 							</div>
 
@@ -4337,4 +4352,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="acceuil/plugins/easing/easing.js"></script>
 <script src="acceuil/js/custom.js"></script>
 		</h:body>
-		</html>
+		</ui:composition>
