@@ -46,12 +46,20 @@
 						      </tr>
 						    </thead>
 						    <tbody>
-						     <ui:repeat var="panier" value="#{cartController. panierParIdclient(1)}" varStatus="status"> 
+<<<<<<< HEAD
+						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
+=======
+
+						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(1)}" varStatus="status"> 
+
+>>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
 						      <tr class="text-center">
 						      
-<!-- 						      	panier.id -->
-  <td class="product-remove"><a><span class="ion-ios-close"></span></a></td>	 
-						        	        	 
+					   <h:form>   	
+   <td><h:commandButton class="product-remove"
+									action="#{cartController.deleteLigne(panier.id)}"
+									value="Supprimer"/></td>
+						     </h:form>   	        	 
 
 						     	  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td> 
   
@@ -79,7 +87,6 @@
    </ui:repeat>
 								    
 						    </tbody>
-				
 						  </table>
 					  </div>
     			</div>
@@ -102,7 +109,7 @@
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
-    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(1)}" varStatus="status"> 
+    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(5)}" varStatus="status"> 
     					<p class="d-flex">
     					 
     						<span>Subtotal</span>
