@@ -36,9 +36,21 @@
 						<div class="top_bar_content ml-auto">
 							
 							<div class="top_bar_user">
+								<h:panelGroup rendered="#{empty loginController.userDetails}">
+							
 								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
-								<div><a href="#">Register</a></div>
-								<div><a href="#">Sign in</a></div>
+								<div><a href="signup">Register</a></div>
+								<div><a href="login">Sign in</a></div>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{not empty loginController.userDetails}">
+								<h:form>
+								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
+								<h:outputText
+value="Good Morning #{loginController.userDetails.firstName} #{loginController.userDetails.lastName}" />
+<h:commandLink value="  Log Out" action="#{loginController.doLogout()}" />
+</h:form>
+								</h:panelGroup>
+								
 							</div>
 						</div>
 					</div>

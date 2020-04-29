@@ -33,62 +33,42 @@ public class ControllerPub {
 	PubDAO publiciteDAO;
 	@Autowired
 	EventsDAO eventDAO;
-	@Autowired
-	FileStorageServiceImpl fileStorageServiceImpl;
-	ObjectMapper objectMapper = new ObjectMapper();
 	
-	public String AjouterPub( Long idevents,
-			String PubJson,
-			List<MultipartFile> file) 
-					throws JsonParseException, JsonMappingException,IOException, ParseException{
-		
-		Pub p = objectMapper.readValue(PubJson, Pub.class);
+	
+	public String AjouterPub(Long idevents, Pub p)
+			throws JsonParseException, JsonMappingException, IOException, ParseException {
+
 		Events e1 = eventDAO.findOne(idevents);
-		
 
-		for (MultipartFile i : file) {
-			String fileName = fileStorageServiceImpl.storeFile(i);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
-			p.setImage(fileDownloadUri);			
-			publiciteDAO.save(p);
-			e1.setPublicite(p);
-			eventDAO.saveEvents(e1);
-			
+		publiciteDAO.save(p);
+		e1.setPublicite(p);
+		eventDAO.saveEvents(e1);
 
-		}
 		String dateDebut = p.getDateDebut().toString();
 		String dateFin = p.getDateFin().toString();
-		return"Successful"+" "+publiciteDAO.DifferenceJourDateDebutEtDateFin(dateDebut, dateFin)+" "+"days";
+		return "Successful" + " " + publiciteDAO.DifferenceJourDateDebutEtDateFin(dateDebut, dateFin) + " " + "days";
 	}
-	
+
 	public List<Pub> AfficherPub() {
 		return publiciteDAO.findAll();
 	}
-	
+
 	public String DeletePub(Long idPub) {
 		Pub p = publiciteDAO.findOne(idPub);
-		
+
 		publiciteDAO.Delete(p);
 		return "Successful";
 	}
-	public String EditPublicite( String ps, List<MultipartFile> file) 
-			throws JsonParseException, JsonMappingException,IOException {
-		
-		Pub p = objectMapper.readValue(ps, Pub.class);
+
+	public String EditPublicite(Pub p) {
+
 		p.setNom(p.getNom());
 		p.setDateDebut(p.getDateDebut());
 		p.setDateFin(p.getDateFin());
 		p.setEvents(p.getEvents());
-		for (MultipartFile i : file) {
-			String fileName = fileStorageServiceImpl.storeFile(i);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
-			p.setImage(fileDownloadUri);
-			publiciteDAO.save(p);
 
-		}
-		 publiciteDAO.save(p);
+		publiciteDAO.save(p);
+		publiciteDAO.save(p);
 		return "Successful";
 
 	}

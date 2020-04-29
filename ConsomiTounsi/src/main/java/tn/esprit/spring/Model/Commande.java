@@ -21,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.Transient;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -52,7 +53,7 @@ public class Commande implements Serializable  {
 	private double pourcentageDeRemise;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="commande")
+	@OneToMany(mappedBy="commande",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	public Set<LigneCommande> ligneCommande;
 	
 	@OneToOne(mappedBy="commande")
