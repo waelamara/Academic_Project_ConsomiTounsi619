@@ -8,7 +8,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import Config.AppProperties;
 import Utils.CookieUtils;
+import tn.esprit.spring.Controller.GestionUser.LoginController;
+import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.security.jwt.JwtUtils;
+import tn.esprit.spring.security.services.UserDetailsImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -28,6 +31,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private JwtUtils tokenProvider;
 
     private AppProperties appProperties;
+    
+    
+    @Autowired
+    private LoginController logincontroller;
+    
+    
 
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
@@ -43,11 +52,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String targetUrl = determineTargetUrl(request, response, authentication);
-
+        logincontroller.onAuthenticationSuccess(request, response, authentication);
         if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
+        
 
         clearAuthenticationAttributes(request, response);
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
@@ -62,7 +72,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         }
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
+        
         String token = tokenProvider.generateJwtToken(authentication);
 
         return UriComponentsBuilder.fromUriString(targetUrl)
