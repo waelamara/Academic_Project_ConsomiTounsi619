@@ -90,7 +90,7 @@
 									<div class="contact_form_container">
 										<div class="contact_form_title">Get in Touch</div>
 
-										<form>
+										<h:form>
 											<div
 												class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
 												<h:inputText type="text"
@@ -100,15 +100,15 @@
 											</div>
 											<div class="contact_form_text">
 												<h:inputText class="text_field contact_form_message"
-													name="message" rows="4" placeholder="Message"
+													placeholder="Message"
 													required="required"
 													value="#{ContactController.description}"
 													data-error="Please, write us a message." />
 											</div>
-											<div class="contact_form_button">
-												<a href="/" action="#{ContactController.addreclamation()}" >Envoyer</a> 
+											<div >
+												<h:commandButton class="button contact_submit_button" value="Save" action="#{ContactController.addreclamation()}"/>
 											</div>
-										</form>
+										</h:form>
 
 									</div>
 								</div>

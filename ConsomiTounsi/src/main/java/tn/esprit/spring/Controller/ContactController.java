@@ -40,12 +40,13 @@ public class ContactController {
 		this.description = description;
 	}
 
-	public  void  addreclamation() {
-		
+	public  String  addreclamation() {
+		String navigateTo = "/acceuil.xhtml"; 
 		reclamation rec= new reclamation (titre,description);
 		System.out.println(titre);
 		System.out.println(description);
 		ReclamationService.save1(rec);
+		return navigateTo;
 		
 	}
 
