@@ -25,13 +25,23 @@ public class ReclamationService {
 	
 	private static final Logger L =LogManager.getLogger(LivreurService.class);
 	
-	/* Ajouter une reclamation */
+	/* Ajouter une reclamation avec user id parametre*/
 	public reclamation save(reclamation rec, long u) {
 		User us = UserDAO.findOne(u);
 		rec.setReponse(null);
 		rec.setTraiter(false); 
 		rec.setEtat("En_attente");
 		rec.setUser(us);
+		return reclamationRepository.save(rec);
+
+	}
+	/* Ajouter une reclamation sans user id parametre*/
+	public reclamation save1(reclamation rec) {
+		rec.setUser(null);
+		rec.setReponse(null);
+		rec.setTraiter(false); 
+		rec.setEtat("En_attente");
+		rec.setCommande(null);
 		return reclamationRepository.save(rec);
 
 	}
