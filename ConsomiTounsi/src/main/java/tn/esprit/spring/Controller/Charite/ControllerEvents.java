@@ -209,6 +209,10 @@ public class ControllerEvents {
 		
 		return endroitDAO.getAllEndroitList();
 	}
+	public int addPub(Long publicite,Events Events) {
+
+		return eventDAO.saveEvent(publicite, Events);
+	}
 	
 	public Long getId() {
 		return Id;
