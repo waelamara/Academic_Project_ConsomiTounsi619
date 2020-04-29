@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
@@ -162,12 +165,14 @@ public class LigneCommandeImpl implements ILigneCommande {
 	{
 		return ligneCommandeRepository.NumProduitVendu(idProduit);
 	}
+	 @Transactional
 	public void deleteLigne(long idLigneCommande) {
 		LigneCommande lc = ligneCommandeRepository.getOne(idLigneCommande);
+		Commande c=commandeRepository.findById(lc.getCommande().getId()).get();
+	
 		
-//		Commande c=commandeRepository.findById(lc.getCommande().getId()).get();
-//		c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
-//		commandeRepository.save(c);
+		c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
+	commandeRepository.save(c);
 		ligneCommandeRepository.delete(lc);
 	}
 		
