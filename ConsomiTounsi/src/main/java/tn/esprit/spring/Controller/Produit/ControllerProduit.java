@@ -1,7 +1,12 @@
 package tn.esprit.spring.Controller.Produit;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
+import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +26,37 @@ public class ControllerProduit {
 	private Long barcode;
 	private float poids;
 	private float prixAchat;
+	private int filtrageProduit;
+	private Long idFiltrageProduit;
 	
 	public List<Produit> getProduitsByCategorie(Long idCategorie){
 		return iproduitService.findProduitCategorie(idCategorie);
 	}
+	
+	public List<Produit> getProduitsBySCategorie(Long idSCategorie){
+		return iproduitService.findProduitSCategorie(idSCategorie);
+	}
+	public List<Produit> getProduitsBySsCategorie(Long idSsCategorie){
+		return iproduitService.findProduitSsCategorie(idSsCategorie); 
+	}
+
+
+	public List<Produit> getProduits(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		setFiltrageProfuit(Integer.parseInt(params.get("filtrageProduit")));
+		setIdFiltrageProfuit(Long.parseLong(params.get("idRecherhceProduit")));
+		if(filtrageProduit==0){
+			return iproduitService.findProduitCategorie(idFiltrageProduit);}
+		else if(filtrageProduit==1){
+			return iproduitService.findProduitSCategorie(idFiltrageProduit);}
+		else if(filtrageProduit==2){
+			return iproduitService.findProduitSsCategorie(idFiltrageProduit);}
+		else return null;
+	}
+	
+	
+	
 	
 
 	public Long getId() {
@@ -81,6 +113,22 @@ public class ControllerProduit {
 
 	public void setPrixAchat(float prixAchat) {
 		this.prixAchat = prixAchat;
+	}
+
+	public int getFiltrageProfuit() {
+		return filtrageProduit;
+	}
+
+	public void setFiltrageProfuit(int filtrageProduit) {
+		this.filtrageProduit = filtrageProduit;
+	}
+
+	public Long getIdFiltrageProfuit() {
+		return idFiltrageProduit;
+	}
+
+	public void setIdFiltrageProfuit(Long idFiltrageProduit) {
+		this.idFiltrageProduit = idFiltrageProduit;
 	}
 	
 	

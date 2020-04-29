@@ -16,7 +16,7 @@ import tn.esprit.spring.Service.Produit.SousSousCategorieServiceImpl;
 
 @Controller(value = "shopController")
 @ELBeanName(value = "shopController")
-@Join(path = "/shop", to = "/shop.jsf")
+@Join(path = "/shop", to = "/pages/shop.jsf")
 public class ShopController {
 	@Autowired
 	CategorieServiceImpl categorieServiceImpl;

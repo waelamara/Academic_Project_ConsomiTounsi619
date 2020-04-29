@@ -25,13 +25,13 @@ public class reclamation implements Serializable {
 	//@Transient
 	public long id ;
 	
-	private String Titre ;
+	private String titre ;
 	
-	private String Description ;
+	private String description ;
 	
-	private boolean Traiter ;
+	private boolean traiter ;
 	
-	private String Etat ;
+	private String etat ;
 	
 	@Transient
 	long commande_id;
@@ -45,27 +45,27 @@ public class reclamation implements Serializable {
 	}
 
 	public String getTitre() {
-		return Titre;
+		return titre;
 	}
 
 	public void setTitre(String titre) {
-		Titre = titre;
+		this.titre = titre;
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
 	public boolean isTraiter() {
-		return Traiter;
+		return traiter;
 	}
 
 	public void setTraiter(boolean traiter) {
-		Traiter = traiter;
+		this.traiter = traiter;
 	}
 
 	public String getReponse() {
@@ -100,11 +100,11 @@ public class reclamation implements Serializable {
 
 
 	public String getEtat() {
-		return Etat;
+		return etat;
 	}
 
 	public void setEtat(String etat) {
-		Etat = etat;
+		this.etat = etat;
 	}
 	@ManyToOne
 	@JoinColumn(name = "commande_id")
@@ -130,17 +130,25 @@ public class reclamation implements Serializable {
 	public reclamation(long id, String titre, String description, long commande_id) {
 		super();
 		this.id = id;
-		Titre = titre;
-		Description = description;
+		this.titre = titre;
+		this.description = description;
 		this.commande_id = commande_id;
 	}
 
 	public reclamation(long id, String titre, String description) {
 		super();
 		this.id = id;
-		Titre = titre;
-		Description = description;
+		this.titre = titre;
+		this.description = description;
 	}
+
+	public reclamation(String titre, String description) {
+		super();
+		this.titre = titre;
+		this.description = description;
+	}
+	
+	
 
 
 

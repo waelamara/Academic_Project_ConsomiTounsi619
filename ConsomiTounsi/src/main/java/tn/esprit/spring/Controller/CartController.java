@@ -2,9 +2,12 @@ package tn.esprit.spring.Controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import tn.esprit.spring.Model.Commande;
@@ -30,10 +33,12 @@ public class CartController {
 		
 		return ligneCommandeDao.panierParIdclient(id);
 	}
-	public void deleteLigne( long idLigneCommande) {
 	
-		ligneCommandeDao.deleteLigne(idLigneCommande);
-	}
+public void deleteLigne(long idLigneCommande) {
+		
+	ligneCommandeDao.deleteLigne(idLigneCommande);
+		
+}
 	public List<Commande> commandeparClient(int id) {
 		return commandeDao.CommandeparClient(id);
 
