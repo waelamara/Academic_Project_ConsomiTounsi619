@@ -5,106 +5,90 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
-	<ui:define name="events">
+	<ui:define name="shop">
+	
+	<h:head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="description" content="OneTech shop project"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<h:outputStylesheet library="acceuil" name="styles/bootstrap4/bootstrap.min.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/animate.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_styles.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_responsive.css" />
 
-		<h:head>
-			<meta charset="utf-8" />
-			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-			<meta name="description" content="OneTech shop project" />
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<h:outputStylesheet library="events"
-				name="styles/bootstrap4/bootstrap.min.css" />
-			<h:outputStylesheet library="events"
-				name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
-			<h:outputStylesheet library="events"
-				name="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
-			<h:outputStylesheet library="events"
-				name="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
-			<h:outputStylesheet library="events"
-				name="plugins/OwlCarousel2-2.2.1/animate.css" />
-			<h:outputStylesheet library="events"
-				name="plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />
-			<h:outputStylesheet library="events" name="styles/shop_styles.css" />
-			<h:outputStylesheet library="events"
-				name="styles/shop_responsive.css" />
-
-		</h:head>
+	</h:head>
 
 
 
-		<h:body>
+		<body>
 
 
 
 			<!-- Event Item -->
-
+			<center>
+			
 			<ui:repeat var="event" value="#{ControllerEvents.getAllEvents()}">
 
-			<div class="event_content">
 
-
+<div class="event_content">
 				<div
-					class="event_image d-flex flex-column align-items-center justify-content-center">
-					<img src="#{event.image}" style="width: 80%; height: 100%" alt="" />
+					class="event_image">
+					<img src="#{event.image}" style="width: 10%; height: 20%" alt="" />
 				</div>
 
 
 				<div class="event_name">
 					<h:outputText value="#{event.titre}" />
 				</div>
-								<div class="event_place">
-					<div>
+				
+								<div class="event_place"><div>
+
 						<a href="#" tabindex="0"><h:outputText
 								value="#{event.nbplace}" /></a>
+					</div>
 					</div>
 				<div class="event_partarticipant">
 					<div>
 						<a href="#" tabindex="0"><h:outputText
-								value="#{event.nbparticipant}" /></a>
+								value="#{event.nbparticipant}" /></a></div>
 					</div>
 					<div class="event_description">
 					<h:outputText value="#{event.description}" />
 				</div>
-					
+				<div>
+				<h:form>   	
+   <h:commandButton class="Events-remove"
+									action="#{ControllerEvents.delete(event.id)}"
+									value="Supprimer"/>
+						     </h:form>   
+						     </div>
 				</div>
-			</div>
-			</div>
-			
-
-			<br></br>
 			</ui:repeat>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-			<script src="acceuil/js/jquery-3.3.1.min.js"></script>
-			<script src="acceuil/styles/bootstrap4/popper.js"></script>
-			<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
-			<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
-			<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
-			<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
-			<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
-			<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
-			<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-			<script src="acceuil/plugins/easing/easing.js"></script>
-			<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
-			<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-			<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
-			<script src="acceuil/js/shop_custom.js"></script>
-
-
-
-
-		</h:body>
+<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+<script src="acceuil/styles/bootstrap4/popper.js"></script>
+<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="acceuil/plugins/easing/easing.js"></script>
+<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="acceuil/js/shop_custom.js"></script>
+	
+	
+	</center>
+	
+	</body>
 	</ui:define>
-</ui:composition>
+	</ui:composition>
