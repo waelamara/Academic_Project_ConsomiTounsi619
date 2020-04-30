@@ -9,6 +9,7 @@ import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
@@ -27,6 +28,17 @@ public class CartController {
 	@Autowired
 	CommandeImpl commandeDao;
 	
+	private int qty;
+	
+	public int getQty() {
+		return qty;
+	}
+
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	
 	
 	public List<lignecommandeproduit> panierParIdclient(long id)
 	{
@@ -43,6 +55,11 @@ public void deleteLigne(long idLigneCommande) {
 		return commandeDao.CommandeparClient(id);
 
 	}
+	 public void updateLigne(long idL,int quantity)
+	 {
+		 ligneCommandeDao.updateLigne(idL,qty); 
+	 }
+	 
 	
 	
 

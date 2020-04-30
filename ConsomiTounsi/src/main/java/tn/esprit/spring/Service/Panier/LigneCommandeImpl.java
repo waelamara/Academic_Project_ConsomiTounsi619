@@ -37,7 +37,9 @@ public class LigneCommandeImpl implements ILigneCommande {
 	@Autowired
 	UserRepository userRepository;
 	
-	
+
+
+
 	public List<lignecommandeproduit> panierParIdclient( long id) {
 		return ligneCommandeRepository.panierParIdclient(id);
 
@@ -175,6 +177,13 @@ public class LigneCommandeImpl implements ILigneCommande {
 	commandeRepository.save(c);
 		ligneCommandeRepository.delete(lc);
 	}
+	 @Transactional
+	 public void updateLigne(long idL,int quantity)
+	 {
+			LigneCommande lc = ligneCommandeRepository.getOne(idL);
+			lc.setQuantity(quantity);
+			ligneCommandeRepository.save(lc);
+	 }
 		
 	
 }
