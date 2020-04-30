@@ -6,18 +6,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
-	<ui:define name="Charity">
- <head>
-   
+	<ui:define name="Cart">
+
+<head>
+<!--     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet"/> -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet"/> -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"/> -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    
-<!--     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet"> -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet"> -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"> -->
-
- 
-   <h:outputStylesheet library="Cart" name="css/owl.carousel.min.css" />
+<h:outputStylesheet library="Cart" name="css/owl.carousel.min.css" />
 <h:outputStylesheet library="Cart" name="css/animate.css" />
 <h:outputStylesheet library="Cart" name="css/owl.theme.default.min.css" />
  <h:outputStylesheet library="Cart" name="css/magnific-popup.css" /> 
@@ -29,14 +26,69 @@
              <h:outputStylesheet library="Cart" name="css/flaticon.css" /> 
                <h:outputStylesheet library="Cart" name="css/icomoon.css" /> 
           <h:outputStylesheet library="Cart" name="css/style.css" /> 
-  </head>
-   <body class="goto-here">
+
+</head>
+<body>
 		
+<section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>Type of Charity</th>
+						        <th>Montant</th>
+						       
+						      </tr>
+						    </thead>
+						    <tbody>
+
+						     <ui:repeat var="charite" value="#{ControllerCharite.getAllCharite()}"> 
+
+						      <tr class="text-center">
+						  	        	 
+
+  
+						        <td class="Type of Charity">
+ 						              
+ 				<h:outputText value="#{charite.TypeCharite}"/>
+				
+
+						        </td>
+						        
+						        
+			  <td class="Montant">	        	
+			        	<h:outputText  value="#{charite.MontantPaye}"/>
+			</td>
+			
+						        
+						        
+					            
+					   <h:form>   	
+   <td><h:commandButton class="Events-remove"
+									action="#{ControllerEvents.delete(event.id)}"
+									value="Supprimer"/></td>
+						     </h:form>   
+						     
+						
+						      </tr><!-- END TR-->
+   </ui:repeat>
+								    
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+    	
+			</div>
+		</section>
 
  
 
     
-  <script src="Cart/js/jquery.min.js"></script>
+ <script src="Cart/js/jquery.min.js"></script>
   <script src="Cart/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="Cart/js/popper.min.js"></script>
   <script src="Cart/js/bootstrap.min.js"></script>
@@ -52,7 +104,12 @@
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false;"></script> -->
   <script src="Cart/js/google-map.js"></script>
   <script src="Cart/js/main.js"></script>
+
   
-    </body>
+
+</body>
 </ui:define>
 </ui:composition>
+
+
+
