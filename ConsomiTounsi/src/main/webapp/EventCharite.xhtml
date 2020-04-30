@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
@@ -6,69 +5,90 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
-	<ui:define name="Event Charity">
- <head>
-   
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    
-<!--     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet"> -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet"> -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"> -->
+	<ui:define name="shop">
+	
+	<h:head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="description" content="OneTech shop project"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<h:outputStylesheet library="acceuil" name="styles/bootstrap4/bootstrap.min.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/animate.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_styles.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_responsive.css" />
 
- 
-   <h:outputStylesheet library="Cart" name="css/owl.carousel.min.css" />
-<h:outputStylesheet library="Cart" name="css/animate.css" />
-<h:outputStylesheet library="Cart" name="css/owl.theme.default.min.css" />
- <h:outputStylesheet library="Cart" name="css/magnific-popup.css" /> 
-  <h:outputStylesheet library="Cart" name="css/aos.css" /> 
-   <h:outputStylesheet library="Cart" name="css/ionicons.min.css" /> 
-    <h:outputStylesheet library="Cart" name="css/bootstrap-datepicker.css" /> 
-       <h:outputStylesheet library="Cart" name="css/jquery.timepicker.css" /> 
-          <h:outputStylesheet library="Cart" name="css/bootstrap-datepicker.css" /> 
-             <h:outputStylesheet library="Cart" name="css/flaticon.css" /> 
-               <h:outputStylesheet library="Cart" name="css/icomoon.css" /> 
-          <h:outputStylesheet library="Cart" name="css/style.css" /> 
-  </head>
-   <body class="goto-here">
-		
+	</h:head>
 
- <h:panelGroup columns="2"><h:form><table>
-<tr><td><h:outputText value="Title "></h:outputText></td><td><h:inputText
-value="#{ControllerEvents.titre}"></h:inputText></td></tr>
-<tr><td><h:outputText value="Date Event"></h:outputText></td>
-<td><h:inputSecret value="#{ControllerEvents.DateE}"></h:inputSecret></td></tr>
-<tr><td><h:outputText value="Number of place"></h:outputText></td>
-<td><h:inputText value="#{ControllerEvents.nbplace}"></h:inputText></td></tr>
-<tr><td><h:outputText value="Number of participants"></h:outputText></td>
-<td><h:inputText value="#{ControllerEvents.nbparticipant}"></h:inputText></td></tr>
-<tr><td><h:outputText value="Description"></h:outputText></td>
-<td><h:inputText value="#{ControllerEvents.description}"></h:inputText></td></tr>
-<tr><td><h:outputText value="Image"></h:outputText></td>
-<td><h:inputText value="#{ControllerEvents.image}"></h:inputText></td></tr>
 
-<tr><td colspan="2"> <h:commandButton value="ADD Events"
-action="#{ControllerEvents.addEvents()}" /></td></tr>
-</table></h:form></h:panelGroup>
 
-    
-  <script src="Cart/js/jquery.min.js"></script>
-  <script src="Cart/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="Cart/js/popper.min.js"></script>
-  <script src="Cart/js/bootstrap.min.js"></script>
-  <script src="Cart/js/jquery.easing.1.3.js"></script>
-  <script src="Cart/js/jquery.waypoints.min.js"></script>
-  <script src="Cart/js/jquery.stellar.min.js"></script>
-  <script src="Cart/js/owl.carousel.min.js"></script>
-  <script src="Cart/js/jquery.magnific-popup.min.js"></script>
-  <script src="Cart/js/aos.js"></script>
-  <script src="Cart/js/jquery.animateNumber.min.js"></script>
-  <script src="Cart/js/bootstrap-datepicker.js"></script>
-  <script src="Cart/js/scrollax.min.js"></script>
-<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false;"></script> -->
-  <script src="Cart/js/google-map.js"></script>
-  <script src="Cart/js/main.js"></script>
-  
-    </body>
-</ui:define>
-</ui:composition>
+		<body>
+
+
+
+			<!-- Event Item -->
+			<center>
+			
+			<ui:repeat var="event" value="#{ControllerEvents.getAllEvents()}">
+
+
+<div class="event_content">
+				<div
+					class="event_image">
+					<img src="#{event.image}" style="width: 10%; height: 20%" alt="" />
+				</div>
+
+
+				<div class="event_name">
+					<h:outputText value="#{event.titre}" />
+				</div>
+				
+								<div class="event_place"><div>
+
+						<a href="#" tabindex="0"><h:outputText
+								value="#{event.nbplace}" /></a>
+					</div>
+					</div>
+				<div class="event_partarticipant">
+					<div>
+						<a href="#" tabindex="0"><h:outputText
+								value="#{event.nbparticipant}" /></a></div>
+					</div>
+					<div class="event_description">
+					<h:outputText value="#{event.description}" />
+				</div>
+				<div>
+				<h:form>   	
+   <h:commandButton class="Events-remove"
+									action="#{ControllerEvents.delete(event.id)}"
+									value="Supprimer"/>
+						     </h:form>   
+						     </div>
+				</div>
+			</ui:repeat>
+
+
+<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+<script src="acceuil/styles/bootstrap4/popper.js"></script>
+<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="acceuil/plugins/easing/easing.js"></script>
+<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="acceuil/js/shop_custom.js"></script>
+	
+	
+	</center>
+	
+	</body>
+	</ui:define>
+	</ui:composition>

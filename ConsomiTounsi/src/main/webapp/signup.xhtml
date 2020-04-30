@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:b="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+<h:head>
+    
+    <title>Sign Up ConsommiTounsi</title>
+    
+    
+			<h:outputStylesheet library="signup" name="fonts/material-icon/css/material-design-iconic-font.min.css" />
+			<h:outputStylesheet library="signup" name="css/style.css" />
+</h:head>
+<h:body>
+
+    <div class="main" style="background-image: url('login/images/bg-01.jpg');">
+
+        <section class="signup">            
+            <div class="container">
+                <div class="signup-content">
+                	<h:form id="form1" class="signup-form">					
+                        <h2 class="form-title">Create account</h2>
+                        <div class="form-group">
+                        	<h:inputText type="text" class="form-input" name="name" id="name"  p:placeholder="First Name" value="#{signupController.firstName}" />
+                        </div>
+                        <div class="form-group">
+                        	<h:inputText type="text" class="form-input" name="name" id="lastname"  p:placeholder="Last Name" value="#{signupController.lastName}" />
+                        </div>
+                        <div class="form-group">
+                        	<h:inputText type="text" class="form-input" name="name" id="username"  p:placeholder="Username" value="#{signupController.username}" />
+                        </div>
+                        <div class="form-group">
+                      <h:inputText type="email" class="form-input" name="email" id="email" p:placeholder="Your Email" value="#{signupController.email}" />
+                            
+                        </div>
+                        <div class="form-group">
+                        	<h:inputText type="text" class="form-input" name="name" id="address"  p:placeholder="Your Address" value="#{signupController.address}" />
+                        </div>
+                        <div class="form-group">
+                        	<h:inputText type="text" class="form-input" name="name" id="tel"  p:placeholder="Your Phone Number" value="#{signupController.tel}" />
+                        </div>
+                        <div class="form-group">
+                        
+<h:selectOneMenu class="form-input" value="#{signupController.sexe}">
+   	<f:selectItem itemValue="#{signupController.sexe.HOMME}" itemLabel="Male" />
+   	<f:selectItem itemValue="#{signupController.sexe.FEMME}" itemLabel="Female" />
+</h:selectOneMenu>
+                        
+                        	                        </div>
+                        	                        
+                       <div class="form-group">
+                       		
+                       		
+        <h:inputText value="#{signupController.dateN}" p:placeholder="dd-mm-yyyy" styleClass="form-input">
+    <f:convertDateTime pattern="dd-mm-yyyy" />
+</h:inputText>
+                        </div>
+                        <div class="form-group">
+                           <h:inputSecret type="password" class="form-input" name="password" id="password" p:placeholder="Password" value="#{signupController.password}" />
+
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group">
+                       <h:commandButton id="btn" class="form-submit" title="signup" value="Sign Up" action="#{signupController.doSignup()}"/>
+                            <h:message style = "color:red" for="btn"/>
+                        </div>
+                    </h:form>
+                    <p class="loginhere">
+                        Have already an account ? <a href="login" class="loginhere-link">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="signup/vendor/jquery/jquery.min.js"></script>
+    <script src="signup/js/main.js"></script>
+</h:body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

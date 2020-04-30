@@ -11,9 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import tn.esprit.spring.Model.Produit.Produit;
 @Entity
-@Table(name="LigneCommande")
 public class LigneCommande implements Serializable  {
 
 	/**
@@ -33,7 +34,7 @@ public class LigneCommande implements Serializable  {
 	@ManyToOne
 	private Produit produit;
 	 
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(cascade = CascadeType.PERSIST)
     private Commande commande ;
 	 
 	public Long getId() {
@@ -83,7 +84,18 @@ public class LigneCommande implements Serializable  {
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}
-	 
+
+	public LigneCommande( int quantity) {
+		super();
+		
+		this.quantity = quantity;
+	}
+
+	public LigneCommande() {
+		super();
+	}
+	
+	
 	
 
 }

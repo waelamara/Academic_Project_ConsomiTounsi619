@@ -41,9 +41,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     	System.out.println("method loaded+++++++++++++++++");
 
         OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
-
         try {
             return processOAuth2User(oAuth2UserRequest, oAuth2User);
+            
             
         } catch (AuthenticationException ex) {
             throw ex;

@@ -2,8 +2,13 @@ package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,14 +32,62 @@ import tn.esprit.spring.Service.Charite.EventsDAO;
 import tn.esprit.spring.Service.Charite.PubDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
-@Controller
+@Controller(value = "ControllerPub")
+@ELBeanName(value = "ControllerPub")
 public class ControllerPub {
 	@Autowired
 	PubDAO publiciteDAO;
 	@Autowired
 	EventsDAO eventDAO;
+	private Long Id;
+	private String Nom;
+	@Temporal (TemporalType.DATE)
+	private Date DateDebut;
+	@Temporal (TemporalType.DATE)
+	private Date DateFin;
+	private String Image;
 	
 	
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getNom() {
+		return Nom;
+	}
+
+	public void setNom(String nom) {
+		Nom = nom;
+	}
+
+	public Date getDateDebut() {
+		return DateDebut;
+	}
+
+	public void setDateDebut(Date dateDebut) {
+		DateDebut = dateDebut;
+	}
+
+	public Date getDateFin() {
+		return DateFin;
+	}
+
+	public void setDateFin(Date dateFin) {
+		DateFin = dateFin;
+	}
+
+	public String getImage() {
+		return Image;
+	}
+
+	public void setImage(String image) {
+		Image = image;
+	}
+
 	public String AjouterPub(Long idevents, Pub p)
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 

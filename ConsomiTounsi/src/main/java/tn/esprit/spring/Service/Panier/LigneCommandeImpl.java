@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
@@ -34,7 +37,9 @@ public class LigneCommandeImpl implements ILigneCommande {
 	@Autowired
 	UserRepository userRepository;
 	
-	
+
+
+
 	public List<lignecommandeproduit> panierParIdclient( long id) {
 		return ligneCommandeRepository.panierParIdclient(id);
 
@@ -162,14 +167,28 @@ public class LigneCommandeImpl implements ILigneCommande {
 	{
 		return ligneCommandeRepository.NumProduitVendu(idProduit);
 	}
+	 @Transactional
 	public void deleteLigne(long idLigneCommande) {
 		LigneCommande lc = ligneCommandeRepository.getOne(idLigneCommande);
+		Commande c=commandeRepository.findById(lc.getCommande().getId()).get();
+	
 		
-		Commande c=commandeRepository.getOne(lc.getCommande().getId());
 		c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
-		commandeRepository.save(c);
+	commandeRepository.save(c);
 		ligneCommandeRepository.delete(lc);
 	}
+	 @Transactional
+	 public void updateLigne(long idL,int quantity)
+	 {
+			LigneCommande lc = ligneCommandeRepository.getOne(idL);
+			lc.setQuantity(quantity);
+			ligneCommandeRepository.save(lc);
+	 }
+	 @Transactional
+	 public void updateLigne2(LigneCommande lc)
+	 {
+		 ligneCommandeRepository.save(lc);
+	 }
 		
 	
 }

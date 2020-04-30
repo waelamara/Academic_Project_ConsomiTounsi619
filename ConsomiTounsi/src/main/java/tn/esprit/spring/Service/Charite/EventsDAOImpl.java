@@ -111,7 +111,7 @@ public class EventsDAOImpl implements EventsDAO {
 		    System.out.println(message.getSid());
 		  }
 
- @Scheduled(cron="0 0 0 * * ?")
+ //@Scheduled(cron="0 0 0 * * ?")
 //@Scheduled(fixedRate = 2000L)
 	public void removeOldItems() {
 
