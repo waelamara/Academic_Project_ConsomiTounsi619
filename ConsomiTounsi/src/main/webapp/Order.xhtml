@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="Order">
+<head>
+</head>
+<style type="text/css">
+    .ui-paginator a {
+        margin-right: 5px;
+    }
+</style>
+<body>
+ <br/><br/><br/><br/><br/><br/>
+<h:form>
+    <p:dataTable id="tbl" var="Commande" value="#{OrderAdminController.getAllCommande()}"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                 paginator="true" rows="10" style="margin-bottom:20px">
+                 
+ 
+<!--         <f:facet name=""> -->
+<!--             <div style="float:right;padding-top: 5px;"> -->
+<!--                 <h:commandLink> -->
+<!--                     <p:graphicImage name="/demo/images/excel.png" width="24"/> -->
+<!--                     <p:dataExporter type="xls" target="tbl" fileName="cars" /> -->
+<!--                 </h:commandLink> -->
+                 
+<!--                 <h:commandLink> -->
+<!--                     <p:graphicImage name="/demo/images/xlsx.png" width="24"/> -->
+<!--                     <p:dataExporter type="xlsxstream" target="tbl" fileName="cars" /> -->
+<!--                 </h:commandLink> -->
+ 
+<!--                 <h:commandLink> -->
+<!--                     <p:graphicImage name="/demo/images/pdf.png" width="24"/> -->
+<!--                     <p:dataExporter type="pdf" target="tbl" fileName="cars"/> -->
+<!--                 </h:commandLink> -->
+ 
+<!--                 <h:commandLink> -->
+<!--                     <p:graphicImage name="/demo/images/csv.png" width="24"/> -->
+<!--                     <p:dataExporter type="csv" target="tbl" fileName="cars" /> -->
+<!--                 </h:commandLink> -->
+ 
+<!--                 <h:commandLink> -->
+<!--                     <p:graphicImage name="/demo/images/xml.png" width="24"/> -->
+<!--                     <p:dataExporter type="xml" target="tbl" fileName="cars" /> -->
+<!--                 </h:commandLink> -->
+                 
+<!--                 <h:commandLink> -->
+<!--                     <p:graphicImage name="/demo/images/keyboardpencil.png" width="24"/> -->
+<!--                     <p:dataExporter type="text" target="tbl" fileName="cars" exporter=""/> -->
+<!--                 </h:commandLink>                         -->
+<!--             </div> -->
+<!--         </f:facet> -->
+ 
+        <p:column>
+            <f:facet name="date">
+                <h:outputText value="" />
+            </f:facet>
+            <h:outputText value="#{Commande.date}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Type"/>
+            </f:facet>
+            <h:outputText value="#{Commande.typedePayment}"/>
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Montant" />
+            </f:facet>
+            <h:outputText value="#{Commande.montant}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Remise" />
+            </f:facet>
+            <h:outputText value="#{Commande.pourcentageDeRemise}" />
+        </p:column>
+    </p:dataTable>
+ 
+<!--     <h3>Export Page Data Only</h3> -->
+<!--     <h:commandLink> -->
+<!--         <p:graphicImage name="/demo/images/excel.png" /> -->
+<!--         <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/> -->
+<!--     </h:commandLink> -->
+ 
+<!--     <h:commandLink> -->
+<!--         <p:graphicImage name="/demo/images/pdf.png" /> -->
+<!--         <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" /> -->
+<!--     </h:commandLink> -->
+ 
+<!--     <h:commandLink> -->
+<!--         <p:graphicImage name="/demo/images/csv.png" /> -->
+<!--         <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" /> -->
+<!--     </h:commandLink> -->
+ 
+<!--     <h:commandLink> -->
+<!--         <p:graphicImage name="/demo/images/xml.png" /> -->
+<!--         <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" /> -->
+<!--     </h:commandLink> -->
+    </h:form>
+</body>
+</ui:define>
+</ui:composition>

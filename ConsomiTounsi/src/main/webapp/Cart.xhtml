@@ -46,21 +46,17 @@
 						        <th>Total</th>
 						      </tr>
 						    </thead>
-						    <tbody>
-
-						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
-
-
-						    
-
-						      <tr class="text-center">
 						      
+						    <tbody>
+						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
+						      <tr class="text-center">
+						       
 					   <h:form>   	
    <td><h:commandButton class="product-remove"
 									action="#{cartController.deleteLigne(panier.id)}"
 									value="Delete"/></td>
 									 <td><h:commandButton class="product-remove"
-									action="#{cartController.updateLigne(panier.id,10)}"
+									action="#{cartController.updateLigne()}"
 									value="Update"/></td>
 						     </h:form>   	        	 
 		
@@ -89,11 +85,12 @@
 					        
 						        <td class="total"><h:outputText  value="#{panier.total}"/></td>
 						     
-						
+							
 						      </tr><!-- END TR-->
    </ui:repeat>
-								    
+							      
 						    </tbody>
+						  
 						  </table>
 					  </div>
     			</div>

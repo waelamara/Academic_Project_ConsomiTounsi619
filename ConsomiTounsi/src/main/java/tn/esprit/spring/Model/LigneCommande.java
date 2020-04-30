@@ -84,7 +84,18 @@ public class LigneCommande implements Serializable  {
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}
-	 
+
+	public LigneCommande( int quantity) {
+		super();
+		
+		this.quantity = quantity;
+	}
+
+	public LigneCommande() {
+		super();
+	}
+	
+	
 	
 
 }
