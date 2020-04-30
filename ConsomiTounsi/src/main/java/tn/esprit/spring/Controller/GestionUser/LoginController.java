@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -17,6 +20,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import tn.esprit.spring.Model.User;
@@ -25,13 +30,15 @@ import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.payload.response.MessageResponse;
 import tn.esprit.spring.security.jwt.JwtUtils;
+import tn.esprit.spring.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
-@Scope(value = "session")
+
 @Controller(value = "loginController")
 @ELBeanName(value = "loginController")
 @Join(path = "/login", to = "/login.jsf")
-public class LoginController {
+@Component
+public class LoginController extends SimpleUrlAuthenticationSuccessHandler{
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -43,6 +50,7 @@ public class LoginController {
 
 	@Autowired
 	RoleRepository roleRepository;
+	
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -55,8 +63,21 @@ public class LoginController {
 	private Boolean loggedIn=false;
 	private UserDetailsImpl userDetails;
 	private Authentication authentication;
-
 	
+    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+
+    
+
+	public LoginController(
+			HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
+		this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
+	}
+
+	@Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        userDetails=(UserDetailsImpl) authentication.getPrincipal();
+        System.out.println(userDetails.getFirstName());
+    }
 
 	public UserDetailsImpl getUserDetails() {
 		return userDetails;

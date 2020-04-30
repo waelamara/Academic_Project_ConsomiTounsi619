@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -61,12 +63,69 @@ public class ControllerEvents {
 	
 	private Long Id;
 	private String titre;
+	@Temporal(TemporalType.DATE)
 	private Date DateE;
 	private int nbplace;
 	private int nbparticipant;
 	private String description;
 	private String image;
 	
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public Date getDateE() {
+		return DateE;
+	}
+
+	public void setDateE(Date dateE) {
+		DateE = dateE;
+	}
+
+	public int getNbplace() {
+		return nbplace;
+	}
+
+	public void setNbplace(int nbplace) {
+		this.nbplace = nbplace;
+	}
+
+	public int getNbparticipant() {
+		return nbparticipant;
+	}
+
+	public void setNbparticipant(int nbparticipant) {
+		this.nbparticipant = nbparticipant;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public String addEvents(Events e) {
 		eventDAO.saveEvents(e);
 		return "Successful";
@@ -95,8 +154,8 @@ public class ControllerEvents {
 		return eventDAO.getEventsParDate();
 	}
 	
-	public String addCharitees(Authentication authentication,Charite Charite) {
-		Events e1 = eventDAO.findOne(Charite.getEvent_id());
+	public String addChariteesMoney(Authentication authentication,Long idevents,Charite Charite) {
+		Events e1 = eventDAO.findOne(idevents);
   		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
 		User u2= userDAO.findOne(u1.getId());
 		int nb = e1.getNbplace();
@@ -133,9 +192,30 @@ public class ControllerEvents {
 			return "Successful Donate money thank you";
 
 		} 
+		
+		else if(u2.getSolde()<Charite.getMontantPaye()){
+			return "your insufficient balance thank you";
+			
+		}
+		
+		
+		else {
+			return "insufficient space";
+
+		}
+}
+	
+	public String addChariteesCommande(Authentication authentication,Long idCommande,Long idevents,Charite Charite) {
+		Events e1 = eventDAO.findOne(idevents);
+  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
+		User u2= userDAO.findOne(u1.getId());
+		int nb = e1.getNbplace();
+		int nbP = e1.getNbparticipant();
+		float S ;
+		
 		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("dons"))&&(Charite.getCommande_id()!=0)) {
-			Commande c1= commandeDao.findOne(Charite.getCommande_id());
+				&&(Charite.getTypeCharite().equals("dons"))) {
+			Commande c1= commandeDao.findOne(idCommande);
 			Set<Commande> c= new HashSet<Commande>();
 			c.add(c1);
 			e1.setTitre(e1.getTitre());
@@ -170,10 +250,7 @@ public class ControllerEvents {
 			return "Successful Donated a ordered";
 
 		} 
-		else if(u2.getSolde()<Charite.getMontantPaye()){
-			return "your insufficient balance thank you";
-			
-		}
+		
 		
 		
 		else {
@@ -181,6 +258,7 @@ public class ControllerEvents {
 
 		}
 }
+	
 	public String reserveEndroit( Long idendroit,
 			Long ideventss, Endroit e) {
 		Endroit e2 = endroitDAO.findOne(e.getId());
@@ -209,51 +287,16 @@ public class ControllerEvents {
 		
 		return endroitDAO.getAllEndroitList();
 	}
-	
-	public Long getId() {
-		return Id;
-	}
-	public void setId(Long id) {
-		Id = id;
-	}
-	public String getTitre() {
-		return titre;
-	}
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-	public Date getDateE() {
-		return DateE;
-	}
-	public void setDateE(Date dateE) {
-		DateE = dateE;
-	}
-	public int getNbplace() {
-		return nbplace;
-	}
-	public void setNbplace(int nbplace) {
-		this.nbplace = nbplace;
-	}
-	public int getNbparticipant() {
-		return nbparticipant;
-	}
-	public void setNbparticipant(int nbparticipant) {
-		this.nbparticipant = nbparticipant;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
+	public int addPub(Long publicite,Events Events) {
 
+		return eventDAO.saveEvent(publicite, Events);
+	}
+	public Endroit addEndroit(Endroit Endroit) {
+
+		return endroitDAO.saveEndroit1(Endroit);
+	}
 	
+
     
 
 }

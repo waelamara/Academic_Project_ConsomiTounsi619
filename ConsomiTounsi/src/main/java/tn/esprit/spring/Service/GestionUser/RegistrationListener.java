@@ -187,7 +187,7 @@ public class RegistrationListener implements
 				+ "                        </table>\n" + "                        <h3>Bienvenue chez Consomi-Tounsi!</h3>\n"
 				+ "                        <p>Merci pour votre inscription. veuillez vérifier votre adresse e-mail pour commencer à utiliser notre service</p>\n"
 				+ "                        <p>Cliquez ici :"+"http://localhost:8081"+ confirmationUrl+"</p>\n"
-				+ "                        <p>Vous pourrez retirer votre bon d'achat au magasin à l'aide du bon ci-joint.</p>\n"
+				+ "                        <p></p>\n"
 				+ "                        <p>Cordialement.</p>\n"
 				+ "                        <p>CONSOMI TOUNSI Group.</p>\n" + "                      </td>\n"
 				+ "                    </tr>\n" + "                  </table>\n" + "                </td>\n"

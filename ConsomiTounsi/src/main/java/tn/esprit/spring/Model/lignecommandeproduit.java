@@ -14,6 +14,8 @@ public class lignecommandeproduit implements Serializable{
 	
 	private long id;
 	
+	private long idp;
+	
 	private String nomProduit;
 	
 	private int quantity;
@@ -110,9 +112,10 @@ public class lignecommandeproduit implements Serializable{
 		
 	}
 	
-	public lignecommandeproduit(long id,String nomProduit, int quantity, float price, float total, float montant) {
+	public lignecommandeproduit(long id,long idp,String nomProduit, int quantity, float price, float total, float montant) {
 		super();
 		this.id = id;
+		this.idp = idp;
 		this.nomProduit = nomProduit;
 		this.quantity = quantity;
 		this.price = price;
@@ -150,6 +153,15 @@ public class lignecommandeproduit implements Serializable{
 		this.nomProduit = nomProduit;
 		
 	}
+
+	public long getIdp() {
+		return idp;
+	}
+
+	public void setIdp(long idp) {
+		this.idp = idp;
+	}
+	
 	
 	
 	

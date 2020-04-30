@@ -46,7 +46,7 @@ public class Commande implements Serializable  {
 	
 	private String status;
 	
-	private String TypedePayment;
+	private String typedePayment;
 	
 	private String Remise;
 	
@@ -118,11 +118,11 @@ public class Commande implements Serializable  {
 	private Set<reclamation> reclamation;
 
 	public String getTypedePayment() {
-		return TypedePayment;
+		return typedePayment;
 	}
 	
 	public void setTypedePayment(String typedePayment) {
-		TypedePayment = typedePayment;
+		typedePayment = typedePayment;
 	}
 	
 	public User getIdUser() {
