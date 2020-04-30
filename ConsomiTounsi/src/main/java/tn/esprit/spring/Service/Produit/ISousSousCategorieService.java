@@ -10,4 +10,5 @@ public interface ISousSousCategorieService {
 	public SsCategorie findOne(Long id);
 	public void Delete(Long id);
 	public SsCategorie Update(SsCategorie ssc,Long idSscategorie,Long idSCategorie);
+	public String GetNameById(Long id);
 }

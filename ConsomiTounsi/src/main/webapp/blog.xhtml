@@ -88,12 +88,14 @@
                                     </div>
                                     
                                     <ul class="blog_meta list">
-                                        <li><a href="#"><h:outputText value="#{sujet.idUser.firstName} #{sujet.idUser.lastName}"/><i class="lnr lnr-user"></i></a></li>
+                                    <ui:param name="buttonText" value="#{sujet.id}" />
+                                     <h:outputText value="#{sujet.id}"/>
+                                   <li><a href="#"> <h:outputText value="#{sujet.idUser.firstName} #{sujet.idUser.lastName}"/><i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{blogController.convertireDate(sujet.dateAjout)}"/><i class="lnr lnr-calendar-full"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{sujet.nbVue} Views"/><i class="lnr lnr-eye"></i></a></li>
                                         <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
                                         <li><a  href="#"><h:outputText value="#{sujet.nbLike} Like"/><i style="color:#49D85C"  class="lnr lnr-thumbs-up"></i></a></li>
-                                        <li><a href="#" ><h:outputText value="#{sujet.nbDislike} Like"/><i style="color:#dc3545" class="lnr lnr-thumbs-down"></i></a></li>
+                                        <li><a href="#" ><h:outputText value="#{sujet.nbDislike} DisLike"/><i style="color:#dc3545" class="lnr lnr-thumbs-down"></i></a></li>
                                     </ul>
                                 </div>
                             </div> 
@@ -101,13 +103,11 @@
                                 <div class="blog_post">
                                     <img src="img/blog/main-blog/m-blog-1.jpg" alt=""/>
                                     <div class="blog_details">
-                                        <a href="single-blog.html">
-                                         <h2><h:outputText value="#{sujet.nomSujet}"/></h2>
-                                        </a>
+                                       <a href="/single-blog.xhtml" action="#{blogController.findSujetrec(sujet.id)}" > 
+                                         <h2><h:outputText value="#{sujet.nomSujet}"/></h2>   </a>
               								<p><h:outputText value="#{sujet.description}MCSE boot camps have its supporters and its detractors. Some people do not
                                             understand why you should have to spend money on boot camp when you can get
                                             the MCSE study ma"/></p>
-                                         
                                         <a href="single-blog.html" class="white_bg_btn">View More</a>
                                     </div>
                                     <br></br>

@@ -28,5 +28,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 			+ "JOIN categorie c ON sc.id_categorie_id=c.id WHERE c.nom_categorie like ?1 and p.prix<600", nativeQuery = true)
 	public List<String>  findProduitCategorbyName(String nom );
 	
+	@Query(value = "SELECT * FROM produit WHERE id=?1", nativeQuery = true)
+	public Produit findProduit(Long idProduit);
 	
 }

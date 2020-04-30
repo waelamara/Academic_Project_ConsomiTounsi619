@@ -16,8 +16,7 @@ import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
-@Controller(value = "ControllerCharite")
-@ELBeanName(value = "ControllerCharite")
+@Controller
 public class ControllerCharite {
 	@Autowired
 	ChariteDAO chariteDAO;
@@ -34,10 +33,6 @@ public class ControllerCharite {
 		com = chariteDAO.getCharite(u1.getId());
 		return com;
 	}
-	
-	
-	
-	
 	
 	public Long getId() {
 		return id;

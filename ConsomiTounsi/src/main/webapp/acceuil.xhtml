@@ -45,10 +45,9 @@
 								<h:panelGroup rendered="#{not empty loginController.userDetails}">
 								<h:form>
 								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
-								<h:outputText
-value="Good Morning #{loginController.userDetails.firstName} #{loginController.userDetails.lastName}" />
-<h:commandLink value="  Log Out" action="#{loginController.doLogout()}" />
-</h:form>
+								<h:outputText value="Good Morning #{loginController.userDetails.firstName} #{loginController.userDetails.lastName}" />
+								<h:commandLink value="  Log Out" action="#{loginController.doLogout()}" />
+								</h:form>
 								</h:panelGroup>
 								
 							</div>

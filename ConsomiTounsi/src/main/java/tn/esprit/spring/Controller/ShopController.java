@@ -1,6 +1,9 @@
 package tn.esprit.spring.Controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -30,11 +33,37 @@ public class ShopController {
 	private String nomCategorie;
 	private Long IdScategorie;
 	private Long id;
-	
 
-	public List<Categorie> getAllCategorie() {
+	public List<Categorie> getAllCategorie(){
+		//FacesContext fc = FacesContext.getCurrentInstance();
+		//Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+//		
+		//if(Integer.parseInt(params.get("filtrageProduit"))==0){
 		return categorieServiceImpl.findAll();
+		//}
+		//else return null;
 	}
+//	public List<SCategorie> getAllSousCategorie(){
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+//		setFiltrageProduit(Integer.parseInt(params.get("filtrageProduit")));
+//		if(filtrageProduit==0){
+//		return SousCategorieServiceImpl.findAll();
+//		}
+//		else return null;
+//	}
+//	
+//	public List<SsCategorie> getAllSousSousCategorie(){
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+//		setFiltrageProduit(Integer.parseInt(params.get("filtrageProduit")));
+//		if(filtrageProduit==0){
+//		return sousSousCategorieServiceImpl.findAll();
+//		}
+//		else return null;
+//	}
+	
+	
 	
 	public List<SCategorie> getSousCategorie(Long id){
 		return SousCategorieServiceImpl.findSCategorieByCategorie(id) ;	
@@ -85,6 +114,7 @@ public class ShopController {
 	public void setNomSCategorie(String nomSCategorie) {
 		this.nomSCategorie = nomSCategorie;
 	}
+
 
 
 

@@ -19,10 +19,14 @@ public class ControllerImagesProduit {
 	private Long id;
 	private String image;
 	
-	public List<ImageProduit> getImageProduits(Long idProduit){
-		return imageProduitService.findImageProduits(idProduit);
+	public ImageProduit getImageProduits(Long idProduit){
+		ImageProduit img=imageProduitService.findAllImagesProduits(idProduit).get(0);
+		return img;
 	}
 	
+	public List<ImageProduit> getAllImagesProduits(Long idProduit){
+		return imageProduitService.findAllImagesProduits(idProduit);
+	}
 
 	public Long getId() {
 		return id;
