@@ -48,7 +48,7 @@ public class Commande implements Serializable  {
 	
 	private String typedePayment;
 	
-	private String Remise;
+	private String remise;
 	
 	private double pourcentageDeRemise;
 	
@@ -134,11 +134,11 @@ public class Commande implements Serializable  {
 	}
 	
 	public String getRemise() {
-		return Remise;
+		return remise;
 	}
 	
 	public void setRemise(String remise) {
-		Remise = remise;
+		this.remise = remise;
 	}
 	
 	
@@ -155,6 +155,15 @@ public class Commande implements Serializable  {
 	public void setPourcentageDeRemise(double pourcentageDeRemise) {
 		this.pourcentageDeRemise = pourcentageDeRemise;
 	}
+
+	public Facture getFactureid() {
+		return factureid;
+	}
+
+	public void setFactureid(Facture factureid) {
+		this.factureid = factureid;
+	}
+	
 	
 	
 

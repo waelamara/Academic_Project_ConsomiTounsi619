@@ -5,108 +5,255 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
 	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="Order">
-<head>
-</head>
-<style type="text/css">
-    .ui-paginator a {
-        margin-right: 5px;
-    }
-</style>
-<body>
- <br/><br/><br/><br/><br/><br/>
-<h:form>
-    <p:dataTable id="tbl" var="Commande" value="#{OrderAdminController.getAllCommande()}"
-                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                 paginator="true" rows="10" style="margin-bottom:20px">
-                 
- 
-<!--         <f:facet name=""> -->
-<!--             <div style="float:right;padding-top: 5px;"> -->
-<!--                 <h:commandLink> -->
-<!--                     <p:graphicImage name="/demo/images/excel.png" width="24"/> -->
-<!--                     <p:dataExporter type="xls" target="tbl" fileName="cars" /> -->
-<!--                 </h:commandLink> -->
-                 
-<!--                 <h:commandLink> -->
-<!--                     <p:graphicImage name="/demo/images/xlsx.png" width="24"/> -->
-<!--                     <p:dataExporter type="xlsxstream" target="tbl" fileName="cars" /> -->
-<!--                 </h:commandLink> -->
- 
-<!--                 <h:commandLink> -->
-<!--                     <p:graphicImage name="/demo/images/pdf.png" width="24"/> -->
-<!--                     <p:dataExporter type="pdf" target="tbl" fileName="cars"/> -->
-<!--                 </h:commandLink> -->
- 
-<!--                 <h:commandLink> -->
-<!--                     <p:graphicImage name="/demo/images/csv.png" width="24"/> -->
-<!--                     <p:dataExporter type="csv" target="tbl" fileName="cars" /> -->
-<!--                 </h:commandLink> -->
- 
-<!--                 <h:commandLink> -->
-<!--                     <p:graphicImage name="/demo/images/xml.png" width="24"/> -->
-<!--                     <p:dataExporter type="xml" target="tbl" fileName="cars" /> -->
-<!--                 </h:commandLink> -->
-                 
-<!--                 <h:commandLink> -->
-<!--                     <p:graphicImage name="/demo/images/keyboardpencil.png" width="24"/> -->
-<!--                     <p:dataExporter type="text" target="tbl" fileName="cars" exporter=""/> -->
-<!--                 </h:commandLink>                         -->
-<!--             </div> -->
-<!--         </f:facet> -->
- 
-        <p:column>
-            <f:facet name="date">
-                <h:outputText value="" />
-            </f:facet>
-            <h:outputText value="#{Commande.date}" />
-        </p:column>
- 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="Type"/>
-            </f:facet>
-            <h:outputText value="#{Commande.typedePayment}"/>
-        </p:column>
- 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="Montant" />
-            </f:facet>
-            <h:outputText value="#{Commande.montant}" />
-        </p:column>
- 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="Remise" />
-            </f:facet>
-            <h:outputText value="#{Commande.pourcentageDeRemise}" />
-        </p:column>
-    </p:dataTable>
- 
-<!--     <h3>Export Page Data Only</h3> -->
-<!--     <h:commandLink> -->
-<!--         <p:graphicImage name="/demo/images/excel.png" /> -->
-<!--         <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/> -->
-<!--     </h:commandLink> -->
- 
-<!--     <h:commandLink> -->
-<!--         <p:graphicImage name="/demo/images/pdf.png" /> -->
-<!--         <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" /> -->
-<!--     </h:commandLink> -->
- 
-<!--     <h:commandLink> -->
-<!--         <p:graphicImage name="/demo/images/csv.png" /> -->
-<!--         <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" /> -->
-<!--     </h:commandLink> -->
- 
-<!--     <h:commandLink> -->
-<!--         <p:graphicImage name="/demo/images/xml.png" /> -->
-<!--         <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" /> -->
-<!--     </h:commandLink> -->
-    </h:form>
-</body>
-</ui:define>
+		<h:head>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+			<title>Tables - Ace Admin</title>
+			<meta name="description" content="Static &amp; Dynamic Tables" />
+			<meta name="viewport"
+				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<!-- 			<h:outputStylesheet library="dash" href="css/bootstrap.min.css" /> -->
+<!-- 			<h:outputStylesheet library="dash" -->
+<!-- 				href="font-awesome/4.5.0/css/font-awesome.min.css" /> -->
+<!-- 			<h:outputStylesheet library="dash" href="css/fonts.googleapis.com.css" /> -->
+<!-- 			<h:outputStylesheet library="dash" href="css/ace.min.css" -->
+<!-- 				class="ace-main-stylesheet" id="main-ace-style" /> -->
+<!-- 			<h:outputStylesheet library="dash" href="css/ace-skins.min.css" /> -->
+<!-- 			<h:outputStylesheet library="dash" href="css/ace-rtl.min.css" /> -->
+			<script src="dash/js/ace-extra.min.js"></script>
+		</h:head>
+		<h:body>
+			<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<table id="simple-table" class="table  table-bordered table-hover">
+											<thead>
+												<tr>
+													<th class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</th>
+													<th class="detail-col">Details</th>
+													<th>PaymentType</th>
+													<th>Amount</th>
+													<th class="hidden-480">Remise</th>
+
+													<th>
+														<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+														Date
+													</th>
+													<th>Status</th>
+													<th>UserName</th>
+													<th class="hidden-480">Action</th>
+
+													
+												</tr>
+											</thead>
+
+											<tbody>
+											 <ui:repeat var="Commande" value="#{OrderAdminController.getAllCommande()}" varStatus="status"> 
+												<tr>
+													<td class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</td>
+
+													<td class="center">
+														<div class="action-buttons">
+															<a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+																<i class="ace-icon fa fa-angle-double-down"></i>
+																<span class="sr-only">Details</span>
+															</a>
+														</div>
+													</td>
+
+													
+													<td><h:outputText value="#{Commande.typedePayment}"/></td>
+													<td class="hidden-480"><h:outputText value="#{Commande.montant}"/></td>
+													<td><h:outputText value="#{Commande.remise}"/></td>
+
+													<td class="hidden-480">
+														<span class="label label-sm label-warning"><h:outputText value="#{Commande.date}"/></span>
+													</td>
+													<td><h:outputText value="#{Commande.status}"/></td>
+
+														<td><h:outputText value="#{Commande.idUser.firstName}   #{Commande.idUser.lastName}"/></td>
+
+													<td>
+														<div class="hidden-sm hidden-xs btn-group">
+															<button class="btn btn-xs btn-success" action="#{OrderAdminController.facturepdf(Commande.factureid.id)}"> 
+																<i class="ace-icon fa fa-check bigger-120"></i>
+															</button>
+
+															<button class="btn btn-xs btn-info" >
+																<i class="ace-icon fa fa-pencil bigger-120" ></i>
+															</button>
+
+															<button class="btn btn-xs btn-danger">
+																<i class="ace-icon fa fa-trash-o bigger-120"></i>
+															</button>
+
+															<button class="btn btn-xs btn-warning">
+																<i class="ace-icon fa fa-flag bigger-120"></i>
+															</button>
+														</div>
+
+														<div class="hidden-md hidden-lg">
+															<div class="inline pos-rel">
+																<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+																	<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+																</button>
+
+																<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+																	<li>
+																		<a href="Facture/afficherPDF/2" class="tooltip-info" data-rel="tooltip" title="View">
+																			<span class="blue">
+																				<i class="ace-icon fa fa-search-plus bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+
+																	<li>
+																		<a href="Facture/afficherPDF/2" class="tooltip-success" data-rel="tooltip" title="Edit">
+																			<span class="green">
+																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+
+																	<li>
+																		<a href="Facture/afficherPDF/2" class="tooltip-error" data-rel="tooltip" title="Delete">
+																			<span class="red">
+																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</td>
+												</tr>
+ </ui:repeat>
+												<tr class="detail-row">
+													<td colspan="8">
+														<div class="table-detail">
+															<div class="row">
+																<div class="col-xs-12 col-sm-2">
+																	<div class="text-center">
+																		<img height="150" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="assets/images/avatars/profile-pic.jpg" />
+																		<br />
+																		<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+																			<div class="inline position-relative">
+																				<a class="user-title-label" href="#">
+																					<i class="ace-icon fa fa-circle light-green"></i>
+																					&nbsp;
+																					<span class="white">Alex M. Doe</span>
+																				</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="col-xs-12 col-sm-7">
+																	<div class="space visible-xs"></div>
+
+																	<div class="profile-user-info profile-user-info-striped">
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Username </div>
+
+																			<div class="profile-info-value">
+																				<span>alexdoe</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Location </div>
+
+																			<div class="profile-info-value">
+																				<i class="fa fa-map-marker light-orange bigger-110"></i>
+																				<span>Netherlands, Amsterdam</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Age </div>
+
+																			<div class="profile-info-value">
+																				<span>38</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Joined </div>
+
+																			<div class="profile-info-value">
+																				<span>2010/06/20</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Last Online </div>
+
+																			<div class="profile-info-value">
+																				<span>3 hours ago</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> About Me </div>
+
+																			<div class="profile-info-value">
+																				<span>Bio</span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="col-xs-12 col-sm-3">
+																	<div class="space visible-xs"></div>
+																	<h4 class="header blue lighter less-margin">Send a message to Alex</h4>
+
+																	<div class="space-6"></div>
+
+																	<form>
+																		<fieldset>
+																			<textarea class="width-100" resize="none" placeholder="Type something…"></textarea>
+																		</fieldset>
+
+																		<div class="hr hr-dotted"></div>
+
+																		<div class="clearfix">
+																			<label class="pull-left">
+																				<input type="checkbox" class="ace" />
+																				<span class="lbl"> Email me a copy</span>
+																			</label>
+
+																			<button class="pull-right btn btn-sm btn-primary btn-white btn-round" type="button">
+																				Submit
+																				<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+																			</button>
+																		</div>
+																	</form>
+																</div>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+									
+											</tbody>
+										</table>
+									</div><!-- /.span -->
+								</div><!-- /.row -->		
+								</div>
+								</div>			
+		</h:body>
+	</ui:define>
 </ui:composition>
