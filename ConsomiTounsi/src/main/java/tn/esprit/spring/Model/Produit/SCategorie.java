@@ -27,9 +27,9 @@ public class SCategorie implements Serializable {
 	@ManyToOne
 	@JsonIgnore
 	private Categorie idCategorie;
-	@OneToMany(mappedBy="IdSCategorie",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="idSCategorie",cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Set<SsCategorie> SsCategories;
+	private Set<SsCategorie> ssCategories;
 	
 	public SCategorie() {
 	}
@@ -69,12 +69,12 @@ public class SCategorie implements Serializable {
 
 
 	public void setSsCategories(Set<SsCategorie> ssCategories) {
-		SsCategories = ssCategories;
+		this.ssCategories = ssCategories;
 	}
 
 
 	public Set<SsCategorie> getSsCategories() {
-		return SsCategories;
+		return ssCategories;
 	}
 	
 	

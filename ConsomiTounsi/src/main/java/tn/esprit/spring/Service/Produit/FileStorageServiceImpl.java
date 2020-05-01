@@ -44,14 +44,7 @@ public class FileStorageServiceImpl {
 		FileOutputStream fout = new FileOutputStream(f);
 		fout.write(file.getBytes());
 		fout.close();
-//		BufferedImage image = ImageIO.read(f);
-//		int height = image.getHeight();
-//		int width = image.getWidth();
-//		if (width > 300 || height > 300) {
-//			if (f.exists())
-//				f.delete();
-//
-//		}
+
 		if (f.exists())
 			f.delete();
 

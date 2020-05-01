@@ -88,7 +88,7 @@
                                     </div>
                                     
                                     <ul class="blog_meta list">
-                                    <ui:param name="buttonText" value="#{sujet.id}" />
+                                 
                                      <h:outputText value="#{sujet.id}"/>
                                    <li><a href="#"> <h:outputText value="#{sujet.idUser.firstName} #{sujet.idUser.lastName}"/><i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{blogController.convertireDate(sujet.dateAjout)}"/><i class="lnr lnr-calendar-full"></i></a></li>
@@ -103,8 +103,11 @@
                                 <div class="blog_post">
                                     <img src="img/blog/main-blog/m-blog-1.jpg" alt=""/>
                                     <div class="blog_details">
-                                       <a href="/single-blog.xhtml" action="#{blogController.findSujetrec(sujet.id)}" > 
-                                         <h2><h:outputText value="#{sujet.nomSujet}"/></h2>   </a>
+                                    <h2><h:link outcome="/fourm/single-blog" >
+                                     <f:param name="idsujet" value="#{sujet.id}"/>
+                                         <h:outputText value="#{sujet.nomSujet}"/>
+                                         </h:link>
+                                         </h2 >   
               								<p><h:outputText value="#{sujet.description}MCSE boot camps have its supporters and its detractors. Some people do not
                                             understand why you should have to spend money on boot camp when you can get
                                             the MCSE study ma"/></p>
