@@ -1,5 +1,6 @@
 package tn.esprit.spring.Controller.Produit;
 
+import java.lang.annotation.Repeatable;
 import java.util.List;
 import java.util.Map;
 
@@ -96,6 +97,48 @@ public class ControllerProduit {
 			return iproduitService.findProduitSsCategorie(idFiltrageProduit);}
 		else return null;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
