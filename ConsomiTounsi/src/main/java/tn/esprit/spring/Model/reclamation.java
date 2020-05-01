@@ -1,6 +1,8 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +34,8 @@ public class reclamation implements Serializable {
 	private boolean traiter ;
 	
 	private String etat ;
+	
+	private LocalDate DateRec;
 	
 	@Transient
 	long commande_id;
@@ -106,6 +110,15 @@ public class reclamation implements Serializable {
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
+
+	public LocalDate getDateRec() {
+		return DateRec;
+	}
+
+	public void setDateRec(LocalDate dateRec) {
+		DateRec = dateRec;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "commande_id")
 	Commande Commande;
@@ -147,6 +160,19 @@ public class reclamation implements Serializable {
 		this.titre = titre;
 		this.description = description;
 	}
+
+	public reclamation(long id, String titre, String description, boolean traiter, String etat, LocalDate dateRec) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.traiter = traiter;
+		this.etat = etat;
+		DateRec = dateRec;
+	}
+
+	
+	
 	
 	
 
