@@ -45,10 +45,9 @@
 								<h:panelGroup rendered="#{not empty loginController.userDetails}">
 								<h:form>
 								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
-								<h:outputText
-value="Good Morning #{loginController.userDetails.firstName} #{loginController.userDetails.lastName}" />
-<h:commandLink value="  Log Out" action="#{loginController.doLogout()}" />
-</h:form>
+								<h:outputText value="Good Morning #{loginController.userDetails.firstName} #{loginController.userDetails.lastName}" />
+								<h:commandLink value="  Log Out" action="#{loginController.doLogout()}" />
+								</h:form>
 								</h:panelGroup>
 								
 							</div>
@@ -171,6 +170,7 @@ value="Good Morning #{loginController.userDetails.firstName} #{loginController.u
 													<h:link outcome="/pages/shop" value="#{SousSousCategorie.nomSsCategorie}">
 													<f:param name="idRecherhceProduit" value="#{SousSousCategorie.id}"/>
 													<f:param name="filtrageProduit" value="2"/>
+													<f:param name="idscategorie" value="#{SousCategorie.id}"/>
 													<i class="fas fa-chevron-right"></i>
 													</h:link></li>
 													</ui:repeat>
@@ -190,7 +190,7 @@ value="Good Morning #{loginController.userDetails.firstName} #{loginController.u
 
 							<div class="main_nav_menu ml-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li><h:link outcome="/acceuil">Home<i class="fas fa-chevron-down"></i></h:link></li>
 									<li class="hassubs">
 										<a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
 										<ul>
@@ -357,7 +357,7 @@ value="Good Morning #{loginController.userDetails.firstName} #{loginController.u
 	
 	<!-- Banner -->
 
-	<div class="banner">
+	<div class="banner" style="height: 60%">
 		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
 		<div class="container fill_height">
 			<div class="row fill_height">

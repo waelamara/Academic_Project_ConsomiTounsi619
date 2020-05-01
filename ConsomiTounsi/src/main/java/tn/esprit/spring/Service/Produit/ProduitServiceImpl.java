@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -17,6 +18,7 @@ import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Produit.SsCategorie;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
+
 
 @Service
 public class ProduitServiceImpl implements IProduitService {

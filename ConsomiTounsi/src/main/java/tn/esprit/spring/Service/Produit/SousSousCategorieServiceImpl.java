@@ -45,4 +45,10 @@ public class SousSousCategorieServiceImpl implements ISousSousCategorieService {
 		ssc2.setIdSCategorie(sc);
 		return sousSousCategorieRepository.save(ssc2);
 	}
+
+	@Override
+	public String GetNameById(Long id) {
+		String name=sousSousCategorieRepository.getOne(id).getNomSsCategorie();
+		return name;
+	}
 }

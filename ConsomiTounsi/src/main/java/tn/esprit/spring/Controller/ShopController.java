@@ -1,6 +1,9 @@
 package tn.esprit.spring.Controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -28,11 +31,47 @@ public class ShopController {
 	private String nomSsCategorie;
 	private String nomSCategorie;
 	private String nomCategorie;
-	private Long IdScategorie;
+	private Long idSCategorie;
 	private Long id;
-	
 
-	public List<Categorie> getAllCategorie() {
+
+	
+//	public List<Categorie> getAllCategories(){
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		Map<String, String> param = fc.getExternalContext().getRequestParameterMap();
+//		
+//		if(Integer.parseInt(param.get("filtrageProduit"))==4){
+//		return categorieServiceImpl.findAll();
+//		}
+//		else return null;
+//	}
+	
+	
+	
+	
+	
+	public List<SCategorie> getAllSousCategorie(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		if(Integer.parseInt(params.get("filtrageProduit"))==0){
+		return SousCategorieServiceImpl.findSCategorieByCategorie(Long.parseLong(params.get("idRecherhceProduit")));
+		}
+		else return null;
+	}
+	
+	public List<SsCategorie> getAllSousSousCategorie(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		if(Integer.parseInt(params.get("filtrageProduit"))==1){
+		return sousSousCategorieServiceImpl.findSsousCategorieByIdSCategorie(Long.parseLong(params.get("idRecherhceProduit")));
+		}
+		else if(Integer.parseInt(params.get("filtrageProduit"))==2){
+		return sousSousCategorieServiceImpl.findSsousCategorieByIdSCategorie(Long.parseLong(params.get("idscategorie")));
+		}
+		else return null;
+	}
+	
+	public List<Categorie> getAllCategorie(){
 		return categorieServiceImpl.findAll();
 	}
 	
@@ -53,11 +92,11 @@ public class ShopController {
 	}
 
 	public Long getIdScategorie() {
-		return IdScategorie;
+		return idSCategorie;
 	}
 
 	public void setIdScategorie(Long idScategorie) {
-		IdScategorie = idScategorie;
+		this.idSCategorie = idScategorie;
 	}
 
 	public Long getId() {
@@ -85,6 +124,7 @@ public class ShopController {
 	public void setNomSCategorie(String nomSCategorie) {
 		this.nomSCategorie = nomSCategorie;
 	}
+
 
 
 
