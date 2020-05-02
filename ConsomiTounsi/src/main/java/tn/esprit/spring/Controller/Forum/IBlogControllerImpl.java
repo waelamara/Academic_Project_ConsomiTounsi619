@@ -123,7 +123,7 @@ public class IBlogControllerImpl{
   String a;
 	private String getCountryFromJSF(FacesContext context) {
         Map<String, String> parameters = context.getExternalContext().getRequestParameterMap();
-        return parameters.get("country");
+        return parameters.get("idsujet");
     }
 	 public Long outcome() {
 	        FacesContext context = FacesContext.getCurrentInstance();
@@ -140,9 +140,8 @@ public class IBlogControllerImpl{
 	public Sujet getSujetrec() {
 		return sujetrec;
 	}
-	public Sujet findSujetrec(String id) {
-		
-		return sujetrec= iSujetService.findOne(Long.parseLong(id));
+	public Sujet findSujetrec() {
+		return sujetrec= iSujetService.findOne(outcome());
 	}
 	public void setSujetrec(Sujet sujetrec) {
 		this.sujetrec = sujetrec;

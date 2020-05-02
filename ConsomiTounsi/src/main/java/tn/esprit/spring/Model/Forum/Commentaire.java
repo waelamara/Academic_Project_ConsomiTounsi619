@@ -92,5 +92,10 @@ public class Commentaire implements Serializable  {
 		public void setVotes(Set<Vote> votes) {
 			Votes = votes;
 		}
+
+		public Commentaire(String description) {
+			super();
+			this.description = description;
+		}
 		
 }

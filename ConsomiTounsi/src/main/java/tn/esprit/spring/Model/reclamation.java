@@ -35,7 +35,7 @@ public class reclamation implements Serializable {
 	
 	private String etat ;
 	
-	private LocalDate DateRec;
+	private LocalDate dateRec;
 	
 	@Transient
 	long commande_id;
@@ -73,29 +73,29 @@ public class reclamation implements Serializable {
 	}
 
 	public String getReponse() {
-		return Reponse;
+		return reponse;
 	}
 
 	public void setReponse(String reponse) {
-		Reponse = reponse;
+		this.reponse = reponse;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	private String Reponse ;
+	private String reponse ;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	User User ;
+	User user ;
 
 
 	public User getUser() {
-		return User;
+		return user;
 	}
 
 	public void setUser(User user) {
-		User = user;
+		this.user = user;
 	}
 
 	public reclamation() {
@@ -112,24 +112,28 @@ public class reclamation implements Serializable {
 	}
 
 	public LocalDate getDateRec() {
-		return DateRec;
+		return dateRec;
 	}
 
 	public void setDateRec(LocalDate dateRec) {
-		DateRec = dateRec;
+		this.dateRec = dateRec;
 	}
 
 	@ManyToOne
 	@JoinColumn(name = "commande_id")
-	Commande Commande;
+	Commande commande;
+
 
 	public Commande getCommande() {
-		return Commande;
+		return commande;
 	}
 
 	public void setCommande(Commande commande) {
-		
-		Commande = commande;
+		this.commande = commande;
+	}
+
+	public void setCommande_id(long commande_id) {
+		this.commande_id = commande_id;
 	}
 
 	public long getCommande_id() {
@@ -168,7 +172,7 @@ public class reclamation implements Serializable {
 		this.description = description;
 		this.traiter = traiter;
 		this.etat = etat;
-		DateRec = dateRec;
+		this.dateRec = dateRec;
 	}
 
 	

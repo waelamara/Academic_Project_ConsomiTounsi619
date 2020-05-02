@@ -47,12 +47,29 @@
 					<div class="shop_sidebar">
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
-				<ul class="sidebar_categories">	
-				<h:dataTable value="#{shopController.getAllCategorie()}" var="categorie" >
+				<ul class="sidebar_categories">		
+				<h:dataTable value="#{shopController.getAllSousCategorie()}" var="scategorie" >
 				<h:column>
-				<li><a href="#">
-				<h:outputText  value="#{categorie.nomCategorie}"/>
-				</a></li>
+				<li><h:link outcome="/pages/shop">
+				<f:param name="idRecherhceProduit" value="#{scategorie.id}"/>
+				<f:param name="filtrageProduit" value="1"/>
+				<h:outputText  value="#{scategorie.nomSCategorie}"/>
+				</h:link>
+				</li>
+				</h:column>	
+				</h:dataTable>	
+				
+				
+				<h:dataTable value="#{shopController.getAllSousSousCategorie()}" var="sscategorie" >
+				<h:column>
+				<li>
+				<h:link outcome="/pages/shop">
+				<f:param name="idRecherhceProduit" value="#{sscategorie.id}"/>
+				<f:param name="filtrageProduit" value="2"/>
+				<f:param name="idscategorie" value="#{sscategorie.idSCategorie.id}"/>
+				<h:outputText  value="#{sscategorie.nomSsCategorie}"/>
+				</h:link>
+				</li>
 				</h:column>	
 				</h:dataTable>		
                 </ul>

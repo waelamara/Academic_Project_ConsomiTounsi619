@@ -85,11 +85,11 @@ public void deleteLigne(long idLigneCommande) {
 		 
 		 ligneCommandeDao.updateLigne2(new LigneCommande(qty)); 
 	 }
-	 public void displayEmploye(LigneCommande lc)
+	 public void display(LigneCommande lc)
 		{
 			
 		 this.setQty(lc.getQuantity());
-			//this.setId(lc.getId());
+			
 
 		}
 	 
