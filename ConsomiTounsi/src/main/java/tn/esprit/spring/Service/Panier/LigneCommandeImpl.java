@@ -184,6 +184,11 @@ public class LigneCommandeImpl implements ILigneCommande {
 			lc.setQuantity(quantity);
 			ligneCommandeRepository.save(lc);
 	 }
+	 @Transactional
+	 public void updateLigne2(LigneCommande lc)
+	 {
+		 ligneCommandeRepository.save(lc);
+	 }
 		
 	
 }

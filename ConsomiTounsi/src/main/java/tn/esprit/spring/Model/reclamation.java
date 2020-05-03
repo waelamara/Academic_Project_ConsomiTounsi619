@@ -1,6 +1,8 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +34,8 @@ public class reclamation implements Serializable {
 	private boolean traiter ;
 	
 	private String etat ;
+	
+	private LocalDate dateRec;
 	
 	@Transient
 	long commande_id;
@@ -69,29 +73,29 @@ public class reclamation implements Serializable {
 	}
 
 	public String getReponse() {
-		return Reponse;
+		return reponse;
 	}
 
 	public void setReponse(String reponse) {
-		Reponse = reponse;
+		this.reponse = reponse;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	private String Reponse ;
+	private String reponse ;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	User User ;
+	User user ;
 
 
 	public User getUser() {
-		return User;
+		return user;
 	}
 
 	public void setUser(User user) {
-		User = user;
+		this.user = user;
 	}
 
 	public reclamation() {
@@ -106,17 +110,30 @@ public class reclamation implements Serializable {
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
+
+	public LocalDate getDateRec() {
+		return dateRec;
+	}
+
+	public void setDateRec(LocalDate dateRec) {
+		this.dateRec = dateRec;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "commande_id")
-	Commande Commande;
+	Commande commande;
+
 
 	public Commande getCommande() {
-		return Commande;
+		return commande;
 	}
 
 	public void setCommande(Commande commande) {
-		
-		Commande = commande;
+		this.commande = commande;
+	}
+
+	public void setCommande_id(long commande_id) {
+		this.commande_id = commande_id;
 	}
 
 	public long getCommande_id() {
@@ -147,6 +164,19 @@ public class reclamation implements Serializable {
 		this.titre = titre;
 		this.description = description;
 	}
+
+	public reclamation(long id, String titre, String description, boolean traiter, String etat, LocalDate dateRec) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.traiter = traiter;
+		this.etat = etat;
+		this.dateRec = dateRec;
+	}
+
+	
+	
 	
 	
 

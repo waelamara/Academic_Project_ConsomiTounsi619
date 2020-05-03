@@ -6,5 +6,6 @@ import tn.esprit.spring.Model.Produit.ImageProduit;
 
 public interface IImageProduitService {
 	public ImageProduit save(ImageProduit image);
-	public List<ImageProduit> findImageProduits(Long idProduit);
+	public ImageProduit findImageProduits(Long idProduit);
+	public List<ImageProduit> findAllImagesProduits(Long idProduit);
 }

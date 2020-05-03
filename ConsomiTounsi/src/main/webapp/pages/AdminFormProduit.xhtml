@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="AdminFormProduit">
+<h:head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Form Elements - Ace Admin</title>
+
+		<meta name="description" content="Common form elements and layouts" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<h:outputStylesheet library="dash" name="css/bootstrap.min.css" />
+		<h:outputStylesheet library="dash" name="font-awesome/4.5.0/css/font-awesome.min.css" />
+		<!-- page specific plugin styles -->
+
+		<h:outputStylesheet library="dash" name="css/jquery-ui.custom.min.css" />
+ 		<h:outputStylesheet library="dash" name="css/chosen.min.css" /> 
+  		<h:outputStylesheet library="dash" name="css/bootstrap-datepicker3.min.css" /> 
+  		<h:outputStylesheet library="dash" name="css/bootstrap-timepicker.min.css" /> 
+    	<h:outputStylesheet library="dash" name="css/daterangepicker.min.css" /> 
+       	<h:outputStylesheet library="dash" name="css/bootstrap-datetimepicker.min.css" /> 
+       	<h:outputStylesheet library="dash" name="css/bootstrap-colorpicker.min.css" />
+		<!-- text fonts -->
+		<h:outputStylesheet library="dash" name="css/fonts.googleapis.com.css" />
+		<!-- ace styles -->
+		<h:outputStylesheet library="dash" name="css/ace-skins.min.css" />
+		<h:outputStylesheet library="dash" name="css/ace-rtl.min.css" />
+		<script src="dash/js/ace-extra.min.js"></script>
+		
+</h:head>
+<h:body>
+<div style="margin-left: 11.5%;position:relative;">
+		<div class="main-container ace-save-state" id="main-container">
+			<div class="main-content">
+				<div class="main-content-inner">
+
+
+					<div class="page-content">
+						<div class="ace-settings-container" id="ace-settings-container">
+							<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+								<i class="ace-icon fa fa-cog bigger-130"></i>
+							</div>
+
+							<div class="ace-settings-box clearfix" id="ace-settings-box">
+								<div class="pull-left width-50">
+									<div class="ace-settings-item">
+										<div class="pull-left">
+											<select id="skin-colorpicker" class="hide">
+												<option data-skin="no-skin" value="#438EB9">#438EB9</option>
+												<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+												<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+												<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+											</select>
+										</div>
+										<span>&nbsp; Choose Skin</span>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
+										<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
+										<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
+										<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
+										<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
+										<label class="lbl" for="ace-settings-add-container">
+											Inside
+											<b>.container</b>
+										</label>
+									</div>
+								</div><!-- /.pull-left -->
+
+								<div class="pull-left width-50">
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
+										<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
+										<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
+										<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+									</div>
+								</div><!-- /.pull-left -->
+							</div><!-- /.ace-settings-box -->
+						</div><!-- /.ace-settings-container -->
+
+						<div class="page-header">
+							<h1>
+								Form Elements
+								<small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Text Field </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Full Length </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1-1" placeholder="Text Field" class="form-control" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Password Field </label>
+
+										<div class="col-sm-9">
+											<input type="password" id="form-field-2" placeholder="Password" class="col-xs-10 col-sm-5" />
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">Inline help text</span>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-input-readonly"> Readonly field </label>
+
+										<div class="col-sm-9">
+											<input readonly="" type="text" class="col-xs-10 col-sm-5" id="form-input-readonly" value="This text field is readonly!" />
+											<span class="help-inline col-xs-12 col-sm-7">
+												<label class="middle">
+													<input class="ace" type="checkbox" id="id-disable-check" />
+													<span class="lbl"> Disable it!</span>
+												</label>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">Relative Sizing</label>
+
+										<div class="col-sm-9">
+											<input class="input-sm" type="text" id="form-field-4" placeholder=".input-sm" />
+											<div class="space-2"></div>
+
+											<div class="help-block" id="input-size-slider"></div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-5">Grid Sizing</label>
+
+										<div class="col-sm-9">
+											<div class="clearfix">
+												<input class="col-xs-1" type="text" id="form-field-5" placeholder=".col-xs-1" />
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="help-block" id="input-span-slider"></div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right">Input with Icon</label>
+
+										<div class="col-sm-9">
+											<span class="input-icon">
+												<input type="text" id="form-field-icon-1" />
+												<i class="ace-icon fa fa-leaf blue"></i>
+											</span>
+
+											<span class="input-icon input-icon-right">
+												<input type="text" id="form-field-icon-2" />
+												<i class="ace-icon fa fa-leaf green"></i>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-6">Tooltip and help button</label>
+
+										<div class="col-sm-9">
+											<input data-rel="tooltip" type="text" id="form-field-6" placeholder="Tooltip on hover" title="Hello Tooltip!" data-placement="bottom" />
+											<span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="More details." title="Popover on hover">?</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-tags">Tag input</label>
+
+										<div class="col-sm-9">
+											<div class="inline">
+												<input type="text" name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="button">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Submit
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												Reset
+											</button>
+										</div>
+									</div>
+
+									<div class="hr hr-24"></div>
+
+									
+									<div class="space-24"></div>
+
+				
+									
+								</form>
+
+			
+
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="dash/js/jquery-2.1.4.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+
+		<script src="dash/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!--[if lte IE 8]>
+		  <script src="assets/js/excanvas.min.js"></script>
+		<![endif]-->
+		<script src="dash/js/jquery-ui.custom.min.js"></script>
+		<script src="dash/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="dash/js/chosen.jquery.min.js"></script>
+		<script src="dash/js/spinbox.min.js"></script>
+		<script src="dash/js/bootstrap-datepicker.min.js"></script>
+		<script src="dash/js/bootstrap-timepicker.min.js"></script>
+		<script src="dash/js/moment.min.js"></script>
+		<script src="dash/js/daterangepicker.min.js"></script>
+		<script src="dash/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="dash/js/bootstrap-colorpicker.min.js"></script>
+		<script src="dash/js/jquery.knob.min.js"></script>
+		<script src="dash/js/autosize.min.js"></script>
+		<script src="dash/js/jquery.inputlimiter.min.js"></script>
+		<script src="dash/js/jquery.maskedinput.min.js"></script>
+		<script src="dash/js/bootstrap-tag.min.js"></script>
+
+		<script src="dash/js/ace-elements.min.js"></script>
+		<script src="dash/js/ace.min.js"></script>
+
+
+		
+
+
+
+
+
+</h:body>
+</ui:define>
+</ui:composition>

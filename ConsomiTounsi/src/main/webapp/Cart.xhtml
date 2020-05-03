@@ -9,9 +9,9 @@
 	<ui:define name="Cart">
 
 <head>
-<!--     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet"/> -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet"/> -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"/> -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;display=swap" rel="stylesheet"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <h:outputStylesheet library="Cart" name="css/owl.carousel.min.css" />
@@ -46,27 +46,17 @@
 						        <th>Total</th>
 						      </tr>
 						    </thead>
-						    <tbody>
-<<<<<<< HEAD
-=======
-
-						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
-
-
-<<<<<<< HEAD
-=======
-						    
-
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
-						      <tr class="text-center">
 						      
+						    <tbody>
+						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
+						      <tr class="text-center">
+						       
 					   <h:form>   	
    <td><h:commandButton class="product-remove"
 									action="#{cartController.deleteLigne(panier.id)}"
 									value="Delete"/></td>
 									 <td><h:commandButton class="product-remove"
-									action="#{cartController.updateLigne(panier.id,10)}"
+									action="#{cartController.updateLigne()}"
 									value="Update"/></td>
 						     </h:form>   	        	 
 		
@@ -95,11 +85,12 @@
 					        
 						        <td class="total"><h:outputText  value="#{panier.total}"/></td>
 						     
-						
+							
 						      </tr><!-- END TR-->
    </ui:repeat>
-								    
+							      
 						    </tbody>
+						  
 						  </table>
 					  </div>
     			</div>
@@ -169,7 +160,7 @@
   <script src="Cart/js/jquery.animateNumber.min.js"></script>
   <script src="Cart/js/bootstrap-datepicker.js"></script>
   <script src="Cart/js/scrollax.min.js"></script>
-<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false;"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
   <script src="Cart/js/google-map.js"></script>
   <script src="Cart/js/main.js"></script>
 

@@ -3,7 +3,9 @@ package tn.esprit.spring.Controller.Forum;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,8 +19,6 @@ import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Service.Forum.ICategorieSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
-import tn.esprit.spring.Service.GestionUser.UserService;
-import tn.esprit.spring.Service.Produit.ICategorieService;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
@@ -41,6 +41,7 @@ public class IBlogControllerImpl{
 	private int nbpoint;
 	private List<Sujet> sujets;
 	private Sujet sujet;
+	private Sujet sujetrec;
 	User idUser;
 	CategorieSujet idCategorieSujet;
 	
@@ -112,19 +113,38 @@ public class IBlogControllerImpl{
 	
 	/******shoow one sujet******/
 	public Sujet getSujet() {
-		Sujet v =iSujetService.getAllSujets().get(0);
-		setNomSujet(v.getNomSujet());
-		return v;
+		return sujet;
+	
 	}
 	public void setSujet(Sujet sujet) {
 		this.sujet = sujet;
 	}
 	
-
+  String a;
+	private String getCountryFromJSF(FacesContext context) {
+        Map<String, String> parameters = context.getExternalContext().getRequestParameterMap();
+        return parameters.get("idsujet");
+    }
+	 public Long outcome() {
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        a = getCountryFromJSF(context);
+	        System.out.println(a);
+	        return Long.parseLong(a);
+	        
+	    }
 	
 	public String convertireDate(Date D){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
 		return formatter.format(D);
+	}
+	public Sujet getSujetrec() {
+		return sujetrec;
+	}
+	public Sujet findSujetrec() {
+		return sujetrec= iSujetService.findOne(outcome());
+	}
+	public void setSujetrec(Sujet sujetrec) {
+		this.sujetrec = sujetrec;
 	}
 	
 

@@ -3,6 +3,8 @@ package tn.esprit.spring.Service.Forum;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,7 @@ public class CommentaireServiceImpl implements ICommentaireService{
 	@Autowired
 	SujetRepository sujetRepository;
 	
-	
-	
+	@Transactional
 	@Override
 	public int ajouterCommentaire(Commentaire c, Long sujetId, Long userId) {
 		List<String> badwords=new ArrayList<>();

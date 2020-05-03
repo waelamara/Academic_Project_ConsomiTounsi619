@@ -32,7 +32,7 @@
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
 		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">Smartphones  Tablets</h2>
+			<h2 class="home_title"><h:outputText  value="#{ControllerProduit.nameRecherche()}"/></h2>
 		</div>
 	</div>
 
@@ -47,14 +47,31 @@
 					<div class="shop_sidebar">
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
-				<ul class="sidebar_categories">	
-				<h:dataTable value="#{shopController.getAllCategorie()}" var="categorie" >
+				<ul class="sidebar_categories">		
+				<h:dataTable value="#{shopController.getAllSousCategorie()}" var="scategorie" >
 				<h:column>
-				<li><a href="#">
-				<h:outputText  value="#{categorie.nomCategorie}"/>
-				</a></li>
+				<li><h:link outcome="/pages/shop">
+				<f:param name="idRecherhceProduit" value="#{scategorie.id}"/>
+				<f:param name="filtrageProduit" value="1"/>
+				<h:outputText  value="#{scategorie.nomSCategorie}"/>
+				</h:link>
+				</li>
 				</h:column>	
 				</h:dataTable>	
+				
+				
+				<h:dataTable value="#{shopController.getAllSousSousCategorie()}" var="sscategorie" >
+				<h:column>
+				<li>
+				<h:link outcome="/pages/shop">
+				<f:param name="idRecherhceProduit" value="#{sscategorie.id}"/>
+				<f:param name="filtrageProduit" value="2"/>
+				<f:param name="idscategorie" value="#{sscategorie.idSCategorie.id}"/>
+				<h:outputText  value="#{sscategorie.nomSsCategorie}"/>
+				</h:link>
+				</li>
+				</h:column>	
+				</h:dataTable>		
                 </ul>
 						
 							
@@ -125,7 +142,8 @@
 							<!-- Product Item -->
 							
 							<ui:repeat var="Produit" value="#{ControllerProduit.getProduits()}" varStatus="status">
-							
+							<h:link outcome="/pages/produit">
+								<f:param name="idProduit" value="#{Produit.id}"/>
 								<div class="product_item is_new">
 								<div class="product_border"></div>
 								
@@ -136,8 +154,8 @@
 								</ui:repeat>
 								
 								<div class="product_content">
-									<div class="product_price"><h:outputText  value="#{Produit.prix}"/></div>
-									<div class="product_name"><div><a href="#" tabindex="0"><h:outputText  value="#{Produit.nomProduit}"/></a></div></div>
+									<div class="product_price" style="color: #000000"><h:outputText  value="#{Produit.prix}"/></div>
+									<div class="product_name" style="color: #000000"><div><h:outputText  value="#{Produit.nomProduit}"/></div></div>
 								</div>
 								<div class="product_fav"><i class="fas fa-heart"></i></div>
 								<ul class="product_marks">
@@ -146,6 +164,7 @@
 								</ul>
 							</div>
 							<br></br>
+							</h:link>
 							</ui:repeat>
 							
 

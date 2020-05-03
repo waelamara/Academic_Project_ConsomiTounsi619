@@ -17,9 +17,13 @@ public class ImagesProduitServiceImpl implements IImageProduitService {
 		return imagesProduitRepository.save(image);
 	}
 
-	
-	public List<ImageProduit> findImageProduits(Long idProduit) {
+	public ImageProduit findImageProduits(Long idProduit) {
 		return imagesProduitRepository.findImageProduits(idProduit);
+	}
+
+	@Override
+	public List<ImageProduit> findAllImagesProduits(Long idProduit) {
+		return imagesProduitRepository.findAllImagesProduits(idProduit);
 	}
 	
 

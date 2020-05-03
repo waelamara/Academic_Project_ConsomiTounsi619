@@ -40,7 +40,7 @@ public class Produit implements Serializable {
 	private float prixAchat;
 	@JsonIgnore
 	@ManyToOne
-	private SsCategorie IdSsCategorie;
+	private SsCategorie idSsCategorie;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="Idproduit",cascade=CascadeType.ALL)
@@ -130,11 +130,11 @@ public class Produit implements Serializable {
 	}
 
 	public SsCategorie getIdSsCategorie() {
-		return IdSsCategorie;
+		return idSsCategorie;
 	}
 
 	public void setIdSsCategorie(SsCategorie idSsCategorie) {
-		IdSsCategorie = idSsCategorie;
+		this.idSsCategorie = idSsCategorie;
 	}
 
 
@@ -168,7 +168,7 @@ public class Produit implements Serializable {
 		this.barcode = barcode;
 		this.poids = poids;
 		this.prixAchat = prixAchat;
-		this.IdSsCategorie = idSsCategorie;
+		this.idSsCategorie = idSsCategorie;
 	}
 
 	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat,
