@@ -43,7 +43,7 @@ public class Charite implements Serializable {
     private Events idevents ;
 	@ManyToMany(cascade = CascadeType.ALL) 
 	@JsonIgnore
-	private Set<Commande> CommandeCharite = new HashSet<>() ; 
+	private Set<Commande> commandeCharite = new HashSet<>() ; 
 	@Transient
 	long commande_id;
 	@Transient
@@ -64,14 +64,15 @@ public class Charite implements Serializable {
 	public void setEvent_id(long event_id) {
 		this.event_id = event_id;
 	}
+	
+	
+	
 	public Set<Commande> getCommandeCharite() {
-		return CommandeCharite;
+		return commandeCharite;
 	}
 	public void setCommandeCharite(Set<Commande> commandeCharite) {
-		CommandeCharite = commandeCharite;
+		this.commandeCharite = commandeCharite;
 	}
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -116,7 +117,7 @@ public class Charite implements Serializable {
 		this.montantPaye=MontantPaye;
 		this.idevents=idevents;
 		this.iduser=iduser;
-		this.CommandeCharite=CommandeCharite;
+		this.commandeCharite=CommandeCharite;
 
 	}
 	public Charite(String TypeCharite,float MontantPaye,User iduser,Events idevents) {
@@ -130,7 +131,7 @@ public class Charite implements Serializable {
 	public Charite(Set<Commande> CommandeCharite) {
 		super();
 		
-		this.CommandeCharite=CommandeCharite;
+		this.commandeCharite=CommandeCharite;
 
 	}
 
