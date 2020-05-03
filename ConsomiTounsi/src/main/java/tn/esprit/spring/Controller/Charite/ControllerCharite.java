@@ -21,8 +21,8 @@ public class ControllerCharite {
 	@Autowired
 	ChariteDAO chariteDAO;
 	private Long id; 
-	private String TypeCharite;
-	private float MontantPaye;
+	private String typeCharite;
+	private float montantPaye;
 	
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
@@ -41,16 +41,17 @@ public class ControllerCharite {
 		this.id = id;
 	}
 	public String getTypeCharite() {
-		return TypeCharite;
+		return typeCharite;
 	}
 	public void setTypeCharite(String typeCharite) {
-		TypeCharite = typeCharite;
+		this.typeCharite = typeCharite;
 	}
 	public float getMontantPaye() {
-		return MontantPaye;
+		return montantPaye;
 	}
 	public void setMontantPaye(float montantPaye) {
-		MontantPaye = montantPaye;
+		this.montantPaye = montantPaye;
 	}
+	
 
 }
