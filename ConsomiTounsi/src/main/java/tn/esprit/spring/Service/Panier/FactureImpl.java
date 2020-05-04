@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -258,8 +259,8 @@ PdfWriter writer =PdfWriter.getInstance(d, new FileOutputStream(file+"/"+"employ
 	return true;
 }
 
-
-public void facturepdf (int id_facture){
+@Transactional
+public void facturepdf (long id_facture){
 	try {
 		Facture f=factureRepository.getOne((long) id_facture);
 		//List<lignecommandeproduit>commandes = panierRepository.panier_confirmer_ParIdclient(f.getCommande().getClient().getUserId());

@@ -2,7 +2,6 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -17,11 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.data.annotation.Transient;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,9 +40,9 @@ public class Commande implements Serializable  {
 	
 	private String status;
 	
-	private String TypedePayment;
+	private String typedePayment;
 	
-	private String Remise;
+	private String remise;
 	
 	private double pourcentageDeRemise;
 	
@@ -114,15 +108,15 @@ public class Commande implements Serializable  {
 		this.status = status;
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="Commande")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="commande")
 	private Set<reclamation> reclamation;
 
 	public String getTypedePayment() {
-		return TypedePayment;
+		return typedePayment;
 	}
 	
 	public void setTypedePayment(String typedePayment) {
-		TypedePayment = typedePayment;
+		typedePayment = typedePayment;
 	}
 	
 	public User getIdUser() {
@@ -134,11 +128,11 @@ public class Commande implements Serializable  {
 	}
 	
 	public String getRemise() {
-		return Remise;
+		return remise;
 	}
 	
 	public void setRemise(String remise) {
-		Remise = remise;
+		this.remise = remise;
 	}
 	
 	
@@ -155,6 +149,15 @@ public class Commande implements Serializable  {
 	public void setPourcentageDeRemise(double pourcentageDeRemise) {
 		this.pourcentageDeRemise = pourcentageDeRemise;
 	}
+
+	public Facture getFactureid() {
+		return factureid;
+	}
+
+	public void setFactureid(Facture factureid) {
+		this.factureid = factureid;
+	}
+	
 	
 	
 

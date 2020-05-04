@@ -33,7 +33,7 @@ public class Events implements Serializable {
 	private Long Id;
 	private String titre;
 	@Temporal(TemporalType.DATE)
-	private Date DateE;
+	private Date dateE;
 	private int nbplace;
 	private int nbparticipant;
 	private String description;
@@ -74,12 +74,14 @@ public class Events implements Serializable {
 		this.titre = titre;
 	}
 
+	
+
 	public Date getDateE() {
-		return DateE;
+		return dateE;
 	}
 
 	public void setDateE(Date dateE) {
-		DateE = dateE;
+		this.dateE = dateE;
 	}
 
 	public int getNbplace() {
@@ -137,7 +139,7 @@ public class Events implements Serializable {
 			Set<Charite> charite,String description,String image) {
 		super();
 		this.titre = titre;
-		this.DateE = DateE;
+		this.dateE = DateE;
 		this.nbplace = nbplace;
 		this.nbparticipant = nbparticipant;
 		this.publicite = publicite;
@@ -152,7 +154,7 @@ public class Events implements Serializable {
 		super();
 		this.Id=id;
 		this.titre = titre;
-		this.DateE = DateE;
+		this.dateE = DateE;
 		this.nbplace = nbplace;
 		this.nbparticipant = nbparticipant;
 		this.publicite = publicite;

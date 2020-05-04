@@ -16,14 +16,13 @@ import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
-@Controller(value = "ControllerCharite")
-@ELBeanName(value = "ControllerCharite")
+@Controller
 public class ControllerCharite {
 	@Autowired
 	ChariteDAO chariteDAO;
 	private Long id; 
-	private String TypeCharite;
-	private float MontantPaye;
+	private String typeCharite;
+	private float montantPaye;
 	
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
@@ -35,10 +34,6 @@ public class ControllerCharite {
 		return com;
 	}
 	
-	
-	
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -46,16 +41,17 @@ public class ControllerCharite {
 		this.id = id;
 	}
 	public String getTypeCharite() {
-		return TypeCharite;
+		return typeCharite;
 	}
 	public void setTypeCharite(String typeCharite) {
-		TypeCharite = typeCharite;
+		this.typeCharite = typeCharite;
 	}
 	public float getMontantPaye() {
-		return MontantPaye;
+		return montantPaye;
 	}
 	public void setMontantPaye(float montantPaye) {
-		MontantPaye = montantPaye;
+		this.montantPaye = montantPaye;
 	}
+	
 
 }

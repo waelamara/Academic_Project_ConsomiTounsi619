@@ -35,5 +35,11 @@ public class CategorieServiceImpl implements ICategorieService {
 		c2.setNomCategorie(c.getNomCategorie());
 		return categorieRepository.save(c2);
 	}
+
+	@Override
+	public String GetNameById(Long id) {
+		String name=categorieRepository.getOne(id).getNomCategorie();
+		return name;
+	}
 	
 }
