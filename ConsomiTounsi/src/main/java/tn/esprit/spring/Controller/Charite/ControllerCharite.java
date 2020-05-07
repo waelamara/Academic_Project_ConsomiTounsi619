@@ -16,7 +16,8 @@ import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
-@Controller
+@Controller(value = "ControllerCharite")
+@ELBeanName(value = "ControllerCharite")
 public class ControllerCharite {
 	@Autowired
 	ChariteDAO chariteDAO;
