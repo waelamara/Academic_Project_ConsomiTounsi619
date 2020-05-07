@@ -6,7 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/TemplateAdmin/template.xhtml">
-	<ui:define name="Charity">
+	<ui:define name="ComplaintAdmin">
 		<h:head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 			<title>Tables - Ace Admin</title>
@@ -32,18 +32,18 @@
 													</th>
 													<th class="detail-col">Details</th>
 													<th>Type of Charity</th>
-													<th>donate Money</th>
+													<th>Price Donate</th>
+													<th class="hidden-480">Event</th>
+
 													
-														
+													<th>Commande</th>
 													
-													<th >Event</th>
-                                                    <th >Commande</th>
 													
 												</tr>
 											</thead>
 
 											<tbody>
-											 <ui:repeat var="cha" value="#{ControllerCharite.getAllCharite()}" varStatus="status"> 
+											 <ui:repeat var="cha" value="#{ControllerCharity.getAllCharite()}" varStatus="status"> 
 												<tr>
 													<td class="center">
 														<label class="pos-rel">
@@ -63,12 +63,12 @@
 
 													
 													<td><h:outputText value="#{cha.typeCharite}"/></td>
-													<td ><h:outputText value="#{cha.montantPaye}"/></td>
-													<td><h:outputText value="#{cha.events.id}"/></td>
-
+													<td><h:outputText value="#{cha.montantPaye}"/></td>
+													<td><h:outputText value="#{cha.idevents}"/></td>
 													
 													<td><h:outputText value="#{cha.commande.id}"/></td>
 
+														
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
