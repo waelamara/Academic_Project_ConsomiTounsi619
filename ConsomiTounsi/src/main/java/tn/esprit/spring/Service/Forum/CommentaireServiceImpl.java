@@ -1,8 +1,11 @@
 package tn.esprit.spring.Service.Forum;
 
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Date;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,7 @@ public class CommentaireServiceImpl implements ICommentaireService{
 		 User user =userRepository.getOne(userId);
 		 Sujet sujet=sujetRepository.getOne(sujetId);
 	for(String mots:motcommentaire){
-		if(motcommentaire.length==1 && motcommentaire.equals("b"))
+//		if(motcommentaire.length==1 && motcommentaire.equals("b"))
 		
 			if (badwords.contains(mots)){
 			    mots="(@#à*&è)";
@@ -43,6 +46,9 @@ public class CommentaireServiceImpl implements ICommentaireService{
 			}
 		else
 			com=com+" "+mots;}
+	LocalDateTime localDateTime = LocalDateTime.now();
+    Date date =  Date.from( localDateTime.atZone( ZoneId.systemDefault()).toInstant());
+	c.setDateAjout(date);
 	 c.setIdSujet(sujet);
 	 c.setIdUser(user);
 	 c.setNbDislike(0);

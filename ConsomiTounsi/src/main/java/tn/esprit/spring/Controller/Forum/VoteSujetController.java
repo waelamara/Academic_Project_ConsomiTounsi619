@@ -56,7 +56,7 @@ public ResponseEntity<?> counteDislike(@PathVariable(value = "sujetId") Long suj
 @GetMapping("/verification/{sujetId}/{iduser}")
 public ResponseEntity<?> verificationVote(@PathVariable(value = "sujetId") Long sujetId,
 									 @PathVariable("iduser") Long iduser) {
-	return 	ResponseEntity.ok().body(ivoteSujetservice.verificationvote(sujetId, iduser));
+	return 	ResponseEntity.ok().body(ivoteSujetservice.verificationvoteChoix(sujetId, iduser));
 }
 @GetMapping("/afficher/{sujetId}/{iduser}")
 public ResponseEntity<?> afficherVote(@PathVariable(value = "sujetId") Long sujetId,
