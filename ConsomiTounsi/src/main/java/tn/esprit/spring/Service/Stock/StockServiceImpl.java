@@ -112,4 +112,10 @@ public class StockServiceImpl implements IStockService {
 
 	}
 
+	@Override
+	public List<Stock> findStockbyName(String name) {
+		// TODO Auto-generated method stub
+		return stockRepository.findStockbyName(name);
+	}
+
 }

@@ -6,7 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/TemplateAdmin/template.xhtml">
-	<ui:define name="ComplaintAdmin">
+	<ui:define name="stock">
 		<h:head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 			<title>Tables - Ace Admin</title>
@@ -30,10 +30,10 @@
 															<span class="lbl"></span>
 														</label>
 													</th>
-													<th class="detail-col">Details</th>
-													<th>Title</th>
-													<th>Description</th>
-													<th class="hidden-480">State</th>
+													<th class="detail-col">Stock Name</th>
+													<th>Quantity</th>
+													<th>Validity</th>
+													<th class="hidden-480">Price</th>
 
 													<th>
 														<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
@@ -48,7 +48,7 @@
 											</thead>
 
 											<tbody>
-											 <ui:repeat var="rec" value="#{ComplaintAdminController.getAllrec()}" varStatus="status"> 
+											 <ui:repeat value="#{StockController.allstock()}" varStatus="status"> 
 												<tr>
 													<td class="center">
 														<label class="pos-rel">
@@ -57,22 +57,15 @@
 														</label>
 													</td>
 
-													<td class="center">
-														<div class="action-buttons">
-															<a href="#" class="green bigger-140 show-details-btn" title="Show Details">
-																<i class="ace-icon fa fa-angle-double-down"></i>
-																<span class="sr-only">Details</span>
-															</a>
-														</div>
-													</td>
+													
 
 													
-													<td><h:outputText value="#{rec.titre}"/></td>
-													<td class="hidden-480"><h:outputText value="#{rec.description}"/></td>
-													<td><h:outputText value="#{rec.etat}"/></td>
+													<td><h:outputText value="#{StockController.nom_stock}"/></td>
+													<td class="hidden-480"><h:outputText value="#{StockController.quantite}"/></td>
+													<td><h:outputText value="#{StockController.validite}"/></td>
 
 													<td class="hidden-480">
-														<span class="label label-sm label-warning"><h:outputText value="#{rec.dateRec}"/></span>
+														<span class="label label-sm label-warning"><h:outputText value="#{StockController.prixdevente }"/></span>
 													</td>
 													<td><h:outputText value="#{rec.commande.id}"/></td>
 
@@ -536,19 +529,7 @@
 									'fa-angle-double-down').toggleClass(
 									'fa-angle-double-up');
 						});
-				/***************/
-
-				/**
-				//add horizontal scrollbars to a simple table
-				$('#simple-table').css({'width':'2000px', 'max-width': 'none'}).wrap('<div style="width: 1000px;" />').parent().ace_scroll(
-				  {
-					horizontal: true,
-					styleClass: 'scroll-top scroll-dark scroll-visible',//show the scrollbars on top(default is bottom)
-					size: 2000,
-					mouseWheelLock: true
-				  }
-				).css('padding-top', '12px');
-				 */
+				
 
 			})
 		</script>

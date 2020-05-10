@@ -188,6 +188,8 @@ System.out.println(LoginController.this.userDetails.getEmail());
 	///////////////
 	
 	public String doLogout() {
+		userDetails=null;
+		loggedIn=false;
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/login.xhtml?faces-redirect=true";
 		}

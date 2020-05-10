@@ -2,7 +2,6 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -17,11 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.data.annotation.Transient;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -114,7 +108,7 @@ public class Commande implements Serializable  {
 		this.status = status;
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="Commande")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="commande")
 	private Set<reclamation> reclamation;
 
 	public String getTypedePayment() {

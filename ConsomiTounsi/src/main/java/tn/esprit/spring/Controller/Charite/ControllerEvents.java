@@ -63,8 +63,7 @@ public class ControllerEvents {
 	
 	private Long Id;
 	private String titre;
-	@Temporal(TemporalType.DATE)
-	private Date DateE;
+	private Date dateE;
 	private int nbplace;
 	private int nbparticipant;
 	private String description;
@@ -86,12 +85,14 @@ public class ControllerEvents {
 		this.titre = titre;
 	}
 
+	
+
 	public Date getDateE() {
-		return DateE;
+		return dateE;
 	}
 
 	public void setDateE(Date dateE) {
-		DateE = dateE;
+		this.dateE = dateE;
 	}
 
 	public int getNbplace() {

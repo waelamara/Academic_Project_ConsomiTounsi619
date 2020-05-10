@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,13 @@ import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
-@Controller
+@Controller(value = "ControllerCharite")
+@ELBeanName(value = "ControllerCharite")
+@Join(path = "/showCharite", to = "/Charity.jsf")
 public class ControllerCharite {
 	@Autowired
 	ChariteDAO chariteDAO;
-	private Long id; 
-	private String TypeCharite;
-	private float MontantPaye;
+	
 	
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
@@ -34,23 +35,7 @@ public class ControllerCharite {
 		return com;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getTypeCharite() {
-		return TypeCharite;
-	}
-	public void setTypeCharite(String typeCharite) {
-		TypeCharite = typeCharite;
-	}
-	public float getMontantPaye() {
-		return MontantPaye;
-	}
-	public void setMontantPaye(float montantPaye) {
-		MontantPaye = montantPaye;
-	}
+	
+	
 
 }

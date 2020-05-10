@@ -33,8 +33,8 @@ public class Charite implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	 
-	private String TypeCharite;
-	private float MontantPaye;
+	private String typeCharite;
+	private float montantPaye;
 	@ManyToOne
 	@JsonIgnore
 	private User iduser;
@@ -43,7 +43,7 @@ public class Charite implements Serializable {
     private Events idevents ;
 	@ManyToMany(cascade = CascadeType.ALL) 
 	@JsonIgnore
-	private Set<Commande> CommandeCharite = new HashSet<>() ; 
+	private Set<Commande> commandeCharite = new HashSet<>() ; 
 	@Transient
 	long commande_id;
 	@Transient
@@ -64,30 +64,33 @@ public class Charite implements Serializable {
 	public void setEvent_id(long event_id) {
 		this.event_id = event_id;
 	}
+	
+	
+	
 	public Set<Commande> getCommandeCharite() {
-		return CommandeCharite;
+		return commandeCharite;
 	}
 	public void setCommandeCharite(Set<Commande> commandeCharite) {
-		CommandeCharite = commandeCharite;
+		this.commandeCharite = commandeCharite;
 	}
-	public float getMontantPaye() {
-		return MontantPaye;
-	}
-	public void setMontantPaye(float montantPaye) {
-		MontantPaye = montantPaye;
-	}
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	 
 	public String getTypeCharite() {
-		return TypeCharite;
+		return typeCharite;
 	}
 	public void setTypeCharite(String typeCharite) {
-		TypeCharite = typeCharite;
+		this.typeCharite = typeCharite;
+	}
+	public float getMontantPaye() {
+		return montantPaye;
+	}
+	public void setMontantPaye(float montantPaye) {
+		this.montantPaye = montantPaye;
 	}
 	public User getIduser() {
 		return iduser;
@@ -110,17 +113,17 @@ public class Charite implements Serializable {
 	}
 	public Charite(String TypeCharite,float MontantPaye,User iduser,Events idevents,Set<Commande> CommandeCharite) {
 		super();
-		this.TypeCharite=TypeCharite;
-		this.MontantPaye=MontantPaye;
+		this.typeCharite=TypeCharite;
+		this.montantPaye=MontantPaye;
 		this.idevents=idevents;
 		this.iduser=iduser;
-		this.CommandeCharite=CommandeCharite;
+		this.commandeCharite=CommandeCharite;
 
 	}
 	public Charite(String TypeCharite,float MontantPaye,User iduser,Events idevents) {
 		super();
-		this.TypeCharite=TypeCharite;
-		this.MontantPaye=MontantPaye;
+		this.typeCharite=TypeCharite;
+		this.montantPaye=MontantPaye;
 		this.idevents=idevents;
 		this.iduser=iduser;
 
@@ -128,7 +131,7 @@ public class Charite implements Serializable {
 	public Charite(Set<Commande> CommandeCharite) {
 		super();
 		
-		this.CommandeCharite=CommandeCharite;
+		this.commandeCharite=CommandeCharite;
 
 	}
 
