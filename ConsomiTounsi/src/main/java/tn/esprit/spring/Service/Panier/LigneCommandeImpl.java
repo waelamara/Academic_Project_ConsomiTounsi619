@@ -60,7 +60,7 @@ public class LigneCommandeImpl implements ILigneCommande {
 		return ligneCommandeRepository.findLigneCommande(idProduit, idClient,idCommande);
 	}
 	
-	
+	 @Transactional
 	public List<lignecommandeproduit> AjouterAuPanier(long idprod, long iduser,LigneCommande lc )
 	{
 		List<lignecommandeproduit>List=ligneCommandeRepository.panierParIdclient(iduser);

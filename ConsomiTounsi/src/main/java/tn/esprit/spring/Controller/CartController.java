@@ -88,11 +88,17 @@ public void deleteLigne(long idLigneCommande) {
 	 public void display(LigneCommande lc)
 		{
 			
-		 this.setQty(lc.getQuantity());
-			
+		 this.setQty(lc.getQuantity());	
 
 		}
+		public void ajouterLigne (Long idprod,Long iduser) 
+	    {
+		System.out.print("hhhhhhh");
+		    ligneCommandeDao.AjouterAuPanier(idprod,iduser,new LigneCommande(qty));
+			
+		}
 	 
+
 	
 	
 
