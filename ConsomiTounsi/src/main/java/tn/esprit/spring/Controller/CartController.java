@@ -93,7 +93,7 @@ public void deleteLigne(long idLigneCommande) {
 		}
 		public void ajouterLigne (Long idprod,Long iduser) 
 	    {
-		System.out.print("hhhhhhh");
+		
 		    ligneCommandeDao.AjouterAuPanier(idprod,iduser,new LigneCommande(qty));
 			
 		}
