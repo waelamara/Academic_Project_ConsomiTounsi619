@@ -39,5 +39,8 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Lo
 	
 	@Query(value = "SELECT COUNT(*) as n FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE p.id=?1 and c.status='payee'", nativeQuery = true)
 	public int NumProduitVendu(Long idProduit);
+	@Query(value = "SELECT COUNT(*) from ligne_commande l JOIN commande c on l.commande_id=c.id WHERE c.id_user=?1 and c.status='en cours' ", nativeQuery = true)
+	public int numProduitPanier(Long iduser);
+	
 
 }

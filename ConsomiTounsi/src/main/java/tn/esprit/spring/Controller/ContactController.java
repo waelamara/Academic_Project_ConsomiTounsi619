@@ -1,5 +1,7 @@
 package tn.esprit.spring.Controller;
 
+import java.time.LocalDate;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,7 @@ public class ContactController {
 	public  String  addreclamation() {
 		String navigateTo = "/acceuil.xhtml"; 
 		reclamation rec= new reclamation (titre,description);
+        rec.setDateRec(LocalDate.now());
 		System.out.println(titre);
 		System.out.println(description);
 		ReclamationService.save1(rec);

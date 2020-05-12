@@ -7,9 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import tn.esprit.spring.Model.LigneCommande;
+import tn.esprit.spring.Model.Rayon.Rayon;
 import tn.esprit.spring.Model.Stock.Stock;
 
 public interface StockRepository extends JpaRepository <Stock, Long>  {
+	
+	@Query(value = "SELECT * FROM Stock WHERE nom_stock LIKE ?1%", nativeQuery = true)
+	public List<Stock> findStockbyName(String name);
 
 	
 	@Query(value = "SELECT * FROM Stock WHERE id_produit_id LIKE ?1% AND MONTH(NOW())-MONTH(validite)<2 and YEAR(validite)=YEAR(NOW()) ORDER BY validite", nativeQuery = true)

@@ -45,6 +45,7 @@
 								<h:panelGroup rendered="#{not empty loginController.userDetails}">
 								<h:form>
 								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
+<!-- 								user id : #{loginController.userDetails.id} -->
 								<h:outputText value="Good Morning #{loginController.userDetails.firstName} #{loginController.userDetails.lastName}" />
 								<h:commandLink value="  Log Out" action="#{loginController.doLogout()}" />
 								</h:form>
@@ -114,12 +115,13 @@
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<img src="images/cart.png" alt=""/>
-										<div class="cart_count"><span>10</span></div>
+										<a href="/Cart"><img src="images/cart.png" alt=""/></a>
+										<div class="cart_count"><span><h:outputText value="#{cartController.numProduitPanier(loginController.userDetails.id)}"/></span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price">$85</div>
+										<div class="cart_text"><a href="/Cart">Cart</a></div>
+										 <ui:repeat var="Commande" value="#{cartController.commandeparClient(loginController.userDetails.id)}" varStatus="status"> 
+										<div class="cart_price"><h:outputText  value="#{Commande.montant}"/>D</div></ui:repeat>
 									</div>
 								</div>
 							</div>
@@ -231,7 +233,7 @@
 											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="/Cart">Cart<i class="fas fa-chevron-down"></i></a></li>
 										    <li><a href="EventCharite.jsf">Events Charity<i class="fas fa-chevron-down"></i></a></li>
 											<li class="hassubs">
 										<a href="#">Charity<i class="fas fa-chevron-down"></i></a>

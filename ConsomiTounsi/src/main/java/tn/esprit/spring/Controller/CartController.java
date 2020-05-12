@@ -85,15 +85,29 @@ public void deleteLigne(long idLigneCommande) {
 		 
 		 ligneCommandeDao.updateLigne2(new LigneCommande(qty)); 
 	 }
-	 public void displayEmploye(LigneCommande lc)
+	 public void display(LigneCommande lc)
 		{
 			
-		 this.setQty(lc.getQuantity());
-			//this.setId(lc.getId());
+		 this.setQty(lc.getQuantity());	
 
 		}
+		public void ajouterLigne (Long idprod,Long iduser) 
+	    {
+		System.out.print("hhhhhhh");
+		    ligneCommandeDao.AjouterAuPanier(idprod,iduser,new LigneCommande(qty));
+			
+		}
 	 
-	
+		 public int numProduitPanier(Long iduser)
+		 {
+			 int a=ligneCommandeDao.numProduitPanier(iduser);
+			 System.out.println(ligneCommandeDao.numProduitPanier(iduser));
+			 return a;
+		 }
+		 public int numProduitVendu(Long idProduit)
+			{
+				return ligneCommandeDao.NumProduitVendu(idProduit);
+			}
 	
 
 }

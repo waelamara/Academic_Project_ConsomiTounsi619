@@ -5,10 +5,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/Template/template.xhtml">
-	<ui:define name="Cart">
-
-<head>
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="OrderDetails">
+	<head>
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;display=swap" rel="stylesheet"/>
@@ -37,8 +36,7 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>&nbsp;</th>
-						        <th>&nbsp;</th>
+						     
 						         <th>&nbsp;</th>
 						        <th>Product name</th>
 						        <th>Price</th>
@@ -46,22 +44,11 @@
 						        <th>Total</th>
 						      </tr>
 						    </thead>
-
-					
-
 						      
 						    <tbody>
-						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(loginController.userDetails.id)}" varStatus="status"> 
+						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
 						      <tr class="text-center">
 						       
-					   <h:form>   	
-   <td><h:commandButton class="product-remove"
-									action="#{cartController.deleteLigne(panier.id)}"
-									value="Delete"/></td>
-									 <td><h:commandButton class="product-remove"
-									action="#{cartController.updateLigne()}"
-									value="Update"/></td>
-						     </h:form>   	        	 
 		
 <!-- 						     	  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>  -->
   <ui:repeat value="#{ControllerImagesProduit.getImageProduits(panier.idp)}" var="ImageProduit" varStatus="status">		
@@ -90,68 +77,17 @@
 						     
 							
 						      </tr><!-- END TR-->
-
-	   </ui:repeat>							      
+   </ui:repeat>
+							      
 						    </tbody>
-
-		  
+						  
 						  </table>
-					  </div>
-    			</div>
-    		</div>
-    		<div class="row justify-content-end">
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Coupon Code</h3>
-    					<p>Enter your coupon code if you have one</p>
-  						<form action="#" class="info">
-	              <div class="form-group">
-	              	<label for="">Coupon code</label>
-	                <input type="text" class="form-control text-left px-3" placeholder=""/>
-	              </div>
-	            </form>
-    				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
-    			</div>
-    			
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Cart Totals</h3>
-    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(loginController.userDetails.id)}" varStatus="status"> 
-    					<p class="d-flex">
-    					 
-    						<span>Subtotal</span>
-    						<span><h:outputText  value="#{Commande.montant}"/></span>
-    						 
-    					</p>
-    					
-    					<p class="d-flex">
-    						<span>Delivery</span>
-    						<span><h:outputText  value="#{Commande.montant}"/></span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Discount</span>
-    						<span><h:outputText  value="#{Commande.pourcentageDeRemise}"/></span>
-    					</p>
-<!--     					</hr> -->
-    					<p class="d-flex total-price">
-    						<span>Total</span>
-    						<span><h:outputText  value="#{Commande.montant-Commande.pourcentageDeRemise}"/></span>
-    						
-    					</p>
-    					 </ui:repeat>
-    				</div>
-    				 
-    				<p><a href="OrderDetailsAdmin" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-    			</div>
-    		</div>
-			</div>
-		</section>
-
-    
-	
-
- <script src="Cart/js/jquery.min.js"></script>
+						  </div>
+						  </div>
+						  </div>
+						  </div>
+						  </section>
+						   <script src="Cart/js/jquery.min.js"></script>
   <script src="Cart/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="Cart/js/popper.min.js"></script>
   <script src="Cart/js/bootstrap.min.js"></script>
@@ -167,8 +103,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
   <script src="Cart/js/google-map.js"></script>
   <script src="Cart/js/main.js"></script>
-
-  <script>
+    <script>
 		$(document).ready(function(){
 
 		var quantitiy=0;
@@ -208,7 +143,3 @@
 </body>
 </ui:define>
 </ui:composition>
-
-
-
-	

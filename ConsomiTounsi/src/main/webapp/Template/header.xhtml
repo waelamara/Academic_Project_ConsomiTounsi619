@@ -112,12 +112,13 @@ value="Good Morning #{loginController.userDetails.firstName} #{loginController.u
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<img src="images/cart.png" alt=""/>
-										<div class="cart_count"><span>10</span></div>
+										<a href="/Cart"><img src="images/cart.png" alt=""/></a>
+										<div class="cart_count"><span><h:outputText value="#{cartController.numProduitPanier(loginController.userDetails.id)}"/></span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price">$85</div>
+										<div class="cart_text"><a href="/Cart">Cart</a></div>
+											 <ui:repeat var="Commande" value="#{cartController.commandeparClient(loginController.userDetails.id)}" varStatus="status"> 
+										<div class="cart_price"><h:outputText  value="#{Commande.montant}"/>D</div></ui:repeat>
 									</div>
 								</div>
 							</div>
@@ -218,7 +219,7 @@ value="Good Morning #{loginController.userDetails.firstName} #{loginController.u
 											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="/Cart">Cart<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
 										</ul>
 									</li>
