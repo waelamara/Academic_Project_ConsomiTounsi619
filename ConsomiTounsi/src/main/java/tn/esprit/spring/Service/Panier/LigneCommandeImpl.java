@@ -189,6 +189,12 @@ public class LigneCommandeImpl implements ILigneCommande {
 	 {
 		 ligneCommandeRepository.save(lc);
 	 }
+	 
+	 @Transactional
+	 public int numProduitPanier(Long iduser)
+	 {
+		return  ligneCommandeRepository.numProduitPanier(iduser) ;
+	 }
 		
 	
 }

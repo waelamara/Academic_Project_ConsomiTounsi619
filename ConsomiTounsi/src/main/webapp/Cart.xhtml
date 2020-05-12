@@ -51,7 +51,7 @@
 
 						      
 						    <tbody>
-						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
+						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(loginController.userDetails.id)}" varStatus="status"> 
 						      <tr class="text-center">
 						       
 					   <h:form>   	
@@ -117,7 +117,7 @@
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
-    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(5)}" varStatus="status"> 
+    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(loginController.userDetails.id)}" varStatus="status"> 
     					<p class="d-flex">
     					 
     						<span>Subtotal</span>

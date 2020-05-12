@@ -87,7 +87,7 @@
 									
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								<h:commandButton  class="button cart_button" action="#{cartController.ajouterLigne(Produit.id,5)}" value="AddToCart"/>
+								<h:commandButton  class="button cart_button" action="#{cartController.ajouterLigne(Produit.id,loginController.userDetails.id)}" value="AddToCart"/>
 							</h:form>
 						</div>
 					</div>

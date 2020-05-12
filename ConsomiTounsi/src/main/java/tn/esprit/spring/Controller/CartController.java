@@ -98,8 +98,16 @@ public void deleteLigne(long idLigneCommande) {
 			
 		}
 	 
-
-	
+		 public int numProduitPanier(Long iduser)
+		 {
+			 int a=ligneCommandeDao.numProduitPanier(iduser);
+			 System.out.println(ligneCommandeDao.numProduitPanier(iduser));
+			 return a;
+		 }
+		 public int numProduitVendu(Long idProduit)
+			{
+				return ligneCommandeDao.NumProduitVendu(idProduit);
+			}
 	
 
 }
