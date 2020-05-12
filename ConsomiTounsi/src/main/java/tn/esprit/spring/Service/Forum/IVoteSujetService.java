@@ -15,6 +15,7 @@ public interface IVoteSujetService {
 	public void Updatelike(Long sujetId, Long userId);
 	public void Updatedislike(Long sujetId,Long userId);
     public Boolean verificationvote (Long sujetId,Long userId);
+    public int verificationvoteChoix(Long userId, Long sujetId) ;
     public int countlike(Long sujetId);    
     public int countdislik(Long sujetId);
     public List<String> findNomdesUsersVoter(Long sujetId);

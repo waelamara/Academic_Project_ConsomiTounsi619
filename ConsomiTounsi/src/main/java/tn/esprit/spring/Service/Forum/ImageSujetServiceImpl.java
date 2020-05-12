@@ -15,6 +15,12 @@ public class ImageSujetServiceImpl implements IImageSujetService {
 		return imageSujetRepository.save(image);
 		
 		}
+
+	@Override
+	public ImageSujet findImageSujet(Long idSujet) {
+		return imageSujetRepository.findImageSujet(idSujet);
+	}
+	
 	}
 
 

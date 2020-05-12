@@ -1,6 +1,7 @@
 package tn.esprit.spring.Model.Forum;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,6 +28,8 @@ public class Commentaire implements Serializable  {
 		private String description;
 		private int nbLike;
 		private int nbDislike;
+		@Temporal(TemporalType.TIMESTAMP)
+	    private Date dateAjout;
 		
 		@JsonIgnore
 		@ManyToOne  	
@@ -96,6 +101,14 @@ public class Commentaire implements Serializable  {
 		public Commentaire(String description) {
 			super();
 			this.description = description;
+		}
+
+		public Date getDateAjout() {
+			return dateAjout;
+		}
+
+		public void setDateAjout(Date dateAjout) {
+			this.dateAjout = dateAjout;
 		}
 		
 }

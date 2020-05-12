@@ -1,10 +1,12 @@
 package tn.esprit.spring.Controller.Forum;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -13,23 +15,27 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.SessionScope;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Service.Forum.ICategorieSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
+import tn.esprit.spring.Service.Forum.IVoteSujetService;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
 @Join(path = "/blog", to = "/blog.jsf")
+@SessionScope
 public class IBlogControllerImpl{
 	@Autowired
 	ISujetService iSujetService;
 	@Autowired
 	 ICategorieSujetService  icategorieSujetService;
-	
-	
+	@Autowired 
+	IVoteSujetService iVoteSujetService;
+	private RepeatPaginator paginator;
 	private Long id;
 	private String nomSujet;
 	private String description;
@@ -108,9 +114,24 @@ public class IBlogControllerImpl{
 	
 	/********show all sujets****/
 	public List<Sujet> getAllSujets() {
+		List<Sujet> sujets =iSujetService.getAllSujets();
+		for (Sujet s:sujets){
+			iVoteSujetService.affecterdespoints(s.getId());
+		}
+		
 		return iSujetService.getAllSujets();
 	}
 	
+	@PostConstruct
+	public void init(){
+	List <Sujet> s= getAllSujets();
+	paginator = new RepeatPaginator(s);
+}
+
+    public RepeatPaginator getPaginator() {
+    	 
+        return paginator;
+    }
 	/******shoow one sujet******/
 	public Sujet getSujet() {
 		return sujet;
@@ -137,6 +158,10 @@ public class IBlogControllerImpl{
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
 		return formatter.format(D);
 	}
+	public String convertireTime(Date d){
+	SimpleDateFormat  formatter = new SimpleDateFormat(" MMMM d, yyyy 'at' HH:mm a "); 
+	return formatter.format(d);
+}
 	public Sujet getSujetrec() {
 		return sujetrec;
 	}
@@ -146,6 +171,7 @@ public class IBlogControllerImpl{
 	public void setSujetrec(Sujet sujetrec) {
 		this.sujetrec = sujetrec;
 	}
+	
 	
 
 }
