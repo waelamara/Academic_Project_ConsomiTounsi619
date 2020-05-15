@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,10 +13,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Utils.AppConstants;
+import tn.esprit.spring.Controller.Produit.ControllerSousSousCategorie;
 import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Produit.SsCategorie;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
+import tn.esprit.spring.Repository.Produit.SousSousCategorieRepository;
 
 
 @Service
@@ -25,11 +26,15 @@ public class ProduitServiceImpl implements IProduitService {
 	@Autowired
 	ProduitRepository produitRepository;
 	@Autowired
-	ISousSousCategorieService isousSousCategorieRepository;
+	ISousSousCategorieService isousSousCategorieService;
+	@Autowired
+	SousSousCategorieRepository sousSousCategorieRepository;
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	@Autowired
 	IImageProduitService iImagesProduitService;
+	@Autowired
+	ControllerSousSousCategorie controllerSousSousCategorie;
 
 	ObjectMapper objectMapper = new ObjectMapper();
 
@@ -45,7 +50,7 @@ public class ProduitServiceImpl implements IProduitService {
 			throws JsonMappingException, JsonProcessingException, IOException {
 		Produit p2 = findOne(idproduit);
 		Produit p = objectMapper.readValue(ProduitJson, Produit.class);
-		SsCategorie ssc = isousSousCategorieRepository.findOne(idSsCategorie);
+		SsCategorie ssc = isousSousCategorieService.findOne(idSsCategorie);
 		if (p.BarcodeIsvalid(p.getBarcode())) {
 			p2.setNomProduit(p.getNomProduit());
 			p2.setPrix(p.getPrix());
@@ -67,7 +72,7 @@ public class ProduitServiceImpl implements IProduitService {
 	public Produit Add(String ProduitJson, Long idSsCategorie, List<MultipartFile> file)
 			throws JsonMappingException, JsonProcessingException, IOException {
 		Produit p = objectMapper.readValue(ProduitJson, Produit.class);
-		SsCategorie ssc = isousSousCategorieRepository.findOne(idSsCategorie);
+		SsCategorie ssc = isousSousCategorieService.findOne(idSsCategorie);
 		if (!p.BarcodeIsvalid(p.getBarcode())) {
 			return null;
 		}
@@ -103,4 +108,12 @@ public class ProduitServiceImpl implements IProduitService {
 		return produitRepository.findProduitCategorie(idCategorie);
 	}
 
+
+	@Override
+	public void addProduitWithOutImage(Produit p) {
+		SsCategorie ssc = sousSousCategorieRepository.findSsCategorieByName(controllerSousSousCategorie.getNomSsCategorie());
+		p.setIdSsCategorie(ssc);
+		produitRepository.save(p);
+	}
+	
 }

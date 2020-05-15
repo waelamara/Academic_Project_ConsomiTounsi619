@@ -1,6 +1,6 @@
 package tn.esprit.spring.Controller.Produit;
 
-import java.lang.annotation.Repeatable;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +11,7 @@ import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
@@ -35,6 +36,7 @@ public class ControllerProduit {
 	@Autowired
 	ProduitRepository produitRepository;
 	
+	
 	private Long id;
 	private String nomProduit;
 	private float prix;
@@ -44,7 +46,8 @@ public class ControllerProduit {
 	private float prixAchat;
 	private int filtrageProduit;
 	private Long idFiltrageProduit;
-
+	private MultipartFile file;
+	private String nameimage;
 
 	public List<Produit> getProduitsByCategorie(Long idCategorie){
 		return iproduitService.findProduitCategorie(idCategorie);
@@ -100,6 +103,10 @@ public class ControllerProduit {
 	
 	
 	
+	public void addProduit(){
+		iproduitService.addProduitWithOutImage(new Produit( nomProduit,  prix,  description,  barcode,  poids,  prixAchat));
+		System.out.println(nameimage);
+	}
 	
 	
 	
@@ -142,7 +149,8 @@ public class ControllerProduit {
 	
 	
 	
-	
+
+
 
 	public Long getId() {
 		return id;
@@ -214,6 +222,22 @@ public class ControllerProduit {
 
 	public void setIdFiltrageProfuit(Long idFiltrageProduit) {
 		this.idFiltrageProduit = idFiltrageProduit;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getNameimage() {
+		return nameimage;
+	}
+
+	public void setNameimage(String nameimage) {
+		this.nameimage = nameimage;
 	}
 
 	
