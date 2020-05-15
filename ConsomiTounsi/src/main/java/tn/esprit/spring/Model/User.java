@@ -356,7 +356,7 @@ public class User implements Serializable {
 
 
 	/***************Oussama********/
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="User")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private Set<reclamation> reclamation;
 
 	public Set<reclamation> getReclamation() {

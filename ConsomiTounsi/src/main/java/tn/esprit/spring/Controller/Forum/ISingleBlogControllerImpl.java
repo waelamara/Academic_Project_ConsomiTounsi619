@@ -1,129 +1,87 @@
 package tn.esprit.spring.Controller.Forum;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.PathVariable;
 
 import tn.esprit.spring.Model.User;
-import tn.esprit.spring.Model.Forum.CategorieSujet;
-import tn.esprit.spring.Model.Forum.Sujet;
-import tn.esprit.spring.Service.Forum.ICategorieSujetService;
+import tn.esprit.spring.Model.reclamation;
+import tn.esprit.spring.Model.Forum.Commentaire;
+import tn.esprit.spring.Service.Forum.ICommentaireService;
 import tn.esprit.spring.Service.Forum.ISujetService;
+
 
 @Controller(value = "singleblogController")
 @ELBeanName(value = "singleblogController")
-@Join(path = "/single-blog{idsujet}", to = "/single-blog.jsf")
+@Join(path = "/single-blog", to = "/fourm/single-blog.jsf")
 public class ISingleBlogControllerImpl{
 	@Autowired
 	ISujetService iSujetService;
-	@Autowired
-	 ICategorieSujetService  icategorieSujetService;
-
 	
+	@Autowired ICommentaireService icommentaireService;
 	private Long id;
-	private String nomSujet;
 	private String description;
-	@Temporal (TemporalType.DATE)
-    private Date dateAjout;
-	private int nbVue;
-	private int nbLike;
-	private int nbDislike;
-	private int nbpoint;
-	private List<Sujet> sujets;
-	private Sujet sujet;
-	User idUser;
-	CategorieSujet idCategorieSujet;
+	private Commentaire commentaire;
+	private User idUser;
 	
-	public CategorieSujet getIdCategorieSujet() {
-		return idCategorieSujet;
-	}
-	public void setIdCategorieSujet(CategorieSujet categorieSujet) {
-		idCategorieSujet = categorieSujet;
-	}
-	public User getIdUser() {
-		return idUser;
-	}
-	public void setIdUser(User idUser) {
-		this.idUser = idUser;
-	}
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNomSujet() {
-		return nomSujet;
-	}
-	public void setNomSujet(String nomSujet) {
-		this.nomSujet = nomSujet;
-	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getDateAjout() {
-		return dateAjout;
+
+	public Commentaire getCommentaire() {
+		return commentaire;
 	}
-	public void setDateAjout(Date dateAjout) {
-		this.dateAjout = dateAjout;
+
+	public void setCommentaire(Commentaire commentaire) {
+		this.commentaire = commentaire;
 	}
-	public int getNbVue() {
-		return nbVue;
+
+	public User getIdUser() {
+		return idUser;
 	}
-	public void setNbVue(int nbVue) {
-		this.nbVue = nbVue;
+
+	public void setIdUser(User idUser) {
+		this.idUser = idUser;
 	}
-	public int getNbLike() {
-		return nbLike;
-	}
-	public void setNbLike(int nbLike) {
-		this.nbLike = nbLike;
-	}
-	public int getNbDislike() {
-		return nbDislike;
-	}
-	public void setNbDislike(int nbDislike) {
-		this.nbDislike = nbDislike;
-	}
-	public int getNbpoint() {
-		return nbpoint;
-	}
-	public void setNbpoint(int nbpoint) {
-		this.nbpoint = nbpoint;
+
+	public  List<Commentaire> afficherCommentaireOfSujet(Long sujetId) {
+	
+		return icommentaireService.getCommentaireOfSujet(sujetId);
+		}
+	
+	public String ajoutercommentaire(Long sujetId, Long userId){
+		String navigateTo =null;
+		Commentaire com2= new Commentaire ();
+		com2.setDescription(description);
+		System.out.println("********"+description);
+		icommentaireService.ajouterCommentaire(com2, sujetId, userId);
+		return navigateTo ;
 	}
 	
-	/********show all sujets****/
-	public List<Sujet> getAllSujets() {
-		return iSujetService.getAllSujets();
-	}
-	
-	/******shoow one sujet******/
-	public Sujet getSujet() {
-		Sujet v =iSujetService.findOne(id);
-		return v;
-	}
-	public void setSujet(Sujet sujet) {
-		this.sujet = sujet;
+	public int countNbcommentaire(Long sujetId){
+		return icommentaireService.countNbcommentaire(sujetId);
 	}
 	
 
-	
-	public String convertireDate(Date D){
-		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
-		return formatter.format(D);
-	}
-	
 
 }

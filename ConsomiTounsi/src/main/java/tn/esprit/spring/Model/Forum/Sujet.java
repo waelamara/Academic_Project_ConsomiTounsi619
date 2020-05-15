@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,7 @@ public class Sujet implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idUser", referencedColumnName = "USER_ID")
 	User idUser;
-	@OneToMany(mappedBy="idSujet")
+	@OneToMany(mappedBy="idSujet" ,fetch = FetchType.EAGER)
 	@JsonIgnore
 	public Set<Commentaire> commentarie;
 	@OneToMany(mappedBy="sujetId",cascade=CascadeType.ALL)
