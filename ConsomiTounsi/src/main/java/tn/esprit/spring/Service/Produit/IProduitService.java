@@ -20,4 +20,5 @@ public interface IProduitService {
 	public List<Produit> findProduitSsCategorie(Long idSsCategorie);
 	public List<Produit> findProduitSCategorie(Long idSCategorie);
 	public List<Produit> findProduitCategorie(Long idCategorie);
+	public void addProduitWithOutImage(Produit p);
 }
