@@ -84,7 +84,7 @@ public class CommandeImpl implements ICommande {
 	}
 	
 	
-	public void PayerEnLigne(int idCommande,int iduser)
+	public void PayerEnLigne(Long idCommande,int iduser)
 	{
 		Commande c = commandeRepository.getOne((long) idCommande);
 		User u =userRepository.findById((long) iduser).get();
@@ -96,7 +96,7 @@ public class CommandeImpl implements ICommande {
 	}
 	
 	
-	public void PayerEnLigne(int idCommande,int iduser,String code)
+	public void PayerEnLigne(long idCommande,int iduser,String code)
 
 	{
 
@@ -189,7 +189,7 @@ public class CommandeImpl implements ICommande {
 	
 	
 	
-	public void PayerPorteaPorte(int idCommande,int iduser,String code)
+	public void PayerPorteaPorte(long idCommande,int iduser,String code)
 	{
 		
 		List<LigneCommande> Linges=ligneCommandeRepository.findAll();
@@ -256,7 +256,7 @@ public class CommandeImpl implements ICommande {
 			}
 		}
 }
-	public void PayerPorteaPorte(int idCommande,int iduser)
+	public void PayerPorteaPorte(long idCommande,int iduser)
 	{
 		Commande c = commandeRepository.getOne((long) idCommande);
 		User u =userRepository.findById((long) iduser).get();
@@ -272,5 +272,9 @@ public class CommandeImpl implements ICommande {
 	{
 		
 		return commandeRepository.NumCommadeParMOIS();
+	}
+	public Commande CommandeencoursparClient(long id)
+	{
+		return commandeRepository.CommandeencoursparClient(id);
 	}
 }
