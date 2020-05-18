@@ -20,13 +20,14 @@ import org.springframework.web.context.annotation.SessionScope;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Repository.Forum.ImageSujetRepository;
 import tn.esprit.spring.Service.Forum.ICategorieSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
 import tn.esprit.spring.Service.Forum.IVoteSujetService;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
-@Join(path = "/blog", to = "/blog.jsf")
+@Join(path = "/blog", to = "/fourm//blog.jsf")
 @SessionScope
 public class IBlogControllerImpl{
 	@Autowired
@@ -48,6 +49,8 @@ public class IBlogControllerImpl{
 	private List<Sujet> sujets;
 	private Sujet sujet;
 	private Sujet sujetrec;
+	private String nomCategorie;
+	private Long categorieId;
 	User idUser;
 	CategorieSujet idCategorieSujet;
 	
@@ -112,6 +115,22 @@ public class IBlogControllerImpl{
 		this.nbpoint = nbpoint;
 	}
 	
+
+	
+	public String getNomCategorie() {
+		return nomCategorie;
+	}
+	public void setNomCategorie(String nomCategorie) {
+		this.nomCategorie = nomCategorie;
+	}
+	
+	
+	public Long getCategorieId() {
+		return categorieId;
+	}
+	public void setCategorieId(Long categorieId) {
+		this.categorieId = categorieId;
+	}
 	/********show all sujets****/
 	public List<Sujet> getAllSujets() {
 		List<Sujet> sujets =iSujetService.getAllSujets();
@@ -170,6 +189,16 @@ public class IBlogControllerImpl{
 	}
 	public void setSujetrec(Sujet sujetrec) {
 		this.sujetrec = sujetrec;
+	}
+	
+	public String ajouterSujet(Long userId){
+		long cc=getCategorieId();
+		System.out.println("********"+cc);
+		String navigateTo =null;
+		Sujet c=new Sujet(nomSujet,description);
+		//idCategorieSujet.getId()
+		iSujetService.ajouterSujet(c,cc, userId);
+		return navigateTo;
 	}
 	
 	

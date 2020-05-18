@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Manifest-Version: 1.0
 Implementation-Title: ConsomiTounsi
 Implementation-Version: 1.0
@@ -9,15 +8,3 @@ Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/ConsomiTounsi
 Created-By: Maven Integration for Eclipse
 
-=======
-Manifest-Version: 1.0
-Implementation-Title: ConsomiTounsi
-Implementation-Version: 1.0
-Built-By: Iheb
-Implementation-Vendor-Id: tn.esprit.spring
-Build-Jdk: 1.8.0_201
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/ConsomiTounsi
-Created-By: Maven Integration for Eclipse
-
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git

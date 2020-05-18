@@ -17,6 +17,7 @@ public interface SujetRepository extends JpaRepository<Sujet, Long> {
 	@Query(value = "SELECT * FROM sujet WHERE id_categorie_sujet= ?1 ORDER BY nb_like Desc,date_ajout DESC ", nativeQuery = true)
 	public List<Sujet> findSujetbycatgID(Long categId);
 
-	@Query(value = "SELECT id_categorie_sujet,count(*) as nb FROM sujet GROUP by id_categorie_sujet order by nb desc", nativeQuery = true)
-	public List<NbSujetbyCat> countSujetbycatId();
+	
+	@Query(value="SELECT count(*) FROM `sujet` WHERE `id_categorie_sujet`=?1",nativeQuery=true)
+	public int countSujetbycatId(Long categId);
 }
