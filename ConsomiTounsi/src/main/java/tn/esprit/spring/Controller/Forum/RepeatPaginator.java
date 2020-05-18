@@ -16,7 +16,7 @@ public class RepeatPaginator {
 
 	public RepeatPaginator(List<?> model) {
 		this.origModel = model;
-		this.records = 4;
+		this.records =3 ;
 		this.pageIndex = DEFAULT_PAGE_INDEX;
 		this.recordsTotal = model.size();
 

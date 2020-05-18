@@ -9,6 +9,8 @@ import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.transaction.Transactional;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,6 +25,7 @@ import tn.esprit.spring.Model.CadeauUser;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.CadeauUserRepository;
+import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
 
 @Service
@@ -33,6 +36,9 @@ public class CadeauUserImpl implements ICadeauUser {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	CommandeRepository commandeRepository;
 	
 	private JavaMailSender javaMailSender;
 	
@@ -335,14 +341,69 @@ public class CadeauUserImpl implements ICadeauUser {
 	userRepository.save(u);
 	cadeauUserRepository.save(cd);
 	}*/
-	
-	public float montantCadeau(String code)
+@Transactional	
+	public float montantCadeau(String code,Long idCommande)
 	{
+	float a=cadeauUserRepository.montantCadeau(code);
+	Commande c = commandeRepository.getOne(idCommande);
+CadeauUser cd=cadeauUserRepository.verifierCode(code,c.getIdUser().getId());
+if(cd!=null)
+{
+	if(c.getPourcentageDeRemise()==0)
+	{
+		if(c.getMontant()<cd.getMontant())
+		{
+			System.out.print("111");
+			cd.setMontant((int) (cd.getMontant()-c.getMontant()));
+			c.setMontant(0);
+			commandeRepository.save(c);
+			cadeauUserRepository.save(cd);
+			User u =userRepository.getOne(c.getIdUser().getId());
+			 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+			 userRepository.save(u);
+		}
+		else 
+		{
+			System.out.print("222");
+	c.setMontant(c.getMontant()-cd.getMontant());
+	commandeRepository.save(c);
+	cd.setValidite(true);
+	cadeauUserRepository.save(cd);
+	User u =userRepository.getOne(c.getIdUser().getId());
+	 u.setPointFidelite(Math.round((int) c.getMontant()/ 10));
+	 userRepository.save(u);
+	
+		}
+		
+	}
+	else
+	{
+		if(c.getPourcentageDeRemise()<cd.getMontant())
+		{
+			cd.setMontant((int) (cd.getMontant()-c.getPourcentageDeRemise()));
+			cadeauUserRepository.save(cd);
+		}
+		else
+		{
+		c.setPourcentageDeRemise(c.getPourcentageDeRemise()-cd.getMontant());
+		commandeRepository.save(c);
+		cd.setValidite(true);
+		cadeauUserRepository.save(cd);
+		
+		User u =userRepository.getOne(c.getIdUser().getId());
+		 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
+		 userRepository.save(u);
+		}
+	}
+}
+//	c.setMontant(c.getMontant()-a/2);
+//	commandeRepository.save(c);
+	
 		return cadeauUserRepository.montantCadeau(code);
 	}
 	
 	
-	public CadeauUser verifierCode(String code,int idUser)
+	public CadeauUser verifierCode(String code,long idUser)
 	{
 		return cadeauUserRepository.verifierCode(code,idUser);
 	
@@ -352,6 +413,11 @@ public class CadeauUserImpl implements ICadeauUser {
 	public float nombreCodeValidee()
 	{
 		return cadeauUserRepository.nombreCodeValidee();
+	}
+	
+	public CadeauUser verifier(long idUser)
+	{
+		return cadeauUserRepository.verifier(idUser);
 	}
 	
 

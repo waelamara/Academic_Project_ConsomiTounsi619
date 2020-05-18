@@ -171,24 +171,48 @@ public class LigneCommandeImpl implements ILigneCommande {
 	public void deleteLigne(long idLigneCommande) {
 		LigneCommande lc = ligneCommandeRepository.getOne(idLigneCommande);
 		Commande c=commandeRepository.findById(lc.getCommande().getId()).get();
-	
-		
+		if(c.getPourcentageDeRemise()==0)	
+		{
 		c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
 	commandeRepository.save(c);
+	if(c.getMontant()<=1)
+	{
+		commandeRepository.delete(c);
+	}
+		}
+		else
+		{
+			c.setMontant((float) (c.getMontant()-(lc.getQuantity()*lc.getPrice())));
+			c.setPourcentageDeRemise((float) (c.getPourcentageDeRemise()-(lc.getQuantity()*lc.getPrice())));
+			commandeRepository.save(c);
+			if(c.getPourcentageDeRemise()<=1)
+			{
+				commandeRepository.delete(c);
+			}
+		}
 		ligneCommandeRepository.delete(lc);
 	}
 	 @Transactional
 	 public void updateLigne(long idL,int quantity)
 	 {
 			LigneCommande lc = ligneCommandeRepository.getOne(idL);
+			Commande c = commandeRepository.getOne(lc.getCommande().getId());
+			if(c.getPourcentageDeRemise()==0)
+			{
+			c.setMontant((float) (c.getMontant()+((quantity-lc.getQuantity())*lc.getPrice())));
 			lc.setQuantity(quantity);
+			commandeRepository.save(c);
+			}
+			else
+			{
+				c.setMontant((float) (c.getMontant()+((quantity-lc.getQuantity())*lc.getPrice())));
+				c.setPourcentageDeRemise((float) (c.getPourcentageDeRemise()+((quantity-lc.getQuantity())*lc.getPrice())));
+				lc.setQuantity(quantity);
+				commandeRepository.save(c);
+			}
 			ligneCommandeRepository.save(lc);
 	 }
-	 @Transactional
-	 public void updateLigne2(LigneCommande lc)
-	 {
-		 ligneCommandeRepository.save(lc);
-	 }
+
 	 
 	 @Transactional
 	 public int numProduitPanier(Long iduser)

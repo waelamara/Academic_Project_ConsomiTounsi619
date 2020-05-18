@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 
@@ -60,5 +62,12 @@ public class RestControlCharge {
 		String paymentStr = paymentIntent.toJson();
 		return new ResponseEntity<String>(paymentStr, HttpStatus.OK);
 		
+	}
+	@PostMapping("/pay/{id}/{carta}/{expMonth}/{expYear}/{cvc}")
+	public void Pay(@PathVariable("id") int idUser,@PathVariable("carta") String carta,
+			@PathVariable("expMonth") int expMonth, @PathVariable("expYear") int expYear,@PathVariable("cvc") String cvc) throws AuthenticationException, InvalidRequestException, CardException, StripeException{
+		{
+			stripeService.Pay(idUser,carta,expMonth,expYear,cvc);
+		}
 	}
 }
