@@ -20,8 +20,8 @@ public interface ICommande {
 	
 	public List< Commande> Commandeparcode( long code);
 	
-	public void PayerEnLigne(int idCommande,int iduser,String code);
+	public void PayerEnLigne(long idCommande,int iduser,String code);
 	
-	public void PayerPorteaPorte(int idCommande,int iduser,String code);
+	public void PayerPorteaPorte(long idCommande,int iduser,String code);
 
 }

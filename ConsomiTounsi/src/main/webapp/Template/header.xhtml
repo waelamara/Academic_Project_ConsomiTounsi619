@@ -112,13 +112,19 @@ value="Good Morning #{loginController.userDetails.firstName} #{loginController.u
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<a href="/Cart"><img src="images/cart.png" alt=""/></a>
+										<a href="/Cart"><img src="acceuil/images/cart.png" alt=""/></a>
 										<div class="cart_count"><span><h:outputText value="#{cartController.numProduitPanier(loginController.userDetails.id)}"/></span></div>
 									</div>
 									<div class="cart_content">
 										<div class="cart_text"><a href="/Cart">Cart</a></div>
-											 <ui:repeat var="Commande" value="#{cartController.commandeparClient(loginController.userDetails.id)}" varStatus="status"> 
-										<div class="cart_price"><h:outputText  value="#{Commande.montant}"/>D</div></ui:repeat>
+											 <ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status"> 
+									 <h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
+										<div class="cart_price"><h:outputText  value="#{Commande.montant}"/>D</div>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
+										<div class="cart_price"><h:outputText  value="#{Commande.pourcentageDeRemise}"/>D</div>
+										</h:panelGroup>
+										</ui:repeat>
 									</div>
 								</div>
 							</div>

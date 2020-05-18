@@ -51,7 +51,7 @@
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text"><p><h:outputText value="#{Produit.description}"/></p></div>
 						<div class="order_info d-flex flex-row">
-							<h:form>
+							<h:form id="myform">
 								<div class="clearfix" style="z-index: 1000;">
 
 									<!-- Product Quantity -->
@@ -87,7 +87,12 @@
 									
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
+									<h:panelGroup rendered="#{empty loginController.userDetails}">
+									<a class="button cart_button" href="/login" >AddToCart</a>
+									</h:panelGroup>
+										<h:panelGroup rendered="#{not empty loginController.userDetails}">
 								<h:commandButton  class="button cart_button" action="#{cartController.ajouterLigne(Produit.id,loginController.userDetails.id)}" value="AddToCart"/>
+								</h:panelGroup>
 							</h:form>
 						</div>
 					</div>

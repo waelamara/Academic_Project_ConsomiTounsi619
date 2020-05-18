@@ -38,10 +38,10 @@ public String CadeauUser(@PathVariable(value = "idUser")Long idUser) throws Mess
 }
 
 //http://localhost:8081/Cadeau/montantCadeau/{code}
-@GetMapping("/montantCadeau/{code}")
-public float montantCadeau(@PathVariable(value = "code")String code)
-{
-	return cadeauUserImpl.montantCadeau(code);
-}
+//@GetMapping("/montantCadeau/{code}")
+//public float montantCadeau(@PathVariable(value = "code")String code)
+//{
+//	return cadeauUserImpl.montantCadeau(code);
+//}
 
 }
