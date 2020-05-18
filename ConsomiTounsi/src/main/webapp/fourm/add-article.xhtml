@@ -124,12 +124,11 @@
 							<h:form enctype="multipart/form-data">
 								<h:outputText value="File: "></h:outputText>
 								<h:inputFile value="#{addArticleController.uploadedFile}" />
-								<h:commandButton value="Save" type="submit"
-									action="#{addArticleController.saveFile}" style="color: red;"></h:commandButton>
+								
 							</h:form>
 							<div class="contact_form_button">
 								<h:commandButton value="Validate"
-									class="button contact_submit_button"
+									class="button contact_submit_button" type="submit"
 									action="#{blogController.ajouterSujet(3)}" />
 
 							</div>
