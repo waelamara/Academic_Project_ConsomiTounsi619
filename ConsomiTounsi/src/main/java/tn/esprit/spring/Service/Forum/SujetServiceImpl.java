@@ -346,8 +346,5 @@ public  class SujetServiceImpl implements ISujetService {
    return p1;		
 	}
 
-	@Override
-	public List<NbSujetbyCat> countSujetbycatId() {
-		return sujetRepository.countSujetbycatId();
-	}
+	
 }

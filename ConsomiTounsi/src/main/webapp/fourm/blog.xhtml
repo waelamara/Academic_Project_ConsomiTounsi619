@@ -217,55 +217,23 @@
                             </div>
                             <div class="br"></div>
                         </aside>
-                        <aside class="single_sidebar_widget ads_widget">
-                            <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""/></a>
-                            <div class="br"></div>
-                        </aside>
+                       
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Post Catgories</h4>
                             <ul class="list cat-list">
+                            <ui:repeat var="categSujet" value="#{ControllerCategorieSujet.findNameCategoris()}" varStatus="status"> 
                                 <li>
                                     <a href="#" class="d-flex justify-content-between">
-                                        <p>Technology</p>
-                                        <p>37</p>
+                                    <p>
+                                        <h:outputText value="#{categSujet.nomCategorie} "/>
+                                        </p>
+                                        <p>
+                                        <h:outputText value="          #{ControllerCategorieSujet.getNbcategeorieSujet(categSujet.id)}"/>
+                                    </p>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Lifestyle</p>
-                                        <p>24</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Fashion</p>
-                                        <p>59</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Art</p>
-                                        <p>29</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Food</p>
-                                        <p>15</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Architecture</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Adventure</p>
-                                        <p>44</p>
-                                    </a>
-                                </li>
+                                </ui:repeat>
+                               
                             </ul>
                             <div class="br"></div>
                         </aside>
@@ -274,17 +242,8 @@
                             <p>
                                 Here, I focus on a range of items and features that we use in life without
                                 giving them a second thought.
-                            </p>
-                            <div class="form-group d-flex flex-row">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'"/>
-                                </div>
-                                <a href="#" class="bbtns">Subcribe</a>
-                            </div>
+                            </p>                             
+                         <a href="#" class="bbtns">Subcribe</a>
                             <p class="text-bottom">You can unsubscribe at any time</p>
                             <div class="br"></div>
                         </aside>

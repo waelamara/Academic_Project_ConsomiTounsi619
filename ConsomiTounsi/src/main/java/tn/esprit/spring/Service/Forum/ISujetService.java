@@ -23,5 +23,5 @@ public interface ISujetService {
 	public User client_gangnant();
 	public Produit produit_gangnant() throws MessagingException;
 	public void sendmail();
-	public List<NbSujetbyCat> countSujetbycatId();
+	
 }
