@@ -27,11 +27,14 @@ public interface CadeauUserRepository extends JpaRepository<CadeauUser, Long> {
 	public float montantCadeau(String code);
 	
 	
-	@Query(value = "SELECT 	* FROM `cadeau_user`where code=?1 and id_user=?2 ", nativeQuery = true)
-	public CadeauUser verifierCode(String code,int idUser);
+	@Query(value = "SELECT 	* FROM `cadeau_user`where code=?1 and id_user=?2 and validite=0 ", nativeQuery = true)
+	public CadeauUser verifierCode(String code,long idUser);
 	
 	
 	@Query(value = "SELECT 	count(*) FROM `cadeau_user`where validite=0", nativeQuery = true)
 	public float nombreCodeValidee();
 
+	@Query(value = "SELECT 	* FROM `cadeau_user`where  id_user=?1 and validite=0 ", nativeQuery = true)
+	public CadeauUser verifier(long idUser);
+	
 }

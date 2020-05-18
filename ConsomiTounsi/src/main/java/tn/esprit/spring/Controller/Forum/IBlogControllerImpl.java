@@ -1,35 +1,58 @@
 package tn.esprit.spring.Controller.Forum;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.servlet.http.Part;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import Utils.AppConstants;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
+import tn.esprit.spring.Model.Forum.ImageSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Repository.Forum.ImageSujetRepository;
 import tn.esprit.spring.Service.Forum.ICategorieSujetService;
+import tn.esprit.spring.Service.Forum.IImageSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
+import tn.esprit.spring.Service.Forum.IVoteSujetService;
+import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
-@Join(path = "/blog", to = "/blog.jsf")
+@Join(path = "/blog", to = "/fourm//blog.jsf")
+@SessionScope
 public class IBlogControllerImpl{
 	@Autowired
 	ISujetService iSujetService;
 	@Autowired
 	 ICategorieSujetService  icategorieSujetService;
-	
-	
+	@Autowired 
+	IVoteSujetService iVoteSujetService;
+	@Autowired
+	IImageSujetService iImageSujetService;
+	 @Autowired
+	  FileStorageServiceImpl fileStorageServiceImpl;
+	private RepeatPaginator paginator;
 	private Long id;
 	private String nomSujet;
 	private String description;
@@ -42,8 +65,13 @@ public class IBlogControllerImpl{
 	private List<Sujet> sujets;
 	private Sujet sujet;
 	private Sujet sujetrec;
+	private String nomCategorie;
+	private Long categorieId;
+	ImageSujet image = new ImageSujet();
+	
 	User idUser;
 	CategorieSujet idCategorieSujet;
+	private Part uploadedFile;
 	
 	public CategorieSujet getIdCategorieSujet() {
 		return idCategorieSujet;
@@ -106,11 +134,49 @@ public class IBlogControllerImpl{
 		this.nbpoint = nbpoint;
 	}
 	
+
+	
+	public String getNomCategorie() {
+		return nomCategorie;
+	}
+	public void setNomCategorie(String nomCategorie) {
+		this.nomCategorie = nomCategorie;
+	}
+	
+	
+	public Long getCategorieId() {
+		return categorieId;
+	}
+	public void setCategorieId(Long categorieId) {
+		this.categorieId = categorieId;
+	}
+	
+	public Part getUploadedFile() {
+		return uploadedFile;
+	}
+	public void setUploadedFile(Part uploadedFile) {
+		this.uploadedFile = uploadedFile;
+	}
 	/********show all sujets****/
 	public List<Sujet> getAllSujets() {
+		List<Sujet> sujets =iSujetService.getAllSujets();
+		for (Sujet s:sujets){
+			iVoteSujetService.affecterdespoints(s.getId());
+		}
+		
 		return iSujetService.getAllSujets();
 	}
 	
+	@PostConstruct
+	public void init(){
+	List <Sujet> s= getAllSujets();
+	paginator = new RepeatPaginator(s);
+}
+
+    public RepeatPaginator getPaginator() {
+    	 
+        return paginator;
+    }
 	/******shoow one sujet******/
 	public Sujet getSujet() {
 		return sujet;
@@ -137,6 +203,10 @@ public class IBlogControllerImpl{
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
 		return formatter.format(D);
 	}
+	public String convertireTime(Date d){
+	SimpleDateFormat  formatter = new SimpleDateFormat(" MMMM d, yyyy 'at' HH:mm a "); 
+	return formatter.format(d);
+}
 	public Sujet getSujetrec() {
 		return sujetrec;
 	}
@@ -146,6 +216,22 @@ public class IBlogControllerImpl{
 	public void setSujetrec(Sujet sujetrec) {
 		this.sujetrec = sujetrec;
 	}
+	
+	public String ajouterSujet(Long userId){
+		long cc=getCategorieId();
+		System.out.println("********"+cc);
+		String navigateTo =null;
+		Sujet s=new Sujet(nomSujet,description);
+		iSujetService.ajouterSujet(s,cc, userId);
+		String newFileName=fileStorageServiceImpl.UploadImage(uploadedFile);
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
+			image.setImage(fileDownloadUri);
+			image.setSujetId(s);
+			iImageSujetService.ajouterImage(image);
+		return navigateTo;
+	}
+	
 	
 
 }

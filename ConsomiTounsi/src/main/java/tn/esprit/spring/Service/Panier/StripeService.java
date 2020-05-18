@@ -11,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stripe.Stripe;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Token;
+import com.stripe.model.Charge;
 
 
 import tn.esprit.spring.Model.ChargeRequest;
@@ -132,7 +137,7 @@ public class StripeService {
 	 * or provided payment method. Upon confirmation, the PaymentIntent will
 	 * attempt to initiate a payment
 	 */
-	public PaymentIntent confirm(String id,int idCommande,int iduser) throws StripeException {
+	public PaymentIntent confirm(String id,long idCommande,int iduser) throws StripeException {
 		Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
 		PaymentIntent paymentIntent = PaymentIntent.retrieve(id);
 		Map<String, Object> params = new HashMap<>();
@@ -149,7 +154,37 @@ public class StripeService {
 		return null;
 		
 	}
-
+	@Transactional
+	public void Pay(int idUser, String carta, int expMonth, int expYear, String cvc) throws AuthenticationException, InvalidRequestException, CardException, StripeException{
+		Commande orders = commandeRepository.CommandeencoursparClient(idUser);
+		
+			if(orders.getStatus().contentEquals("en cours")){
+				Map<String, Object> params = new HashMap<>();
+		        Map<String, Object> tokenParams = new HashMap<>();
+		        Map<String, Object> cardParams = new HashMap<>();
+		        Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
+		        cardParams.put("number", carta);
+		        cardParams.put("exp_month", expMonth);
+		        cardParams.put("exp_year", expYear);
+		        cardParams.put("cvc", cvc);
+		        int nMontant= (int) (orders.getMontant()*100);
+		        tokenParams.put("card", cardParams);
+		        Token token =Token.create(tokenParams);
+		      //  System.out.println(token.getCard().getId());
+		        if (token.getId()!=null){
+		        params.put("amount", nMontant);
+		        params.put("description", "test de stipe");
+		        params.put("currency", "eur");
+		        params.put("source", token.getId());
+		        Charge charge = Charge.create(params);
+		        commandeRepository.PayerEnLigne(orders.getId());
+		        commandeRepository.remise(idUser);
+		    	User u =userRepository.findById((long) idUser).get();
+				 u.setPointFidelite(Math.round((int) orders.getMontant()/ 10));
+				 userRepository.save(u);
 
 	
+}
+			}
+	}
 }
