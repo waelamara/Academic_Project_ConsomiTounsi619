@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	template="/TemplateAdmin/template.xhtml">
+	
 	<ui:define name="AdminFormProduit">
 <h:head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -124,7 +125,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<h:form class="form-horizontal" >
+								
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Product </label>
 
@@ -223,25 +224,20 @@
 										<div>
 									
 										<div class="fallback">
-										<p:fileUpload value="#{ControllerProduit.nameimage}" label="file"></p:fileUpload>
+										
 											
+     
 										</div>
 									
 								</div>
 									</div>
-
 									
-
+									<h:inputFile value="#{ControllerProduit.image}"/>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-										
-										
-											
+									<h:commandButton class="btn btn-info" value="Save" type="submit" action="#{ControllerProduit.upload}" ></h:commandButton>
 												
-												<h:commandButton class="btn btn-info" value="Ajouter Produit" action="#{ControllerProduit.addProduit()}" />
-											
 
-								
 										</div>
 									</div>
 
@@ -252,8 +248,19 @@
 
 				
 									
+									<h:form enctype="multipart/form-data">
+								<h:outputText value="File: "></h:outputText>
+								<h:inputFile value="#{AdminFormProduit.uploadedFile}" />
+								<h:commandButton value="Save" type="submit"
+									action="#{AdminFormProduit.saveFile}" style="color: red;"></h:commandButton>
 								</h:form>
+	
+		
 
+
+                      
+                 
+  
 			
 
 								</div><!-- PAGE CONTENT ENDS -->
