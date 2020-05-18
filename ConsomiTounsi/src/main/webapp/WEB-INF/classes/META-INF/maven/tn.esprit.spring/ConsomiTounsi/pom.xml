@@ -142,7 +142,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.16</version>
+			<version>1.16.16</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 
 		<dependency>
@@ -150,6 +150,7 @@
 			<artifactId>font-awesome</artifactId>
 			<version>4.5.0</version>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
