@@ -223,21 +223,12 @@ public class IBlogControllerImpl{
 		String navigateTo =null;
 		Sujet s=new Sujet(nomSujet,description);
 		iSujetService.ajouterSujet(s,cc, userId);
-		try (InputStream input = uploadedFile.getInputStream()) {
-			String fileName = uploadedFile.getSubmittedFileName();
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-			.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
-			Files.copy(input, new File(fileDownloadUri).toPath());
-			System.out.println(fileDownloadUri);
-			System.out.println(fileName+" "+"aaaaaaaaa");
+		String newFileName=fileStorageServiceImpl.UploadImage(uploadedFile);
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
 			image.setImage(fileDownloadUri);
 			image.setSujetId(s);
 			iImageSujetService.ajouterImage(image);
-	    }
-	    catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	
 		return navigateTo;
 	}
 	

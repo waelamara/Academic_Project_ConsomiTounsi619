@@ -24,9 +24,8 @@ import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 @Join(path = "/add-article", to = "/fourm/add-article.jsf")
 public class AddArticleController {
 
-	private Part uploadedFile;
-	private String folder = "C:\\files";
-
+	private Part uploadedFile;    @Autowired
+	FileStorageServiceImpl fileStorageServiceImpl;
 	public Part getUploadedFile() {
 		return uploadedFile;
 	}
@@ -36,17 +35,11 @@ public class AddArticleController {
 	}
 	
 		public void saveFile(){
-			
-			try (InputStream input = uploadedFile.getInputStream()) {
-				String fileName = uploadedFile.getSubmittedFileName();
-				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-						.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
-				System.out.println(fileDownloadUri);
-				System.out.println(fileName+" "+"aaaaaaaaa");
-		        Files.copy(input, new File(folder, fileName).toPath());
-		    }
-		    catch (IOException e) {
-		        e.printStackTrace();
-		    }
+			String newFileName=fileStorageServiceImpl.UploadImage(uploadedFile);
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+			.path(newFileName).toUriString();
+			System.out.println(fileDownloadUri);
 		}
+			
+			
 }
