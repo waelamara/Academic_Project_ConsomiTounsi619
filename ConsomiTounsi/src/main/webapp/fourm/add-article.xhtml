@@ -87,53 +87,51 @@
 				<div class="col-lg-10 offset-lg-1">
 					<div class="contact_form_container">
 						<div class="contact_form_title">Get in Touch</div>
+					<h:form enctype="multipart/form-data">
+						<ul class="standard_dropdown ">
+							<h:selectOneMenu value="#{blogController.categorieId}"
+								style="color:black ;font-family:arial,sans-serif;font-weight: normal;font-size:90%;"
+								class=" contact_form_phone input_field fas fa-chevron-down">
+								<ul class="custom_list clc">
+									<f:selectItem itemLabel="All Categories :" />
+									<c:forEach var="categSujet"
+										items="#{ControllerCategorieSujet.findNameCategoris()}"
+										varStatus="status">
+										<f:selectItem itemLabel="#{categSujet.nomCategorie}"
+											 itemValue="#{categSujet.id}" />
+									</c:forEach>
+								</ul>
+							</h:selectOneMenu>
+						</ul>
+						<br></br>
+
+						<div
+							class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
+							<h:inputText value="#{blogController.nomSujet}" type="text"
+								class="contact_form_name input_field" a:placeholder="Title "
+								required="required" data-error="Name is required."></h:inputText>
+						</div>
+						<div class="contact_form_text">
+
+							<h:inputTextarea id="contact_form_message"
+								class="text_field contact_form_message" name="message" rows="4"
+								a:placeholder="your article must be more than "
+								required="required" value="#{blogController.description}"
+								data-error="Please, write us a message."></h:inputTextarea>
+						</div>
+
 						
-							<ul class="standard_dropdown ">
-								<h:selectOneMenu value="#{blogController.categorieId}"
-									style="color:black ;font-family:arial,sans-serif;font-weight: normal;font-size:90%;"
-									class=" contact_form_phone input_field fas fa-chevron-down">
-									<ul class="custom_list clc">
-										<f:selectItem itemLabel="All Categories :" />
-										<c:forEach var="categSujet"
-											items="#{ControllerCategorieSujet.findNameCategoris()}"
-											varStatus="status">
-											<f:selectItem itemLabel="#{categSujet.nomCategorie}"
-												itemValue="#{categSujet.id}" />
+							<h:outputText value="File: "></h:outputText>
+							<h:inputFile value="#{blogController.uploadedFile}" />
 
-										</c:forEach>
-									</ul>
-								</h:selectOneMenu>
-							</ul>
-							<br></br>
-							
-							<div
-								class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
-								<h:inputText value="#{blogController.nomSujet}" type="text"
-									class="contact_form_name input_field" a:placeholder="Title "
-									required="required" data-error="Name is required."></h:inputText>
-							</div>
-							<div class="contact_form_text">
+						<div class="contact_form_button">
+							<h:commandButton value="Validate"
+								class="button contact_submit_button" type="submit"
+								action="#{blogController.ajouterSujet(3)}" />
 
-								<h:inputTextarea id="contact_form_message"
-									class="text_field contact_form_message" name="message" rows="4"
-									a:placeholder="your article must be more than "
-									required="required" value="#{blogController.description}"
-									data-error="Please, write us a message."></h:inputTextarea>
-							</div>
+						</div>
 
-							<h:form enctype="multipart/form-data">
-								<h:outputText value="File: "></h:outputText>
-								<h:inputFile value="#{addArticleController.uploadedFile}" />
-								<h:commandButton value="Save" type="submit"
-									action="#{addArticleController.saveFile}" style="color: red;"></h:commandButton>
-							</h:form>
-							<div class="contact_form_button">
-								<h:commandButton value="Validate"
-									class="button contact_submit_button"
-									action="#{blogController.ajouterSujet(3)}" />
-
-							</div>
-				
+						</h:form>
 
 					</div>
 				</div>
@@ -162,18 +160,5 @@
 </h:body>
 
 		</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
 	</ui:define>
 </ui:composition>
