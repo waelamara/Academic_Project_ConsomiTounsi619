@@ -13,13 +13,13 @@ import java.nio.file.StandardCopyOption;
 
 import javax.servlet.http.Part;
 
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import Config.FileStorageProperties;
 import Exception.FileStorageException;
@@ -72,6 +72,21 @@ public class FileStorageServiceImpl {
 		
 		try (InputStream input = part.getInputStream()) {
 			String fileName = part.getSubmittedFileName();
+			String newFileName = System.currentTimeMillis() + AppConstants.FILE_SEPERATOR + fileName;
+			Path targetLocation = this.fileStorageLocation.resolve(newFileName);    
+			Files.copy(input, targetLocation, StandardCopyOption.REPLACE_EXISTING);
+			return newFileName;
+		}
+	    catch (IOException e) {
+	        e.printStackTrace();
+	        return "catsh";
+	    }
+	}
+	
+	public String UploadImages(UploadedFile img){
+		
+		try (InputStream input = img.getInputStream()) {
+			String fileName = img.getFileName();
 			String newFileName = System.currentTimeMillis() + AppConstants.FILE_SEPERATOR + fileName;
 			Path targetLocation = this.fileStorageLocation.resolve(newFileName);    
 			Files.copy(input, targetLocation, StandardCopyOption.REPLACE_EXISTING);

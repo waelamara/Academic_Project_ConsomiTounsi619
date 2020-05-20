@@ -6,19 +6,48 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
 	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="afficheProduitAdmin">
 	<h:head>
 	</h:head>
 	<h:body>
-	
-	<h:form enctype="multipart/form-data">
-								<h:outputText value="File: "></h:outputText>
-								<h:inputFile value="#{addArticleController.uploadedFile}" />
-								<h:commandButton value="Save" type="submit"
-									action="#{addArticleController.saveFile}" style="color: red;"></h:commandButton>
-	</h:form>
-	
+
+	<h:form>
+
+            <p:outputLabel  value="Categorie " />
+            <h:selectOneMenu id="catego" value="#{AdminFormProduit.nomCategorie}" style="width:150px">             
+                <f:selectItem itemLabel="Select Categorie" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AdminFormProduit.getAllCategorieName()}" />
+                 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="scategorie" />
+            </h:selectOneMenu>
+ 
+ 		
+            <p:outputLabel  value="Sous/Categorie " />
+            <h:selectOneMenu  id="scategorie" value="#{AdminFormProduit.nomSCategorie}" style="width:150px">
+                <f:selectItem itemLabel="Select S/Categorie" itemValue="" noSelectionOption="block" />
+                <f:selectItems value="#{AdminFormProduit.listNomScateg}" />
+                <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="sscategorie" />
+            </h:selectOneMenu>
+           
+           
+           
+            <p:outputLabel  value="SSous/Categorie " />
+            <h:selectOneMenu  id="sscategorie" value="#{AdminFormProduit.nomSsCategorie}" style="width:150px" >
+                <f:selectItem itemLabel="Select SS/Categorie" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AdminFormProduit.listNomSsouscateg}"/>
+            </h:selectOneMenu>
+    		
+ 
+        <p:separator />
+ 
+        <p:commandButton value="Submit"/>
+   
+</h:form>	
+
+
+
+
 	</h:body>
 	
 	
