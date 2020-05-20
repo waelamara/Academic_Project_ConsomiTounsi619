@@ -82,10 +82,8 @@ public class VoteCommentaireServiceImpl implements IVoteCommentaire{
 	}
 	@Override
 	public Boolean verificationvote(Long comId, Long userId) {
-		List <Vote> votes=new ArrayList<>();
 		 Vote v=voteComRepository.getVoteByComAndUser(comId, userId);
-			 votes.add(v);
-			if (votes.isEmpty())
+			if (v==null)
 				return false;
 			return true;
 	}

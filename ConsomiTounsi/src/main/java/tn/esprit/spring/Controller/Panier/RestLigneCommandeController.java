@@ -79,5 +79,12 @@ public class RestLigneCommandeController {
 	 {
 		 ligneCommandeDao.updateLigne(idL, quantity); 
 	 }
+	@GetMapping("numProduit/{iduser}")
+	 public int numProduitPanier(@PathVariable(value = "iduser")Long iduser)
+	 {
+		 int a=ligneCommandeDao.numProduitPanier(iduser);
+		 System.out.println(ligneCommandeDao.numProduitPanier(iduser));
+		 return a;
+	 }
 	 
 }

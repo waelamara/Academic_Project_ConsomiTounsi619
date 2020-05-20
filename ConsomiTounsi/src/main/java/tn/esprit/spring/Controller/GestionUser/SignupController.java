@@ -50,6 +50,18 @@ public class SignupController {
     private Date dateN;
 	private String tel;
  	private Sexe sexe;
+ 	
+ 	
+
+	public SignupController() {
+		try
+		{
+		System.out.println(LoginController.userDetails.getFirstName());
+		} catch(Exception e){
+			System.out.println("Error, please connect to get acces to user details");
+		}
+	}
+
 
 	public String doSignup() {
 		String navigateTo = "null";

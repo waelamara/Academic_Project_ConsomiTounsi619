@@ -14,4 +14,5 @@ public interface ICategorieSujetService {
 	public List<CategorieSujet> findCategbyName(String name);
 	public CategorieSujet findOne(Long id);
 	public void modifierNom(String name, long CategId);
+	public int countSujetbycatId(Long CategId);
 }

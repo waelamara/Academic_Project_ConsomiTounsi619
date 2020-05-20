@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
+import tn.esprit.spring.Model.Forum.NbSujetbyCat;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.UserRepository;
@@ -344,4 +345,6 @@ public  class SujetServiceImpl implements ISujetService {
   javaMailSender.send(message);
    return p1;		
 	}
+
+	
 }

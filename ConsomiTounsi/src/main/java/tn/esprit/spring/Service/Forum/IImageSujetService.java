@@ -4,4 +4,5 @@ import tn.esprit.spring.Model.Forum.ImageSujet;
 
 public interface IImageSujetService {
 	public ImageSujet ajouterImage(ImageSujet image) ;
+	public ImageSujet findImageSujet(Long idSujet);
 }

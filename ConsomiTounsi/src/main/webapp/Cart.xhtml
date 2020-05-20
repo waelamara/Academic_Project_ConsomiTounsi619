@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/Template/template.xhtml">
 	<ui:define name="Cart">
 
@@ -29,6 +30,19 @@
 
 </head>
 <body>
+<br></br><br></br>
+<h:panelGroup rendered="#{empty cartController.panierParIdclient(loginController.userDetails.id)}">
+  <div class="container-fluid bg-white">
+        <div class="container py-5">
+            <div class="img-vide text-center">
+                <a href="/"><img src="https://www.ajipressing.ma/images/panier-vide.png"/></a>
+            </div>
+        </div>
+    </div>
+</h:panelGroup>
+<h:panelGroup rendered="#{not empty cartController.panierParIdclient(loginController.userDetails.id)}">
+
+
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
@@ -46,29 +60,24 @@
 						        <th>Total</th>
 						      </tr>
 						    </thead>
-<<<<<<< HEAD
-						    <tbody>
 
-						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
-						     <ui:repeat var="panier" value="#{cartController.panierParIdclient(1)}" varStatus="status"> 
+					
 
-
-						      <tr class="text-center">
-=======
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619
 						      
 						    <tbody>
-						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
+						      <h:form id="account">  
+						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(loginController.userDetails.id)}" varStatus="status">
+						   <p></p> 
 						      <tr class="text-center">
 						       
-					   <h:form>   	
+					  	
    <td><h:commandButton class="product-remove"
 									action="#{cartController.deleteLigne(panier.id)}"
 									value="Delete"/></td>
 									 <td><h:commandButton class="product-remove"
-									action="#{cartController.updateLigne()}"
+									action="#{cartController.updateLigne(panier.id,panier.quantity)}"
 									value="Update"/></td>
-						     </h:form>   	        	 
+						       	        	 
 		
 <!-- 						     	  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>  -->
   <ui:repeat value="#{ControllerImagesProduit.getImageProduits(panier.idp)}" var="ImageProduit" varStatus="status">		
@@ -89,7 +98,9 @@
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
-					             <h:column>	<input type="text" name="quantity" class="quantity form-control input-number" value="#{panier.quantity}" min="1" max="100"/></h:column>
+						        	
+					             <h:column>	
+					             <h:inputText id="amount" value="#{panier.quantity}" name="quantity" class="quantity form-control input-number"  min="1" max="100" /></h:column>
 					          	</div>
 					          </td>
 					        
@@ -97,33 +108,41 @@
 						     
 							
 						      </tr><!-- END TR-->
-   </ui:repeat>
-							      
+
+	   </ui:repeat>			
+	   </h:form> 				      
 						    </tbody>
-						  
+
+		  
 						  </table>
 					  </div>
     			</div>
     		</div>
     		<div class="row justify-content-end">
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    			<h:panelGroup rendered="#{not empty cartController.verifier(loginController.userDetails.id)}">
     				<div class="cart-total mb-3">
     					<h3>Coupon Code</h3>
     					<p>Enter your coupon code if you have one</p>
-  						<form action="#" class="info">
+  						<h:form class="info">
+  						 <ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
 	              <div class="form-group">
-	              	<label for="">Coupon code</label>
-	                <input type="text" class="form-control text-left px-3" placeholder=""/>
+	              	<label>Coupon code</label>
+	                <h:inputText value="#{cartController.codeCoupon}" class="form-control text-left px-3"/>
 	              </div>
-	            </form>
+	              <h:commandButton  class="btn btn-primary py-3 px-4"
+									action="#{cartController.montantCadeau(codeCoupon,Commande.id)}"
+									value="Apply Coupon"/>
+							</ui:repeat>	
+	            </h:form>
     				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+    				</h:panelGroup>
     			</div>
     			
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
-    					 <ui:repeat var="Commande" value="#{cartController.commandeparClient(5)}" varStatus="status"> 
+    					 <ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status"> 
     					<p class="d-flex">
     					 
     						<span>Subtotal</span>
@@ -133,22 +152,31 @@
     					
     					<p class="d-flex">
     						<span>Delivery</span>
-    						<span><h:outputText  value="#{Commande.montant}"/></span>
+    						<span><h:outputText  value=""/></span>
     					</p>
     					<p class="d-flex">
     						<span>Discount</span>
-    						<span><h:outputText  value="#{Commande.pourcentageDeRemise}"/></span>
+    						<h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
+    						<span><h:outputText  value="0"/></span>
+    						</h:panelGroup>
+    						<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
+    						<span><h:outputText  value="#{Commande.montant-Commande.pourcentageDeRemise}"/></span>
+    						</h:panelGroup>
     					</p>
 <!--     					</hr> -->
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span><h:outputText  value="#{Commande.montant-Commande.pourcentageDeRemise}"/></span>
-    						
+    						<h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
+    						<span><h:outputText  value="#{Commande.montant}"/></span>
+    						</h:panelGroup>
+    						<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
+    						<span><h:outputText  value="#{Commande.pourcentageDeRemise}"/></span>
+    						</h:panelGroup>
     					</p>
     					 </ui:repeat>
     				</div>
     				 
-    				<p><a href="Chekout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+    				<p><a href="/Chekout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
     			</div>
     		</div>
 			</div>
@@ -210,8 +238,9 @@
 		    
 		});
 	</script>
-
+</h:panelGroup>
 </body>
+
 </ui:define>
 </ui:composition>
 

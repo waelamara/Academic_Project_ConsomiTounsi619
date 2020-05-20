@@ -1,18 +1,24 @@
 package tn.esprit.spring.Service.Forum;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Repository.Forum.CategorieSujetRepository;
+import tn.esprit.spring.Repository.Forum.SujetRepository;
 
-
+@Transactional
 @Service
 public class CategorieSujetServiceImpl implements ICategorieSujetService {
 	@Autowired
 	private  CategorieSujetRepository categorieSujetRepository; 
+	
+	@Autowired 
+	SujetRepository sujetRepository;
 	
 	@Override
 	public int ajouterCategorieSujet(CategorieSujet c) {
@@ -50,6 +56,12 @@ public class CategorieSujetServiceImpl implements ICategorieSujetService {
 			categorieSujetRepository.save(categS);
 			}
 
+	@Override
+	public int countSujetbycatId(Long CategId) {
+		return sujetRepository.countSujetbycatId(CategId);	
+	}
+
+	
 
 
 }

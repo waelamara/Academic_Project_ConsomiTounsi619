@@ -79,7 +79,7 @@ public class RestControllerCommande {
 	
 	//http://localhost:8081/Commande/payerenligne/{idCommande}/{idClient}
 	@PutMapping("/payerenligne/{idCommande}/{idClient}")
-	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id)
+	public void PayerEnLigne(@PathVariable(value = "idCommande")long idCommande,@PathVariable(value = "idClient") int id)
 	{
 		commandeDao.PayerEnLigne( idCommande,id);
 	}
@@ -87,7 +87,7 @@ public class RestControllerCommande {
 	
 	//http://localhost:8081/Commande/payerenligne/{idCommande}/{idClient}/{code}
 	@PutMapping("/payerenligne/{idCommande}/{idClient}/{code}")
-	public void PayerEnLigne(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
+	public void PayerEnLigne(@PathVariable(value = "idCommande")long idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
 		if(code==null)
 		{
@@ -100,7 +100,7 @@ public class RestControllerCommande {
 	
 	//http://localhost:8081/Commande/payerporteaporte/{idCommande}/{idClient}
 	@PutMapping("/payerporteaporte/{idCommande}/{idClient}")
-	public void PayerPorteaPorte(@PathVariable(value = "idCommande")int idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
+	public void PayerPorteaPorte(@PathVariable(value = "idCommande")long idCommande,@PathVariable(value = "idClient") int id,@PathVariable(value = "code") String code)
 	{
 		if(code==null)
 		{

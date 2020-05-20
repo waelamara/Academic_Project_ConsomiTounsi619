@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller(value = "chekoutController")
 @ELBeanName(value = "chekoutController")
-@Join(path = "/Chekout", to = "/checkout.jsf")
+@Join(path = "/Chekout", to = "/checkout2.jsf")
 public class ChekoutController {
 
 }

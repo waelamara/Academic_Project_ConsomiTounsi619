@@ -28,13 +28,13 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Query(value ="UPDATE commande c set c.status='payee',c.typede_payment='en ligne'where c.id=?1",nativeQuery = true)
 	@Modifying
 	@Transactional
-	public void PayerEnLigne( @Param("id")int idCommande);
+	public void PayerEnLigne( @Param("id")long idCommande);
 	
 	
 	@Query(value ="UPDATE commande c set c.status='en livraison',c.typede_payment='a domcilie'where c.id=?1",nativeQuery = true)
 	   @Modifying
 	  @Transactional
-	public void PayerPorteaPorte( @Param("id")int idCommande);
+	public void PayerPorteaPorte( @Param("id")long idCommande);
 	
 	
 	@Query(value = "SELECT * FROM commande WHERE id_user=?1 and status='en cours'", nativeQuery = true)

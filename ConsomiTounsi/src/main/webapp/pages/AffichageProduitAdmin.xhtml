@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="afficheProduitAdmin">
+	<h:head>
+	</h:head>
+	<h:body>
+
+	<h:form>
+
+            <p:outputLabel  value="Categorie " />
+            <h:selectOneMenu id="catego" value="#{AdminFormProduit.nomCategorie}" style="width:150px">             
+                <f:selectItem itemLabel="Select Categorie" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AdminFormProduit.getAllCategorieName()}" />
+                 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="scategorie" />
+            </h:selectOneMenu>
+ 
+ 		
+            <p:outputLabel  value="Sous/Categorie " />
+            <h:selectOneMenu  id="scategorie" value="#{AdminFormProduit.nomSCategorie}" style="width:150px">
+                <f:selectItem itemLabel="Select S/Categorie" itemValue="" noSelectionOption="block" />
+                <f:selectItems value="#{AdminFormProduit.listNomScateg}" />
+                <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="sscategorie" />
+            </h:selectOneMenu>
+           
+           
+           
+            <p:outputLabel  value="SSous/Categorie " />
+            <h:selectOneMenu  id="sscategorie" value="#{AdminFormProduit.nomSsCategorie}" style="width:150px" >
+                <f:selectItem itemLabel="Select SS/Categorie" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AdminFormProduit.listNomSsouscateg}"/>
+            </h:selectOneMenu>
+    		
+ 
+        <p:separator />
+ 
+        <p:commandButton value="Submit"/>
+   
+</h:form>	
+
+
+
+
+	</h:body>
+	
+	
+	
+	</ui:define>
+	</ui:composition>

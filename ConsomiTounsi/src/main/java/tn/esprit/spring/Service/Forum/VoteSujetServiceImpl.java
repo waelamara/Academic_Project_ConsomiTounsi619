@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.Sujet;
@@ -15,6 +16,7 @@ import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Forum.SujetRepository;
 import tn.esprit.spring.Repository.Forum.VoteSujetRepository;
 @Service
+@Transactional
 public class VoteSujetServiceImpl implements IVoteSujetService{
 	
 	@Autowired
@@ -27,6 +29,7 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 	@Override
 	public int ajouterlike(VoteSujet v, Long sujetId, Long userId) {
    	 	v.setNbLike(1);
+   	  v.setNbDislike(0);
    		Sujet sujet = sujetRepository.findById(sujetId).get();
 		User user= userRepository.findById(userId).get();
 		v.setIdUser(user);
@@ -38,6 +41,7 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 	@Override
 	public int ajouterdislike(VoteSujet v, Long sujetId, Long userId) {
 		v.setNbDislike(1);
+		  v.setNbLike(0);
    		Sujet sujet = sujetRepository.findById(sujetId).get();
 		User user= userRepository.findById(userId).get();
 		v.setIdUser(user);
@@ -64,9 +68,7 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 	@Override
 	public void deletevoteById(Long sujetId, Long userId) {
 		VoteSujet v=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
-		v.setNbLike(0);
-		v.setNbDislike(0);
-	voteSujetRepository.save(v);
+	voteSujetRepository.delete(v);
 	}
 
 	@Override
@@ -88,22 +90,43 @@ public class VoteSujetServiceImpl implements IVoteSujetService{
 
 	@Override
 	public Boolean verificationvote(Long userId, Long sujetId) {
-	 List <VoteSujet> votes=new ArrayList<>();
+
 	 VoteSujet v=voteSujetRepository.getVoteBySujetAndUser(sujetId, userId);
-		 votes.add(v);
-		if (votes.isEmpty())
-			return false;
+		if (v==null)
+		return false;
 		return true;
+	}
+	@Override
+	public int verificationvoteChoix(Long userId, Long sujetId) {
+
+	 VoteSujet v=voteSujetRepository.getVoteBySujetAndUserlike(sujetId, userId);
+	 VoteSujet v1=voteSujetRepository.getVoteBySujetAndUserdislike(sujetId, userId);
+		if (v==null&&v1==null)
+		return 0;
+		else if(v!=null&&v1==null)
+		return 1;
+		else if(v1!=null&&v==null)
+	    return 2;
+		else
+		return 0;
 	}
 
 	@Override
 	public int countlike(Long sujetId) {
-		return  voteSujetRepository.countlike(sujetId);
+		int nblike=  voteSujetRepository.countlike(sujetId);
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		sujet.setNbLike(nblike);
+		sujetRepository.save(sujet);
+		return (nblike);
 	}
 
 	@Override
 	public int countdislik(Long sujetId) {
-		return voteSujetRepository.countdislike(sujetId);
+		int nbdislike =voteSujetRepository.countdislike(sujetId);
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		sujet.setNbDislike(nbdislike);
+		sujetRepository.save(sujet);
+		return nbdislike;
 	}
 
 	@Override

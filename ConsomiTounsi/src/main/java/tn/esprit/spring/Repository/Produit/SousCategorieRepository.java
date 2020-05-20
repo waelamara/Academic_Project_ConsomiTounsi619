@@ -11,4 +11,6 @@ public interface SousCategorieRepository extends JpaRepository<SCategorie, Long>
 
 	@Query(value = "SELECT * FROM scategorie WHERE id_categorie_id=?1", nativeQuery = true)
 	public List<SCategorie> findByIdCategorie(Long id);
+	@Query(value = "SELECT * FROM scategorie WHERE nomscategorie=?1", nativeQuery = true)
+	public SCategorie findSCategorieByName(String name);
 }

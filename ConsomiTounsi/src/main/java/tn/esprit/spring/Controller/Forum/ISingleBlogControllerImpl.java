@@ -65,18 +65,22 @@ public class ISingleBlogControllerImpl{
 	}
 
 	public  List<Commentaire> afficherCommentaireOfSujet(Long sujetId) {
-		List<Commentaire> com=new ArrayList<>();
-		return com =icommentaireService.getCommentaireOfSujet(sujetId);
+	
+		return icommentaireService.getCommentaireOfSujet(sujetId);
 		}
 	
 	public String ajoutercommentaire(Long sujetId, Long userId){
-		String navigateTo ="null";
-		Commentaire com2= new Commentaire (description);
+		String navigateTo =null;
+		Commentaire com2= new Commentaire ();
+		com2.setDescription(description);
 		System.out.println("********"+description);
 		icommentaireService.ajouterCommentaire(com2, sujetId, userId);
 		return navigateTo ;
 	}
 	
+	public int countNbcommentaire(Long sujetId){
+		return icommentaireService.countNbcommentaire(sujetId);
+	}
 	
 
 

@@ -39,7 +39,7 @@ public class ShopController {
 //	public List<Categorie> getAllCategories(){
 //		FacesContext fc = FacesContext.getCurrentInstance();
 //		Map<String, String> param = fc.getExternalContext().getRequestParameterMap();
-//		
+//		int id=Integer.parseInt(param.get("idProduit"));
 //		if(Integer.parseInt(param.get("filtrageProduit"))==4){
 //		return categorieServiceImpl.findAll();
 //		}

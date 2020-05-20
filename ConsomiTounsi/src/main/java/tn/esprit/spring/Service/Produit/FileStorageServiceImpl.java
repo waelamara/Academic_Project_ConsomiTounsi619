@@ -4,12 +4,16 @@ package tn.esprit.spring.Service.Produit;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.servlet.http.Part;
+
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -24,7 +28,7 @@ import Utils.AppConstants;
 
 @Service
 public class FileStorageServiceImpl {
-	private final Path fileStorageLocation;
+	public final Path fileStorageLocation;
 
 	@Autowired
 	public FileStorageServiceImpl(FileStorageProperties fileStorageProperties) {
@@ -62,6 +66,39 @@ public class FileStorageServiceImpl {
 		}
 
 	}
+	
+	
+	public String UploadImage(Part part){
+		
+		try (InputStream input = part.getInputStream()) {
+			String fileName = part.getSubmittedFileName();
+			String newFileName = System.currentTimeMillis() + AppConstants.FILE_SEPERATOR + fileName;
+			Path targetLocation = this.fileStorageLocation.resolve(newFileName);    
+			Files.copy(input, targetLocation, StandardCopyOption.REPLACE_EXISTING);
+			return newFileName;
+		}
+	    catch (IOException e) {
+	        e.printStackTrace();
+	        return "catsh";
+	    }
+	}
+	
+	public String UploadImages(UploadedFile img){
+		
+		try (InputStream input = img.getInputStream()) {
+			String fileName = img.getFileName();
+			String newFileName = System.currentTimeMillis() + AppConstants.FILE_SEPERATOR + fileName;
+			Path targetLocation = this.fileStorageLocation.resolve(newFileName);    
+			Files.copy(input, targetLocation, StandardCopyOption.REPLACE_EXISTING);
+			return newFileName;
+		}
+	    catch (IOException e) {
+	        e.printStackTrace();
+	        return "catsh";
+	    }
+	}
+	
+	
 
 	public Resource loadFileAsResource(String fileName) {
 		try {
