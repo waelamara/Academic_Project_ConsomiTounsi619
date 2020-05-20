@@ -61,8 +61,9 @@ public class LoginController extends SimpleUrlAuthenticationSuccessHandler{
 	private String login; 
 	private String password;
 	private Boolean loggedIn=false;
-	private UserDetailsImpl userDetails;
+	public static UserDetailsImpl userDetails;
 	private Authentication authentication;
+	public static LoginController instance; 
 	
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 

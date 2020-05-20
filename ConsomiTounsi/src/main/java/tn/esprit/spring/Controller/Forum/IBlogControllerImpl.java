@@ -52,6 +52,7 @@ public class IBlogControllerImpl{
 	IImageSujetService iImageSujetService;
 	 @Autowired
 	  FileStorageServiceImpl fileStorageServiceImpl;
+	 
 	private RepeatPaginator paginator;
 	private Long id;
 	private String nomSujet;
@@ -218,17 +219,18 @@ public class IBlogControllerImpl{
 	}
 	
 	public String ajouterSujet(Long userId){
+		String navigateTo =null;
 		long cc=getCategorieId();
 		System.out.println("********"+cc);
-		String navigateTo =null;
 		Sujet s=new Sujet(nomSujet,description);
 		iSujetService.ajouterSujet(s,cc, userId);
 		String newFileName=fileStorageServiceImpl.UploadImage(uploadedFile);
-		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-				.path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
-			image.setImage(fileDownloadUri);
-			image.setSujetId(s);
-			iImageSujetService.ajouterImage(image);
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+		.path(newFileName).toUriString();
+		image.setImage(fileDownloadUri);
+		System.out.println("********"+fileDownloadUri);
+		image.setSujetId(s);
+		iImageSujetService.ajouterImage(image);
 		return navigateTo;
 	}
 	

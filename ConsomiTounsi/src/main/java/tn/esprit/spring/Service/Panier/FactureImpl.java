@@ -53,6 +53,16 @@ CommandeRepository commandeRepository;
 LigneCommandeRepository ligneCommandeRepository;
 
 
+public Facture  Ajouter (long idCommande)
+{
+	Commande c =commandeRepository.getOne(idCommande);
+	Facture f = new Facture();
+	f.setDate(LocalDate.now());
+	f.setType("auto");
+	f.setCommande(c);
+	return factureRepository.save(f);
+}
+
 public Facture findOne(Long id) {
 	return factureRepository.getOne(id);
 }
