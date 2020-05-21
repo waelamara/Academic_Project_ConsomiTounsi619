@@ -23,6 +23,7 @@ import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Service.Panier.CadeauUserImpl;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
+import tn.esprit.spring.Service.Panier.FactureImpl;
 import tn.esprit.spring.Service.Panier.LigneCommandeImpl;
 import tn.esprit.spring.Service.Panier.StripeService;
 
@@ -40,6 +41,8 @@ public class CartController {
 	CadeauUserImpl cadeauUserImpl;
 	@Autowired
 	StripeService stripeService;
+	@Autowired
+	FactureImpl factureImpl;
 	private long id;
 	
 	private int qty;
@@ -53,6 +56,8 @@ public class CartController {
 	private int expYear;
 	
 	private String cvc;
+	
+	private Facture facture;
 	
 	
 	
@@ -80,6 +85,17 @@ public class CartController {
 
 	public int getExpYear() {
 		return expYear;
+	}
+	
+
+
+	public Facture getFacture() {
+		return facture;
+	}
+
+
+	public void setFacture(Facture facture) {
+		this.facture = facture;
 	}
 
 
@@ -187,10 +203,15 @@ public void deleteLigne(long idLigneCommande) {
 		 	
 		 }
 		 
-			public void Pay( int idUser, String carta1,
-			int expMonth1, int expYear1, String cvc1) throws AuthenticationException, InvalidRequestException, CardException, StripeException
+			public String  Pay( int idUser, String carta1,
+			int expMonth1, int expYear1, String cvc1,long idCommande) throws AuthenticationException, InvalidRequestException, CardException, StripeException
 				{
+				String navigateTo  = "facture.xhtml?faces-redirect=true";
 					stripeService.Pay(idUser,carta,expMonth,expYear,cvc);
+					
+					facture= factureImpl.Ajouter(idCommande);
+					return navigateTo;
+					
 				}
 			public Commande commandeencoursparClient(long id)
 			{
@@ -201,5 +222,10 @@ public void deleteLigne(long idLigneCommande) {
 			{
 				return cadeauUserImpl.verifier(idUser);
 			}
+			public void facturepdf (long id_facture){
+				factureImpl.facturepdf(id_facture);
+			}
+			
+			
 
 }

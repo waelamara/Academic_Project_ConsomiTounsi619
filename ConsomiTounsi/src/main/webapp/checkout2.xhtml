@@ -187,11 +187,11 @@
 									<div class="col-md-6 mb-3">
 										<label for="cc-name">Credit card number</label>
 					
+<!-- required="true" requiredMessage="Date Début -->
 
-										<h:inputText id="Carta" value="#{cartController.carta}" required="true" requiredMessage="Date Début
+<!-- Obligatoire"/><h:message for="Carta"></h:message> -->
 
-Obligatoire"/><h:message for="Carta"></h:message>
-										<!-- 										<small class="text-muted">Full name as displayed on -->
+										<h:inputText id="Carta" value="#{cartController.carta}"/>								
 										<!-- 											card</small> -->
 
 										<!-- 										<div class="invalid-feedback">Name on card is required</div> -->
@@ -199,28 +199,28 @@ Obligatoire"/><h:message for="Carta"></h:message>
 
 									<div class="col-md-6 mb-3">
 										<!-- 										<label for="cc-number">expMonth</label> -->
-										<h:outputText value="expMonth" required="true" requiredMessage="Date Début
+										<h:outputText value="expMonth" />
 
-Obligatoire"></h:outputText>
+
 										<!--  <input type="text" -->
 										<!-- 											class="form-control" id="cc-number" placeholder="" -->
 										<!-- 											required="" /> -->
-										<h:inputText value="#{cartController.expMonth}" required="true" requiredMessage="Date Début
+										<h:inputText value="#{cartController.expMonth}" >
 
-Obligatoire"></h:inputText>
+</h:inputText>
 
 										<!-- 										<div class="invalid-feedback">Credit card number is required</div> -->
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-6 mb-3">
-										<h:outputText value="expYear" required="true" requiredMessage="Date Début
+										<h:outputText value="expYear"/>
 
-Obligatoire"></h:outputText>
+
 										<!-- 											<input type="text" -->
 										<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
 										<!-- 												required="" /> -->
-										<h:inputText value="#{cartController.expYear}" required="true"></h:inputText>
+										<h:inputText value="#{cartController.expYear}" ></h:inputText>
 										<!-- 										<div class="invalid-feedback">Expiration date required</div> -->
 									</div>
 
@@ -249,11 +249,14 @@ Obligatoire"></h:outputText>
 <!-- 								</div> -->
 							
 							</div>
-							
-							 <h:commandButton  class="btn btn-primary py-3 px-4"
-									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc)}"
-									value="PalceOrder"/>
+							<ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
+						 <h:commandButton  class="btn btn-primary py-3 px-4" 
+									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
+									value="PalceOrder" />
+									</ui:repeat>
+								
 								</div>
+								<div></div>
 													
 					</h:form>
 					<!-- 									<div class="row"> -->

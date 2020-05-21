@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/Template/template.xhtml">
+	<ui:define name="Facture">
+ <head>
+   
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    
+<!--     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet"> -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet"> -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"> -->
+
+ 
+   <h:outputStylesheet library="Cart" name="css/owl.carousel.min.css" />
+<h:outputStylesheet library="Cart" name="css/animate.css" />
+<h:outputStylesheet library="Cart" name="css/owl.theme.default.min.css" />
+ <h:outputStylesheet library="Cart" name="css/magnific-popup.css" /> 
+  <h:outputStylesheet library="Cart" name="css/aos.css" /> 
+   <h:outputStylesheet library="Cart" name="css/ionicons.min.css" /> 
+    <h:outputStylesheet library="Cart" name="css/bootstrap-datepicker.css" /> 
+       <h:outputStylesheet library="Cart" name="css/jquery.timepicker.css" /> 
+          <h:outputStylesheet library="Cart" name="css/bootstrap-datepicker.css" /> 
+             <h:outputStylesheet library="Cart" name="css/flaticon.css" /> 
+               <h:outputStylesheet library="Cart" name="css/icomoon.css" /> 
+          <h:outputStylesheet library="Cart" name="css/style.css" /> 
+  </head>
+   <body class="goto-here">
+		<center>
+<h:form>
+
+ <img src="Cart/images2/istockphoto-881288376-1024x1024.jpg" alt="">	<h:commandButton action="#{cartController.facturepdf(cartController.facture.id)}"
+									value="Upload" href="/"/></img>
+ 	</h:form>
+</center>
+    </body>
+</ui:define>
+</ui:composition>
