@@ -1,18 +1,13 @@
 package tn.esprit.spring.Controller.Forum;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.servlet.http.Part;
@@ -20,9 +15,8 @@ import javax.servlet.http.Part;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.SessionScope;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import Utils.AppConstants;
@@ -30,17 +24,18 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.ImageSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
-import tn.esprit.spring.Repository.Forum.ImageSujetRepository;
+import tn.esprit.spring.Model.Forum.Vus;
 import tn.esprit.spring.Service.Forum.ICategorieSujetService;
 import tn.esprit.spring.Service.Forum.IImageSujetService;
 import tn.esprit.spring.Service.Forum.ISujetService;
 import tn.esprit.spring.Service.Forum.IVoteSujetService;
+import tn.esprit.spring.Service.Forum.IVusService;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
 @Join(path = "/blog", to = "/fourm//blog.jsf")
-@SessionScope
+@ViewScoped
 public class IBlogControllerImpl{
 	@Autowired
 	ISujetService iSujetService;
@@ -50,10 +45,13 @@ public class IBlogControllerImpl{
 	IVoteSujetService iVoteSujetService;
 	@Autowired
 	IImageSujetService iImageSujetService;
+	@Autowired
+	IVusService iVusService;
 	 @Autowired
 	  FileStorageServiceImpl fileStorageServiceImpl;
 	 
 	private RepeatPaginator paginator;
+	private RepeatPaginator paginatorRec;
 	private Long id;
 	private String nomSujet;
 	private String description;
@@ -69,7 +67,7 @@ public class IBlogControllerImpl{
 	private String nomCategorie;
 	private Long categorieId;
 	ImageSujet image = new ImageSujet();
-	
+	Vus v=new Vus();
 	User idUser;
 	CategorieSujet idCategorieSujet;
 	private Part uploadedFile;
@@ -137,6 +135,13 @@ public class IBlogControllerImpl{
 	
 
 	
+
+	public RepeatPaginator getPaginatorRec() {
+		return paginatorRec;
+	}
+	public void setPaginatorRec(RepeatPaginator paginatorRec) {
+		this.paginatorRec = paginatorRec;
+	}
 	public String getNomCategorie() {
 		return nomCategorie;
 	}
@@ -160,25 +165,36 @@ public class IBlogControllerImpl{
 	}
 	/********show all sujets****/
 	public List<Sujet> getAllSujets() {
-		List<Sujet> sujets =iSujetService.getAllSujets();
+		 List<Sujet> sujets =iSujetService.getAllSujets();
 		for (Sujet s:sujets){
 			iVoteSujetService.affecterdespoints(s.getId());
+			iVusService.countVus(s.getId());
 		}
 		
 		return iSujetService.getAllSujets();
 	}
+	/*******show Sujet By User******/
 	
+	
+	public List<Sujet>getSujetByUser(Long userId){
+		return iSujetService.findSujetbyUser(userId);	
+		
+	}
+	
+	/******pagination****/
 	@PostConstruct
+//	@Scheduled(cron="*/10 * * * * *")
 	public void init(){
 	List <Sujet> s= getAllSujets();
 	paginator = new RepeatPaginator(s);
-}
+	
+	}
 
     public RepeatPaginator getPaginator() {
     	 
         return paginator;
     }
-	/******shoow one sujet******/
+	
 	public Sujet getSujet() {
 		return sujet;
 	
@@ -199,15 +215,8 @@ public class IBlogControllerImpl{
 	        return Long.parseLong(a);
 	        
 	    }
+
 	
-	public String convertireDate(Date D){
-		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
-		return formatter.format(D);
-	}
-	public String convertireTime(Date d){
-	SimpleDateFormat  formatter = new SimpleDateFormat(" MMMM d, yyyy 'at' HH:mm a "); 
-	return formatter.format(d);
-}
 	public Sujet getSujetrec() {
 		return sujetrec;
 	}
@@ -218,6 +227,17 @@ public class IBlogControllerImpl{
 		this.sujetrec = sujetrec;
 	}
 	
+	
+	/*******convertion  dates******/
+	public String convertireDate(Date D){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
+		return formatter.format(D);
+	}
+	public String convertireTime(Date d){
+	SimpleDateFormat  formatter = new SimpleDateFormat(" MMMM d, yyyy 'at' HH:mm a "); 
+	return formatter.format(d);
+}    
+	/*******addPost********/
 	public String ajouterSujet(Long userId){
 		String navigateTo =null;
 		long cc=getCategorieId();
@@ -233,7 +253,16 @@ public class IBlogControllerImpl{
 		iImageSujetService.ajouterImage(image);
 		return navigateTo;
 	}
-	
+/*****add view*****/
+
+	   public void ajouterVus(Long userId, Long sujetId){
+		   
+		if(iVusService.verificationVus(userId, sujetId)){
+			iVusService.UpdateVus(sujetId, userId);
+		}else{
+		iVusService.ajouterVus(v, sujetId, userId);}
+	   }
+
 	
 
 }

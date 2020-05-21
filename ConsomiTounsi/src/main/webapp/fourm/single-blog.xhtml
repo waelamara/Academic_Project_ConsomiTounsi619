@@ -8,10 +8,8 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	template="/Template/template.xhtml">
 	<ui:define name="single-blog">
-
 		<head>
-<!--	CSS============================================= -->
-<meta charset="utf-8" />
+
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="description" content="OneTech shop project" />
@@ -24,6 +22,10 @@
 <h:outputStylesheet library="acceuil"
 	name="styles/contact_responsive.css" />
 		</head>
+		
+		    <f:metadata>
+        <f:event type="preRenderView" listener="#{blogController.ajouterVus(0,blogController.findSujetrec().id)}"/>
+    </f:metadata>
 		<h:outputStylesheet library="blog"
 			name="css/ion.rangeSlider.skinFlat.css" />
 		<h:outputStylesheet library="blog" name="css/main.css" />
@@ -218,13 +220,15 @@
 												<h:outputText
 													value="#{blogController.convertireTime(commentaire.dateAjout)}" />
 											</p>
-											<p class="comment">
-												<h:outputText value="#{commentaire.description}" />
+											<p class="comment" >
+												<h:outputText class="comment1" value="#{commentaire.description}" />
 											</p>
 										</div>
 									</div>
-									<div class="reply-btn">
-										<a href="" class="btn-reply text-uppercase">reply</a>
+									<div class="reply-btn ">
+									<h:commandButton class="btn-reply text-uppercase az95"
+									value="..."/>
+									
 									</div>
 								</div>
 
@@ -407,5 +411,6 @@
 			</div>
 		</div>
 		</section>
+		<script src="blog/js/commentarie.js"></script>
 	</ui:define>
 </ui:composition>
