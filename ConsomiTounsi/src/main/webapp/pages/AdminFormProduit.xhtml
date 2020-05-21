@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
 	template="/TemplateAdmin/template.xhtml">
 	
 	<ui:define name="AdminFormProduit">
@@ -125,7 +126,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								
+								<h:form enctype="multipart/form-data" class="form-horizontal">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Product </label>
 
@@ -195,8 +196,17 @@
 										</div>
 									</div>
 
-	
-
+								<div class="form-group">
+									<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-6">Images</label>
+								<div class="col-sm-9">
+								<p:fileUpload value="#{ControllerProduit.files}" mode="simple" skinSimple="true" multiple="true" />
+								</div>
+								</div>
+								</div>
+								
+								
+								
 									<div class="space-4"></div>
 
 									<div class="form-group">
@@ -231,11 +241,11 @@
 									
 								</div>
 									</div>
+									 
 									
-									<h:inputFile value="#{ControllerProduit.image}"/>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-									<h:commandButton class="btn btn-info" value="Save" type="submit" action="#{ControllerProduit.upload}" ></h:commandButton>
+									<h:commandButton class="btn btn-info" value="Save" type="submit" action="#{ControllerProduit.addProduit}" ></h:commandButton>
 												
 
 										</div>
@@ -245,18 +255,15 @@
 
 									
 									<div class="space-24"></div>
-
+							
 				
 									
-									<h:form enctype="multipart/form-data">
-								<h:outputText value="File: "></h:outputText>
-								<h:inputFile value="#{AdminFormProduit.uploadedFile}" />
-								<h:commandButton value="Save" type="submit"
-									action="#{AdminFormProduit.saveFile}" style="color: red;"></h:commandButton>
-								</h:form>
-	
+					
+   				
+  
+					</h:form>
 		
-
+			
 
                       
                  
