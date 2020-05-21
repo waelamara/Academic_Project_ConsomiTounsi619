@@ -203,14 +203,14 @@ public void deleteLigne(long idLigneCommande) {
 		 	
 		 }
 		 
-			public Facture Pay( int idUser, String carta1,
+			public String  Pay( int idUser, String carta1,
 			int expMonth1, int expYear1, String cvc1,long idCommande) throws AuthenticationException, InvalidRequestException, CardException, StripeException
 				{
-				
+				String navigateTo  = "facture.xhtml?faces-redirect=true";
 					stripeService.Pay(idUser,carta,expMonth,expYear,cvc);
 					
 					facture= factureImpl.Ajouter(idCommande);
-					return facture;
+					return navigateTo;
 					
 				}
 			public Commande commandeencoursparClient(long id)

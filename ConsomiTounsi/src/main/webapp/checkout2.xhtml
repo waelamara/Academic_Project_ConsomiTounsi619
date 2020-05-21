@@ -250,7 +250,7 @@
 							
 							</div>
 							<ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
-						 <h:commandButton  class="btn btn-primary py-3 px-4" href="/Facture"
+						 <h:commandButton  class="btn btn-primary py-3 px-4" 
 									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
 									value="PalceOrder" />
 									</ui:repeat>
