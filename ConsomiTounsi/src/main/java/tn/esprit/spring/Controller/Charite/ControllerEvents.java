@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -37,6 +39,7 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
@@ -58,6 +61,8 @@ public class ControllerEvents {
 	EndroitDAO endroitDAO;
 	@Autowired
 	UserService userDAO;
+	@Autowired
+	FileStorageServiceImpl fileStorageServiceImpl;
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
 	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
 	
@@ -68,7 +73,19 @@ public class ControllerEvents {
 	private int nbparticipant;
 	private String description;
 	private String image;
+	private UploadedFiles files;
 	
+	
+	
+	
+	public UploadedFiles getFiles() {
+		return files;
+	}
+
+	public void setFiles(UploadedFiles files) {
+		this.files = files;
+	}
+
 	public Long getId() {
 		return Id;
 	}
@@ -296,6 +313,28 @@ public class ControllerEvents {
 
 		return endroitDAO.saveEndroit1(Endroit);
 	}
+	public String addEv() {
+		Events e = new Events();
+		for (UploadedFile f : files.getFiles()) {
+         	String newFileName = fileStorageServiceImpl.UploadImages(f);
+         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
+			
+			e.setImage(fileDownloadUri);
+			
+			eventDAO.saveEvents(e);
+
+			//eventDAO.saveEvents(e);
+		}
+		eventDAO.saveEvents(e);
+		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
+		
+		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant, image));
+		return "/EventAdmin.xhtml?faces-redirect=true";
+	}
+	 public String save() {
+		 
+	       return eventDAO.save();
+	    }
 	
 
     

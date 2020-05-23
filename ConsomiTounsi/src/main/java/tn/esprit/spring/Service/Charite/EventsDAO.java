@@ -2,12 +2,14 @@ package tn.esprit.spring.Service.Charite;
 
 import java.util.List;
 
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.security.core.Authentication;
 
 import tn.esprit.spring.Model.Charite.Events;
 
 public interface EventsDAO {
 	Events saveEvents(Events Events);
+	public void  saveEventss(Events e,UploadedFiles files);
 
 	Events upsateEvents(Events Events);
 
@@ -22,5 +24,6 @@ public interface EventsDAO {
 	public void sendSms();
 	public void removeOldItems();
 	List<Events> getEventsParDate();
+	public String save();
 
 }
