@@ -3,8 +3,12 @@ package tn.esprit.spring.Model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,23 +32,38 @@ public class Livreur implements Serializable {
 	// @Column(name="Liv_id",length=15,nullable=false,unique=true)
 	// @Transient
 	public long id;
-
-	private String Nom;
-
-	private String Prenom;
-
-	private String Email;
-
-	private int Telephone;
-
+	@Column(name = "nom")
+	private String nom;
+	@Column(name = "prenom")
+	private String prenom;
+	@Column(name = "sexe")
+    @Enumerated(EnumType.STRING)
+ 	private Sexe sexe;
+	@Column(name = "email")
+	private String email;
+	@Column(name = "cin")
+	private int cin;
+	@Column(name = "telephone")
+	private int telephone;
+	@Column(name = "datedeNaissance")
 	@Temporal(TemporalType.DATE)
-	private Date DatedeNaissance;
-
-	private int NbMission;
-
-	private String LieuxTravail;
-
-	private int Prime;
+	private Date datedeNaissance;
+	@Column(name = "nbMission")
+	private int nbMission;
+	@Column(name = "lieuxTravail")
+	private String lieuxTravail;
+	@Column(name = "prime")
+	private int prime;
+	@Column(name = "password")
+	private String password;
+	@Column(name = "etat")
+	private String etat;
+	@Column(name = "adresse")
+	private String adresse;
+	@Column(name = "disponible")
+	private String disponible;
+	
+	
 
 	public long getId() {
 		return id;
@@ -53,82 +72,185 @@ public class Livreur implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 
 	public String getPrenom() {
-		return Prenom;
+		return prenom;
 	}
 
 	public void setPrenom(String prenom) {
-		Prenom = prenom;
+		this.prenom = prenom;
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
+	}
+
+	public int getCin() {
+		return cin;
+	}
+
+	public void setCin(int cin) {
+		this.cin = cin;
 	}
 
 	public int getTelephone() {
-		return Telephone;
+		return telephone;
 	}
 
 	public void setTelephone(int telephone) {
-		Telephone = telephone;
+		this.telephone = telephone;
 	}
 
 	public Date getDatedeNaissance() {
-		return DatedeNaissance;
+		return datedeNaissance;
 	}
 
 	public void setDatedeNaissance(Date datedeNaissance) {
-		DatedeNaissance = datedeNaissance;
+		this.datedeNaissance = datedeNaissance;
 	}
 
 	public int getNbMission() {
-		return NbMission;
+		return nbMission;
 	}
 
 	public void setNbMission(int nbMission) {
-		NbMission = nbMission;
+		this.nbMission = nbMission;
 	}
 
 	public String getLieuxTravail() {
-		return LieuxTravail;
+		return lieuxTravail;
 	}
 
 	public void setLieuxTravail(String lieuxTravail) {
-		LieuxTravail = lieuxTravail;
+		this.lieuxTravail = lieuxTravail;
 	}
 
 	public int getPrime() {
-		return Prime;
+		return prime;
 	}
 
 	public void setPrime(int prime) {
-		Prime = prime;
+		this.prime = prime;
 	}
 
-	public Livreur(int id, String nom, String prenom, String email, int telephone, Date datedeNaissance, int nbMission,
-			String lieuxTravail) {
+	public Sexe getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(Sexe sexe) {
+		this.sexe = sexe;
+	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+	
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	
+
+	public String getDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(String disponible) {
+		this.disponible = disponible;
+	}
+
+	public Livreur(String nom, String prenom, Sexe sexe, String email, int cin, int telephone,
+			Date datedeNaissance, String password) {
 		super();
-		this.id = id;
-		Nom = nom;
-		Prenom = prenom;
-		Email = email;
-		Telephone = telephone;
-		DatedeNaissance = datedeNaissance;
-		NbMission = nbMission;
-		LieuxTravail = lieuxTravail;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.email = email;
+		this.cin = cin;
+		this.telephone = telephone;
+		this.datedeNaissance = datedeNaissance;
+		this.password = password;
+		
+	}
+	
+	
+
+	public Livreur( String nom, String prenom, Sexe sexe, String email, int cin, int telephone,
+			Date datedeNaissance, String password, String adresse) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.email = email;
+		this.cin = cin;
+		this.telephone = telephone;
+		this.datedeNaissance = datedeNaissance;
+		this.password = password;
+		this.adresse = adresse;
+	}
+
+	public Livreur(String nom, String prenom, String email, int cin, int telephone,Sexe sexe, Date datedeNaissance,
+			String password, String adresse) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.email = email;
+		this.cin = cin;
+		this.telephone = telephone;
+		this.datedeNaissance = datedeNaissance;
+		this.password = password;
+		this.adresse = adresse;
+		;
+	}
+	
+
+	public Livreur(String nom, String prenom, String email, int cin, int telephone,Sexe sexe, Date datedeNaissance,
+			int nbMission, String lieuxTravail, int prime, String password, String etat, String adresse,
+			String disponible) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.email = email;
+		this.cin = cin;
+		this.telephone = telephone;
+		this.datedeNaissance = datedeNaissance;
+		this.nbMission = nbMission;
+		this.lieuxTravail = lieuxTravail;
+		this.prime = prime;
+		this.password = password;
+		this.etat = etat;
+		this.adresse = adresse;
+		this.disponible = disponible;
 	}
 
 	public Livreur() {
@@ -152,9 +274,8 @@ public class Livreur implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Livreur [Nom=" + Nom + ", Prenom=" + Prenom + ", Email=" + Email + ", Telephone=" + Telephone
-				+ ", DatedeNaissance=" + DatedeNaissance + ", NbMission=" + NbMission + ", LieuxTravail=" + LieuxTravail
-				+ ", Livraison=" + Livraison + "]";
+		return "Livreur [Nom=" + nom + ", Prenom=" + prenom + ", Email=" + email + ", Telephone=" + telephone
+				+ ", DatedeNaissance=" + datedeNaissance + ", NbMission=" + nbMission + ", LieuxTravail=" + lieuxTravail + "]";
 	}
 
 }
