@@ -77,9 +77,19 @@ public class LivraisonService {
 		L.setCommande(c);
 		L.setDateAffecLivr(LocalDate.now());
 		L.setLieux(Lieux);
-		double distance =calculedistance(Lieux);
-		System.out.println("athya l distance"+distance);
-		if(distance>15)
+		//calcule le mindistance et affectation local de livraison
+		double distanceAriana=calculedistanceArianna(Lieux);
+		double distanceSousse=calculedistanceSousse(Lieux);
+		double distanceGabes=calculedistanceGabes(Lieux);
+        double Mindistance =Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes));
+		System.out.println("athya l distance"+Mindistance);
+	    if(Mindistance==distanceAriana){   L.setLocaldistribu("Arianna");}
+	    else if (Mindistance==distanceSousse) { 
+	    	L.setLocaldistribu("Sousse");
+	    }
+	    else {L.setLocaldistribu("Gabes"); }
+	    //affectation moyen transport
+		if(Mindistance>15)
 		{
 			L.setMoyenTL(EMoyenTransportL.Voiture);
 		
@@ -98,13 +108,16 @@ public class LivraisonService {
 	
 	public float CalculerFraisLivraison (String adresse,long idc)
 	{
-		double DistanceKm = calculedistance(adresse);
-		if (DistanceKm>20){
-			double fraisdeliv =(DistanceKm*0.5)+3;
+		double distanceAriana=calculedistanceArianna(adresse);
+		double distanceSousse=calculedistanceSousse(adresse);
+		double distanceGabes=calculedistanceGabes(adresse);
+		double fraisdeliv;
+        double Mindistance =Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes));
+		if (Mindistance>15){
+			 fraisdeliv =(Mindistance*0.5)+3;
 		}
-		double fraisdeliv =DistanceKm*0.5;
+		else{fraisdeliv =Mindistance*0.5;}
 		float fraisdepoid=CalculCommandepoid(idc) ;
-		
 		return (float) (fraisdepoid+fraisdeliv);
 		
 		
@@ -135,22 +148,59 @@ public class LivraisonService {
 	
 	
 	
-	public double calculedistance(String adresse) {
+	public double calculedistanceArianna(String adresse) {
 
 		double lat = Double.parseDouble(getlatitudelieu(adresse));
 		double Long = Double.parseDouble(getlongitudelieu(adresse));
-		System.out.println(lat + " aaa " + Long);
 		double latlocalAriana = 36.895753;
 		double longlocalAriana = 10.18703;
 		double R = 6378137;
 		double lat_a = convertRad(lat);
 		double lon_a = convertRad(Long);
-		double lat_b = convertRad(latlocalAriana);
-		double lon_b = convertRad(longlocalAriana);
-		double D;
-		 D = Math.acos((Math.sin(lat_b) * Math.sin(lat_a)) + Math.cos(lat_b) * Math.cos(lat_a) * (Math.cos(lon_a-lon_b)));
-
-		return D*R/1000;
+		double lat_ariana = convertRad(latlocalAriana);
+		double lon_ariana = convertRad(longlocalAriana);
+		
+		//Calcul distance par rapport local Ariana
+		double DA;
+		 DA = Math.acos((Math.sin(lat_ariana) * Math.sin(lat_a)) + Math.cos(lat_ariana) * Math.cos(lat_a) * (Math.cos(lon_a-lon_ariana)));
+		 double distanceAriana = DA*R/1000;
+		 return distanceAriana;
+	}
+	
+	public double calculedistanceSousse (String adresse){
+		double lat = Double.parseDouble(getlatitudelieu(adresse));
+		double Long = Double.parseDouble(getlongitudelieu(adresse));
+		double latlocalSousse =35.828322;
+		double longlocalSousse=10.639873;
+		double R = 6378137;
+		double lat_a = convertRad(lat);
+		double lon_a = convertRad(Long);
+		double lat_sousse = convertRad(latlocalSousse);
+		double lon_sousse = convertRad(longlocalSousse);
+		 //Calcul distance par rapport local Sousse
+		 double DS;
+		 DS = Math.acos((Math.sin(lat_sousse) * Math.sin(lat_a)) + Math.cos(lat_sousse) * Math.cos(lat_a) * (Math.cos(lon_a-lon_sousse)));
+		 double distanceSousse = DS*R/1000;
+		 return distanceSousse;
+		
+		
+		
+	}
+	public double calculedistanceGabes (String adresse){
+		double lat = Double.parseDouble(getlatitudelieu(adresse));
+		double Long = Double.parseDouble(getlongitudelieu(adresse));
+		double latlocalGabes=33.883242;
+		double longlocalGabes=10.096779;
+		double R = 6378137;
+		double lat_a = convertRad(lat);
+		double lon_a = convertRad(Long);
+		double lat_gabes = convertRad(latlocalGabes);
+		double lon_gabes = convertRad(longlocalGabes);
+		 //33.883242, 10.096779 Calcule distance par rapport local Gabes
+		 double DG;
+		 DG = Math.acos((Math.sin(lat_gabes) * Math.sin(lat_a)) + Math.cos(lat_gabes) * Math.cos(lat_a) * (Math.cos(lon_a-lon_gabes)));
+		 double distanceGabes = DG*R/1000;
+		 return distanceGabes;
 		
 	}
 

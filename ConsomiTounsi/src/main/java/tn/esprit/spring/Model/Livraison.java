@@ -39,6 +39,8 @@ public class Livraison implements Serializable {
 	@Column(name = "DateAffecLivr")
 	// @Temporal(TemporalType.DATE)
 	private LocalDate DateAffecLivr;
+	private String Localdistribu;
+	
 
 	public long getId() {
 		return id;
@@ -116,12 +118,20 @@ public class Livraison implements Serializable {
 		DateAffecLivr = dateAffecLivr;
 	}
 
+	public String getLocaldistribu() {
+		return Localdistribu;
+	}
+
+	public void setLocaldistribu(String localdistribu) {
+		Localdistribu = localdistribu;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
-			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande) {
+			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
 		super();
 		this.id = id;
 		Lieux = lieux;
@@ -132,6 +142,7 @@ public class Livraison implements Serializable {
 		DateAffecLivr = dateAffecLivr;
 		Livreur = livreur;
 		Commande = commande;
+		Localdistribu=localdistribu;
 	}
 
 	public Livraison() {
