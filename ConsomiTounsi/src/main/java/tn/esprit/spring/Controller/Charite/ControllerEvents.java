@@ -314,22 +314,14 @@ public class ControllerEvents {
 
 		return endroitDAO.saveEndroit1(Endroit);
 	}
+	//private Events e = new Events(titre, description, dateE, nbplace, nbparticipant, image);
 	public String addEv() {
-		/*Events e = new Events();
-		for (UploadedFile f : files.getFiles()) {
-         	String newFileName = fileStorageServiceImpl.UploadImages(f);
-         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
-			
-			e.setImage(fileDownloadUri);
-			
-			eventDAO.saveEvents(e);
-
-			//eventDAO.saveEvents(e);
-		}
-		eventDAO.saveEvents(e);*/
-		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
 		
-		eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
+		
+	//	eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
+		eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
+		
+//eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
 	 public String save() {

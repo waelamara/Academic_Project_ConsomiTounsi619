@@ -3,7 +3,6 @@ package tn.esprit.spring.Service.Charite;
 import java.util.List;
 
 import org.primefaces.model.file.UploadedFiles;
-import org.springframework.security.core.Authentication;
 
 import tn.esprit.spring.Model.Charite.Events;
 
