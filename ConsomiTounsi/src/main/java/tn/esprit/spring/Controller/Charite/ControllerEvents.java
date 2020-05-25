@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.servlet.ServletException;
 import javax.validation.Valid;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -314,7 +315,7 @@ public class ControllerEvents {
 		return endroitDAO.saveEndroit1(Endroit);
 	}
 	public String addEv() {
-		Events e = new Events();
+		/*Events e = new Events();
 		for (UploadedFile f : files.getFiles()) {
          	String newFileName = fileStorageServiceImpl.UploadImages(f);
          	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
@@ -325,10 +326,10 @@ public class ControllerEvents {
 
 			//eventDAO.saveEvents(e);
 		}
-		eventDAO.saveEvents(e);
+		eventDAO.saveEvents(e);*/
 		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
 		
-		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant, image));
+		eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
 	 public String save() {

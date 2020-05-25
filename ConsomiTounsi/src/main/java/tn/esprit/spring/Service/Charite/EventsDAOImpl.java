@@ -1,5 +1,6 @@
 package tn.esprit.spring.Service.Charite;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -167,13 +168,12 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public void saveEventss(Events e, UploadedFiles files) {
-		eventDAO.saveEvents(e);
 		for (UploadedFile f : files.getFiles()) {
          	String newFileName = fileStorageServiceImpl.UploadImages(f);
          	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
 			
 			e.setImage(fileDownloadUri);
-			eventDAO.saveEvents(e);
+			eventsRepository.save(e);
 		}
 		
 	}
