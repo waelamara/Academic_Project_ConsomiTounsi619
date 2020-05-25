@@ -6,7 +6,22 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,6 +31,7 @@ import tn.esprit.spring.Model.Forum.Commentaire;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Forum.Vote;
 import tn.esprit.spring.Model.Forum.VoteSujet;
+import tn.esprit.spring.Model.Forum.Vus;
 import tn.esprit.spring.Model.Publicite.Publicite;
 
 
@@ -239,7 +255,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="idUser")
 	@JsonIgnore
 	public Set<Commentaire> commentaires;
-	@OneToMany(mappedBy="idUser")
+	@OneToMany(mappedBy="idUser",fetch = FetchType.EAGER)
 	@JsonIgnore
 	public Set<Sujet> Sujets;
 	@OneToMany(mappedBy="idUser")
@@ -248,6 +264,9 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="idUser")
 	@JsonIgnore
 	public Set<VoteSujet> VotesSujet;
+	@OneToMany(mappedBy="idUser")
+	@JsonIgnore
+	public Set<Vus> vus;
 	/*********ayed*********/
 	public Long getId() {
 		return id;
@@ -275,6 +294,13 @@ public class User implements Serializable {
 	}
 	public void setVotesSujet(Set<VoteSujet> votesSujet) {
 		VotesSujet = votesSujet;
+	}
+	
+	public Set<Vus> getVus() {
+		return vus;
+	}
+	public void setVus(Set<Vus> vus) {
+		this.vus = vus;
 	}
 	public void setId(Long id) {
 		this.id = id;

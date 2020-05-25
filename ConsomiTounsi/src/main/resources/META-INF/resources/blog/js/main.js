@@ -11,7 +11,16 @@ $(document).ready(function(){
 
 	$(".fullscreen").css("height", window_height)
     $(".fitscreen").css("height", fitscreen);
-
+	
+	//-------myfuncontion----------//
+	$(document).ready(function(){
+	    $(".az95").click(function(e){
+	        e.preventDefault();
+	        var txt = $(".comment1").xhtml();
+	        $(".comment1").replaceWith("<h:inputText value='" + txt + "' />");
+	        $(this).replaceWith("<h:commandButton value='modifier' class='primary-btn submit_btn'/> | <h:commandButton value='suprrimer' class='primary-btn submit_btn'/>");
+	    });
+	});
   //------- Active Nice Select --------//
 
     $('select').niceSelect();

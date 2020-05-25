@@ -54,6 +54,10 @@ public class Sujet implements Serializable {
 	@JsonIgnore
 	private Set<ImageSujet> Images;
 	
+	@OneToMany(mappedBy="idSujet")
+	@JsonIgnore
+	private Set<Vus> vus;
+	
 	public Set<Commentaire> getCommentarie() {
 		return commentarie;
 	}
@@ -146,6 +150,13 @@ public class Sujet implements Serializable {
 	}
 	public void setNbpoint(int nbpoint) {
 		this.nbpoint = nbpoint;
+	}
+	
+	public Set<Vus> getVus() {
+		return vus;
+	}
+	public void setVus(Set<Vus> vus) {
+		this.vus = vus;
 	}
 	@Override
 	public int hashCode() {
