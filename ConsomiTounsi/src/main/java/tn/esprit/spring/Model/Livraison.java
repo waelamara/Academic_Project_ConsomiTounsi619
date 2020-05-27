@@ -3,6 +3,7 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -81,17 +82,27 @@ public class Livraison implements Serializable {
 	public void setCommande_id(long commande_id) {
 		this.commande_id = commande_id;
 	}
+//
+//	public Livreur getLivreur() {
+//		return Livreur;
+//	}
+//
+//	public void setLivreur(Livreur livreur) {
+//		Livreur = livreur;
+//	}
 
-	public Livreur getLivreur() {
-		return Livreur;
-	}
-
-	public void setLivreur(Livreur livreur) {
-		Livreur = livreur;
-	}
-
+	
 	public Commande getCommande() {
 		return Commande;
+	}
+
+
+	public User getDelivery() {
+		return Delivery;
+	}
+
+	public void setDelivery(User delivery) {
+		Delivery = delivery;
 	}
 
 	public void setCommande(Commande commande) {
@@ -130,29 +141,30 @@ public class Livraison implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
-			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
-		super();
-		this.id = id;
-		Lieux = lieux;
-		Etat = etat;
-		MoyenTL = moyenTL;
-		this.commande_id = commande_id;
-		this.livreur_id = livreur_id;
-		DateAffecLivr = dateAffecLivr;
-		Livreur = livreur;
-		Commande = commande;
-		Localdistribu=localdistribu;
-	}
+//	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
+//			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
+//		super();
+//		this.id = id;
+//		Lieux = lieux;
+//		Etat = etat;
+//		MoyenTL = moyenTL;
+//		this.commande_id = commande_id;
+//		this.livreur_id = livreur_id;
+//		DateAffecLivr = dateAffecLivr;
+//		Livreur = livreur;
+//		Commande = commande;
+//		Localdistribu=localdistribu;
+//	}
 
 	public Livraison() {
 		super();
 	}
 
-	@ManyToOne
-	Livreur Livreur;
+	
 	@OneToOne
 	Commande Commande;
+	@ManyToOne
+	User Delivery;
 
 }
 

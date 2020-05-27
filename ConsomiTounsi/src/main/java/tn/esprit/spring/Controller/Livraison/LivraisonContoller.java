@@ -57,19 +57,19 @@ public class LivraisonContoller {
 	
 
 	/* Enregistrer un livreur */
-	@PostMapping("/ajout")
-
-	public Livraison createLivrison(@Valid @RequestBody Livraison liv) {
-		if ((liv.getCommande_id() != 0) && (liv.getLivreur_id() != 0)) {
-			Commande c = CommandeDAO.findOne(liv.getCommande_id());
-			liv.setCommande(c);
-			Livreur L = LivreurService.findOne(liv.getLivreur_id());
-			liv.setLivreur(L);
-			liv.setDateAffecLivr(LocalDate.now());
-			return livraisonService.save(liv);
-		} else
-			return null;
-	}
+//	@PostMapping("/ajout")
+//
+//	public Livraison createLivrison(@Valid @RequestBody Livraison liv) {
+//		if ((liv.getCommande_id() != 0) && (liv.getLivreur_id() != 0)) {
+//			Commande c = CommandeDAO.findOne(liv.getCommande_id());
+//			liv.setCommande(c);
+//			Livreur L = LivreurService.findOne(liv.getLivreur_id());
+//			liv.setLivreur(L);
+//			liv.setDateAffecLivr(LocalDate.now());
+//			return livraisonService.save(liv);
+//		} else
+//			return null;
+//	}
 
 	/* get all employees */
 	@GetMapping("/affichall")
