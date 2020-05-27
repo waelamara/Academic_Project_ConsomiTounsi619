@@ -16,51 +16,104 @@
 			<script src="dash/js/ace-extra.min.js"></script>
 		</h:head>
 		<h:body>
-				<!-- Event Item -->
-			<center>
+		
+		<center>
+		<div class="row">
+							<div class="col-xs-12">
 			
-			<ui:repeat var="event" value="#{ControllerEvents.getAllEvents()}">
-
-
-<div class="event_content">
-				<div
-					class="event_image">
-					<img src="#{event.image}" style="width: 10%; height: 20%" alt="" />
-				</div>
-
-
-				<div class="event_name">
-					<h:outputText value="#{event.titre}" />
-				</div>
+							
 				
-				<div class="event_date">
-				<span class="label label-sm label-warning"><h:outputText value="#{event.dateE}"/></span>
-				</div>
-				
-								<div class="event_place"><div>
+									<ui:repeat var="event"
+										value="#{ControllerEvents.getAllEvents()}">
+										<div class="Event_content">
+										
+											<div
+												class="event_image d-flex flex-column align-items-center justify-content-center">
+												<img src="#{event.image}" style="width: 60%; height: 80%"
+													alt="" />
+											</div>
+										
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Title
+													:</label>
 
-						<a href="#" tabindex="0"><h:outputText
-								value="#{event.nbplace}" /></a>
-					</div>
-					</div>
-				<div class="event_partarticipant">
-					<div>
-						<a href="#" tabindex="0"><h:outputText
-								value="#{event.nbparticipant}" /></a></div>
-					</div>
-					<div class="event_description">
-					<h:outputText value="#{event.description}" />
-				</div>
-				<div>
-				<h:form>   	
-   <h:commandButton class="Events-remove"
-									action="#{ControllerEvents.delete(event.id)}"
-									value="Supprimer"/>
-						     </h:form>   
-						     </div>
-				</div>
-			</ui:repeat>
-			</center>
+												<div class="Event_title" style="color: #000000">
+													<h:outputText value="#{event.titre}" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Date
+													:</label>
+												<div class="Event_date" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.dateE}" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">places :</label>
+												<div class="numbre_of_places" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.nbplace}" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">participant :</label>
+												<div class="numbre_of_participants" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.nbparticipant}" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Description :</label>
+												<div class="Descreption" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.description}" />
+													</div>
+												</div>
+											</div>
+
+											<div>
+												<h:form>
+													<h:commandButton class="Events-remove"
+														action="#{ControllerEvents.delete(event.id)}"
+														value="Supprimer" />
+												</h:form>
+											</div>
+											<br> </br>
+
+										</div>
+									</ui:repeat>
+
+</div>
+</div>
+
+							
+							
+
+
+
+
+<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+<script src="acceuil/styles/bootstrap4/popper.js"></script>
+<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="acceuil/plugins/easing/easing.js"></script>
+<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="acceuil/js/shop_custom.js"></script>
+	
+	
+	</center>
+
 		</h:body>
 
 	</ui:define>

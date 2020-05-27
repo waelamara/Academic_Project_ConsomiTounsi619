@@ -8,52 +8,160 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
 	template="/TemplateAdmin/template.xhtml">
-	
+
 	<ui:define name="AddEvent">
 		<h:head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 			<title>Tables - Ace Admin</title>
 			<meta name="description" content="Static &amp; Dynamic Tables" />
 			<meta name="viewport"
 				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 			<script src="dash/js/ace-extra.min.js"></script>
-		
-</h:head>
+
+		</h:head>
 		<h:body>
 			<!--Add Event Item -->
+			<div class="page-header">
+							<h1>
+								Add Events
+								<small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+							<div class="row">
+							<div class="col-xs-12">
 
-			<h:form id="productForm" enctype="multipart/form-data" class="form-horizontal">
-<div>
-				<h:outputLabel for="name" value="Name: " />
-				<h:inputText id="name" value="#{ControllerEvents.titre}" />
-				</div>
-				<div>
-				<h:outputLabel for="description" value="description: " />
-				<h:inputText id="description"
-					value="#{ControllerEvents.description}" />
-					</div>
-					<div>
-				<h:outputLabel for=" place" value="place:" />
-				<p:inputNumber id="place"
-					value="#{ControllerEvents.nbplace}" />
-					</div>
-					<div>
-				<h:outputLabel for="participant"
-					value="participant:" />
-				<p:inputNumber id="participant"
-					value="#{ControllerEvents.nbparticipant}" />
-				</div>
-				<div>
+			<h:form id="EventForm" enctype="multipart/form-data"
+				class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"
+						for="form-field-1"> Title Event </label>
 
-				<p:fileUpload value="#{ControllerEvents.files}" mode="simple"
-					skinSimple="true" multiple="true" />
-					</div>
-					<div>
+					<div class="col-sm-9">
+						<h:inputText value="#{ControllerEvents.titre}"
+							placeholder="Name" class="col-xs-10 col-sm-5"></h:inputText>
 
-				<h:commandButton value="Save" action="#{ControllerEvents.addEv}" />
+					</div>
 				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">Date Event</label>
+
+					<div class="col-sm-9">
+						<p:inputText value="#{ControllerEvents.dateE}" 
+							>
+							<f:convertDateTime pattern="yyyy-MM-dd"/> 
+							</p:inputText>
+							
+						<div class="space-2"></div>
+
+						<div class="help-block" id="input-size-slider"></div>
+					</div>
+				</div>
+
+				
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">Number of places</label>
+
+					<div class="col-sm-9">
+						<p:inputNumber value="#{ControllerEvents.nbplace}"
+							></p:inputNumber>
+						<div class="space-2"></div>
+
+						<div class="help-block" id="input-size-slider"></div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">Number of participants</label>
+
+					<div class="col-sm-9">
+						<p:inputNumber value="#{ControllerEvents.nbparticipant}"
+							></p:inputNumber>
+						<div class="space-2"></div>
+
+						<div class="help-block" id="input-size-slider"></div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-6">Pictures</label>
+						<div class="col-sm-9">
+							<p:fileUpload value="#{ControllerEvents.files}" mode="simple"
+								skinSimple="true" multiple="true" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"
+						for="form-field-1-1"> Description </label>
+
+					<div class="col-sm-9">
+						<h:inputTextarea value="#{ControllerEvents.description}"
+							style="width:50%;height:80px" id="form-field-1-1"
+							placeholder="Description" class="form-control"></h:inputTextarea>
+					</div>
+
+				</div>
+				
+
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<h:commandButton class="btn btn-info" value="Save" type="submit"
+							action="#{ControllerEvents.addEv}"></h:commandButton>
+
+
+					</div>
+				</div>
+
 
 			</h:form>
+			</div>
+			</div>
+			<script src="dash/js/jquery-2.1.4.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+
+		<script src="dash/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!--[if lte IE 8]>
+		  <script src="assets/js/excanvas.min.js"></script>
+		<![endif]-->
+		<script src="dash/js/jquery-ui.custom.min.js"></script>
+		<script src="dash/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="dash/js/chosen.jquery.min.js"></script>
+		<script src="dash/js/spinbox.min.js"></script>
+		<script src="dash/js/bootstrap-datepicker.min.js"></script>
+		<script src="dash/js/bootstrap-timepicker.min.js"></script>
+		<script src="dash/js/moment.min.js"></script>
+		<script src="dash/js/daterangepicker.min.js"></script>
+		<script src="dash/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="dash/js/bootstrap-colorpicker.min.js"></script>
+		<script src="dash/js/jquery.knob.min.js"></script>
+		<script src="dash/js/autosize.min.js"></script>
+		<script src="dash/js/jquery.inputlimiter.min.js"></script>
+		<script src="dash/js/jquery.maskedinput.min.js"></script>
+		<script src="dash/js/bootstrap-tag.min.js"></script>
+
+		<script src="dash/js/ace-elements.min.js"></script>
+		<script src="dash/js/ace.min.js"></script>
+
+
+		
+
+			
 
 		</h:body>
 
