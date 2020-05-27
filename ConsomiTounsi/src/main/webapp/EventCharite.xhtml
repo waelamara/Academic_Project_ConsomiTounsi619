@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
-	<ui:define name="shop">
+	<ui:define name="EventCharite">
 	
 	<h:head>
 	<meta charset="utf-8"/>
@@ -30,49 +30,85 @@
 
 
 			<!-- Event Item -->
-			<center>
 			
-			<ui:repeat var="event" value="#{ControllerEvents.getAllEvents()}">
 
-
-<div class="event_content">
-				<div
-					class="event_image">
-					<img src="#{event.image}" style="width: 10%; height: 20%" alt="" />
-				</div>
-
-
-				<div class="event_name">
-					<h:outputText value="#{event.titre}" />
-				</div>
+			<!-- Event Item -->
+			<center>
+			<div class="event">
+							
 				
-				<div class="event_date">
-				<span class="label label-sm label-warning"><h:outputText value="#{event.dateE}"/></span>
-				</div>
-				
-								<div class="event_place"><div>
+									<ui:repeat var="event"
+										value="#{ControllerEvents.getAllEvents()}">
+										<div class="Event_content">
+										
+											<div
+												class="event_image d-flex flex-column align-items-center justify-content-center">
+												<img src="#{event.image}" style="width: 20%; height: 40%"
+													alt="" />
+											</div>
+										
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Title
+													:</label>
 
-						<a href="#" tabindex="0"><h:outputText
-								value="#{event.nbplace}" /></a>
-					</div>
-					</div>
-				<div class="event_partarticipant">
-					<div>
-						<a href="#" tabindex="0"><h:outputText
-								value="#{event.nbparticipant}" /></a></div>
-					</div>
-					<div class="event_description">
-					<h:outputText value="#{event.description}" />
-				</div>
-				<div>
-				<h:form>   	
-   <h:commandButton class="Events-remove"
-									action="#{ControllerEvents.delete(event.id)}"
-									value="Supprimer"/>
-						     </h:form>   
-						     </div>
-				</div>
-			</ui:repeat>
+												<div class="Event_title" style="color: #000000">
+													<h:outputText value="#{event.titre}" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Date
+													:</label>
+												<div class="Event_date" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.dateE}" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">places :</label>
+												<div class="numbre_of_places" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.nbplace}" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">participant :</label>
+												<div class="numbre_of_participants" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.nbparticipant}" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Description :</label>
+												<div class="Descreption" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.description}" />
+													</div>
+												</div>
+											</div>
+
+											<div>
+												<h:form>
+													<h:commandButton class="Events-remove"
+														action="#{ControllerEvents.delete(event.id)}"
+														value="Supprimer" />
+												</h:form>
+											</div>
+											<br> </br>
+
+										</div>
+									</ui:repeat>
+
+
+								</div>
+							
+								
+							
+							
+
+
 
 
 <script src="acceuil/js/jquery-3.3.1.min.js"></script>

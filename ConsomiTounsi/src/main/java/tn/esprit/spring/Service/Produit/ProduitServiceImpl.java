@@ -3,6 +3,8 @@ package tn.esprit.spring.Service.Produit;
 import java.io.IOException;
 import java.util.List;
 
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -90,6 +92,29 @@ public class ProduitServiceImpl implements IProduitService {
 		
 		return p;
 	}
+	
+	
+	public Produit AddProduit(String ProduitJson, Long idSsCategorie, UploadedFiles files)
+			throws JsonMappingException, JsonProcessingException, IOException {
+		Produit p = objectMapper.readValue(ProduitJson, Produit.class);
+		SsCategorie ssc = isousSousCategorieService.findOne(idSsCategorie);
+		if (!p.BarcodeIsvalid(p.getBarcode())) {
+			return null;
+		}
+		p.setIdSsCategorie(ssc);
+		produitRepository.save(p);
+		 for (UploadedFile f : files.getFiles()) {
+         	String newFileName = fileStorageServiceImpl.UploadImages(f);
+         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+     				.path(newFileName).toUriString();
+			ImageProduit image = new ImageProduit();
+			image.setImage(fileDownloadUri);
+			image.setIdproduit(p);
+			iImagesProduitService.save(image);
+		}
+		
+		return p;
+	}
 
 	public List<Produit> findLikeName(String name) {
 		return produitRepository.findLikeName(name);
@@ -109,11 +134,19 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 
-	@Override
-	public void addProduitWithOutImage(Produit p) {
+
+	public void addProduitWithImage(Produit p, UploadedFiles files) {
 		SsCategorie ssc = sousSousCategorieRepository.findSsCategorieByName(controllerSousSousCategorie.getNomSsCategorie());
 		p.setIdSsCategorie(ssc);
 		produitRepository.save(p);
+		for (UploadedFile f : files.getFiles()) {
+         	String newFileName = fileStorageServiceImpl.UploadImages(f);
+         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
+			ImageProduit image = new ImageProduit();
+			image.setImage(fileDownloadUri);
+			image.setIdproduit(p);
+			iImagesProduitService.save(image);
+		}
 	}
 	
 }

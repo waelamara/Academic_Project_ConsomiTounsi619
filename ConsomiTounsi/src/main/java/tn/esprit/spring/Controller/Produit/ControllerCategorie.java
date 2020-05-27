@@ -8,5 +8,9 @@ import org.springframework.stereotype.Controller;
 @ELBeanName(value = "categorieController")
 @Join(path = "/shop/categorie", to = "/shop.jsf")
 public class ControllerCategorie {
-
+	
+	
+	
+	
+	
 }

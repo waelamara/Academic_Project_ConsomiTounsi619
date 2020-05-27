@@ -1,6 +1,8 @@
 package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,9 +13,13 @@ import java.util.Set;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.servlet.ServletException;
 import javax.validation.Valid;
 
+import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -47,6 +53,7 @@ import tn.esprit.spring.security.services.UserDetailsImpl;
 
 @Controller(value = "ControllerEvents")
 @ELBeanName(value = "ControllerEvents")
+@Join(path = "/AddEvent", to = "AddEvent.jsf")
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
@@ -58,6 +65,8 @@ public class ControllerEvents {
 	EndroitDAO endroitDAO;
 	@Autowired
 	UserService userDAO;
+	@Autowired
+	FileStorageServiceImpl fileStorageServiceImpl;
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
 	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
 	
@@ -68,7 +77,19 @@ public class ControllerEvents {
 	private int nbparticipant;
 	private String description;
 	private String image;
+	private UploadedFiles files;
 	
+	
+	
+	
+	public UploadedFiles getFiles() {
+		return files;
+	}
+
+	public void setFiles(UploadedFiles files) {
+		this.files = files;
+	}
+
 	public Long getId() {
 		return Id;
 	}
@@ -296,6 +317,23 @@ public class ControllerEvents {
 
 		return endroitDAO.saveEndroit1(Endroit);
 	}
+	//private Events e = new Events(titre, description, dateE, nbplace, nbparticipant, image);
+	public String addEv() {
+		 DateFormat df=new SimpleDateFormat("dd/MM/yyyy");
+	        df.format(dateE);
+	        
+		
+		
+	//	eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
+		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
+		
+eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
+		return "/EventAdmin.xhtml?faces-redirect=true";
+	}
+	 public String save() {
+		 
+	       return eventDAO.save();
+	    }
 	
 
     

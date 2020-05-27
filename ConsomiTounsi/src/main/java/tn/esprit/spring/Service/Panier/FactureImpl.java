@@ -58,7 +58,7 @@ public Facture  Ajouter (long idCommande)
 	Commande c =commandeRepository.getOne(idCommande);
 	Facture f = new Facture();
 	f.setDate(LocalDate.now());
-	f.setType("auto");
+	f.setType("non");
 	f.setCommande(c);
 	return factureRepository.save(f);
 }
@@ -276,7 +276,7 @@ public void facturepdf (long id_facture){
 		//List<lignecommandeproduit>commandes = panierRepository.panier_confirmer_ParIdclient(f.getCommande().getClient().getUserId());
 		//System.out.println("/////////"+commandes);
 	//	List<Commande>commandes=commandeRepository.findAll();
-		List<lignecommandeproduit>commandes=ligneCommandeRepository.panierParIdclient(f.getCommande().getIdUser().getId());
+		List<lignecommandeproduit>commandes=ligneCommandeRepository.factureParIdclient(f.getCommande().getIdUser().getId(),f.getCommande().getId());
 	String file_name="C:\\Users\\Iheb\\Desktop\\Nouveau dossier\\my_facture"+f.getId()+".pdf";
 	Document document=new Document(PageSize.A4,15,15,45,30);
 		PdfWriter.getInstance(document, new FileOutputStream(file_name));
@@ -315,7 +315,7 @@ public void facturepdf (long id_facture){
  PdfPTable table2 = new PdfPTable(3);
   Font tableHeader = FontFactory.getFont("Arial", 10, BaseColor.BLACK);
     Font tableBody = FontFactory.getFont("Arial", 9, BaseColor.BLACK);
- PdfPCell name = new PdfPCell(new Paragraph("Quantite", tableHeader));
+ PdfPCell name = new PdfPCell(new Paragraph("Produit", tableHeader));
     name.setBorderColor(BaseColor.BLACK);
     name.setPaddingLeft(10);
     name.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -323,7 +323,7 @@ public void facturepdf (long id_facture){
     name.setBackgroundColor(BaseColor.LIGHT_GRAY);
     name.setExtraParagraphSpace(5f);
     table.addCell(name);
-    PdfPCell nameProduit = new PdfPCell(new Paragraph("Produit", tableHeader));
+    PdfPCell nameProduit = new PdfPCell(new Paragraph("Quantite", tableHeader));
     nameProduit.setBorderColor(BaseColor.BLACK);
     nameProduit.setPaddingLeft(10);
     nameProduit.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -353,7 +353,7 @@ public void facturepdf (long id_facture){
     ////////////////////////////
     for(lignecommandeproduit c : commandes)
 	{
-    	 PdfPCell quantiteval = new PdfPCell(new Paragraph(String.valueOf(c.getQuantity()), tableHeader));
+    	 PdfPCell quantiteval = new PdfPCell(new Paragraph(c.getNomProduit(), tableHeader));
  	    quantiteval.setBorderColor(BaseColor.BLACK);
  	    quantiteval.setPaddingLeft(10);
  	    quantiteval.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -361,7 +361,7 @@ public void facturepdf (long id_facture){
  	    quantiteval.setBackgroundColor(BaseColor.WHITE);
  	    quantiteval.setExtraParagraphSpace(5f);
  	    table.addCell(quantiteval);
- 	    PdfPCell produiteval = new PdfPCell(new Paragraph(c.getNomProduit(), tableHeader));
+ 	    PdfPCell produiteval = new PdfPCell(new Paragraph(String.valueOf(c.getQuantity()), tableHeader));
  	    produiteval.setBorderColor(BaseColor.BLACK);
  	    produiteval.setPaddingLeft(10);
  	    produiteval.setHorizontalAlignment(Element.ALIGN_CENTER);
