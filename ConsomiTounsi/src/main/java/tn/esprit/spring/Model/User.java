@@ -103,9 +103,9 @@ public class User implements Serializable {
 	@Column(name = "etat")
 	private String etatD;
 	@Column(name = "prime")
-	private int prime;
+	private Integer prime;
 	@Column(name = "nbMission")
-	private int nbMission;
+	private Integer nbMission;
 	@Column(name = "lieuxTravail")
 	private String lieuxTravail;
 
