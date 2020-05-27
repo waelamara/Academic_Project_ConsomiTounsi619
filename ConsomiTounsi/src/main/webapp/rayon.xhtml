@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="rayon">
+
+		<h:head>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+			<title>Tables - Ace Admin</title>
+			<meta name="description" content="Static &amp; Dynamic Tables" />
+			<meta name="viewport"
+				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+			<script src="dash/js/ace-extra.min.js"></script>
+		</h:head>
+		<h:body>
+			<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<table id="simple-table" class="table  table-bordered table-hover">
+											<thead>
+												<tr>
+													<th class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</th>
+													<th >Ray name</th>
+													<th>Ray Type</th>
+													
+
+													
+													
+
+													
+												</tr>
+											</thead>
+
+											<tbody>
+											 <ui:repeat var="rayon" value="#{JsfRayonController.getAllRayon()}" varStatus="status"> 
+												<tr>
+													<td class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</td>
+
+<!-- 													<td class="center"> -->
+<!-- 														<div class="action-buttons"> -->
+<!-- 															<a href="OrderDetailsAdmin" class="green bigger-140 show-details-btn" title="Show Details"> -->
+<!-- 																<i class="ace-icon fa fa-angle-double-down"></i> -->
+<!-- 																<span class="sr-only">Details</span> -->
+<!-- 															</a> -->
+<!-- 														</div> -->
+<!-- 													</td> -->
+
+													
+													<td><h:outputText value="#{rayon.nom_rayon}"/></td>
+													<td class="hidden-480"><h:outputText value="#{rayon.type_rayon}"/></td>
+													
+
+												
+												</tr>
+												
+												
+												
+												
+												
+ </ui:repeat>
+												<tr class="detail-row">
+													<td colspan="8">
+														<div class="table-detail">
+															<div class="row">
+																<div class="col-xs-12 col-sm-2">
+																	<div class="text-center">
+																		<img height="150" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="assets/images/avatars/profile-pic.jpg" />
+																		<br />
+																		<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+																			<div class="inline position-relative">
+																				<a class="user-title-label" href="#">
+																					<i class="ace-icon fa fa-circle light-green"></i>
+																					&nbsp;
+																					<span class="white">Alex M. Doe</span>
+																				</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="col-xs-12 col-sm-7">
+																	<div class="space visible-xs"></div>
+
+																	<div class="profile-user-info profile-user-info-striped">
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Username </div>
+
+																			<div class="profile-info-value">
+																				<span>alexdoe</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Location </div>
+
+																			<div class="profile-info-value">
+																				<i class="fa fa-map-marker light-orange bigger-110"></i>
+																				<span>Netherlands, Amsterdam</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Age </div>
+
+																			<div class="profile-info-value">
+																				<span>38</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Joined </div>
+
+																			<div class="profile-info-value">
+																				<span>2010/06/20</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> Last Online </div>
+
+																			<div class="profile-info-value">
+																				<span>3 hours ago</span>
+																			</div>
+																		</div>
+
+																		<div class="profile-info-row">
+																			<div class="profile-info-name"> About Me </div>
+
+																			<div class="profile-info-value">
+																				<span>Bio</span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="col-xs-12 col-sm-3">
+																	<div class="space visible-xs"></div>
+																	<h4 class="header blue lighter less-margin">Send a message to Alex</h4>
+
+																	<div class="space-6"></div>
+
+																	<form>
+																		<fieldset>
+																			<textarea class="width-100" resize="none" placeholder="Type something…"></textarea>
+																		</fieldset>
+
+																		<div class="hr hr-dotted"></div>
+
+																		<div class="clearfix">
+																			<label class="pull-left">
+																				<input type="checkbox" class="ace" />
+																				<span class="lbl"> Email me a copy</span>
+																			</label>
+
+																			<button class="pull-right btn btn-sm btn-primary btn-white btn-round" type="button">
+																				Submit
+																				<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+																			</button>
+																		</div>
+																	</form>
+																</div>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+									
+											</tbody>
+										</table>
+									</div><!-- /.span -->
+								</div><!-- /.row -->		
+								</div>
+								</div>			
+		</h:body>
+		
+		
+		
+		
+		
+		
+		
+		</ui:define>
+		</ui:composition>
+		

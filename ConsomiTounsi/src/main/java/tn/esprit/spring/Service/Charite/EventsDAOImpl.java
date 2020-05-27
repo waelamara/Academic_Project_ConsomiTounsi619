@@ -1,13 +1,10 @@
 package tn.esprit.spring.Service.Charite;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
-import javax.mail.internet.MimeMessage;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -18,24 +15,15 @@ import Utils.AppConstants;
 import org.primefaces.model.file.UploadedFile;
 import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.Schedules;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import tn.esprit.spring.Model.User;
-import tn.esprit.spring.Model.Charite.Charite;
+
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
 import tn.esprit.spring.Model.Produit.ImageProduit;
-import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
 import tn.esprit.spring.Repository.Charite.PubRepository;
@@ -58,9 +46,11 @@ public class EventsDAOImpl implements EventsDAO {
 	FileStorageServiceImpl fileStorageServiceImpl;
 	@Autowired
 	EventsDAO eventDAO;
+	private UploadedFiles files;
 
 	@Override
 	public Events saveEvents(Events Events) {
+		
 		return eventsRepository.save(Events);
 	}
 
@@ -167,14 +157,14 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public void saveEventss(Events e, UploadedFiles files) {
-		eventDAO.saveEvents(e);
+	
 		for (UploadedFile f : files.getFiles()) {
          	String newFileName = fileStorageServiceImpl.UploadImages(f);
          	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
-			
 			e.setImage(fileDownloadUri);
-			eventDAO.saveEvents(e);
+			eventsRepository.save(e);
 		}
+		
 		
 	}
 

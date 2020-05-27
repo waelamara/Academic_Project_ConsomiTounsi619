@@ -3,7 +3,6 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,8 +38,10 @@ public class Livraison implements Serializable {
 	long livreur_id;
 	@Column(name = "DateAffecLivr")
 	// @Temporal(TemporalType.DATE)
+
 	private LocalDate DateAffecLivr;
 	private String Localdistribu;
+
 	
 
 	public long getId() {
@@ -50,6 +51,7 @@ public class Livraison implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 
 	public String getLieux() {
 		return Lieux;
@@ -92,9 +94,7 @@ public class Livraison implements Serializable {
 //	}
 
 	
-	public Commande getCommande() {
-		return Commande;
-	}
+	
 
 
 	public User getDelivery() {
@@ -103,6 +103,14 @@ public class Livraison implements Serializable {
 
 	public void setDelivery(User delivery) {
 		Delivery = delivery;
+	}
+
+	
+
+	
+
+	public Commande getCommande() {
+		return Commande;
 	}
 
 	public void setCommande(Commande commande) {
@@ -129,6 +137,7 @@ public class Livraison implements Serializable {
 		DateAffecLivr = dateAffecLivr;
 	}
 
+
 	public String getLocaldistribu() {
 		return Localdistribu;
 	}
@@ -136,6 +145,7 @@ public class Livraison implements Serializable {
 	public void setLocaldistribu(String localdistribu) {
 		Localdistribu = localdistribu;
 	}
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -166,5 +176,7 @@ public class Livraison implements Serializable {
 	@ManyToOne
 	User Delivery;
 
+
 }
+
 

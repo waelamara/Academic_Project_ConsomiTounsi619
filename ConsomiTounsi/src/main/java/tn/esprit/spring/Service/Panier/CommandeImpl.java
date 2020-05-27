@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.CadeauUser;
 import tn.esprit.spring.Model.Commande;
@@ -43,6 +46,13 @@ public class CommandeImpl implements ICommande {
 	@Autowired
 	CadeauUserRepository cadeauUserRepository; 
 
+	
+	   @PostConstruct
+	    public void init() {
+		 
+	       
+	    }
+
 	public Commande save (Commande c)
 	{
 	    
@@ -63,7 +73,7 @@ public class CommandeImpl implements ICommande {
 
 	}
 	
-	
+	@Transactional
 	public List<Commande> findAll() {
 		return commandeRepository.findAll();
 	}

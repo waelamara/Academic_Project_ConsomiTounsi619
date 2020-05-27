@@ -22,8 +22,6 @@ import tn.esprit.spring.Model.Stock.Stock;
 import tn.esprit.spring.Service.Stock.IStockService;
 
 @Controller(value = "StockController")
-@ELBeanName(value = "StockController")
-@Join(path = "/stock", to = "/stock.jsf")
 public class StockController {
 	
 	@Autowired

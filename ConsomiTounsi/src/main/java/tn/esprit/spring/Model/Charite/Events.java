@@ -184,5 +184,15 @@ public class Events implements Serializable {
 		this.image=image;
 
 	}
+	public Events(String titre,String description, Date dateE, int nbplace, int nbparticipant) {
+		super();
+		this.titre = titre;
+		this.dateE = dateE;
+		this.nbplace = nbplace;
+		this.nbparticipant = nbparticipant;
+		this.description = description;
+		
+
+	}
 
 }

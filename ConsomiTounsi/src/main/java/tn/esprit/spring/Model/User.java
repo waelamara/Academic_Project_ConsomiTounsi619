@@ -266,6 +266,15 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+
+	public int getNbMission() {
+		return nbMission;
+	}
+
+	public void setNbMission(int nbMission) {
+		this.nbMission = nbMission;
+	}
 
 	@Column(name = "Solde")
 	private float solde;
@@ -381,14 +390,6 @@ public class User implements Serializable {
 
 	public void setPrime(int prime) {
 		this.prime = prime;
-	}
-
-	public int getNbMission() {
-		return nbMission;
-	}
-
-	public void setNbMission(int nbMission) {
-		this.nbMission = nbMission;
 	}
 
 	public String getLieuxTravail() {
