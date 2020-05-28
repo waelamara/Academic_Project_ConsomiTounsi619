@@ -50,7 +50,8 @@ public class UserService {
         VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
     }
-	
+	/*Livreur methodes oussama*/
+  
 	
 	
 

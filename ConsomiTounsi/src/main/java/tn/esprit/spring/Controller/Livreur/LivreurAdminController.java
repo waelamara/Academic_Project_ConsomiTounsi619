@@ -9,8 +9,10 @@ import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import tn.esprit.spring.Model.Livreur;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.LivreurRepository;
+import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
 
 @Controller(value = "LivreurAdminController")
@@ -21,11 +23,31 @@ public class LivreurAdminController {
 	LivreurService LivreurService;
 	@Autowired
 	LivreurRepository L;
+	@Autowired
+	UserService UserService;
+	@Autowired
+	UserRepository UserRepository;
+	
+	//esma3ni hani bech njareb na3mel initialize lahna amma mana3refch ken tji mrgl or yo93edou user w kol mata3mel refresh yetzadou mara o5ra
+	List<User> listeliv;
 	
 	/*get all Livreur*/
-	public List<Livreur> getAllliv(){
-		
-		return LivreurService.findall();
+	public List<User> getAllliv(){
+		 List<Long> listeliv1=UserRepository.Listettlivreur();
+		 System.out.println(listeliv1);
+		 
+		 User u = new User();
+		 for(Long  a : listeliv1)
+		 {
+			 u=UserService.findOne(a);
+			 System.out.println(u);
+
+			 listeliv.add(u);
+			 //console win
+		 }
+		 //ntestiwha nrmlmnt haka temshi tra jareb
+		 
+		return  listeliv;
 		
 	}
 	/*Accepter le livreur*/

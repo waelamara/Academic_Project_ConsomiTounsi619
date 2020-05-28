@@ -21,4 +21,8 @@ public interface UserRepository extends JpaRepository <User, Long> {
 	@Query(value = "SELECT user_id FROM user WHERE  point_fidelite >=100 ", nativeQuery = true)
 	public List<String> findClient_pt_100();
 	
+	/*liste des livreur*/
+	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=4", nativeQuery = true)
+	public List<Long> Listettlivreur();
+	
 }
