@@ -1,5 +1,6 @@
 package tn.esprit.spring.Controller.Livreur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,19 +30,18 @@ public class LivreurAdminController {
 	UserRepository UserRepository;
 	
 	//esma3ni hani bech njareb na3mel initialize lahna amma mana3refch ken tji mrgl or yo93edou user w kol mata3mel refresh yetzadou mara o5ra
-	List<User> listeliv;
+
 	
 	/*get all Livreur*/
 	public List<User> getAllliv(){
 		 List<Long> listeliv1=UserRepository.Listettlivreur();
 		 System.out.println(listeliv1);
-		 
+			List<User> listeliv = new ArrayList();
 		 User u = new User();
 		 for(Long  a : listeliv1)
 		 {
 			 u=UserService.findOne(a);
-			 System.out.println(u);
-
+			 System.out.println("livreur ahawa"+u);
 			 listeliv.add(u);
 			 //console win
 		 }
