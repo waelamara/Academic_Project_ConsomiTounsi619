@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.CadeauUser;
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.Event;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.lignecommandeproduit;
@@ -287,4 +288,11 @@ public class CommandeImpl implements ICommande {
 	{
 		return commandeRepository.CommandeencoursparClient(id);
 	}
+	public List<Event> NumCommadeParMOIS2()
+	{
+		
+		return commandeRepository.NumCommadeParMOIS2();
+	}
+	
+	
 }

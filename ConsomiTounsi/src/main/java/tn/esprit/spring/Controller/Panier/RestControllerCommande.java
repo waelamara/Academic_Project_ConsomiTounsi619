@@ -1,5 +1,7 @@
 package tn.esprit.spring.Controller.Panier;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.Event;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
@@ -124,6 +127,13 @@ public class RestControllerCommande {
 	{
 		return commandeDao.NumCommadeParMOIS();
 	}
+	@GetMapping("/commandeParMois2")
+	//http://localhost:8081/Commande/commandeParMois2
+	public List<Event> NumCommadeParMOIS2()
+	{
+		return commandeDao.NumCommadeParMOIS2();
+	}
+
 	
 	
 
