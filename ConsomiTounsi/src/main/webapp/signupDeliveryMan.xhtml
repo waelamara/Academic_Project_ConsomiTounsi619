@@ -35,6 +35,12 @@
 							id="lastname" p:placeholder="Last Name"
 							value="#{SignupDeliveryController.nom}" />
 					</div>
+					<div class="form-group">
+						<h:inputText type="email" class="form-input" 
+							 p:placeholder="Your username"
+							value="#{SignupDeliveryController.username}" />
+
+					</div>
 
 					
 					<div class="form-group">
@@ -48,13 +54,7 @@
 						<h:inputText type="text" class="form-input" name="name" id="tel"  p:placeholder="Your Phone Number" 
 							value="#{SignupDeliveryController.telephone}" />
 					</div>
-					
-					<div class="form-group">
-						<h:inputText type="email" class="form-input" 
-							 p:placeholder="Your CIN"
-							value="#{SignupDeliveryController.cin}" />
-
-					</div>
+		
 					<div class="form-group">
 
 						<h:selectOneMenu class="form-input" value="#{SignupDeliveryController.sexe}">

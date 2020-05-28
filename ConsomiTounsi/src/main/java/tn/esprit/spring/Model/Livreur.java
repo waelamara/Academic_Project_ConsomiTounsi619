@@ -257,16 +257,16 @@ public class Livreur implements Serializable {
 
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Livreur")
-	private Set<Livraison> Livraison;
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Livreur")
+//	private Set<Livraison> Livraison;
+//
+//	public Set<Livraison> getLivraison() {
+//		return Livraison;
+//	}
 
-	public Set<Livraison> getLivraison() {
-		return Livraison;
-	}
-
-	public void setLivraison(Set<Livraison> livraison) {
-		Livraison = livraison;
-	}
+//	public void setLivraison(Set<Livraison> livraison) {
+//		Livraison = livraison;
+//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

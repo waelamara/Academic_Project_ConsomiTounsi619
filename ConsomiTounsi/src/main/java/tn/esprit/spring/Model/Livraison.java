@@ -38,8 +38,10 @@ public class Livraison implements Serializable {
 	long livreur_id;
 	@Column(name = "DateAffecLivr")
 	// @Temporal(TemporalType.DATE)
+
 	private LocalDate DateAffecLivr;
 	private String Localdistribu;
+
 	
 
 	public long getId() {
@@ -49,6 +51,7 @@ public class Livraison implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 
 	public String getLieux() {
 		return Lieux;
@@ -81,14 +84,30 @@ public class Livraison implements Serializable {
 	public void setCommande_id(long commande_id) {
 		this.commande_id = commande_id;
 	}
+//
+//	public Livreur getLivreur() {
+//		return Livreur;
+//	}
+//
+//	public void setLivreur(Livreur livreur) {
+//		Livreur = livreur;
+//	}
 
-	public Livreur getLivreur() {
-		return Livreur;
+	
+	
+
+
+	public User getDelivery() {
+		return Delivery;
 	}
 
-	public void setLivreur(Livreur livreur) {
-		Livreur = livreur;
+	public void setDelivery(User delivery) {
+		Delivery = delivery;
 	}
+
+	
+
+	
 
 	public Commande getCommande() {
 		return Commande;
@@ -118,6 +137,7 @@ public class Livraison implements Serializable {
 		DateAffecLivr = dateAffecLivr;
 	}
 
+
 	public String getLocaldistribu() {
 		return Localdistribu;
 	}
@@ -126,33 +146,37 @@ public class Livraison implements Serializable {
 		Localdistribu = localdistribu;
 	}
 
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
-			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
-		super();
-		this.id = id;
-		Lieux = lieux;
-		Etat = etat;
-		MoyenTL = moyenTL;
-		this.commande_id = commande_id;
-		this.livreur_id = livreur_id;
-		DateAffecLivr = dateAffecLivr;
-		Livreur = livreur;
-		Commande = commande;
-		Localdistribu=localdistribu;
-	}
+//	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
+//			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
+//		super();
+//		this.id = id;
+//		Lieux = lieux;
+//		Etat = etat;
+//		MoyenTL = moyenTL;
+//		this.commande_id = commande_id;
+//		this.livreur_id = livreur_id;
+//		DateAffecLivr = dateAffecLivr;
+//		Livreur = livreur;
+//		Commande = commande;
+//		Localdistribu=localdistribu;
+//	}
 
 	public Livraison() {
 		super();
 	}
 
-	@ManyToOne
-	Livreur Livreur;
+	
 	@OneToOne
 	Commande Commande;
+	@ManyToOne
+	User Delivery;
+
 
 }
+
 

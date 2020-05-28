@@ -35,13 +35,13 @@
 											<th class="detail-col">Details</th>
 											<th>LastName</th>
 											<th>Name</th>
-											<th class="hidden-480">CIN</th>
+											<th class="hidden-480">Username</th>
 
 											<th><i
 												class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 												Date</th>
+											<th>Adress</th>
 											<th>Email</th>
-											<th>Adresse</th>
 											<th class="hidden-480">Mobile</th>
 											<th class="hidden-480">State</th>
 											<th>Action</th>
@@ -69,19 +69,19 @@
 												</td>
 
 
-												<td><h:outputText value="#{liv.nom}" /></td>
+												<td><h:outputText value="#{liv.lastName}" /></td>
 												<td class="hidden-480"><h:outputText
-														value="#{liv.prenom}" /></td>
-												<td><h:outputText value="#{liv.cin}" /></td>
+														value="#{liv.firstName}" /></td>
+												<td><h:outputText value="#{liv.username}" /></td>
 
 												<td class="hidden-480"><span
 													class="label label-sm label-warning"><h:outputText
-															value="#{liv.datedeNaissance}" /></span></td>
-												<td><h:outputText value="#{liv.email}" /></td>
+															value="#{liv.dateN}" /></span></td>
+												<td><h:outputText value="#{liv.address}" /></td>
 
-												<td><h:outputText value="#{liv.adresse}" /></td>
-												<td><h:outputText value="#{liv.telephone}" /></td>
-												<td><h:outputText value="#{liv.etat}" /></td>
+												<td><h:outputText value="#{liv.email}" /></td>
+												<td><h:outputText value="#{liv.tel}" /></td>
+												
 
 												<td>
 													<div>

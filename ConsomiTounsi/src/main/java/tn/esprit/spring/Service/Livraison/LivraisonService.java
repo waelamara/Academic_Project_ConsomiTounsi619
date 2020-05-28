@@ -1,3 +1,4 @@
+
 package tn.esprit.spring.Service.Livraison;
 
 import java.time.LocalDate;
@@ -101,7 +102,7 @@ public class LivraisonService {
 		L.setEtat(false);
 		Livreur DeliveryM = new Livreur();
 		DeliveryM=LivreurRepository.findparhasard("accepted","free");
-		L.setLivreur(DeliveryM);
+//		L.setLivreur(DeliveryM);
 		LivraisonRepository.save(L);
 	}
 	

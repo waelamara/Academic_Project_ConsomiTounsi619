@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.Event;
 @Repository
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	
@@ -53,4 +54,6 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	
 	@Query(value = "SELECT COUNT(*),MONTH(c.date) FROM commande c WHERE c.status='payee' GROUP BY c.date", nativeQuery = true)
 	public List<Object[]> NumCommadeParMOIS();
+	@Query(value = "SELECT NEW tn.esprit.spring.Model.Event (c.id,COUNT(*),c.date) FROM Commande c GROUP BY c.date")
+	public List<Event> NumCommadeParMOIS2();
 }
