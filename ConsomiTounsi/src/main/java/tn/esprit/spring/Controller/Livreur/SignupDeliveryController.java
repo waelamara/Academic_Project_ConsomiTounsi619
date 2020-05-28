@@ -171,7 +171,7 @@ public class SignupDeliveryController {
 			String appUrl = "";
 			User registered= user;
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
-			navigateTo="loginDelivery.xhtml?faces-redirect=true";
+			navigateTo="login.xhtml?faces-redirect=true";
 			FacesMessage facesMessage =
 
 					new FacesMessage("Registered successfully, please verify your account!");
@@ -186,3 +186,4 @@ public class SignupDeliveryController {
 
 	
 }
+
