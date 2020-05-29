@@ -134,5 +134,19 @@ public class Charite implements Serializable {
 		this.commandeCharite=CommandeCharite;
 
 	}
+	public Charite(String TypeCharite,float MontantPaye) {
+		super();
+		this.typeCharite=TypeCharite;
+		this.montantPaye=MontantPaye;
+		
+
+	}
+	public Charite(String TypeCharite,float MontantPaye,Events idevents) {
+		super();
+		this.typeCharite=TypeCharite;
+		this.montantPaye=MontantPaye;
+		this.idevents=idevents;
+
+	}
 
 }
