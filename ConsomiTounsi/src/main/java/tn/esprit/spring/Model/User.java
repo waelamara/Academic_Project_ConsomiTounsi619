@@ -108,6 +108,7 @@ public class User implements Serializable {
 	private Integer nbMission;
 	@Column(name = "lieuxTravail")
 	private String lieuxTravail;
+	
 
 	public AuthProvider getProvider() {
 		return provider;
@@ -402,6 +403,15 @@ public class User implements Serializable {
 
 	public Set<Charite> getCharite() {
 		return charite;
+	}
+	
+
+	public void setPrime(Integer prime) {
+		this.prime = prime;
+	}
+
+	public void setNbMission(Integer nbMission) {
+		this.nbMission = nbMission;
 	}
 
 	public void setCharite(Set<Charite> charite) {

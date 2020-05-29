@@ -167,6 +167,7 @@ public class SignupDeliveryController {
 		    //fin
 		
 		user.setNbMission(0);
+		user.setEtatD("waiting");
 			userRepository.save(user);
 			String appUrl = "";
 			User registered= user;
