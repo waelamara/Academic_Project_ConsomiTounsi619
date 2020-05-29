@@ -207,8 +207,8 @@ public String addCh() {
 	c.setIdevents(e1);
 	c.setMontantPaye(montantPaye);
 	c.setTypeCharite(typeCharite);*/
-	chariteDAO.saveCharit3(idevents,new Charite(typeCharite, montantPaye, idevents));
-	//chariteDAO.saveCharit(c);
+	chariteDAO.saveCharit3(idevents,new Charite(typeCharite, montantPaye));
+	//chariteDAO.saveCharit(new Charite(typeCharite, montantPaye, idevents));
 	//chariteDAO.saveCharit2(idevents, new Charite(typeCharite, montantPaye));
 		return "/Charity.xhtml?faces-redirect=true";
 	}
