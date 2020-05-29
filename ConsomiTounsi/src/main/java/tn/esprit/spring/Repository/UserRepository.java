@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import tn.esprit.spring.Model.User;
 
@@ -24,5 +24,7 @@ public interface UserRepository extends JpaRepository <User, Long> {
 	/*liste des livreur*/
 	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=4", nativeQuery = true)
 	public List<Long> Listettlivreur();
-	
+	@Modifying
+	@Query(value = "UPDATE `user` SET `etat`=?1 WHERE `user_id`=?2", nativeQuery = true)
+	public void ConfirmerLiv(String etat1,long id);
 }
