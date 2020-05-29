@@ -63,6 +63,8 @@ public class ChariteDAOImpl implements ChariteDAO {
 	CommandeRepository commandeRepository;
 	@Autowired
 	ChariteDAO chariteDAO;
+	@Autowired
+	EventsDAO eventDAO;
 	
 
 	@Override
@@ -247,6 +249,26 @@ public PaymentIntent confirm(Charite Charite,String id,Long idcharite,int iduser
 	}
 	return null;
 	
+}
+
+@Override
+public boolean saveCharit2(long idevents,Charite Charite) {
+	// TODO Auto-generated method stub
+	Events e1 = eventDAO.findOne(idevents);
+	Charite.setIdevents(e1);
+	chariteRepository.save(Charite);
+	return true;
+}
+
+@Override
+public boolean saveCharit3(Events e1,Charite Charite) {
+	// TODO Auto-generated method stub
+	
+	
+	Events e2 = eventDAO.findOne(e1.getId());
+	Charite.setIdevents(e2);
+	chariteRepository.save(Charite);
+	return true;
 }
 
 	
