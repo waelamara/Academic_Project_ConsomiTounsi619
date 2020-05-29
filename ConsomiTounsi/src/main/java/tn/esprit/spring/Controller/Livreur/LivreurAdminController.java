@@ -21,10 +21,6 @@ import tn.esprit.spring.Service.Livreur.LivreurService;
 @Join(path = "/LivreurAdmin", to = "/LivreurAdmin.jsf")
 public class LivreurAdminController {
 	@Autowired
-	LivreurService LivreurService;
-	@Autowired
-	LivreurRepository L;
-	@Autowired
 	UserService UserService;
 	@Autowired
 	UserRepository UserRepository;
