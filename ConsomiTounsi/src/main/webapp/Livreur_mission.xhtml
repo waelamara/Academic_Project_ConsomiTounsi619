@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/TemplateAdmin/template.xhtml">
+	template="/TemplateLivreur/template.xhtml">
 	<ui:define name="LivreurMission">
 		<h:head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -38,15 +38,16 @@
 														<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 														Date
 													</th>
-													<th>Commande</th>
+													<th>From</th>
+													<th>CommandeId</th>
 													<th>Name of client</th>
-                                                    <th>Action</th>
+                                                    
 													
 												</tr>
 											</thead>
 
 											<tbody>
-											 <ui:repeat var="rec" value="#{LivreurMissionController.ListeMissions()}" varStatus="status"> 
+											 <ui:repeat var="rec" value="#{LivreurMissionController.ListeMissions(LoginDeliveryController.userDetails.id)}" varStatus="status"> 
 												<tr>
 													<td class="center">
 														<label class="pos-rel">
@@ -65,17 +66,16 @@
 													</td>
 
 													
-													<td><h:outputText value="#{rec.titre}"/></td>
-													<td class="hidden-480"><h:outputText value="#{rec.description}"/></td>
-													<td><h:outputText value="#{rec.etat}"/></td>
+													<td><h:outputText value="#{rec.lieux}"/></td>
+													<td class="hidden-480"><h:outputText value="#{rec.etat}"/></td>
+													<td class="hidden-480"><h:outputText value="#{rec.dateAffecLivr}"/></td>
 
-													<td class="hidden-480">
-														<span class="label label-sm label-warning"><h:outputText value="#{rec.dateRec}"/></span>
+													<td >
+														<span class="label label-sm label-warning"><h:outputText value="#{rec.localdistribu}"/></span>
 													</td>
 													<td><h:outputText value="#{rec.commande.id}"/></td>
 
-														<td><h:outputText value="#{rec.user.firstName}"/></td>
-														<td><h:outputText value="#{rec.reponse}"/></td>
+												
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
