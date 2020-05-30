@@ -40,7 +40,7 @@
 						        <th>Price doneted</th>
 						        <th>Event</th>
 						        <th>User</th>
-						        <th>Commande</th>
+						        <th>Action</th>
 						        
 						        
 						      </tr>
@@ -72,6 +72,15 @@
 						        <td class="Price doneted"><h:outputText  value="#{charite.montantPaye}"/></td>
 						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
 						     <td class="User"><h:outputText  value="#{charite.iduser.username}"/></td>
+						  <td class="Action">
+						  <h:form>
+						  <h:commandButton class="Charite-remove"
+														action="#{ControllerCharite.delete(charite.id)}"
+														value="Supprimer" />
+												</h:form>
+												</td>
+						     
+						  
 						  
 						     
 						     

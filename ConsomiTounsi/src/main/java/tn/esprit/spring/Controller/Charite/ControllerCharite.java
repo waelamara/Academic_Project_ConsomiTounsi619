@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import tn.esprit.spring.Controller.GestionUser.LoginController;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
@@ -38,10 +39,16 @@ public class ControllerCharite {
 	private String typeCharite;
 	private float montantPaye;
 	private User iduser;
-	
+	private Set<Commande> commandeCharite = new HashSet<>() ;
     private Events idevents ;
     
 	
+	public Set<Commande> getCommandeCharite() {
+		return commandeCharite;
+	}
+	public void setCommandeCharite(Set<Commande> commandeCharite) {
+		this.commandeCharite = commandeCharite;
+	}
 	public User getIduser() {
 		return iduser;
 	}
@@ -82,11 +89,15 @@ public class ControllerCharite {
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
 	}
-	public List<Charite> getAllChariteUser(Authentication authentication,Charite C) {
+	public List<Charite> getAllChariteUser() {
+		
+		LoginController.userDetails.getFirstName();
 		List<Charite> com=new ArrayList<>();
-		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
-		com = chariteDAO.getCharite(u1.getId());
+		//UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
+		com = chariteDAO.getCharite(LoginController.userDetails.getId());
 		return com;
+		
+	
 	}
 	
 	/********** Commande *******************/
@@ -202,20 +213,28 @@ public class ControllerCharite {
 	
 public String addCh() {
 	
-/*	Charite c = new Charite();
-	Events e1 = eventDAO.findOne(idevents);
-	c.setIdevents(e1);
-	c.setMontantPaye(montantPaye);
-	c.setTypeCharite(typeCharite);*/
-	chariteDAO.saveCharit3(idevents,new Charite(typeCharite, montantPaye));
+//	Charite c = new Charite();
+	//Events e = new Events();
+//	Events e1 = eventDAO.findOne(idevents.getId());
+	//c.setIdevents(e1);
+	//c.setMontantPaye(montantPaye);
+	//c.setTypeCharite(typeCharite);
+	System.out.println(typeCharite);
+	System.out.println(montantPaye);
+	Events e1 = eventDAO.findOne(ide);
+	System.out.println(ide);
+	chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye,e1));
+	
 	//chariteDAO.saveCharit(new Charite(typeCharite, montantPaye, idevents));
 	//chariteDAO.saveCharit2(idevents, new Charite(typeCharite, montantPaye));
 		return "/Charity.xhtml?faces-redirect=true";
 	}
+public static Long ide ;
 public String addCh1(Long idevents) {
 	
-	 
-	chariteDAO.saveCharit2(idevents, new Charite(typeCharite, montantPaye));
+	 ide = idevents;
+	chariteDAO.saveCharit2(idevents, new Charite());
+	System.out.println(idevents);
 	return "/AddCharite.xhtml?faces-redirect=true";
 }
 	
@@ -268,6 +287,12 @@ public String addChariteesMoney1(Long iduser,Long idevents,Charite Charite) {
 		return "insufficient space";
 
 	}
+}
+/*********delete******************/
+public void delete(long Id) {
+
+	chariteDAO.deleteChariteById(Id);
+
 }
 	
 

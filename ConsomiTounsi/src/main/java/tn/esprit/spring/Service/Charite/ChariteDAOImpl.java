@@ -270,6 +270,37 @@ public boolean saveCharit3(Events e1,Charite Charite) {
 	chariteRepository.save(Charite);
 	return true;
 }
+@Override
+public boolean saveCharit4(Events e1,Charite Charite,String typeCharite,float montantPaye ) {
+	// TODO Auto-generated method stub
+	
+	
+	//Events e2 = eventDAO.findOne(e1.getId());
+	Charite.setIdevents(e1);
+	Charite.setMontantPaye(montantPaye);
+	Charite.setTypeCharite(typeCharite);
+	chariteRepository.save(Charite);
+	return true;
+}
+
+public int saveCharite5(Long idevents,Charite Charite) {
+	Events events = eventsRepository.findById(idevents).get();
+	//User user= userRepository.findById(iduser).get();
+	Charite.setIdevents(events);
+	
+//	Charite.setIduser(user);
+	chariteRepository.save(Charite);
+	return Charite.getId().intValue();
+	//return chariteRepository.save(Charite);
+
+}
+
+@Override
+public void deleteChariteById(long Id) {
+	chariteRepository.deleteById(Id);
+	
+}
+
 
 	
 }
