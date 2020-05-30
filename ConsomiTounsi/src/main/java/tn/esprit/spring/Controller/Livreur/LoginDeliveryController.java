@@ -146,7 +146,7 @@ public class LoginDeliveryController {
 
 					FacesContext.getCurrentInstance().addMessage("form:btn", facesMessage);
 				} else {
-					navigateTo = "dash.xhtml?faces-redirect=true";
+					navigateTo = "LivreurAcceuil.xhtml?faces-redirect=true";
 					loggedIn = true;
 				}
 			}
