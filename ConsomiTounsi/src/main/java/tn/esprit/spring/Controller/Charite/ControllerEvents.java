@@ -335,7 +335,14 @@ eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipan
 	       return eventDAO.save();
 	    }
 	
-
+	 public static Long idev ;
+	 public String reserveE(Long ideventss) {
+			
+		 idev = ideventss;
+		endroitDAO.saveEndroit(ideventss, new Endroit());
+		System.out.println(ideventss);
+		return "/Endroit.xhtml?faces-redirect=true";
+	}
     
 
 }
