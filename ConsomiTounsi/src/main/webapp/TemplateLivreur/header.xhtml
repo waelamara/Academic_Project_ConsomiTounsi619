@@ -47,7 +47,7 @@
 					</button>
 
 					<div class="navbar-header pull-left">
-						<a href="index.html" class="navbar-brand"> <small> 
+						<a href="#" class="navbar-brand"> <small> 
 						<i
 								class="fa fa-leaf"></i> Delivery Man Space - ConsommiTounsi
 						</small>
@@ -249,7 +249,7 @@
 										</ul>
 									</li>
 
-									<li class="dropdown-footer"><a href="inbox.html"> See
+									<li class="dropdown-footer"><a href="#"> See
 											all messages <i class="ace-icon fa fa-arrow-right"></i>
 									</a></li>
 								</ul></li>
@@ -258,23 +258,18 @@
 								data-toggle="dropdown" href="#" class="dropdown-toggle"> <img
 									class="nav-user-photo" src="dash/images/avatars/user.jpg"
 									alt="Jason's Photo" /> <span class="user-info"> <small>Welcome,</small>
-										Delivery Man
+										#{LoginDeliveryController.userDetails.username}
 								</span> <i class="ace-icon fa fa-caret-down"></i>
 							</a>
 
 								<ul
 									class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-									<li><a href="#"> <i class="ace-icon fa fa-cog"></i>
-											Settings
-									</a></li>
+<!-- 									<li><a href="#"> <i class="ace-icon fa fa-cog"></i> -->
+<!-- 											Settings -->
+<!-- 									</a></li> -->
 
-									<li><a href="profile.html"> <i
-											class="ace-icon fa fa-user"></i> Profile
-									</a></li>
 
-									<li class="divider"></li>
-
-									<li><a href="#"> <i class="ace-icon fa fa-power-off"></i>
+									<li><a href="/acceuil"> <i class="ace-icon fa fa-power-off"></i>
 											Logout
 									</a></li>
 								</ul></li>
@@ -335,18 +330,15 @@
 									Delivery Man Space </span>
 						</a> <b class="arrow"></b></li>
 
-						<li class="active"><a href="#" class="dropdown-toggle"> <i
-								class="fa fa-users"></i> <span class="menu-text"> View Profil </span> <b class="arrow fa fa-angle-down"></b>
+						<li class="active"><a href="profilD" class="dropdown-toggle"> <i
+								class="ace-icon fa fa-user"></i> <span class="menu-text"> View Profil </span> <b class="arrow fa fa-angle-down"></b>
 						</a> <b class="arrow"></b>
 
 							<ul class="submenu">
-								<li class=""><a href="#" class="dropdown-toggle"> <i
-										class="menu-icon fa fa-caret-right"></i> Layouts <b
-										class="arrow fa fa-angle-down"></b>
-								</a> <b class="arrow"></b>
 
-								<li class=""><a href="typography.html"> <i
-										class="menu-icon fa fa-caret-right"></i> Typography
+
+								<li class=""><a href="profilD"> <i
+										class="menu-icon fa fa-caret-right"></i> Profil
 								</a> <b class="arrow"></b></li>
 
 								<li class=""><a href="elements.html"> <i
@@ -398,10 +390,8 @@
 												</a> <b class="arrow"></b></li>
 											</ul></li>
 									</ul></li>
-									</li>
-									</ul>
-									</li>
 									
+									</ul></li>
 
 						<li class=""><a href="/LivreurMission"> <i
 								class="menu-icon fa fa-calendar"></i> <span class="menu-text">
@@ -472,12 +462,12 @@
 					
 				</div>
 			</div>
-				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-				<i id="sidebar-toggle-icon"
-					class="ace-icon fa fa-angle-double-left ace-save-state"
-					data-icon1="ace-icon fa fa-angle-double-left"
-					data-icon2="ace-icon fa fa-angle-double-right"></i>
-			</div>
+<!-- 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse"> -->
+<!-- 				<i id="sidebar-toggle-icon" -->
+<!-- 					class="ace-icon fa fa-angle-double-left ace-save-state" -->
+<!-- 					data-icon1="ace-icon fa fa-angle-double-left" -->
+<!-- 					data-icon2="ace-icon fa fa-angle-double-right"></i> -->
+<!-- 			</div> -->
 		</div>
 		
 		<script src="dash/js/jquery-2.1.4.min.js"></script>
