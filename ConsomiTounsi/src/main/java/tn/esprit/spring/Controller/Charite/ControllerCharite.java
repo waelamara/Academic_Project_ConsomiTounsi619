@@ -25,6 +25,7 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
@@ -73,6 +74,8 @@ public class ControllerCharite {
 	EndroitDAO endroitDAO;
 	@Autowired
 	UserService userDAO;
+	@Autowired
+	private ChariteRepository chariteRepository;
 	
 	public String getTypeCharite() {
 		return typeCharite;
@@ -99,6 +102,16 @@ public class ControllerCharite {
 		
 	
 	}
+	
+	public List<Charite> getChariteCommande(Long id) {
+		List<Long> adis= chariteRepository.getChariteCommande(id);
+		List<Charite> charite=new ArrayList<>();
+		for(Long a : adis){
+			Charite c = chariteDAO.findOne(id);
+			charite.add(c);
+			}
+		return charite;
+		}
 	
 	/********** Commande *******************/
 	

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -24,26 +25,28 @@ public class Endroit implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	private String statu;
 	private String emplacement;
 	private int nbplace;
-	@ManyToOne 
 	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "eventss", referencedColumnName = "id") 
 	private Events eventss;
 	@Transient
 	long event_id;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public long getEvent_id() {
 		return event_id;
 	}
 	public void setEvent_id(long event_id) {
 		this.event_id = event_id;
-	}
-	public Long getId() {
-		return Id;
-	}
-	public void setId(Long id) {
-		Id = id;
 	}
 	
 	public String getStatu() {
@@ -88,7 +91,7 @@ public class Endroit implements Serializable {
 	public Endroit(long id) {
 
 		super();
-		this.Id=id;
+		this.id=id;
 		}
 
 	
