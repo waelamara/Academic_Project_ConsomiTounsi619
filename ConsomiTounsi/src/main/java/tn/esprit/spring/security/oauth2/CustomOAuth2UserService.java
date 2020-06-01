@@ -14,10 +14,12 @@ import org.springframework.util.StringUtils;
 
 import tn.esprit.spring.Model.AuthProvider;
 import tn.esprit.spring.Model.ERole;
+import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.Role;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.RoleRepository;
 import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Service.GestionUser.IImageUserService;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
 import java.util.HashSet;
@@ -35,6 +37,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     
     @Autowired
 	PasswordEncoder encoder;
+    
+	@Autowired
+	IImageUserService iImageUserService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -86,13 +91,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setUsername(oAuth2UserInfo.getEmail());
         user.setLastName(oAuth2UserInfo.getLastName());
         user.setPassword(encoder.encode("12345678"));
+        
         user.setEnabled(true);
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 				.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 		roles.add(userRole);
 		user.setRoles(roles);
-		return userRepository.save(user);
+		User x=userRepository.save(user);
+		ImageUser image = new ImageUser();
+		image.setImage(oAuth2UserInfo.getImageUrl());
+		image.setUserId(user);
+		iImageUserService.ajouterImage(image);
+		return x;
     }
 
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {

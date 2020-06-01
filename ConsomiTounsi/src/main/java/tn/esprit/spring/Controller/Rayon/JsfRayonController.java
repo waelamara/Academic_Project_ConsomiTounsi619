@@ -1,3 +1,4 @@
+
 package tn.esprit.spring.Controller.Rayon;
 
 import java.util.List;
@@ -12,11 +13,13 @@ import tn.esprit.spring.Service.Rayon.IRayonService;
 
 @Controller(value = "JsfRayonController")
 @ELBeanName(value = "JsfRayonController")
-@Join(path = "/rayon", to = "/rayon.jsf")
+@Join(path = "/rayon", to = "rayon.jsf")
 public class JsfRayonController {
 	@Autowired
 	IRayonService rayonDAO;
 
+	
+	
 	
 	public List<Rayon> getAllRayon() {
 		return rayonDAO.getAllRayon();

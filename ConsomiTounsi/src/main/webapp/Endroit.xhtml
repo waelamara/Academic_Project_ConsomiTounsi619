@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="Endroit">
+		<h:head>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+			<title>Tables - Ace Admin</title>
+			<meta name="description" content="Static &amp; Dynamic Tables" />
+			<meta name="viewport"
+				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+			<script src="dash/js/ace-extra.min.js"></script>
+		</h:head>
+		<h:body>
+		
+		
+		
+				<!-- Event Item -->
+				<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<table id="simple-table" class="table  table-bordered table-hover">
+											<thead>
+												<tr>
+												<th class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</th>
+													
+						        
+						        <th>Emplacement</th>
+						        <th>Number of places</th>
+						        <th>Statu</th>
+						        <th>Action</th>
+						        
+						        
+						        
+						      </tr>
+						    </thead>
+
+					
+
+						      
+						    <tbody>
+						   
+						      <h:form id="account">  
+						   <ui:repeat var="endroit" value="#{ControllerEndroit.getAllEndroitD()}" varStatus="status">
+						  
+						       <tr class="text-center">
+						       <td class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</td>
+						        
+						        
+						        <td class="Emplacement">	        	
+			        	<h:outputText  value="#{endroit.emplacement}"/>
+			</td>
+						        
+						        
+					        
+						        <td class="Number of places"><h:outputText  value="#{endroit.nbplace}"/></td>
+						     <td class="Statu"><h:outputText  value="#{endroit.statu}"/></td>
+						     <td class="Action">
+						   <h:commandButton value="Reserve" action="#{ControllerEndroit.reserveEndroit(endroit.id)}" />
+												</td>
+						    
+						  
+						  
+						     
+						     
+							
+						      </tr><!-- END TR-->
+
+	   </ui:repeat>			
+	   </h:form> 				      
+						    </tbody>
+
+		  
+						  </table>
+						</div>  
+					  </div>
+    			</div>
+    		</div>
+    		
+		
+		</h:body>
+
+	</ui:define>
+</ui:composition>

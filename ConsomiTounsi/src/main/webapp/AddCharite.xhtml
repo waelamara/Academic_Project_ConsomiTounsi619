@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/Template/template.xhtml">
+	<ui:define name="AddCharite">
+	
+	<h:head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="description" content="OneTech shop project"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<h:outputStylesheet library="acceuil" name="styles/bootstrap4/bootstrap.min.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/animate.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_styles.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_responsive.css" />
+
+	</h:head>
+
+
+
+		<body>
+
+<center>
+
+			<!-- Event Item -->
+			
+<div class="page-header">
+							<h1>
+								Add Charity
+								<small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+							<section class="signup">            
+            <div class="container">
+                <div class="signup-content">
+
+			<h:form id="ChariteForm" >
+			<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right">Type of Charity</label>
+								<div class="col-sm-9">
+			
+				<h:selectOneMenu class="form-input" value="#{ControllerCharite.typeCharite}">
+   					<f:selectItem itemValue="dons" itemLabel="Dons" />
+   					<f:selectItem itemValue="cagnotte" itemLabel="Cagnotte" />
+				</h:selectOneMenu>
+
+				</div>
+				</div>
+
+				
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">Montant Paye</label>
+
+					<div class="col-sm-9">
+						<h:inputText value="#{ControllerCharite.montantPaye}"
+							></h:inputText>
+						<div class="space-2"></div>
+
+						<div class="help-block" id="input-size-slider"></div>
+					</div>
+				</div>
+
+
+
+				
+				
+				
+
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<h:commandButton class="btn btn-info" value="Save" type="submit"
+							action="#{ControllerCharite.addCh}"></h:commandButton>
+
+
+					</div>
+				</div>
+
+
+			</h:form>
+			</div>
+			</div>
+			</section>
+			
+			<!-- Event Item -->
+			
+								
+							
+							
+
+
+
+
+<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+<script src="acceuil/styles/bootstrap4/popper.js"></script>
+<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="acceuil/plugins/easing/easing.js"></script>
+<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="acceuil/js/shop_custom.js"></script>
+	
+	
+	
+	</center>
+	</body>
+	</ui:define>
+	</ui:composition>

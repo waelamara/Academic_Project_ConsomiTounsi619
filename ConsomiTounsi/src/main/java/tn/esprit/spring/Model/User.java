@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Forum.Commentaire;
+import tn.esprit.spring.Model.Forum.ImageSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Forum.Vote;
 import tn.esprit.spring.Model.Forum.VoteSujet;
@@ -82,6 +83,10 @@ public class User implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	
+	@OneToMany(mappedBy="userId",cascade=CascadeType.ALL)
+	@JsonIgnore
+	private Set<ImageUser> Images;
 
 	@Column(name = "sexe")
 	@Enumerated(EnumType.STRING)
@@ -108,6 +113,7 @@ public class User implements Serializable {
 	private Integer nbMission;
 	@Column(name = "lieuxTravail")
 	private String lieuxTravail;
+	
 
 	public AuthProvider getProvider() {
 		return provider;
@@ -182,6 +188,22 @@ public class User implements Serializable {
 		this.tel = tel;
 		this.sexe = sexe;
 	}
+	
+	public User(String username, String email, String password, String firstName, String lastName, String address,
+			Date dateN, String tel, Sexe sexe, Set<ImageUser> images) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.dateN = dateN;
+		this.tel = tel;
+		this.sexe = sexe;
+		this.Images = images;
+	}
+	
 
 	public User(String username, String email, String password, String firstName, String lastName, String address,
 			String tel) {
@@ -402,6 +424,15 @@ public class User implements Serializable {
 
 	public Set<Charite> getCharite() {
 		return charite;
+	}
+	
+
+	public void setPrime(Integer prime) {
+		this.prime = prime;
+	}
+
+	public void setNbMission(Integer nbMission) {
+		this.nbMission = nbMission;
 	}
 
 	public void setCharite(Set<Charite> charite) {

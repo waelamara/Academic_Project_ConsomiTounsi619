@@ -27,11 +27,11 @@ public class Livraison implements Serializable {
 	private long id;
 
 	@Column(name = "Lieux")
-	private String Lieux;
+	private String lieux;
 	@Column(name = "Etat")
-	private boolean Etat;
+	private boolean etat;
 	@Column(name = "MoyenLivraison")
-	private EMoyenTransportL MoyenTL;
+	private EMoyenTransportL moyenTL;
 	@Transient
 	long commande_id;
 	@Transient
@@ -39,8 +39,8 @@ public class Livraison implements Serializable {
 	@Column(name = "DateAffecLivr")
 	// @Temporal(TemporalType.DATE)
 
-	private LocalDate DateAffecLivr;
-	private String Localdistribu;
+	private LocalDate dateAffecLivr;
+	private String localdistribu;
 
 	
 
@@ -54,27 +54,23 @@ public class Livraison implements Serializable {
 	
 
 	public String getLieux() {
-		return Lieux;
+		return lieux;
 	}
 
 	public void setLieux(String lieux) {
-		Lieux = lieux;
+		this.lieux = lieux;
 	}
 
 	public EMoyenTransportL getMoyenTL() {
-		return MoyenTL;
+		return moyenTL;
 	}
 
 	public void setMoyenTL(EMoyenTransportL moyenTL) {
-		MoyenTL = moyenTL;
+		this.moyenTL = moyenTL;
 	}
 
 	public Boolean getEtat() {
-		return Etat;
-	}
-
-	public void setEtat(Boolean etat) {
-		Etat = etat;
+		return etat;
 	}
 
 	public long getCommande_id() {
@@ -105,20 +101,17 @@ public class Livraison implements Serializable {
 		Delivery = delivery;
 	}
 
-	
-
-	
 
 	public Commande getCommande() {
-		return Commande;
+		return commande;
 	}
 
 	public void setCommande(Commande commande) {
-		Commande = commande;
+		this.commande = commande;
 	}
 
 	public void setEtat(boolean etat) {
-		Etat = etat;
+		this.etat = etat;
 	}
 
 	public long getLivreur_id() {
@@ -130,22 +123,22 @@ public class Livraison implements Serializable {
 	}
 
 	public LocalDate getDateAffecLivr() {
-		return DateAffecLivr;
+		return dateAffecLivr;
 	}
 
 	public void setDateAffecLivr(LocalDate dateAffecLivr) {
-		DateAffecLivr = dateAffecLivr;
+		this.dateAffecLivr = dateAffecLivr;
 	}
 
 
 	public String getLocaldistribu() {
-		return Localdistribu;
+		return localdistribu;
 	}
+
 
 	public void setLocaldistribu(String localdistribu) {
-		Localdistribu = localdistribu;
+		this.localdistribu = localdistribu;
 	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -172,7 +165,7 @@ public class Livraison implements Serializable {
 
 	
 	@OneToOne
-	Commande Commande;
+	Commande commande;
 	@ManyToOne
 	User Delivery;
 

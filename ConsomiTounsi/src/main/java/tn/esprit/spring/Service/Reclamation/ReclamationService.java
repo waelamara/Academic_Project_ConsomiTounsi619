@@ -37,7 +37,6 @@ public class ReclamationService {
 	}
 	/* Ajouter une reclamation sans user id parametre*/
 	public reclamation save1(reclamation rec) {
-		rec.setUser(null);
 		rec.setReponse(null);
 		rec.setTraiter(false); 
 		rec.setEtat("En_attente");

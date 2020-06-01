@@ -30,7 +30,7 @@ public class Events implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	private String titre;
 	@Temporal(TemporalType.DATE)
 	private Date dateE;
@@ -41,9 +41,9 @@ public class Events implements Serializable {
 	@OneToOne
 	@JsonIgnore
 	private Pub publicite;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "eventss")
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "eventss")
 	private Set<Endroit> endroit;
-	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER,mappedBy = "idevents")
+	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE},mappedBy = "idevents")
 	public Set<Charite> charite;
 
 	
@@ -59,11 +59,11 @@ public class Events implements Serializable {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getTitre() {
@@ -152,7 +152,7 @@ public class Events implements Serializable {
 	public Events(long id,String titre, Date DateE, int nbplace, int nbparticipant, Pub publicite, Set<Endroit> endroit,
 			Set<Charite> charite,String description,String image) {
 		super();
-		this.Id=id;
+		this.id=id;
 		this.titre = titre;
 		this.dateE = DateE;
 		this.nbplace = nbplace;
@@ -171,7 +171,7 @@ public class Events implements Serializable {
 	}
 	public Events(long idevents) {
 		super();
-		this.Id=idevents;
+		this.id=idevents;
 
 	}
 	public Events(String titre,String description, Date dateE, int nbplace, int nbparticipant,String image) {
