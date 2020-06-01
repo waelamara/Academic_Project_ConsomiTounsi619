@@ -52,7 +52,7 @@
 						    <tbody>
 						   
 						      <h:form id="account">  
-						   <ui:repeat var="endroit" value="#{ControllerEndroit.getAllEndroit()}" varStatus="status">
+						   <ui:repeat var="endroit" value="#{ControllerEndroit.getAllEndroitD()}" varStatus="status">
 						  
 						       <tr class="text-center">
 						       <td class="center">
@@ -72,7 +72,7 @@
 						        <td class="Number of places"><h:outputText  value="#{endroit.nbplace}"/></td>
 						     <td class="Statu"><h:outputText  value="#{endroit.statu}"/></td>
 						     <td class="Action">
-						   <h:commandButton value="Reserve" action="#{ControllerEndroit.reserveEndroit(endroit.id)}" />
+						   <h:commandButton value="Reserve" action="#{ControllerEndroit.reserve(endroit.id)}" />
 												</td>
 						    
 						  

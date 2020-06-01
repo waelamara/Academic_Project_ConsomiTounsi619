@@ -41,7 +41,7 @@
 
 					<div class="col-sm-9">
 						<h:inputText value="#{ControllerEvents.titre}"
-							placeholder="Name" class="col-xs-10 col-sm-5"></h:inputText>
+							p:placeholder="Title" class="col-xs-10 col-sm-5"></h:inputText>
 
 					</div>
 				</div>
@@ -51,7 +51,7 @@
 
 					<div class="col-sm-9">
 						<p:inputText value="#{ControllerEvents.dateE}" 
-							>
+							p:placeholder="yyyy-MM-dd" styleClass="form-input">
 							<f:convertDateTime pattern="yyyy-MM-dd"/> 
 							</p:inputText>
 							
@@ -68,7 +68,7 @@
 
 					<div class="col-sm-9">
 						<p:inputNumber value="#{ControllerEvents.nbplace}"
-							></p:inputNumber>
+							p:placeholder="Number of places" styleClass="form-input"></p:inputNumber>
 						<div class="space-2"></div>
 
 						<div class="help-block" id="input-size-slider"></div>
@@ -80,7 +80,7 @@
 
 					<div class="col-sm-9">
 						<p:inputNumber value="#{ControllerEvents.nbparticipant}"
-							></p:inputNumber>
+							p:placeholder="Number of participants" styleClass="form-input"></p:inputNumber>
 						<div class="space-2"></div>
 
 						<div class="help-block" id="input-size-slider"></div>
