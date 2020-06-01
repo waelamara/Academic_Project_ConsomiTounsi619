@@ -136,7 +136,7 @@ public class Commande implements Serializable  {
 	}
 	
 	
-	@OneToOne (mappedBy="Commande")
+	@OneToOne (mappedBy="commande")
 	Livraison Livraison;
 
 	public Stream<Commande> stream() {

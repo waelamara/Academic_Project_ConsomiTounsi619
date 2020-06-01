@@ -27,19 +27,21 @@ public class Livraison implements Serializable {
 	private long id;
 
 	@Column(name = "Lieux")
-	private String Lieux;
+	private String lieux;
 	@Column(name = "Etat")
-	private boolean Etat;
+	private boolean etat;
 	@Column(name = "MoyenLivraison")
-	private EMoyenTransportL MoyenTL;
+	private EMoyenTransportL moyenTL;
 	@Transient
 	long commande_id;
 	@Transient
 	long livreur_id;
 	@Column(name = "DateAffecLivr")
 	// @Temporal(TemporalType.DATE)
-	private LocalDate DateAffecLivr;
-	private String Localdistribu;
+
+	private LocalDate dateAffecLivr;
+	private String localdistribu;
+
 	
 
 	public long getId() {
@@ -49,29 +51,26 @@ public class Livraison implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 
 	public String getLieux() {
-		return Lieux;
+		return lieux;
 	}
 
 	public void setLieux(String lieux) {
-		Lieux = lieux;
+		this.lieux = lieux;
 	}
 
 	public EMoyenTransportL getMoyenTL() {
-		return MoyenTL;
+		return moyenTL;
 	}
 
 	public void setMoyenTL(EMoyenTransportL moyenTL) {
-		MoyenTL = moyenTL;
+		this.moyenTL = moyenTL;
 	}
 
 	public Boolean getEtat() {
-		return Etat;
-	}
-
-	public void setEtat(Boolean etat) {
-		Etat = etat;
+		return etat;
 	}
 
 	public long getCommande_id() {
@@ -81,25 +80,38 @@ public class Livraison implements Serializable {
 	public void setCommande_id(long commande_id) {
 		this.commande_id = commande_id;
 	}
+//
+//	public Livreur getLivreur() {
+//		return Livreur;
+//	}
+//
+//	public void setLivreur(Livreur livreur) {
+//		Livreur = livreur;
+//	}
 
-	public Livreur getLivreur() {
-		return Livreur;
+	
+	
+
+
+	public User getDelivery() {
+		return Delivery;
 	}
 
-	public void setLivreur(Livreur livreur) {
-		Livreur = livreur;
+	public void setDelivery(User delivery) {
+		Delivery = delivery;
 	}
+
 
 	public Commande getCommande() {
-		return Commande;
+		return commande;
 	}
 
 	public void setCommande(Commande commande) {
-		Commande = commande;
+		this.commande = commande;
 	}
 
 	public void setEtat(boolean etat) {
-		Etat = etat;
+		this.etat = etat;
 	}
 
 	public long getLivreur_id() {
@@ -111,48 +123,53 @@ public class Livraison implements Serializable {
 	}
 
 	public LocalDate getDateAffecLivr() {
-		return DateAffecLivr;
+		return dateAffecLivr;
 	}
 
 	public void setDateAffecLivr(LocalDate dateAffecLivr) {
-		DateAffecLivr = dateAffecLivr;
+		this.dateAffecLivr = dateAffecLivr;
 	}
+
 
 	public String getLocaldistribu() {
-		return Localdistribu;
+		return localdistribu;
 	}
 
+
 	public void setLocaldistribu(String localdistribu) {
-		Localdistribu = localdistribu;
+		this.localdistribu = localdistribu;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
-			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
-		super();
-		this.id = id;
-		Lieux = lieux;
-		Etat = etat;
-		MoyenTL = moyenTL;
-		this.commande_id = commande_id;
-		this.livreur_id = livreur_id;
-		DateAffecLivr = dateAffecLivr;
-		Livreur = livreur;
-		Commande = commande;
-		Localdistribu=localdistribu;
-	}
+//	public Livraison(long id, String lieux, boolean etat, EMoyenTransportL moyenTL, long commande_id, long livreur_id,
+//			LocalDate dateAffecLivr, tn.esprit.spring.Model.Livreur livreur, tn.esprit.spring.Model.Commande commande,String localdistribu) {
+//		super();
+//		this.id = id;
+//		Lieux = lieux;
+//		Etat = etat;
+//		MoyenTL = moyenTL;
+//		this.commande_id = commande_id;
+//		this.livreur_id = livreur_id;
+//		DateAffecLivr = dateAffecLivr;
+//		Livreur = livreur;
+//		Commande = commande;
+//		Localdistribu=localdistribu;
+//	}
 
 	public Livraison() {
 		super();
 	}
 
-	@ManyToOne
-	Livreur Livreur;
+	
 	@OneToOne
-	Commande Commande;
+	Commande commande;
+	@ManyToOne
+	User Delivery;
+
 
 }
+
 

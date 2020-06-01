@@ -319,13 +319,12 @@ public class ControllerEvents {
 	}
 	//private Events e = new Events(titre, description, dateE, nbplace, nbparticipant, image);
 	public String addEv() {
-		 DateFormat df=new SimpleDateFormat("dd/MM/yyyy");
-	        df.format(dateE);
+	/*	 DateFormat df=new SimpleDateFormat("dd/MM/yyyy");
+	        df.format(dateE);*/
 	        
 		
 		
-	//	eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
-		//eventDAO.saveEvents(new Events(titre, description, dateE, nbplace, nbparticipant,image));
+	
 		
 eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
@@ -335,7 +334,14 @@ eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipan
 	       return eventDAO.save();
 	    }
 	
-
+	/* public static Long idev ;
+	 public String reserveE(Long ideventss) {
+			
+		 idev = ideventss;
+		endroitDAO.saveEndroit(ideventss, new Endroit());
+		System.out.println(ideventss);
+		return "/Endroit.xhtml?faces-redirect=true";
+	}*/
     
 
 }

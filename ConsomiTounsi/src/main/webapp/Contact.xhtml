@@ -106,7 +106,13 @@
 													data-error="Please, write us a message." />
 											</div>
 											<div >
-												<h:commandButton class="button contact_submit_button" value="Save" action="#{ContactController.addreclamation()}"/>
+											    
+											    <h:panelGroup rendered="#{empty loginController.userDetails}">
+											    <a class="button contact_submit_button" href="/login">Save</a>
+											    </h:panelGroup>
+											    <h:panelGroup rendered="#{not empty loginController.userDetails}">
+												<h:commandButton class="button contact_submit_button" value="Save" action="#{ContactController.addreclamation(loginController.userDetails.id)}"/>
+												</h:panelGroup>
 											</div>
 										</h:form>
 

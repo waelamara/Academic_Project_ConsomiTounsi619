@@ -22,7 +22,7 @@ public class UserService {
 	
 	/*Chercher un utilisateur*/
 	public User findOne(long id){
-	return UserRepository.getOne(id);
+	return UserRepository.findById(id).get();
 	}
 	public User save(User u) {
 		return UserRepository.save(u);
@@ -50,7 +50,8 @@ public class UserService {
         VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
     }
-	
+	/*Livreur methodes oussama*/
+  
 	
 	
 

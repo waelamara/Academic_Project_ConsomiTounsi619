@@ -13,6 +13,9 @@ public interface LivraisonRepository extends JpaRepository <Livraison, Long> {
 	@Query(value = "SELECT `produit_id` FROM `ligne_commande` WHERE `commande_id` =?1", nativeQuery = true)
 	public List<String> ListProduit_idcommande(float id_commande);
 	
+	@Query(value = "SELECT * FROM `livraison` WHERE `delivery_user_id`=?1", nativeQuery = true)
+	public List<Livraison> Listedemission(long id_livreur);
+	
 	
 	
 	

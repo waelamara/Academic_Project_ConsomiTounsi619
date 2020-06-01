@@ -6,6 +6,7 @@ import java.util.Set;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Charite.Charite;
+import tn.esprit.spring.Model.Charite.Events;
 
 public interface ChariteDAO {
 	boolean saveCharit(Charite Charite);
@@ -18,6 +19,11 @@ public interface ChariteDAO {
 	public List<Charite> getCharite(Long iduser);
 	Charite findOnes(Long id);
 	public void facturepdf (int id_Charite);
+	public boolean saveCharit2(long idevents,Charite Charite);
+	public boolean saveCharit3(Events e1,Charite Charite);
+	public boolean saveCharit4(Events e1,Charite Charite,String typeCharite,float montantPaye );
+	public int saveCharite5(Long idevents,Charite Charite);
+	void deleteChariteById(long Id);
 
 	
 }

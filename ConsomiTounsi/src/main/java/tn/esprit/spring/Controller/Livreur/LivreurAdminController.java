@@ -1,5 +1,6 @@
 package tn.esprit.spring.Controller.Livreur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,40 +9,55 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import tn.esprit.spring.Model.Livreur;
-import tn.esprit.spring.Repository.LivreurRepository;
-import tn.esprit.spring.Service.Livreur.LivreurService;
+import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Service.GestionUser.UserService;
 
 @Controller(value = "LivreurAdminController")
 @ELBeanName(value = "LivreurAdminController")
 @Join(path = "/LivreurAdmin", to = "/LivreurAdmin.jsf")
 public class LivreurAdminController {
 	@Autowired
-	LivreurService LivreurService;
+	UserService UserService;
 	@Autowired
-	LivreurRepository L;
+	UserRepository UserRepository;
 	
 	/*get all Livreur*/
-	public List<Livreur> getAllliv(){
+	public List<User> getAllliv(){
+		 List<Long> listeliv1=UserRepository.Listettlivreur();
+	
+			List<User> listeliv = new ArrayList();
+		 User u = new User();
+		 for(Long  a : listeliv1)
+		 {
+			 u=UserService.findOne(a);
+			 if((u.getEtatD().equals("waiting")||(u.getEtatD().equals("accepted")))||(u.getEtatD().equals("refused")))
+			 {
+				 listeliv.add(u);
+			 }
+			 
+	
+		 }
 		
-		return LivreurService.findall();
+		 
+		return  listeliv;
 		
 	}
 	/*Accepter le livreur*/
 	@Transactional
 	public String accepterliv(long id){
 		String navigateTo = "/LivreurAdmin.xhtml"; 
-		L.ConfirmerLiv("accepted", id);
+		UserRepository.ConfirmerLiv("accepted", id);
 		return navigateTo;
 		
 		
 	}
 	/*suppr le livreur*/
+	@Transactional
 	public String supprimerliv(long id){
 		
 		String navigateTo = "/LivreurAdmin.xhtml";
-		L.deleteById(id);
+		UserRepository.ConfirmerLiv("deleted",id);
 		return navigateTo;
 	}
 	
@@ -50,7 +66,7 @@ public class LivreurAdminController {
 	public String refuserliv(long id){
 		
 		String navigateTo = "/LivreurAdmin.xhtml";
-		L.ConfirmerLiv("refused", id);
+		UserRepository.ConfirmerLiv("refused", id);
 		return navigateTo;
 	}
 	

@@ -1,7 +1,9 @@
 package tn.esprit.spring.Controller.GestionUser;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.faces.application.FacesMessage;
@@ -10,20 +12,31 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import Utils.AppConstants;
 import tn.esprit.spring.Model.ERole;
+import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.Role;
 import tn.esprit.spring.Model.Sexe;
 import tn.esprit.spring.Model.User;
+import tn.esprit.spring.Model.Produit.ImageProduit;
 import tn.esprit.spring.Repository.RoleRepository;
 import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Service.Forum.IImageSujetService;
+import tn.esprit.spring.Service.GestionUser.IImageUserService;
 import tn.esprit.spring.Service.GestionUser.OnRegistrationCompleteEvent;
+import tn.esprit.spring.Service.GestionUser.UserService;
+import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 import tn.esprit.spring.payload.response.MessageResponse;
 
 @Controller(value = "signupController")
@@ -35,11 +48,19 @@ public class SignupController {
 	UserRepository userRepository;
 	@Autowired
 	RoleRepository roleRepository;
+	
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	PasswordEncoder encoder;
 	@Autowired
 	ApplicationEventPublisher eventPublisher;
+	
+	@Autowired
+	IImageUserService iImageUserService;
+	@Autowired
+	FileStorageServiceImpl fileStorageServiceImpl;
 	
 	private String firstName;
 	private String lastName;
@@ -50,8 +71,13 @@ public class SignupController {
     private Date dateN;
 	private String tel;
  	private Sexe sexe;
+ 	private Sexe[] sexelist;
+ 	private UploadedFiles file;
  	
- 	
+ 	public Sexe[] getSexeList()
+ 	{
+ 		return sexe.values();
+ 	}
 
 	public SignupController() {
 		try
@@ -63,7 +89,7 @@ public class SignupController {
 	}
 
 
-	public String doSignup() {
+	public String doSignup() throws IOException {
 		String navigateTo = "null";
 		if (userRepository.existsByUsername(username)) {
 			FacesMessage facesMessage =
@@ -93,6 +119,17 @@ public class SignupController {
 			roles.add(userRole);
 			user.setRoles(roles);
 			userRepository.save(user);
+			
+			for (UploadedFile f : file.getFiles()) {
+	         	String newFileName = fileStorageServiceImpl.UploadImages(f);
+	         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
+				
+				ImageUser image = new ImageUser();
+				image.setImage(fileDownloadUri);
+				image.setUserId(user);
+				iImageUserService.ajouterImage(image);
+			}
+			
 			String appUrl = "";
 			User registered= user;
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
@@ -106,6 +143,8 @@ public class SignupController {
 		return navigateTo;
 		
 	}
+	
+	
 
 
 	public String getFirstName() {
@@ -196,6 +235,18 @@ public class SignupController {
 	public void setSexe(Sexe sexe) {
 		this.sexe = sexe;
 	}
+
+
+	public UploadedFiles getFile() {
+		return file;
+	}
+
+
+	public void setFile(UploadedFiles file) {
+		this.file = file;
+	}
+
+
 	
 	
 	
