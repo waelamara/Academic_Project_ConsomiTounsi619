@@ -223,16 +223,20 @@ public String addCh() {
 	System.out.println(montantPaye);
 	Events e1 = eventDAO.findOne(ide);
 	System.out.println(ide);
-	chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye,e1));
+	User u2= userDAO.findOne(LoginController.userDetails.getId());
+	 
+	//System.out.println(e1.getDescription());
+	chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye, u2, e1));
 	
 	//chariteDAO.saveCharit(new Charite(typeCharite, montantPaye, idevents));
 	//chariteDAO.saveCharit2(idevents, new Charite(typeCharite, montantPaye));
-		return "/Charity.xhtml?faces-redirect=true";
+		return "/CharityUser.xhtml?faces-redirect=true";
 	}
 public static Long ide ;
 public String addCh1(Long idevents) {
 	
 	 ide = idevents;
+	
 	chariteDAO.saveCharit2(idevents, new Charite());
 	System.out.println(idevents);
 	return "/AddCharite.xhtml?faces-redirect=true";
