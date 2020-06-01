@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/TemplateAdmin/template.xhtml">
+ 	template="/TemplateAdmin/template.xhtml"> 
 	<ui:define name="OrderDetails">
 	<head>
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&amp;display=swap" rel="stylesheet"/>
@@ -27,7 +27,7 @@
           <h:outputStylesheet library="Cart" name="css/style.css" /> 
 
 </head>
-<body>
+<h:body>
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
@@ -46,7 +46,7 @@
 						    </thead>
 						      
 						    <tbody>
-						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(5)}" varStatus="status"> 
+						   <ui:repeat var="panier" value="#{cartController.panierParIdclient(11)}" varStatus="status"> 
 						      <tr class="text-center">
 						       
 		
@@ -140,6 +140,6 @@
 		});
 	</script>
 
-</body>
+</h:body>
 </ui:define>
 </ui:composition>
