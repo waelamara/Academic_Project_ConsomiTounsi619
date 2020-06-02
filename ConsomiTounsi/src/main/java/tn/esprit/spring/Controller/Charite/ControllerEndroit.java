@@ -38,51 +38,7 @@ public class ControllerEndroit {
 	@Autowired
 	private EndroitRepository endroitRepository;
 	
-	private Long Id;
-	private String statu;
-	private String emplacement;
-	private int nbplace;
-	private Events eventss;
-	public Long getId() {
-		return Id;
-	}
-	public void setId(Long id) {
-		Id = id;
-	}
-	public String getStatu() {
-		return statu;
-	}
-	public void setStatu(String statu) {
-		this.statu = statu;
-	}
-	public String getEmplacement() {
-		return emplacement;
-	}
-	public void setEmplacement(String emplacement) {
-		this.emplacement = emplacement;
-	}
-	public int getNbplace() {
-		return nbplace;
-	}
-	public void setNbplace(int nbplace) {
-		this.nbplace = nbplace;
-	}
-	public Events getEventss() {
-		return eventss;
-	}
-	public void setEventss(Events eventss) {
-		this.eventss = eventss;
-	}
-private Endroit en = new Endroit();
 	
-
-	public Endroit getEn() {
-		return en;
-	}
-
-	public void setEn(Endroit en) {
-		this.en = en;
-	}
 
 	
 	public List<Endroit> getAllEndroit() {
@@ -103,33 +59,21 @@ public List<Endroit> getAllEndroitD() {
 		System.out.println(idev);
 		return "/Endroit.xhtml?faces-redirect=true";
 	}
+	@Transactional
 	public String reserveEndroit(Long idendroit) {
 		iden = idendroit;
 		Endroit e2 = endroitDAO.findOne(idendroit);
-		//Endroit en1=endroitRepository.findById(en.getId()).get();
 		Events d1 = eventDAO.findOne(idev);
-		statu = "reserve";
-		emplacement = e2.getEmplacement();
-		nbplace = e2.getNbplace();
-	//	e2.setStatu(statu);
-		//nbplace = e2.getNbplace();
-		//emplacement = e2.getEmplacement();
+		int nb = e2.getNbplace();
 		System.out.println("d1 =" +d1.getId());
 		System.out.println("e2 =" +e2.getId());
-		
+		System.out.println("e2 =" +nb);
 		String message = "this place is reserved ";
 		String message1 = "reserve";
 		String message2 = "number of places less than number of places in its event";
-	//	endroitDAO.saveEndroit(d1.getId(), e2);
-		endroitDAO.saveEndroit(idev, iden, e2);
-		//endroitDAO.reserveEndroit(e2, idev);
-
-		/*int nbPEndroit = e2.getNbplace();
-		int nbPEvent = d1.getNbplace();*/
-	//System.out.println("nb en =" +d1.getNbplace());
-	//	System.out.println("nb ev =" +e2.getNbplace());
-		return "/EventAdmin.xhtml?faces-redirect=true";
-		/*if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
+		int nbPEndroit = e2.getNbplace();
+		int nbPEvent = d1.getNbplace();
+		if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
 			e2.setNbplace(e2.getNbplace());
 			e2.setEmplacement(e2.getEmplacement());
 			e2.setEventss(e2.getEventss());
@@ -140,7 +84,7 @@ public List<Endroit> getAllEndroitD() {
 			return message2;
 		} else {
 			return message ;
-		}*/
+		}
 		
 		
 

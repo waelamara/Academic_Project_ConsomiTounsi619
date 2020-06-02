@@ -29,7 +29,7 @@ import tn.esprit.spring.Service.Panier.FactureImpl;
 
 @Controller(value = "OrderAdminController")
 @ELBeanName(value = "OrderAdminController")
-@Join(path = "/OrderAdmin", to = "/Order2.jsf")
+@Join(path = "/OrderAdmin", to = "/Order.jsf")
 public class OrderAdminController {
 
 	@Autowired
