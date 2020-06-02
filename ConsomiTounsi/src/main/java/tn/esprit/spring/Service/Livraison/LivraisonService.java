@@ -79,7 +79,7 @@ public class LivraisonService {
 		Commande c = CommandeRepository.getOne(id_commande);
 		Livraison L = new Livraison();
 		L.setCommande(c);
-		L.setDateAffecLivr(LocalDate.now());
+		L.setDateAffecLivr(LocalDate.now().plusDays(2));
 		L.setLieux(Lieux);
 		// calcule le mindistance et affectation local de livraison
 		double distanceAriana = calculedistanceArianna(Lieux);
