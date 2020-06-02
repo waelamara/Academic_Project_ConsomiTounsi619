@@ -30,11 +30,13 @@
 
 			        var calendar = new FullCalendar.Calendar(calendarEl, {
 			          plugins: [ 'dayGrid', 'list' ],
+			          
 			          header:{
 	 			        	 center:'title',
 	 			        	 left:'dayGridMonth,list'
 	 			        	 },
 			        events :'http://localhost:8081/Commande/commandeParMois2'
+			        
 			        	
 			        });
 

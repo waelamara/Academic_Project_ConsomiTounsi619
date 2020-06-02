@@ -133,7 +133,9 @@
 <h:commandButton id="btn" class="btn btn-lg" title="signup" value="Save" action="#{profileController.updateUser()}"/>
                           <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                           <h:message style = "color:red" for="btn"/>
-                          
+                       
+                      <div align="right"> <h:commandButton action="#{cartController.cadeauUser(loginController.userDetails.id)}" image="images/cadeau.png"></h:commandButton></div>
+ 
                                	</br>
                             </div>
                       </div>
