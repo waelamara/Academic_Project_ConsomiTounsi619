@@ -141,7 +141,8 @@ public class LoginController extends SimpleUrlAuthenticationSuccessHandler{
 		userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		User U = userRepository.findByUsername(login)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + login));
-System.out.println(LoginController.this.userDetails.getEmail());
+		
+System.out.println(U.getRoles().toArray()[0]);
 		if(authentication.isAuthenticated())
 		{
 			if (!userDetails.getEtatAcc()) {

@@ -74,12 +74,12 @@ public class LivraisonService {
 		return LivraisonRepository.getOne(liv);
 	}
 
-	public void AjouterLivraison(long id_commande, String Lieux) {
+	public void AjouterLivraison(long id_commande, String Lieux,int user_id) {
 
 		Commande c = CommandeRepository.getOne(id_commande);
 		Livraison L = new Livraison();
 		L.setCommande(c);
-		L.setDateAffecLivr(LocalDate.now());
+		L.setDateAffecLivr(LocalDate.now().plusDays(2));
 		L.setLieux(Lieux);
 		// calcule le mindistance et affectation local de livraison
 		double distanceAriana = calculedistanceArianna(Lieux);
@@ -115,6 +115,13 @@ public class LivraisonService {
 		}
 
 		L.setEtat(false);
+		//determiner le nom de l'utilisateur et son num
+		User u = new User();
+		u=UserService.findOne(user_id);
+		String nameuser=u.getFirstName();
+		String teluser=u.getTel();
+		L.setUser_id_demande(nameuser);
+		L.setTel_user_commande(teluser);
 
 		// DeliveryM=LivreurRepository.findparhasard("accepted","free");
 		// L.setLivreur(DeliveryM);

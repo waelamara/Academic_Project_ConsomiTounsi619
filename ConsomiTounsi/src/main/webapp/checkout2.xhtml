@@ -153,7 +153,7 @@
 						value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}"
 						varStatus="status">
 						<h:commandButton value="Confirm location"
-							action="#{chekoutController.affecterfraisLiv(adresse,Commande.id)}" />
+							action="#{chekoutController.affecterfraisLiv(adresse,Commande.id,loginController.userDetails.id)}" />
 					</ui:repeat>
 				</center>
 
