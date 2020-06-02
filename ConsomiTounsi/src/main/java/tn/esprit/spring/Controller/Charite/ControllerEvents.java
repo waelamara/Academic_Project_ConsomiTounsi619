@@ -171,140 +171,15 @@ public class ControllerEvents {
 	public List<Events> findLikeNameM(String titre) {
 		return eventDAO.findLikeName(titre);
 	}
-	
+	/*****evenement du jour*********/
 	public List<Events> getEventsParDate() {
 		return eventDAO.getEventsParDate();
 	}
 	
-	public String addChariteesMoney(Authentication authentication,Long idevents,Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-		User u2= userDAO.findOne(u1.getId());
-		int nb = e1.getNbplace();
-		int nbP = e1.getNbparticipant();
-		float S ;
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("cagnotte"))) {			
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			S=u2.getSolde()-Charite.getMontantPaye();
-			u2.setSolde(S);
-			eventDAO.saveEvents(e1);
-			userDAO.save(u2);
-			chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
-			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-		    Message message = Message.creator(new PhoneNumber("+21629651973"),
-		        new PhoneNumber("+18654261966"), 
-		        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
-		        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
-		        +" , "+"donate money"+" "+Charite.getMontantPaye()+"       "+"thank you so much").create();
-
-		    System.out.println(message.getSid());*/
-			//eventDAO.sendSms();
-			
-			
-			return "Successful Donate money thank you";
-
-		} 
-		
-		else if(u2.getSolde()<Charite.getMontantPaye()){
-			return "your insufficient balance thank you";
-			
-		}
-		
-		
-		else {
-			return "insufficient space";
-
-		}
-}
 	
-	public String addChariteesCommande(Authentication authentication,Long idCommande,Long idevents,Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-		User u2= userDAO.findOne(u1.getId());
-		int nb = e1.getNbplace();
-		int nbP = e1.getNbparticipant();
-		float S ;
-		
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("dons"))) {
-			Commande c1= commandeDao.findOne(idCommande);
-			Set<Commande> c= new HashSet<Commande>();
-			c.add(c1);
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
-			u2.setSolde(S);
-			
-			Charite.setCommandeCharite(c);
-			eventDAO.saveEvents(e1);
-			userDAO.save(u2);
-			commandeDao.save(c1);
-			chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
-			//eventDAO.sendSms();
-			
-			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-		    Message message = Message.creator(new PhoneNumber("+21629651973"),
-		        new PhoneNumber("+18654261966"), 
-		        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
-		        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
-		        +" , "+"donate ordered ID="+" "+c1.getId()+"       "+"thank you so much").create();
-
-		    System.out.println(message.getSid());*/
-			
-			return "Successful Donated a ordered";
-
-		} 
-		
-		
-		
-		else {
-			return "insufficient space";
-
-		}
-}
 	
-	public String reserveEndroit( Long idendroit,
-			Long ideventss, Endroit e) {
-		Endroit e2 = endroitDAO.findOne(e.getId());
-		Events d1 = eventDAO.findOne(e.getEvent_id());
-		String message = "this place is reserved ";
-		String message1 = "Successful";
-		String message2 = "number of places less than number of places in its event";
-
-		int nbPEndroit = e2.getNbplace();
-		int nbPEvent = d1.getNbplace();
-		if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
-			e2.setNbplace(e2.getNbplace());
-			e2.setEmplacement(e2.getEmplacement());
-			e2.setEventss(e2.getEventss());
-			e2.setStatu("Reservé");
-			endroitDAO.saveEndroit(d1.getId(), e2);
-			return message1;
-		} else if (nbPEndroit < nbPEvent) {
-			return message2;
-		} else {
-			return message ;
-		}
-
-	}
+	
+	
 	public List<Endroit> getAllEndroit() {
 		
 		return endroitDAO.getAllEndroitList();
@@ -317,15 +192,8 @@ public class ControllerEvents {
 
 		return endroitDAO.saveEndroit1(Endroit);
 	}
-	//private Events e = new Events(titre, description, dateE, nbplace, nbparticipant, image);
 	public String addEv() {
-	/*	 DateFormat df=new SimpleDateFormat("dd/MM/yyyy");
-	        df.format(dateE);*/
-	        
-		
-		
 	
-		
 eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
@@ -334,14 +202,6 @@ eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipan
 	       return eventDAO.save();
 	    }
 	
-	/* public static Long idev ;
-	 public String reserveE(Long ideventss) {
-			
-		 idev = ideventss;
-		endroitDAO.saveEndroit(ideventss, new Endroit());
-		System.out.println(ideventss);
-		return "/Endroit.xhtml?faces-redirect=true";
-	}*/
-    
+	
 
 }

@@ -143,6 +143,22 @@ public class ChariteDAOImpl implements ChariteDAO {
 		return charite;
 		
 	}
+	@Override
+	public List<Charite> getChariteC(Long iduser) {
+		List<Charite> charite=new ArrayList<>();
+		charite= chariteRepository.getChariteC(iduser);
+		return charite;
+		
+	}
+	@Override
+	public List<Charite> getChariteM(Long iduser) {
+		List<Charite> charite=new ArrayList<>();
+		charite= chariteRepository.getChariteM(iduser);
+		return charite;
+		
+	}
+	
+	
 
 	@Override
 	public Charite findOnes(Long id) {
@@ -270,18 +286,7 @@ public boolean saveCharit3(Events e1,Charite Charite) {
 	chariteRepository.save(Charite);
 	return true;
 }
-@Override
-public boolean saveCharit4(Events e1,Charite Charite,String typeCharite,float montantPaye ) {
-	// TODO Auto-generated method stub
-	
-	
-	//Events e2 = eventDAO.findOne(e1.getId());
-	Charite.setIdevents(e1);
-	Charite.setMontantPaye(montantPaye);
-	Charite.setTypeCharite(typeCharite);
-	chariteRepository.save(Charite);
-	return true;
-}
+
 
 public int saveCharite5(Long idevents,Charite Charite) {
 	Events events = eventsRepository.findById(idevents).get();

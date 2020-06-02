@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.ManyToOne;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -42,6 +43,8 @@ public class ControllerCharite {
 	private User iduser;
 	private Set<Commande> commandeCharite = new HashSet<>() ;
     private Events idevents ;
+    public static Long ide ;
+    public static Long idc ;
     
 	
 	public Set<Commande> getCommandeCharite() {
@@ -92,6 +95,7 @@ public class ControllerCharite {
 	public List<Charite> getAllCharite() {
 		return chariteDAO.getAllChariteList();
 	}
+	@Transactional
 	public List<Charite> getAllChariteUser() {
 		
 		LoginController.userDetails.getFirstName();
@@ -102,7 +106,39 @@ public class ControllerCharite {
 		
 	
 	}
+	@Transactional
+	public List<Charite> getAllChariteUserM() {
+		
+		LoginController.userDetails.getFirstName();
+		List<Charite> com=new ArrayList<>();
+		//UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
+		com = chariteDAO.getChariteM(LoginController.userDetails.getId());
+		return com;
+		
 	
+	}
+	@Transactional
+	public List<Charite> getAllChariteUserC() {
+		
+		LoginController.userDetails.getFirstName();
+		List<Charite> com=new ArrayList<>();
+		//UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
+		com = chariteDAO.getChariteC(LoginController.userDetails.getId());
+		return com;
+		
+	
+	}
+
+	
+	@Transactional
+	public List<Charite> getAllChariteCommande() {
+		return chariteRepository.ListeChariteCommande();
+	}
+	@Transactional
+	public List<Charite> getAllChariteMoney() {
+		return chariteRepository.ListeChariteMoney();
+	}
+	@Transactional
 	public List<Charite> getChariteCommande(Long id) {
 		List<Long> adis= chariteRepository.getChariteCommande(id);
 		List<Charite> charite=new ArrayList<>();
@@ -114,18 +150,15 @@ public class ControllerCharite {
 		}
 	
 	/********** Commande *******************/
-	
-	public String addChariteesCommande(Authentication authentication,Long idCommande,Long idevents,Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-		User u2= userDAO.findOne(u1.getId());
+	@Transactional
+	public String addChariteesCommande() {
+		Events e1 = eventDAO.findOne(ide);
+  			
+		User u2= userDAO.findOne(LoginController.userDetails.getId());
 		int nb = e1.getNbplace();
-		int nbP = e1.getNbparticipant();
-		float S ;
-		
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("dons"))) {
-			Commande c1= commandeDao.findOne(idCommande);
+		int nbP = e1.getNbparticipant();		
+		if ((e1.getNbplace() > 0)) {
+			Commande c1= commandeDao.findOne(idc);
 			Set<Commande> c= new HashSet<Commande>();
 			c.add(c1);
 			e1.setTitre(e1.getTitre());
@@ -137,14 +170,11 @@ public class ControllerCharite {
 			e1.setCharite(e1.getCharite());
 			e1.setDescription(e1.getDescription());
 			e1.setImage(e1.getImage());
-			S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
-			u2.setSolde(S);
-			
-			Charite.setCommandeCharite(c);
+			//Charite.setCommandeCharite(c);
 			eventDAO.saveEvents(e1);
-			userDAO.save(u2);
-			commandeDao.save(c1);
-			chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
+			//userDAO.save(u2);
+			//commandeDao.save(c1);
+			chariteDAO.saveCharitee(e1.getId(), u2.getId(),c1.getId(), new Charite(c, u2, e1));
 			//eventDAO.sendSms();
 			
 			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
@@ -169,83 +199,23 @@ public class ControllerCharite {
 		}
 }
 	
-	/********** money *******************/
-	public String addChariteesMoney(Authentication authentication,Long idevents,Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-		User u2= userDAO.findOne(u1.getId());
-		int nb = e1.getNbplace();
-		int nbP = e1.getNbparticipant();
-		float S ;
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("cagnotte"))) {			
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			S=u2.getSolde()-Charite.getMontantPaye();
-			u2.setSolde(S);
-			eventDAO.saveEvents(e1);
-			userDAO.save(u2);
-			chariteDAO.saveCharite1(e1.getId(), u1.getId(), new Charite(typeCharite, montantPaye));
-			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-		    Message message = Message.creator(new PhoneNumber("+21629651973"),
-		        new PhoneNumber("+18654261966"), 
-		        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
-		        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
-		        +" , "+"donate money"+" "+Charite.getMontantPaye()+"       "+"thank you so much").create();
-
-		    System.out.println(message.getSid());*/
-			//eventDAO.sendSms();
-			
-			
-			return "Successful Donate money thank you";
-
-		} 
-		
-		else if(u2.getSolde()<Charite.getMontantPaye()){
-			return "your insufficient balance thank you";
-			
-		}
-		
-		
-		else {
-			return "insufficient space";
-
-		}
-}
+	
 	
 	/*********************charite*******************************/
 	
 	
 public String addCh() {
 	
-//	Charite c = new Charite();
-	//Events e = new Events();
-//	Events e1 = eventDAO.findOne(idevents.getId());
-	//c.setIdevents(e1);
-	//c.setMontantPaye(montantPaye);
-	//c.setTypeCharite(typeCharite);
+
 	System.out.println(typeCharite);
 	System.out.println(montantPaye);
 	Events e1 = eventDAO.findOne(ide);
 	System.out.println(ide);
 	User u2= userDAO.findOne(LoginController.userDetails.getId());
-	 
-	//System.out.println(e1.getDescription());
 	chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye, u2, e1));
-	
-	//chariteDAO.saveCharit(new Charite(typeCharite, montantPaye, idevents));
-	//chariteDAO.saveCharit2(idevents, new Charite(typeCharite, montantPaye));
 		return "/CharityUser.xhtml?faces-redirect=true";
 	}
-public static Long ide ;
+
 public String addCh1(Long idevents) {
 	
 	 ide = idevents;
@@ -255,15 +225,14 @@ public String addCh1(Long idevents) {
 	return "/AddCharite.xhtml?faces-redirect=true";
 }
 	
-
-public String addChariteesMoney1(Long iduser,Long idevents,Charite Charite) {
-	Events e1 = eventDAO.findOne(idevents);
-	User u2= userDAO.findOne(iduser);
+@Transactional
+public String addChariteesMoney1() {
+	Events e1 = eventDAO.findOne(ide);
+	User u2= userDAO.findOne(LoginController.userDetails.getId());
+	Charite Charite = new Charite();
 	int nb = e1.getNbplace();
 	int nbP = e1.getNbparticipant();
-	float S ;
-	if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-			&&(Charite.getTypeCharite().equals("cagnotte"))) {			
+	if ((e1.getNbplace() > 0)) {			
 		e1.setTitre(e1.getTitre());
 		e1.setDateE(e1.getDateE());
 		e1.setEndroit(e1.getEndroit());
@@ -273,11 +242,9 @@ public String addChariteesMoney1(Long iduser,Long idevents,Charite Charite) {
 		e1.setCharite(e1.getCharite());
 		e1.setDescription(e1.getDescription());
 		e1.setImage(e1.getImage());
-		S=u2.getSolde()-Charite.getMontantPaye();
-		u2.setSolde(S);
 		eventDAO.saveEvents(e1);
-		userDAO.save(u2);
-		chariteDAO.saveCharite1(e1.getId(), u2.getId(), new Charite(typeCharite, montantPaye));
+		//userDAO.save(u2);
+		chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye, u2, e1));
 		/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 	    Message message = Message.creator(new PhoneNumber("+21629651973"),
@@ -290,14 +257,9 @@ public String addChariteesMoney1(Long iduser,Long idevents,Charite Charite) {
 		//eventDAO.sendSms();
 		
 		
-		return "Successful Donate money thank you";
+		return "/AddCharite.xhtml?faces-redirect=true";
 
 	} 
-	
-	else if(u2.getSolde()<Charite.getMontantPaye()){
-		return "your insufficient balance thank you";
-		
-	}
 	
 	
 	else {

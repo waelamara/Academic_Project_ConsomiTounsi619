@@ -37,11 +37,10 @@
 													
 						        
 						        <th>Type of Charity</th>
-						        <th>Price doneted</th>
+						        <th>Commande</th>
 						        <th>Event</th>
 						        <th>User</th>
-						        <th>Commande</th>
-						        <th>Action</th>
+						        
 						        
 						        
 						      </tr>
@@ -53,7 +52,78 @@
 						    <tbody>
 						   
 						      <h:form id="account">  
-						   <ui:repeat var="charite" value="#{ControllerCharite.getAllCharite()}" varStatus="status">
+						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteCommande()}" varStatus="status">
+						  
+						       <tr class="text-center">
+						       <td class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</td>
+						        
+						        
+						        <td class="type of Charity">	        	
+			        	<h:outputText  value="#{charite.typeCharite}"/>
+			</td>
+		<ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande(charite.id)}" varStatus="status">
+			 <td class="Commande">
+						   <h:outputText  value="#{commande.id}"/>
+						    </td>
+						     </ui:repeat>
+						     
+						        
+						        
+					        
+						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
+						     <td class="User"><h:outputText  value="#{charite.iduser.username}"/></td>
+						    
+						    
+						     
+						  
+						     
+						  
+						  
+						     
+						     
+							
+						      </tr><!-- END TR-->
+
+	   </ui:repeat>			
+	   </h:form> 				      
+						    </tbody>
+
+		  
+						  </table>
+						  <table id="simple-table" class="table  table-bordered table-hover">
+											<thead>
+												<tr>
+												<th class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</th>
+													
+						        
+						        <th>Type of Charity</th>
+						             <th>Price doneted</th>
+						        <th>Event</th>
+						        <th>User</th>
+						   
+						       
+						        
+						        
+						      </tr>
+						    </thead>
+
+					
+
+						      
+						    <tbody>
+						   
+						      <h:form id="account">  
+						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteMoney()}" varStatus="status">
 						  
 						       <tr class="text-center">
 						       <td class="center">
@@ -68,19 +138,13 @@
 			        	<h:outputText  value="#{charite.typeCharite}"/>
 			</td>
 						        
-						        
+						       	<td class="Price doneted"><h:outputText  value="#{charite.montantPaye}"/></td> 
 					        
-						        <td class="Price doneted"><h:outputText  value="#{charite.montantPaye}"/></td>
 						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
 						     <td class="User"><h:outputText  value="#{charite.iduser.username}"/></td>
-						     <td class="Commande"><h:outputText  value="#{ControllerCharite.getChariteCommande(charite.id)}"/></td>
-						  <td class="Action">
-						  <h:form>
-						  <h:commandButton class="Charite-remove"
-														action="#{ControllerCharite.delete(charite.id)}"
-														value="Supprimer" />
-												</h:form>
-												</td>
+						    
+						    
+						 
 						     
 						  
 						  
@@ -99,6 +163,7 @@
 					  </div>
     			</div>
     		</div>
+    		
     		
 		
 		</h:body>

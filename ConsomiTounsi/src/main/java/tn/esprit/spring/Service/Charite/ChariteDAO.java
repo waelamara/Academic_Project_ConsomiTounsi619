@@ -21,9 +21,10 @@ public interface ChariteDAO {
 	public void facturepdf (int id_Charite);
 	public boolean saveCharit2(long idevents,Charite Charite);
 	public boolean saveCharit3(Events e1,Charite Charite);
-	public boolean saveCharit4(Events e1,Charite Charite,String typeCharite,float montantPaye );
 	public int saveCharite5(Long idevents,Charite Charite);
 	void deleteChariteById(long Id);
+	public List<Charite> getChariteC(Long iduser);
+	public List<Charite> getChariteM(Long iduser);
 
 	
 }
