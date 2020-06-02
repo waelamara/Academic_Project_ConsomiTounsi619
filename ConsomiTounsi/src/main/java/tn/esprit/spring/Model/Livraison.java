@@ -41,6 +41,8 @@ public class Livraison implements Serializable {
 
 	private LocalDate dateAffecLivr;
 	private String localdistribu;
+	private String user_id_demande; 
+	public String tel_user_commande;
 
 	
 
@@ -95,6 +97,24 @@ public class Livraison implements Serializable {
 
 	public User getDelivery() {
 		return Delivery;
+	}
+
+	
+
+	public String getUser_id_demande() {
+		return user_id_demande;
+	}
+
+	public void setUser_id_demande(String user_id_demande) {
+		this.user_id_demande = user_id_demande;
+	}
+
+	public String getTel_user_commande() {
+		return tel_user_commande;
+	}
+
+	public void setTel_user_commande(String tel_user_commande) {
+		this.tel_user_commande = tel_user_commande;
 	}
 
 	public void setDelivery(User delivery) {

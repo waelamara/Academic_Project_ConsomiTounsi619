@@ -24,12 +24,12 @@ public class ChekoutController {
 		this.adresse = adresse;
 	}
 
-	public void affecterfraisLiv(String adress, long idc) {
+	public void affecterfraisLiv(String adress, long idc,int user_id) {
 
 		float prixfinal = LivraisonService.CalculerFraisLivraison(adresse, idc);
 
 		System.out.println("aaaaaaaaaaaa   :" + prixfinal);
-		LivraisonService.AjouterLivraison(idc, adresse);
+		LivraisonService.AjouterLivraison(idc, adresse,user_id);
 	}
 
 }

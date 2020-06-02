@@ -1,4 +1,4 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.Controller.Livreur;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import Utils.AppConstants;
-import tn.esprit.spring.Controller.Livreur.LoginDeliveryController;
 import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Service.GestionUser.IImageUserService;
