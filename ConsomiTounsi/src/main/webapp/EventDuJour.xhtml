@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
-	<ui:define name="EventCharite">
+	<ui:define name="EventDuJour">
 	
 	<h:head>
 	<meta charset="utf-8"/>
@@ -38,7 +38,7 @@
 							
 				
 									<ui:repeat var="event"
-										value="#{ControllerEvents.getAllEvents()}">
+										value="#{ControllerEvents.getEventsParDate()}">
 										<div class="Event_content">
 										
 											<div
@@ -105,7 +105,7 @@
 												<h:form>
 													<h:commandButton class="Events-remove"
 														action="#{ControllerCharite.addCh1(event.id)}"
-														value="AddPriceCharity" />
+														value="AddCharity" />
 												</h:form>
 											</div>
 											<br> </br>

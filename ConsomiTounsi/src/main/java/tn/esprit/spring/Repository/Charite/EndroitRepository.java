@@ -15,5 +15,7 @@ public interface EndroitRepository extends JpaRepository<Endroit, Long> {
 	
 	@Query(value = "SELECT * FROM t_endroit WHERE statu='disponible'", nativeQuery = true)
 	public List<Endroit> ListeEndroit();
+	@Query(value = "SELECT * FROM `t_endroit` WHERE `eventss`=?1", nativeQuery = true)
+	public List<Endroit> ListeEndroitE(Long idevntss);
 
 }

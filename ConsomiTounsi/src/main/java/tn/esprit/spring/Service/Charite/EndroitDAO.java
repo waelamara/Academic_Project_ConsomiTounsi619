@@ -14,6 +14,7 @@ public interface EndroitDAO {
 	//public String reserveEndroit( Endroit e,Long idevent);
 	public int saveEndroit(Long ideventss, Endroit Endroit);
 	public int saveEndroit(Long ideventss,Long idendroit,Endroit Endroit);
+	List<Endroit> getAllEndroitEv(Long id);
 	
 	
 }

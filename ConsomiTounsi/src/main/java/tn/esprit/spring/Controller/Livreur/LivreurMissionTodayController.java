@@ -12,16 +12,16 @@ import org.springframework.stereotype.Controller;
 import tn.esprit.spring.Model.Livraison;
 import tn.esprit.spring.Repository.LivraisonRepository;
 
-@Controller(value = "LivreurMissionController")
-@ELBeanName(value = "LivreurMissionController")
-@Join(path = "/LivreurMission", to = "/Livreur_mission.jsf")
-public class LivreurMissionController {
+@Controller(value = "LivreurMissionTodayController")
+@ELBeanName(value = "LivreurMissionTodayController")
+@Join(path = "/LivreurMissionToday", to = "/Livreur_missionToday.jsf")
+public class LivreurMissionTodayController {
 	@Autowired
 	LivraisonRepository L;
 	
 	public List<Livraison> ListeMissions(long idD)
 	{  System.out.println("atheya id l livreur"+idD);
-		return L.Listedemission(idD);
+		return L.ListedemissionToday(idD);
 	}
 	
 	@Transactional

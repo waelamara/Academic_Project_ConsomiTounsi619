@@ -43,7 +43,7 @@ public class Events implements Serializable {
 	private Pub publicite;
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "eventss")
 	private Set<Endroit> endroit;
-	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE},mappedBy = "idevents")
+	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE},fetch=FetchType.EAGER,mappedBy = "idevents")
 	public Set<Charite> charite;
 
 	

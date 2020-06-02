@@ -74,6 +74,18 @@
 													</div>
 												</div>
 											</div>
+											<div class="form-group">
+													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
+											
+												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Emplacement
+													:</label>
+												<div class="Event_date" style="color: #000000">
+													<div>
+														<h:outputText value="#{endroit.emplacement}" />
+													</div>
+												</div>
+												</ui:repeat>
+											</div>
 
 											<div>
 												<h:form>

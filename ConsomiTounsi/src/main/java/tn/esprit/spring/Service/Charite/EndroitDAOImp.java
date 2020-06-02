@@ -85,11 +85,21 @@ public class EndroitDAOImp implements EndroitDAO{
 		return e.getId().intValue();
 	}
 
+	
+
+	@Override
+	public List<Endroit> getAllEndroitEv(Long id) {
+		// TODO Auto-generated method stub
+		return endroitRepository.ListeEndroitE(id);
+	}
+
 	@Override
 	public List<Endroit> getAllEndroitDi() {
 		// TODO Auto-generated method stub
 		return endroitRepository.ListeEndroit();
 	}
+
+	
 	
 
 }

@@ -6,7 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/TemplateLivreur/template.xhtml">
-	<ui:define name="LivreurMission">
+	<ui:define name="LivreurMissionToday">
 		<h:head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 			<title>Tables - Ace Admin</title>
@@ -48,7 +48,7 @@
 
 								<tbody>
 									<ui:repeat var="rec"
-										value="#{LivreurMissionController.ListeMissions(LoginDeliveryController.userDetails.id)}"
+										value="#{LivreurMissionTodayController.ListeMissions(LoginDeliveryController.userDetails.id)}"
 										varStatus="status">
 										<tr>
 											<td class="center"><label class="pos-rel"> <input

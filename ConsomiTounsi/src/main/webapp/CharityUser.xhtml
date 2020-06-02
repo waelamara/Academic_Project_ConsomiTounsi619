@@ -52,7 +52,7 @@
 						    <tbody>
 						   
 						      <h:form id="account">  
-						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteUser()}" varStatus="status">
+						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteUserM()}" varStatus="status">
 						  
 						       <tr class="text-center">
 						     
@@ -64,6 +64,58 @@
 						        
 					        
 						        <td class="Price doneted"><h:outputText  value="#{charite.montantPaye}"/></td>
+						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
+						     
+						  
+						     
+						  
+						  
+						     
+						     
+							
+						      </tr><!-- END TR-->
+
+	   </ui:repeat>			
+	   </h:form> 				      
+						    </tbody>
+
+		  
+						  </table>
+						  <table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+													
+						        
+						        <th>Type of Charity</th>
+						        <th>Commande</th>
+						        <th>Event</th>
+						      
+						        
+						        
+						      </tr>
+						    </thead>
+
+					
+
+						      
+						    <tbody>
+						   
+						      <h:form id="account">  
+						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteUserC()}" varStatus="status">
+						  
+						       <tr class="text-center">
+						     
+						        
+						        <td class="type of Charity">	        	
+			        	<h:outputText  value="#{charite.typeCharite}"/>
+			</td>
+						        
+						        
+					        <ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande(charite.id)}" varStatus="status">
+			 <td class="Commande">
+						   <h:outputText  value="#{commande.id}"/>
+						    </td>
+						     </ui:repeat>
 						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
 						     
 						  
