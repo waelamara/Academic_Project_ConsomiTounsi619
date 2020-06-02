@@ -306,6 +306,12 @@ public void deleteChariteById(long Id) {
 	
 }
 
+@Override
+public List<Charite> getAllCharCom(Long id) {
+	// TODO Auto-generated method stub
+	return chariteRepository.getChariteCommande1(id);
+}
+
 
 	
 }

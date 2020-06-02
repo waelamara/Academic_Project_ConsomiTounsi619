@@ -43,6 +43,7 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Repository.Charite.EndroitRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
@@ -78,6 +79,8 @@ public class ControllerEvents {
 	private String description;
 	private String image;
 	private UploadedFiles files;
+	@Autowired
+	private EndroitRepository endroitRepository;
 	
 	
 	
@@ -202,6 +205,9 @@ eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipan
 	       return eventDAO.save();
 	    }
 	
-	
+	 public List<Endroit> getAllEndroitE(Long id) {
+			
+			return endroitDAO.getAllEndroitEv(id);
+		}
 
 }

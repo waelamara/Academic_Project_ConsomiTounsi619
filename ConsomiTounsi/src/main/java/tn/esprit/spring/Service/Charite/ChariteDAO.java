@@ -6,6 +6,7 @@ import java.util.Set;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Charite.Charite;
+import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
 
 public interface ChariteDAO {
@@ -25,6 +26,7 @@ public interface ChariteDAO {
 	void deleteChariteById(long Id);
 	public List<Charite> getChariteC(Long iduser);
 	public List<Charite> getChariteM(Long iduser);
+	List<Charite> getAllCharCom(Long id);
 
 	
 }

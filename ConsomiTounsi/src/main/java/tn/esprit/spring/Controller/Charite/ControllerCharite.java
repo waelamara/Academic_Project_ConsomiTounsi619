@@ -129,7 +129,10 @@ public class ControllerCharite {
 	
 	}
 
-	
+	@Transactional
+	public List<Charite> getAllChariteCo(Long id) {
+		return chariteDAO.getAllCharCom(id);
+	}
 	@Transactional
 	public List<Charite> getAllChariteCommande() {
 		return chariteRepository.ListeChariteCommande();
