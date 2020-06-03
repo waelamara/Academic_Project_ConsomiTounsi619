@@ -119,50 +119,65 @@ public class LoginDeliveryController {
 	public String doLogin() {
 
 		String navigateTo = "null";
-		try {
-			authentication = authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(login, password));
+		try
+		{
+		 authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(login, password));
 
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			String jwt = jwtUtils.generateJwtToken(authentication);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		User U = userRepository.findByUsername(login)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + login));
+		
+System.out.println("Role"+U.getRoles().stream().findFirst().get().getId());
+		if(authentication.isAuthenticated())
+		{
+			if (!userDetails.getEtatAcc()) {
+				FacesMessage facesMessage =
 
-			userDetails = (UserDetailsImpl) authentication.getPrincipal();
-			User U = userRepository.findByUsername(login)
-					.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + login));
-			System.out.println(LoginDeliveryController.this.userDetails.getEmail());
-			if (authentication.isAuthenticated()) {
-				if (!userDetails.getEtatAcc()) {
-					FacesMessage facesMessage =
+						new FacesMessage("Error: Your account is Disabled by Admin!");
 
-							new FacesMessage("Error: Your account is Disabled by Admin!");
-
-					FacesContext.getCurrentInstance().addMessage("form:btn", facesMessage);
-				}
-
-				else if (!U.isEnabled()) {
-					FacesMessage facesMessage =
-
-							new FacesMessage("Please Confirm your Account, We've sent you a confirmation email");
-
-					FacesContext.getCurrentInstance().addMessage("form:btn", facesMessage);
-				} else {
-					navigateTo = "LivreurAcceuil.xhtml?faces-redirect=true";
-					loggedIn = true;
-				}
+						FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
 			}
-		} catch (BadCredentialsException badCredentialsException) {
-			FacesMessage facesMessage =
+			
+			else if (!U.isEnabled()) {
+				FacesMessage facesMessage =
 
-					new FacesMessage("Login Failed: please check your username/password and try again.");
+						new FacesMessage("Please Confirm your Account, We've sent you a confirmation email");
 
-			FacesContext.getCurrentInstance().addMessage("form:btn", facesMessage);
-		} catch (UsernameNotFoundException e) {
-			FacesMessage facesMessage =
-
-					new FacesMessage("Login Failed: please check your username/password and try again.");
-
-			FacesContext.getCurrentInstance().addMessage("form:btn", facesMessage);
+						FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
+			}
+			else if(U.getRoles().stream().findFirst().get().getId()==4)
+			{
+				navigateTo = "LivreurAcceuil.xhtml?faces-redirect=true";
+			loggedIn = true; 
+			}
+			else
+			{
+				navigateTo = "Login.xhtml?faces-redirect=true";
+				userDetails=null;
+				loggedIn = false; 
+			}
+			
+			
 		}
+		}
+		catch (BadCredentialsException badCredentialsException)  {
+			FacesMessage facesMessage =
+
+					new FacesMessage("Login Failed: please check your username/password and try again.");
+
+					FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
+		}
+		catch (UsernameNotFoundException e) {
+			FacesMessage facesMessage =
+
+					new FacesMessage("Login Failed: please check your username/password and try again.");
+
+					FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
+		}	
 		return navigateTo;
 	}
 
@@ -172,7 +187,7 @@ public class LoginDeliveryController {
 		userDetails = null;
 		loggedIn = false;
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/login.xhtml?faces-redirect=true";
+		return "/LivreurAcceuil.xhtml?faces-redirect=true";
 	}
 
 }

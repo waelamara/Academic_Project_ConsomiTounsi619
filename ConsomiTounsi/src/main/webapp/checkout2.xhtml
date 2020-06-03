@@ -70,8 +70,8 @@
 								<!-- script of map -->
 								<script type="text/javascript">
 									var theme = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
-									var lat = 8.619543;
-									var lon = 0.82;
+									var lat = 36;
+									var lon = 10;
 									var alt = 481;
 									var macarte = null;
 									//var trace = new Array();
@@ -91,7 +91,7 @@
 										L.tileLayer(theme, {
 											// Il est toujours bien de laisser le lien vers la source des données
 											//attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
-											minZoom : 1,
+											minZoom : 8,
 											maxZoom : 20
 										}).addTo(macarte);
 										macarte.on('click', onMapClick);
@@ -392,6 +392,9 @@
 						 <h:commandButton  class="btn btn-primary py-3 px-4" 
 									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
 									value="PalceOrder" />
+									<h:commandButton  class="btn btn-primary py-3 px-4" 
+									action="#{ControllerCharite.addChCom(Commande.id)}"
+									value="AddTOCharity" />
 									</ui:repeat>
 								
 								</div>

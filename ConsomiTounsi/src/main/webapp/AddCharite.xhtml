@@ -45,19 +45,6 @@
                 <div class="signup-content">
 
 			<h:form id="ChariteForm" >
-			<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right">Type of Charity</label>
-								<div class="col-sm-9">
-			
-				<h:selectOneMenu class="form-input" value="#{ControllerCharite.typeCharite}">
-   					<f:selectItem itemValue="dons" itemLabel="dons" />
-				</h:selectOneMenu>
-
-				</div>
-				</div>
-
-				
-
 				<div class="form-group">
 					<label class="col-sm-3 control-label no-padding-right">Montant Paye</label>
 
@@ -69,6 +56,76 @@
 						<div class="help-block" id="input-size-slider"></div>
 					</div>
 				</div>
+				<div class="row">
+
+									<div class="col-md-6 mb-3">
+										<label for="cc-name">Credit card number</label>
+					
+<!-- required="true" requiredMessage="Date Début -->
+
+<!-- Obligatoire"/>> -->
+<h:message for="Carta"></h:message>
+										<h:inputText id="Carta" value="#{ControllerCharite.carta}" requiredMessage="424242424" required="true"/>
+
+								
+										
+
+									</div>
+
+									<div class="col-md-6 mb-3">
+										<!-- 										<label for="cc-number">expMonth</label> -->
+										<h:outputText value="expMonth" />
+
+
+										<!--  <input type="text" -->
+										<!-- 											class="form-control" id="cc-number" placeholder="" -->
+										<!-- 											required="" /> -->
+										<h:inputText value="#{ControllerCharite.expMonth}" >
+
+</h:inputText>
+
+										<!-- 										<div class="invalid-feedback">Credit card number is required</div> -->
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<h:outputText value="expYear"/>
+
+
+										<!-- 											<input type="text" -->
+										<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
+										<!-- 												required="" /> -->
+										<h:inputText value="#{ControllerCharite.expYear}" ></h:inputText>
+										<!-- 										<div class="invalid-feedback">Expiration date required</div> -->
+									</div>
+
+									<div class="col-md-6 mb-3">
+										<label for="cc-expiration">CVV</label>
+										<!-- 											<input type="text" -->
+										<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
+										<h:inputText value="#{ControllerCharite.cvc}" required="true"></h:inputText>
+
+										<!-- 										<div class="invalid-feedback">Security code required</div> -->
+									</div>
+								</div>
+<!-- 							</div> -->
+							<div class="col-md-6 mb-3">
+
+								<div class="payment-icon">
+
+									<ul>
+
+									   <li><img class="img-fluid" src="Cart/images2/payment-icon/1.png" alt=""/></li>
+                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/2.png" alt=""/></li>
+                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/3.png" alt=""/></li>
+                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/5.png" alt=""/></li>
+                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/7.png" alt=""/></li>
+									</ul>
+<!-- 								</div> -->
+							
+							</div>
+								
+								</div>
 
 
 
@@ -79,7 +136,7 @@
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
 						<h:commandButton class="btn btn-info" value="Save" type="submit"
-							action="#{ControllerCharite.addChariteesMoney1}"></h:commandButton>
+							action="#{ControllerCharite.addChariteesMoney2(carta,expMonth,expYear,cvc)}"></h:commandButton>
 
 
 					</div>
@@ -87,6 +144,9 @@
 
 
 			</h:form>
+	
+					
+				
 			</div>
 			</div>
 			</section>

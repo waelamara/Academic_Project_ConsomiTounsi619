@@ -20,6 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 
 import tn.esprit.spring.Controller.GestionUser.LoginController;
 import tn.esprit.spring.Model.Commande;
@@ -45,8 +49,43 @@ public class ControllerCharite {
     private Events idevents ;
     public static Long ide ;
     public static Long idc ;
+    private String carta;
+	
+	private int expMonth;
+	
+	private int expYear;
+	
+	private String cvc;
+	
+   // private static List<Long> ch ;
+    
     
 	
+	
+	public String getCarta() {
+		return carta;
+	}
+	public void setCarta(String carta) {
+		this.carta = carta;
+	}
+	public int getExpMonth() {
+		return expMonth;
+	}
+	public void setExpMonth(int expMonth) {
+		this.expMonth = expMonth;
+	}
+	public int getExpYear() {
+		return expYear;
+	}
+	public void setExpYear(int expYear) {
+		this.expYear = expYear;
+	}
+	public String getCvc() {
+		return cvc;
+	}
+	public void setCvc(String cvc) {
+		this.cvc = cvc;
+	}
 	public Set<Commande> getCommandeCharite() {
 		return commandeCharite;
 	}
@@ -144,19 +183,36 @@ public class ControllerCharite {
 	@Transactional
 	public List<Charite> getChariteCommande(Long id) {
 		List<Long> adis= chariteRepository.getChariteCommande(id);
+		System.out.println(adis);
 		List<Charite> charite=new ArrayList<>();
 		for(Long a : adis){
 			Charite c = chariteDAO.findOne(id);
 			charite.add(c);
 			}
+		System.out.println(charite);
 		return charite;
+		
+		}
+	@Transactional
+	public List<Charite> getChariteCommande2(Long id) {
+		Long adis= chariteRepository.getChariteCommande3(id);
+		System.out.println(adis);
+		List<Charite> charite=new ArrayList<>();
+		//for(Long a : adis){
+			Charite c = chariteDAO.findOne(id);
+			charite.add(c);
+			Commande c1= commandeDao.findOne(adis);
+			//}
+		System.out.println(charite);
+		return charite;
+		
 		}
 	
 	/********** Commande *******************/
 	@Transactional
-	public String addChariteesCommande() {
-		Events e1 = eventDAO.findOne(ide);
-  			
+	public String addChariteesCommande(Long idevents) {
+		Events e1 = eventDAO.findOne(idevents);
+		Charite ch= new Charite();
 		User u2= userDAO.findOne(LoginController.userDetails.getId());
 		int nb = e1.getNbplace();
 		int nbP = e1.getNbparticipant();		
@@ -175,9 +231,14 @@ public class ControllerCharite {
 			e1.setImage(e1.getImage());
 			//Charite.setCommandeCharite(c);
 			eventDAO.saveEvents(e1);
+			ch.setIdevents(e1);
+			ch.setIduser(u2);
+			ch.setCommandeCharite(c);
+			//ch.setMontantPaye(montantPaye);
+			ch.setTypeCharite("dons");
 			//userDAO.save(u2);
 			//commandeDao.save(c1);
-			chariteDAO.saveCharitee(e1.getId(), u2.getId(),c1.getId(), new Charite(c, u2, e1));
+			chariteDAO.saveCharitee(e1.getId(), u2.getId(),c1.getId(), ch);
 			//eventDAO.sendSms();
 			
 			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
@@ -190,7 +251,7 @@ public class ControllerCharite {
 
 		    System.out.println(message.getSid());*/
 			
-			return "Successful Donated a ordered";
+			return "/CharityUser.xhtml?faces-redirect=true";
 
 		} 
 		
@@ -207,17 +268,7 @@ public class ControllerCharite {
 	/*********************charite*******************************/
 	
 	
-public String addCh() {
-	
 
-	System.out.println(typeCharite);
-	System.out.println(montantPaye);
-	Events e1 = eventDAO.findOne(ide);
-	System.out.println(ide);
-	User u2= userDAO.findOne(LoginController.userDetails.getId());
-	chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye, u2, e1));
-		return "/CharityUser.xhtml?faces-redirect=true";
-	}
 
 public String addCh1(Long idevents) {
 	
@@ -227,12 +278,40 @@ public String addCh1(Long idevents) {
 	System.out.println(idevents);
 	return "/AddCharite.xhtml?faces-redirect=true";
 }
+public String addChCom(Long idcommande) {
 	
+	 idc = idcommande;
+	// chariteDAO.saveCharitCom(idcommande, new Charite());
+	System.out.println("id commande ="+idc);
+	
+	return "/EventCharite.xhtml?faces-redirect=true";
+}
+	
+
+/*********delete******************/
+public void delete(long Id) {
+
+	chariteDAO.deleteChariteById(Id);
+
+}
+/***paiement*/
+//http://localhost:8081/event/pay/4/4242424242424242/11/2026/123
+public String  Pay( Long idchar, String carta1,
+		int expMonth1, int expYear1, String cvc1)
+				throws AuthenticationException, InvalidRequestException, CardException, StripeException
+			{
+			String navigateTo  = "Charity.xhtml?faces-redirect=true";
+				chariteDAO.Pay(idchar,carta,expMonth,expYear,cvc);
+				return navigateTo;
+				
+			}
 @Transactional
-public String addChariteesMoney1() {
+public String addChariteesMoney2(String carta1,
+		int expMonth1, int expYear1, String cvc1)
+				throws AuthenticationException, InvalidRequestException, CardException, StripeException{
 	Events e1 = eventDAO.findOne(ide);
 	User u2= userDAO.findOne(LoginController.userDetails.getId());
-	Charite Charite = new Charite();
+	Charite ch= new Charite();
 	int nb = e1.getNbplace();
 	int nbP = e1.getNbparticipant();
 	if ((e1.getNbplace() > 0)) {			
@@ -246,8 +325,13 @@ public String addChariteesMoney1() {
 		e1.setDescription(e1.getDescription());
 		e1.setImage(e1.getImage());
 		eventDAO.saveEvents(e1);
+		ch.setIdevents(e1);
+		ch.setIduser(u2);
+		ch.setMontantPaye(montantPaye);
+		ch.setTypeCharite("cagnotte");
 		//userDAO.save(u2);
-		chariteDAO.saveCharite5(ide, new Charite(typeCharite, montantPaye, u2, e1));
+		chariteDAO.saveCharite5(ide,ch);
+		chariteDAO.Pay(ch.getId(), carta, expMonth, expYear, cvc);
 		/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 	    Message message = Message.creator(new PhoneNumber("+21629651973"),
@@ -260,21 +344,15 @@ public String addChariteesMoney1() {
 		//eventDAO.sendSms();
 		
 		
-		return "/AddCharite.xhtml?faces-redirect=true";
+		return "/CharityUser.xhtml?faces-redirect=true";
 
 	} 
 	
 	
 	else {
-		return "insufficient space";
+		return "/AddCharite.xhtml?faces-redirect=true";
 
 	}
-}
-/*********delete******************/
-public void delete(long Id) {
-
-	chariteDAO.deleteChariteById(Id);
-
 }
 	
 

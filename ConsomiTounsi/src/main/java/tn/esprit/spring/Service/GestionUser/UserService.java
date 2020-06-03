@@ -1,10 +1,12 @@
 package tn.esprit.spring.Service.GestionUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.VerificationToken;
 import tn.esprit.spring.Model.Produit.Produit;
@@ -35,6 +37,23 @@ public class UserService {
 	public  User updateUser(User user)	{
 		return UserRepository.save(user);
 		
+	}
+	
+	/*get all Users*/
+	public List<User> getAllUsers(){
+		 List<Long> listUsersId=UserRepository.ListeUsers();
+	
+			List<User> listUsers = new ArrayList();
+		 User u = new User();
+		 for(Long  a : listUsersId)
+		 {
+			 u=findOne(a);
+			// if(u.getEtatAcc().equals("waiting"))
+			// {
+				 listUsers.add(u);
+			// }
+		 }
+		return  listUsers;		
 	}
 	
 	public User getUser(String verificationToken) {
