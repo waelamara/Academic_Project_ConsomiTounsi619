@@ -27,6 +27,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=4", nativeQuery = true)
 	public List<Long> Listettlivreur();
 
+	/* liste des users */
+	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=1", nativeQuery = true)
+	public List<Long> ListeUsers();
+	
 	@Modifying
 	@Query(value = "UPDATE `user` SET `etat`=?1 WHERE `user_id`=?2", nativeQuery = true)
 	public void ConfirmerLiv(String etat1, long id);

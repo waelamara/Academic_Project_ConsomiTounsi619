@@ -20,6 +20,7 @@ public class ImageUserController {
 	
 	public ImageUser getImageUser(Long idUser){
 		ImageUser img=imageUserService.findImageUser(idUser);
+		System.out.println(img);
 		return img;
 	}
 
