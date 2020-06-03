@@ -96,7 +96,7 @@ public class CadeauUserImpl implements ICadeauUser {
 		return random;
 	}
 	
-	
+	@Transactional
 	public String CadeauUser(Long idUser) throws MessagingException
 	{
 		User u = userRepository.getOne(idUser);  

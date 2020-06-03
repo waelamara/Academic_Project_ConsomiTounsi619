@@ -68,7 +68,7 @@
 			</td>
 		<ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande(charite.id)}" varStatus="status">
 			 <td class="Commande">
-						   <h:outputText  value="#{commande.id}"/>
+						   <h:outputText  value="#{commande.commandeCharite}"/>
 						    </td>
 						     </ui:repeat>
 						     

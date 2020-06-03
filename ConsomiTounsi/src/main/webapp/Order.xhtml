@@ -41,8 +41,9 @@
 <!--          <f:ajax execute="search" render="output"></f:ajax>  -->
     </h:commandButton>
     <h:panelGroup rendered="#{not empty OrderAdminController.CommandeparType(OrderAdminController.type)}">
-  
+ 
   <div class="row">
+  
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 								<div class="row">
@@ -116,6 +117,7 @@
 															</button>
 
 															<button class="btn btn-xs btn-danger">
+												
 																<i class="ace-icon fa fa-trash-o bigger-120"></i>
 															</button>
 
@@ -312,7 +314,7 @@
 </tbody>
 
 </table>
-  <h:form><nav class="blog-pagination justify-content-center d-flex"> -->
+  <h:form><nav class="blog-pagination justify-content-center d-flex"> 
                             <ul class="pagination">
                                 <li class="page-item">
                                   <h:commandLink action="#{OrderAdminController.paginator.prev()}" class="page-link" aria-label="Previous">

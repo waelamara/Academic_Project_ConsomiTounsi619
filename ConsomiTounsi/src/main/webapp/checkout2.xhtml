@@ -392,6 +392,9 @@
 						 <h:commandButton  class="btn btn-primary py-3 px-4" 
 									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
 									value="PalceOrder" />
+									<h:commandButton  class="btn btn-primary py-3 px-4" 
+									action="#{ControllerCharite.addChCom(Commande.id)}"
+									value="AddTOCharity" />
 									</ui:repeat>
 								
 								</div>

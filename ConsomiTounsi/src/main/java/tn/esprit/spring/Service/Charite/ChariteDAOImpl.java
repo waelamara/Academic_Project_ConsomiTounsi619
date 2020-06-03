@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -34,7 +35,11 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.stripe.Stripe;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Token;
@@ -50,6 +55,7 @@ import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Repository.Charite.ChariteRepository;
 import tn.esprit.spring.Repository.Charite.EventsRepository;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 
 @Service("ChariteDAO")
 public class ChariteDAOImpl implements ChariteDAO {
@@ -65,6 +71,8 @@ public class ChariteDAOImpl implements ChariteDAO {
 	ChariteDAO chariteDAO;
 	@Autowired
 	EventsDAO eventDAO;
+	@Autowired
+	CommandeImpl commandeDao;
 	
 
 	@Override
@@ -174,104 +182,23 @@ public class ChariteDAOImpl implements ChariteDAO {
 	@Value("${stripe.keys.secret}")
 	private String secretKey;
 
-	@PostConstruct
-	public void init() {
-		Stripe.apiKey = secretKey;
-	}
-public String createStripeCustomer(int idUser) {
-		
-		// stripe key
-		Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
-
-		User user = userRepository.findById((long) idUser).get();
-		Map<String, Object> params = new HashMap<>();
-		params.put("description", "My First Test Customer (created for API docs)");
-		params.put("email", user.getEmail());
-
-		// affichage id du customer
-		try {
-			Customer customer = Customer.create(params);
-
-			System.out.println("create customer id: {}");
-			return customer.getId();
-		} catch (StripeException e) {
-
-			throw new RuntimeException(e);
-		}
-		// TODO Auto-generated method stub
-//		return null;
-	}
-public String createCustumorStripe(String customerId, String carta, String expMonth, String expYear, String cvc)
-		throws StripeException {
-	// TODO Auto-generated method stub
-	//return null;
-	// stripe key
-	Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
-
-	Customer customer = Customer.retrieve(customerId);
-
-	Map<String, Object> cardParam = new HashMap<String, Object>();
-	cardParam.put("number", carta);
-	cardParam.put("exp_month", expMonth);
-	cardParam.put("exp_year", expYear);
-	cardParam.put("cvc", cvc);
-
-	Map<String, Object> tokenParam = new HashMap<String, Object>();
-	tokenParam.put("card", cardParam);
-
-	Token token = Token.create(tokenParam);
-
-	Map<String, Object> source = new HashMap<String, Object>();
-	source.put("source", token.getId());
-
-	customer.getSources().create(source);
-	return token.getId();
-}
-public String paymentIntent(ChargeRequest chargerequest)throws StripeException{
-	// TODO Auto-generated method stub
-	//return null;
-	// stripe key
-	Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
-
-	// `source` is obtained with Stripe.js; see
-	// https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
-	List<String> paymentMethodTypes = new ArrayList();
-	paymentMethodTypes.add("card");
 	
-	
-	Map<String, Object> params = new HashMap<>();
-	params.put("amount",chargerequest.getAmount());
-	params.put("currency", chargerequest.getCurrency());
-	params.put("description", chargerequest.getDescription());
-	params.put("payment_method_types", paymentMethodTypes);
-	
-	PaymentIntent p = PaymentIntent.create(params);
-	p.getId();
-	return p.getId();
-}
-public PaymentIntent confirm(Charite Charite,String id,Long idcharite,int iduser) throws StripeException {
-	Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
-	PaymentIntent paymentIntent = PaymentIntent.retrieve(id);
-	Map<String, Object> params = new HashMap<>();
-	params.put("payment_method", "pm_card_visa");
-	// params.put("customer", "cus_H1OvsnwEn1KX36");
-	Charite c =chariteRepository.getOne(idcharite);
-	if(c.getIduser().getId()==iduser)
-	{
-	paymentIntent.confirm(params);
-	chariteDAO.saveCharit(Charite);
-	
-	return paymentIntent;
-	}
-	return null;
-	
-}
-
 @Override
 public boolean saveCharit2(long idevents,Charite Charite) {
 	// TODO Auto-generated method stub
 	Events e1 = eventDAO.findOne(idevents);
 	Charite.setIdevents(e1);
+	chariteRepository.save(Charite);
+	return true;
+}
+@Override
+public boolean saveCharitCom(Long idcommande,Charite Charite) {
+	// TODO Auto-generated method stub
+	Commande c1= commandeDao.findOne(idcommande);
+	Set<Commande> c= new HashSet<Commande>();
+	c.add(c1);
+	//Events e1 = eventDAO.findOne(idcommande);
+	Charite.setCommandeCharite(c);
 	chariteRepository.save(Charite);
 	return true;
 }
@@ -312,6 +239,31 @@ public List<Charite> getAllCharCom(Long id) {
 	return chariteRepository.getChariteCommande1(id);
 }
 
-
+@Transactional
+public void Pay(Long idchar, String carta, int expMonth, int expYear, String cvc) throws AuthenticationException, InvalidRequestException, CardException, StripeException{
+	Charite  c= chariteDAO.findOne(idchar);
 	
+		
+			Map<String, Object> params = new HashMap<>();
+	        Map<String, Object> tokenParams = new HashMap<>();
+	        Map<String, Object> cardParams = new HashMap<>();
+	        Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
+	        cardParams.put("number", carta);
+	        cardParams.put("exp_month", expMonth);
+	        cardParams.put("exp_year", expYear);
+	        cardParams.put("cvc", cvc);
+	        int nMontant= (int) (c.getMontantPaye()*100);
+	        tokenParams.put("card", cardParams);
+	        Token token =Token.create(tokenParams);
+	      //  System.out.println(token.getCard().getId());
+	        if (token.getId()!=null){
+	        params.put("amount", nMontant);
+	        params.put("description", "test de stipe");
+	        params.put("currency", "eur");
+	        params.put("source", token.getId());
+	        Charge charge = Charge.create(params);
+	        
+	        }
+}
+
 }

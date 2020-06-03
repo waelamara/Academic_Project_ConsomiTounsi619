@@ -116,6 +116,7 @@ public class SignupController {
 			Set<Role> roles = new HashSet<>();
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+			
 			roles.add(userRole);
 			user.setRoles(roles);
 			userRepository.save(user);
