@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.RoleRepository;
@@ -142,7 +144,7 @@ public class LoginController extends SimpleUrlAuthenticationSuccessHandler{
 		User U = userRepository.findByUsername(login)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + login));
 		
-System.out.println(U.getRoles().toArray()[0]);
+System.out.println("Role"+U.getRoles().stream().findFirst().get().getId());
 		if(authentication.isAuthenticated())
 		{
 			if (!userDetails.getEtatAcc()) {
@@ -160,11 +162,22 @@ System.out.println(U.getRoles().toArray()[0]);
 
 						FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
 			}
-			else 
+			else if(U.getRoles().stream().findFirst().get().getId()==1)
 			{
 				navigateTo = "acceuil.xhtml?faces-redirect=true";
 			loggedIn = true; 
 			}
+			else if(U.getRoles().stream().findFirst().get().getId()==2)
+			{
+				navigateTo = "LoginDeliveryController.xhtml?faces-redirect=true";
+				userDetails=null;
+				loggedIn = false; 
+			}
+			else
+			{
+				
+			}
+			
 		}
 		}
 		catch (BadCredentialsException badCredentialsException)  {
@@ -183,6 +196,7 @@ System.out.println(U.getRoles().toArray()[0]);
 		}	
 		return navigateTo;
 		}
+	
 	
 	///////////////
 	
