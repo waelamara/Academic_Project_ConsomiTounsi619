@@ -30,6 +30,10 @@ import org.springframework.security.core.Authentication;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -485,6 +489,12 @@ public class RestControllerEvents {
 		@RequestMapping(value = "/EventJour")
 		public List<Events> getEventsParDate() {
 			return eventDAO.getEventsParDate();
+		}
+		//http://localhost:8081/event/pay/4/4242424242424242/11/2026/123
+		@RequestMapping(value = "/pay/{id}/{carta}/{expMonth}/{expYear}/{cvc}")
+		public void getEventsPaie(@PathVariable("id") Long idchar,@PathVariable("carta") String carta,
+				@PathVariable("expMonth") int expMonth, @PathVariable("expYear") int expYear,@PathVariable("cvc") String cvc) throws AuthenticationException, InvalidRequestException, CardException, StripeException{
+			chariteDAO.Pay(idchar, carta, expMonth, expYear, cvc);
 		}
 
 		

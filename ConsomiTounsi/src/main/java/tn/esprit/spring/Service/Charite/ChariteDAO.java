@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
+
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
@@ -27,6 +32,8 @@ public interface ChariteDAO {
 	public List<Charite> getChariteC(Long iduser);
 	public List<Charite> getChariteM(Long iduser);
 	List<Charite> getAllCharCom(Long id);
+	public boolean saveCharitCom(Long idcommande,Charite Charite);
+	public void Pay(Long idchar, String carta, int expMonth, int expYear, String cvc) throws AuthenticationException, InvalidRequestException, CardException, StripeException ;
 
 	
 }

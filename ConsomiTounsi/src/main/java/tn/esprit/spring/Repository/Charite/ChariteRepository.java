@@ -20,7 +20,8 @@ public interface ChariteRepository extends JpaRepository<Charite, Long>{
 	@Query(value="select * from t_charite where iduser_user_id=?1 ",nativeQuery=true)
 	public Charite getChariteUser(Long id);
 	
-	
+	@Query(value="SELECT commande_charite_id FROM t_charite_commande_charite WHERE `charite_id`=?1",nativeQuery=true)
+	public Long getChariteCommande3(Long id);
 	@Query(value="SELECT commande_charite_id FROM t_charite_commande_charite WHERE `charite_id`=?1",nativeQuery=true)
 	public List<Long> getChariteCommande(Long id);
 	@Query(value = "SELECT * FROM t_charite WHERE `type_charite`='dons'", nativeQuery = true)
