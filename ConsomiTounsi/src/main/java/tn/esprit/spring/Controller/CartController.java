@@ -231,6 +231,7 @@ public void deleteLigne(long idLigneCommande) {
 			{
 				return cadeauUserImpl.CadeauUser(idUser);
 			}
+		
 			
 			
 

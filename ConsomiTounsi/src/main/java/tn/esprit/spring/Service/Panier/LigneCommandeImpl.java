@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.Commande;
@@ -218,6 +219,11 @@ public class LigneCommandeImpl implements ILigneCommande {
 	 public int numProduitPanier(Long iduser)
 	 {
 		return  ligneCommandeRepository.numProduitPanier(iduser) ;
+	 }
+	 @Transactional
+	 public List<lignecommandeproduit> panierParIdCommande(long idCommande)
+	 {
+		 return ligneCommandeRepository.panierParIdCommande(idCommande);
 	 }
 		
 	
