@@ -121,7 +121,7 @@ public class ControllerPub {
 		return "Successful";
 	}
 
-	public String EditPublicite(Pub p) {
+	/*public String EditPublicite(Pub p) {
 
 		p.setNom(p.getNom());
 		p.setDateDebut(p.getDateDebut());
@@ -132,7 +132,7 @@ public class ControllerPub {
 		publiciteDAO.save(p);
 		return "Successful";
 
-	}
+	}*/
 	@Transactional
 	public String addPub() {
 		Events e = eventDAO.findOne(ide);
