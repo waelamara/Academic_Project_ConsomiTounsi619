@@ -10,10 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.servlet.ServletException;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -38,7 +40,10 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
 import Utils.AppConstants;
+import tn.esprit.spring.Controller.Forum.RepeatPaginator;
+import tn.esprit.spring.Controller.GestionUser.LoginController;
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
@@ -81,6 +86,7 @@ public class ControllerEvents {
 	private UploadedFiles files;
 	@Autowired
 	private EndroitRepository endroitRepository;
+	 public static Long ide ;
 	
 	
 	
@@ -197,7 +203,7 @@ public class ControllerEvents {
 	}
 	public String addEv() {
 	
-eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
+		eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
 	 public String save() {
@@ -209,5 +215,43 @@ eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipan
 			
 			return endroitDAO.getAllEndroitEv(id);
 		}
-
+	
+	 public String updateEvent(Events e,Long idevents,String titre,Date dateE, int nbplace,
+			 int nbparticipant,String description, String image) {
+			
+		 ide = idevents;
+			System.out.println(idevents);
+		/* return eventDAO.updateEvent(e, e.getId(), e.getTitre(),
+				e.getDateE(), e.getNbplace(), e.getNbparticipant(), 
+				e.getDescription(), e.getImage());*/
+			return "/UpdateEvent.xhtml?faces-redirect=true";
+		
+	}
+	 public String updateEventImage()
+		{
+			
+			Events u = new Events();
+			u=eventDAO.findOne(ide);
+			for (UploadedFile f : files.getFiles()) {
+	         	String newFileName = fileStorageServiceImpl.UploadImages(f);
+	         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
+				
+				
+				u.setImage(fileDownloadUri);
+				eventDAO.saveEvents(u);
+			}
+			
+			return "EventAdmin.xhtml?faces-redirect=true";
+			
+		}
+	 private RepeatPaginator paginatorRec;
+	 
+		public RepeatPaginator getPaginatorRec() {
+			return paginatorRec;
+		}
+		public void setPaginatorRec(RepeatPaginator paginatorRec) {
+			this.paginatorRec = paginatorRec;
+		}
+		
 }
+

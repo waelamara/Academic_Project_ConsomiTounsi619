@@ -1,5 +1,6 @@
 package tn.esprit.spring.Service.Charite;
 
+import java.util.Date;
 import java.util.List;
 
 import org.primefaces.model.file.UploadedFiles;
@@ -24,5 +25,7 @@ public interface EventsDAO {
 	public void removeOldItems();
 	List<Events> getEventsParDate();
 	public String save();
+	public String updateEvent(Events e,Long idevents,String titre,Date dateE, int nbplace,
+			 int nbparticipant,String description, String image);
 
 }

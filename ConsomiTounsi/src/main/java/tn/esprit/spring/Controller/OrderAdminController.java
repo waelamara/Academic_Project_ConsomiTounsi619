@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,7 @@ import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Panier.FactureImpl;
+import tn.esprit.spring.Service.Panier.LigneCommandeImpl;
 
 
 @Controller(value = "OrderAdminController")
@@ -40,6 +43,9 @@ public class OrderAdminController {
 	
 	@Autowired
 	ServletContext context;
+	
+	@Autowired
+	LigneCommandeImpl ligneCommandeDao;
 	
 	private String type;
 	
@@ -80,10 +86,32 @@ public void facturepdf (long id_facture)
 {
 	factureDAO.facturepdf(id_facture);
 }
+
+
 public List<Commande> CommandeparType(String types) {
 	System.out.print(type);
 	return CommandeDao.CommandeparType(type);
-
 }
+
+public List<lignecommandeproduit> panierParIdCommande(long idCommande)
+{
+	 return ligneCommandeDao.panierParIdCommande(outcome());
+}
+String a;
+private String getCountryFromJSF(FacesContext context) {
+    Map<String, String> parameters = context.getExternalContext().getRequestParameterMap();
+    return parameters.get("idCommande");
+}
+ public Long outcome() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        a = getCountryFromJSF(context);
+        System.out.println(a);
+        return Long.parseLong(a);
+        
+    }
+
+
+
+
 
 }

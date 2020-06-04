@@ -7,6 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:hf="http://highfaces.org"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="listusers">
@@ -36,7 +37,9 @@
 <!-- Default box -->
 
 <center><h1>List Of Users</h1></center>
-
+<hf:chart type="pie" title="Users Selon Sexe" alpha3d="45" beta3d="0">
+    <hf:chartSerie name="Homme" value="#{chartController.sexes}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+  </hf:chart>  
 <div class="card card-solid">
     <div class="card-body pb-0">
         <div class="row d-flex align-items-stretch">

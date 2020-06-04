@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:hf="http://highfaces.org"
+	xmlns:b="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	>
+	<h:head>
+		<script src="login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	
+	<script src="login/vendor/bootstrap/js/popper.js"></script>
+	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	
+	</h:head>
+	
+	<h:body>
+	  	<div ><h1>#{chartController.getUserSelonSexe()}</h1></div>
+	
+ <hf:chart type="pie" title="Users Selon Sexe" alpha3d="45" beta3d="0">
+    <hf:chartSerie name="Sexe" value="#{chartController.sexes}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+  </hf:chart>  
+	
+	</h:body>
+	
+	</ui:composition>

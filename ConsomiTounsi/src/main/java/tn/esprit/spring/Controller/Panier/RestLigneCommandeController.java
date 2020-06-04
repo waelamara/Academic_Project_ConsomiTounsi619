@@ -86,5 +86,10 @@ public class RestLigneCommandeController {
 		 System.out.println(ligneCommandeDao.numProduitPanier(iduser));
 		 return a;
 	 }
+	@GetMapping("PanierParidCommande/{idCommande}")
+	 public List<lignecommandeproduit> panierParIdCommande(@PathVariable(value = "idCommande")long idCommande)
+	 {
+		 return ligneCommandeDao.panierParIdCommande(idCommande);
+	 }
 	 
 }

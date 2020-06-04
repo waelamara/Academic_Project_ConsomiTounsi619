@@ -44,6 +44,8 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Lo
 	
 	@Query(value = "SELECT  NEW tn.esprit.spring.Model.lignecommandeproduit(l.id,p.id,p.nomProduit,l.quantity,p.prix,l.quantity*p.prix,c.montant) FROM LigneCommande l join l.commande c  join l.produit p   WHERE c.idUser.id=:idc  and c.id=:idf")
 	public List<lignecommandeproduit> factureParIdclient(@Param("idc")long i,@Param("idf")long idf);
+	@Query(value = "SELECT  NEW tn.esprit.spring.Model.lignecommandeproduit(l.id,p.id,p.nomProduit,l.quantity,p.prix,l.quantity*p.prix,c.montant) FROM LigneCommande l join l.commande c  join l.produit p   WHERE c.id.id=:idc")
+	public List<lignecommandeproduit> panierParIdCommande(@Param("idc")long i);
 	
 
 }
