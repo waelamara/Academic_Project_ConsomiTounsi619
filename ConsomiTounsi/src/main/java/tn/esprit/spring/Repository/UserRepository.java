@@ -38,6 +38,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT `user_id` FROM `user` WHERE `etat`=?1 and `disponible`=?2 and `lieux_travail`=?3 ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	public long findparhasard(String etat,String dispo,String lieuxTravail);	
 	
-
+	/* Selon Sexe */
+	@Query(value = "SELECT COUNT(*) FROM user WHERE `sexe`=?1", nativeQuery = true)
+	public int NombreUsersSelonSexe(String Sexe);
 
 }
