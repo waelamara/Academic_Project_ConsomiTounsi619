@@ -25,7 +25,7 @@ import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Controller(value = "ControllerEventsUpdate")
 @ELBeanName(value = "ControllerEventsUpdate")
-@Join(path = "/update", to = "UpdateEvent.jsf")
+@Join(path = "/UpdateEvent", to = "/UpdateEvent.jsf")
 public class ControllerEventsUpdate {
 	@Autowired
 	EventsDAO eventDAO;
@@ -129,17 +129,34 @@ public class ControllerEventsUpdate {
 			return endroitDAO.getAllEndroitEv(id);
 		}
 	
-	 public String updateEvent(Events e,Long idevents,String titre,Date dateE, int nbplace,
-			 int nbparticipant,String description) {
+	 public String updateEvent(Events e,Long idevents) {
 			
 		 ide = idevents;
 			System.out.println(idevents);
+			this.description=e.getDescription();
+			this.dateE=e.getDateE();
+			this.nbparticipant=e.getNbparticipant();
+			this.titre=e.getTitre();
+			this.nbplace=e.getNbplace();
+			this.image=e.getImage();
 		/* return eventDAO.updateEvent(e, e.getId(), e.getTitre(),
 				e.getDateE(), e.getNbplace(), e.getNbparticipant(), 
 				e.getDescription(), e.getImage());*/
 		return "/UpdateEvent.xhtml?faces-redirect=true";
 		
 	}
+	/* public String DisplayProduits(Produit p){
+			
+			this.idToUpdate=p.getId();
+			this.nomProduit=p.getNomProduit();
+			this.description=p.getDescription();
+			this.prix=p.getPrix();
+			this.poids=p.getPoids();
+			this.prixAchat=p.getPrixAchat();
+			this.barcode=p.getBarcode();
+			
+			return "/pages/AdminFormProduit.xhtml?faces-redirect=true";
+		}*/
 	 @Transactional
 	 public String updateE()
 		{
@@ -153,7 +170,7 @@ public class ControllerEventsUpdate {
 			e.setEndroit(e.getEndroit());
 			e.setCharite(e.getCharite());
 			e.setImage(e.getImage());
-			eventDAO.saveEvents(e);
+			eventDAO.saveEventss(e, files);
 			FacesMessage facesMessage =
 
 					new FacesMessage("Events Updated with Sucess");

@@ -96,10 +96,10 @@
 													<h:commandButton class="btn btn-xs btn-success"
 														action="#{ControllerEndroit.reserveE(event.id)}"
 														value="Reserve" />
-												
-													<h:commandButton class="btn btn-xs btn-warning"
-														action="#{ControllerEventsUpdate.updateEvent(event,event.id,event.titre,event.dateE, event.nbplace,event.nbparticipant,event.description)}"
-														value="Update" />
+														<h:commandButton class="btn btn-xs btn-warning"
+														value="Update" action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
+													
+													
 												</h:form>
 											</div>
 											<br> </br>
