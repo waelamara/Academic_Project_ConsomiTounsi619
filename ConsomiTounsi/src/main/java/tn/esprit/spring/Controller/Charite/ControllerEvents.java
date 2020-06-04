@@ -216,34 +216,8 @@ public class ControllerEvents {
 			return endroitDAO.getAllEndroitEv(id);
 		}
 	
-	 public String updateEvent(Events e,Long idevents,String titre,Date dateE, int nbplace,
-			 int nbparticipant,String description, String image) {
-			
-		 ide = idevents;
-			System.out.println(idevents);
-		/* return eventDAO.updateEvent(e, e.getId(), e.getTitre(),
-				e.getDateE(), e.getNbplace(), e.getNbparticipant(), 
-				e.getDescription(), e.getImage());*/
-			return "/UpdateEvent.xhtml?faces-redirect=true";
-		
-	}
-	 public String updateEventImage()
-		{
-			
-			Events u = new Events();
-			u=eventDAO.findOne(ide);
-			for (UploadedFile f : files.getFiles()) {
-	         	String newFileName = fileStorageServiceImpl.UploadImages(f);
-	         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
-				
-				
-				u.setImage(fileDownloadUri);
-				eventDAO.saveEvents(u);
-			}
-			
-			return "EventAdmin.xhtml?faces-redirect=true";
-			
-		}
+	 
+	
 	 private RepeatPaginator paginatorRec;
 	 
 		public RepeatPaginator getPaginatorRec() {

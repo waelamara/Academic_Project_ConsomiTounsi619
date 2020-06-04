@@ -7,8 +7,11 @@ import java.util.List;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
+import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,18 +37,22 @@ import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Controller(value = "ControllerPub")
 @ELBeanName(value = "ControllerPub")
+@Join(path = "/AddPub", to = "/AddPub.jsf")
 public class ControllerPub {
 	@Autowired
 	PubDAO publiciteDAO;
 	@Autowired
 	EventsDAO eventDAO;
 	private Long Id;
-	private String Nom;
-	@Temporal (TemporalType.DATE)
-	private Date DateDebut;
-	@Temporal (TemporalType.DATE)
-	private Date DateFin;
-	private String Image;
+	private String nom;
+	
+	private Date dateDebut;
+	
+	private Date dateFin;
+	private String image;
+	private UploadedFiles files;
+	 public static Long ide ;
+	
 	
 	
 	public Long getId() {
@@ -57,51 +64,52 @@ public class ControllerPub {
 	}
 
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 
 	public Date getDateDebut() {
-		return DateDebut;
+		return dateDebut;
 	}
 
 	public void setDateDebut(Date dateDebut) {
-		DateDebut = dateDebut;
+		this.dateDebut = dateDebut;
 	}
 
 	public Date getDateFin() {
-		return DateFin;
+		return dateFin;
 	}
 
 	public void setDateFin(Date dateFin) {
-		DateFin = dateFin;
+		this.dateFin = dateFin;
 	}
 
 	public String getImage() {
-		return Image;
+		return image;
 	}
 
 	public void setImage(String image) {
-		Image = image;
+		this.image = image;
 	}
 
-	public String AjouterPub(Long idevents, Pub p)
-			throws JsonParseException, JsonMappingException, IOException, ParseException {
-
-		Events e1 = eventDAO.findOne(idevents);
-
-		publiciteDAO.save(p);
-		e1.setPublicite(p);
-		eventDAO.saveEvents(e1);
-
-		String dateDebut = p.getDateDebut().toString();
-		String dateFin = p.getDateFin().toString();
-		return "Successful" + " " + publiciteDAO.DifferenceJourDateDebutEtDateFin(dateDebut, dateFin) + " " + "days";
+	public UploadedFiles getFiles() {
+		return files;
 	}
 
+	public void setFiles(UploadedFiles files) {
+		this.files = files;
+	}
+
+	 public String addPubEvent(Long idevents) {
+			
+		 ide = idevents;
+			System.out.println(idevents);
+		return "/AddPub.xhtml?faces-redirect=true";
+		
+	}
 	public List<Pub> AfficherPub() {
 		return publiciteDAO.findAll();
 	}
@@ -124,6 +132,13 @@ public class ControllerPub {
 		publiciteDAO.save(p);
 		return "Successful";
 
+	}
+	@Transactional
+	public String addPub() {
+		Events e = eventDAO.findOne(ide);
+		
+		publiciteDAO.savePub(ide, new Pub(nom, dateDebut, dateFin, e), files);
+		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
 
 }
