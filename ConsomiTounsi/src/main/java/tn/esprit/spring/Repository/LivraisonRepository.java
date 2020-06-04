@@ -24,6 +24,9 @@ public interface LivraisonRepository extends JpaRepository <Livraison, Long> {
 	//	
 	@Query(value = "SELECT * FROM `livraison` c WHERE `delivery_user_id`=?1 AND YEAR(c.date_affec_livr)-YEAR(NOW())=0 AND MONTH(NOW())-MONTH(c.date_affec_livr)=0  AND DAY(NOW())-DAY(c.date_affec_livr)=0", nativeQuery = true)
 	public List<Livraison> ListedemissionToday(long id_livreur);
+	//liste mission par mois
+	@Query(value = "SELECT * FROM `livraison` c WHERE `delivery_user_id`=?1 AND YEAR(c.date_affec_livr)-YEAR(NOW())=0 AND MONTH(NOW())-MONTH(c.date_affec_livr)=0 ", nativeQuery = true)
+	public List<Livraison> ListedemissionMonth(long id_livreur);
 	
 	
 	

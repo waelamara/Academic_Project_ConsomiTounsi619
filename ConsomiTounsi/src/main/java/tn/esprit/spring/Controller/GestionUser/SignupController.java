@@ -119,6 +119,8 @@ public class SignupController {
 			
 			roles.add(userRole);
 			user.setRoles(roles);
+			user.setNbMission(0);
+			user.setNbMission(0);
 			userRepository.save(user);
 			
 			for (UploadedFile f : file.getFiles()) {

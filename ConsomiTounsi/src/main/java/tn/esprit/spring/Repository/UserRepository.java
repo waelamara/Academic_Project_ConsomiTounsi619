@@ -41,5 +41,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	/* Selon Sexe */
 	@Query(value = "SELECT COUNT(*) FROM user WHERE `sexe`=?1", nativeQuery = true)
 	public int NombreUsersSelonSexe(String Sexe);
+	/* Change disponibilité livreur */
+	@Modifying
+	@Query(value = "UPDATE `user` SET `disponible`=?1 WHERE `user_id`=?2", nativeQuery = true)
+	public void ChangeDispo(String Dispo, long id);
+	//Top 10 Stat liv
+	@Query(value = "SELECT `user_id` FROM `user`  ORDER BY `nb_mission` DESC LIMIT 10", nativeQuery = true)
+	public List<Long> Top10nbLivreur();
+	
+    //SELECT `user_id` FROM `user`  ORDER BY `nb_mission` DESC LIMIT 10
 
 }
