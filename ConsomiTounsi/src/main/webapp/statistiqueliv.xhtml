@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:hf="http://highfaces.org"
+	xmlns:b="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	>
+	<h:head>
+		<script src="login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	
+	<script src="login/vendor/bootstrap/js/popper.js"></script>
+	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	
+	</h:head>
+	
+	<h:body>
+	  	<div ><h1>#{StatistiqueLivController.StatTop10liv()}</h1></div>
+	
+ <hf:chart type="pie" title="Stat top10" alpha3d="45" beta3d="0">
+    <hf:chartSerie name="Number of mission" value="#{StatistiqueLivController.TOP10liv}" var="point" point="#{point.nbmission}"  tickLabel="#{point.username}"/>
+  </hf:chart>  
+	
+	</h:body>
+	
+	</ui:composition>
