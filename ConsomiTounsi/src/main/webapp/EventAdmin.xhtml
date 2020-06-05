@@ -15,7 +15,6 @@
 			<meta name="viewport"
 				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 			<script src="dash/js/ace-extra.min.js"></script>
-			
 		</h:head>
 		<h:body>
 		
@@ -28,7 +27,7 @@
 							
 				
 									<ui:repeat var="event"
-										value="#{ControllerEvents.getAllEvents()}">
+										value="#{ControllerEvents.paginatorRec.model}">
 										<div class="Event_content">
 										
 											<div

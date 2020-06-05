@@ -223,7 +223,16 @@ public class ControllerEvents {
 	 
 	
 	 private RepeatPaginator2 paginatorRec;
+	 private RepeatPaginator2 paginatorRec1;
 	 
+		public RepeatPaginator2 getPaginatorRec1() {
+		return paginatorRec1;
+	}
+
+	public void setPaginatorRec1(RepeatPaginator2 paginatorRec1) {
+		this.paginatorRec1 = paginatorRec1;
+	}
+
 		public RepeatPaginator2 getPaginatorRec() {
 			return paginatorRec;
 		}
@@ -231,9 +240,12 @@ public class ControllerEvents {
 			this.paginatorRec = paginatorRec;
 		}
 		@PostConstruct
-		@Scheduled(cron="0 * * ? * *")
 		public void init(){
 			paginatorRec=new RepeatPaginator2(getAllEvents());
+		}
+		@PostConstruct
+		public void init1(){
+			paginatorRec1=new RepeatPaginator2(getEventsParDate());
 		}
 	
 }

@@ -39,7 +39,7 @@
 							
 				
 									<ui:repeat var="event"
-										value="#{ControllerEvents.getEventsParDate()}">
+										value="#{ControllerEvents.paginatorRec1.model}">
 										<div class="Event_content">
 										
 											<div class="col-lg-5 order-lg-2 order-1">
@@ -116,23 +116,23 @@
 									 <h:form><nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
-                                  <h:commandLink action="#{ControllerEvents.paginatorRec.prev()}" class="page-link" aria-label="Previous">
+                                  <h:commandLink action="#{ControllerEvents.paginatorRec1.prev()}" class="page-link" aria-label="Previous">
                                         <span aria-hidden="true">
                                             <span class="lnr lnr-chevron-left"></span>
                                         </span>
                                     </h:commandLink>
                                 </li>
                                 
-								<c:forEach var = "i" begin = "1" end = "#{ControllerEvents.paginatorRec.pages}"  >
+								<c:forEach var = "i" begin = "1" end = "#{ControllerEvents.paginatorRec1.pages}"  >
 								<c:if
-						             test="#{i==ControllerEvents.paginatorRec.pageIndex}">
-                                <li class="page-item active"> <h:commandLink action="#{ControllerEvents.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li></c:if>
-                                <c:if test="#{i!=ControllerEvents.paginatorRec.pageIndex}">
-                                <li class="page-item "><h:commandLink action="#{ControllerEvents.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li> </c:if>
+						             test="#{i==ControllerEvents.paginatorRec1.pageIndex}">
+                                <li class="page-item active"> <h:commandLink action="#{ControllerEvents.paginatorRec1.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li></c:if>
+                                <c:if test="#{i!=ControllerEvents.paginatorRec1.pageIndex}">
+                                <li class="page-item "><h:commandLink action="#{ControllerEvents.paginatorRec1.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li> </c:if>
                                 </c:forEach>
                                 <li class="page-item">
  							  
- 							  <h:commandLink action="#{ControllerEvents.paginatorRec.next()}" class="page-link" aria-label="Next">
+ 							  <h:commandLink action="#{ControllerEvents.paginatorRec1.next()}" class="page-link" aria-label="Next">
                                         <span aria-hidden="true">
                                             <span class="lnr lnr-chevron-right"></span>
                                         </span>
