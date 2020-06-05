@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
@@ -24,6 +25,7 @@ import org.primefaces.model.file.UploadedFile;
 import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +42,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
 import Utils.AppConstants;
+import tn.esprit.spring.Controller.Charite.RepeatPaginator2;
 import tn.esprit.spring.Controller.Forum.RepeatPaginator;
 import tn.esprit.spring.Controller.GestionUser.LoginController;
 import tn.esprit.spring.Model.Commande;
@@ -48,6 +51,7 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Repository.Charite.EndroitRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
@@ -59,7 +63,7 @@ import tn.esprit.spring.security.services.UserDetailsImpl;
 
 @Controller(value = "ControllerEvents")
 @ELBeanName(value = "ControllerEvents")
-@Join(path = "/AddEvent", to = "AddEvent.jsf")
+@Join(path = "/AddEvent", to = "/AddEvent.jsf")
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
@@ -218,14 +222,19 @@ public class ControllerEvents {
 	
 	 
 	
-	 private RepeatPaginator paginatorRec;
+	 private RepeatPaginator2 paginatorRec;
 	 
-		public RepeatPaginator getPaginatorRec() {
+		public RepeatPaginator2 getPaginatorRec() {
 			return paginatorRec;
 		}
-		public void setPaginatorRec(RepeatPaginator paginatorRec) {
+		public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
 			this.paginatorRec = paginatorRec;
 		}
-		
+		@PostConstruct
+		@Scheduled(cron="0 * * ? * *")
+		public void init(){
+			paginatorRec=new RepeatPaginator2(getAllEvents());
+		}
+	
 }
 
