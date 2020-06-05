@@ -111,9 +111,9 @@
 			</td>
 						        
 						        
-					        <ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande(charite.id)}" varStatus="status">
+					       <ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande1(charite.id)}" varStatus="status">
 			 <td class="Commande">
-						   <h:outputText  value="#{commande.commandeCharite}"/>
+						   <h:outputText  value="#{commande.id}"/>
 						    </td>
 						     </ui:repeat>
 						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>

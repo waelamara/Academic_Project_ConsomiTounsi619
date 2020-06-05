@@ -175,7 +175,6 @@ public class ControllerCharite {
 
 		LoginController.userDetails.getFirstName();
 		List<Charite> com = new ArrayList<>();
-		// UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();
 		com = chariteDAO.getChariteC(LoginController.userDetails.getId());
 		return com;
 
@@ -209,21 +208,18 @@ public class ControllerCharite {
 		return charite;
 
 	}
-
 	@Transactional
-	public List<Charite> getChariteCommande2(Long id) {
+	public List<Commande> getChariteCommande1(Long id) {
 		Long adis = chariteRepository.getChariteCommande3(id);
 		System.out.println(adis);
-		List<Charite> charite = new ArrayList<>();
-		// for(Long a : adis){
-		Charite c = chariteDAO.findOne(id);
-		charite.add(c);
+		List<Commande> c = new ArrayList<>();
 		Commande c1 = commandeDao.findOne(adis);
-		// }
-		System.out.println(charite);
-		return charite;
+		c.add(c1);
+		return c;
 
 	}
+
+	
 
 	/********** Commande *******************/
 	@Transactional

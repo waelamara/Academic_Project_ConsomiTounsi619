@@ -66,9 +66,9 @@
 						        <td class="type of Charity">	        	
 			        	<h:outputText  value="#{charite.typeCharite}"/>
 			</td>
-		<ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande(charite.id)}" varStatus="status">
+		<ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande1(charite.id)}" varStatus="status">
 			 <td class="Commande">
-						   <h:outputText  value="#{commande.commandeCharite}"/>
+						   <h:outputText  value="#{commande.id}"/>
 						    </td>
 						     </ui:repeat>
 						     
