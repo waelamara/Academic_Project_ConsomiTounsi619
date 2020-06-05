@@ -77,6 +77,15 @@ public class UserService {
 		return userRepository.NombreUsersSelonSexe(sexe);
 	}
 	
+	public List<User> getUserSelonChoix(String choix, String cle)
+	{
+		return userRepository.getUserSelonChoix(cle);
+	}
+	public List<User> getUserSelonEmail(String choix, String cle)
+	{
+		return userRepository.getUserSelonEmail(cle);
+	}
+	
 	
 
 
