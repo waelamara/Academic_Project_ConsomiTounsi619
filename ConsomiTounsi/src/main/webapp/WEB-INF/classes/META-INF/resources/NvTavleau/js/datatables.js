@@ -1,7 +1,11 @@
 $(document).ready(function() {
+	// /
+
+	// /
 
     var table = $('#data_table').DataTable({
         responsive: true,
+        "bDestroy": true,
         select: true,
         'aoColumnDefs': [{
             'bSortable': false,
@@ -65,7 +69,10 @@ $(document).ready(function() {
     };
     $('#dt-ordering').DataTable();
 
-    /* Custom filtering function which will search data in column four between two values */
+    /*
+	 * Custom filtering function which will search data in column four between
+	 * two values
+	 */
     $.fn.dataTable.ext.search.push(
         function(settings, data, dataIndex) {
             var min = parseInt($('#min').val(), 10);
@@ -96,7 +103,10 @@ $(document).ready(function() {
         });
     }
 
-    /* Create an array with the values of all the input boxes in a column, parsed as numbers */
+    /*
+	 * Create an array with the values of all the input boxes in a column,
+	 * parsed as numbers
+	 */
     $.fn.dataTable.ext.order['dom-text-numeric'] = function(settings, col) {
         return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
             return $('input', td).val() * 1;
@@ -580,8 +590,10 @@ $(document).ready(function() {
 
     $('#colum-rendr').DataTable({
         "columnDefs": [{
-                // The `data` parameter refers to the data for the cell (defined by the
-                // `data` option, which defaults to the column being worked with, in
+                // The `data` parameter refers to the data for the cell (defined
+				// by the
+                // `data` option, which defaults to the column being worked
+				// with, in
                 // this case `data: 0`.
                 "render": function(data, type, row) {
                     return data + ' (' + row[3] + ')';
@@ -702,6 +714,8 @@ $(document).ready(function() {
             }
         }
     });
+    
+    
 
 
 
