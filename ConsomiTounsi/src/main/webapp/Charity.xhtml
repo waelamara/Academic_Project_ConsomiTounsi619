@@ -66,16 +66,18 @@
 						        <td class="type of Charity">	        	
 			        	<h:outputText  value="#{charite.typeCharite}"/>
 			</td>
-		<ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande(charite.id)}" varStatus="status">
+		<ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande1(charite.id)}" varStatus="status">
 			 <td class="Commande">
-						   <h:outputText  value="#{commande.commandeCharite}"/>
+						   <h:outputText  value="#{commande.id}"/>
 						    </td>
 						     </ui:repeat>
 						     
 						        
 						        
 					        
-						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
+						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> 
+						     , id : <h:outputText  value="#{charite.idevents.id}"/>
+						     , date :<h:outputText  value="#{charite.idevents.dateE}"/></td>
 						     <td class="User"><h:outputText  value="#{charite.iduser.username}"/></td>
 						    
 						    
@@ -107,7 +109,7 @@
 													
 						        
 						        <th>Type of Charity</th>
-						             <th>Price doneted</th>
+						        <th>Price doneted</th>
 						        <th>Event</th>
 						        <th>User</th>
 						   
@@ -140,7 +142,9 @@
 						        
 						       	<td class="Price doneted"><h:outputText  value="#{charite.montantPaye}"/></td> 
 					        
-						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> , id:<h:outputText  value="#{charite.idevents.id}"/></td>
+						      <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> 
+						     , id : <h:outputText  value="#{charite.idevents.id}"/>
+						     , date :<h:outputText  value="#{charite.idevents.dateE}"/></td>
 						     <td class="User"><h:outputText  value="#{charite.iduser.username}"/></td>
 						    
 						    

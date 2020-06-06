@@ -9,7 +9,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/TemplateAdmin/template.xhtml">
 
-	<ui:define name="UpdateEvent">
+	<ui:define name="AddPub">
 		<h:head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 			<title>Tables - Ace Admin</title>
@@ -23,7 +23,7 @@
 			<!--Add Event Item -->
 			<div class="page-header">
 							<h1>
-								Update Events
+								Add Advertising
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
 									
@@ -37,20 +37,34 @@
 				class="form-horizontal">
 				<div class="form-group">
 					<label class="col-sm-3 control-label no-padding-right"
-						for="form-field-1"> Title Event </label>
+						for="form-field-1"> Name </label>
 
 					<div class="col-sm-9">
-						<h:inputText value="#{ControllerEventsUpdate.titre}"
-							p:placeholder="Title" class="col-xs-10 col-sm-5" ></h:inputText>
+						<h:inputText value="#{ControllerPub.nom}"
+							p:placeholder="Title" class="col-xs-10 col-sm-5"></h:inputText>
 
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right">Date Event</label>
+					<label class="col-sm-3 control-label no-padding-right">Start Date</label>
 
 					<div class="col-sm-9">
-						<p:inputText value="#{ControllerEventsUpdate.dateE}" 
+						<p:inputText value="#{ControllerPub.dateDebut}" 
+							p:placeholder="yyyy-MM-dd" styleClass="form-input">
+							<f:convertDateTime pattern="yyyy-MM-dd"/> 
+							</p:inputText>
+							
+						<div class="space-2"></div>
+
+						<div class="help-block" id="input-size-slider"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">End Date</label>
+
+					<div class="col-sm-9">
+						<p:inputText value="#{ControllerPub.dateFin}" 
 							p:placeholder="yyyy-MM-dd" styleClass="form-input">
 							<f:convertDateTime pattern="yyyy-MM-dd"/> 
 							</p:inputText>
@@ -63,60 +77,28 @@
 
 				
 
-				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right">Number of places</label>
-
-					<div class="col-sm-9">
-						<p:inputNumber value="#{ControllerEventsUpdate.nbplace}"
-							p:placeholder="Number of places" styleClass="form-input"></p:inputNumber>
-						<div class="space-2"></div>
-
-						<div class="help-block" id="input-size-slider"></div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right">Number of participants</label>
-
-					<div class="col-sm-9">
-						<p:inputNumber value="#{ControllerEventsUpdate.nbparticipant}"
-							p:placeholder="Number of participants" styleClass="form-input"></p:inputNumber>
-						<div class="space-2"></div>
-
-						<div class="help-block" id="input-size-slider"></div>
-					</div>
-				</div>
 				
+
+				
+
+
 				<div class="form-group">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-6">Pictures</label>
 						<div class="col-sm-9">
-							<p:fileUpload value="#{ControllerEventsUpdate.files}" mode="simple"
+							<p:fileUpload value="#{ControllerPub.files}" mode="simple"
 								skinSimple="true" multiple="true" />
 						</div>
 					</div>
 				</div>
-
-
 				
-				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right"
-						for="form-field-1-1"> Description </label>
-
-					<div class="col-sm-9">
-						<h:inputTextarea value="#{ControllerEventsUpdate.description}"
-							style="width:50%;height:80px" id="form-field-1-1"
-							placeholder="Description" class="form-control"></h:inputTextarea>
-					</div>
-
-				</div>
 				
 
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
 						<h:commandButton class="btn btn-info" value="Save" type="submit"
-							action="#{ControllerEventsUpdate.updateE}"></h:commandButton>
+							action="#{ControllerPub.addPub}"></h:commandButton>
 
 
 					</div>
