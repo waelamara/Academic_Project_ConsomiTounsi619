@@ -383,24 +383,40 @@
 	</header>
 	
 	<!-- Banner -->
-
+<ui:repeat var="Publicite" value="#{ControllerPublicite.getAllPub().get(0)}" varStatus="status">
 	<div class="banner" style="height: 60%">
-		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
-		<div class="container fill_height">
+			<h:panelGroup rendered="#{Publicite.image!=null}">
+			<div class="banner_background" style="background-image:url(#{Publicite.image})"></div>
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{Publicite.video!=null}">
+			<div class="banner_background" style="background-video:url(#{Publicite.video})"></div>
+			<!-- <video style="width:100px;height:100px" onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4"/>
+			</video> -->
+			
+			</h:panelGroup>
+			
+			
+			<div class="container fill_height">
 			<div class="row fill_height">
-				<div class="banner_product_image"><img src="images/banner_product.png" alt=""/></div>
+			<div class="banner_product_image"><img src="#" alt=""/></div>
+			<div class="banner_product_image">
+			</div>
+			
+			
 				<div class="col-lg-5 offset-lg-4 fill_height">
 					<div class="banner_content">
-						<h1 class="banner_text">new era of smartphones</h1>
+						<!-- <h1 class="banner_text">new era of smartphones</h1>
 						<div class="banner_price"><span>$530</span>$460</div>
 						<div class="banner_product_name">Apple Iphone 6s</div>
-						<div class="button banner_button"><a href="#">Shop Now</a></div>
+						<div class="button banner_button"><a href="#">Shop Now</a></div> -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+</ui:repeat>
 	<!-- Characteristics -->
 
 	<div class="characteristics">

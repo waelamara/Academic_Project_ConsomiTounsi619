@@ -36,6 +36,12 @@ public class SsCategorie implements Serializable {
 	}
 	
 
+	public SsCategorie(String nomSsCategorie) {
+		super();
+		this.nomSsCategorie = nomSsCategorie;
+	}
+
+
 	public SsCategorie(String nomSsCategorie, SCategorie idSCategorie) {
 		super();
 		this.nomSsCategorie = nomSsCategorie;

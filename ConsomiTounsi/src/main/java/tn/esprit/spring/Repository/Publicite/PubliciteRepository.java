@@ -1,6 +1,8 @@
 package tn.esprit.spring.Repository.Publicite;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,4 +21,8 @@ public interface PubliciteRepository extends JpaRepository<Publicite, Long> {
 	public int  CountUserFemmeWithAgeBetwin(int ageDebut,int ageFin);
 	@Query(value = "SELECT COUNT(*) FROM user WHERE sexe='HOMME' AND year(NOW())-year(daten) BETWEEN ?1 AND ?2", nativeQuery = true)
 	public int  CountUserHommeWithAgeBetwin(int ageDebut,int ageFin);
+	@Query(value = "SELECT * FROM publicite WHERE nom LIKE ?1%", nativeQuery = true)
+	public List<Publicite> findLikeName(String nom);
+	@Query(value = "SELECT * FROM publicite WHERE canal LIKE ?1", nativeQuery = true)
+	public List<Publicite> findByCanal(String canal);
 }

@@ -31,6 +31,13 @@ public class Categorie implements Serializable {
 	public Categorie() {
 		super();
 	}
+	
+
+	public Categorie(String nomCategorie) {
+		super();
+		this.nomCategorie = nomCategorie;
+	}
+
 
 	public Categorie(Long id, String nomCategorie) {
 		super();
