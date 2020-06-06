@@ -83,4 +83,19 @@ public class PubDAO {
 		
 		
 	}
+	@Transactional
+	public void updatePub(Pub p, UploadedFiles files) {
+		
+	
+		for (UploadedFile f : files.getFiles()) {
+         	String newFileName = fileStorageServiceImpl.UploadImages(f);
+         	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
+			p.setImage(fileDownloadUri);
+			publiciteRepository.save(p);
+		}
+		
+		
+		
+		
+	}
 }

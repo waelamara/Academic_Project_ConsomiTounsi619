@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.ManyToOne;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,9 +40,46 @@ public class ControllerEndroit {
 	@Autowired
 	private EndroitRepository endroitRepository;
 	
-	
+	private Long id;
+	private String statu;
+	private String emplacement;
+	private int nbplace;
 
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getStatu() {
+		return statu;
+	}
+	public void setStatu(String statu) {
+		this.statu = statu;
+	}
+	public String getEmplacement() {
+		return emplacement;
+	}
+	public void setEmplacement(String emplacement) {
+		this.emplacement = emplacement;
+	}
+	public int getNbplace() {
+		return nbplace;
+	}
+	public void setNbplace(int nbplace) {
+		this.nbplace = nbplace;
+	}
+	@Transactional
+	public String addEndroit() {
+		Endroit e = new Endroit();
+		e.setEmplacement(emplacement);
+		e.setNbplace(nbplace);
+		e.setStatu("disponible");
+		endroitDAO.saveEndroit1(e);
+
+		return "/Endroit.xhtml?faces-redirect=true";
+	}
 	public List<Endroit> getAllEndroit() {
 		
 		return endroitDAO.getAllEndroitList();
@@ -49,6 +88,10 @@ public List<Endroit> getAllEndroitD() {
 		
 		return endroitDAO.getAllEndroitDi();
 	}
+public List<Endroit> getAllEndroitR() {
+	
+	return endroitDAO.getAllEndroitR();
+}
 	public static Long idev ;
 	public static Long iden ;
 
@@ -77,7 +120,7 @@ public List<Endroit> getAllEndroitD() {
 			e2.setNbplace(e2.getNbplace());
 			e2.setEmplacement(e2.getEmplacement());
 			e2.setEventss(e2.getEventss());
-			e2.setStatu("Reservé");
+			e2.setStatu("reserve");
 			endroitDAO.saveEndroit(d1.getId(), e2);
 			return "/EventAdmin.xhtml?faces-redirect=true";
 		} else if (nbPEndroit < nbPEvent) {
@@ -89,19 +132,26 @@ public List<Endroit> getAllEndroitD() {
 		
 
 	}
-	
 	@Transactional
-	public String reserve(Long id){
-	
-		Events d1 = eventDAO.findOne(idev);
-		Endroit e2 = endroitDAO.findOne(id);
-	
-		String navigateTo = "/EventAdmin.xhtml";
-		endroitRepository.ReserveEndroit("reserve", id);
+	public String dreserveEndroit(Long idendroit) {
+		iden = idendroit;
+		Endroit e2 = endroitDAO.findOne(idendroit);
 		
-		endroitDAO.saveEndroit(d1.getId(), e2);
-		return navigateTo;
+		String message = "this place is reserved ";
+		if ((e2.getStatu().equals("reserve"))) {
+			e2.setNbplace(e2.getNbplace());
+			e2.setEmplacement(e2.getEmplacement());
+			e2.setEventss(null);
+			e2.setStatu("disponible");
+			endroitDAO.saveEndroit2(idendroit, e2);
+			return "/Endroit.xhtml?faces-redirect=true";
+		} else {
+			return message ;
+		}
 		
 		
+
 	}
+	
+	
 }

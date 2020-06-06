@@ -12,6 +12,7 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,6 +46,7 @@ import Utils.AppConstants;
 import tn.esprit.spring.Controller.Charite.RepeatPaginator2;
 import tn.esprit.spring.Controller.Forum.RepeatPaginator;
 import tn.esprit.spring.Controller.GestionUser.LoginController;
+import tn.esprit.spring.Controller.GestionUser.RepeatPaginator1;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.User;
@@ -64,6 +66,7 @@ import tn.esprit.spring.security.services.UserDetailsImpl;
 @Controller(value = "ControllerEvents")
 @ELBeanName(value = "ControllerEvents")
 @Join(path = "/AddEvent", to = "/AddEvent.jsf")
+@ViewScoped
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
@@ -91,10 +94,28 @@ public class ControllerEvents {
 	@Autowired
 	private EndroitRepository endroitRepository;
 	 public static Long ide ;
+	 private RepeatPaginator2 paginatorRec;
+	 private RepeatPaginator2 paginatorRec1;
 	
 	
 	
 	
+	public RepeatPaginator2 getPaginatorRec() {
+		return paginatorRec;
+	}
+
+	public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
+		this.paginatorRec = paginatorRec;
+	}
+
+	public RepeatPaginator2 getPaginatorRec1() {
+		return paginatorRec1;
+	}
+
+	public void setPaginatorRec1(RepeatPaginator2 paginatorRec1) {
+		this.paginatorRec1 = paginatorRec1;
+	}
+
 	public UploadedFiles getFiles() {
 		return files;
 	}
@@ -176,9 +197,10 @@ public class ControllerEvents {
 
 	}
 	
-	public void delete(long Id) {
+	public String delete(long Id) {
 
 		eventDAO.deleteEventsById(Id);
+		return "/EventAdmin.xhtml?faces-redirect=true";
 
 	}
 	public List<Events> findLikeNameM(String titre) {
@@ -222,31 +244,24 @@ public class ControllerEvents {
 	
 	 
 	
-	 private RepeatPaginator2 paginatorRec;
-	 private RepeatPaginator2 paginatorRec1;
+	
 	 
-		public RepeatPaginator2 getPaginatorRec1() {
-		return paginatorRec1;
-	}
-
-	public void setPaginatorRec1(RepeatPaginator2 paginatorRec1) {
-		this.paginatorRec1 = paginatorRec1;
-	}
-
-		public RepeatPaginator2 getPaginatorRec() {
-			return paginatorRec;
-		}
-		public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
-			this.paginatorRec = paginatorRec;
-		}
-		@PostConstruct
+		
+		/*@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
 		public void init(){
 			paginatorRec=new RepeatPaginator2(getAllEvents());
-		}
+		}*/
 		@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
 		public void init1(){
 			paginatorRec1=new RepeatPaginator2(getEventsParDate());
 		}
+		@PostConstruct
+		public void init(){
+			List<Events> c= getAllEvents();
+		paginatorRec = new RepeatPaginator2(c);
+	}
 	
 }
 
