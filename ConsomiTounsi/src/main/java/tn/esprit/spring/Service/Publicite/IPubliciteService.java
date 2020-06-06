@@ -34,5 +34,5 @@ public interface IPubliciteService {
 	public List<Publicite> findByCanal(String canal);
 	public Date ConvertirDate(String date) throws ParseException;
 	public String TypeFile(UploadedFile file) throws IOException;
-	
+	public List<Publicite> findPubForAll();
 }
