@@ -281,7 +281,7 @@ public class IBlogControllerImpl {
 		System.out.println("********" + fileDownloadUri);
 		image.setSujetId(s);
 		iImageSujetService.ajouterImage(image);
-		return "/fourm/myposts";
+		return "/fourm/myPosts";
 	}
 
 	/***** add view *****/

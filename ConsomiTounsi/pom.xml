@@ -162,12 +162,11 @@
 			<artifactId>font-awesome</artifactId>
 			<version>5.13.0</version>
 		</dependency>
-<<<<<<< HEAD
+
 <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-=======
 
 		<dependency>
                          <groupId>org.highfaces</groupId>
@@ -179,7 +178,6 @@
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
 </dependency>
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
 
 
 	</dependencies>

@@ -22,7 +22,7 @@
 </head>
 	
 <body>
-<h:panelGroup rendered="#{empty ControllerMyposts.getSujetByUser(2)}">
+<h:panelGroup rendered="#{empty ControllerMyposts.getSujetByUser(loginController.userDetails.id)}">
   <div class="container-fluid bg-white">
         <div class="container py-5">
             <div class="img-vide text-center">
@@ -31,7 +31,7 @@
         </div>
     </div>
 </h:panelGroup>
-<h:panelGroup rendered="#{not empty cartController.panierParIdclient(loginController.userDetails.id)}">
+<h:panelGroup rendered="#{not empty ControllerMyposts.getSujetByUser(loginController.userDetails.id)}">
     <!--================Blog Categorie Area =================-->
     <section class="blog_categorie_area">
         <div class="container">
@@ -92,7 +92,7 @@
                        
        
 
-                    <ui:repeat var="sujet" value="#{ControllerMyposts.getSujetByUser(3)}" varStatus="status"> 
+                    <ui:repeat var="sujet" value="#{ControllerMyposts.paginatorRec.model}" varStatus="status"> 
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
@@ -101,7 +101,6 @@
                                     </div>
                                     <ul class="blog_meta list">
                                      <h:outputText value="#{sujet.id}" style="display: none"/>
-                                   <li><a href="#"> <h:outputText value="#{sujet.idUser.firstName} #{sujet.idUser.lastName}"/><i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{blogController.convertireDate(sujet.dateAjout)}"/><i class="lnr lnr-calendar-full"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{sujet.nbVue} Views"/><i class="lnr lnr-eye"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{singleblogController.countNbcommentaire(sujet.id)} Comments"/><i class="lnr lnr-bubble"></i></a></li>
