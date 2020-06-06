@@ -22,7 +22,7 @@
 </head>
 	
 <body>
-<h:panelGroup rendered="#{empty ControllerMyposts.getSujetByUser(2)}">
+<h:panelGroup rendered="#{empty ControllerMyposts.getSujetByUser(loginController.userDetails.id)}">
   <div class="container-fluid bg-white">
         <div class="container py-5">
             <div class="img-vide text-center">
@@ -31,7 +31,8 @@
         </div>
     </div>
 </h:panelGroup>
-<h:panelGroup rendered="#{not empty cartController.panierParIdclient(loginController.userDetails.id)}">
+
+<h:panelGroup rendered="#{not empty ControllerMyposts.getSujetByUser(loginController.userDetails.id)}">
     <!--================Blog Categorie Area =================-->
     <section class="blog_categorie_area">
         <div class="container">
@@ -92,7 +93,7 @@
                        
        
 
-                    <ui:repeat var="sujet" value="#{ControllerMyposts.getSujetByUser(3)}" varStatus="status"> 
+                    <ui:repeat var="sujet" value="#{ControllerMyposts.paginatorRec.model}" varStatus="status"> 
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
@@ -143,8 +144,7 @@
                                 </li>
                                 
 								<c:forEach var = "i" begin = "1" end = "#{ControllerMyposts.paginatorRec.pages}"  >
-								<c:if
-						             test="#{i==ControllerMyposts.paginatorRec.pageIndex}">
+								<c:if test="#{i==ControllerMyposts.paginatorRec.pageIndex}">
                                 <li class="page-item active"> <h:commandLink action="#{ControllerMyposts.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li></c:if>
                                 <c:if test="#{i!=ControllerMyposts.paginatorRec.pageIndex}">
                                 <li class="page-item "><h:commandLink action="#{ControllerMyposts.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li> </c:if>

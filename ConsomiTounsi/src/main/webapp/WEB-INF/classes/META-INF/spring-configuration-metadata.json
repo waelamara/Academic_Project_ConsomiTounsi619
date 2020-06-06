@@ -9,13 +9,13 @@
       "name": "app.auth",
       "type": "Config.AppProperties$Auth",
       "sourceType": "Config.AppProperties",
-      "sourceMethod": "getAuth()"
+      "sourceMethod": "public Config.AppProperties.Auth getAuth() "
     },
     {
       "name": "app.oauth2",
       "type": "Config.AppProperties$OAuth2",
       "sourceType": "Config.AppProperties",
-      "sourceMethod": "getOauth2()"
+      "sourceMethod": "public Config.AppProperties.OAuth2 getOauth2() "
     },
     {
       "name": "file",
@@ -27,8 +27,7 @@
     {
       "name": "app.auth.token-expiration-msec",
       "type": "java.lang.Long",
-      "sourceType": "Config.AppProperties$Auth",
-      "defaultValue": 0
+      "sourceType": "Config.AppProperties$Auth"
     },
     {
       "name": "app.auth.token-secret",

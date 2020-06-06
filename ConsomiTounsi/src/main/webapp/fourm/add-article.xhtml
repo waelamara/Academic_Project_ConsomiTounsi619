@@ -127,7 +127,7 @@
 						<div class="contact_form_button">
 							<h:commandButton value="Validate"
 								class="button contact_submit_button" type="submit"
-								action="#{blogController.ajouterSujet(3)}" />
+								action="#{blogController.ajouterSujet(loginController.userDetails.id)}" />
 
 						</div>
 

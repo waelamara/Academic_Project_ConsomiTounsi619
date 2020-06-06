@@ -30,7 +30,7 @@ public class CommentaireServiceImpl implements ICommentaireService{
 	@Override
 	public int ajouterCommentaire(Commentaire c, Long sujetId, Long userId) {
 		List<String> badwords=new ArrayList<>();
-		badwords.add("bad");
+		badwords.add("corona");
 		badwords.add("badwors");
 		badwords.add("bads");
 		String motcommentaire[]=c.getDescription().split(" ");
@@ -70,17 +70,14 @@ public class CommentaireServiceImpl implements ICommentaireService{
 	}
 	@Override
 	public List<Commentaire> getCommentaireOfSujet(Long sujetId) {
-		Sujet sujet= sujetRepository.findById(sujetId).get();
-		List<Commentaire> commentaires=new ArrayList<>();
-		for(Commentaire com : sujet.getCommentarie())
-			commentaires.add(com);
-		return commentaires;
+		
+		return commentairesRepository.getCommentaire(sujetId);
 				}
 
 	@Override
 	public int deletecommentairevoteById(Long comId,Long sujetId,Long userId) {
 		Commentaire com = commentairesRepository.findById(comId).get();
-		if(com.getIdUser().getId()== userId && com.getIdSujet().getId()==sujetId)
+		if(com.getIdUser().getId()== userId)
 		{
 			commentairesRepository.deleteById(com.getId());	 
 			 return 1;
@@ -122,4 +119,24 @@ public class CommentaireServiceImpl implements ICommentaireService{
 		
 	}
 
-}
+	@Override
+	public int RemoveCommentairebyIdUser(Long comId, Long userId) {
+		Commentaire com = commentairesRepository.findById(comId).get();
+		if(com.getIdUser().getId()== userId)
+		{
+			commentairesRepository.delete(com);	 
+			 return 1;
+		}
+			 return 0;  
+	}
+	@Override
+      public int verivcationCom(Long comId,Long userId){
+  		Commentaire com = commentairesRepository.findById(comId).get();
+  		if(com.getIdUser().getId()== userId)
+		{
+			 return 1;
+		}
+			 return 0;  
+	}
+ }
+
