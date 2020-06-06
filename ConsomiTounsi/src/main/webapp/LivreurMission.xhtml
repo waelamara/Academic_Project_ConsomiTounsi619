@@ -7,9 +7,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ez="http://java.sun.com/jsf/composite/spinner"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	template="/TemplateLivreur/template.xhtml">
+	template="/TemplateLivreur/template.xhtml"
+	>
 	<!-- Basic -->
-<!-- 	<ui:param name="cart" value="Accueil" /> -->
+	<!-- 	<ui:param name="cart" value="Accueil" /> -->
 	<ui:define name="LivreurMission">
 		<head>
 
@@ -199,8 +200,9 @@
 
 									<div class="card-body">
 
-										<h:dataTable value="#{CommandeController.get_all_commandes()}"
-											var="listecommande" id="advanced_table" class="table">
+										<h:dataTable
+											value="#{LivreurMissionController.ListeMissions(LoginDeliveryController.userDetails.id)}"
+											var="rec" id="advanced_table" class="table">
 											<table id="advanced_table" class="table">
 												<thead>
 
@@ -245,13 +247,11 @@
 
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="ID" />
+																	<h:outputText value="Place of delivery" />
 																</f:facet>
-																<a href="#"> <h:form>
-																<h:link   value="#{listecommande.id}" outcome="affichepanier.jsf">
-														<f:param name="idcc" value="#{listecommande.id}"/>
-																		</h:link>
-																	</h:form>
+																<a href="#"> <h:outputText class="name-pr"
+																		value="#{rec.lieux}" />
+															
 																</a>
 															</h:column></td>
 
@@ -259,10 +259,10 @@
 
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="date_commande" />
+																	<h:outputText value="State" />
 																</f:facet>
 																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.date_commande}" />
+																		value="#{rec.etat}" />
 
 																</a>
 															</h:column></td>
@@ -271,61 +271,61 @@
 
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="prixtotale" />
+																	<h:outputText value="Date" />
 																</f:facet>
 																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.prixtotale}" />
+																		value="#{rec.dateAffecLivr}" />
 
 																</a>
 															</h:column></td>
 
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="poucentage" />
+																	<h:outputText value="From" />
 																</f:facet>
 																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.poucentage}" />
+																		value="#{rec.localdistribu}" />
 
 																</a>
 															</h:column></td>
 
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="prix_after_remise" />
+																	<h:outputText value="CommandeId" />
 																</f:facet>
 																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.prix_after_remise}" />
+																		value="#{rec.commande.id}" />
 
 																</a>
 															</h:column></td>
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="status" />
+																	<h:outputText value="Name of client" />
 																</f:facet>
 																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.status}" />
+																		value="#{rec.user_id_demande}" />
 
 																</a>
 															</h:column></td>
 
 														<td><h:column>
 																<f:facet name="header">
-																	<h:outputText value="user" />
+																	<h:outputText value="Mobile" />
 																</f:facet>
 																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.client.userId}" />
+																		value="#{rec.tel_user_commande}" />
 
 																</a>
 															</h:column></td>
-														<td><h:column>
-																<f:facet name="header">
-																	<h:outputText value="user" />
-																</f:facet>
-																<a href="#"> <h:outputText class="name-pr"
-																		value="#{listecommande.client.userId}" />
+														<!-- 														<td><h:column> -->
+														<!-- 																<f:facet name="header"> -->
+														<!-- 																	<h:outputText value="user" /> -->
+														<!-- 																</f:facet> -->
+														<!-- 																<a href="#"> <h:outputText class="name-pr" -->
+														<!-- 																		value="#{listecommande.client.userId}" /> -->
 
-																</a>
-															</h:column></td>
+														<!-- 																</a> -->
+														<!-- 															</h:column></td> -->
 
 													</tr>
 
@@ -671,52 +671,52 @@
 
 			<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-			<script src="../../js/vendor/jquery-3.3.1.min.js">
+			<script src="NvTavleau/js/vendor/jquery-3.3.1.min.js">
 				
 			</script>
 
-			<script src="../../plugins/popper.js/dist/umd/popper.min.js"></script>
+			<script src="NvTavleau/plugins/popper.js/dist/umd/popper.min.js"></script>
 
-			<script src="../../plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-
-			<script
-				src="../../plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-
-			<script src="../../plugins/screenfull/dist/screenfull.js"></script>
+			<script src="NvTavleau/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 
 			<script
-				src="../../plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+				src="NvTavleau/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+
+			<script src="NvTavleau/plugins/screenfull/dist/screenfull.js"></script>
 
 			<script
-				src="../../plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+				src="NvTavleau/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
 
 			<script
-				src="../../plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+				src="NvTavleau/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 			<script
-				src="../../plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
-			<script src="../../plugins/jvectormap/jquery-jvectormap.min.js"></script>
+				src="NvTavleau/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 
 			<script
-				src="../../plugins/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js"></script>
+				src="NvTavleau/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-			<script src="../../plugins/moment/moment.js"></script>
+			<script src="NvTavleau/plugins/jvectormap/jquery-jvectormap.min.js"></script>
 
 			<script
-				src="../../plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
+				src="NvTavleau/plugins/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js"></script>
 
-			<script src="../../plugins/d3/dist/d3.min.js"></script>
+			<script src="NvTavleau/plugins/moment/moment.js"></script>
 
-			<script src="../../plugins/c3/c3.min.js"></script>
+			<script
+				src="NvTavleau/plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
 
-			<script src="../../js/tables.js"></script>
+			<script src="NvTavleau/plugins/d3/dist/d3.min.js"></script>
 
-			<script src="../../js/widgets.js"></script>
+			<script src="NvTavleau/plugins/c3/c3.min.js"></script>
 
-			<script src="../../js/charts.js"></script>
+			<script src="NvTavleau/js/tables.js"></script>
 
-			<script src="../../dist/js/theme.min.js"></script>
+			<script src="NvTavleau/js/widgets.js"></script>
+
+			<script src="NvTavleau/js/charts.js"></script>
+
+			<script src="NvTavleau/dist/js/theme.min.js"></script>
 			<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 
 			<script>
