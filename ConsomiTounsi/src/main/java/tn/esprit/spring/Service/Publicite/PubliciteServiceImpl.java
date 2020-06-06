@@ -2,11 +2,15 @@ package tn.esprit.spring.Service.Publicite;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -98,6 +102,36 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		return publiciteRepository.save(PubWithImg);
 
 	}
+	
+	public Publicite AddPub(Publicite pub, UploadedFile file) throws IOException, ParseException {
+		Publicite PubWithImg = AffecterImageVideoPubs(pub, file);
+		String typefile = TypeFile(file);
+
+		float coutPub = CalculeCoutTotalPub(pub.getGenderCible().toString(), pub.getCanal().toString(),
+				pub.getDebutAgeCible(), pub.getFinAgeCible(), pub.getDateDebut().toString(),
+				pub.getDateFin().toString(), typefile);
+		PubWithImg.setCout(coutPub);
+		PubWithImg.setNbrInitialVueCible(CountUserCible(pub.getDebutAgeCible(),pub.getFinAgeCible(),pub.getGenderCible().toString()));
+		return publiciteRepository.save(PubWithImg);
+
+	}
+	
+	public Publicite UpdatePubWithoutImage(Publicite pub) throws IOException, ParseException {
+		String typefile;
+		if(pub.getImage()!=null){
+			 typefile = "Image";
+		}
+		else{
+			 typefile = "Video";
+		}
+		float coutPub = CalculeCoutTotalPub(pub.getGenderCible().toString(), pub.getCanal().toString(),
+				pub.getDebutAgeCible(), pub.getFinAgeCible(), pub.getDateDebut().toString(),
+				pub.getDateFin().toString(), typefile);
+		pub.setCout(coutPub);
+		pub.setNbrInitialVueCible(CountUserCible(pub.getDebutAgeCible(),pub.getFinAgeCible(),pub.getGenderCible().toString()));
+		return publiciteRepository.save(pub);
+
+	}
 
 	public int CountUserCible(int ageCibledebut, int ageCibleFin, String gender) {
 		int nbrUser = 0;
@@ -131,6 +165,7 @@ public class PubliciteServiceImpl implements IPubliciteService {
 	}
 
 	public int CoutSurLeNbrDeJour(String dateDebut, String dateFin) throws ParseException {
+		if(dateDebut!=null && dateFin!=null){
 		int NbrJourPub = DifferenceJourDateDebutEtDateFin(dateDebut, dateFin);
 		int cout = 0;
 		if (NbrJourPub <= 30) {
@@ -144,6 +179,8 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		} else {
 			return cout += 10 * NbrJourPub;
 		}
+		}
+		else return 0;
 
 	}
 
@@ -174,24 +211,34 @@ public class PubliciteServiceImpl implements IPubliciteService {
 	}
 
 	public int CoutSurTrancheAge(int ageCibledebut, int ageCibleFin) {
-		int TrancheAge = ageCibleFin - ageCibledebut;
-		int cout = 500;
-		for (int i = 1; i <= TrancheAge; i++) {
-			cout -= 10;
+		if(ageCibledebut!=0 && ageCibleFin!=0){
+			int TrancheAge = ageCibleFin - ageCibledebut;
+			int cout = 500;
+			for (int i = 1; i <= TrancheAge; i++) {
+				cout -= 10;
+			}
+			return cout;
 		}
-		return cout;
+		else return 0;
 	}
 
-	public String TypeFile(MultipartFile file) throws IOException {
-		String fileName = fileStorageServiceImpl.storeFile(file);
+	public String TypeFile(UploadedFile file) throws IOException {
+		if(file.getSize()==0){
+			return "Nofile";
+		}
+		else{
+		String fileName = fileStorageServiceImpl.UploadImages(file);
 		int length = fileName.length();
 		String typefile = fileName.substring(length - 3, length);
 		if (typefile.equals("png") || typefile.equals("peg") || typefile.equals("jpg")) {
 			return "Image";
-		} else {
+		} 
+		else {
 			return "Video";
 		}
+		}
 	}
+	
 
 	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException {
 		String fileName = fileStorageServiceImpl.storeFile(file);
@@ -204,6 +251,49 @@ public class PubliciteServiceImpl implements IPubliciteService {
 			pub.setVideo(fileDownloadUri);
 		}
 		return pub;
+	}
+	
+	public Publicite AffecterImageVideoPubs(Publicite pub, UploadedFile file) throws IOException {
+		String fileName = fileStorageServiceImpl.UploadImages(file);
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+				.path(fileName).toUriString();
+		String typefile = TypeFile(file);
+		if (typefile.equals("Image")) {
+			pub.setImage(fileDownloadUri);
+		} else {
+			pub.setVideo(fileDownloadUri);
+		}
+		return pub;
+	}
+
+	
+	public String TypeFile(MultipartFile file) throws IOException {
+		String fileName = fileStorageServiceImpl.storeFile(file);
+		int length = fileName.length();
+		String typefile = fileName.substring(length - 3, length);
+		if (typefile.equals("png") || typefile.equals("peg") || typefile.equals("jpg")) {
+			return "Image";
+		} else {
+			return "Video";
+		}
+	}
+
+	@Override
+	public List<Publicite> findLikeName(String nom) {
+		return publiciteRepository.findLikeName(nom);
+	}
+
+	@Override
+	public List<Publicite> findByCanal(String canal) {
+		return publiciteRepository.findByCanal(canal);
+	}
+	
+	public Date ConvertirDate(String date) throws ParseException{
+		SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(sdf1.parse(date));
+		calendar.add(Calendar.DATE, 1);
+        return calendar.getTime();
 	}
 
 }

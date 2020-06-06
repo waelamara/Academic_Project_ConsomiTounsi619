@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Template/template.xhtml">
+	<ui:define name="Profil">
+	
+
+<h:head>
+  <title>Profile - ConsommiTounsi</title>
+  
+  
+  	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  	</link>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</link>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</h:head>
+
+<h:body>
+
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>#{loginController.userDetails.username}</h1></div>
+    	<div class="col-sm-2">
+    	<a href="/users" class="pull-right">
+    	<img title="profile image" class="img-circle img-responsive" src="https://cdn2.iconfinder.com/data/icons/business-dual-color-glyph-set-4/128/LINKEDIN_PROFILE-512.png"></img>
+    	</a></div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3">
+              
+
+      <div class="text-center">
+      <h:form enctype="multipart/form-data" id="form3">
+        <ui:repeat var="ImagesUser" value="#{ImageUserController.getImageUser(loginController.userDetails.id)}" varStatus="status">
+						<li data-image="#{ImagesUser.image}">
+						<img src="#{ImagesUser.image}" class="avatar img-circle img-thumbnail" alt="avatar"/></li>
+						</ui:repeat>
+        
+        <h6>Upload a different photo...</h6>
+        <b:fileUpload value="#{profileController.file}" mode="simple" skinSimple="true" class="text-center center-block file-upload" multiple="true" />
+        <h:commandButton id="btn3" class="btn btn-lg" title="Save Profile Picture" value="Save" action="#{profileController.updateProfileImage()}"/>
+        
+        </h:form>
+      </div>
+
+      
+     
+          
+        </div>
+    	<div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Profile</a></li>
+                <li><a data-toggle="tab" href="#messages">Password</a></li>
+                
+              </ul>
+
+              
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                  <h:form  id="form1" class="form">
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>First Name</h4></label>
+              				<h:inputText type="text" class="form-control" name="first_name" id="first_name"  p:placeholder="First Name" value="#{loginController.userDetails.firstName}" />
+                              
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="last_name"><h4>Last Name</h4></label>
+                   <h:inputText type="text" class="form-control" name="last_name" id="last_name"  p:placeholder="Last Name" value="#{loginController.userDetails.lastName}" />
+                            
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="phone"><h4>Phone</h4></label>
+          <h:inputText type="text" class="form-control" name="phone" id="phone"  p:placeholder="enter phone" value="#{loginController.userDetails.tel}" />
+                             
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <label for="mobile"><h4>Birthday</h4></label>
+                                     <h:inputText value="#{loginController.userDetails.dateN}" p:placeholder="dd-mm-yyyy" styleClass="form-control">
+    <f:convertDateTime pattern="dd-mm-yyyy" />
+</h:inputText>
+                              
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Email</h4></label>
+                        <h:inputText type="email" class="form-control" name="email" id="email" p:placeholder="Your Email" value="#{loginController.userDetails.email}" />
+                              
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Location</h4></label>
+                   <h:inputText type="text" class="form-control" name="location" id="location"  p:placeholder="Your address" value="#{loginController.userDetails.address}" />
+                              
+                          </div>
+                      </div>
+                     
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+<h:commandButton id="btn" class="btn btn-lg" title="signup" value="Save" action="#{profileController.updateUser()}"/>
+                          <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                          <h:message style = "color:red" for="btn"/>
+                       
+                      <div align="right"> <h:commandButton action="#{cartController.cadeauUser(loginController.userDetails.id)}" image="images/cadeau.png"></h:commandButton></div>
+ 
+                               	</br>
+                            </div>
+                      </div>
+              	</h:form>
+              
+              
+             </div>
+             <div class="tab-pane" id="messages">
+               
+               <h:form  id="form2" class="form">
+                     
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="password"><h4>Password</h4></label>
+            <h:inputSecret type="password" class="form-control" name="password" id="password" p:placeholder="Password" value="#{profileController.password}" />
+                              
+                              
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="password2"><h4>Verify</h4></label>
+                     <h:inputSecret type="password" class="form-control" name="password" id="password1" p:placeholder="Password" value="#{profileController.verifyPass}" />
+                            
+                          </div>
+                      </div>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+<h:commandButton id="btn1" class="btn btn-lg" title="Update" value="Save" action="#{profileController.updatePassword()}"/>
+                          <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                          <h:message style = "color:red" for="btn1"/>
+                          
+                               	</br>
+                            </div>
+                      </div>
+              	</h:form>
+              
+              
+             </div>
+             
+               
+              </div>
+          </div>
+
+   </div>
+   </div>
+      
+      
+	</h:body>
+	
+	</ui:define>
+</ui:composition>

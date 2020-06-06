@@ -1,0 +1,41 @@
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" -->
+<!-- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
+<!-- <ui:composition xmlns="http://www.w3.org/1999/xhtml" -->
+<!-- 	xmlns:f="http://java.sun.com/jsf/core" -->
+<!-- 	xmlns:h="http://java.sun.com/jsf/html" -->
+<!-- 	xmlns:ui="http://java.sun.com/jsf/facelets"> -->
+<!-- 	<h:head> -->
+<!-- <h:form> -->
+<!--   <b:row> -->
+<!--     <b:column small-screen="two-thirds"> -->
+<!--       <hf:chart title="Series with individual lists" xaxisLabel="Year" yaxisLabel="Amount"> -->
+<!--         <hf:chartSerie name="Boys" -->
+<!--                        type="#{highFacesSettingsBean.boysType}" -->
+<!--                        value="#{lineChartBean.boys}" -->
+<!--                        var="point" -->
+<!--                        point="#{point.amount}" -->
+<!--                        tickLabel="#{point.year}"/> -->
+<!--         <hf:chartSerie colorByPoint="true" -->
+<!--                        type="#{highFacesSettingsBean.girlsType}" -->
+<!--                        name="Girls" -->
+<!--                        value="#{lineChartBean.girls}" -->
+<!--                        var="point" -->
+<!--                        point="#{point.amount}"  /> -->
+<!--       </hf:chart> -->
+<!--       </b:column> -->
+<!--     <b:column small-screen="one-third"> -->
+<!--       <b:panelGrid columns="2"> -->
+<!--         <h:outputLabel value="Chart type (girls):" /> -->
+<!--         <h:outputLabel value="Chart type (boys):" /> -->
+<!--         <b:radiobutton value="#{highFacesSettingsBean.girlsType}"> -->
+<!--           <f:selectItems value="#{highFacesSettingsBean.chartTypes}" /> -->
+<!--         </b:radiobutton> -->
+<!--          <b:radiobutton value="#{highFacesSettingsBean.boysType}"> -->
+<!--           <f:selectItems value="#{highFacesSettingsBean.chartTypes}" /> -->
+<!--         </b:radiobutton> -->
+<!--       </b:panelGrid> -->
+<!--       <br /> -->
+<!--       <b:commandButton value="draw" update="@form" onclick="ajax:highFacesSettingsBean.redraw()" /> -->
+<!--     </b:column> -->
+<!--   </b:row> -->
+<!-- </h:form> -->

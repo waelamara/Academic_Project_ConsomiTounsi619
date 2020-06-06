@@ -1,6 +1,8 @@
 package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -8,14 +10,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.servlet.ServletException;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,11 +43,18 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
 import Utils.AppConstants;
+import tn.esprit.spring.Controller.Charite.RepeatPaginator2;
+import tn.esprit.spring.Controller.Forum.RepeatPaginator;
+import tn.esprit.spring.Controller.GestionUser.LoginController;
+import tn.esprit.spring.Controller.GestionUser.RepeatPaginator1;
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Forum.Sujet;
+import tn.esprit.spring.Repository.Charite.EndroitRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
@@ -47,6 +65,8 @@ import tn.esprit.spring.security.services.UserDetailsImpl;
 
 @Controller(value = "ControllerEvents")
 @ELBeanName(value = "ControllerEvents")
+@Join(path = "/AddEvent", to = "/AddEvent.jsf")
+@ViewScoped
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
@@ -58,6 +78,8 @@ public class ControllerEvents {
 	EndroitDAO endroitDAO;
 	@Autowired
 	UserService userDAO;
+	@Autowired
+	FileStorageServiceImpl fileStorageServiceImpl;
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
 	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
 	
@@ -68,7 +90,40 @@ public class ControllerEvents {
 	private int nbparticipant;
 	private String description;
 	private String image;
+	private UploadedFiles files;
+	@Autowired
+	private EndroitRepository endroitRepository;
+	 public static Long ide ;
+	 private RepeatPaginator2 paginatorRec;
+	 private RepeatPaginator2 paginatorRec1;
 	
+	
+	
+	
+	public RepeatPaginator2 getPaginatorRec() {
+		return paginatorRec;
+	}
+
+	public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
+		this.paginatorRec = paginatorRec;
+	}
+
+	public RepeatPaginator2 getPaginatorRec1() {
+		return paginatorRec1;
+	}
+
+	public void setPaginatorRec1(RepeatPaginator2 paginatorRec1) {
+		this.paginatorRec1 = paginatorRec1;
+	}
+
+	public UploadedFiles getFiles() {
+		return files;
+	}
+
+	public void setFiles(UploadedFiles files) {
+		this.files = files;
+	}
+
 	public Long getId() {
 		return Id;
 	}
@@ -142,148 +197,24 @@ public class ControllerEvents {
 
 	}
 	
-	public void delete(long Id) {
+	public String delete(long Id) {
 
 		eventDAO.deleteEventsById(Id);
+		return "/EventAdmin.xhtml?faces-redirect=true";
 
 	}
 	public List<Events> findLikeNameM(String titre) {
 		return eventDAO.findLikeName(titre);
 	}
-	
+	/*****evenement du jour*********/
 	public List<Events> getEventsParDate() {
 		return eventDAO.getEventsParDate();
 	}
 	
-	public String addChariteesMoney(Authentication authentication,Long idevents,Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-		User u2= userDAO.findOne(u1.getId());
-		int nb = e1.getNbplace();
-		int nbP = e1.getNbparticipant();
-		float S ;
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("cagnotte"))) {			
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			S=u2.getSolde()-Charite.getMontantPaye();
-			u2.setSolde(S);
-			eventDAO.saveEvents(e1);
-			userDAO.save(u2);
-			chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
-			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-		    Message message = Message.creator(new PhoneNumber("+21629651973"),
-		        new PhoneNumber("+18654261966"), 
-		        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
-		        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
-		        +" , "+"donate money"+" "+Charite.getMontantPaye()+"       "+"thank you so much").create();
-
-		    System.out.println(message.getSid());*/
-			//eventDAO.sendSms();
-			
-			
-			return "Successful Donate money thank you";
-
-		} 
-		
-		else if(u2.getSolde()<Charite.getMontantPaye()){
-			return "your insufficient balance thank you";
-			
-		}
-		
-		
-		else {
-			return "insufficient space";
-
-		}
-}
 	
-	public String addChariteesCommande(Authentication authentication,Long idCommande,Long idevents,Charite Charite) {
-		Events e1 = eventDAO.findOne(idevents);
-  		UserDetailsImpl u1 = (UserDetailsImpl) authentication.getPrincipal();		
-		User u2= userDAO.findOne(u1.getId());
-		int nb = e1.getNbplace();
-		int nbP = e1.getNbparticipant();
-		float S ;
-		
-		if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-				&&(Charite.getTypeCharite().equals("dons"))) {
-			Commande c1= commandeDao.findOne(idCommande);
-			Set<Commande> c= new HashSet<Commande>();
-			c.add(c1);
-			e1.setTitre(e1.getTitre());
-			e1.setDateE(e1.getDateE());
-			e1.setEndroit(e1.getEndroit());
-			e1.setNbplace(nb - 1);
-			e1.setNbparticipant(nbP + 1);
-			e1.setPublicite(e1.getPublicite());
-			e1.setCharite(e1.getCharite());
-			e1.setDescription(e1.getDescription());
-			e1.setImage(e1.getImage());
-			S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
-			u2.setSolde(S);
-			
-			Charite.setCommandeCharite(c);
-			eventDAO.saveEvents(e1);
-			userDAO.save(u2);
-			commandeDao.save(c1);
-			chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
-			//eventDAO.sendSms();
-			
-			/*Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-		    Message message = Message.creator(new PhoneNumber("+21629651973"),
-		        new PhoneNumber("+18654261966"), 
-		        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
-		        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
-		        +" , "+"donate ordered ID="+" "+c1.getId()+"       "+"thank you so much").create();
-
-		    System.out.println(message.getSid());*/
-			
-			return "Successful Donated a ordered";
-
-		} 
-		
-		
-		
-		else {
-			return "insufficient space";
-
-		}
-}
 	
-	public String reserveEndroit( Long idendroit,
-			Long ideventss, Endroit e) {
-		Endroit e2 = endroitDAO.findOne(e.getId());
-		Events d1 = eventDAO.findOne(e.getEvent_id());
-		String message = "this place is reserved ";
-		String message1 = "Successful";
-		String message2 = "number of places less than number of places in its event";
-
-		int nbPEndroit = e2.getNbplace();
-		int nbPEvent = d1.getNbplace();
-		if ((e2.getStatu().equals("disponible")) && (nbPEndroit > nbPEvent)) {
-			e2.setNbplace(e2.getNbplace());
-			e2.setEmplacement(e2.getEmplacement());
-			e2.setEventss(e2.getEventss());
-			e2.setStatu("Reservé");
-			endroitDAO.saveEndroit(d1.getId(), e2);
-			return message1;
-		} else if (nbPEndroit < nbPEvent) {
-			return message2;
-		} else {
-			return message ;
-		}
-
-	}
+	
+	
 	public List<Endroit> getAllEndroit() {
 		
 		return endroitDAO.getAllEndroitList();
@@ -296,8 +227,41 @@ public class ControllerEvents {
 
 		return endroitDAO.saveEndroit1(Endroit);
 	}
+	public String addEv() {
 	
-
-    
-
+		eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
+		return "/EventAdmin.xhtml?faces-redirect=true";
+	}
+	 public String save() {
+		 
+	       return eventDAO.save();
+	    }
+	
+	 public List<Endroit> getAllEndroitE(Long id) {
+			
+			return endroitDAO.getAllEndroitEv(id);
+		}
+	
+	 
+	
+	
+	 
+		
+		/*@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
+		public void init(){
+			paginatorRec=new RepeatPaginator2(getAllEvents());
+		}*/
+		@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
+		public void init1(){
+			paginatorRec1=new RepeatPaginator2(getEventsParDate());
+		}
+		@PostConstruct
+		public void init(){
+			List<Events> c= getAllEvents();
+		paginatorRec = new RepeatPaginator2(c);
+	}
+	
 }
+

@@ -43,6 +43,12 @@ public class ProduitServiceImpl implements IProduitService {
 	public Produit findOne(Long id) {
 		return produitRepository.getOne(id);
 	}
+	public Long UpdateProduit(Produit produit) {
+		SsCategorie ssc = sousSousCategorieRepository.findSsCategorieByName(controllerSousSousCategorie.getNomSsCategorie());
+		produit.setIdSsCategorie(ssc);
+		produitRepository.save(produit);
+		return produit.getId();
+		}
 
 	public List<Produit> findAll() {
 		return produitRepository.findAll();
@@ -139,13 +145,22 @@ public class ProduitServiceImpl implements IProduitService {
 		SsCategorie ssc = sousSousCategorieRepository.findSsCategorieByName(controllerSousSousCategorie.getNomSsCategorie());
 		p.setIdSsCategorie(ssc);
 		produitRepository.save(p);
+
+		if(files.getSize()!=0){
 		for (UploadedFile f : files.getFiles()) {
          	String newFileName = fileStorageServiceImpl.UploadImages(f);
          	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH).path(newFileName).toUriString();
 			ImageProduit image = new ImageProduit();
 			image.setImage(fileDownloadUri);
 			image.setIdproduit(p);
+			iImagesProduitService.save(image);}
+		}
+		else{
+			ImageProduit image = new ImageProduit();
+			image.setImage("http://localhost:8081/downloadFile/1590066364642_no-image-available.jpg");
+			image.setIdproduit(p);
 			iImagesProduitService.save(image);
+			
 		}
 	}
 	

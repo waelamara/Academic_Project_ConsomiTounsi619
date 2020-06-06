@@ -1,10 +1,12 @@
 package tn.esprit.spring.Service.GestionUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.Livreur;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.VerificationToken;
 import tn.esprit.spring.Model.Produit.Produit;
@@ -15,26 +17,43 @@ import tn.esprit.spring.Repository.VerificationTokenRepository;
 @Service
 public class UserService {
 	@Autowired
-	UserRepository  UserRepository;
+	UserRepository  userRepository;
 	
 	@Autowired
     private VerificationTokenRepository tokenRepository;
 	
 	/*Chercher un utilisateur*/
 	public User findOne(long id){
-	return UserRepository.getOne(id);
+	return userRepository.findById(id).get();
 	}
 	public User save(User u) {
-		return UserRepository.save(u);
+		return userRepository.save(u);
 	}
 	public List<User> findAll() {
-		return UserRepository.findAll();
+		return userRepository.findAll();
 	}
 	
 	/*Update d'un user*/
 	public  User updateUser(User user)	{
-		return UserRepository.save(user);
+		return userRepository.save(user);
 		
+	}
+	
+	/*get all Users*/
+	public List<User> getAllUsers(){
+		 List<Long> listUsersId=userRepository.ListeUsers();
+	
+			List<User> listUsers = new ArrayList();
+		 User u = new User();
+		 for(Long  a : listUsersId)
+		 {
+			 u=findOne(a);
+			// if(u.getEtatAcc().equals("waiting"))
+			// {
+				 listUsers.add(u);
+			// }
+		 }
+		return  listUsers;		
 	}
 	
 	public User getUser(String verificationToken) {
@@ -50,7 +69,22 @@ public class UserService {
         VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
     }
+	/*Livreur methodes oussama*/
 	
+  
+	public int getNombresUsersSelonSexe(String sexe)
+	{
+		return userRepository.NombreUsersSelonSexe(sexe);
+	}
+	
+	public List<User> getUserSelonChoix(String choix, String cle)
+	{
+		return userRepository.getUserSelonChoix(cle);
+	}
+	public List<User> getUserSelonEmail(String choix, String cle)
+	{
+		return userRepository.getUserSelonEmail(cle);
+	}
 	
 	
 

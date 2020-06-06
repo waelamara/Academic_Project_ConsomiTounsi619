@@ -2,6 +2,7 @@ package tn.esprit.spring.Controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -225,6 +226,12 @@ public void deleteLigne(long idLigneCommande) {
 			public void facturepdf (long id_facture){
 				factureImpl.facturepdf(id_facture);
 			}
+			
+			public String cadeauUser(Long idUser) throws MessagingException
+			{
+				return cadeauUserImpl.CadeauUser(idUser);
+			}
+		
 			
 			
 

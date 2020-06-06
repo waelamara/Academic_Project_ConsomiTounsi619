@@ -33,7 +33,10 @@ public class ControllerProduit {
 	ISousSousCategorieService iSousSousCategorieService;
 	@Autowired
 	ProduitRepository produitRepository;
-
+	@Autowired
+	AdminFormProduit adminFormProduit;
+	@Autowired
+	ControllerSousSousCategorie controllerSousSousCategorie;
 	private Long id;
 	private String nomProduit;
 	private float prix;
@@ -44,6 +47,9 @@ public class ControllerProduit {
 	private int filtrageProduit;
 	private Long idFiltrageProduit;
 	private UploadedFiles files;
+	private List<Produit> listRechercheProduits;
+	private String nomRechercheProduit;
+	private Long idToUpdate;
 
 	public List<Produit> getProduitsByCategorie(Long idCategorie) {
 		return iproduitService.findProduitCategorie(idCategorie);
@@ -93,15 +99,69 @@ public class ControllerProduit {
 		} else
 			return null;
 	}
+	
+	public List<Produit> getAllProduits() {
+		if(nomRechercheProduit==null){
+			return iproduitService.findAll();
+		}
+		else{
+		   return findLikeName(nomRechercheProduit);
+		}
+		
+	}
 
 	
 	
-	public void addProduit() {
-		iproduitService.addProduitWithImage(new Produit( nomProduit,  prix,  description,  barcode,  poids,  prixAchat),files);
+	public String addProduit() {
+	if(idToUpdate!=null){
+
+		iproduitService.UpdateProduit(new Produit(idToUpdate ,nomProduit,  prix,  description,  barcode,  poids,  prixAchat));
+		idToUpdate=null;
+		HideProduits();
+		return "/pages/AffichageProduitAdmin.xhtml?faces-redirect=true";
+		}
+	else {
+			iproduitService.addProduitWithImage(new Produit( nomProduit,  prix,  description,  barcode,  poids,  prixAchat),files);
+			HideProduits();
+			return "null";
+		}
+		
 	}
 	
 	
+	public List<Produit> findLikeName(String name){
+	 return iproduitService.findLikeName(name);
+	}
 	
+	public void RemoveProduit(Long id){
+		iproduitService.Delete(id);
+	}
+	
+	public void HideProduits(){
+		this.idToUpdate=null;
+		this.nomProduit=null;
+		this.description=null;
+		this.prix=0;
+		this.poids=0;
+		this.prixAchat=0;
+		this.barcode=null;
+	}
+	
+	public String DisplayProduits(Produit p){
+		adminFormProduit.setNomCategorie(p.getIdSsCategorie().getIdSCategorie().getIdCategorie().getNomCategorie());
+		adminFormProduit.setNomSCategorie(p.getIdSsCategorie().getIdSCategorie().getNomSCategorie());
+		adminFormProduit.onCountryChange();
+		controllerSousSousCategorie.setNomSsCategorie(p.getIdSsCategorie().getNomSsCategorie());
+		this.idToUpdate=p.getId();
+		this.nomProduit=p.getNomProduit();
+		this.description=p.getDescription();
+		this.prix=p.getPrix();
+		this.poids=p.getPoids();
+		this.prixAchat=p.getPrixAchat();
+		this.barcode=p.getBarcode();
+		
+		return "/pages/AdminFormProduit.xhtml?faces-redirect=true";
+	}
 	
 	
 	
@@ -216,5 +276,32 @@ public class ControllerProduit {
 	public void setIdFiltrageProfuit(Long idFiltrageProduit) {
 		this.idFiltrageProduit = idFiltrageProduit;
 	}
+
+	public List<Produit> getListRechercheProduits() {
+		return listRechercheProduits;
+	}
+
+	public void setListRechercheProduits(List<Produit> listRechercheProduits) {
+		this.listRechercheProduits = listRechercheProduits;
+	}
+
+	public String getNomRechercheProduit() {
+		return nomRechercheProduit;
+	}
+
+	public void setNomRechercheProduit(String nomRechercheProduit) {
+		this.nomRechercheProduit = nomRechercheProduit;
+	}
+
+	public Long getIdToUpdate() {
+		return idToUpdate;
+	}
+
+	public void setIdToUpdate(Long idToUpdate) {
+		this.idToUpdate = idToUpdate;
+	}
+	
+	
+	
 
 }

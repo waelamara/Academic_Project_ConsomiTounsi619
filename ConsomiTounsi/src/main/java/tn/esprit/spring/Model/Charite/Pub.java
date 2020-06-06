@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,15 +26,16 @@ public class Pub implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private String Nom;
+	private String nom;
 	@Temporal (TemporalType.DATE)
-	private Date DateDebut;
+	private Date dateDebut;
 	@Temporal (TemporalType.DATE)
-	private Date DateFin;
-	private String Image;
-	@OneToOne(mappedBy="publicite") 
+	private Date dateFin;
+	private String image;
+	@OneToOne(fetch=FetchType.EAGER,mappedBy="publicite") 
 	@JsonIgnore
 	private Events events;
+	
 	public Long getId() {
 		return Id;
 	}
@@ -41,28 +43,28 @@ public class Pub implements Serializable {
 		Id = id;
 	}
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 	public Date getDateDebut() {
-		return DateDebut;
+		return dateDebut;
 	}
 	public void setDateDebut(Date dateDebut) {
-		DateDebut = dateDebut;
+		this.dateDebut = dateDebut;
 	}
 	public Date getDateFin() {
-		return DateFin;
+		return dateFin;
 	}
 	public void setDateFin(Date dateFin) {
-		DateFin = dateFin;
+		this.dateFin = dateFin;
 	}
 	public String getImage() {
-		return Image;
+		return image;
 	}
 	public void setImage(String image) {
-		Image = image;
+		this.image = image;
 	}
 	public Events getEvents() {
 		return events;
@@ -79,10 +81,18 @@ public class Pub implements Serializable {
 	}
 	public Pub(String Nom,Date DateDebut,Date DateFin,String Image,Events events) {
 		super();
-		this.Nom=Nom;
-		this.DateDebut=DateDebut;
-		this.DateFin=DateFin;
-		this.Image=Image;
+		this.nom=Nom;
+		this.dateDebut=DateDebut;
+		this.dateFin=DateFin;
+		this.image=Image;
+		this.events=events;
+
+	}
+	public Pub(String Nom,Date DateDebut,Date DateFin,Events events) {
+		super();
+		this.nom=Nom;
+		this.dateDebut=DateDebut;
+		this.dateFin=DateFin;
 		this.events=events;
 
 	}
