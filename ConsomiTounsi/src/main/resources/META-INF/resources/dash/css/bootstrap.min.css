@@ -3395,21 +3395,21 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-info {
 	color: #fff;
-	background-color: #5bc0de;
-	border-color: #46b8da
+	background-color: #eb141a;
+	border-color: #eb141a
 }
 
 .btn-info.focus, .btn-info:focus {
 	color: #fff;
-	background-color: #31b0d5;
-	border-color: #1b6d85
+	background-color: #eb141a;
+	border-color: #eb141a
 }
 
 .btn-info.active, .btn-info:active, .btn-info:hover, .open>.dropdown-toggle.btn-info
 	{
 	color: #fff;
-	background-color: #31b0d5;
-	border-color: #269abc
+	background-color: #eb141a;
+	border-color: #eb141a
 }
 
 .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover,
@@ -3417,20 +3417,20 @@ a.btn.disabled, fieldset[disabled] a.btn {
 	.open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus,
 	.open>.dropdown-toggle.btn-info:hover {
 	color: #fff;
-	background-color: #269abc;
-	border-color: #1b6d85
+	background-color: #eb141a;
+	border-color: #eb141a
 }
 
 .btn-info.disabled.focus, .btn-info.disabled:focus, .btn-info.disabled:hover,
 	.btn-info[disabled].focus, .btn-info[disabled]:focus, .btn-info[disabled]:hover,
 	fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:focus,
 	fieldset[disabled] .btn-info:hover {
-	background-color: #5bc0de;
-	border-color: #46b8da
+	background-color: #eb141a;
+	border-color: #eb141a
 }
 
 .btn-info .badge {
-	color: #5bc0de;
+	color: #eb141a;
 	background-color: #fff
 }
 
@@ -5066,11 +5066,11 @@ a.badge:focus, a.badge:hover, a.label:focus, a.label:hover {
 }
 
 .label-info {
-	background-color: #5bc0de
+	background-color: #eb141a
 }
 
 .label-info[href]:focus, .label-info[href]:hover {
-	background-color: #31b0d5
+	background-color: #eb141a
 }
 
 .label-warning {
@@ -5379,7 +5379,7 @@ to {
 }
 
 .progress-bar-info {
-	background-color: #5bc0de
+	background-color: #eb141a
 }
 
 .progress-striped .progress-bar-info {

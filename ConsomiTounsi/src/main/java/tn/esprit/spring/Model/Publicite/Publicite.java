@@ -24,22 +24,22 @@ public class Publicite implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private String Nom;
+	private String nom;
 	@Enumerated(EnumType.STRING)
-	private Canal Canal;
+	private Canal canal;
 	@Enumerated(EnumType.STRING)
-	private GenderCible GenderCible;
+	private GenderCible genderCible;
 	@Temporal(TemporalType.DATE)
-	private Date DateDebut;
+	private Date dateDebut;
 	@Temporal(TemporalType.DATE)
-	private Date DateFin;
-	private int NbrInitialVueCible;
-	private int NbrFinalVue;
-	private int DebutAgeCible;
-	private int FinAgeCible;
-	private float Cout;
-	private String Video;
-	private String Image;
+	private Date dateFin;
+	private int nbrInitialVueCible;
+	private int nbrFinalVue;
+	private int debutAgeCible;
+	private int finAgeCible;
+	private float cout;
+	private String video;
+	private String image;
 	@ManyToOne
 	private User IdUser;
 
@@ -47,55 +47,103 @@ public class Publicite implements Serializable {
 	}
 	
 
-	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal,
-			tn.esprit.spring.Model.Publicite.GenderCible genderCible, Date dateDebut, Date dateFin,
+	public Publicite(String nom,Canal canal,
+			GenderCible genderCible, Date dateDebut, Date dateFin,
 			int nbrInitialVueCible, int nbrFinalVue, int debutAgeCible, int finAgeCible, float cout, String video,
 			String image, User idUser) {
 		super();
-		Nom = nom;
-		Canal = canal;
-		GenderCible = genderCible;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-		NbrInitialVueCible = nbrInitialVueCible;
-		NbrFinalVue = nbrFinalVue;
-		DebutAgeCible = debutAgeCible;
-		FinAgeCible = finAgeCible;
-		Cout = cout;
-		Video = video;
-		Image = image;
-		IdUser = idUser;
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.nbrInitialVueCible = nbrInitialVueCible;
+		this.nbrFinalVue = nbrFinalVue;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+		this.cout = cout;
+		this.video = video;
+		this.image = image;
+		this.IdUser = idUser;
 	}
 
 
-	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
+	public Publicite(String nom, Canal canal, Date dateDebut, Date dateFin,
 			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image, User idUser) {
 		super();
-		Nom = nom;
-		Canal = canal;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-		NbrInitialVueCible = nbrInitialVueCible;
-		NbrFinalVue = nbrFinalVue;
-		Cout = cout;
-		Video = video;
-		Image = image;
-		IdUser = idUser;
+		this.nom = nom;
+		this.canal = canal;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.nbrInitialVueCible = nbrInitialVueCible;
+		this.nbrFinalVue = nbrFinalVue;
+		this.cout = cout;
+		this.video = video;
+		this.image = image;
+		this.IdUser = idUser;
 	}
 
-	public Publicite(String nom, tn.esprit.spring.Model.Publicite.Canal canal, Date dateDebut, Date dateFin,
+	public Publicite(String nom, Canal canal, Date dateDebut, Date dateFin,
 			int nbrInitialVueCible, int nbrFinalVue, float cout, String video, String image) {
 		super();
-		Nom = nom;
-		Canal = canal;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-		NbrInitialVueCible = nbrInitialVueCible;
-		NbrFinalVue = nbrFinalVue;
-		Cout = cout;
-		Video = video;
-		Image = image;
+		this.nom = nom;
+		this.canal = canal;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.nbrInitialVueCible = nbrInitialVueCible;
+		this.nbrFinalVue = nbrFinalVue;
+		this.cout = cout;
+		this.video = video;
+		this.image = image;
 	}
+	
+	
+
+	public Publicite(String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin, int debutAgeCible,
+			int finAgeCible) {
+		super();
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+	}
+	
+	
+	
+
+
+	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,
+			int debutAgeCible, int finAgeCible) {
+		super();
+		Id = id;
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+	}
+
+
+	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,
+			int debutAgeCible, int finAgeCible, String video, String image) {
+		super();
+		Id = id;
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+		this.video = video;
+		this.image = image;
+	}
+
 
 	public Long getId() {
 		return Id;
@@ -106,75 +154,75 @@ public class Publicite implements Serializable {
 	}
 
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 
 	public Canal getCanal() {
-		return Canal;
+		return canal;
 	}
 
 	public void setCanal(Canal canal) {
-		Canal = canal;
+		this.canal = canal;
 	}
 
 	public Date getDateDebut() {
-		return DateDebut;
+		return dateDebut;
 	}
 
 	public void setDateDebut(Date dateDebut) {
-		DateDebut = dateDebut;
+		this.dateDebut = dateDebut;
 	}
 
 	public Date getDateFin() {
-		return DateFin;
+		return dateFin;
 	}
 
 	public void setDateFin(Date dateFin) {
-		DateFin = dateFin;
+		this.dateFin = dateFin;
 	}
 
 	public int getNbrInitialVueCible() {
-		return NbrInitialVueCible;
+		return nbrInitialVueCible;
 	}
 
 	public void setNbrInitialVueCible(int nbrInitialVueCible) {
-		NbrInitialVueCible = nbrInitialVueCible;
+		this.nbrInitialVueCible = nbrInitialVueCible;
 	}
 
 	public int getNbrFinalVue() {
-		return NbrFinalVue;
+		return nbrFinalVue;
 	}
 
 	public void setNbrFinalVue(int nbrFinalVue) {
-		NbrFinalVue = nbrFinalVue;
+		this.nbrFinalVue = nbrFinalVue;
 	}
 
 	public float getCout() {
-		return Cout;
+		return cout;
 	}
 
 	public void setCout(float cout) {
-		Cout = cout;
+		this.cout = cout;
 	}
 
 	public String getVideo() {
-		return Video;
+		return video;
 	}
 
 	public void setVideo(String video) {
-		Video = video;
+		this.video = video;
 	}
 
 	public String getImage() {
-		return Image;
+		return image;
 	}
 
 	public void setImage(String image) {
-		Image = image;
+		this.image = image;
 	}
 
 	public User getIdUser() {
@@ -186,27 +234,27 @@ public class Publicite implements Serializable {
 	}
 
 	public GenderCible getGenderCible() {
-		return GenderCible;
+		return genderCible;
 	}
 
 	public void setGenderCible(GenderCible genderCible) {
-		GenderCible = genderCible;
+		this.genderCible = genderCible;
 	}
 
 	public int getDebutAgeCible() {
-		return DebutAgeCible;
+		return debutAgeCible;
 	}
 
 	public void setDebutAgeCible(int debutAgeCible) {
-		DebutAgeCible = debutAgeCible;
+		this.debutAgeCible = debutAgeCible;
 	}
 
 	public int getFinAgeCible() {
-		return FinAgeCible;
+		return finAgeCible;
 	}
 
 	public void setFinAgeCible(int finAgeCible) {
-		FinAgeCible = finAgeCible;
+		this.finAgeCible = finAgeCible;
 	}
 
 }

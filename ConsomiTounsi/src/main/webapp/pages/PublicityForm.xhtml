@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="PublicityForm">
+<h:head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Form Elements - Ace Admin</title>
+
+		<meta name="description" content="Common form elements and layouts" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<h:outputStylesheet library="dash" name="css/bootstrap.min.css" />
+		<h:outputStylesheet library="dash" name="font-awesome/4.5.0/css/font-awesome.min.css" />
+		<!-- page specific plugin styles -->
+
+		<h:outputStylesheet library="dash" name="css/jquery-ui.custom.min.css" />
+ 		<h:outputStylesheet library="dash" name="css/chosen.min.css" /> 
+  		<h:outputStylesheet library="dash" name="css/bootstrap-datepicker3.min.css" /> 
+  		<h:outputStylesheet library="dash" name="css/bootstrap-timepicker.min.css" /> 
+    	<h:outputStylesheet library="dash" name="css/daterangepicker.min.css" /> 
+       	<h:outputStylesheet library="dash" name="css/bootstrap-datetimepicker.min.css" /> 
+       	<h:outputStylesheet library="dash" name="css/bootstrap-colorpicker.min.css" />
+		<!-- text fonts -->
+		<h:outputStylesheet library="dash" name="css/fonts.googleapis.com.css" />
+		<!-- ace styles -->
+		<h:outputStylesheet library="dash" name="css/ace-skins.min.css" />
+		<h:outputStylesheet library="dash" name="css/ace-rtl.min.css" />
+		<script src="dash/js/ace-extra.min.js"></script>
+
+		<h:outputStylesheet library="dash" name="css/chosen.min.css" />
+		<h:outputStylesheet library="dash" name="css/bootstrap-datepicker3.min.css" />
+		<h:outputStylesheet library="dash" name="css/bootstrap-timepicker.min.css" />
+		<h:outputStylesheet library="dash" name="css/daterangepicker.min.css" />
+		<h:outputStylesheet library="dash" name="css/bootstrap-datetimepicker.min.css" />
+
+
+</h:head>
+<h:body>
+<div style="margin-left: 16.5%;position:relative;">
+		<div class="main-container ace-save-state" id="main-container">
+			<div class="main-content">
+				<div class="main-content-inner">
+
+
+					<div class="page-content">
+						<div class="ace-settings-container" id="ace-settings-container">
+							<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+								<i class="ace-icon fa fa-cog bigger-130"></i>
+							</div>
+
+							<div class="ace-settings-box clearfix" id="ace-settings-box">
+								<div class="pull-left width-50">
+									<div class="ace-settings-item">
+										<div class="pull-left">
+											<select id="skin-colorpicker" class="hide">
+												<option data-skin="no-skin" value="#438EB9">#438EB9</option>
+												<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+												<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+												<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+											</select>
+										</div>
+										<span>&nbsp; Choose Skin</span>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
+										<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
+										<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
+										<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
+										<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
+										<label class="lbl" for="ace-settings-add-container">
+											Inside
+											<b>.container</b>
+										</label>
+									</div>
+								</div><!-- /.pull-left -->
+
+								<div class="pull-left width-50">
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
+										<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
+										<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
+										<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+									</div>
+								</div><!-- /.pull-left -->
+							</div><!-- /.ace-settings-box -->
+						</div><!-- /.ace-settings-container -->
+
+						<div class="page-header">
+							<h1>
+								Ajouter Publicité
+								<small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<h:form enctype="multipart/form-data" class="form-horizontal" >
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Publicité</b> </label>
+
+										<div class="col-sm-9">
+											<h:inputText value="#{ControllerPublicite.nom}" placeholder="Nom produit" class="col-xs-10 col-sm-5"></h:inputText>
+											
+										</div>
+									</div>
+
+						
+
+								
+										
+								
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"><b>Canal</b></label>
+
+										<div class="col-sm-9">
+										<h:selectOneMenu id="canal" value="#{ControllerPublicite.canal}">
+									<f:selectItem itemLabel="Choisir le Canal" itemValue="#{null}" />
+									<f:selectItems value="#{ControllerPublicite.canals}" />
+									<f:ajax event="change" execute="canal" render="cout" />
+								</h:selectOneMenu>
+											<div class="space-2"></div>
+											
+											<div class="help-block" id="input-size-slider"></div>
+										</div>
+										  
+										
+									</div>
+										<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" ><b>Date Range</b></label>
+
+										<div class="col-sm-9">
+									
+													
+							
+												<div class="row">
+															<div class="col-xs-8 col-sm-11">
+																<div class="input-daterange input-group">
+																	<h:inputText id="datedebut" type="text" value="#{ControllerPublicite.dateDebutString}" class="input-sm form-control" name="start">
+																	<f:ajax event="change" execute="datedebut" render="cout" />
+																	</h:inputText>
+																	
+																	<span class="input-group-addon">
+																		<i class="fa fa-exchange"></i>
+																	</span>
+
+																	<h:inputText id="datefin" type="text" value="#{ControllerPublicite.dateFinString}" class="input-sm form-control" name="end" >
+																	<f:ajax event="change" execute="datefin" render="cout" />
+																	</h:inputText>
+																</div>
+															</div>
+														</div>
+										
+											<div class="space-2"></div>
+												
+											<div class="help-block" id="input-size-slider"></div>
+										</div>
+									</div>
+
+									<div class="form-group">
+									
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-5"><b>Sexe</b></label>
+
+										<div class="col-sm-9">
+											<div class="clearfix">
+											<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        									<p:selectOneRadio id="gender" value="#{ControllerPublicite.genderCible}" unselectable="true" >
+           									<f:selectItem itemLabel="Homme" itemValue="HOMME"  />
+            								<f:selectItem itemLabel="Femme" itemValue="FEMME" />
+           									<f:selectItem itemLabel="All" itemValue="TOUS" />
+           									<f:ajax event="change" execute="gender" render="cout" />
+       										</p:selectOneRadio>
+    										</h:panelGrid>
+												
+											</div>
+
+											<div class="space-2"></div>
+                                            
+											<div class="help-block" id="input-span-slider"></div>
+										</div>
+									</div>
+
+								<div class="form-group">
+									<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-6"><b>Images or Video</b></label>
+								<div class="col-sm-9">
+								<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        									<p:selectOneRadio id="typefile" value="#{ControllerPublicite.typeFile}" unselectable="true" >
+           									<f:selectItem itemLabel="Image" itemValue="Image"  />
+            								<f:selectItem itemLabel="Video" itemValue="Video" />
+           									<f:ajax event="change" execute="typefile" render="cout" />
+       										</p:selectOneRadio>
+       										<p:fileUpload  value="#{ControllerPublicite.file}" mode="simple" skinSimple="true"/>
+    										</h:panelGrid>
+								
+								
+								
+								
+								</div>
+								</div>
+								</div>
+								
+								
+								
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-6"><b>Age</b></label>
+
+										<div class="col-sm-9">
+											<div class="clearfix">
+										<h:panelGrid columns="1" style="margin-bottom: 10px">
+										 <h:outputText id="displayRange" value="Between #{ControllerPublicite.debutAgeCible} and #{ControllerPublicite.finAgeCible}" />
+        								<p:slider id="slider" for="txt6,txt7" minValue="10" maxValue="80" display="displayRange" style="width: 400px" range="true" displayTemplate="Between {min} and {max}" >
+   
+   										 <f:ajax event="slideEnd" execute="slider txt6 txt7" render="cout"/>
+        								</p:slider>
+   										</h:panelGrid>
+   										<h:inputText id="txt6" value="#{ControllerPublicite.debutAgeCible}">
+        								 <f:ajax event="focus" execute="txt6 txt7" render="cout"/>
+        								</h:inputText>	
+   										 <h:inputText id="txt7" value="#{ControllerPublicite.finAgeCible}">
+   										  <f:ajax event="focus" execute="txt7 txt6" render="cout"/>
+   										 </h:inputText>
+   										
+									</div>
+									</div>
+									</div>
+									
+												
+									 
+									
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+									<h:commandButton class="btn btn-info" value="Save" type="submit" action="#{ControllerPublicite.addPublicite}" ></h:commandButton>
+												
+									<span class="blue bolder bigger-150"><h:outputText id="cout"  value="#{ControllerPublicite.UpdateCoutDispaly()}" /></span><span class="text-info">/DT</span>
+										</div>
+									</div>
+
+									<div class="hr hr-24"></div>
+
+									
+									<div class="space-24"></div>
+							
+				
+									
+					
+   				
+  
+					</h:form>
+		
+			
+
+                      
+                 
+  
+			
+
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+
+
+			
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+		<script src="dash/js/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+			jQuery(function($) {
+				$('#id-disable-check').on('click', function() {
+					var inp = $('#form-input-readonly').get(0);
+					if(inp.hasAttribute('disabled')) {
+						inp.setAttribute('readonly' , 'true');
+						inp.removeAttribute('disabled');
+						inp.value="This text field is readonly!";
+					}
+					else {
+						inp.setAttribute('disabled' , 'disabled');
+						inp.removeAttribute('readonly');
+						inp.value="This text field is disabled!";
+					}
+				});
+
+				autosize($('textarea[class*=autosize]'));
+				
+				
+				$('.date-picker').datepicker({
+					autoclose: true,
+					todayHighlight: true
+				})
+				
+				.next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+			
+				
+				$('.input-daterange').datepicker({autoclose:true});
+		
+				var tag_input = $('#form-field-tags');
+				try{
+					tag_input.tag(
+					  {
+						placeholder:tag_input.attr('placeholder'),
+						
+						source: ace.vars['US_STATES'],
+					  }
+					)
+			
+					
+					var $tag_obj = $('#form-field-tags').data('tag');
+					$tag_obj.add('Programmatically Added');
+					
+					var index = $tag_obj.inValues('some tag');
+					$tag_obj.remove(index);
+				}
+				catch(e) {
+					
+					tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+					
+				}
+				
+				
+			
+				
+				
+				
+				$('#modal-form').on('shown.bs.modal', function () {
+					if(!ace.vars['touch']) {
+						$(this).find('.chosen-container').each(function(){
+							$(this).find('a:first-child').css('width' , '210px');
+							$(this).find('.chosen-drop').css('width' , '210px');
+							$(this).find('.chosen-search input').css('width' , '200px');
+						});
+					}
+				})
+				
+				
+				
+				$(document).one('ajaxloadstart.page', function(e) {
+					autosize.destroy('textarea[class*=autosize]')
+					
+					$('.limiterBox,.autosizejs').remove();
+					$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
+				});
+			
+			});
+		</script>
+
+		<script src="dash/js/bootstrap.min.js"></script>
+
+		<script src="dash/js/jquery-ui.custom.min.js"></script>
+		<script src="dash/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="dash/js/chosen.jquery.min.js"></script>
+		<script src="dash/js/spinbox.min.js"></script>
+		<script src="dash/js/bootstrap-datepicker.min.js"></script>
+		<script src="dash/js/bootstrap-timepicker.min.js"></script>
+		<script src="dash/js/moment.min.js"></script>
+		<script src="dash/js/daterangepicker.min.js"></script>
+		<script src="dash/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="dash/js/bootstrap-colorpicker.min.js"></script>
+		<script src="dash/js/jquery.knob.min.js"></script>
+		<script src="dash/js/autosize.min.js"></script>
+		<script src="dash/js/jquery.inputlimiter.min.js"></script>
+		<script src="dash/js/jquery.maskedinput.min.js"></script>
+		<script src="dash/js/bootstrap-tag.min.js"></script>
+
+		<script src="dash/js/ace-elements.min.js"></script>
+		<script src="dash/js/ace.min.js"></script>
+
+</h:body>
+</ui:define>
+</ui:composition>
