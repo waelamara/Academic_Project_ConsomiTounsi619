@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/TemplateAdmin/template.xhtml"> 
+	<ui:define name="Order2">
+
+
+<h:head>
+		<h:outputStylesheet library="Calender" name="core/main.css" /> 
+		<h:outputStylesheet library="Calender" name="daygrid/main.css" /> 
+			<h:outputStylesheet library="Calender" name="timegrid/main.css" /> 
+		<h:outputStylesheet library="Calender" name="index.css" /> 
+		<h:outputStylesheet library="Calender" name="list/main.css" /> 
+		<script src="Calender/core/main.js"></script>
+			<script src="Calender/daygrid/main.js"></script>
+			<script src="Calender/list/main.js"></script>
+
+  </h:head>
+
+  		<script> 
+
+			   document.addEventListener('DOMContentLoaded', function() {
+			        var calendarEl = document.getElementById('calendar');
+
+			        var calendar = new FullCalendar.Calendar(calendarEl, {
+			          plugins: [ 'dayGrid', 'list' ],
+			          
+			          header:{
+	 			        	 center:'title',
+	 			        	 left:'dayGridMonth,list'
+	 			        	 },
+			        events :'http://localhost:8081/Commande/commandeParMois2'
+			        
+			        	
+			        });
+
+			        calendar.render();
+			     
+			      });
+			   console.log(event);
+
+    </script>
+      <h:body>
+       <div id='calendar'></div>
+  </h:body>
+ 
+
+
+	</ui:define>
+		</ui:composition>
+	

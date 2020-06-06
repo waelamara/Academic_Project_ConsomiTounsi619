@@ -2,13 +2,18 @@ package tn.esprit.spring.Controller;
 
 import java.time.LocalDate;
 
+import javax.transaction.Transactional;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import tn.esprit.spring.Controller.GestionUser.LoginController;
+import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
+import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Reclamation.ReclamationService;
 
@@ -21,6 +26,10 @@ public class ContactController {
 	ReclamationService ReclamationService;
 	@Autowired
 	CommandeImpl CommandeDAO;
+	@Autowired
+	LoginController loginController;
+	@Autowired 
+	UserRepository UserRepository;
 	
 	public String titre;
 	public String description;
@@ -41,13 +50,15 @@ public class ContactController {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public  String  addreclamation() {
+	@Transactional
+	public  String  addreclamation(long iduser) {
+		
 		String navigateTo = "/acceuil.xhtml"; 
 		reclamation rec= new reclamation (titre,description);
         rec.setDateRec(LocalDate.now());
-		System.out.println(titre);
-		System.out.println(description);
+        User u =UserRepository.getOne(iduser);
+        rec.setUser(u);
+        System.out.println(u);
 		ReclamationService.save1(rec);
 		return navigateTo;
 		

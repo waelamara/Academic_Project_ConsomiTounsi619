@@ -28,6 +28,7 @@ import tn.esprit.spring.Model.ChargeRequest;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.CommandeRepository;
+import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.UserRepository;
 
 
@@ -42,6 +43,8 @@ public class StripeService {
 	
 	@Autowired
 	CommandeRepository commandeRepository;
+	@Autowired
+	LigneCommandeImpl ligneImpl;
 	
 	@Value("${stripe.keys.secret}")
 	private String secretKey;
@@ -178,6 +181,7 @@ public class StripeService {
 		        params.put("source", token.getId());
 		        Charge charge = Charge.create(params);
 		        commandeRepository.PayerEnLigne(orders.getId());
+		        if(ligneImpl.PrixTotalCommande(idUser)>5000)       
 		        commandeRepository.remise(idUser);
 		    	User u =userRepository.findById((long) idUser).get();
 				 u.setPointFidelite(Math.round((int) orders.getMontant()/ 10));

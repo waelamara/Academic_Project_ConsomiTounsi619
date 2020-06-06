@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
+import tn.esprit.spring.Model.Stock.Stock;
 import tn.esprit.spring.Service.Rayon.IRayonService;
 import tn.esprit.spring.Service.Rayon.RayonServiceImpl;
 
@@ -25,6 +26,8 @@ public class RayonController {
 
 	@Autowired
 	IRayonService rayonDAO;
+	/////////////////////////////////////////////////////////////////////////////
+	
 	
 	
 	///////////////////////////////////////////////////////////////////////////////

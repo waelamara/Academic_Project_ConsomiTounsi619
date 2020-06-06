@@ -31,14 +31,14 @@ IVoteSujetService ivoteSujetservice;
 @PostMapping("/ajouterl/{sujetId}/{userId}")
 public ResponseEntity<?> ajouterLike( @PathVariable(value = "sujetId") Long sujetid,
 		                              @PathVariable(value = "userId") Long userid,
-		                              @Valid @RequestBody VoteSujet v ) {
+		                               VoteSujet v ) {
 	ivoteSujetservice.ajouterlike( v,sujetid, userid);
 	  return ResponseEntity.created(null).body(v);}
 
 @PostMapping("/ajouterd/{sujetId}/{userId}")
 public ResponseEntity<?> ajouterDislike( @PathVariable(value = "sujetId") Long sujetid,
 		                              @PathVariable(value = "userId") Long userid,
-		                              @Valid @RequestBody VoteSujet v ) {
+		                               VoteSujet v ) {
 	ivoteSujetservice.ajouterdislike( v,sujetid, userid);
 	  return ResponseEntity.created(null).body(v);}
 

@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/Template/template.xhtml">
+	<ui:define name="AddCharite">
+	
+	<h:head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="description" content="OneTech shop project"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<h:outputStylesheet library="acceuil" name="styles/bootstrap4/bootstrap.min.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/animate.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_styles.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_responsive.css" />
+
+	</h:head>
+
+
+
+		<body>
+
+	<section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+													
+						        
+						        <th>Type of Charity</th>
+						        <th>Price doneted</th>
+						        <th>Event</th>
+						      
+						        
+						        
+						      </tr>
+						    </thead>
+
+					
+
+						      
+						    <tbody>
+						   
+						      <h:form id="account">  
+						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteUserM()}" varStatus="status">
+						  
+						       <tr class="text-center">
+						     
+						        
+						        <td class="type of Charity">	        	
+			        	<h:outputText  value="#{charite.typeCharite}"/>
+			</td>
+						        
+						        
+					        
+						        <td class="Price doneted"><h:outputText  value="#{charite.montantPaye}"/></td>
+						      <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> 
+						     , date :<h:outputText  value="#{charite.idevents.dateE}"/></td>
+						  
+						     
+						  
+						  
+						     
+						     
+							
+						      </tr><!-- END TR-->
+
+	   </ui:repeat>			
+	   </h:form> 				      
+						    </tbody>
+
+		  
+						  </table>
+						  <table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+													
+						        
+						        <th>Type of Charity</th>
+						        <th>Commande</th>
+						        <th>Event</th>
+						      
+						        
+						        
+						      </tr>
+						    </thead>
+
+					
+
+						      
+						    <tbody>
+						   
+						      <h:form id="account">  
+						   <ui:repeat var="charite" value="#{ControllerCharite.getAllChariteUserC()}" varStatus="status">
+						  
+						       <tr class="text-center">
+						     
+						        
+						        <td class="type of Charity">	        	
+			        	<h:outputText  value="#{charite.typeCharite}"/>
+			</td>
+						        
+						        
+					       <ui:repeat var="commande" value="#{ControllerCharite.getChariteCommande1(charite.id)}" varStatus="status">
+			 <td class="Commande">
+						   <h:outputText  value="#{commande.id}"/>
+						    </td>
+						     </ui:repeat>
+						     <td class="Event"> titre : <h:outputText  value="#{charite.idevents.titre}"/> 
+						     , date :<h:outputText  value="#{charite.idevents.dateE}"/></td>
+						     
+						  
+						  
+						     
+						     
+							
+						      </tr><!-- END TR-->
+
+	   </ui:repeat>			
+	   </h:form> 				      
+						    </tbody>
+
+		  
+						  </table>
+						</div>  
+					  </div>
+    			</div>
+    		</div>
+    		</section>
+    		
+			
+			<!-- Event Item -->
+			
+								
+							
+							
+
+
+
+
+<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+<script src="acceuil/styles/bootstrap4/popper.js"></script>
+<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="acceuil/plugins/easing/easing.js"></script>
+<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="acceuil/js/shop_custom.js"></script>
+	
+	
+	
+
+	</body>
+	</ui:define>
+	</ui:composition>

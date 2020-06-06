@@ -20,7 +20,7 @@
 	<h:outputStylesheet library="blog" name="css/ion.rangeSlider.skinFlat.css" />
 	<h:outputStylesheet library="blog" name="css/main.css" />
 </head>
-	
+	 
 <body>
 
     <!--================Blog Categorie Area =================-->
@@ -80,6 +80,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="blog_left_sidebar">
+                 <h:form>
                     <ui:repeat var="sujet" value="#{blogController.paginator.model}" varStatus="status"> 
                         <article class="row blog_item">
                             <div class="col-md-3">
@@ -104,11 +105,13 @@
 									<img class="img-fluid" src="#{ImageSujet.image}" alt="" />
                                     <img src="img/blog/main-blog/m-blog-1.jpg" alt=""/>
                                     <div class="blog_details">
-                                  <h:link outcome="/fourm/single-blog" >
-                                     <f:param name="idsujet" value="#{sujet.id}"/>
+                            
+                                        <h:link outcome="/fourm/single-blog " >
+                                          <f:param name="idsujet" value="#{sujet.id}"/>
                                          <h2>  <h:outputText value="#{sujet.nomSujet}"/>  </h2 > 
                                          </h:link>
-                                         
+                      
+                              
               								<p><h:outputText value="#{sujet.description}MCSE boot camps have its supporters and its detractors. Some people do not
                                             understand why you should have to spend money on boot camp when you can get
                                             the MCSE study ma"/></p>
@@ -120,7 +123,7 @@
                         </article>
                      </ui:repeat>
                         
-                        <h:form><nav class="blog-pagination justify-content-center d-flex">
+                        <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
                                   <h:commandLink action="#{blogController.paginator.prev()}" class="page-link" aria-label="Previous">

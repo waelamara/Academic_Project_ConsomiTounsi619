@@ -37,7 +37,9 @@
 							
 							<div class="top_bar_user">
 								<h:panelGroup rendered="#{empty loginController.userDetails}">
-							
+								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
+								<div><a href="signupdeliverym">register as a delivery man</a></div>
+								<div><a href="/LoginDeliveryController">Sign in as Delivery man</a></div>
 								<div class="user_icon"><img src="images/user.svg" alt=""/></div>
 								<div><a href="signup">Register</a></div>
 								<div><a href="login">Sign in</a></div>
@@ -245,12 +247,28 @@
 											<li class="hassubs">
 										<a href="#">Charity<i class="fas fa-chevron-down"></i></a>
 										<ul>
-											<li><a href="Charity.jsf">jackpot<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="CharityUser.jsf">jackpot<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="EventCharite.jsf">donations<i class="fas fa-chevron-down"></i></a></li>
 											
 										</ul>
 									</li>
-											<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+									</ul>
+									</li>
+									
+<!-- 									khayat -->
+									<li class="hassubs">
+										<a href="#">Charity<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="EventCharite.jsf">Events<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="EventDuJour.jsf">Event Of The Day<i class="fas fa-chevron-down"></i></a></li>
+											<li class="hassubs">
+										<a href="#">Charity<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="CharityUser.jsf">My Charities<i class="fas fa-chevron-down"></i></a></li>
+											
+										</ul>
+									</li>
+<!-- 									khayat -->
 										</ul>
 									</li>
 									
@@ -4334,7 +4352,7 @@
 					<div class="footer_column">
 						<div class="footer_title">Customer Care</div>
 						<ul class="footer_list">
-							<li><a href="#">My Account</a></li>
+							<li><a href="profil">My Account</a></li>
 							<li><a href="#">Order Tracking</a></li>
 							<li><a href="#">Wish List</a></li>
 							<li><a href="#">Customer Services</a></li>

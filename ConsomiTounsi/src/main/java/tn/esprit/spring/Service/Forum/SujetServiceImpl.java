@@ -342,7 +342,7 @@ public  class SujetServiceImpl implements ISujetService {
    helper.setFrom("consommis.toounsi.619@gmail.com");
    helper.setSubject("réussite à notre grand jeu");
    helper.setText(messaage, messaage);
-  javaMailSender.send(message);
+   javaMailSender.send(message);
    return p1;		
 	}
 

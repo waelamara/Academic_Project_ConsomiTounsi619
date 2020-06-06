@@ -41,7 +41,7 @@ public class Charite implements Serializable {
 	@ManyToOne
 	@JsonIgnore
     private Events idevents ;
-	@ManyToMany(cascade = CascadeType.ALL) 
+	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER) 
 	@JsonIgnore
 	private Set<Commande> commandeCharite = new HashSet<>() ; 
 	@Transient
@@ -132,6 +132,28 @@ public class Charite implements Serializable {
 		super();
 		
 		this.commandeCharite=CommandeCharite;
+
+	}
+	public Charite(Set<Commande> CommandeCharite,User iduser,Events idevents) {
+		super();
+		
+		this.commandeCharite=CommandeCharite;
+		this.idevents=idevents;
+		this.iduser=iduser;
+
+	}
+	public Charite(String TypeCharite,float MontantPaye) {
+		super();
+		this.typeCharite=TypeCharite;
+		this.montantPaye=MontantPaye;
+		
+
+	}
+	public Charite(String TypeCharite,float MontantPaye,Events idevents) {
+		super();
+		this.typeCharite=TypeCharite;
+		this.montantPaye=MontantPaye;
+		this.idevents=idevents;
 
 	}
 

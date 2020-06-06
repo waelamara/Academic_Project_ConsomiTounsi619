@@ -22,8 +22,9 @@
 
         <section class="signup">            
             <div class="container">
+            
                 <div class="signup-content">
-                	<h:form id="form1" class="signup-form">					
+                	<h:form enctype="multipart/form-data" id="form1" class="signup-form">					
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
                         	<h:inputText type="text" class="form-input" name="name" id="name"  p:placeholder="First Name" value="#{signupController.firstName}" />
@@ -47,8 +48,8 @@
                         <div class="form-group">
                         
 <h:selectOneMenu class="form-input" value="#{signupController.sexe}">
-   	<f:selectItem itemValue="#{signupController.sexe.HOMME}" itemLabel="Male" />
-   	<f:selectItem itemValue="#{signupController.sexe.FEMME}" itemLabel="Female" />
+   	<f:selectItems value="#{signupController.getSexeList()}" />	
+
 </h:selectOneMenu>
                         
                         	                        </div>
@@ -64,11 +65,15 @@
                            <h:inputSecret type="password" class="form-input" name="password" id="password" p:placeholder="Password" value="#{signupController.password}" />
 
                         </div>
-                        
+                        <div class="form-group">
+                        <label class="form-input" >Profile Picture </label>
+                        <b:fileUpload value="#{signupController.file}" mode="simple" skinSimple="true" multiple="true" />
+                        </div>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                         </div>
+                        
                         <div class="form-group">
                        <h:commandButton id="btn" class="form-submit" title="signup" value="Sign Up" action="#{signupController.doSignup()}"/>
                             <h:message style = "color:red" for="btn"/>

@@ -39,8 +39,8 @@ public class FormulaireLivraisonController {
 	}
 
 	public void addMap(long id,String pp) {
-		
-		LivraisonService.AjouterLivraison(id,pp);
+		int a =3;
+		LivraisonService.AjouterLivraison(id,pp,a);
 	}
 	
 	
