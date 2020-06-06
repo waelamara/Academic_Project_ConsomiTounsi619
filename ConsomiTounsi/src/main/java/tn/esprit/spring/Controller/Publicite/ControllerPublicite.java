@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -46,7 +47,7 @@ public class ControllerPublicite {
 	private Long idToUpdate;
 	private float coutDispaly;
 	private String typeFile="Image";
-	
+	private Random rand = new Random();
 	
 	
 	public String addPublicite() throws IOException, ParseException {
@@ -81,6 +82,13 @@ public class ControllerPublicite {
 		else {
 			return iPubliciteService.findLikeName(nomRecherchePub);
 		}
+	}
+	
+	public Publicite getPubForAll(){
+		Publicite pub=iPubliciteService.findPubForAll().get(rand.nextInt(iPubliciteService.findPubForAll().size()));
+		pub.setNbrFinalVue(pub.getNbrFinalVue()+1);
+		iPubliciteService.save(pub);
+		return pub;
 	}
 	
 	public void HidePub(){
@@ -347,6 +355,16 @@ public class ControllerPublicite {
 
 	public void setTypeFile(String typeFile) {
 		this.typeFile = typeFile;
+	}
+
+
+	public Random getRand() {
+		return rand;
+	}
+
+
+	public void setRand(Random rand) {
+		this.rand = rand;
 	}
 	
 	
