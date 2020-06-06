@@ -118,4 +118,10 @@ public class StockServiceImpl implements IStockService {
 		return stockRepository.findStockbyName(name);
 	}
 
+	@Override
+	public List<Produit> getProduits() {
+		
+		return produitRepository.findAll();
+	}
+
 }

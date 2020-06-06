@@ -5,6 +5,7 @@ package tn.esprit.spring.Service.Stock;
 
 import java.util.List;
 
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
 import tn.esprit.spring.Model.Stock.Stock;
 
@@ -24,5 +25,6 @@ public interface IStockService {
     public void PrixVenteParStock(Long idproduit);
     
     public void effectuerCommande(Long idcommande);
+    public List<Produit> getProduits() ;
 }
 

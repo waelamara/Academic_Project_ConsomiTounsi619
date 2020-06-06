@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Service.Produit.IProduitService;
 import tn.esprit.spring.Service.Stock.IStockService;
 
 
@@ -28,6 +30,8 @@ public class JsfStockController {
 	
 	@Autowired
 	IStockService stockservice;
+	@Autowired
+	IProduitService iproduitService;
 	
 	private Long idstock;
 	private String nom_stock;
@@ -102,5 +106,11 @@ public int getQuantite() {
 		return stockservice.saveStock(new Stock(nom_stock,quantite,validite,prixdevente));
 
 		}
+	
+	
+public List<Produit> getProduits() {
+		
+		return stockservice.getProduits();
+	}
 
 }
