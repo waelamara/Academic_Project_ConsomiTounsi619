@@ -27,7 +27,7 @@
 							
 				
 									<ui:repeat var="event"
-										value="#{ControllerEvents.paginatorRec.model}">
+										value="#{ControllerEvents.paginatorRec.model}" varStatus="status">
 										<div class="Event_content">
 										
 											<div
@@ -80,7 +80,7 @@
 											<div class="form-group">
 													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
 											
-												<label style="color: #df3b3b">Emplacement
+												<label style="color: #df3b3b">Location
 													:</label>
 												<div class="Event_date" style="color: #000000">
 													<div>
@@ -89,6 +89,7 @@
 												</div>
 												</ui:repeat>
 											</div>
+											
 
 											<div>
 												<h:form>
@@ -102,7 +103,7 @@
 														<h:commandButton class="btn btn-xs btn-warning"
 														value="Update" action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
 												<h:commandButton class="btn btn-xs btn-success"
-														value="Publicite" action="#{ControllerPub.addPubEvent(event.id)}" />
+														value="Publicity" action="#{ControllerPub.addPubEvent(event.id)}" />
 														
 													
 												</h:form>
@@ -111,6 +112,7 @@
 
 										</div>
 									</ui:repeat>
+									
 									<h:form><nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">

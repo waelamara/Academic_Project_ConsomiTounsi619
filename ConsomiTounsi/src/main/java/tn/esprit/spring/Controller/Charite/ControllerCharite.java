@@ -284,7 +284,7 @@ public class ControllerCharite {
 
 		ide = idevents;
 
-		chariteDAO.saveCharit2(idevents, new Charite());
+	//	chariteDAO.saveCharit2(idevents, new Charite());
 		System.out.println(idevents);
 		return "/AddCharite.xhtml?faces-redirect=true";
 	}

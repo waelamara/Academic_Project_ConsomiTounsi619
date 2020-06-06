@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.transaction.Transactional;
@@ -14,6 +16,7 @@ import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +41,7 @@ import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 @Controller(value = "ControllerPub")
 @ELBeanName(value = "ControllerPub")
 @Join(path = "/AddPub", to = "/AddPub.jsf")
+@ViewScoped
 public class ControllerPub {
 	@Autowired
 	PubDAO publiciteDAO;
@@ -52,6 +56,18 @@ public class ControllerPub {
 	private String image;
 	private UploadedFiles files;
 	 public static Long ide ;
+	 private RepeatPaginator2 paginatorRec;
+	 public RepeatPaginator2 getPaginatorRec() {
+			return paginatorRec;
+		}
+		public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
+			this.paginatorRec = paginatorRec;
+		}
+		@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
+		public void init(){
+			paginatorRec=new RepeatPaginator2(AfficherPub());
+		}
 	
 	
 	
@@ -118,7 +134,7 @@ public class ControllerPub {
 		Pub p = publiciteDAO.findOne(idPub);
 
 		publiciteDAO.Delete(p);
-		return "Successful";
+		return "/EventPub.xhtml?faces-redirect=true";
 	}
 
 	public String EditPublicite(Pub p) {
