@@ -124,6 +124,16 @@ public class Stock implements Serializable{
 		this.idProduit = idProduit;
 	}
 
+	public Stock(String nom_stock, int quantite, Date validite, float prixdevente) {
+		super();
+		this.nom_stock = nom_stock;
+		this.quantite = quantite;
+		this.validite = validite;
+		this.prixdevente = prixdevente;
+	}
+
+	
+	
 	
 	
 	

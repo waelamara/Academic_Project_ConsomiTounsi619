@@ -23,15 +23,15 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div class="row">
 									<div class="col-xs-12">
-										<table id="simple-table" class="table  table-bordered table-hover">
+										<table class="table  table-bordered table-hover">
 											<thead>
 												<tr>
-													<th class="center">
-														<label class="pos-rel">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</th>
+<!-- 													<th class="center"> -->
+<!-- 														<label class="pos-rel"> -->
+<!-- 															<input type="checkbox" class="ace" /> -->
+<!-- 															<span class="lbl"></span> -->
+<!-- 														</label> -->
+<!-- 													</th> -->
 													<th >Ray name</th>
 													<th>Ray Type</th>
 													
@@ -46,22 +46,7 @@
 											<tbody>
 											 <ui:repeat var="rayon" value="#{JsfRayonController.getAllRayon()}" varStatus="status"> 
 												<tr>
-													<td class="center">
-														<label class="pos-rel">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</td>
-
-<!-- 													<td class="center"> -->
-<!-- 														<div class="action-buttons"> -->
-<!-- 															<a href="OrderDetailsAdmin" class="green bigger-140 show-details-btn" title="Show Details"> -->
-<!-- 																<i class="ace-icon fa fa-angle-double-down"></i> -->
-<!-- 																<span class="sr-only">Details</span> -->
-<!-- 															</a> -->
-<!-- 														</div> -->
-<!-- 													</td> -->
-
+													
 													
 													<td><h:outputText value="#{rayon.nom_rayon}"/></td>
 													<td class="hidden-480"><h:outputText value="#{rayon.type_rayon}"/></td>

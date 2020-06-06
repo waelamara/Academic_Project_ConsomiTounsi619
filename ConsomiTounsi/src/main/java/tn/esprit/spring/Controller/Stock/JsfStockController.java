@@ -82,14 +82,15 @@ public int getQuantite() {
 		super();
 	}
 	
-	public JsfStockController(Long idstock, String nom_stock, int quantite, Date validite, float prixdevente) {
+	public JsfStockController(String nom_stock, int quantite, Date validite, float prixdevente) {
 		super();
-		this.idstock = idstock;
+		
 		this.nom_stock = nom_stock;
 		this.quantite = quantite;
 		this.validite = validite;
 		this.prixdevente = prixdevente;
 	}
+
 	public List<Stock> allStock() {
 		return stockservice.allStock();
 	}
@@ -97,8 +98,8 @@ public int getQuantite() {
 	
 	
 	
-	public Stock addstock(@RequestBody Stock stock) {
-		return stockservice.saveStock(stock);
+	public Stock addstock() {
+		return stockservice.saveStock(new Stock(nom_stock,quantite,validite,prixdevente));
 
 		}
 
