@@ -253,11 +253,12 @@ public class ControllerEvents {
 			paginatorRec=new RepeatPaginator2(getAllEvents());
 		}*/
 		@PostConstruct
-		//@Scheduled(cron="0 * * ? * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init1(){
 			paginatorRec1=new RepeatPaginator2(getEventsParDate());
 		}
 		@PostConstruct
+		@Scheduled(cron="*/10 * * * * *")
 		public void init(){
 			List<Events> c= getAllEvents();
 		paginatorRec = new RepeatPaginator2(c);
