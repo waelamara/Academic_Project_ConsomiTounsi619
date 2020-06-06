@@ -247,6 +247,11 @@ public class ControllerEvents {
 	
 	 
 		
+		/*@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
+		public void init(){
+			paginatorRec=new RepeatPaginator2(getAllEvents());
+		}*/
 		@PostConstruct
 		@Scheduled(cron="*/10 * * * * *")
 		public void init1(){
