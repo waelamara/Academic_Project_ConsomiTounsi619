@@ -53,16 +53,16 @@ public class OrderAdminController {
 	  
 	
 	private RepeatPaginator paginator;
-	@PostConstruct
-	public void init(){
-		List<Commande> c= getAllCommande();
-	paginator = new RepeatPaginator(c);
-}
+//	@PostConstruct
+//	public void init(){
+//		List<Commande> c= getAllCommande();
+//	paginator = new RepeatPaginator(c);
+//}
 	
-    public RepeatPaginator getPaginator() {
-   	 
-        return paginator;
-    }
+//    public RepeatPaginator getPaginator() {
+//   	 
+//        return paginator;
+//    }
 	
 	
 
