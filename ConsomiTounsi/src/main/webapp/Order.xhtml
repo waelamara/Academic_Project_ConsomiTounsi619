@@ -7,9 +7,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ez="http://java.sun.com/jsf/composite/spinner"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/TemplateLivreur/template.xhtml"
 	>
 	
-<!-- 	<ui:define name="Order"> -->
+ 	<ui:define name="Order"> 
 		<head>
 
 <meta charset="utf-8" />
@@ -200,7 +201,7 @@
 
 										<h:dataTable value="#{OrderAdminController.getAllCommande()}"
 											var="Commande" id="advanced_table" class="table">
-											<table id="advanced_table" class="table">
+											<table  class="table">
 												<thead>
 
 													<tr>
@@ -746,5 +747,5 @@ Discount" />
 			</script>
 
 		</h:body>
-<!-- 	</ui:define> -->
+	</ui:define> 
 </ui:composition>
