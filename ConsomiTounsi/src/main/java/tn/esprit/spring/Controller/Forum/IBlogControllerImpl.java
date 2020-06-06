@@ -17,6 +17,7 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import Utils.AppConstants;
@@ -268,7 +269,7 @@ public class IBlogControllerImpl {
 		if (userId == null) {
 			return "/login";
 		}
-		String navigateTo = "/myposts";
+	
 		long cc = getCategorieId();
 		System.out.println("********" + cc);
 		Sujet s = new Sujet(nomSujet, description);
@@ -280,7 +281,7 @@ public class IBlogControllerImpl {
 		System.out.println("********" + fileDownloadUri);
 		image.setSujetId(s);
 		iImageSujetService.ajouterImage(image);
-		return navigateTo;
+		return "/fourm/myposts";
 	}
 
 	/***** add view *****/

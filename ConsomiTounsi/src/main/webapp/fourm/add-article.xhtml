@@ -125,10 +125,11 @@
 							<h:inputFile value="#{blogController.uploadedFile}" />
 
 						<div class="contact_form_button">
-							<h:commandButton value="Validate"
-								class="button contact_submit_button" type="submit"
+						
+							<h:commandButton value="Validate" href="/myposts"
+								class="button contact_submit_button" 
 								action="#{blogController.ajouterSujet(loginController.userDetails.id)}" />
-
+						
 						</div>
 
 						</h:form>

@@ -2,7 +2,6 @@ package tn.esprit.spring.Service.Forum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
-import tn.esprit.spring.Model.Forum.NbSujetbyCat;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.UserRepository;
@@ -53,6 +51,7 @@ public  class SujetServiceImpl implements ISujetService {
 		s.setDateAjout(java.sql.Date.valueOf(localDate));
 		s.setNbLike(0);
 		s.setNbDislike(0);
+		s.setEtat("Waiting");
 		sujetRepository.save(s);
 		return s.getId().intValue();	
 	}
@@ -344,6 +343,21 @@ public  class SujetServiceImpl implements ISujetService {
    helper.setText(messaage, messaage);
    javaMailSender.send(message);
    return p1;		
+	}
+
+	@Override
+	public void accpeterSujet(Long sujetId) {
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		sujet.setEtat("Accpted");
+		sujetRepository.save(sujet);
+		
+	}
+
+	@Override
+	public void RefuserSujet(Long sujetId) {
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		sujet.setEtat("Refused");
+		sujetRepository.save(sujet);
 	}
 
 	

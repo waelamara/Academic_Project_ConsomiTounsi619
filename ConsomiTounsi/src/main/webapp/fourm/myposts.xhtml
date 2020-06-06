@@ -102,12 +102,25 @@
                                     </div>
                                     <ul class="blog_meta list">
                                      <h:outputText value="#{sujet.id}" style="display: none"/>
-                                   <li><a href="#"> <h:outputText value="#{sujet.idUser.firstName} #{sujet.idUser.lastName}"/><i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{blogController.convertireDate(sujet.dateAjout)}"/><i class="lnr lnr-calendar-full"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{sujet.nbVue} Views"/><i class="lnr lnr-eye"></i></a></li>
                                         <li><a href="#"><h:outputText value="#{singleblogController.countNbcommentaire(sujet.id)} Comments"/><i class="lnr lnr-bubble"></i></a></li>
+                                          <h:panelGroup
+													rendered="#{sujet.etat eq 'Waiting'}">
+												<li><a href="#"><h:outputText value="#{sujet.etat}"/><i class="lnr lnr-hourglass"></i></a></li>
+												</h:panelGroup> 
+												 <h:panelGroup
+													rendered="#{sujet.etat eq'Accpted'}">
+												<li><a href="#"><h:outputText value="#{sujet.etat}"/><i class="lnr lnr-checkmark-circle"></i></a></li>
+												</h:panelGroup> 
+												 <h:panelGroup
+													rendered="#{sujet.etat eq'Refused'}">
+												<li><a href="#"><h:outputText value="#{sujet.etat}"/><i class="lnr lnr-cross-circle"></i></a></li>
+										  </h:panelGroup> 
+                                        
                                         <li><a  href="#"><h:outputText value="#{sujet.nbLike} Like"/><i style="color:#49D85C"  class="lnr lnr-thumbs-up"></i></a></li>
                                         <li><a href="#" ><h:outputText value="#{sujet.nbDislike} DisLike"/><i style="color:#dc3545" class="lnr lnr-thumbs-down"></i></a></li>
+                                        
                                     </ul>
                                 </div>
                             </div> 
@@ -190,45 +203,30 @@
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Popular Posts</h3>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post1.jpg" alt="post" />
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Space The Final Frontier</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post2.jpg" alt="post"/>
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post3.jpg" alt="post"/>
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post4.jpg" alt="post"/>
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="br"></div>
-                        </aside>
+						<h3 class="widget_title">Popular Posts</h3>
+						<c:forEach items="#{blogController.popularPost()}" var="s"
+							varStatus="j">
+							<div class="media post_item">
+								<img src="img/blog/popular-post/post#{j.index+1}.jpg" alt="post" />
+								<div class="media-body">
+									<a href="blog-details.html"> <h:form>
+											<h3>
+												<h:commandLink style="color:black" value="#{s.nomSujet}"
+													action="#{blogController.ajouterVus(loginController.userDetails.id,s.id)}">
+													<f:param name="idsujet" value="#{s.id}" />
+												</h:commandLink>
+											</h3>
+										</h:form>
+									</a>
+									<p>
+										<h:outputText
+											value="#{blogController.convertireDate(s.dateAjout)}" />
+									</p>
+								</div>
+							</div>
+						</c:forEach>
+						<div class="br"></div>
+						</aside>
                        
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Post Catgories</h4>
@@ -298,8 +296,8 @@
 	<script src="blog/js/owl.carousel.min.js"></script>
 	<!--gmaps Js-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="js/gmaps.min.js"></script>
-	<script src="js/main.js"></script>
+
+	<script src="blog/js/main.js"></script>
 </body>
 
 

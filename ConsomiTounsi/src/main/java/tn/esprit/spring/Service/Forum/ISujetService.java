@@ -11,6 +11,8 @@ import tn.esprit.spring.Model.Produit.Produit;
 public interface ISujetService {
 
 	public int ajouterSujet (Sujet c,Long categId,Long userId);
+	public void accpeterSujet (Long sujetId);
+	public void RefuserSujet (Long sujetId);
 	public List<Sujet> getAllSujets();
 	public int deleteSujetById(Long sujetId,Long userId);
 	public List<Sujet> findSujetbyName(String name);

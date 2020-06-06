@@ -25,7 +25,7 @@ import tn.esprit.spring.Service.Forum.IVoteSujetService;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 @Controller(value = "ControllerMyposts")
 @ELBeanName(value = "ControllerMyposts")
-@Join(path = "/myposts", to = "/fourm/myPosts.jsf")
+@Join(path = "/myposts", to = "/fourm/myposts.jsf")
 @SessionScope
 @ViewScoped
 public class MypostsController {
