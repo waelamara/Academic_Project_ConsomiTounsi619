@@ -11,12 +11,14 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Service.Produit.IProduitService;
 import tn.esprit.spring.Service.Stock.IStockService;
 
@@ -98,12 +100,17 @@ public int getQuantite() {
 	public List<Stock> allStock() {
 		return stockservice.allStock();
 	}
+	 
+	public String gopage(Long idprod){
+		
+		return "/addstock.xhtml?faces-redirect=true&idprod=" + idprod.toString();
+	}
 	
 	
 	
-	
-	public Stock addstock() {
-		return stockservice.saveStock(new Stock(nom_stock,quantite,validite,prixdevente));
+	public void addstock(long idprod) {
+		
+		 stockservice.ajouterStockbyProd(new Stock(nom_stock,quantite,validite,prixdevente) ,idprod);
 
 		}
 	
@@ -112,5 +119,22 @@ public List<Produit> getProduits() {
 		
 		return stockservice.getProduits();
 	}
+
+
+public void deletestock(Long idstock) {
+
+	stockservice.deleteStockById(idstock);
+
+}
+
+
+public void displayStock(){
+	
+	
+	
+	
+}
+
+
 
 }

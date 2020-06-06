@@ -227,6 +227,14 @@
 																	<h:column><p><b>Prix d'achat:   </b><h:outputText  value="#{Produit.prixAchat}" /></p></h:column>
 																	<h:column><p><b>Poid:   </b><h:outputText  value="#{Produit.poids}" /></p></h:column>
 																	
+																	
+																	
+																	<h:form>
+																	<h:commandLink id="btnstock" value="Add Stock" action="#{JsfStockController.gopage(Produit.id)}"  >
+																	<f:param name="idprod" value="#{Produit.id}"/>
+																		<i class="ace-icon fa fa-trash-o bigger-120 white" ></i>   
+																		</h:commandLink></h:form>
+																	
 																	<div class="search-actions text-center">
 																		
 
@@ -243,7 +251,10 @@
 																		<i class="ace-icon fa fa-trash-o bigger-120 white" ></i>   
 																		</h:commandButton>
 																		</div>
+																		
 																		</h:column>
+																		
+														
 																	</div>
 																	
 																</div>

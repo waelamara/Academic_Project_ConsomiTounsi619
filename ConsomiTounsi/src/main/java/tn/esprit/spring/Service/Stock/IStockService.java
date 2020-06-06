@@ -16,6 +16,7 @@ public interface IStockService {
 	Stock updateStock(Stock stock);
 	
 	void deleteStockById(Long idstock);
+	public void ajouterStockbyProd(Stock stock,Long idprod);
 	
 	List<Stock> allStock();
 	public List<Stock> findStockbyName(String name);
@@ -26,5 +27,7 @@ public interface IStockService {
     
     public void effectuerCommande(Long idcommande);
     public List<Produit> getProduits() ;
+    
+    public void displayStock();
 }
 
