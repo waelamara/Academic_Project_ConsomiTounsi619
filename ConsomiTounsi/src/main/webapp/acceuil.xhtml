@@ -1738,6 +1738,7 @@
 	</div>
 
 	<!-- Popular Categories -->
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForAll()!=null}">
 <ui:repeat var="Publicite" value="#{ControllerPublicite.getPubForAll()}" varStatus="status">
 	<h:panelGroup rendered="#{Publicite.image!=null}">
 	<div class="banner" style="height: 60%">
@@ -1756,6 +1757,7 @@
 			</div>
 			</h:panelGroup>
 </ui:repeat>
+</h:panelGroup>
 	<div class="popular_categories">
 		<div class="container">
 			<div class="row">
