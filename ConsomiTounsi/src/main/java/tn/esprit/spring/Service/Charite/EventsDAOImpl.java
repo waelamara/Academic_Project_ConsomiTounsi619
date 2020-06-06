@@ -168,6 +168,13 @@ public class EventsDAOImpl implements EventsDAO {
 		
 	}
 
+	@Override
+	public String updateEvent(Events e, Long idevents, String titre, Date dateE, int nbplace, int nbparticipant,
+			String description, String image) {
+		// TODO Auto-generated method stub
+		return "/UpdateEvent.xhtml?faces-redirect=true";
+	}
+
 	
 
 	

@@ -17,31 +17,31 @@ import tn.esprit.spring.Repository.VerificationTokenRepository;
 @Service
 public class UserService {
 	@Autowired
-	UserRepository  UserRepository;
+	UserRepository  userRepository;
 	
 	@Autowired
     private VerificationTokenRepository tokenRepository;
 	
 	/*Chercher un utilisateur*/
 	public User findOne(long id){
-	return UserRepository.findById(id).get();
+	return userRepository.findById(id).get();
 	}
 	public User save(User u) {
-		return UserRepository.save(u);
+		return userRepository.save(u);
 	}
 	public List<User> findAll() {
-		return UserRepository.findAll();
+		return userRepository.findAll();
 	}
 	
 	/*Update d'un user*/
 	public  User updateUser(User user)	{
-		return UserRepository.save(user);
+		return userRepository.save(user);
 		
 	}
 	
 	/*get all Users*/
 	public List<User> getAllUsers(){
-		 List<Long> listUsersId=UserRepository.ListeUsers();
+		 List<Long> listUsersId=userRepository.ListeUsers();
 	
 			List<User> listUsers = new ArrayList();
 		 User u = new User();
@@ -70,7 +70,21 @@ public class UserService {
         tokenRepository.save(myToken);
     }
 	/*Livreur methodes oussama*/
+	
   
+	public int getNombresUsersSelonSexe(String sexe)
+	{
+		return userRepository.NombreUsersSelonSexe(sexe);
+	}
+	
+	public List<User> getUserSelonChoix(String choix, String cle)
+	{
+		return userRepository.getUserSelonChoix(cle);
+	}
+	public List<User> getUserSelonEmail(String choix, String cle)
+	{
+		return userRepository.getUserSelonEmail(cle);
+	}
 	
 	
 

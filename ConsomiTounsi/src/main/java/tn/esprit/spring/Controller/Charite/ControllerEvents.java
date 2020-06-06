@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.servlet.ServletException;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -22,6 +26,7 @@ import org.primefaces.model.file.UploadedFile;
 import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,11 +43,17 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
 import Utils.AppConstants;
+import tn.esprit.spring.Controller.Charite.RepeatPaginator2;
+import tn.esprit.spring.Controller.Forum.RepeatPaginator;
+import tn.esprit.spring.Controller.GestionUser.LoginController;
+import tn.esprit.spring.Controller.GestionUser.RepeatPaginator1;
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Repository.Charite.EndroitRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
@@ -54,7 +65,8 @@ import tn.esprit.spring.security.services.UserDetailsImpl;
 
 @Controller(value = "ControllerEvents")
 @ELBeanName(value = "ControllerEvents")
-@Join(path = "/AddEvent", to = "AddEvent.jsf")
+@Join(path = "/AddEvent", to = "/AddEvent.jsf")
+@ViewScoped
 public class ControllerEvents {
 	@Autowired
 	EventsDAO eventDAO;
@@ -81,10 +93,29 @@ public class ControllerEvents {
 	private UploadedFiles files;
 	@Autowired
 	private EndroitRepository endroitRepository;
+	 public static Long ide ;
+	 private RepeatPaginator2 paginatorRec;
+	 private RepeatPaginator2 paginatorRec1;
 	
 	
 	
 	
+	public RepeatPaginator2 getPaginatorRec() {
+		return paginatorRec;
+	}
+
+	public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
+		this.paginatorRec = paginatorRec;
+	}
+
+	public RepeatPaginator2 getPaginatorRec1() {
+		return paginatorRec1;
+	}
+
+	public void setPaginatorRec1(RepeatPaginator2 paginatorRec1) {
+		this.paginatorRec1 = paginatorRec1;
+	}
+
 	public UploadedFiles getFiles() {
 		return files;
 	}
@@ -166,9 +197,10 @@ public class ControllerEvents {
 
 	}
 	
-	public void delete(long Id) {
+	public String delete(long Id) {
 
 		eventDAO.deleteEventsById(Id);
+		return "/EventAdmin.xhtml?faces-redirect=true";
 
 	}
 	public List<Events> findLikeNameM(String titre) {
@@ -197,7 +229,7 @@ public class ControllerEvents {
 	}
 	public String addEv() {
 	
-eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
+		eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
 	 public String save() {
@@ -209,5 +241,27 @@ eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipan
 			
 			return endroitDAO.getAllEndroitEv(id);
 		}
-
+	
+	 
+	
+	
+	 
+		
+		/*@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
+		public void init(){
+			paginatorRec=new RepeatPaginator2(getAllEvents());
+		}*/
+		@PostConstruct
+		//@Scheduled(cron="0 * * ? * *")
+		public void init1(){
+			paginatorRec1=new RepeatPaginator2(getEventsParDate());
+		}
+		@PostConstruct
+		public void init(){
+			List<Events> c= getAllEvents();
+		paginatorRec = new RepeatPaginator2(c);
+	}
+	
 }
+

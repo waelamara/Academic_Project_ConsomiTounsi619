@@ -84,6 +84,13 @@ public class EndroitDAOImp implements EndroitDAO{
 		endroitRepository.saveAndFlush(e);
 		return e.getId().intValue();
 	}
+	@Override
+	public int saveEndroit2(Long idendroit, Endroit e) {
+	Endroit en1 = findOne(idendroit);
+	
+		endroitRepository.saveAndFlush(e);
+		return e.getId().intValue();
+	}
 
 	
 
@@ -97,6 +104,12 @@ public class EndroitDAOImp implements EndroitDAO{
 	public List<Endroit> getAllEndroitDi() {
 		// TODO Auto-generated method stub
 		return endroitRepository.ListeEndroit();
+	}
+
+	@Override
+	public List<Endroit> getAllEndroitR() {
+		// TODO Auto-generated method stub
+		return endroitRepository.ListeEndroitR();
 	}
 
 	

@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="EventAdmin">
 		<h:head>
@@ -18,23 +19,25 @@
 		<h:body>
 		
 		<center>
+		<section class="blog_area">
+        <div class="container">
 		<div class="row">
 							<div class="col-xs-12">
 			
 							
 				
 									<ui:repeat var="event"
-										value="#{ControllerEvents.getAllEvents()}">
+										value="#{ControllerEvents.paginatorRec.model}" varStatus="status">
 										<div class="Event_content">
 										
 											<div
 												class="event_image d-flex flex-column align-items-center justify-content-center">
-												<img src="#{event.image}" style="width: 60%; height: 80%"
-													alt="" />
+												<img src="#{event.image}" style="width: 40%; height: 60%"
+													class="avatar img-circle img-thumbnail" alt="avatar"/>
 											</div>
 										
 											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Title
+												<label style="color: #df3b3b">Title
 													:</label>
 
 												<div class="Event_title" style="color: #000000">
@@ -42,7 +45,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Date
+												<label  style="color: #df3b3b">Date
 													:</label>
 												<div class="Event_date" style="color: #000000">
 													<div>
@@ -51,7 +54,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">places :</label>
+												<label  style="color: #df3b3b">places :</label>
 												<div class="numbre_of_places" style="color: #000000">
 													<div>
 														<h:outputText value="#{event.nbplace}" />
@@ -59,7 +62,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">participant :</label>
+												<label  style="color: #df3b3b">participant :</label>
 												<div class="numbre_of_participants" style="color: #000000">
 													<div>
 														<h:outputText value="#{event.nbparticipant}" />
@@ -67,7 +70,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Description :</label>
+												<label style="color: #df3b3b">Description :</label>
 												<div class="Descreption" style="color: #000000">
 													<div>
 														<h:outputText value="#{event.description}" />
@@ -77,7 +80,7 @@
 											<div class="form-group">
 													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
 											
-												<label class="col-sm-3 control-label no-padding-right" style="color: #df3b3b">Emplacement
+												<label style="color: #df3b3b">Location
 													:</label>
 												<div class="Event_date" style="color: #000000">
 													<div>
@@ -86,28 +89,64 @@
 												</div>
 												</ui:repeat>
 											</div>
+											
 
 											<div>
 												<h:form>
-													<h:commandButton class="Events-remove"
+													<h:commandButton class="btn btn-xs btn-danger"
 														action="#{ControllerEvents.delete(event.id)}"
 														value="Supprimer" />
-												</h:form>
-											</div>
-											<div>
-												<h:form>
-													<h:commandButton class="Events-reserve"
+												
+													<h:commandButton class="btn btn-xs btn-success"
 														action="#{ControllerEndroit.reserveE(event.id)}"
 														value="Reserve" />
+														<h:commandButton class="btn btn-xs btn-warning"
+														value="Update" action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
+												<h:commandButton class="btn btn-xs btn-success"
+														value="Publicity" action="#{ControllerPub.addPubEvent(event.id)}" />
+														
+													
 												</h:form>
 											</div>
 											<br> </br>
 
 										</div>
 									</ui:repeat>
+									
+									<h:form><nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                  <h:commandLink action="#{ControllerEvents.paginatorRec.prev()}" class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            <span class="lnr lnr-chevron-left"></span>
+                                        </span>
+                                    </h:commandLink>
+                                </li>
+                                
+								<c:forEach var = "i" begin = "1" end = "#{ControllerEvents.paginatorRec.pages}"  >
+								<c:if
+						             test="#{i==ControllerEvents.paginatorRec.pageIndex}">
+                                <li class="page-item active"> <h:commandLink action="#{ControllerEvents.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li></c:if>
+                                <c:if test="#{i!=ControllerEvents.paginatorRec.pageIndex}">
+                                <li class="page-item "><h:commandLink action="#{ControllerEvents.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li> </c:if>
+                                </c:forEach>
+                                <li class="page-item">
+ 							  
+ 							  <h:commandLink action="#{ControllerEvents.paginatorRec.next()}" class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">
+                                            <span class="lnr lnr-chevron-right"></span>
+                                        </span>
+                                    </h:commandLink>
+                                    
+                                </li>
+                            </ul>
+                        </nav></h:form>
 
 </div>
 </div>
+</div>
+</section>
+	</center>
 
 							
 							
@@ -131,7 +170,7 @@
 <script src="acceuil/js/shop_custom.js"></script>
 	
 	
-	</center>
+
 
 		</h:body>
 

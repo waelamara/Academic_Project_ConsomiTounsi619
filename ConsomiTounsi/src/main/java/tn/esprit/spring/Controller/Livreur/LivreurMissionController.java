@@ -14,7 +14,7 @@ import tn.esprit.spring.Repository.LivraisonRepository;
 
 @Controller(value = "LivreurMissionController")
 @ELBeanName(value = "LivreurMissionController")
-@Join(path = "/LivreurMission", to = "/Livreur_mission.jsf")
+@Join(path = "/LivreurMission", to = "/LivreurMission.jsf")
 public class LivreurMissionController {
 	@Autowired
 	LivraisonRepository L;

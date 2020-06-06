@@ -13,8 +13,11 @@ public interface EndroitRepository extends JpaRepository<Endroit, Long> {
 	@Query(value = "UPDATE `t_endroit` SET `statu`=?1 WHERE `id`=?2", nativeQuery = true)
 	public void ReserveEndroit(String statu1, Long id);
 	
+	
 	@Query(value = "SELECT * FROM t_endroit WHERE statu='disponible'", nativeQuery = true)
 	public List<Endroit> ListeEndroit();
+	@Query(value = "SELECT * FROM t_endroit WHERE statu='Reserve'", nativeQuery = true)
+	public List<Endroit> ListeEndroitR();
 	@Query(value = "SELECT * FROM `t_endroit` WHERE `eventss`=?1", nativeQuery = true)
 	public List<Endroit> ListeEndroitE(Long idevntss);
 
