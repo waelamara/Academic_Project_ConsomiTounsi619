@@ -85,10 +85,14 @@ public class ControllerPublicite {
 	}
 	
 	public Publicite getPubForAll(){
+		if(iPubliciteService.findPubForAll().isEmpty()){
+			return null;
+		}
+		else {
 		Publicite pub=iPubliciteService.findPubForAll().get(rand.nextInt(iPubliciteService.findPubForAll().size()));
 		pub.setNbrFinalVue(pub.getNbrFinalVue()+1);
 		iPubliciteService.save(pub);
-		return pub;
+		return pub;}
 	}
 	
 	public void HidePub(){
