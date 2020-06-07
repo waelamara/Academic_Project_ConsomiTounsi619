@@ -46,6 +46,9 @@ public class CommandeImpl implements ICommande {
 	
 	@Autowired
 	CadeauUserRepository cadeauUserRepository; 
+	
+	@Autowired
+	LigneCommandeImpl ligneImpl;
 
 	
 	   @PostConstruct
@@ -267,6 +270,7 @@ public class CommandeImpl implements ICommande {
 			}
 		}
 }
+	@Transactional
 	public void PayerPorteaPorte(long idCommande,int iduser)
 	{
 		Commande c = commandeRepository.getOne((long) idCommande);
@@ -274,6 +278,8 @@ public class CommandeImpl implements ICommande {
 		 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
 		 userRepository.save(u);
 			commandeRepository.PayerPorteaPorte(idCommande);
+			if(ligneImpl.PrixTotalCommande(iduser)>5000) 
+			
 			commandeRepository.remise(iduser);
 		
 	}
