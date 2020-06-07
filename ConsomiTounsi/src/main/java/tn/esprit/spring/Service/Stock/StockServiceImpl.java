@@ -1,17 +1,9 @@
 
 package tn.esprit.spring.Service.Stock;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +14,6 @@ import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
-
 import tn.esprit.spring.Repository.Stock.StockRepository;
 
 @Service
@@ -40,6 +31,7 @@ public class StockServiceImpl implements IStockService {
 		return stockRepository.save(stock);
 	}
 
+	 
 	@Override
 	public Stock updateStock(Stock stock) {
 
@@ -116,6 +108,28 @@ public class StockServiceImpl implements IStockService {
 	public List<Stock> findStockbyName(String name) {
 		// TODO Auto-generated method stub
 		return stockRepository.findStockbyName(name);
+	}
+
+	@Override
+	public List<Produit> getProduits() {
+		
+		return produitRepository.findAll();
+	}
+
+
+	@Override
+	public void ajouterStockbyProd(Stock stock,Long idprod) {
+		Produit p = produitRepository.findById(idprod).get();	
+		stock.setIdProduit(p);
+	    stockRepository.save(stock);
+	    
+	}
+
+
+	@Override
+	public void displayStock() {
+		
+		
 	}
 
 }
