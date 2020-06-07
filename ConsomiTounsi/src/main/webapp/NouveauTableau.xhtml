@@ -56,13 +56,8 @@
 
 	<div class="row">
 		<div class="col-xs-12">
-			<h3 class="header smaller lighter blue">jQuery dataTables</h3>
-
-			<div class="clearfix">
-				<div class="pull-right tableTools-container"></div>
-			</div>
-			<div class="table-header">Results for "Latest Registered
-				Domains"</div>
+			<br></br><br></br>
+			<div class="table-header">Here is the list of deliveries you made </div>
 
 			<!-- div.table-responsive -->
 
@@ -81,80 +76,82 @@
 
 							<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 								Date</th>
-<!-- 							<th>From</th> -->
+							<th>From</th>
 							<th>CommandeId</th>
 <!-- 							<th>Name of client</th> -->
 							<th>Mobile</th>
-							<th>Action</th>
+<!-- 							<th>Action</th> -->
 
 
 						</tr>
 					</thead>
+					<ui:repeat var="rec"
+							value="#{LivreurMissionController.ListeMissions(LoginDeliveryController.userDetails.id)}"
+							varStatus="status">
 					<tr>
 						<td class="center"><label class="pos-rel"> <input
 								type="checkbox" class="ace" /> <span class="lbl"></span>
 						</label></td>
-						<ui:repeat var="rec"
-							value="#{LivreurMissionController.ListeMissions(LoginDeliveryController.userDetails.id)}"
-							varStatus="status">
+						
 							<td class="hidden-480"><h:outputText value="#{rec.lieux}" />
 							</td>
 							<td class="hidden-480"><h:outputText value="#{rec.etat}" /></td>
 							<td class="hidden-480"><h:outputText
 									value="#{rec.dateAffecLivr}" /></td>
-<!-- 							<td class="hidden-480"><span -->
-<!-- 								class="label label-sm label-warning"><h:outputText -->
-<!-- 									value="#{rec.localdistribu}" /></span></td> -->
+							<td class="hidden-480"><span
+								class="label label-sm label-warning"><h:outputText
+									value="#{rec.localdistribu}" /></span></td>
 							<td class="hidden-480"><h:outputText
 										value="#{rec.commande.id}" /></td>
 <!-- 							<td class="hidden-480"><h:outputText value="#{rec.user_id_demande}" /></td> -->
 							<td class="hidden-480"><span
 								class="label label-sm label-warning"><h:outputText value="#{rec.tel_user_commande}" /></span></td>
+								</tr>
 						</ui:repeat>
 
 
-						<td>
-							<div class="hidden-sm hidden-xs action-buttons">
-								<a class="blue" href="#"> <i
-									class="ace-icon fa fa-search-plus bigger-130"></i>
-								</a> <a class="green" href="#"> <i
-									class="ace-icon fa fa-pencil bigger-130"></i>
-								</a> <a class="red" href="#"> <i
-									class="ace-icon fa fa-trash-o bigger-130"></i>
-								</a>
-							</div>
+<!-- 						<td> -->
+<!-- 							<div class="hidden-sm hidden-xs action-buttons"> -->
+<!-- 								<a class="blue" href="#"> <i -->
+<!-- 									class="ace-icon fa fa-search-plus bigger-130"></i> -->
+<!-- 								</a> <a class="green" href="#"> <i -->
+<!-- 									class="ace-icon fa fa-pencil bigger-130"></i> -->
+<!-- 								</a> <a class="red" href="#"> <i -->
+<!-- 									class="ace-icon fa fa-trash-o bigger-130"></i> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
 
-							<div class="hidden-md hidden-lg">
-								<div class="inline pos-rel">
-									<button class="btn btn-minier btn-yellow dropdown-toggle"
-										data-toggle="dropdown" data-position="auto">
-										<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-									</button>
+<!-- 							<div class="hidden-md hidden-lg"> -->
+<!-- 								<div class="inline pos-rel"> -->
+<!-- 									<button class="btn btn-minier btn-yellow dropdown-toggle" -->
+<!-- 										data-toggle="dropdown" data-position="auto"> -->
+<!-- 										<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i> -->
+<!-- 									</button> -->
 
-									<ul
-										class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-										<li><a href="#" class="tooltip-info" data-rel="tooltip"
-											title="View"> <span class="blue"> <i
-													class="ace-icon fa fa-search-plus bigger-120"></i>
-											</span>
-										</a></li>
+<!-- 									<ul -->
+<!-- 										class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close"> -->
+<!-- 										<li><a href="#" class="tooltip-info" data-rel="tooltip" -->
+<!-- 											title="View"> <span class="blue"> <i -->
+<!-- 													class="ace-icon fa fa-search-plus bigger-120"></i> -->
+<!-- 											</span> -->
+<!-- 										</a></li> -->
 
-										<li><a href="#" class="tooltip-success"
-											data-rel="tooltip" title="Edit"> <span class="green">
-													<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-											</span>
-										</a></li>
+<!-- 										<li><a href="#" class="tooltip-success" -->
+<!-- 											data-rel="tooltip" title="Edit"> <span class="green"> -->
+<!-- 													<i class="ace-icon fa fa-pencil-square-o bigger-120"></i> -->
+<!-- 											</span> -->
+<!-- 										</a></li> -->
 
-										<li><a href="#" class="tooltip-error" data-rel="tooltip"
-											title="Delete"> <span class="red"> <i
-													class="ace-icon fa fa-trash-o bigger-120"></i>
-											</span>
-										</a></li>
-									</ul>
-								</div>
-							</div>
-						</td>
-					</tr>
+<!-- 										<li><a href="#" class="tooltip-error" data-rel="tooltip" -->
+<!-- 											title="Delete"> <span class="red"> <i -->
+<!-- 													class="ace-icon fa fa-trash-o bigger-120"></i> -->
+<!-- 											</span> -->
+<!-- 										</a></li> -->
+<!-- 									</ul> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</td> -->
+					
 
 
 				</table>

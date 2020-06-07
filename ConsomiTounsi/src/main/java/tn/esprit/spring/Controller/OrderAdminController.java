@@ -41,6 +41,7 @@ public class OrderAdminController {
 	@Autowired
 	FactureImpl factureDAO;
 	
+
 	@Autowired
 	ServletContext context;
 	
@@ -49,8 +50,8 @@ public class OrderAdminController {
 	
 	private String type;
 	
-
-	  
+	
+	
 	
 	private RepeatPaginator paginator;
 //	@PostConstruct

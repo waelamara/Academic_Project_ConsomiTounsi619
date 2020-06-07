@@ -50,10 +50,19 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Modifying
 	@Transactional
 	  public void remise( @Param("id_user")long iduser);
+	@Query(value ="UPDATE commande c set c.status='payee apres livraison',c.typede_payment='porteaporte'where c.id=?1",nativeQuery = true)
+	   @Modifying
+	  @Transactional
+	public void payerApresLivraison( @Param("id")long idCommande);
 	
 	
 	@Query(value = "SELECT COUNT(*),MONTH(c.date) FROM commande c WHERE c.status='payee' GROUP BY c.date", nativeQuery = true)
 	public List<Object[]> NumCommadeParMOIS();
 	@Query(value = "SELECT NEW tn.esprit.spring.Model.Event (c.id,COUNT(*),c.date) FROM Commande c GROUP BY c.date")
 	public List<Event> NumCommadeParMOIS2();
+	
+	@Query(value = "SELECT `id` FROM `commande` WHERE `id_user`=?1", nativeQuery = true)
+	public List<Long> ListeCommandePariduser(Long Iduser);
+	
+	
 }
