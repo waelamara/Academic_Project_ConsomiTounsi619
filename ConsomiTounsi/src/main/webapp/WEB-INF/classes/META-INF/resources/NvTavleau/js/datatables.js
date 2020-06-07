@@ -5,7 +5,6 @@ $(document).ready(function() {
 
     var table = $('#data_table').DataTable({
         responsive: true,
-        "bDestroy": true,
         select: true,
         'aoColumnDefs': [{
             'bSortable': false,
@@ -704,6 +703,7 @@ $(document).ready(function() {
     $('#custm-tool-ele').DataTable({
         "dom": '<"toolbar">frtip'
     });
+    $("#data_table").dataTable().fnDestroy();
 
     $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
 
