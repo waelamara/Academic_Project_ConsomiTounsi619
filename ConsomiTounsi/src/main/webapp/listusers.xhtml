@@ -56,6 +56,7 @@
         <div class="row d-flex align-items-stretch">
         <c:if
 						             test="#{listUsersController.choix == 'username'}">
+						             <h:form>
             					<ui:repeat var="user" value="#{listUsersController.getUserSelonChoix(listUsersController.choix,listUsersController.cle)}" varStatus="status">
             
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
@@ -65,13 +66,15 @@
                         <div class="card-body pt-0">
                             <div class="row">
                                 <div class="col-7">
-                                    <h2 class="lead"><b>#{user.firstName} #{user.lastName}</b></h2>
+                                   <h2 class="lead"><b>#{user.firstName} #{user.lastName}</b></h2>
                                     <p class="text-muted text-sm"><b>Username: </b> #{user.username} </p>
-                                    <p class="text-muted text-sm"><b>Adresse Email: </b> #{user.email} </p>
+                                    <p class="text-muted text-sm"><b>Email Address: </b> #{user.email} </p>
+                                    <p class="text-muted text-sm"><b>Address: </b> #{user.address} </p>
+                                   
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <p class="text-muted text-sm"><b>Address: </b> #{user.address} </p>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telephone #: #{user.tel}</li>
+                                        <li class="text-muted text-sm"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: #{user.tel}</li>
                                     </ul>
+                                    <p class="text-muted text-sm"><b>State Of Account: </b> #{listUsersController.getEtatAcc(user.username)} </p>
                                 </div>
                                 <div class="col-5 text-center">
                 <h:graphicImage class="img-circle img-fluid" alt="avatar" value="https://img.icons8.com/plasticine/2x/user.png" rendered="#{empty ImageUserController.getImageUser(user.id)}" />
@@ -87,19 +90,20 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-
-                                <a href="" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> View Profile
-                                </a>
+ <h:commandButton style="margin:2px;" id="btn" class="btn btn-sm btn-primary" title="BanUser" value="Ban User" action="#{listUsersController.BanUser(user.id)}"/>
+                       <h:commandButton style="margin:2px;" id="btn03" class="btn btn-sm btn-primary" title="UnBanUser" value="UnBan User" action="#{listUsersController.UnBanUser(user.id)}"/>
+                                
                             </div>
                         </div>
                     </div>
                     
                 </div>
                 </ui:repeat>
+                </h:form>
                 </c:if>
                  <c:if
 						             test="#{listUsersController.choix == 'email'}">
+						             <h:form>
             					<ui:repeat var="user" value="#{listUsersController.getUserSelonEmail(listUsersController.choix,listUsersController.cle)}" varStatus="status">
             
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
@@ -111,11 +115,13 @@
                                 <div class="col-7">
                                     <h2 class="lead"><b>#{user.firstName} #{user.lastName}</b></h2>
                                     <p class="text-muted text-sm"><b>Username: </b> #{user.username} </p>
-                                    <p class="text-muted text-sm"><b>Adresse Email: </b> #{user.email} </p>
+                                    <p class="text-muted text-sm"><b>Email Address: </b> #{user.email} </p>
+                                    <p class="text-muted text-sm"><b>Address: </b> #{user.address} </p>
+                                   
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <p class="text-muted text-sm"><b>Address: </b> #{user.address} </p>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telephone #: #{user.tel}</li>
+                                        <li class="text-muted text-sm"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: #{user.tel}</li>
                                     </ul>
+                                    <p class="text-muted text-sm"><b>State Of Account: </b> #{listUsersController.getEtatAcc(user.username)} </p>
                                 </div>
                                 <div class="col-5 text-center">
                 <h:graphicImage class="img-circle img-fluid" alt="avatar" value="https://img.icons8.com/plasticine/2x/user.png" rendered="#{empty ImageUserController.getImageUser(user.id)}" />
@@ -131,16 +137,15 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-
-                                <a href="" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> View Profile
-                                </a>
+                        <h:commandButton style="margin:2px;" id="btn" class="btn btn-sm btn-primary" title="BanUser" value="Ban User" action="#{listUsersController.BanUser(user.id)}"/>
+                       <h:commandButton style="margin:2px;" id="btn02" class="btn btn-sm btn-primary" title="UnBanUser" value="UnBan User" action="#{listUsersController.UnBanUser(user.id)}"/>
                             </div>
                         </div>
                     </div>
                     
                 </div>
                 </ui:repeat>
+                </h:form>
                 </c:if>
         </div>
         
@@ -156,6 +161,7 @@
 <div class="card card-solid">
     <div class="card-body pb-0">
         <div class="row d-flex align-items-stretch">
+        <h:form>
             					<ui:repeat var="user" value="#{listUsersController.paginator.model}" varStatus="status">
             
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
@@ -167,11 +173,14 @@
                                 <div class="col-7">
                                     <h2 class="lead"><b>#{user.firstName} #{user.lastName}</b></h2>
                                     <p class="text-muted text-sm"><b>Username: </b> #{user.username} </p>
-                                    <p class="text-muted text-sm"><b>Adresse Email: </b> #{user.email} </p>
+                                    <p class="text-muted text-sm"><b>Email Address: </b> #{user.email} </p>
+                                    <p class="text-muted text-sm"><b>Address: </b> #{user.address} </p>
+                                   
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <p class="text-muted text-sm"><b>Address: </b> #{user.address} </p>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telephone #: #{user.tel}</li>
+                                        <li class="text-muted text-sm"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: #{user.tel}</li>
                                     </ul>
+                                    <p class="text-muted text-sm"><b>State Of Account: </b> #{listUsersController.getEtatAcc(user.username)} </p>
+                                    
                                 </div>
                                 <div class="col-5 text-center">
                 <h:graphicImage class="img-circle img-fluid" alt="avatar" value="https://img.icons8.com/plasticine/2x/user.png" rendered="#{empty ImageUserController.getImageUser(user.id)}" />
@@ -187,16 +196,17 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
+                       <h:commandButton style="margin:2px;" id="btn" class="btn btn-sm btn-primary" title="BanUser" value="Ban User" action="#{listUsersController.BanUser(user.id)}"/>
+                       <h:commandButton style="margin:1px;" id="btn01" class="btn btn-sm btn-primary" title="UnBanUser" value="UnBan User" action="#{listUsersController.UnBanUser(user.id)}"/>
 
-                                <a href="" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> View Profile
-                                </a>
+                                
                             </div>
                         </div>
                     </div>
                     
                 </div>
                 </ui:repeat>
+                </h:form>
         </div>
         <h:form><nav class="blog-pagination justify-content-center d-flex"> 
                             <ul class="pagination">
