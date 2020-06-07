@@ -295,5 +295,9 @@ public class PubliciteServiceImpl implements IPubliciteService {
 		calendar.add(Calendar.DATE, 1);
         return calendar.getTime();
 	}
+	
+	public List<Publicite> findPubForAll(){
+		return publiciteRepository.findPubForAll();
+	}
 
 }

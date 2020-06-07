@@ -25,4 +25,6 @@ public interface PubliciteRepository extends JpaRepository<Publicite, Long> {
 	public List<Publicite> findLikeName(String nom);
 	@Query(value = "SELECT * FROM publicite WHERE canal LIKE ?1", nativeQuery = true)
 	public List<Publicite> findByCanal(String canal);
+	@Query(value = "SELECT * FROM publicite WHERE gender_cible='TOUS' and debut_age_cible=10 and fin_age_cible=70", nativeQuery = true)
+	public List<Publicite> findPubForAll();
 }
