@@ -56,4 +56,9 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public List<Object[]> NumCommadeParMOIS();
 	@Query(value = "SELECT NEW tn.esprit.spring.Model.Event (c.id,COUNT(*),c.date) FROM Commande c GROUP BY c.date")
 	public List<Event> NumCommadeParMOIS2();
+	
+	@Query(value = "SELECT `id` FROM `commande` WHERE `id_user`=?1", nativeQuery = true)
+	public List<Long> ListeCommandePariduser(Long Iduser);
+	
+	
 }
