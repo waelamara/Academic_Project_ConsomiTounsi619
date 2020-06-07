@@ -50,6 +50,10 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Modifying
 	@Transactional
 	  public void remise( @Param("id_user")long iduser);
+	@Query(value ="UPDATE commande c set c.status='payee apres livraison',c.typede_payment='porteaporte'where c.id=?1",nativeQuery = true)
+	   @Modifying
+	  @Transactional
+	public void payerApresLivraison( @Param("id")long idCommande);
 	
 	
 	@Query(value = "SELECT COUNT(*),MONTH(c.date) FROM commande c WHERE c.status='payee' GROUP BY c.date", nativeQuery = true)
