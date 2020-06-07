@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -298,6 +299,10 @@ public class CommandeImpl implements ICommande {
 	{
 		
 		return commandeRepository.NumCommadeParMOIS2();
+	}
+	public void payerApresLivraison(long idCommande)
+	{
+		commandeRepository.payerApresLivraison(idCommande);	
 	}
 	
 	

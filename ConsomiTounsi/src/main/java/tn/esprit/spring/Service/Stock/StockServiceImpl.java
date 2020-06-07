@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -130,6 +132,20 @@ public class StockServiceImpl implements IStockService {
 	public void displayStock() {
 		
 		
+	}
+
+
+	@Override
+	public Long updateStockjsf(Stock stock) {
+		stockRepository.save(stock);
+		return stock.getIdstock();
+	}
+
+
+	@Override
+	@Transactional
+	public Stock getStockbyId(Long idstock) {
+		return  stockRepository.findById(idstock).get();
 	}
 
 }
