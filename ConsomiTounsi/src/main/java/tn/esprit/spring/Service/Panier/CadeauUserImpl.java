@@ -113,7 +113,7 @@ public class CadeauUserImpl implements ICadeauUser {
 				cd1.setIdUser(u);
 				if(cd1.getMontant()>u.getPointFidelite()){u.setPointFidelite(0);}
 				else {u.setPointFidelite((int) (u.getPointFidelite()-cd1.getMontant()));}
-				cd1.setValidite(true);
+				//cd1.setValidite(true);
 				userRepository.save(u);
 				cadeauUserRepository.save(cd1);
 				 a= cd1.getCode();
@@ -129,7 +129,7 @@ public class CadeauUserImpl implements ICadeauUser {
 				cd2.setIdUser(u);
 				if(cd2.getMontant()>u.getPointFidelite()){u.setPointFidelite(0);}
 				else {u.setPointFidelite((int) (u.getPointFidelite()-cd2.getMontant()));}
-				cd2.setValidite(true);
+				//cd2.setValidite(true);
 				userRepository.save(u);
 				cadeauUserRepository.save(cd2);
 				 a= cd2.getCode();
@@ -147,7 +147,7 @@ public class CadeauUserImpl implements ICadeauUser {
 				
 				if(cd3.getMontant()>u.getPointFidelite()){u.setPointFidelite(0);}
 				else {u.setPointFidelite((int) (u.getPointFidelite()-cd3.getMontant()));}
-				cd3.setValidite(true);
+				//cd3.setValidite(true);
 				userRepository.save(u);
 				cadeauUserRepository.save(cd3);
 				 a= cd3.getCode();
