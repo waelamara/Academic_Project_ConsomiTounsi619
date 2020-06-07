@@ -328,8 +328,8 @@
 <!-- required="true" requiredMessage="Date Début -->
 
 <!-- Obligatoire"/>> -->
-<h:message for="Carta"></h:message>
-										<h:inputText id="Carta" value="#{cartController.carta}" requiredMessage="424242424" required="true"/>
+
+										<h:inputText id="Carta" value="#{cartController.carta}" />
 
 								
 										
@@ -367,7 +367,7 @@
 										<label for="cc-expiration">CVV</label>
 										<!-- 											<input type="text" -->
 										<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
-										<h:inputText value="#{cartController.cvc}" required="true"></h:inputText>
+										<h:inputText value="#{cartController.cvc}" ></h:inputText>
 
 										<!-- 										<div class="invalid-feedback">Security code required</div> -->
 									</div>
@@ -391,7 +391,12 @@
 							<ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
 						 <h:commandButton  class="btn btn-primary py-3 px-4" 
 									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
-									value="PalceOrder" />
+									value="Pay online" />
+								<br/><br/>
+									 <h:commandButton  class="btn btn-primary py-3 px-4" 
+									action="#{cartController.payerPorteaPorte(Commande.id,loginController.userDetails.id)}"
+									value="PayAfterDelivery" />
+								<br/><br/>
 									<h:commandButton  class="btn btn-primary py-3 px-4" 
 									action="#{ControllerCharite.addChCom(Commande.id)}"
 									value="AddTOCharity" />

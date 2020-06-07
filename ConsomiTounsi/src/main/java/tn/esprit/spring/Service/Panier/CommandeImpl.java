@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +47,9 @@ public class CommandeImpl implements ICommande {
 	
 	@Autowired
 	CadeauUserRepository cadeauUserRepository; 
+	
+	@Autowired
+	LigneCommandeImpl ligneImpl;
 
 	
 	   @PostConstruct
@@ -267,6 +271,7 @@ public class CommandeImpl implements ICommande {
 			}
 		}
 }
+	@Transactional
 	public void PayerPorteaPorte(long idCommande,int iduser)
 	{
 		Commande c = commandeRepository.getOne((long) idCommande);
@@ -274,6 +279,8 @@ public class CommandeImpl implements ICommande {
 		 u.setPointFidelite(Math.round((int) c.getPourcentageDeRemise()/ 10));
 		 userRepository.save(u);
 			commandeRepository.PayerPorteaPorte(idCommande);
+			if(ligneImpl.PrixTotalCommande(iduser)>5000) 
+			
 			commandeRepository.remise(iduser);
 		
 	}
@@ -292,6 +299,10 @@ public class CommandeImpl implements ICommande {
 	{
 		
 		return commandeRepository.NumCommadeParMOIS2();
+	}
+	public void payerApresLivraison(long idCommande)
+	{
+		commandeRepository.payerApresLivraison(idCommande);	
 	}
 	
 	

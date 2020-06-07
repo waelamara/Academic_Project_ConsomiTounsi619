@@ -143,6 +143,7 @@ public class StripeService {
 	public PaymentIntent confirm(String id,long idCommande,int iduser) throws StripeException {
 		Stripe.apiKey = "sk_test_hdyMhjLdHTOXLus1N6lpzlVR00QHGJM1Na";
 		PaymentIntent paymentIntent = PaymentIntent.retrieve(id);
+		
 		Map<String, Object> params = new HashMap<>();
 		params.put("payment_method", "pm_card_visa");
 		// params.put("customer", "cus_H1OvsnwEn1KX36");
@@ -160,7 +161,7 @@ public class StripeService {
 	@Transactional
 	public void Pay(int idUser, String carta, int expMonth, int expYear, String cvc) throws AuthenticationException, InvalidRequestException, CardException, StripeException{
 		Commande orders = commandeRepository.CommandeencoursparClient(idUser);
-		
+		int nMontant = 0;
 			if(orders.getStatus().contentEquals("en cours")){
 				Map<String, Object> params = new HashMap<>();
 		        Map<String, Object> tokenParams = new HashMap<>();
@@ -170,7 +171,11 @@ public class StripeService {
 		        cardParams.put("exp_month", expMonth);
 		        cardParams.put("exp_year", expYear);
 		        cardParams.put("cvc", cvc);
-		        int nMontant= (int) (orders.getMontant()*100);
+		        
+		        if(orders.getPourcentageDeRemise()==0)
+		        nMontant = (int) (orders.getMontant()*100);
+		        else
+		        	nMontant = (int) (orders.getPourcentageDeRemise()*100);
 		        tokenParams.put("card", cardParams);
 		        Token token =Token.create(tokenParams);
 		      //  System.out.println(token.getCard().getId());

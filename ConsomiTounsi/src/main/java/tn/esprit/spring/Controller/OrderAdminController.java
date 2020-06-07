@@ -32,7 +32,7 @@ import tn.esprit.spring.Service.Panier.LigneCommandeImpl;
 
 @Controller(value = "OrderAdminController")
 @ELBeanName(value = "OrderAdminController")
-@Join(path = "/OrderAdmin", to = "/Order2.jsf")
+@Join(path = "/OrderAdmin", to = "/Order.jsf")
 public class OrderAdminController {
 
 	@Autowired
@@ -41,6 +41,7 @@ public class OrderAdminController {
 	@Autowired
 	FactureImpl factureDAO;
 	
+
 	@Autowired
 	ServletContext context;
 	
@@ -49,8 +50,8 @@ public class OrderAdminController {
 	
 	private String type;
 	
-
-	  
+	
+	
 	
 	private RepeatPaginator paginator;
 //	@PostConstruct

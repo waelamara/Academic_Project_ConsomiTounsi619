@@ -1,6 +1,7 @@
 package tn.esprit.spring.Controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import tn.esprit.spring.Controller.GestionUser.LoginController;
+import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Repository.UserRepository;
@@ -34,7 +36,7 @@ public class ContactController {
 	public String titre;
 	public String description;
 	private reclamation rec;
-	
+	public Long idcommande;
 	public String getTitre() {
 		return titre;
 	}
@@ -50,6 +52,15 @@ public class ContactController {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Long getIdcommande() {
+		return idcommande;
+	}
+
+	public void setIdcommande(Long idcommande) {
+		this.idcommande = idcommande;
+	}
+
 	@Transactional
 	public  String  addreclamation(long iduser) {
 		
@@ -57,6 +68,9 @@ public class ContactController {
 		reclamation rec= new reclamation (titre,description);
         rec.setDateRec(LocalDate.now());
         User u =UserRepository.getOne(iduser);
+        Commande C = new Commande();
+        C=CommandeDAO.findOne(idcommande);
+        rec.setCommande(C);
         rec.setUser(u);
         System.out.println(u);
 		ReclamationService.save1(rec);
@@ -70,6 +84,10 @@ public class ContactController {
 
 	public void setRec(reclamation rec) {
 		this.rec = rec;
+	}
+	
+	public List<Long> findIdCommande(Long iduser1){
+		return ReclamationService.ListeCommandeparuser(iduser1);
 	}
 		
 	}

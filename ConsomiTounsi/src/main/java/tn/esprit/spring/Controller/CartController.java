@@ -231,6 +231,10 @@ public void deleteLigne(long idLigneCommande) {
 			{
 				return cadeauUserImpl.CadeauUser(idUser);
 			}
+			public void payerPorteaPorte(long idCommande,int iduser)
+			{
+				commandeDao.PayerPorteaPorte(idCommande,iduser);
+			}
 		
 			
 			
