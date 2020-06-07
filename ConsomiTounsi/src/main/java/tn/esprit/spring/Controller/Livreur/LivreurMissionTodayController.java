@@ -27,7 +27,7 @@ public class LivreurMissionTodayController {
 	@Transactional
 	public String actionDone(Integer idLiv)
 	{
-		String Navigate="/Livreur_mission.xhtml";
+		String Navigate="/Livreur_missionToday.xhtml";
 		L.DoneMission(1,idLiv);
 		return Navigate;
 		
