@@ -159,6 +159,18 @@ public class Produit implements Serializable {
 
 
 
+	public Produit(Long id, String nomProduit, float prix, String description, Long barcode, float poids,
+			float prixAchat) {
+		super();
+		this.id = id;
+		this.nomProduit = nomProduit;
+		this.prix = prix;
+		this.description = description;
+		this.barcode = barcode;
+		this.poids = poids;
+		this.prixAchat = prixAchat;
+	}
+
 	public Produit(String nomProduit, float prix, String description, Long barcode, float poids, float prixAchat) {
 		super();
 		this.nomProduit = nomProduit;

@@ -39,7 +39,7 @@
 		
 </h:head>
 <h:body>
-<div style="margin-left: 13.5%;position:relative;">
+<div style="margin-left: 16.5%;position:relative;">
 		<div class="main-container ace-save-state" id="main-container">
 			<div class="main-content">
 				<div class="main-content-inner">
@@ -126,7 +126,8 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<h:form enctype="multipart/form-data" class="form-horizontal">
+								<h:form enctype="multipart/form-data" class="form-horizontal" >
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Product </label>
 
@@ -144,10 +145,41 @@
 
 										<div class="col-sm-9">
 								
-									<h:selectOneMenu value="#{sscategorieController.nomSsCategorie}" class="chosen-select form-control" id="form-field-select-3" style="width: 20%">
-									<f:selectItem itemLabel="Choisir Sous/Categorie" itemValue="#{null}" />
-									<f:selectItems value="#{sscategorieController.getAllSsousCategorie()}" />	
-									</h:selectOneMenu>
+									
+									<h:selectOneMenu id="catego" value="#{AdminFormProduit.nomCategorie}" style="width:150px">             
+                					<f:selectItem itemLabel="Select Categorie" itemValue="" noSelectionOption="true" />
+             					   <f:selectItems value="#{AdminFormProduit.getAllCategorieName()}" />
+                					 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="scategorie" />
+            						</h:selectOneMenu>
+						
+										</div>
+										
+										</div>
+										
+											<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" >Sous-Categorie</label>
+
+										<div class="col-sm-9">
+								
+            							<h:selectOneMenu  id="scategorie" value="#{AdminFormProduit.nomSCategorie}" style="width:150px">
+               							 <f:selectItem itemLabel="Select S/Categorie" itemValue="" noSelectionOption="block" />
+                						<f:selectItems value="#{AdminFormProduit.listNomScateg}" />
+               							 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="sscategorie" />
+           								 </h:selectOneMenu>
+						
+										</div>
+										</div>
+										
+											<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" >Sous-SCategorie</label>
+
+										<div class="col-sm-9">
+							
+									
+									 <h:selectOneMenu  id="sscategorie" value="#{sscategorieController.nomSsCategorie}" style="width:150px" >
+               						 <f:selectItem itemLabel="Select SS/Categorie" itemValue="" noSelectionOption="true" />
+                					<f:selectItems value="#{AdminFormProduit.listNomSsouscateg}"/>
+            						</h:selectOneMenu>
 						
 										</div>
 										</div>
@@ -157,9 +189,9 @@
 										<label class="col-sm-3 control-label no-padding-right">Prix d'achat</label>
 
 										<div class="col-sm-9">
-										<h:inputText value="#{ControllerProduit.prixAchat}"  placeholder="Prix d'achat /dt" class="input-sm"></h:inputText>
+										<h:inputText value="#{ControllerProduit.prixAchat}"  placeholder="Prix d'achat /dt" class="input-sm"></h:inputText>/DT
 											<div class="space-2"></div>
-
+											
 											<div class="help-block" id="input-size-slider"></div>
 										</div>
 										  
@@ -172,10 +204,10 @@
 										<label class="col-sm-3 control-label no-padding-right" >Prix de vente</label>
 
 										<div class="col-sm-9">
-										<h:inputText value="#{ControllerProduit.prix}"  placeholder="Prix de vente /dt" class="input-sm"></h:inputText>
+										<h:inputText value="#{ControllerProduit.prix}"  placeholder="Prix de vente /dt" class="input-sm"></h:inputText>/DT
 									
 											<div class="space-2"></div>
-
+												
 											<div class="help-block" id="input-size-slider"></div>
 										</div>
 									</div>
@@ -186,12 +218,12 @@
 
 										<div class="col-sm-9">
 											<div class="clearfix">
-											<h:inputText value="#{ControllerProduit.poids}" id="form-field-5" placeholder="Poids /Kg" class="col-xs-1"></h:inputText>
+											<h:inputText value="#{ControllerProduit.poids}" id="form-field-5" placeholder="Poids /Kg" class="col-xs-1"></h:inputText> /KG
 												
 											</div>
 
 											<div class="space-2"></div>
-
+                                            
 											<div class="help-block" id="input-span-slider"></div>
 										</div>
 									</div>
@@ -200,7 +232,7 @@
 									<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" for="form-field-6">Images</label>
 								<div class="col-sm-9">
-								<p:fileUpload value="#{ControllerProduit.files}" mode="simple" skinSimple="true" multiple="true" />
+								<p:fileUpload value="#{ControllerProduit.files}" mode="simple" skinSimple="true" multiple="true"  />
 								</div>
 								</div>
 								</div>

@@ -11,11 +11,15 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Repository.Produit.ProduitRepository;
+import tn.esprit.spring.Service.Produit.IProduitService;
 import tn.esprit.spring.Service.Stock.IStockService;
 
 
@@ -28,6 +32,8 @@ public class JsfStockController {
 	
 	@Autowired
 	IStockService stockservice;
+	@Autowired
+	IProduitService iproduitService;
 	
 	private Long idstock;
 	private String nom_stock;
@@ -82,24 +88,53 @@ public int getQuantite() {
 		super();
 	}
 	
-	public JsfStockController(Long idstock, String nom_stock, int quantite, Date validite, float prixdevente) {
+	public JsfStockController(String nom_stock, int quantite, Date validite, float prixdevente) {
 		super();
-		this.idstock = idstock;
+		
 		this.nom_stock = nom_stock;
 		this.quantite = quantite;
 		this.validite = validite;
 		this.prixdevente = prixdevente;
 	}
+
 	public List<Stock> allStock() {
 		return stockservice.allStock();
+	}
+	 
+	public String gopage(Long idprod){
+		
+		return "/addstock.xhtml?faces-redirect=true&idprod=" + idprod.toString();
 	}
 	
 	
 	
-	
-	public Stock addstock(@RequestBody Stock stock) {
-		return stockservice.saveStock(stock);
+	public void addstock(long idprod) {
+		
+		 stockservice.ajouterStockbyProd(new Stock(nom_stock,quantite,validite,prixdevente) ,idprod);
 
 		}
+	
+	
+public List<Produit> getProduits() {
+		
+		return stockservice.getProduits();
+	}
+
+
+public void deletestock(Long idstock) {
+
+	stockservice.deleteStockById(idstock);
+
+}
+
+
+public void displayStock(){
+	
+	
+	
+	
+}
+
+
 
 }

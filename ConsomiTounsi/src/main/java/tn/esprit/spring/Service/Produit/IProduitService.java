@@ -22,4 +22,5 @@ public interface IProduitService {
 	public List<Produit> findProduitSCategorie(Long idSCategorie);
 	public List<Produit> findProduitCategorie(Long idCategorie);
 	public void addProduitWithImage(Produit p, UploadedFiles files);
+	public Long UpdateProduit(Produit produit);
 }

@@ -40,6 +40,8 @@ public class Rayon implements Serializable{
 
 	
 
+	
+
 	public Long getIdrayon() {
 		return Idrayon;
 	}
@@ -74,19 +76,25 @@ public class Rayon implements Serializable{
 		this.produits = produits;
 	}
 
-	public Rayon() {
-		super();
-	}
+	
 
-	public Rayon( String nom_rayon, Type_rayon type_rayon) {
-		super();
-		this.nom_rayon = nom_rayon;
-		this.type_rayon = type_rayon;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	public Rayon(String nom_rayon, Type_rayon type_rayon) {
+		super();
+		this.nom_rayon = nom_rayon;
+		this.type_rayon = type_rayon;
+	}
+
+	public Rayon() {
+		super();
+	}
+
+	
+	
 	
 	
 	
