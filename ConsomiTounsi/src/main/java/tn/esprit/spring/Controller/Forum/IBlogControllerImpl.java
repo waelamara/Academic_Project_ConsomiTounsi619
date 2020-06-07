@@ -35,7 +35,7 @@ import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
 
 @Controller(value = "blogController")
 @ELBeanName(value = "blogController")
-@Join(path = "/blog", to = "/fourm//blog.jsf")
+@Join(path = "/blog", to = "/fourm/blog.jsf")
 @ViewScoped
 public class IBlogControllerImpl {
 	@Autowired

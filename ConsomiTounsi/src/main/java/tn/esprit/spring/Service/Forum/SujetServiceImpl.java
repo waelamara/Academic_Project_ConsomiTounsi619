@@ -356,5 +356,10 @@ public  class SujetServiceImpl implements ISujetService {
 		sujetRepository.save(sujet);
 	}
 
+	@Override
+	public List<Sujet> getAllSujetEtatWaiting() {
+		return sujetRepository.findAllbyEtatWaiting();
+	}
+
 	
 }
