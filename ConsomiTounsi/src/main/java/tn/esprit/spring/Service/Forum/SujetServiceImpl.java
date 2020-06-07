@@ -65,13 +65,9 @@ public  class SujetServiceImpl implements ISujetService {
 	
 
 	@Override
-	public int deleteSujetById(Long sujetId,Long userId) {
+	public int deleteSujetById(Long sujetId) {
 		Sujet sujet = sujetRepository.findById(sujetId).get();
-		if(sujet.getIdUser().getId()== userId)
-		{
-			 sujetRepository.deleteById(sujetId);	 
-			 return 1;
-		}
+			 sujetRepository.delete(sujet);	 
 			 return 0;  
 	}
 

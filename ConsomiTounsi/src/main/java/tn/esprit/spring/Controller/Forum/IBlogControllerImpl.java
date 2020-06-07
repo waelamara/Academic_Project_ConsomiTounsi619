@@ -283,7 +283,11 @@ public class IBlogControllerImpl {
 		iImageSujetService.ajouterImage(image);
 		return "/fourm/myPosts";
 	}
-
+    /********remove post**********/
+	public String deletsujet(Long sujetid) {
+		 iSujetService.deleteSujetById(sujetid);
+		return null;
+			}
 	/***** add view *****/
 
 	public String ajouterVus(Long userId, Long sujetId) {
