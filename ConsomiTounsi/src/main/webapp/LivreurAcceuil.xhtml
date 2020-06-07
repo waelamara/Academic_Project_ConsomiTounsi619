@@ -11,7 +11,25 @@
 			
 <title>Livreur Acceuil</title>
 <h:body>
-
+<h:form>
+<div style="padding-left: 20%">
+<br></br><br></br>
+					<table>
+						<tr>
+							<td><h:commandLink value="Free" action="#{LivreurAcceuilController.freeDispo(LoginDeliveryController.userDetails.id)}" class="btn btn-lg btn-success">
+												<i class="ace-icon fa fa-check"></i>
+											
+											</h:commandLink></td>
+							<td><h:commandLink value="Busy" action="#{LivreurAcceuilController.busyDispo(LoginDeliveryController.userDetails.id)}" class="btn btn-lg btn-danger">
+							
+								<i class="ace-icon fa  fa-times "></i>
+									
+							</h:commandLink>
+							</td>
+						</tr>
+					</table>
+					</div>
+</h:form>
 
 </h:body>
 
