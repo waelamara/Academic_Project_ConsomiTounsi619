@@ -1,6 +1,7 @@
 package tn.esprit.spring.Controller.GestionUser;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -121,6 +122,7 @@ public class SignupController {
 			user.setRoles(roles);
 			user.setNbMission(0);
 			user.setNbMission(0);
+			user.setSignupDay(LocalDate.now());
 			userRepository.save(user);
 			
 			for (UploadedFile f : file.getFiles()) {

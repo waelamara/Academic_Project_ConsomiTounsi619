@@ -1,6 +1,7 @@
 package tn.esprit.spring.Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -113,6 +114,8 @@ public class User implements Serializable {
 	private Integer nbMission;
 	@Column(name = "lieuxTravail")
 	private String lieuxTravail;
+	@Column(name = "signupDay")
+	private LocalDate signupDay;
 	
 
 	public AuthProvider getProvider() {
@@ -525,6 +528,14 @@ public class User implements Serializable {
 
 	public void setLivraison(Set<Livraison> livraison) {
 		Livraison = livraison;
+	}
+
+	public LocalDate getSignupDay() {
+		return signupDay;
+	}
+
+	public void setSignupDay(LocalDate signupDay) {
+		this.signupDay = signupDay;
 	}
 
 }
