@@ -133,6 +133,11 @@ public class RestControllerCommande {
 	{
 		return commandeDao.NumCommadeParMOIS2();
 	}
+	@PutMapping("/payerporteaporte/{idCommande}")
+	public void payerApresLivraison(@PathVariable(value = "idCommande")long idCommande)
+	{
+		commandeDao.payerApresLivraison(idCommande);	
+	}
 
 	
 	

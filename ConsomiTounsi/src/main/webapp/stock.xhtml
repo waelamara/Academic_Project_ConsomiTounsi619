@@ -304,7 +304,7 @@
 
                                                    <td><h:column>
                                                    <h:form>
-																	<h:commandLink id="btnsupp" value="Delete" action="#{JsfStockController.deletestock(stock.idstock)}"  >
+																	<h:commandLink id="btnsupp" value="Delete" action="#{JsfStockController.deletestock(stock.idstock)}">
 																	
 																		<i class="ace-icon fa fa-trash-o bigger-120 white" ></i>   
 																		</h:commandLink></h:form>
@@ -314,8 +314,8 @@
                                                    
                                                     <td><h:column>
                                                    <h:form>
-																	<h:commandLink id="btnmodif" value="Update" action="#{JsfStockController.deletestock(stock.idstock)}"  >
-																	
+																	<h:commandLink id="btnmodif" value="Update" action="#{JsfStockController.gopagestock(stock.idstock)}"  >
+																	<f:param name="idstock" value="#{stock.idstock}"/>
 																		<i class="ace-icon fa fa-trash-o bigger-120 white" ></i>   
 																		</h:commandLink></h:form>
                                                    

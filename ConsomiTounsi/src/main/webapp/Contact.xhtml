@@ -4,6 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/Template/template.xhtml">
 	<ui:define name="Contact">
 		<h:head>
@@ -100,20 +101,45 @@
 											</div>
 											<div class="contact_form_text">
 												<h:inputText class="text_field contact_form_message"
-													placeholder="Message"
-													required="required"
+													placeholder="Message" required="required"
 													value="#{ContactController.description}"
 													data-error="Please, write us a message." />
 											</div>
-											<div >
-											    
-											    <h:panelGroup rendered="#{empty loginController.userDetails}">
-											    <a class="button contact_submit_button" href="/login">Save</a>
-											    </h:panelGroup>
-											    <h:panelGroup rendered="#{not empty loginController.userDetails}">
-												<h:commandButton class="button contact_submit_button" value="Save" action="#{ContactController.addreclamation(loginController.userDetails.id)}"/>
+												
+													<div>
+											<ul class="standard_dropdown ">
+												<h:selectOneMenu value="#{ContactController.idcommande}"
+													style="color:black ;font-family:arial,sans-serif;font-weight: normal;font-size:90%;"
+													class=" contact_form_phone input_field fas fa-chevron-down">
+													<ul class="custom_list clc">
+														<f:selectItem itemLabel="All Commande :" itemValue='0' />
+														<c:forEach var="idc"
+															items="#{ContactController.findIdCommande(loginController.userDetails.id)}"
+															varStatus="status">
+															<f:selectItem itemLabel="#{idc}" itemValue="#{idc}"/>
+														</c:forEach>
+													</ul>
+												</h:selectOneMenu>
+												</ul>
+
+											</div>
+										
+								
+											<div>
+
+												<h:panelGroup
+													rendered="#{empty loginController.userDetails}">
+													<a class="button contact_submit_button" href="/login">Save</a>
+												</h:panelGroup>
+												<h:panelGroup
+													rendered="#{not empty loginController.userDetails}">
+													<h:commandButton class="button contact_submit_button"
+														value="Save"
+														action="#{ContactController.addreclamation(loginController.userDetails.id)}" />
 												</h:panelGroup>
 											</div>
+										
+													
 										</h:form>
 
 									</div>

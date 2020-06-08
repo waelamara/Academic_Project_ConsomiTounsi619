@@ -54,7 +54,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT * FROM `user` WHERE `email` LIKE ?1%", nativeQuery = true)
 	public List<User> getUserSelonEmail(String cle);
 	
+	@Query(value = "SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 8", nativeQuery = true)
+	public List<User> getNewUsers();
 	
-    //SELECT `user_id` FROM `user`  ORDER BY `nb_mission` DESC LIMIT 10
+	@Query(value = "SELECT COUNT(*) FROM user ", nativeQuery = true)
+	public int NombreUsers();
+	
+	
+    //SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 3
 
 }

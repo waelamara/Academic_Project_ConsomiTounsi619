@@ -132,6 +132,10 @@ public class Stock implements Serializable{
 		this.prixdevente = prixdevente;
 	}
 
+	public Stock(Long stockIdToBeUpdated, String nom_stock, int quantite, Date validite, float prixdevente) {
+		// TODO Auto-generated constructor stub
+	}
+
 	
 
 	
