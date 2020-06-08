@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Model.Chart.SexeC;
 
 
 
@@ -31,9 +32,9 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Lo
 	@Query(value = "SELECT * FROM ligne_commande l JOIN commande c on l.commande_id=c.id  WHERE l.produit_id=?1 AND c.id_user=?2 AND c.status='en cours'", nativeQuery = true)
 	public LigneCommande findLigneCommande(Long idProduit,Long idClient);
 	
-	
-	@Query(value = "SELECT COUNT(*) as n ,c.nom_categorie,SUM(l.price*l.quantity) as t FROM categorie c JOIN scategorie sc on c.id=sc.id_categorie_id join ss_categorie ssc on sc.id=ssc.idscategorie_id "
-			+ "join produit p on ssc.id=p.id_ss_categorie_id join ligne_commande l ON p.id=l.produit_id GROUP BY c.id ORDER BY t DESC ", nativeQuery = true)
+//	,SUM(l.price*l.quantity) as t
+	@Query(value = "SELECT COUNT(*) as n ,c.nom_categorie FROM categorie c JOIN scategorie sc on c.id=sc.id_categorie_id join ss_categorie ssc on sc.id=ssc.idscategorie_id "
+			+ "join produit p on ssc.id=p.id_ss_categorie_id join ligne_commande l ON p.id=l.produit_id GROUP BY c.id ORDER BY n  DESC ", nativeQuery = true)
 	public List<Object[]>NumCategorie();
 	
 	
@@ -46,6 +47,9 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Lo
 	public List<lignecommandeproduit> factureParIdclient(@Param("idc")long i,@Param("idf")long idf);
 	@Query(value = "SELECT  NEW tn.esprit.spring.Model.lignecommandeproduit(l.id,p.id,p.nomProduit,l.quantity,p.prix,l.quantity*p.prix,c.montant) FROM LigneCommande l join l.commande c  join l.produit p   WHERE c.id.id=:idc")
 	public List<lignecommandeproduit> panierParIdCommande(@Param("idc")long i);
+	@Query(value = "SELECT COUNT(*) as n ,c.nom_categorie FROM categorie c JOIN scategorie sc on c.id=sc.id_categorie_id join ss_categorie ssc on sc.id=ssc.idscategorie_id "
+			+ "join produit p on ssc.id=p.id_ss_categorie_id join ligne_commande l ON p.id=l.produit_id GROUP BY c.id ORDER BY n  DESC where c.id=? ", nativeQuery = true)
+	public int NumCategorie2();
 	
 
 }

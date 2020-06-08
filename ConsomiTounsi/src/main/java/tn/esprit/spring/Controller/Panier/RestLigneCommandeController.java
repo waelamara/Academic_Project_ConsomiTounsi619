@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Model.Chart.SexeC;
 import tn.esprit.spring.Service.Panier.LigneCommandeImpl;
 
 
@@ -60,8 +61,15 @@ public class RestLigneCommandeController {
 	@GetMapping("/Categories")
 	public List<Object[]> NumCategorie()
 	{
+		
 		return ligneCommandeDao.NumCategorie();
 	}
+//	@GetMapping("/Categories2")
+//	public List<SexeC> NumCategorie2()
+//	{
+//		
+//		return ligneCommandeDao.NumCategorie2();
+//	}
 	
 	
 	@GetMapping("Produit/{idprod}")

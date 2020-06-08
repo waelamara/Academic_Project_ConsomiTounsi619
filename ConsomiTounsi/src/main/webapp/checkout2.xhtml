@@ -338,13 +338,13 @@
 
 									<div class="col-md-6 mb-3">
 										<!-- 										<label for="cc-number">expMonth</label> -->
-										<h:outputText value="expMonth" />
+										<h:outputText value="expMonth" required="" />
 
 
 										<!--  <input type="text" -->
 										<!-- 											class="form-control" id="cc-number" placeholder="" -->
 										<!-- 											required="" /> -->
-										<h:inputText value="#{cartController.expMonth}" >
+										<h:inputText value="#{cartController.expMonth}" required="" >
 
 </h:inputText>
 
@@ -353,13 +353,13 @@
 								</div>
 								<div class="row">
 									<div class="col-md-6 mb-3">
-										<h:outputText value="expYear"/>
+										<h:outputText value="expYear" required=""/>
 
 
 										<!-- 											<input type="text" -->
 										<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
 										<!-- 												required="" /> -->
-										<h:inputText value="#{cartController.expYear}" ></h:inputText>
+										<h:inputText value="#{cartController.expYear}" required=""/>
 										<!-- 										<div class="invalid-feedback">Expiration date required</div> -->
 									</div>
 
@@ -367,7 +367,7 @@
 										<label for="cc-expiration">CVV</label>
 										<!-- 											<input type="text" -->
 										<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
-										<h:inputText value="#{cartController.cvc}" ></h:inputText>
+										<h:inputText value="#{cartController.cvc}" required=""></h:inputText>
 
 										<!-- 										<div class="invalid-feedback">Security code required</div> -->
 									</div>

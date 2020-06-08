@@ -16,6 +16,7 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Model.Chart.SexeC;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
@@ -38,7 +39,10 @@ public class LigneCommandeImpl implements ILigneCommande {
 	@Autowired
 	UserRepository userRepository;
 	
-
+//	public List<SexeC>NumCategorie2()
+//	{
+//		return ligneCommandeRepository.NumCategorie2();
+//	}
 
 
 	public List<lignecommandeproduit> panierParIdclient( long id) {
