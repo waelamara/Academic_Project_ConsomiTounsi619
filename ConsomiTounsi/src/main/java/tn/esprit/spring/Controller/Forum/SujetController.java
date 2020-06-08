@@ -135,14 +135,15 @@ public class SujetController {
 	   return ResponseEntity.ok().build();			
 	}
 	
-	@GetMapping(value = "/usergangnant")
-	  public User client_gangant() {
-		  return isujetservice.client_gangnant();
+	@GetMapping(value = "/usergangnant/{nbpoint}")
+	  public User client_gangant(@PathVariable(value = "nbpoint") int nbpoint) {
+		  return isujetservice.client_gangnant(nbpoint);
 	  }
 	
-	@GetMapping(value = "/produit_gangnant")
-	  public Produit produit_gangant() throws MessagingException{
-		return  isujetservice.produit_gangnant();
+	@GetMapping(value = "/produit_gangnant/{nbpoint}")
+	  public Produit produit_gangant(@PathVariable(value = "nbpoint") int nbpoint) throws MessagingException{
+		return  isujetservice.produit_gangnant(nbpoint)
+				;
 	  }
 	
 	 @RequestMapping("/sendmail")

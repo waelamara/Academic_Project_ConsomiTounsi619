@@ -23,8 +23,8 @@ public interface ISujetService {
 	public List<Sujet> getAllSujetNamesByCategorie(Long categId);
 	public List<Sujet> findSujetbyUser(Long userid);
 	public String findNamebySujet (Long sujetid);
-	public User client_gangnant();
-	public Produit produit_gangnant() throws MessagingException;
+	public User client_gangnant(int nbpoint);
+	public Produit produit_gangnant(int nbpoint) throws MessagingException;
 	public void sendmail();
 	
 }

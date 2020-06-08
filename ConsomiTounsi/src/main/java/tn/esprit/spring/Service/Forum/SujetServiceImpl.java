@@ -128,8 +128,8 @@ public  class SujetServiceImpl implements ISujetService {
 	}
 	
 	@Override
-	public User client_gangnant() {
-		List<String> ids = userRepository.findClient_pt_100();
+	public User client_gangnant(int nbpoint) {
+		List<String> ids = userRepository.findClient_pt_100(nbpoint);
 		String separ = ",";
 		String res = String.join(separ, ids);
 		String motcommentaire1[] = res.split(",");
@@ -154,8 +154,8 @@ public  class SujetServiceImpl implements ISujetService {
 	}
 	
 	@Override
-	public Produit produit_gangnant() throws MessagingException {
-		User clientgagnant= client_gangnant();
+	public Produit produit_gangnant(int nbpoint) throws MessagingException {
+		User clientgagnant= client_gangnant(nbpoint);
 		String interets = clientgagnant.getInteret();
 		String linterets[] = interets.split(",");
 		int r = (int) (Math.random() * (linterets.length));
@@ -169,6 +169,8 @@ public  class SujetServiceImpl implements ISujetService {
 		String name2 = lproduits[r2];
 		long random = Long.parseLong(name2);
 		Produit p1 = produitRepository.findById(random).get();
+	   clientgagnant.setPointFidelite(clientgagnant.getPointFidelite()/4);
+	    userRepository.save(clientgagnant);
 ////////////mail
 	SimpleMailMessage mail = new SimpleMailMessage();
 	//// *******************************/////
