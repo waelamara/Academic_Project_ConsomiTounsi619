@@ -69,7 +69,12 @@ public class ContactController {
         rec.setDateRec(LocalDate.now());
         User u =UserRepository.getOne(iduser);
         Commande C = new Commande();
-        C=CommandeDAO.findOne(idcommande);
+        if(idcommande==0)
+        {
+        	C=null;
+        }
+        else{C=CommandeDAO.findOne(idcommande);}
+        
         rec.setCommande(C);
         rec.setUser(u);
         System.out.println(u);
