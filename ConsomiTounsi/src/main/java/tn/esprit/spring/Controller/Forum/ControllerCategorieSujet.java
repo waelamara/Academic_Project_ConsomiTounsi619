@@ -24,8 +24,6 @@ public class ControllerCategorieSujet {
 	}
     public int getNbcategeorieSujet(Long CatregId){
      	return	iCategorieService.countSujetbycatId(CatregId);
-   
-    	
     }
   
 }
