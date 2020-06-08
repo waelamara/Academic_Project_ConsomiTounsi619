@@ -12,9 +12,14 @@
 <title>Livreur Acceuil</title>
 <h:body>
 <h:form>
+<br></br>
+<div align="center">
+<h:graphicImage value="../img/a.jpg" />
+</div>
 <div style="padding-left: 20%">
 <br></br><br></br>
-					<table>
+					<table align="center">
+					   <tr><h2>#{LoginDeliveryController.userDetails.disponible}</h2></tr>
 						<tr>
 							<td><h:commandLink value="Free" action="#{LivreurAcceuilController.freeDispo(LoginDeliveryController.userDetails.id)}" class="btn btn-lg btn-success">
 												<i class="ace-icon fa fa-check"></i>
