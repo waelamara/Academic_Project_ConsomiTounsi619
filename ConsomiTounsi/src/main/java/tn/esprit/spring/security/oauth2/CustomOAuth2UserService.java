@@ -22,6 +22,7 @@ import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Service.GestionUser.IImageUserService;
 import tn.esprit.spring.security.services.UserDetailsImpl;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -98,6 +99,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 		roles.add(userRole);
 		user.setRoles(roles);
+		user.setSignupDay(LocalDate.now());
 		User x=userRepository.save(user);
 		ImageUser image = new ImageUser();
 		image.setImage(oAuth2UserInfo.getImageUrl());

@@ -32,7 +32,6 @@
 											<th class="center"><label class="pos-rel"> <input
 													type="checkbox" class="ace" /> <span class="lbl"></span>
 											</label></th>
-											<th class="detail-col">Details</th>
 											<th>LastName</th>
 											<th>Name</th>
 											<th class="hidden-480">Username</th>
@@ -41,10 +40,10 @@
 												class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 												Date</th>
 											<th>Email</th>
-											<th>Adresse</th>
-											<th class="hidden-480">Mobile</th>
-											<th class="hidden-480">Availability</th>
-											<th>Action</th>
+											<th>Adress</th>
+											<th>Mobile</th>
+											<th>Availability</th>
+											<th>From</th>
 
 										</tr>
 									</thead>
@@ -57,17 +56,6 @@
 												<td class="center"><label class="pos-rel"> <input
 														type="checkbox" class="ace" /> <span class="lbl"></span>
 												</label></td>
-
-												<td class="center">
-													<div class="action-buttons">
-														<a href="#" class="green bigger-140 show-details-btn"
-															title="Show Details"> <i
-															class="ace-icon fa fa-angle-double-down"></i> <span
-															class="sr-only">Details</span>
-														</a>
-													</div>
-												</td>
-
 
 												<td><h:outputText value="#{liv.lastName}" /></td>
 												<td class="hidden-480"><h:outputText
@@ -82,17 +70,7 @@
 												<td><h:outputText value="#{liv.address}" /></td>
 												<td><h:outputText value="#{liv.tel}" /></td>
 												<td><h:outputText value="#{liv.disponible}" /></td>
-
-												<td>
-							
-							
-															
-														
-								 <!-- 													<button class="btn btn-xs btn-danger"> -->
-													<!-- 														<i class="ace-icon fa fa-trash-o bigger-120"></i> -->
-													<!-- 													</button> --> <!-- 												</div> -->
-
-												</td>
+												<td><h:outputText value="#{liv.lieuxTravail}" /></td>
 
 
 											</tr>

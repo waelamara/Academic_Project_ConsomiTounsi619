@@ -31,4 +31,8 @@ public interface ChariteRepository extends JpaRepository<Charite, Long>{
 	@Query(value="SELECT * FROM t_charite_commande_charite WHERE `charite_id`=?1",nativeQuery=true)
 	public List<Charite> getChariteCommande1(Long id);
 	
+	/////raed
+	@Query(value = "SELECT sum(montant_paye) FROM t_charite c WHERE `type_charite`='dons' ", nativeQuery = true)
+	public Float TotalDonation();
+	
 }
