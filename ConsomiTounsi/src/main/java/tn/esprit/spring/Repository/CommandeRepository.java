@@ -64,5 +64,12 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Query(value = "SELECT `id` FROM `commande` WHERE `id_user`=?1", nativeQuery = true)
 	public List<Long> ListeCommandePariduser(Long Iduser);
 	
+	////Raed
+	@Query(value = "SELECT COUNT(*) FROM commande c WHERE c.status='en cours' ", nativeQuery = true)
+	public Long NombreCommade();
+	
+	@Query(value = "SELECT sum(c.montant) FROM commande c WHERE c.status='payee' ", nativeQuery = true)
+	public Float TotalSales();
+	
 	
 }

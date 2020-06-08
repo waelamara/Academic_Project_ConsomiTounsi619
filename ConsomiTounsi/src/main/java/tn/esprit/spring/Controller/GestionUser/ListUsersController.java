@@ -41,6 +41,11 @@ public class ListUsersController {
 	paginator = new RepeatPaginator1(c);
 }
 	
+	public List<User> getNeufUsers()
+	{
+		return UserRepository.getNewUsers();
+	}
+	
 	
 	public List<User> getUserSelonChoix(String choixx, String clee)
 	{
