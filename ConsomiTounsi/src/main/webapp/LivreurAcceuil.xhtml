@@ -18,8 +18,9 @@
 </div>
 <div style="padding-left: 20%">
 <br></br><br></br>
+<!-- #{LoginDeliveryController.userDetails.disponible} -->
 					<table align="center">
-					   <tr><h2>#{LoginDeliveryController.userDetails.disponible}</h2></tr>
+					   <tr><td><h1>For this moment your state is :</h1></td><td><h1><h:outputText value="#{LivreurAcceuilController.returnDispo(LoginDeliveryController.userDetails.id)}"></h:outputText></h1></td></tr>
 						<tr>
 							<td><h:commandLink value="Free" action="#{LivreurAcceuilController.freeDispo(LoginDeliveryController.userDetails.id)}" class="btn btn-lg btn-success">
 												<i class="ace-icon fa fa-check"></i>
