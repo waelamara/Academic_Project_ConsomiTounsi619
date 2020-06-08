@@ -80,8 +80,10 @@ public class LoginDeliveryController {
 		return userDetails;
 	}
 
-	public void setUserDetails(UserDetailsImpl userDetails) {
-		this.userDetails = userDetails;
+	
+
+	public static void setUserDetails(UserDetailsImpl userDetails) {
+		LoginDeliveryController.userDetails = userDetails;
 	}
 
 	public Authentication getAuthentication() {

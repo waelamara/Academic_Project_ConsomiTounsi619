@@ -1,6 +1,7 @@
 package tn.esprit.spring.Controller.GestionUser;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import Utils.AppConstants;
+import tn.esprit.spring.Model.AuthProvider;
 import tn.esprit.spring.Model.ERole;
 import tn.esprit.spring.Model.ImageUser;
 import tn.esprit.spring.Model.Role;
@@ -121,6 +123,15 @@ public class SignupController {
 			user.setRoles(roles);
 			user.setNbMission(0);
 			user.setNbMission(0);
+			user.setInteret("None");
+			user.setProvider(AuthProvider.local);
+			user.setProviderId("local");
+			user.setDisponible("None");
+			user.setEtatD("none");
+			user.setLieuxTravail("None");
+			user.setPrime(0);
+			user.setPrime(0);
+			user.setSignupDay(LocalDate.now());
 			userRepository.save(user);
 			
 			for (UploadedFile f : file.getFiles()) {
