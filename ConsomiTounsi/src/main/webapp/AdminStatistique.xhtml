@@ -14,16 +14,37 @@
 	<h:head>
 	<script src="login/vendor/bootstrap/js/popper.js"></script>
 	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+			rel="stylesheet" />
+ 
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  </link>
+<!-- overlayScrollbars -->
+
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"/>
+
 	
 	
 	</h:head>
 	
 	<h:body>
-	  	<div ><h1>#{OrderStatistiqueController.NumCategorie()}</h1></div>
 	
- <hf:chart type="pie" title="Stat top10" alpha3d="45" beta3d="0">
-    <hf:chartSerie name="Number of mission" value="#{OrderStatistiqueController.NumCategorie()}" var="point" point="#{point.n}"  tickLabel="#{point.nom_categorie}"/>
-  </hf:chart>  
+	<center>
+	  	<div class="inner"><h1>#{OrderStatistiqueController.cat()}</h1></div>
+	
+ <hf:chart type="pie" title="top Vente of Categories" alpha3d="45" beta3d="0">
+    <hf:chartSerie name="Number Vente of Categories" value="#{OrderStatistiqueController.cs}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+  </hf:chart> 
+   
+<!--   	  	<div><h1>#{OrderStatistiqueController.produit()}</h1></div> -->
+	
+<!--  <hf:chart type="pie" title="top vente" alpha3d="45" beta3d="0"> -->
+<!--     <hf:chartSerie name="Number Vente of Products" value="#{OrderStatistiqueController.ps}" var="point1" point="#{point1.amount}"  tickLabel="#{point1.name}"/> -->
+<!--   </hf:chart>   -->
+  </center>
 	</h:body>
 	</ui:define>
 	</ui:composition>

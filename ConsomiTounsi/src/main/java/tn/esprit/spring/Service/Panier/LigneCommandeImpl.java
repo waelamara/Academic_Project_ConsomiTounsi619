@@ -12,6 +12,7 @@ import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Model.CategorieStat;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.User;
@@ -39,10 +40,14 @@ public class LigneCommandeImpl implements ILigneCommande {
 	@Autowired
 	UserRepository userRepository;
 	
-//	public List<SexeC>NumCategorie2()
-//	{
-//		return ligneCommandeRepository.NumCategorie2();
-//	}
+	public List<CategorieStat> NumProduitVendu2()
+	{
+		return ligneCommandeRepository.NumProduitVendu2();		
+	}
+	
+	public List<CategorieStat>NumCategorie2()
+	{
+		return ligneCommandeRepository.NumCategorie2();	}
 
 
 	public List<lignecommandeproduit> panierParIdclient( long id) {

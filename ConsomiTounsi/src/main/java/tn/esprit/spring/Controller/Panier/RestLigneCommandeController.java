@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
+import tn.esprit.spring.Model.CategorieStat;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Chart.SexeC;
@@ -64,12 +63,13 @@ public class RestLigneCommandeController {
 		
 		return ligneCommandeDao.NumCategorie();
 	}
-//	@GetMapping("/Categories2")
-//	public List<SexeC> NumCategorie2()
-//	{
-//		
-//		return ligneCommandeDao.NumCategorie2();
-//	}
+	
+	@GetMapping("/Categories2")
+	public List<CategorieStat> NumCategorie2()
+	{
+		
+		return ligneCommandeDao.NumCategorie2();
+	}
 	
 	
 	@GetMapping("Produit/{idprod}")
@@ -99,5 +99,10 @@ public class RestLigneCommandeController {
 	 {
 		 return ligneCommandeDao.panierParIdCommande(idCommande);
 	 }
+	 @GetMapping("/ProduitVendu")
+		public List<CategorieStat> NumProduitVendu2()
+		{
+			return ligneCommandeDao.NumProduitVendu2();		
+		}
 	 
 }

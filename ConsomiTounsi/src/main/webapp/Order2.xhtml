@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:hf="http://highfaces.org"
 	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="Order2">
 
@@ -46,7 +47,13 @@
     </script>
       <h:body>
       <br/> <br/> <br/> <br/>
+        
        <div id='calendar'></div>
+       	<div class="inner"><h1>#{OrderStatistiqueController.cat()}</h1></div>
+	
+ <hf:chart type="pie" title="top Vente of Categories" alpha3d="45" beta3d="0" style="display:none;">
+    <hf:chartSerie  name="Number Vente of Categories" value="#{OrderStatistiqueController.cs}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+  </hf:chart> 
   </h:body>
  
 
