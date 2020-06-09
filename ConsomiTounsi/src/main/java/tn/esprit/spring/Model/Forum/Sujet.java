@@ -35,6 +35,8 @@ public class Sujet implements Serializable {
 	private int nbLike;
 	private int nbDislike;
 	private int nbpoint;
+	private String etat;
+	
 	
 	@OneToMany(mappedBy="idSujet")
 	@JsonIgnore
@@ -158,6 +160,13 @@ public class Sujet implements Serializable {
 	public void setVus(Set<Vus> vus) {
 		this.vus = vus;
 	}
+	public String getEtat() {
+		return etat;
+	}
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

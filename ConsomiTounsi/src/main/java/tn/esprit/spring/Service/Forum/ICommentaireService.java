@@ -13,6 +13,8 @@ public interface ICommentaireService {
 	public Commentaire getCommentairebyId(Long comId);
 	public List<Commentaire> getCommentaireOfSujet(Long sujetId);
 	public int  deletecommentairevoteById(Long  comId,Long userId,Long sujetId);
+	public int RemoveCommentairebyIdUser(Long comId,Long userId);
+	 public int verivcationCom(Long comId,Long userId);
 	public void modifierCommentaire(String desc,Long comId);
     public String findNamebyCommentaire(Long comId);
     public int countNbcommentaire(Long id);

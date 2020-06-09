@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
 
+import tn.esprit.spring.Controller.GestionUser.LoginController;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Forum.Sujet;
@@ -55,6 +56,8 @@ public class MypostsController {
 		/*******show Sujet By User******/
 		
 		public List<Sujet>getSujetByUser(Long userId){
+			if (userId==null)
+				userId=(long)0;
 			return iSujetService.findSujetbyUser(userId);	
 			
 		}
@@ -72,9 +75,10 @@ public class MypostsController {
 		    }
 
 		@PostConstruct
-		@Scheduled(cron="0 * * ? * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init(){
-			paginatorRec=new RepeatPaginator(getSujetByUser((long)3));
+		System.out.println(LoginController.userDetails.getId());
+			paginatorRec=new RepeatPaginator(getSujetByUser(LoginController.userDetails.getId()));
 		}
 
 }

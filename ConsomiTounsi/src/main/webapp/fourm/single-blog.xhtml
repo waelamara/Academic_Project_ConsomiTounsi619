@@ -11,25 +11,25 @@
 		<head>
 
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="OneTech shop project" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<h:outputStylesheet library="acceuil"
-	name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
-<h:outputStylesheet library="acceuil"
-	name="styles/bootstrap4/bootstrap.min.css" />
-<h:outputStylesheet library="acceuil" name="styles/contact_styles.css" />
-<h:outputStylesheet library="acceuil"
-	name="styles/contact_responsive.css" />
+<h:outputStylesheet library="blog" name="css/linearicons.css" />
+<h:outputStylesheet library="blog" name="css/themify-icons.css" />
+<h:outputStylesheet library="blog" name="css/bootstrap.css" />
+<h:outputStylesheet library="blog" name="css/owl.carousel.css" />
+<h:outputStylesheet library="blog" name="css/nouislider.min.css" />
+<h:outputStylesheet library="blog" name="css/ion.rangeSlider.css" />
+<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet" />
+<h:outputStylesheet library="blog"
+	name="css/ion.rangeSlider.skinFlat.css" />
+<h:outputStylesheet library="blog" name="css/main.css" />
 		</head>
-		
-		    <f:metadata>
-        <f:event type="preRenderView" listener="#{blogController.ajouterVus(0,blogController.findSujetrec().id)}"/>
-    </f:metadata>
+
+
 		<h:outputStylesheet library="blog"
 			name="css/ion.rangeSlider.skinFlat.css" />
 		<h:outputStylesheet library="blog" name="css/main.css" />
-		
+
 
 
 		<section class="blog_area single-post-area section_gap">
@@ -49,8 +49,8 @@
 						<div class="col-lg-3  col-md-3">
 							<div class="blog_info text-right">
 								<div class="post_tag">
-									<a href="#">Food,</a> <a class="active" href="#">Technology,</a>
-									<a href="#">Politics,</a> <a href="#">Lifestyle</a>
+									<a class="active" href="#"><h:outputText
+											value="#{sujetRec.idCategorieSujet.nomCategorie}" /></a>
 								</div>
 								<ul class="blog_meta list">
 									<li><a href="#"> <h:outputText
@@ -60,50 +60,49 @@
 												value="#{blogController.convertireDate(blogController.sujetrec.dateAjout)}" /><i
 											class="lnr lnr-calendar-full"></i></a></li>
 									<li><a href="#"><h:outputText
-												value="#{blogController.sujetrec.nbVue} Views" /><i
+												value="#{blogController.countviews(blogController.sujetrec.id)} Views" /><i
 											class="lnr lnr-eye"></i></a></li>
 									<li><a href="#"><h:outputText
 												value="#{singleblogController.countNbcommentaire(blogController.sujetrec.id)} Comments" /><i
 											class="lnr lnr-bubble"></i></a></li>
 									<li><h:form>
 											<h:commandLink
-												action="#{ControllerVoteSujet.ajouterVote(2,blogController.sujetrec.id)}">
-												<c:if
-													test="#{ControllerVoteSujet.verfication(2,blogController.sujetrec.id)==0||ControllerVoteSujet.verfication(2,blogController.sujetrec.id)==2}">
+												action="#{ControllerVoteSujet.ajouterVote(loginController.userDetails.id,blogController.sujetrec.id)}">
+												<h:panelGroup
+													rendered="#{ControllerVoteSujet.verfication(loginController.userDetails.id,blogController.sujetrec.id)==0||ControllerVoteSujet.verfication(loginController.userDetails.id,blogController.sujetrec.id)==2}">
 													<h:outputText
 														value="#{blogController.sujetrec.nbLike} Like" />
-													<i class="lnr lnr-thumbs-up"></i>
-												</c:if>
-												<c:if
-													test="#{ControllerVoteSujet.verfication(2,blogController.sujetrec.id)==1}">
+													<i class="lnr lnr-thumbs-up" />
+												</h:panelGroup>
+												<h:panelGroup
+													rendered="#{ControllerVoteSujet.verfication(loginController.userDetails.id,blogController.sujetrec.id)==1}">
 													<h:outputText style="color: #49D85C;"
 														value="#{blogController.sujetrec.nbLike} Like" />
-													<i style="color: #49D85C" class="lnr lnr-thumbs-up"></i>
-												</c:if>
-
+													<i style="color: #49D85C" class="lnr lnr-thumbs-up" />
+												</h:panelGroup>
 											</h:commandLink>
 										</h:form></li>
 
 									<li><h:form>
 											<h:commandLink
-												action="#{ControllerVoteSujet.ajouterVotedislike(2,blogController.sujetrec.id)}">
-												<c:if
-													test="#{ControllerVoteSujet.verfication(2,blogController.sujetrec.id)==0 ||ControllerVoteSujet.verfication(2,blogController.sujetrec.id)==1}">
+												action="#{ControllerVoteSujet.ajouterVotedislike(loginController.userDetails.id,blogController.sujetrec.id)}">
+												<h:panelGroup
+													rendered="#{ControllerVoteSujet.verfication(loginController.userDetails.id,blogController.sujetrec.id)==0 ||ControllerVoteSujet.verfication(loginController.userDetails.id,blogController.sujetrec.id)==1}">
 													<h:outputText
 														value="#{blogController.sujetrec.nbDislike} Dislike" />
 													<i class="lnr lnr-thumbs-down"></i>
-												</c:if>
-												<c:if
-													test="#{ControllerVoteSujet.verfication(2,blogController.sujetrec.id)==2}">
+												</h:panelGroup>
+												<h:panelGroup
+													rendered="#{ControllerVoteSujet.verfication(loginController.userDetails.id,blogController.sujetrec.id)==2}">
 													<h:outputText style="color: #dc3545"
 														value="#{blogController.sujetrec.nbDislike} Dislike" />
 													<i class="lnr lnr-thumbs-down" style="color: #dc3545"></i>
-												</c:if>
+												</h:panelGroup>
 											</h:commandLink>
 										</h:form></li>
 								</ul>
 								<ul class="social-links">
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 									<li><a href="#"><i class="fa fa-github"></i></a></li>
 									<li><a href="#"><i class="fa fa-behance"></i></a></li>
@@ -162,38 +161,8 @@
 					</div>
 					<div class="navigation-area">
 						<div class="row">
-							<div
-								class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								<div class="thumb">
-									<a href="#"><img class="img-fluid" src="img/blog/prev.jpg"
-										alt="" /></a>
-								</div>
-								<div class="arrow">
-									<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
-								</div>
-								<div class="detials">
-									<p>Prev Post</p>
-									<a href="#">
-										<h4>Space The Final Frontier</h4>
-									</a>
-								</div>
-							</div>
-							<div
-								class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<div class="detials">
-									<p>Next Post</p>
-									<a href="#">
-										<h4>Telescopes 101</h4>
-									</a>
-								</div>
-								<div class="arrow">
-									<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
-								</div>
-								<div class="thumb">
-									<a href="#"><img class="img-fluid" src="img/blog/next.jpg"
-										alt="" /></a>
-								</div>
-							</div>
+							<div></div>
+							<div></div>
 						</div>
 					</div>
 					<div class="comments-area">
@@ -220,16 +189,64 @@
 												<h:outputText
 													value="#{blogController.convertireTime(commentaire.dateAjout)}" />
 											</p>
-											<p class="comment" >
-												<h:outputText class="comment1" value="#{commentaire.description}" />
+											<p class="comment">
+												<h:outputText value="#{commentaire.description}" />
 											</p>
+											<table>
+												<tr>
+													<h:form>
+														<h:commandLink
+															action="#{ControllerVoteCom.ajouterVote(loginController.userDetails.id,commentaire.id)}">
+															<h:panelGroup
+																rendered="#{ControllerVoteCom.verfication(loginController.userDetails.id,commentaire.id)==0||ControllerVoteCom.verfication(loginController.userDetails.id,commentaire.id)==2}">
+																<h:outputText value="#{commentaire.nbLike}" />
+																<i class="lnr lnr-thumbs-up" />
+															</h:panelGroup>
+															<h:panelGroup
+																rendered="#{ControllerVoteCom.verfication(loginController.userDetails.id,commentaire.id)==1}">
+																<h:outputText style="color: #49D85C;"
+																	value="#{commentaire.nbLike}" />
+																<i style="color: #49D85C" class="lnr lnr-thumbs-up" />
+															</h:panelGroup>
+														</h:commandLink>
+													</h:form>
+												</tr>
+												<tr>
+													<h:outputText value="&#160;" />
+												</tr>
+												<tr>
+													<h:form>
+														<h:commandLink
+															action="#{ControllerVoteCom.ajouterVotedislike(loginController.userDetails.id,commentaire.id)}">
+															<h:panelGroup
+																rendered="#{ControllerVoteCom.verfication(loginController.userDetails.id,commentaire.id)==0 ||ControllerVoteCom.verfication(loginController.userDetails.id,commentaire.id)==1}">
+																<h:outputText value="#{commentaire.nbDislike}" />
+																<i class="lnr lnr-thumbs-down"></i>
+															</h:panelGroup>
+															<h:panelGroup
+																rendered="#{ControllerVoteCom.verfication(loginController.userDetails.id,commentaire.id)==2}">
+																<h:outputText style="color: #dc3545"
+																	value="#{commentaire.nbDislike}" />
+																<i class="lnr lnr-thumbs-down" style="color: #dc3545"></i>
+															</h:panelGroup>
+														</h:commandLink>
+													</h:form>
+												</tr>
+											</table>
 										</div>
 									</div>
-									<div class="reply-btn ">
-									<h:commandButton class="btn-reply text-uppercase az95"
-									value="..."/>
-									
-									</div>
+									<h:form>
+										<h:panelGroup
+											rendered="#{singleblogController.verificationCombyId(commentaire.id,loginController.userDetails.id)==1}">
+
+											<div class="reply-btn ">
+												<h:commandButton class="btn-reply text-uppercase az95"
+													value="remove"
+													action="#{singleblogController.removeCommentarie(commentaire.id,loginController.userDetails.id)}" />
+											</div>
+
+										</h:panelGroup>
+									</h:form>
 								</div>
 
 							</div>
@@ -250,7 +267,7 @@
 							<div>
 								<h:commandButton class="primary-btn submit_btn"
 									value="post comment"
-									action="#{singleblogController.ajoutercommentaire(blogController.sujetrec.id,3)}" />
+									action="#{singleblogController.ajoutercommentaire(blogController.sujetrec.id,loginController.userDetails.id)}" />
 							</div>
 
 						</h:form>
@@ -292,100 +309,55 @@
 						</aside>
 						<aside class="single_sidebar_widget popular_post_widget">
 						<h3 class="widget_title">Popular Posts</h3>
-						<div class="media post_item">
-							<img src="img/blog/popular-post/post1.jpg" alt="post" />
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>Space The Final Frontier</h3>
-								</a>
-								<p>02 Hours ago</p>
+						<c:forEach items="#{blogController.popularPost()}" var="s"
+							varStatus="j">
+							<div class="media post_item">
+								<img src="img/blog/popular-post/post#{j.index+1}.jpg" alt="post" />
+								<div class="media-body">
+									<a href="blog-details.html"> <h:form>
+											<h3>
+												<h:commandLink style="color:black" value="#{s.nomSujet}"
+													action="#{blogController.ajouterVus(loginController.userDetails.id,s.id)}">
+													<f:param name="idsujet" value="#{s.id}" />
+												</h:commandLink>
+											</h3>
+										</h:form>
+									</a>
+									<p>
+										<h:outputText
+											value="#{blogController.convertireDate(s.dateAjout)}" />
+									</p>
+								</div>
 							</div>
-						</div>
-						<div class="media post_item">
-							<img src="img/blog/popular-post/post2.jpg" alt="post" />
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>The Amazing Hubble</h3>
-								</a>
-								<p>02 Hours ago</p>
-							</div>
-						</div>
-						<div class="media post_item">
-							<img src="img/blog/popular-post/post3.jpg" alt="post" />
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>Astronomy Or Astrology</h3>
-								</a>
-								<p>03 Hours ago</p>
-							</div>
-						</div>
-						<div class="media post_item">
-							<img src="img/blog/popular-post/post4.jpg" alt="post" />
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>Asteroids telescope</h3>
-								</a>
-								<p>01 Hours ago</p>
-							</div>
-						</div>
+						</c:forEach>
 						<div class="br"></div>
 						</aside>
-						<aside class="single_sidebar_widget ads_widget"> <a
-							href="#"><img class="img-fluid" src="img/blog/add.jpg" alt="" /></a>
-						<div class="br"></div>
-						</aside>
+
 						<aside class="single_sidebar_widget post_category_widget">
 						<h4 class="widget_title">Post Catgories</h4>
 						<ul class="list cat-list">
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Technology</p>
-									<p>37</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Lifestyle</p>
-									<p>24</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Fashion</p>
-									<p>59</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Art</p>
-									<p>29</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Food</p>
-									<p>15</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Architecture</p>
-									<p>09</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Adventure</p>
-									<p>44</p>
-							</a></li>
+							<ui:repeat var="categSujet"
+								value="#{ControllerCategorieSujet.findNameCategoris()}"
+								varStatus="status">
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>
+											<h:outputText value="#{categSujet.nomCategorie} " />
+										</p>
+										<p>
+											<h:outputText
+												value="#{ControllerCategorieSujet.getNbcategeorieSujet(categSujet.id)}" />
+										</p>
+								</a></li>
+							</ui:repeat>
+
 						</ul>
 						<div class="br"></div>
 						</aside>
 						<aside class="single-sidebar-widget newsletter_widget">
-						<h4 class="widget_title">Newsletter</h4>
+						<h4 class="widget_title">Add Your Post</h4>
 						<p>Here, I focus on a range of items and features that we use
 							in life without giving them a second thought.</p>
-						<div class="form-group d-flex flex-row">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-envelope" aria-hidden="true"></i>
-									</div>
-								</div>
-								<input type="text" class="form-control"
-									id="inlineFormInputGroup" placeholder="Enter email"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Enter email'" />
-							</div>
-							<a href="#" class="bbtns">Subcribe</a>
-						</div>
+						<a href="#" class="bbtns">Subcribe</a>
 						<p class="text-bottom">You can unsubscribe at any time</p>
 						<div class="br"></div>
 						</aside>

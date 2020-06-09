@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.Commentaire;
@@ -14,6 +15,7 @@ import tn.esprit.spring.Repository.Forum.CommentarieRepository;
 import tn.esprit.spring.Repository.Forum.VoteCommentaireRepository;
 
 @Service
+@Transactional
 public class VoteCommentaireServiceImpl implements IVoteCommentaire{
 
 	@Autowired
@@ -59,9 +61,7 @@ public class VoteCommentaireServiceImpl implements IVoteCommentaire{
 	@Override
 	public void deletevoteById(Long comId, Long userId) {
 		Vote v=voteComRepository.getVoteByComAndUser(comId, userId);
-		v.setNbLike(0);
-		v.setNbDislike(0);
-		voteComRepository.save(v);
+		voteComRepository.delete(v);
 		
 	}
 	@Override
@@ -89,11 +89,19 @@ public class VoteCommentaireServiceImpl implements IVoteCommentaire{
 	}
 	@Override
 	public int countlikeCom(Long comId) {
-		return voteComRepository.countlike(comId);
+		int nblike= voteComRepository.countlike(comId);
+		Commentaire com = commentaireRepository.findById(comId).get();
+		com.setNbLike(nblike);
+		commentaireRepository.save(com);
+		return (nblike);
 	}
 	@Override
 	public int countdislikCom(Long comId) {
-		return voteComRepository.countdislik(comId);
+		int nbDislike= voteComRepository.countdislik(comId);
+		Commentaire com = commentaireRepository.findById(comId).get();
+		com.setNbDislike(nbDislike);
+		commentaireRepository.save(com);
+		return (nbDislike);
 	}
 	@Override
 	public List<String> findNomdesUsersVoter(Long comId) {
@@ -103,6 +111,19 @@ public class VoteCommentaireServiceImpl implements IVoteCommentaire{
 			noms.add(v.getIdUser().getFirstName()+" "+v.getIdUser().getLastName());
 			return noms;	
 	
+	}
+	@Override
+	public int verificationvoteChoix(Long userId, Long comId) {
+		Vote  v = voteComRepository.getVoteByComAndUserlike(comId, userId);
+		Vote v1 = voteComRepository.getVoteBycomAndUserdislike(comId, userId);
+		if (v == null && v1 == null)
+			return 0;
+		else if (v != null && v1 == null)
+			return 1;
+		else if (v1 != null && v == null)
+			return 2;
+		else
+			return 0;
 	}
 	
 }

@@ -20,8 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Boolean existsByEmail(String email);
 
-	@Query(value = "SELECT user_id FROM user WHERE  point_fidelite >=100 ", nativeQuery = true)
-	public List<String> findClient_pt_100();
+	@Query(value = "SELECT u.`user_id` FROM `user` u join user_roles r on u.`user_id`=r.user_id WHERE r.role_id=1 ", nativeQuery = true)
+	public List<String> findClient_pt_100(int nbpoint);
 
 	/* liste des livreur */
 	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=4", nativeQuery = true)
