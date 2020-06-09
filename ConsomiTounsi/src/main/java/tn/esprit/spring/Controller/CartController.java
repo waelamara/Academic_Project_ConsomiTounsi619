@@ -252,8 +252,12 @@ public void deleteLigne(long idLigneCommande) {
 			{
 				return cadeauUserImpl.CadeauUser(idUser);
 			}
-			public void payerPorteaPorte(long idCommande,int iduser)
+			public void payerPorteaPorte(long idCommande,int iduser,String q1)
 			{
+				float prixfinal = LivraisonService.CalculerFraisLivraison(q, idCommande);
+
+				
+				LivraisonService.AjouterLivraison(idCommande, q,iduser);
 				commandeDao.PayerPorteaPorte(idCommande,iduser);
 			}
 		

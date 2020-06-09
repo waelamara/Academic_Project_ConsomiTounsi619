@@ -14,6 +14,7 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.LivraisonRepository;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Service.GestionUser.UserService;
+import tn.esprit.spring.Service.Panier.CommandeImpl;
 
 @Controller(value = "LivreurMissionTodayController")
 @ELBeanName(value = "LivreurMissionTodayController")
@@ -25,6 +26,8 @@ public class LivreurMissionTodayController {
 	UserRepository us;
 	@Autowired
 	UserService uss;
+	@Autowired
+	CommandeImpl commandeImpl;
 	
 	public List<Livraison> ListeMissions(long idD)
 	{  System.out.println("atheya id l livreur"+idD);
@@ -38,6 +41,8 @@ public class LivreurMissionTodayController {
 		User u = new User();
 		System.out.println(idDelivery);
 		u=us.getOne(idDelivery);
+			Livraison l=L.getOne(idLiv);
+		commandeImpl.payerApresLivraison(l.getCommande().getId());
 		Integer nbmission =u.getNbMission();
 		nbmission=nbmission+1;
 		u.setNbMission(nbmission);
