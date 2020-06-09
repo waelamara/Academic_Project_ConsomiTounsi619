@@ -1,4 +1,3 @@
-
 package tn.esprit.spring.Repository;
 
 import java.util.List;
@@ -60,7 +59,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT COUNT(*) FROM user ", nativeQuery = true)
 	public int NombreUsers();
 	
-	
+	@Query(value = "SELECT count(*) from user where point_fidelite <100 ",nativeQuery = true)
+	public int nombreUsersbyPointfideletInf100();
     //SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 3
-
+	@Query(value = " SELECT count(*) from user where point_fidelite BETWEEN 100 and 300  ",nativeQuery = true)
+	public int nombreUsersbyPointfideletbetwen100et300();
+	@Query(value = " SELECT count(*)from user where point_fidelite >=300",nativeQuery=true)
+	public int nombreUsersbyPointfideletSup300();
+	@Query(value = "SELECT Avg(`point_fidelite`) FROM user",nativeQuery=true)
+	public float moyenneNpointFidelet();
 }

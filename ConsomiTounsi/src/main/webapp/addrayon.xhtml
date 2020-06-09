@@ -25,11 +25,11 @@
 			<div class="page-header">
 				<h1>Add Ray</h1>
 			</div>
-			
-			
-			
-			
-				<div class="row">
+
+
+
+
+			<div class="row">
 				<div class="col-xs-12">
 
 					<h:form class="form-horizontal">
@@ -46,11 +46,11 @@
 
 
 
-						
 
 
 
-<div class="form-group">
+
+						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right"
 								for="form-field-1"> Ray Type </label>
 
@@ -58,20 +58,41 @@
 								<h:selectOneMenu value="#{JsfRayonController.type_rayon}"
 									p:placeholder="stock name" class="col-xs-10 col-sm-5">
 									<f:selectItem itemLabel="Choose type" itemValue="#{null}" />
-								<f:selectItems value="#{JsfRayonController.types}" />
-									
-									
-									</h:selectOneMenu>
+									<f:selectItems value="#{JsfRayonController.types}" />
+
+
+								</h:selectOneMenu>
 
 							</div>
 						</div>
 
 
-						
 
 
 
-						
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right"
+								for="form-field-1"> Product </label>
+							<div class="col-sm-9">
+								<h:selectOneMenu value="#{JsfRayonController.prodid}"
+									class="col-xs-10 col-sm-5">
+
+
+									<f:selectItem itemLabel="All Product :" />
+									<c:forEach var="prod"
+										items="#{JsfRayonController.getAllProduitName()}"
+										varStatus="status">
+										<f:selectItem itemLabel="#{prod.nomProduit}"
+											itemValue="#{prod.id}" />
+									</c:forEach>
+								</h:selectOneMenu>
+
+								
+							</div>
+						</div>
+
+
+
 
 
 
@@ -89,7 +110,7 @@
 			</div>
 
 
-<script src="dash/js/jquery-2.1.4.min.js"></script>
+			<script src="dash/js/jquery-2.1.4.min.js"></script>
 
 			<!-- <![endif]-->
 
