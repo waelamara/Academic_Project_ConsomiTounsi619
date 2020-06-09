@@ -1,5 +1,7 @@
 package tn.esprit.spring.Controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -23,7 +25,30 @@ public class ComplaintAdminController {
 	ReclamationService ReclamationService;
 	@Autowired
 	reclamationRepository r;
+	private int A;
+	private int B;
+	private int res;
+
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 	
+	public int getA() {
+		return A;
+	}
+	public void setA(int a) {
+		A = a;
+	}
+	public int getB() {
+		return B;
+	}
+	public void setB(int b) {
+		B = b;
+	}
+	public int getRes() {
+		return res;
+	}
+	public void setRes(int res) {
+		this.res = res;
+	}
 	/*get all reclamation*/
 	public List<reclamation> getAllrec(){
 		
@@ -34,7 +59,20 @@ public class ComplaintAdminController {
 	@Transactional
 	public String rembourserReclamation(long id){
 		String navigateTo = "/ReclamationAdmin.xhtml"; 
+		reclamation rec1 = ReclamationService.findbyid(id);
+		A = rec1.getCommande().getDate().getDayOfYear();
+		int yearA = rec1.getCommande().getDate().getYear();
+		int yearB = LocalDate.now().getYear();
+		int diffY = yearB-yearA;
+		B = LocalDate.now().getDayOfYear();
+		res=B-A;
+		if ((res < 15) && (diffY<1)) {
 		r.ChangetEtat("Remboursement", id);
+		}
+		else{
+			r.ChangetEtat("En_attente", id);
+			
+		}
 		return navigateTo;
 		
 		
@@ -43,7 +81,21 @@ public class ComplaintAdminController {
 	@Transactional
 	public String echangeReclamation(long id){
 		String navigateTo = "/ReclamationAdmin.xhtml"; 
+		reclamation rec1 = ReclamationService.findbyid(id);
+		A = rec1.getCommande().getDate().getDayOfYear();
+		int yearA = rec1.getCommande().getDate().getYear();
+		int yearB = LocalDate.now().getYear();
+		int diffY = yearB-yearA;
+		B = LocalDate.now().getDayOfYear();
+		res=B-A;
+		if ((res < 15) && (diffY<1)) {
 		r.ChangetEtat("Echange", id);
+		}
+		else{
+			r.ChangetEtat("En_attente", id);
+			
+		}
+		
 		return navigateTo;
 		
 		
@@ -52,7 +104,21 @@ public class ComplaintAdminController {
 	@Transactional
 	public String reparerReclamation(long id){
 		String navigateTo = "/ReclamationAdmin.xhtml"; 
+		reclamation rec1 = ReclamationService.findbyid(id);
+		A = rec1.getCommande().getDate().getDayOfYear();
+		int yearA = rec1.getCommande().getDate().getYear();
+		int yearB = LocalDate.now().getYear();
+		int diffY = yearB-yearA;
+		B = LocalDate.now().getDayOfYear();
+		res=B-A;
+		if ((res < 15) && (diffY<1)) {
 		r.ChangetEtat("Réparation", id);
+		}
+		else{
+			r.ChangetEtat("En_attente", id);
+			
+		}
+		
 		return navigateTo;
 		
 		
