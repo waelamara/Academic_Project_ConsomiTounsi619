@@ -77,7 +77,7 @@ public class ControllerPub {
 			this.paginatorRec = paginatorRec;
 		}
 		@PostConstruct
-		//@Scheduled(cron="*/10 * * * * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init(){
 			paginatorRec=new RepeatPaginator2(AfficherPub());
 		}
