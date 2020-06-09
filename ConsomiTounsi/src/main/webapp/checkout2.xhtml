@@ -7,23 +7,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Template/template.xhtml">
 	<ui:define name="Chekout2">
-	 <head>
-   
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-      <!-- Site Icons -->
-          <h:outputStylesheet library="Cart" name="css2/style.css" /> 
-            <h:outputStylesheet library="Cart" name="css2/bootstrap.min.css" /> 
-              <h:outputStylesheet library="Cart" name="css2/responsive.css" /> 
-               <h:outputStylesheet library="Cart" name="css2/custom.css" /> 
-               
+		<head>
+
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<!-- Site Icons -->
+<h:outputStylesheet library="Cart" name="css2/style.css" />
+<h:outputStylesheet library="Cart" name="css2/bootstrap.min.css" />
+<h:outputStylesheet library="Cart" name="css2/responsive.css" />
+<h:outputStylesheet library="Cart" name="css2/custom.css" />
+
 <!--     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
 <!--     <link rel="apple-touch-icon" href="images/apple-touch-icon.png"> -->
-</head>
+		</head>
 
 
-   <h:body>
-   <!-- Start Main Top -->
+		<h:body>
+			<!-- Start Main Top -->
 
 			<!-- End Top Search -->
 			<!-- Start All Title Box -->
@@ -91,7 +92,7 @@
 										L.tileLayer(theme, {
 											// Il est toujours bien de laisser le lien vers la source des données
 											//attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
-											minZoom : 6,
+											minZoom : 7,
 											maxZoom : 20
 										}).addTo(macarte);
 										macarte.on('click', onMapClick);
@@ -118,9 +119,7 @@
 										initMap();
 									});
 								</script>
-								<tabel> <!-- /script of map --> <!--                                <tr><td><img id ="mapimage" src="img/map.jpg" /></td></tr> -->
-
-								<!-- display of map -->
+								<tabel> <!-- display of map -->
 
 								<center>
 									<td>
@@ -136,7 +135,7 @@
 
 							</div>
 
-
+ 
 
 							<!-- /display of map -->
 
@@ -147,52 +146,40 @@
 				<br />
 				<br />
 				<br />
-				<center>
-					<h:inputText id="LOG" value="#{chekoutController.adresse}" />
-					<ui:repeat var="Commande"
-						value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}"
-						varStatus="status">
-						<h:commandButton value="Confirm location"
-							action="#{chekoutController.affecterfraisLiv(adresse,Commande.id,loginController.userDetails.id)}" />
-					</ui:repeat>
-				</center>
+ <h:inputText id="LOG" value="#{cartController.q}"  style="display:none;"/>
+				<br />
+				<br />
 
-			</h:form>
+				<!-- End Of map -->
 
-			<br />
-			<br />
 
-			<!-- Start Main Top -->
+				<div class="all-title-box">
 
-			<!-- End Top Search -->
-			<!-- Start All Title Box -->
+					<div class="container">
 
-			<div class="all-title-box">
+						<div class="row">
 
-				<div class="container">
+							<div class="col-lg-12">
 
-					<div class="row">
+								<h2>Checkout</h2>
 
-						<div class="col-lg-12">
+								<ul class="breadcrumb">
 
-							<h2>Checkout</h2>
+									<li class="breadcrumb-item"><a href="#">Shop</a></li>
 
-							<ul class="breadcrumb">
-
-								<li class="breadcrumb-item"><a href="#">Shop</a></li>
-
-								<li class="breadcrumb-item active">Checkout</li>
-							</ul>
+									<li class="breadcrumb-item active">Checkout</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-	
-					<br /> <br />
-					<center>
-					<div class="col-sm-6 col-lg-6 mb-3" align="center"> 
-					
-											<div class="col-md-12 col-lg-12">
+
+				<br />
+				<br />
+				<center>
+					<div class="col-sm-6 col-lg-6 mb-3" align="center">
+
+						<div class="col-md-12 col-lg-12">
 
 							<div class="odr-box">
 
@@ -202,7 +189,9 @@
 								</div>
 
 								<div class="rounded p-2 bg-light">
-									<ui:repeat var="panier" value="#{cartController.panierParIdclient(loginController.userDetails.id)}" varStatus="status">
+									<ui:repeat var="panier"
+										value="#{cartController.panierParIdclient(loginController.userDetails.id)}"
+										varStatus="status">
 										<div class="media mb-2 border-bottom">
 
 											<div class="media-body">
@@ -219,7 +208,7 @@
 
 										</div>
 									</ui:repeat>
-								
+
 
 								</div>
 							</div>
@@ -241,304 +230,174 @@
 								</div>
 
 								<hr class="my-1" />
-<ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
-								<div class="d-flex">
+								<ui:repeat var="Commande"
+									value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}"
+									varStatus="status">
+									<div class="d-flex">
 
-									<h4>Sub Total</h4>
+										<h4>Sub Total</h4>
 
-									<div class="ml-auto font-weight-bold">
-									
-										 <div class="ml-auto font-weight-bold"> <h:outputText  value="#{Commande.montant}"/> </div>
+										<div class="ml-auto font-weight-bold">
 
+											<div class="ml-auto font-weight-bold">
+												<h:outputText value="#{Commande.montant}" />
+											</div>
+
+										</div>
 									</div>
-								</div>
 
-								<div class="d-flex">
+									<div class="d-flex">
 
-									<h4>Discount</h4>
+										<h4>Discount</h4>
 
-									<div class="ml-auto font-weight-bold">
-<h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
-<h:outputText  value="0"/>
-</h:panelGroup>
-<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
-<h:outputText  value="#{Commande.montant-Commande.pourcentageDeRemise}"/>
-</h:panelGroup>
+										<div class="ml-auto font-weight-bold">
+											<h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
+												<h:outputText value="0" />
+											</h:panelGroup>
+											<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
+												<h:outputText
+													value="#{Commande.montant-Commande.pourcentageDeRemise}" />
+											</h:panelGroup>
 
+										</div>
 									</div>
-								</div>
 
-								<hr class="my-1" />
+									<hr class="my-1" />
 
-								<div class="d-flex">
+									<div class="d-flex">
 
-									<h4>Accumulated Point</h4>
+										<h4>Accumulated Point</h4>
 
-									<div class="ml-auto font-weight-bold">
-<!-- <h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}"> -->
-<!-- <h:outputText  value="#{Commande.montant/10}"/> -->
-<!-- </h:panelGroup> -->
-<!-- <h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}"> -->
-<!-- <h:outputText  value="#{Commande.montant-Commande.pourcentageDeRemise}"/> -->
-<!-- </h:panelGroup> -->
+										<div class="ml-auto font-weight-bold"></div>
 									</div>
-								</div>
 
-								<!-- 								<div class="d-flex"> -->
+									<div class="d-flex">
 
-								<!-- 									<h4>Tax</h4> -->
+										<h4>Shipping Cost</h4>
 
-								<!-- 									<div class="ml-auto font-weight-bold">$ 2</div> -->
+										<div class="ml-auto font-weight-bold"></div>
+									</div>
+
+									<hr />
+
+									<div class="d-flex gr-total">
+
+										<h5>Grand Total</h5>
+
+										<div class="ml-auto h5">
+											<h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
+												<h:outputText value="#{Commande.montant}" />
+											</h:panelGroup>
+											<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
+												<h:outputText value="#{Commande.pourcentageDeRemise}" />
+											</h:panelGroup>
+										</div>
+									</div>
+								</ui:repeat>
+								<hr />
+							</div>
+						</div>
+
+
+
+						<div class="row">
+
+							<div class="col-md-6 mb-3">
+								<label for="cc-name">Credit card number</label>
+
+								<!-- required="true" requiredMessage="Date Début -->
+
+								<!-- Obligatoire"/>> -->
+                              
+								<h:inputText id="Carta" value="#{cartController.carta}" />
+
+
+
+
+							</div>
+
+							<div class="col-md-6 mb-3">
+								<!-- 										<label for="cc-number">expMonth</label> -->
+								<h:outputText value="expMonth" />
+
+
+								<!--  <input type="text" -->
+								<!-- 											class="form-control" id="cc-number" placeholder="" -->
+								<!-- 											required="" /> -->
+								<h:inputText value="#{cartController.expMonth}">
+
+								</h:inputText>
+
+								<!-- 										<div class="invalid-feedback">Credit card number is required</div> -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<h:outputText value="expYear" />
+
+
+								<!-- 											<input type="text" -->
+								<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
+								<!-- 												required="" /> -->
+								<h:inputText value="#{cartController.expYear}"></h:inputText>
+								<!-- 										<div class="invalid-feedback">Expiration date required</div> -->
+							</div>
+
+							<div class="col-md-6 mb-3">
+								<label for="cc-expiration">CVV</label>
+								<!-- 											<input type="text" -->
+								<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
+								<h:inputText value="#{cartController.cvc}"></h:inputText>
+
+								<!-- 										<div class="invalid-feedback">Security code required</div> -->
+							</div>
+						</div>
+						<!-- 							</div> -->
+						<div class="col-md-6 mb-3">
+
+							<div class="payment-icon">
+
+								<ul>
+
+									<li><img class="img-fluid"
+										src="Cart/images2/payment-icon/1.png" alt="" /></li>
+									<li><img class="img-fluid"
+										src="Cart/images2/payment-icon/2.png" alt="" /></li>
+									<li><img class="img-fluid"
+										src="Cart/images2/payment-icon/3.png" alt="" /></li>
+									<li><img class="img-fluid"
+										src="Cart/images2/payment-icon/5.png" alt="" /></li>
+									<li><img class="img-fluid"
+										src="Cart/images2/payment-icon/7.png" alt="" /></li>
+								</ul>
 								<!-- 								</div> -->
 
-								<div class="d-flex">
-
-									<h4>Shipping Cost</h4>
-
-									<div class="ml-auto font-weight-bold"></div>
-								</div>
-
-								<hr />
-
-								<div class="d-flex gr-total">
-
-									<h5>Grand Total</h5>
-
-									<div class="ml-auto h5">
-<h:panelGroup rendered="#{Commande.pourcentageDeRemise==0}">
-<h:outputText  value="#{Commande.montant}"/>
-</h:panelGroup>
-<h:panelGroup rendered="#{Commande.pourcentageDeRemise!=0}">
-<h:outputText  value="#{Commande.pourcentageDeRemise}"/>
-</h:panelGroup>
-									</div>
-								</div>
-</ui:repeat>
-								<hr />
 							</div>
-						</div>
-					
-					
-					<h:form>
-					<div class="row">
-
-									<div class="col-md-6 mb-3">
-										<label for="cc-name">Credit card number</label>
-					
-<!-- required="true" requiredMessage="Date Début -->
-
-<!-- Obligatoire"/>> -->
-
-										<h:inputText id="Carta" value="#{cartController.carta}" />
-
-								
-										
-
-									</div>
-
-									<div class="col-md-6 mb-3">
-										<!-- 										<label for="cc-number">expMonth</label> -->
-										<h:outputText value="expMonth" />
-
-
-										<!--  <input type="text" -->
-										<!-- 											class="form-control" id="cc-number" placeholder="" -->
-										<!-- 											required="" /> -->
-										<h:inputText value="#{cartController.expMonth}" >
-
-</h:inputText>
-
-										<!-- 										<div class="invalid-feedback">Credit card number is required</div> -->
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 mb-3">
-										<h:outputText value="expYear"/>
-
-
-										<!-- 											<input type="text" -->
-										<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
-										<!-- 												required="" /> -->
-										<h:inputText value="#{cartController.expYear}" ></h:inputText>
-										<!-- 										<div class="invalid-feedback">Expiration date required</div> -->
-									</div>
-
-									<div class="col-md-6 mb-3">
-										<label for="cc-expiration">CVV</label>
-										<!-- 											<input type="text" -->
-										<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
-										<h:inputText value="#{cartController.cvc}" ></h:inputText>
-
-										<!-- 										<div class="invalid-feedback">Security code required</div> -->
-									</div>
-								</div>
-<!-- 							</div> -->
-							<div class="col-md-6 mb-3">
-
-								<div class="payment-icon">
-
-									<ul>
-
-									   <li><img class="img-fluid" src="Cart/images2/payment-icon/1.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/2.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/3.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/5.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/7.png" alt=""/></li>
-									</ul>
-<!-- 								</div> -->
-							
-							</div>
-							<ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
-						 <h:commandButton  class="btn btn-primary py-3 px-4" 
-									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
+							<ui:repeat var="Commande"
+								value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}"
+								varStatus="status">
+								<h:commandButton class="btn btn-primary py-3 px-4"
+									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id,q)}"
 									value="Pay online" />
-								<br/><br/>
-									 <h:commandButton  class="btn btn-primary py-3 px-4" 
+								<br />
+								<br />
+								<h:commandButton class="btn btn-primary py-3 px-4"
 									action="#{cartController.payerPorteaPorte(Commande.id,loginController.userDetails.id)}"
 									value="PayAfterDelivery" />
-								<br/><br/>
-									<h:commandButton  class="btn btn-primary py-3 px-4" 
+								<br />
+								<br />
+								<h:commandButton class="btn btn-primary py-3 px-4"
 									action="#{ControllerCharite.addChCom(Commande.id)}"
 									value="AddTOCharity" />
-									</ui:repeat>
-								
-								</div>
-								<div></div>
-													
-					</h:form>
-					<!-- 									<div class="row"> -->
+							</ui:repeat>
 
-
-					<hr class="mb-1" />
-					</div>
-					</center>
-
-			<!-- Start Instagram Feed  -->
-
-			<div class="instagram-box">
-
-				<div class="main-instagram owl-carousel owl-theme">
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="images/instagram-img-01.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
 						</div>
+						<div></div>
 					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-02.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-03.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-04.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-05.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-06.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-07.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-08.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-09.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-
-						<div class="ins-inner-box">
-							<img src="../temp1/images/instagram-img-05.jpg" alt="" />
-
-							<div class="hov-in">
-								<a href="#"><i class="fab fa-instagram" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Instagram Feed  -->
-			<!-- Start Footer  -->
-
-			<!-- End copyright  -->
-			<a href="#" id="back-to-top" title="Back to top"
-				style="display: none;">↑</a>
-	
+				</center>
+			</h:form>
 		</h:body>
 	</ui:define>
 </ui:composition>
 
- 
+
