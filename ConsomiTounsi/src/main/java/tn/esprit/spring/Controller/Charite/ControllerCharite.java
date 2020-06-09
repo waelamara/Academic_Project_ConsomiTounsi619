@@ -256,7 +256,7 @@ public class ControllerCharite {
 			chariteDAO.saveCharitee(e1.getId(), u2.getId(), c1.getId(), ch);
 			
 
-			
+			/*
 			  Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			  
 			  Message message = Message.creator(new
@@ -267,7 +267,7 @@ public class ControllerCharite {
 			  +" , "+"donate ordered ID="+" "+c1.getId()+"       "
 			  +"thank you so much").create();
 			  
-			  System.out.println(message.getSid());
+			  System.out.println(message.getSid());*/
 			 
 
 			return "/CharityUser.xhtml?faces-redirect=true";
@@ -344,7 +344,7 @@ public class ControllerCharite {
 			chariteDAO.saveCharite5(ide, ch);
 			chariteDAO.Pay(ch.getId(), carta, expMonth, expYear, cvc);
 			
-			 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+			/* Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			  
 			  Message message = Message.creator(new
 			  PhoneNumber("+21629651973"), new PhoneNumber("+12058131360"),
@@ -354,7 +354,7 @@ public class ControllerCharite {
 			  +" , "+"donate money"+" "+ch.getMontantPaye()+"       "
 			  +"thank you so much").create();
 			  
-			  System.out.println(message.getSid());
+			  System.out.println(message.getSid());*/
 			
 
 			return "/CharityUser.xhtml?faces-redirect=true";
