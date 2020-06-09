@@ -11,8 +11,10 @@
 <head>
 	<!--	CSS============================================= -->
 	<h:outputStylesheet library="blog" name="css/linearicons.css" />
-	<h:outputStylesheet library="blog" name="css/font-awesome.min.css" />
-	<h:outputStylesheet library="blog" name="css/themify-icons.css" />
+<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet" />	<h:outputStylesheet library="blog" name="css/themify-icons.css" />
+			<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"/>
 	<h:outputStylesheet library="blog" name="css/bootstrap.css" />
 	<h:outputStylesheet library="blog" name="css/owl.carousel.css" />
 	<h:outputStylesheet library="blog" name="css/nouislider.min.css" />
@@ -105,11 +107,11 @@
 									<img class="img-fluid" src="#{ImageSujet.image}" alt="" />
                                     <img src="img/blog/main-blog/m-blog-1.jpg" alt=""/>
                                     <div class="blog_details">
-                            
-                                        <h:link outcome="/fourm/single-blog " >
+                                    
+                        				  <h2><h:commandLink value="#{sujet.nomSujet}" action="#{blogController.ajouterVus(loginController.userDetails.id,sujet.id)}">
                                           <f:param name="idsujet" value="#{sujet.id}"/>
-                                         <h2>  <h:outputText value="#{sujet.nomSujet}"/>  </h2 > 
-                                         </h:link>
+                                          </h:commandLink></h2> 
+                                        
                       
                               
               								<p><h:outputText value="#{sujet.description}MCSE boot camps have its supporters and its detractors. Some people do not
@@ -182,42 +184,21 @@
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Popular Posts</h3>
+                           <c:forEach items="#{blogController.popularPost()}" var="s" varStatus="j">
                             <div class="media post_item">
-                                <img src="img/blog/popular-post/post1.jpg" alt="post" />
+                                <img src="img/blog/popular-post/post#{j.index+1}.jpg" alt="post" />
                                 <div class="media-body">
                                     <a href="blog-details.html">
-                                        <h3>Space The Final Frontier</h3>
+                                    <h:form>
+                                        <h3><h:commandLink  style="color:black" value="#{s.nomSujet}" action="#{blogController.ajouterVus(loginController.userDetails.id,s.id)}">
+                                          <f:param name="idsujet" value="#{s.id}"/>
+                                          </h:commandLink></h3>
+                                          </h:form>
                                     </a>
-                                    <p>02 Hours ago</p>
+                                    <p><h:outputText value="#{blogController.convertireDate(s.dateAjout)}"/></p>
                                 </div>
                             </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post2.jpg" alt="post"/>
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post3.jpg" alt="post"/>
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post4.jpg" alt="post"/>
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            </c:forEach>
                             <div class="br"></div>
                         </aside>
                        
@@ -231,7 +212,7 @@
                                         <h:outputText value="#{categSujet.nomCategorie} "/>
                                         </p>
                                         <p>
-                                        <h:outputText value="          #{ControllerCategorieSujet.getNbcategeorieSujet(categSujet.id)}"/>
+                                        <h:outputText value="#{ControllerCategorieSujet.getNbcategeorieSujet(categSujet.id)}"/>
                                     </p>
                                     </a>
                                 </li>
@@ -289,8 +270,8 @@
 	<script src="blog/js/owl.carousel.min.js"></script>
 	<!--gmaps Js-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="js/gmaps.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="/blog/js/gmaps.min.js"></script>
+	<script src="/blog/js/main.js"></script>
 </body>
 
 

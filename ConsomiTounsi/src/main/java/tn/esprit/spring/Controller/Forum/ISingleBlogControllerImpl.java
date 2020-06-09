@@ -1,19 +1,13 @@
 package tn.esprit.spring.Controller.Forum;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.transaction.Transactional;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import tn.esprit.spring.Model.User;
-import tn.esprit.spring.Model.reclamation;
 import tn.esprit.spring.Model.Forum.Commentaire;
 import tn.esprit.spring.Service.Forum.ICommentaireService;
 import tn.esprit.spring.Service.Forum.ISujetService;
@@ -70,11 +64,16 @@ public class ISingleBlogControllerImpl{
 		}
 	
 	public String ajoutercommentaire(Long sujetId, Long userId){
+		if (userId==null)
+		{
+			return "/login";
+		}
 		String navigateTo =null;
 		Commentaire com2= new Commentaire ();
 		com2.setDescription(description);
 		System.out.println("********"+description);
 		icommentaireService.ajouterCommentaire(com2, sujetId, userId);
+		   setDescription(null);
 		return navigateTo ;
 	}
 	
@@ -82,6 +81,17 @@ public class ISingleBlogControllerImpl{
 		return icommentaireService.countNbcommentaire(sujetId);
 	}
 	
-
+	public String removeCommentarie(Long comId,Long userId){
+	    String navigateTo="null";
+		icommentaireService.RemoveCommentairebyIdUser(comId, userId);
+		return navigateTo;
+	}
+	
+    public int verificationCombyId(Long comId,Long userId){
+    	if (userId==null)
+    		userId=(long) 0;
+    	
+    	return icommentaireService.verivcationCom(comId, userId);
+    }
 
 }

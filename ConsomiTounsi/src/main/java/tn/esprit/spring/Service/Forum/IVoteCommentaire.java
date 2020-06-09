@@ -14,6 +14,7 @@ public interface IVoteCommentaire {
 	public void Updatelike(Long comId, Long userId);
 	public void Updatedislike(Long comId,Long userId);
     public Boolean verificationvote (Long comId,Long userId);
+    public int verificationvoteChoix(Long userId, Long sujetId) ;
     public int countlikeCom(Long comId);    
     public int countdislikCom(Long comId);
     public List<String> findNomdesUsersVoter(Long comId);

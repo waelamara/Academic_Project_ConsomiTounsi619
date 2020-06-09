@@ -26,13 +26,15 @@
 				<h1>Update Stock</h1>
 			</div>
 			<!-- /.page-header -->
+				
 			<ui:repeat var="stock"
 				value="#{UpdateStockController.getStockbyId(JsfStockController.outcome())}">
 				<!-- /.page-header -->
 				<div class="row">
 					<div class="col-xs-12">
+				<h:form class="form-horizontal">
 
-						<h:form class="form-horizontal">
+						
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"
 									for="form-field-1"> Stock Name </label>
@@ -97,18 +99,18 @@
 								<div class="col-md-offset-3 col-md-9">
 									<h:commandButton class="btn btn-info" value="Save"
 										type="submit"
-										action="#{JsfStockController.updateStockjsf()}"></h:commandButton>
+										action="#{UpdateStockController.updateStockjsf(stock.idstock)}"></h:commandButton>
 
 
 								</div>
 							</div>
-
-						</h:form>
+</h:form>
+			
 			
 			</div>
 			</div>
-</ui:repeat>
-
+</ui:repeat>	
+		
 			<script src="dash/js/jquery-2.1.4.min.js"></script>
 
 			<!-- <![endif]-->

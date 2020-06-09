@@ -85,8 +85,22 @@ public class UserService {
 	{
 		return userRepository.getUserSelonEmail(cle);
 	}
+	/***ayed***/
+	public int getmbreUsersbyPointfideletInf100(){
+		return userRepository.nombreUsersbyPointfideletInf100();
+	};
+	public int getmbreUsersbyPointfideletBetwen100300(){
+		return userRepository.nombreUsersbyPointfideletbetwen100et300();
+	};
 	
-	
-
-
+	public int getmbreUsersbyPointfideletSup(){
+		return userRepository.nombreUsersbyPointfideletSup300();
+	};
+	public int nbuser() {
+		return userRepository.findAll().size();
+	}
+	public float moyennenbpointfiedelete(){
+		return userRepository.moyenneNpointFidelet();
+	}
+	/***ayed**/
 }

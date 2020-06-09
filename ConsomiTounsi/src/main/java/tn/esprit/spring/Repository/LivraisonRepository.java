@@ -22,7 +22,7 @@ public interface LivraisonRepository extends JpaRepository <Livraison, Long> {
 	public void DoneMission(Integer etat,long Livraison);
 	//UPDATE `livraison` SET `etat`=1 WHERE `id`=1
 	//	
-	@Query(value = "SELECT * FROM `livraison` c WHERE `delivery_user_id`=?1 AND YEAR(c.date_affec_livr)-YEAR(NOW())=0 AND MONTH(NOW())-MONTH(c.date_affec_livr)=0  AND DAY(NOW())-DAY(c.date_affec_livr)=0", nativeQuery = true)
+	@Query(value = "SELECT * FROM `livraison` c WHERE `delivery_user_id`=?1 AND YEAR(c.date_affec_livr)-YEAR(NOW())=0 AND MONTH(NOW())-MONTH(c.date_affec_livr)=0  AND DAY(NOW())-DAY(c.date_affec_livr)=0 AND`etat`=0", nativeQuery = true)
 	public List<Livraison> ListedemissionToday(long id_livreur);
 	//liste mission par mois
 	@Query(value = "SELECT * FROM `livraison` c WHERE `delivery_user_id`=?1 AND YEAR(c.date_affec_livr)-YEAR(NOW())=0 AND MONTH(NOW())-MONTH(c.date_affec_livr)=0 ", nativeQuery = true)
