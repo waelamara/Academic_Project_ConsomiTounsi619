@@ -32,7 +32,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public void PayerEnLigne( @Param("id")long idCommande);
 	
 	
-	@Query(value ="UPDATE commande c set c.status='en livraison',c.typede_payment='a domcilie'where c.id=?1",nativeQuery = true)
+	@Query(value ="UPDATE commande c set c.status='en livraison',c.typede_payment='porteaporte'where c.id=?1",nativeQuery = true)
 	   @Modifying
 	  @Transactional
 	public void PayerPorteaPorte( @Param("id")long idCommande);

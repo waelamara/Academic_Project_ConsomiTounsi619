@@ -373,89 +373,11 @@
 								<!-- 								</div> -->
 
 							</div>
-<<<<<<< HEAD
-						</div>
-					
-					
-					<h:form>
-					<div class="row">
-
-									<div class="col-md-6 mb-3">
-										<label for="cc-name">Credit card number</label>
-					
-<!-- required="true" requiredMessage="Date Début -->
-
-<!-- Obligatoire"/>> -->
-
-										<h:inputText id="Carta" value="#{cartController.carta}" />
-
-								
-										
-
-									</div>
-
-									<div class="col-md-6 mb-3">
-										<!-- 										<label for="cc-number">expMonth</label> -->
-										<h:outputText value="expMonth" required="" />
-
-
-										<!--  <input type="text" -->
-										<!-- 											class="form-control" id="cc-number" placeholder="" -->
-										<!-- 											required="" /> -->
-										<h:inputText value="#{cartController.expMonth}" required="" >
-
-</h:inputText>
-
-										<!-- 										<div class="invalid-feedback">Credit card number is required</div> -->
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 mb-3">
-										<h:outputText value="expYear" required=""/>
-
-
-										<!-- 											<input type="text" -->
-										<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
-										<!-- 												required="" /> -->
-										<h:inputText value="#{cartController.expYear}" required=""/>
-										<!-- 										<div class="invalid-feedback">Expiration date required</div> -->
-									</div>
-
-									<div class="col-md-6 mb-3">
-										<label for="cc-expiration">CVV</label>
-										<!-- 											<input type="text" -->
-										<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
-										<h:inputText value="#{cartController.cvc}" required=""></h:inputText>
-
-										<!-- 										<div class="invalid-feedback">Security code required</div> -->
-									</div>
-								</div>
-<!-- 							</div> -->
-							<div class="col-md-6 mb-3">
-
-								<div class="payment-icon">
-
-									<ul>
-
-									   <li><img class="img-fluid" src="Cart/images2/payment-icon/1.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/2.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/3.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/5.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="Cart/images2/payment-icon/7.png" alt=""/></li>
-									</ul>
-<!-- 								</div> -->
-							
-							</div>
-							<ui:repeat var="Commande" value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}" varStatus="status">
-						 <h:commandButton  class="btn btn-primary py-3 px-4" 
-									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id)}"
-=======
 							<ui:repeat var="Commande"
 								value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}"
 								varStatus="status">
 								<h:commandButton class="btn btn-primary py-3 px-4"
 									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id,q)}"
->>>>>>> branch 'master' of https://github.com/waelamara/ConsomiTounsi619.git
 									value="Pay online" />
 								<br />
 								<br />
@@ -477,5 +399,3 @@
 		</h:body>
 	</ui:define>
 </ui:composition>
-
-
