@@ -27,8 +27,18 @@ public class JsfRayonController {
 	@Autowired
 	IRayonService rayonDAO;
 	
+	private Long idrayon;
+	
 
 	
+public Long getidrayon() {
+		return idrayon;
+	}
+
+	public void setidrayon(Long idrayon) {
+		idrayon = idrayon;
+	}
+
 private String nom_rayon;
 
 	

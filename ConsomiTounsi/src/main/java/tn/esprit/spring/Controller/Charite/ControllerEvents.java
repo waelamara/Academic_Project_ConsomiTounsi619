@@ -53,11 +53,13 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Charite.Pub;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Repository.Charite.EndroitRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
+import tn.esprit.spring.Service.Charite.PubDAO;
 import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
@@ -78,6 +80,8 @@ public class ControllerEvents {
 	EndroitDAO endroitDAO;
 	@Autowired
 	UserService userDAO;
+	@Autowired
+	PubDAO publiciteDAO;
 	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
 	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
@@ -203,7 +207,7 @@ public class ControllerEvents {
 		return "/EventAdmin.xhtml?faces-redirect=true";
 
 	}
-	public List<Events> findLikeNameM(String titre) {
+	public List<Events> findLikeNameM(String title) {
 		return eventDAO.findLikeName(titre);
 	}
 	/*****evenement du jour*********/
@@ -248,16 +252,16 @@ public class ControllerEvents {
 	 
 		
 		@PostConstruct
-		//@Scheduled(cron="*/10 * * * * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init1(){
 			paginatorRec1=new RepeatPaginator2(getEventsParDate());
 		}
 		@PostConstruct
-		//@Scheduled(cron="*/10 * * * * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init(){
 			List<Events> c= getAllEvents();
 		paginatorRec = new RepeatPaginator2(c);
 	}
-	
+		
 }
 

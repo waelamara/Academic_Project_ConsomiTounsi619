@@ -9,15 +9,113 @@
 	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="EventAdmin">
 		<h:head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-			<title>Tables - Ace Admin</title>
-			<meta name="description" content="Static &amp; Dynamic Tables" />
-			<meta name="viewport"
-				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-			<script src="dash/js/ace-extra.min.js"></script>
+			<meta name="description" content="overview &amp; stats" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>List Events - Dash ConsommiTounsi</title>
+<!-- Font Awesome -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js">
+  </link>
+ 
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  </link>
+<!-- overlayScrollbars -->
+<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
+  </link>
 		</h:head>
 		<h:body>
-		
+			  
+  
+ <h:form>
+		  
+    <h:inputText id="search1" value="#{ControllerAfficheEvents.titre}"></h:inputText>
+    
+    <h:commandButton value="Search" action="#{ControllerAfficheEvents.findLikeNameM(ControllerAfficheEvents.titre)}">
+<!--          <f:ajax execute="search" render="output"></f:ajax>   -->
+    </h:commandButton>
+    	<h:panelGroup rendered="#{not empty ControllerAfficheEvents.titre}">
+				<center>
+				<section class="blog_area">
+        <div class="container">
+		<div class="row">
+							<div class="col-xs-12">
+			<div class="event">
+			
+							
+				
+									<ui:repeat var="event"
+										value="#{ControllerAfficheEvents.findLikeNameM(ControllerAfficheEvents.titre)}">
+										 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                    <div class="card w-300">
+                        <div class="card-header text-muted border-bottom-0">
+                        </div>
+                        <div class="card-body text-success">
+                            <div class="row">
+                                <div class="col-7">
+                                   <h2 class="lead"><b>#{event.titre} </b></h2>
+                                    <p class="text-muted text-sm"><b>Date : </b> #{event.dateE} </p>
+                                    <p class="text-muted text-sm"><b>Number of place : </b> #{event.nbplace} </p>
+                                     <p class="text-muted text-sm"><b>Number of participant : </b> #{event.nbparticipant} </p>
+                                    
+                                    <p class="text-muted text-sm"><b>Description :  </b> #{event.description} </p>
+													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
+											                                    <p class="text-muted text-sm"><b>Location : </b> #{endroit.emplacement} </p>
+																							</ui:repeat>
+											
+												
+											                                    <p class="text-muted text-sm"><b>publicity : </b> #{event.publicite.nom} </p>
+											
+												
+											
+                                    
+                                </div>
+                                <div class="col-5 text-center">
+                                
+						<h:graphicImage class="img-circle img-fluid" alt="avatar" value="#{event.image}" rendered="#{not empty event.image}" />
+						
+                                </div>
+                            </div>
+                        </div>
+													<div class="card-footer">
+														<div class="text-right">
+															<h:commandButton style="margin:2px;" class="btn btn-xs btn-danger"
+																action="#{ControllerEvents.delete(event.id)}"
+																value="Supprimer" />
+
+															<h:commandButton style="margin:2px;" class="btn btn-xs btn-warning"
+																value="Update"
+																action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
+															
+														</div>
+													</div>
+													<div class="card-footer">
+														<div class="text-right">
+															
+
+															<h:commandButton style="margin:2px;" class="btn btn-xs btn-success"
+																action="#{ControllerEndroit.reserveE(event.id)}"
+																value="Reserve" />
+															
+															<h:commandButton style="margin:2px;" class="btn btn-xs btn-info"
+																value="Publicity"
+																action="#{ControllerPub.addPubEvent(event.id)}" />
+
+														</div>
+													</div>
+												</div>
+                    </div></ui:repeat>
+                </div>
+							</div>
+									</div>
+</div></section></center>
+</h:panelGroup>
+</h:form>
+<!-- hhhh -->
+		<h:panelGroup rendered="#{empty ControllerAfficheEvents.titre}">
 		<center>
 		<section class="blog_area">
         <div class="container">
@@ -89,6 +187,14 @@
 												</div>
 												</ui:repeat>
 											</div>
+											<div class="form-group">
+												<label style="color: #df3b3b">Publicity :</label>
+												<div class="Descreption" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.publicite.nom}" />
+													</div>
+												</div>
+											</div>
 											
 
 											<div>
@@ -102,7 +208,7 @@
 														value="Reserve" />
 														<h:commandButton class="btn btn-xs btn-warning"
 														value="Update" action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
-												<h:commandButton class="btn btn-xs btn-success"
+												<h:commandButton class="btn btn-xs btn-info"
 														value="Publicity" action="#{ControllerPub.addPubEvent(event.id)}" />
 														
 													
@@ -146,7 +252,8 @@
 </div>
 </div>
 </section>
-	</center>
+
+	</center></h:panelGroup>
 
 							
 							
