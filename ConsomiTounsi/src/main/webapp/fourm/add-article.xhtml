@@ -23,7 +23,8 @@
 <h:outputStylesheet library="acceuil"
 	name="styles/contact_responsive.css" />
 
-
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet" />
 </head>
 
 <h:body>
@@ -125,10 +126,11 @@
 							<h:inputFile value="#{blogController.uploadedFile}" />
 
 						<div class="contact_form_button">
-							<h:commandButton value="Validate"
-								class="button contact_submit_button" type="submit"
-								action="#{blogController.ajouterSujet(3)}" />
-
+						
+							<h:commandButton value="Validate" href="/myposts"
+								class="button contact_submit_button" 
+								action="#{blogController.ajouterSujet(loginController.userDetails.id)}" />
+						
 						</div>
 
 						</h:form>

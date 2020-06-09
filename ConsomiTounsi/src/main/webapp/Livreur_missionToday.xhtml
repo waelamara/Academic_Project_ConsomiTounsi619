@@ -56,13 +56,8 @@
 
 	<div class="row">
 		<div class="col-xs-12">
-			<h3 class="header smaller lighter blue">jQuery dataTables</h3>
-
-			<div class="clearfix">
-				<div class="pull-right tableTools-container"></div>
-			</div>
-			<div class="table-header">Results for "Latest Registered
-				Domains"</div>
+		<br></br><br></br>
+			<div class="table-header">Here is the list of deliveries you need to make today</div>
 
 			<!-- div.table-responsive -->
 
@@ -90,13 +85,14 @@
 
 						</tr>
 					</thead>
+					<ui:repeat var="rec"
+							value="#{LivreurMissionTodayController.ListeMissions(LoginDeliveryController.userDetails.id)}"
+							varStatus="status">
 					<tr>
 						<td class="center"><label class="pos-rel"> <input
 								type="checkbox" class="ace" /> <span class="lbl"></span>
 						</label></td>
-						<ui:repeat var="rec"
-							value="#{LivreurMissionController.ListeMissions(LoginDeliveryController.userDetails.id)}"
-							varStatus="status">
+						
 							<td class="hidden-480"><h:outputText value="#{rec.lieux}" />
 							</td>
 							<td class="hidden-480"><h:outputText value="#{rec.etat}" /></td>
@@ -124,6 +120,7 @@
 													</h:form>
 												</div>
 												</td>
+												</tr>
 						</ui:repeat>
 
 
@@ -168,7 +165,7 @@
 <!-- 								</div> -->
 <!-- 							</div> -->
 <!-- 						</td> -->
-					</tr>
+					
 
 
 				</table>

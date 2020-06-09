@@ -18,6 +18,9 @@ public class ControllerVoteSujet {
 	VoteSujet v = new VoteSujet();
 
 	public String ajouterVote(Long userId, Long sujetId) {
+		if (userId==null)
+			userId=(long) 0;
+		
 		String navigateTo = null;
 		if (ivoteSujetService.verificationvoteChoix(userId, sujetId) == 1) {
 			ivoteSujetService.deletevoteById(sujetId, userId);
@@ -36,6 +39,8 @@ public class ControllerVoteSujet {
 	}
 
 	public String ajouterVotedislike(Long userId, Long sujetId) {
+		if (userId==null)
+			userId=(long) 0;
 		String navigateTo = null;
 		if (ivoteSujetService.verificationvoteChoix(userId, sujetId) == 2) {
 			ivoteSujetService.deletevoteById(sujetId, userId);
@@ -55,6 +60,8 @@ public class ControllerVoteSujet {
 	}
 
 	public int verfication(Long userId, Long sujetId) {
+		if (userId==null)
+			userId=(long) 0;
 		return ivoteSujetService.verificationvoteChoix(userId, sujetId);
 	}
 }
