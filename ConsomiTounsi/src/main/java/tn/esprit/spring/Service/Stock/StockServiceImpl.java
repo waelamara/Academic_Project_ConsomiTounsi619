@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Model.Stock.StockByProd;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
 import tn.esprit.spring.Repository.Produit.ProduitRepository;
 import tn.esprit.spring.Repository.Stock.StockRepository;
@@ -99,7 +100,6 @@ public class StockServiceImpl implements IStockService {
 				Stock s = stock.get(0);
 				stock.get(0).setQuantite(a);
 				stockRepository.save(s);
-
 			}
 
 		}
@@ -136,7 +136,7 @@ public class StockServiceImpl implements IStockService {
 
 
 	@Override
-	public Long updateStockjsf(Stock stock) {
+	public Long addorupdate(Stock stock) {
 		stockRepository.save(stock);
 		return stock.getIdstock();
 	}
@@ -147,5 +147,12 @@ public class StockServiceImpl implements IStockService {
 	public Stock getStockbyId(Long idstock) {
 		return  stockRepository.findById(idstock).get();
 	}
+
+
+//	@Override
+//	public List<StockByProd> quantiteByProd() {
+//		
+//		return stockRepository.QuantiteByProduit();
+//	}
 
 }
