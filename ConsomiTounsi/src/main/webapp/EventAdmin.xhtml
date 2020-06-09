@@ -57,12 +57,20 @@
                             <div class="row">
                                 <div class="col-7">
                                    <h2 class="lead"><b>#{event.titre} </b></h2>
-                                    <p class="text-muted text-sm"><b>Date: </b> #{event.dateE} </p>
-                                    <p class="text-muted text-sm"><b>Number of place: </b> #{event.nbplace} </p>
-                                     <p class="text-muted text-sm"><b>Number of participant: </b> #{event.nbparticipant} </p>
+                                    <p class="text-muted text-sm"><b>Date : </b> #{event.dateE} </p>
+                                    <p class="text-muted text-sm"><b>Number of place : </b> #{event.nbplace} </p>
+                                     <p class="text-muted text-sm"><b>Number of participant : </b> #{event.nbparticipant} </p>
                                     
-                                    <p class="text-muted text-sm"><b>Description: </b> #{event.description} </p>
-                                   
+                                    <p class="text-muted text-sm"><b>Description :  </b> #{event.description} </p>
+													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
+											                                    <p class="text-muted text-sm"><b>Location : </b> #{endroit.emplacement} </p>
+																							</ui:repeat>
+											
+												
+											                                    <p class="text-muted text-sm"><b>publicity : </b> #{event.publicite.nom} </p>
+											
+												
+											
                                     
                                 </div>
                                 <div class="col-5 text-center">
@@ -178,6 +186,14 @@
 													</div>
 												</div>
 												</ui:repeat>
+											</div>
+											<div class="form-group">
+												<label style="color: #df3b3b">Publicity :</label>
+												<div class="Descreption" style="color: #000000">
+													<div>
+														<h:outputText value="#{event.publicite.nom}" />
+													</div>
+												</div>
 											</div>
 											
 
