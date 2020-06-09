@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -23,8 +24,6 @@ import tn.esprit.spring.Service.Stock.IStockService;
 public class UpdateStockController {
 	@Autowired
 	IStockService stockservice;
-	
-	
 	private Long idstock;
 	private String nom_stock;
 	private int quantite;
@@ -32,13 +31,48 @@ public class UpdateStockController {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date validite;
 	private float prixdevente;
-	private Long stockIdToBeUpdated;
 	
 	
-	public UpdateStockController() {
-		super();
-		
-		
+	
+	
+	public Long getIdstock() {
+		return idstock;
+	}
+
+	public void setIdstock(Long idstock) {
+		this.idstock = idstock;
+	}
+
+	public String getNom_stock() {
+		return nom_stock;
+	}
+
+	public void setNom_stock(String nom_stock) {
+		this.nom_stock = nom_stock;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public Date getValidite() {
+		return validite;
+	}
+
+	public void setValidite(Date validite) {
+		this.validite = validite;
+	}
+
+	public float getPrixdevente() {
+		return prixdevente;
+	}
+
+	public void setPrixdevente(float prixdevente) {
+		this.prixdevente = prixdevente;
 	}
 	
 	String a;
@@ -58,6 +92,20 @@ public class UpdateStockController {
 	
 	public Stock getStockbyId(Long idstock) {
 		return  stockservice.getStockbyId(idstock);
+	}
+	
+	public String updateStockjsf(Long idstock){
+		String navigateTo = "/stock";
+		Stock s=stockservice.getStockbyId(idstock);
+		System.out.println("*****************"+s.getNom_stock());
+		s.setNom_stock(nom_stock);
+		System.out.println("****************"+getNom_stock());
+		s.setPrixdevente(prixdevente);
+		System.out.println("****************"+prixdevente);
+		s.setQuantite(quantite);
+		s.setValidite(validite);
+		stockservice.addorupdate(s);
+		return navigateTo;
 	}
 
 
