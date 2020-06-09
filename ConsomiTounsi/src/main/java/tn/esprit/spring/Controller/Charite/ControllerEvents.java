@@ -203,7 +203,7 @@ public class ControllerEvents {
 		return "/EventAdmin.xhtml?faces-redirect=true";
 
 	}
-	public List<Events> findLikeNameM(String titre) {
+	public List<Events> findLikeNameM(String title) {
 		return eventDAO.findLikeName(titre);
 	}
 	/*****evenement du jour*********/
@@ -248,16 +248,16 @@ public class ControllerEvents {
 	 
 		
 		@PostConstruct
-		//@Scheduled(cron="*/10 * * * * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init1(){
 			paginatorRec1=new RepeatPaginator2(getEventsParDate());
 		}
 		@PostConstruct
-		//@Scheduled(cron="*/10 * * * * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init(){
 			List<Events> c= getAllEvents();
 		paginatorRec = new RepeatPaginator2(c);
 	}
-	
+		
 }
 

@@ -21,8 +21,19 @@ import tn.esprit.spring.Service.Charite.EventsDAO;
 public class ControllerAfficheEvents {
 	@Autowired
 	EventsDAO eventDAO;
+	private String titre;
+	
 	 private RepeatPaginator2 paginatorRec;
-	 public List<Events> getAllEvents() {
+	 
+	 public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public List<Events> getAllEvents() {
 			return eventDAO.getAllEventsList();
 		}
 
@@ -38,4 +49,8 @@ public class ControllerAfficheEvents {
 		List<Events> c= getAllEvents();
 	paginatorRec = new RepeatPaginator2(c);
 }
+	
+	public List<Events> findLikeNameM(String title) {
+		return eventDAO.findLikeName(titre);
+	}
 }
