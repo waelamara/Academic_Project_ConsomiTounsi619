@@ -56,12 +56,12 @@
 
 		<div class="row">
 			<div class="col-xs-12">
-				<h3 class="header smaller lighter blue"></h3>
+				<h3 class="header smaller lighter blue">Ray table</h3>
 
 				<div class="clearfix">
 					<div class="pull-right tableTools-container"></div>
 				</div>
-				<div class="table-header">Ray table</div>
+				<div class="table-header">Results for "Latest Registered</div>
 
 				<!-- div.table-responsive -->
 
@@ -71,18 +71,19 @@
 						class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th class="center"><label class="pos-rel"> <input
-										type="checkbox" class="ace" /> <span class="lbl"></span>
-								</label></th>
+<!-- 															<th class="center"><label class="pos-rel"> <input -->
+<!-- 																	type="checkbox" class="ace" /> <span class="lbl"></span> -->
+<!-- 															</label></th> -->
 
-<th>Id</th>
+                                <th>Id</th>
 								<th class="hidden-480">Ray Name</th>
 
-								<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>Ray
-									Type</th>
-								<th>Product</th>
-
+								<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+									Ray type</th>
 								
+								
+								<th>Product</th>
+								<th>Quantity</th>
 								<th>Delete</th>
 								<th>Update</th>
 
@@ -91,22 +92,22 @@
 							</tr>
 						</thead>
 
-						<ui:repeat var="rayon" value="#{JsfRayonController.getAllRayon()}"
-							varStatus="status">
+						<ui:repeat var="rayon" value="#{JsfRayonController.getAllRayon()}" varStatus="status">
 
 							<tr>
-								<td class="center"><label class="pos-rel"> <input
-										type="checkbox" class="ace" /> <span class="lbl"></span>
-								</label></td>
-								<td class="hidden-480"><h:outputText
-										value="#{rayon.idrayon}" /></td>
-								<td class="hidden-480"><h:outputText
-										value="#{rayon.nom_rayon}" /></td>
-								<td class="hidden-480"><h:outputText
-										value="#{rayon.type_rayon}" /></td>
-															<td class="hidden-480"><span class="label label-sm label-warning"><h:outputText value="a" /></span></td>
-								<!-- 							<td class="hidden-480"><h:outputText value="a" /></td> -->
-								<!-- 						<td class="hidden-480"><span class="label label-sm label-warning"><h:outputText value="a" /></span></td> -->
+<!-- 														<td class="center"><label class="pos-rel"> <input -->
+<!-- 																type="checkbox" class="ace" /> <span class="lbl"></span>	</label></td> -->
+								<!-- 													<td class="hidden-480"><h:outputText value="#{stock.idstock}" /> -->
+								<!-- 							</td> -->
+								<td class="hidden-480"><h:outputText value="#{rayon.idrayon}" /></td>
+								<td class="hidden-480"><h:outputText value="#{rayon.nom_rayon}" /></td>
+								<td class="hidden-480"><span class="label label-sm label-warning"><h:outputText value="#{rayon.type_rayon}" /></span></td>
+								<td class="hidden-480"><h:outputText value="a" /></td>
+								<td class="hidden-480"><h:outputText value="50" /></td>
+							
+<!-- 								<td class="hidden-480"><span -->
+<!-- 									class="label label-sm label-warning"><h:outputText -->
+<!-- 											value="#{stock.prixremise}" /></span></td> -->
 								<td><h:column>
 										<h:form>
 											<h:commandLink id="btnsupp" value="Delete"
@@ -120,61 +121,16 @@
 									</h:column></td>
 								<td><h:column>
 										<h:form>
-										<h:commandLink id="btnsupp" value="Delete"
-												action="JsfRayonController.deleterayon(rayon.Idrayon)">
-
+											<h:commandLink id="btnmodif" value="Update">
+											
 												<i class="ace-icon fa fa-trash-o bigger-120 white"></i>
 											</h:commandLink>
-<!-- 											<h:commandLink id="btnmodif" value="Update" action=""> -->
-<!-- 																													<f:param name="idstock" value="#{stock.idstock}"/> -->
-<!-- 												<i class="ace-icon fa fa-trash-o bigger-120 white"></i> -->
-<!-- 											</h:commandLink> -->
 										</h:form>
 
 
 									</h:column></td>
 
 
-
-								<!-- 						<td> -->
-								<!-- 							<div class="hidden-sm hidden-xs action-buttons"> -->
-								<!-- 								<a class="blue" href="#"> <i -->
-								<!-- 									class="ace-icon fa fa-search-plus bigger-130"></i> -->
-								<!-- 								</a> <a class="green" href="#"> <i -->
-								<!-- 									class="ace-icon fa fa-pencil bigger-130"></i> -->
-								<!-- 								</a> <a class="red" href="#"> <i -->
-								<!-- 									class="ace-icon fa fa-trash-o bigger-130"></i> -->
-								<!-- 								</a> -->
-								<!-- 							</div> -->
-
-								<!-- 							<div class="hidden-md hidden-lg"> -->
-								<!-- 								<div class="inline pos-rel"> -->
-								<!-- 									<button class="btn btn-minier btn-yellow dropdown-toggle" -->
-								<!-- 										data-toggle="dropdown" data-position="auto"> -->
-								<!-- 										<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i> -->
-								<!-- 									</button> -->
-
-								<!-- 									<ul -->
-								<!-- 										class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close"> -->
-								<!-- 										<li><a href="#" class="tooltip-info" data-rel="tooltip" -->
-								<!-- 											title="View"> <span class="blue"> <i -->
-								<!-- 													class="ace-icon fa fa-search-plus bigger-120"></i> -->
-								<!-- 											</span> -->
-								<!-- 										</a></li> -->
-
-								<!-- 										<li><a href="#" class="tooltip-success" -->
-								<!-- 											data-rel="tooltip" title="Edit"> <span class="green"> -->
-								<!-- 													<i class="ace-icon fa fa-pencil-square-o bigger-120"></i> -->
-								<!-- 											</span> -->
-								<!-- 										</a></li> -->
-
-								<!-- 										<li><a href="#" class="tooltip-error" data-rel="tooltip" -->
-								<!-- 											title="Delete"> <span class="red"> <i -->
-								<!-- 													class="ace-icon fa fa-trash-o bigger-120"></i> -->
-								<!-- 											</span> -->
-								<!-- 										</a></li> -->
-								<!-- 									</ul> -->
-								<!-- 								</div> -->
 								<!-- 							</div> -->
 								<!-- 						</td> -->
 							</tr>
