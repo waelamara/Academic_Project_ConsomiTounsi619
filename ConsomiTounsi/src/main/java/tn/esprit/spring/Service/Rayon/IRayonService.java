@@ -2,6 +2,7 @@ package tn.esprit.spring.Service.Rayon;
 
 import java.util.List;
 
+import tn.esprit.spring.Model.Forum.CategorieSujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
 
@@ -13,14 +14,13 @@ public interface IRayonService {
 	List<Rayon> getAllRayon();
 
 	void deleteRayonById(Long Idrayon);
-	
 	public List<Rayon> findRayonbyName(String name);
 	
 	public void affecterProduitARayon(Long Idrayon, Long Idproduit);
 	
 	public void desaffecterProduitduRayon(Long Idrayon, Long Idproduit);
 	
-	public List<Produit> findProduitParRayon(Long Idrayon);
+	public List<Produit> findProduitNameParRayon(Long Idrayon);
 
-
+	public List<Produit> getAllProduitName();
 }

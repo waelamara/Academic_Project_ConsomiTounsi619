@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.Model.Rayon.Rayon;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Model.Stock.StockByProd;
 import tn.esprit.spring.Service.Stock.IStockService;
 
-@Controller(value = "StockController")
+@RestController(value = "StockController")
+@RequestMapping("/stock")
 public class StockController {
 	
 	@Autowired
@@ -82,4 +84,10 @@ public void effectuerCommande(@PathVariable(value = "idc") Long idcommande){
 }
 
 /////////////////////////////////////////////////////////////////////////////
+//
+//@RequestMapping(value="/quantitebyprod")
+//public List<StockByProd> quantitebyprod(){
+//	return stockservice.quantiteByProd();
+//}
+
 }

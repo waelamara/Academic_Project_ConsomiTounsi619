@@ -36,7 +36,6 @@ public class JsfStockController {
 	IStockService stockservice;
 	@Autowired
 	IProduitService iproduitService;
-	
 	private Long idstock;
 	private String nom_stock;
 	private int quantite;
@@ -123,9 +122,10 @@ public String gopagestock(Long idstock){
 	
 	
 	
-	public void addstock(long idprod) {
-		
+	public String addstock(long idprod) {
+		String navigateTo = "/stock";
 		 stockservice.ajouterStockbyProd(new Stock(nom_stock,quantite,validite,prixdevente) ,idprod);
+		return navigateTo;
 
 		}
 	
@@ -152,10 +152,17 @@ public void displayStock(Stock stock){
 	
 }
 
-public String updateStockjsf(){
+public String updateStockjsf(Long idstock){
 	String navigateTo = "/stock";
-	stockservice.updateStockjsf(new Stock(stockIdToBeUpdated,nom_stock,quantite,validite,prixdevente));
-
+	Stock s=stockservice.getStockbyId(idstock);
+	
+	s.setNom_stock(nom_stock);
+	System.out.println("****************"+nom_stock);
+	s.setPrixdevente(prixdevente);
+	System.out.println("****************"+prixdevente);
+	s.setQuantite(quantite);
+	s.setValidite(validite);
+	stockservice.saveStock(s);
 	return navigateTo;
 }
 

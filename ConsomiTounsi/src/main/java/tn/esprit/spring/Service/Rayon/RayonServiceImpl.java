@@ -25,7 +25,8 @@ public class RayonServiceImpl implements IRayonService {
 	public Rayon saveRayon(Rayon rayon) {
 		return rayonRepository.save(rayon);
 	}
-
+	
+	
 	@Override
 	public Rayon updateRayon(Rayon rayon) {
 		return rayonRepository.saveAndFlush(rayon);
@@ -82,9 +83,15 @@ public class RayonServiceImpl implements IRayonService {
 }
 
 	@Override
-	public List<Produit> findProduitParRayon(Long Idrayon) {
+	public List<Produit> findProduitNameParRayon(Long Idrayon) {
 		
 		return produitRepository.findProduitParRayon(Idrayon);
+	}
+
+	@Override
+	public List<Produit> getAllProduitName() {
+		
+		return produitRepository.findAll();
 	}
 
 	

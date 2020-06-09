@@ -54,7 +54,7 @@ public class RayonController {
 	////////////////////////////////////////////////////////////////////////////////
 
 	@DeleteMapping("/deleterayon/{Idrayon}")
-	public void deleterayon(@PathVariable(name = "Idrayon") Long Idrayon) {
+	public void deleterayon(@PathVariable(name ="Idrayon") Long Idrayon) {
 
 		rayonDAO.deleteRayonById(Idrayon);
 
@@ -68,8 +68,8 @@ public class RayonController {
 	}
 	
 	@GetMapping("/findproduitparrayon/{idr}")
-	public List<Produit> findProduitParRayon(@PathVariable(value = "idr") Long Idrayon) {
-		return rayonDAO.findProduitParRayon(Idrayon);
+	public List<Produit> findProduitNameParRayon(@PathVariable(value = "idr") Long Idrayon) {
+		return rayonDAO.findProduitNameParRayon(Idrayon);
 	}
 	
 
@@ -80,7 +80,13 @@ public class RayonController {
 
 		rayonDAO.affecterProduitARayon(Idrayon, Idproduit);
 	}
-	
+	/////////////////////////////////////////////////////
+	@GetMapping(value="/allprodname")
+	public List<Produit> getAllProduitName() {
+		return rayonDAO.getAllProduitName();
+	}
+
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
