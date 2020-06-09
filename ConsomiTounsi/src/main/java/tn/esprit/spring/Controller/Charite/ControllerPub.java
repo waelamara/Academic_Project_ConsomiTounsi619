@@ -173,11 +173,9 @@ public class ControllerPub {
 		return "/EventPub.xhtml?faces-redirect=true";
 	}
 	public List<Pub> getAllPub(){
-		if (nomRecherchePub==null ){
-		return publiciteDAO.findAll();}
-		else {
+		
 			return publiciteDAO.findLikeName(nomRecherchePub);
-		}
+		
 	}
 	public String DisplayPublicite(Pub p){
 		this.nom=p.getNom();
@@ -186,6 +184,9 @@ public class ControllerPub {
 		
 		this.image=p.getImage();
 		return "AddPub.xhtml?faces-redirect=true";
+	}
+	public List<Pub> findLikeNameM(String name) {
+		return publiciteDAO.findLikeName(nom);
 	}
 
 }
