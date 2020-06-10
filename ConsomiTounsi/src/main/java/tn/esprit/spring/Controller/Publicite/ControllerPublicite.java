@@ -47,6 +47,7 @@ public class ControllerPublicite {
 	private String image;
 	private String emailProprietaire;
 	private String numeroProprietaire;
+	private boolean status;
 	private String nomRecherchePub;
 	private String searchByCanal;
 	private Long idToUpdate;
@@ -61,14 +62,14 @@ public class ControllerPublicite {
         this.dateDebut=iPubliciteService.ConvertirDate(dateDebutString);
         this.dateFin=iPubliciteService.ConvertirDate(dateFinString);
 		if(idToUpdate!=null && file.getSize()==0){
-			iPubliciteService.UpdatePubWithoutImage(new Publicite( idToUpdate,nom,  canal,  genderCible,dateDebut,dateFin,nbrFinalVue,  debutAgeCible,finAgeCible,video,image,emailProprietaire,numeroProprietaire));
+			iPubliciteService.UpdatePubWithoutImage(new Publicite( idToUpdate,nom,  canal,  genderCible,dateDebut,dateFin,nbrFinalVue,  debutAgeCible,finAgeCible,video,image,emailProprietaire,numeroProprietaire,status));
 			HidePub();
 			idToUpdate=null;
 			 return "/pages/AllPublicities.xhtml?faces-redirect=true";
 		}
 		else if(idToUpdate!=null && file.getSize()!=0)
 		{
-			iPubliciteService.AddPub(new Publicite( idToUpdate,nom,  canal,  genderCible,dateDebut,dateFin,nbrFinalVue,  debutAgeCible,finAgeCible,emailProprietaire,numeroProprietaire), file);
+			iPubliciteService.UpdatePubWithImage(new Publicite( idToUpdate,nom,  canal,  genderCible,dateDebut,dateFin,nbrFinalVue,  debutAgeCible,finAgeCible,emailProprietaire,numeroProprietaire,status), file);
 			HidePub();
 			idToUpdate=null;
 			 return "/pages/AllPublicities.xhtml?faces-redirect=true";
@@ -151,6 +152,7 @@ public class ControllerPublicite {
 		this.emailProprietaire=p.getEmailProprietaire();
 		this.numeroProprietaire=p.getNumeroProprietaire();
 		this.nbrFinalVue=p.getNbrFinalVue();
+		this.status=p.isStatus();
 		if(p.getImage()!=null) this.typeFile="Image";
 		else if(p.getVideo()!=null) this.typeFile="Video";
 		return "/pages/PublicityForm.xhtml?faces-redirect=true";
@@ -454,6 +456,16 @@ public class ControllerPublicite {
 
 	public void setPubliciteForUserConnecter(Publicite publiciteForUserConnecter) {
 		this.publiciteForUserConnecter = publiciteForUserConnecter;
+	}
+
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 	

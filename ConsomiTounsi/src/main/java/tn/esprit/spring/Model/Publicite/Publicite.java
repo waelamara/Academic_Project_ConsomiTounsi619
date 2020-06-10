@@ -42,6 +42,7 @@ public class Publicite implements Serializable {
 	private String image;
 	private String emailProprietaire;
 	private String numeroProprietaire;
+	private boolean status;
 	@ManyToOne
 	private User IdUser;
 
@@ -149,7 +150,7 @@ public class Publicite implements Serializable {
 
 
 	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,
-			int nbrFinalVue, int debutAgeCible, int finAgeCible, String emailProprietaire, String numeroProprietaire) {
+			int nbrFinalVue, int debutAgeCible, int finAgeCible, String emailProprietaire, String numeroProprietaire,boolean status) {
 		super();
 		Id = id;
 		this.nom = nom;
@@ -162,6 +163,7 @@ public class Publicite implements Serializable {
 		this.finAgeCible = finAgeCible;
 		this.emailProprietaire = emailProprietaire;
 		this.numeroProprietaire = numeroProprietaire;
+		this.status=status;
 	}
 
 
@@ -183,7 +185,7 @@ public class Publicite implements Serializable {
 
 	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,int nbrFinalVue,
 			int debutAgeCible, int finAgeCible, String video, String image, String emailProprietaire,
-			String numeroProprietaire) {
+			String numeroProprietaire,boolean status) {
 		super();
 		Id = id;
 		this.nom = nom;
@@ -198,6 +200,7 @@ public class Publicite implements Serializable {
 		this.image = image;
 		this.emailProprietaire = emailProprietaire;
 		this.numeroProprietaire = numeroProprietaire;
+		this.status=status;
 	}
 
 
@@ -331,6 +334,16 @@ public class Publicite implements Serializable {
 
 	public void setNumeroProprietaire(String numeroProprietaire) {
 		this.numeroProprietaire = numeroProprietaire;
+	}
+
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }
