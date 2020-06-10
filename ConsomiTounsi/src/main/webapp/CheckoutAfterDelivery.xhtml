@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f1="http://xmlns.jcp.org/jsf/core"	
 	template="/Template/template.xhtml">
-	<ui:define name="Chekout2">
+	<ui:define name="CheckoutAfterDelivery">
 	
 		<head>
 
@@ -26,13 +26,9 @@
 
 
 		<h:body>
-			<!-- Start Main Top -->
+	
 
-			<!-- End Top Search -->
-			<!-- Start All Title Box -->
-			
-				<br />
-				<br />
+	
 
 				<!-- End Of map -->
 
@@ -155,7 +151,6 @@
 
 								</tabel>
 		
-
  <h:inputText id="LOG" value="#{cartController.q}"  style="display:none;" required="true" class="form-control"
              requiredMessage="ENTER YOUR Adress" />
              <center>
@@ -163,6 +158,7 @@
 </center>
 				<br />
 				<br />
+				
 				<center>
 					<div class="col-sm-6 col-lg-6 mb-3" align="center">
 
@@ -288,99 +284,15 @@
 								<hr />
 							</div>
 						</div>
-
-
-
-						<div class="row">
-
-							<div class="col-md-6 mb-3">
-								<label for="cc-name">Credit card number</label>
-
-								<!-- required="true" requiredMessage="Date Début -->
-
-								<!-- Obligatoire"/>> -->
-                              
-								<h:inputText id="Carta" value="#{cartController.carta}"  required="true" class="form-control"
-             requiredMessage="ENTER YOUR CARD" validatorMessage="INVALID CARD ">
-               <f:validateRegex pattern="4242424242424242" /> 
-               </h:inputText>
-              <h:message for="Carta" style="color:red;" />
-
-
-
-
-							</div>
-
-							<div class="col-md-6 mb-3">
-								<!-- 										<label for="cc-number">expMonth</label> -->
-								<h:outputText value="expMonth" />
-
-
-								<!--  <input type="text" -->
-								<!-- 											class="form-control" id="cc-number" placeholder="" -->
-								<!-- 											required="" /> -->
-								<h:inputText value="#{cartController.expMonth}" required="true"  id="expMonth"
-             requiredMessage="ENTER YOUR ExpMonth"  validatorMessage="INVALID ExpMonth " class="form-control">
-<f:validateDoubleRange minimum="11" maximum="11" />
-								</h:inputText>
-								 <h:message for="expMonth" style="color:red;" />
-
-								<!-- 										<div class="invalid-feedback">Credit card number is required</div> -->
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 mb-3">
-								<h:outputText value="expYear"  />
-                
-
-
-								<!-- 											<input type="text" -->
-								<!-- 												class="form-control" id="cc-expiration" placeholder="" -->
-								<!-- 												required="" /> -->
-								<h:inputText value="#{cartController.expYear}"  required="true" id="expYear" class="form-control"
-             requiredMessage="ENTER YOUR ExpYear" validatorMessage="INVALID ExpYear "><f:validateDoubleRange minimum="2026" maximum="2026" /></h:inputText>
-								 <h:message for="expYear" style="color:red;" />
-							</div>
-
-							<div class="col-md-6 mb-3">
-								<label for="cc-expiration">CVV</label>
-								<!-- 											<input type="text" -->
-								<!-- 												class="form-control" id="cc-cvv" placeholder="" required="" /> -->
-								<h:inputText value="#{cartController.cvc}" required="true"  id="cvv" class="form-control" 
-             requiredMessage="ENTER YOUR Code" validatorMessage="INVALID CVC
-"><f:validateRegex pattern="123" /> </h:inputText>
-                 <h:message for="cvv" style="color:red;" />
-
-							</div>
-						</div>
-						<!-- 							</div> -->
-						<div class="col-md-6 mb-3">
-
-							<div class="payment-icon">
-
-								<ul>
-
-									<li><img class="img-fluid"
-										src="Cart/images2/payment-icon/1.png" alt="" /></li>
-									<li><img class="img-fluid"
-										src="Cart/images2/payment-icon/2.png" alt="" /></li>
-									<li><img class="img-fluid"
-										src="Cart/images2/payment-icon/3.png" alt="" /></li>
-									<li><img class="img-fluid"
-										src="Cart/images2/payment-icon/5.png" alt="" /></li>
-									<li><img class="img-fluid"
-										src="Cart/images2/payment-icon/7.png" alt="" /></li>
-								</ul>
-								<!-- 								</div> -->
-
-							</div>
 							<ui:repeat var="Commande"
 								value="#{cartController.commandeencoursparClient(loginController.userDetails.id)}"
 								varStatus="status">
-								<h:commandButton class="btn btn-primary py-3 px-4" for="Carta" 
-									action="#{cartController.Pay(loginController.userDetails.id,carta,expMonth,expYear,cvc,Commande.id,q)}"
-									value="Pay online" />
 
+								<h:commandButton class="btn btn-primary py-3 px-4"
+									action="#{cartController.payerPorteaPorte(Commande.id,loginController.userDetails.id,q)}"
+									value="PayAfterDelivery" />
+								<br />
+								<br />
 								<h:commandButton class="btn btn-primary py-3 px-4"
 									action="#{ControllerCharite.addChCom(Commande.id)}"
 									value="AddTOCharity" />
@@ -388,7 +300,7 @@
 
 						</div>
 						<div></div>
-					</div>
+				
 				</center>
 			</h:form>
 		</h:body>

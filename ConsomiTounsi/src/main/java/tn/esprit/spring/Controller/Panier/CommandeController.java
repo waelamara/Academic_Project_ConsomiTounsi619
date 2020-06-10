@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import tn.esprit.spring.Model.Commande;
+import tn.esprit.spring.Model.Livraison;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 @Controller
 public class CommandeController {
@@ -61,6 +62,11 @@ public class CommandeController {
 	public void PayerPorteaPorte(int idCommande,int idUser)
 	{
 		commandeDao.PayerPorteaPorte(idCommande,idUser);
+	}
+	
+	public Livraison getlivraisionParIdCommande(long idCommande)
+	{
+		return commandeDao.getlivraisionParIdCommande(idCommande);
 	}
 	
 

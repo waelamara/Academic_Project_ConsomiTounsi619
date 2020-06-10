@@ -16,7 +16,7 @@ import tn.esprit.spring.Service.Panier.LigneCommandeImpl;
 
 @Controller(value = "OrderStatistiqueController")
 @ELBeanName(value = "OrderStatistiqueController")
-@Join(path = "/OrderStatistique", to = "/AdminStatistique.jsf")
+@Join(path = "/OrderStatistique", to = "/Order2.jsf")
 public class OrderStatistiqueController {
 	
 	
