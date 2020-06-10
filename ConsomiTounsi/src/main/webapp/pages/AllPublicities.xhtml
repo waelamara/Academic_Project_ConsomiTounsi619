@@ -178,9 +178,9 @@
 															
                 											
             												<h:panelGroup rendered="#{Publicite.image!=null}">
-																<div class="media-left">
+																<div class="media-left" >
 																	<a href="#">
-																		<img style="width:100px;height:100px" src="#{Publicite.image}" class="media-object" data-src="holder.js/72x72" />
+																		<img style="width:180px;height:120px" src="#{Publicite.image}" class="media-object" data-src="holder.js/72x72" />
 																	</a>
 																</div>
 															</h:panelGroup>
@@ -188,7 +188,7 @@
 																<h:panelGroup rendered="#{Publicite.video!=null}">
 																<div class="media-left">
 																	
-																			<video style="width:100px;height:100px" onmouseover="this.play()" onmouseout="this.pause()">
+																			<video style="width:180px;height:120px" onmouseover="this.play()" onmouseout="this.pause()">
 																				<source src="#{Publicite.video}" type="video/mp4"/>
 																			</video>
 																	
@@ -211,7 +211,7 @@
 																	<h:column><p><b>Canal:    </b><h:outputText  value="#{Publicite.canal}"/></p></h:column>
 																	<h:column><p><b>Date Debut:   </b><h:outputText  value="#{Publicite.dateDebut}" /> <b>|  Date Fin:   </b><h:outputText  value="#{Publicite.dateFin}" /></p></h:column>
 																	<h:column><p><b>Gender:   </b><h:outputText  value="#{Publicite.genderCible}" /> <b>|  Age Cible:   </b><h:outputText  value="#{Publicite.debutAgeCible}" />-><h:outputText  value="#{Publicite.finAgeCible}" /> ans</p></h:column>
-																	
+																	<h:column><p><b>Email:   </b><h:outputText  value="#{Publicite.emailProprietaire}" /> <b>|  Tel:   </b><h:outputText  value="#{Publicite.numeroProprietaire}" /> </p></h:column>
 																	<div class="search-actions text-center">
 																		
 

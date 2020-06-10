@@ -1,6 +1,8 @@
 package tn.esprit.spring.Service.Publicite;
 
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -19,6 +21,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restfb.BinaryAttachment;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
 
 import Utils.AppConstants;
 import tn.esprit.spring.Model.Publicite.Publicite;
@@ -112,7 +119,25 @@ public class PubliciteServiceImpl implements IPubliciteService {
 				pub.getDateFin().toString(), typefile);
 		PubWithImg.setCout(coutPub);
 		PubWithImg.setNbrInitialVueCible(CountUserCible(pub.getDebutAgeCible(),pub.getFinAgeCible(),pub.getGenderCible().toString()));
-		return publiciteRepository.save(PubWithImg);
+		publiciteRepository.save(PubWithImg);
+		
+		String token="EAAoc6WpqZBZBEBAMikPzLLiBxJyS5EuYHuJHk5s1ApIdOZAJj9Gl37j6ZCLzU1t86ZAojZBc6VIeePRpJMzINUqUDHTjIhRvTUcFrKhrqLrZCiD36PZBruBIaAznWOL8tkFL9Pi2K4tWqrhSU0fbpK0WoWwxw5h5voSMK3PSO7gkBBxZAs3PGu5836gAgGoU2wZAMZD";
+		if(PubWithImg.getCanal().toString().equals("SITE_ET_FACEBOOK")){
+			if (typefile.equals("Image")){
+				InputStream inputfile = file.getInputStream();
+				FacebookClient fb= new DefaultFacebookClient(token);
+				FacebookType response=fb.publish("me/photos", FacebookType.class,BinaryAttachment.with(file.getFileName(), inputfile), Parameter.with("message", PubWithImg.getNom()));
+				System.out.println(response.getId());
+			}
+			if (typefile.equals("Video") ){
+				InputStream inputfile = file.getInputStream();
+				FacebookClient fb= new DefaultFacebookClient(token);
+				FacebookType response=fb.publish("me/videos", FacebookType.class,BinaryAttachment.with(file.getFileName(), inputfile), Parameter.with("message", PubWithImg.getNom()));
+				System.out.println(response.getId());
+			}
+		}
+		
+		return PubWithImg ;
 
 	}
 	
@@ -298,6 +323,16 @@ public class PubliciteServiceImpl implements IPubliciteService {
 	
 	public List<Publicite> findPubForAll(){
 		return publiciteRepository.findPubForAll();
+	}
+
+	@Override
+	public List<Publicite> findByCanalAndName(String canal, String nom) {
+		return publiciteRepository.findByCanalAndName(canal, nom);
+	}
+
+	@Override
+	public List<Publicite> getPubForUserConnecter(Date UserDateNaissance, String gender) {
+		return publiciteRepository.getPubForUserConnecter(UserDateNaissance, gender);
 	}
 
 }

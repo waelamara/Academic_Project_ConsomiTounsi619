@@ -1,6 +1,7 @@
 package tn.esprit.spring.Repository.Publicite;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,6 +26,10 @@ public interface PubliciteRepository extends JpaRepository<Publicite, Long> {
 	public List<Publicite> findLikeName(String nom);
 	@Query(value = "SELECT * FROM publicite WHERE canal LIKE ?1", nativeQuery = true)
 	public List<Publicite> findByCanal(String canal);
+	@Query(value = "SELECT * FROM publicite WHERE canal LIKE ?1 and nom LIKE ?2%", nativeQuery = true)
+	public List<Publicite> findByCanalAndName(String canal,String nom);
 	@Query(value = "SELECT * FROM publicite WHERE gender_cible='TOUS' and debut_age_cible=10 and fin_age_cible=70", nativeQuery = true)
 	public List<Publicite> findPubForAll();
+	@Query(value = "SELECT * FROM publicite WHERE year(NOW())-year(?1) BETWEEN debut_age_cible AND fin_age_cible and gender_cible=?2", nativeQuery = true)
+	public List<Publicite> getPubForUserConnecter(Date UserDateNaissance,String gender);
 }
