@@ -138,12 +138,26 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Publicité</b> </label>
 
 										<div class="col-sm-9">
-											<h:inputText value="#{ControllerPublicite.nom}" placeholder="Nom produit" class="col-xs-10 col-sm-5"></h:inputText>
+											<h:inputText value="#{ControllerPublicite.nom}" a:placeholder="Nom produit" class="col-xs-10 col-sm-5"></h:inputText>
 											
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Email Proprietaire</b> </label>
 
-						
+										<div class="col-sm-9">
+											<h:inputText value="#{ControllerPublicite.emailProprietaire}" a:placeholder="example@example.exp" class="col-xs-10 col-sm-5"></h:inputText>
+											
+										</div>
+									</div>
+										<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Tel</b> </label>
+
+										<div class="col-sm-9">
+											<h:inputText value="#{ControllerPublicite.numeroProprietaire}" a:placeholder="+216-xx-xxx-xxx" ></h:inputText>
+											
+										</div>
+									</div>
 
 								
 										
@@ -175,7 +189,7 @@
 												<div class="row">
 															<div class="col-xs-8 col-sm-11">
 																<div class="input-daterange input-group">
-																	<h:inputText id="datedebut" type="text" value="#{ControllerPublicite.dateDebutString}" class="input-sm form-control" name="start">
+																	<h:inputText id="datedebut" type="text" value="#{ControllerPublicite.dateDebutString}" a:placeholder="MM/dd/YYYY" class="input-sm form-control" name="start">
 																	<f:ajax event="change" execute="datedebut" render="cout" />
 																	</h:inputText>
 																	
@@ -183,7 +197,7 @@
 																		<i class="fa fa-exchange"></i>
 																	</span>
 
-																	<h:inputText id="datefin" type="text" value="#{ControllerPublicite.dateFinString}" class="input-sm form-control" name="end" >
+																	<h:inputText id="datefin" type="text" value="#{ControllerPublicite.dateFinString}" a:placeholder="MM/dd/YYYY" class="input-sm form-control" name="end" >
 																	<f:ajax event="change" execute="datefin" render="cout" />
 																	</h:inputText>
 																</div>

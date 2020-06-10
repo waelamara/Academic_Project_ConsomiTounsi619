@@ -12,4 +12,5 @@ public interface ISousSousCategorieService {
 	public SsCategorie Update(SsCategorie ssc,Long idSscategorie,Long idSCategorie);
 	public String GetNameById(Long id);
 	public List<SsCategorie> findSsousCategorieByIdSCategorie(Long id);
+	public SsCategorie findSsCategorieByName(String name);
 }

@@ -32,7 +32,9 @@ public interface IPubliciteService {
 	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException;
 	public List<Publicite> findLikeName(String nom);
 	public List<Publicite> findByCanal(String canal);
+	public List<Publicite> findByCanalAndName(String canal,String nom);
 	public Date ConvertirDate(String date) throws ParseException;
 	public String TypeFile(UploadedFile file) throws IOException;
 	public List<Publicite> findPubForAll();
+	public List<Publicite> getPubForUserConnecter(Date UserDateNaissance,String gender);;
 }

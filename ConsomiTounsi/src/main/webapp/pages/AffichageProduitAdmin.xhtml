@@ -86,10 +86,10 @@
 														</h4>
 
 														<div >
-															<h:selectOneMenu id="catego" value="#{AdminFormProduit.nomCategorie}" style="width:150px">             
+															<h:selectOneMenu id="catego" value="#{ControllerProduit.nomCategorie}" style="width:150px">             
                 											<f:selectItem itemLabel="Select Categorie" itemValue="" noSelectionOption="true" />
-             					   							<f:selectItems value="#{AdminFormProduit.getAllCategorieName()}" />
-                					 						<f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="scategorie" />
+             					   							<f:selectItems value="#{ControllerProduit.getAllCategorieName()}" />
+                					 						<f:ajax event="change" execute="catego" listener="#{ControllerProduit.onCountryChange()}" render="scategorie listproduit" />
             												</h:selectOneMenu>
 														</div>
 
@@ -101,10 +101,10 @@
 														</h4>
 
 														<div >
-            							<h:selectOneMenu  id="scategorie" value="#{AdminFormProduit.nomSCategorie}" style="width:150px">
+            							<h:selectOneMenu  id="scategorie" value="#{ControllerProduit.nomSCategorie}" style="width:150px">
                							 <f:selectItem itemLabel="Select S/Categorie" itemValue="" noSelectionOption="block" />
-                						<f:selectItems value="#{AdminFormProduit.listNomScateg}" />
-               							 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="sscategorie" />
+                						<f:selectItems value="#{ControllerProduit.listNomScateg}" />
+               							 <f:ajax event="change" execute="scategorie" listener="#{ControllerProduit.onCountryChange()}" render="sscategorie listproduit" />
            								 </h:selectOneMenu>
 														</div>
 
@@ -115,9 +115,10 @@
 														</h4>
 
 														<div >
-									 <h:selectOneMenu  id="sscategorie" value="#{sscategorieController.nomSsCategorie}" style="width:150px" >
+									 <h:selectOneMenu  id="sscategorie" value="#{ControllerProduit.nomSsCategorie}" style="width:150px" >
                						 <f:selectItem itemLabel="Select SS/Categorie" itemValue="" noSelectionOption="true" />
-                					<f:selectItems value="#{AdminFormProduit.listNomSsouscateg}"/>
+                					<f:selectItems value="#{ControllerProduit.listNomSsouscateg}"/>
+                					<f:ajax event="change" execute="sscategorie"  render="listproduit" />
             						</h:selectOneMenu>
 														</div>
 
@@ -129,7 +130,9 @@
 														</h4>
 
 														<div >
-															<input></input>
+															<h:inputText id="barcode" value="#{ControllerProduit.barcodeSearch}">
+															<f:ajax event="keyup" execute="barcode"  render="listproduit" />
+															</h:inputText>
 														</div>
 
 														<div class="hr hr-dotted hr-24"></div>
