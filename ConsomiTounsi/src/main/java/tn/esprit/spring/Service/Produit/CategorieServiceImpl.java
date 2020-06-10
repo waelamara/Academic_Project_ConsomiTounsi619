@@ -41,5 +41,10 @@ public class CategorieServiceImpl implements ICategorieService {
 		String name=categorieRepository.getOne(id).getNomCategorie();
 		return name;
 	}
+
+	@Override
+	public Categorie MostPopularCategorie() {
+		return categorieRepository.MostPopularCategorie();
+	}
 	
 }

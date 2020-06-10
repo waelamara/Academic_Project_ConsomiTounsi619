@@ -29,7 +29,9 @@ import tn.esprit.spring.Service.Produit.IProduitService;
 public class RestControllerProduit {
 	@Autowired
 	IProduitService iproduitService;
-
+	@Autowired
+	ControllerProduit controllerProduit;
+	public static Long barcodeWithPhone=1111L;
 	// http://localhost:8081/produit/ajouter/1
 	//{"nomProduit":"souris Gm910","prix":"50","description":"tres bonne sensibilite ","barcode":"6190000001001","poids":"0.5","prixAchat":"30.500"}
 	@PostMapping(value = "/ajouter/{idSsCategorie}")
@@ -88,4 +90,24 @@ public class RestControllerProduit {
 		return iproduitService.findProduitCategorie(idCategorie);
 	}
 
+	@RequestMapping(value = "/barcode/{barcode}")
+	public Long AjouterProduit(@PathVariable(value = "barcode") Long Bcode)  {
+		System.out.println(Bcode);
+		System.out.println(Bcode);
+		setBarcodeWithPhone(Bcode);
+		controllerProduit.setBarcode(Bcode);
+		return Bcode;
+		
+	}
+
+	public static Long getBarcodeWithPhone() {
+		return barcodeWithPhone;
+	}
+
+	public static void setBarcodeWithPhone(Long barcodeWithPhone) {
+		RestControllerProduit.barcodeWithPhone = barcodeWithPhone;
+	}
+	
+	
+	
 }

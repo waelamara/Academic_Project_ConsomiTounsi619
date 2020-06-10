@@ -40,6 +40,9 @@ public class Publicite implements Serializable {
 	private float cout;
 	private String video;
 	private String image;
+	private String emailProprietaire;
+	private String numeroProprietaire;
+	private boolean status;
 	@ManyToOne
 	private User IdUser;
 
@@ -113,6 +116,22 @@ public class Publicite implements Serializable {
 	
 	
 	
+	
+
+
+	public Publicite(String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin, int debutAgeCible,
+			int finAgeCible, String emailProprietaire, String numeroProprietaire) {
+		super();
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+		this.emailProprietaire = emailProprietaire;
+		this.numeroProprietaire = numeroProprietaire;
+	}
 
 
 	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,
@@ -126,6 +145,25 @@ public class Publicite implements Serializable {
 		this.dateFin = dateFin;
 		this.debutAgeCible = debutAgeCible;
 		this.finAgeCible = finAgeCible;
+	}
+	
+
+
+	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,
+			int nbrFinalVue, int debutAgeCible, int finAgeCible, String emailProprietaire, String numeroProprietaire,boolean status) {
+		super();
+		Id = id;
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.nbrFinalVue = nbrFinalVue;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+		this.emailProprietaire = emailProprietaire;
+		this.numeroProprietaire = numeroProprietaire;
+		this.status=status;
 	}
 
 
@@ -142,6 +180,27 @@ public class Publicite implements Serializable {
 		this.finAgeCible = finAgeCible;
 		this.video = video;
 		this.image = image;
+	}
+
+
+	public Publicite(Long id, String nom, Canal canal, GenderCible genderCible, Date dateDebut, Date dateFin,int nbrFinalVue,
+			int debutAgeCible, int finAgeCible, String video, String image, String emailProprietaire,
+			String numeroProprietaire,boolean status) {
+		super();
+		Id = id;
+		this.nom = nom;
+		this.canal = canal;
+		this.genderCible = genderCible;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.nbrFinalVue=nbrFinalVue;
+		this.debutAgeCible = debutAgeCible;
+		this.finAgeCible = finAgeCible;
+		this.video = video;
+		this.image = image;
+		this.emailProprietaire = emailProprietaire;
+		this.numeroProprietaire = numeroProprietaire;
+		this.status=status;
 	}
 
 
@@ -255,6 +314,36 @@ public class Publicite implements Serializable {
 
 	public void setFinAgeCible(int finAgeCible) {
 		this.finAgeCible = finAgeCible;
+	}
+
+
+	public String getEmailProprietaire() {
+		return emailProprietaire;
+	}
+
+
+	public void setEmailProprietaire(String emailProprietaire) {
+		this.emailProprietaire = emailProprietaire;
+	}
+
+
+	public String getNumeroProprietaire() {
+		return numeroProprietaire;
+	}
+
+
+	public void setNumeroProprietaire(String numeroProprietaire) {
+		this.numeroProprietaire = numeroProprietaire;
+	}
+
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }

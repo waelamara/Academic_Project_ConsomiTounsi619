@@ -51,4 +51,9 @@ public class SousSousCategorieServiceImpl implements ISousSousCategorieService {
 		String name=sousSousCategorieRepository.getOne(id).getNomSsCategorie();
 		return name;
 	}
+
+	@Override
+	public SsCategorie findSsCategorieByName(String name) {
+		return sousSousCategorieRepository.findSsCategorieByName(name) ;
+	}
 }
