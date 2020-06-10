@@ -10,6 +10,7 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import tn.esprit.spring.Model.Produit.Produit;
@@ -118,10 +119,12 @@ private String nom_rayon;
 		rayonDAO.affecterProduitARayon(r.getIdrayon(), prodid);;
 		 return navigateTo;
 		}
-	
-	public void deleterayon(Long Idrayon) {
-
+	@Transactional
+	public void deleterayon(long Idrayon) {
+		System.out.println("****************"+Idrayon);
 		rayonDAO.deleteRayonById(Idrayon);
+		System.out.println("****************"+Idrayon);
+		
 
 	}
 

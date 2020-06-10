@@ -48,7 +48,7 @@ public class Produit implements Serializable {
 	@OneToMany(mappedBy="produit")
 	@JsonIgnore
 	private Set<LigneCommande> ligneCommande;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	Rayon Idrayon;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="idProduit")

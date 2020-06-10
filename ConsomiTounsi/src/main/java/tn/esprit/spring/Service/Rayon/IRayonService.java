@@ -13,7 +13,7 @@ public interface IRayonService {
 
 	List<Rayon> getAllRayon();
 
-	void deleteRayonById(Long Idrayon);
+	void deleteRayonById(long Idrayon);
 	public List<Rayon> findRayonbyName(String name);
 	
 	public void affecterProduitARayon(Long Idrayon, Long Idproduit);

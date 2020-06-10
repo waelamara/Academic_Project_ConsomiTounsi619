@@ -38,10 +38,11 @@ public class RayonServiceImpl implements IRayonService {
 
 		return rayonRepository.findAll();
 	}
-
+    @Transactional
 	@Override
-	public void deleteRayonById(Long Idrayon) {
-		rayonRepository.deleteById(Idrayon);
+	public void deleteRayonById(long Idrayon) {
+    	
+		rayonRepository.deleteById(Idrayon);;
 
 	}
 
