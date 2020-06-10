@@ -52,7 +52,7 @@ public class ControllerProduit {
 	private String nomProduit;
 	private float prix;
 	private String description;
-	private Long barcode;
+	public  Long barcode;
 	private float poids;
 	private float prixAchat;
 	private int filtrageProduit;
@@ -134,8 +134,10 @@ public class ControllerProduit {
 	}
 	
 	public List<Produit> getAllProduits() {
-
-		 if(nomRechercheProduit!=null&&(nomCategorie==null||nomCategorie.equals(""))&&(nomSCategorie==null||nomSCategorie.equals(""))&&(nomSsCategorie==null||nomSsCategorie.equals(""))&&(barcodeSearch==null||barcodeSearch.equals(""))) {
+		 if((nomRechercheProduit==null||nomRechercheProduit.equals(""))&&(nomCategorie==null||nomCategorie.equals(""))&&(nomSCategorie==null||nomSCategorie.equals(""))&&(nomSsCategorie==null||nomSsCategorie.equals(""))&&(barcodeSearch==null||barcodeSearch.equals(""))) {
+			return iproduitService.findAll();
+			}
+		else if(nomRechercheProduit!=null&&(nomCategorie==null||nomCategorie.equals(""))&&(nomSCategorie==null||nomSCategorie.equals(""))&&(nomSsCategorie==null||nomSsCategorie.equals(""))&&(barcodeSearch==null||barcodeSearch.equals(""))) {
 			   return findLikeName(nomRechercheProduit);
 			}
 		else if((nomRechercheProduit==null||nomRechercheProduit.equals(""))&&(nomCategorie!=null)&&(nomSCategorie==null||nomSCategorie.equals(""))&&(nomSsCategorie==null||nomSsCategorie.equals(""))&&(barcodeSearch==null||barcodeSearch.equals(""))) {
@@ -171,7 +173,7 @@ public class ControllerProduit {
 	else {
 			iproduitService.addProduitWithImage(new Produit( nomProduit,  prix,  description,  barcode,  poids,  prixAchat),files);
 			HideProduits();
-			return "null";
+			return "/pages/AffichageProduitAdmin.xhtml?faces-redirect=true";
 		}
 		
 	}
@@ -193,6 +195,7 @@ public class ControllerProduit {
 		this.poids=0;
 		this.prixAchat=0;
 		this.barcode=null;
+		this.nomSsCategorie=null;
 	}
 	
 	public String DisplayProduits(Produit p){
@@ -263,7 +266,10 @@ public class ControllerProduit {
 		return iCategorieService.MostPopularCategorie();
 	}
 	
-	
+	public String barcodeImage(){
+		System.out.println(barcode.toString().substring(0, 13));
+		return barcode.toString().substring(0, 13);
+	}
 	
 	
 	
@@ -361,6 +367,10 @@ public class ControllerProduit {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
+
+
 
 	public Long getBarcode() {
 		return barcode;
