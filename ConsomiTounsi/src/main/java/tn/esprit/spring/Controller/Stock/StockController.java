@@ -85,9 +85,9 @@ public void effectuerCommande(@PathVariable(value = "idc") Long idcommande){
 
 /////////////////////////////////////////////////////////////////////////////
 //
-//@RequestMapping(value="/quantitebyprod")
-//public List<StockByProd> quantitebyprod(){
-//	return stockservice.quantiteByProd();
-//}
+@RequestMapping(value="/quantitebyprod")
+public List<StockByProd> quantitebyprod(){
+	return stockservice.quantiteByProd();
+}
 
 }
