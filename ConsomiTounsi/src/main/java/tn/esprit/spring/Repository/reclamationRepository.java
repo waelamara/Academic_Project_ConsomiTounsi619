@@ -14,5 +14,10 @@ public interface reclamationRepository extends JpaRepository <reclamation, Long>
 	@Modifying
 	@Query(value = "UPDATE `reclamation` SET `etat`=?1,`traiter`=1 WHERE `id`=?2", nativeQuery = true)
 	public void ChangetEtat(String Dispo, long id);
+	
+	/*Repondre au reclamation*/
+	@Modifying
+	@Query(value = "UPDATE `reclamation` SET `reponse`=?1 ,`traiter`=1 WHERE `id`=?2", nativeQuery = true)
+	public void RepondreReclamation(String reponse1, long id);
 
 }

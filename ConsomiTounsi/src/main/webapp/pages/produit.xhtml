@@ -4,6 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	template="/Template/template.xhtml">
 	<ui:define name="produit">
 	<h:head>
@@ -46,10 +47,10 @@
 				<!-- Description -->
 				<div class="col-lg-5 order-3">
 					<div class="product_description">
-						<div class="product_category">Laptops</div>
+						<div class="product_category"><h:outputText  value="#{Produit.idSsCategorie.nomSsCategorie}"/></div>
 						<div class="product_name"><h:outputText value="#{Produit.nomProduit}"/></div>
-						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text"><p><h:outputText value="#{Produit.description}"/></p></div>
+						<div class="rating_r rating_r_4 product_rating"><h:outputText  value="#{Produit.poids}"/> Kg</div>
 						<div class="order_info d-flex flex-row">
 							<h:form id="myform">
 								<div class="clearfix" style="z-index: 1000;">
@@ -65,19 +66,7 @@
 									</div>
 
 									<!-- Product Color -->
-									<ul class="product_color">
-										<li>
-											<span>Color: </span>
-											<div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
-											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
-
-											<ul class="color_list">
-												<li><div class="color_mark" style="background: #999999;"></div></li>
-												<li><div class="color_mark" style="background: #b19c83;"></div></li>
-												<li><div class="color_mark" style="background: #000000;"></div></li>
-											</ul>
-										</li>
-									</ul>
+									<p:barcode  value="#{Produit.barcode.toString()}" type="ean13"/>
 
 								</div>
 

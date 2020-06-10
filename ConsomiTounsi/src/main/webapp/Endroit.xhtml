@@ -117,7 +117,9 @@
 						for="form-field-1"> Location </label>
 
 					<div class="col-sm-9"> 
-						<h:inputText value="#{ControllerEndroit.emplacement}" 
+					<h:message for="LOG" style="color:red"></h:message>
+						<h:inputText value="#{ControllerEndroit.emplacement}"
+						required="true" requiredMessage="enter your Location" 
 							p:placeholder="Title" class="col-xs-10 col-sm-5" id="LOG"> 
 
 					
@@ -223,8 +225,13 @@
 						for="form-field-1"> Number of places </label>
 
 					<div class="col-sm-9">
-						<h:inputText value="#{ControllerEndroit.nbplace}"
-							p:placeholder="Title" class="col-xs-10 col-sm-5"></h:inputText>
+					<h:message for="validateNbPlace" style="color:red"></h:message>
+						<h:inputText value="#{ControllerEndroit.nbplace}" id="validateNbPlace"
+						required="true" requiredMessage="enter number of palce"
+						 validatorMessage="number of palce between 50 and 1000"
+							p:placeholder="Title" class="col-xs-10 col-sm-5">
+							<f:validateDoubleRange minimum="50" maximum="1000" for="validateNbPlace"></f:validateDoubleRange>
+							</h:inputText>
 
 					</div>
 				</div>

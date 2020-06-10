@@ -243,17 +243,21 @@
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-6">Barcode</label>
-
+										<h:panelGroup id="barcode">
 										<div class="col-sm-9">
-										<h:inputText value="#{ControllerProduit.barcode}" id="form-field-icon-2" placeholder="Barcode" ></h:inputText>
+										<h:inputText value="#{ControllerProduit.barcode}" id="codeabarre" a:placeholder="619-xxx-xxx-xxx-x" >
+										<f:ajax event="keyup" execute="codeabarre"  render="changebarcode" />
+										</h:inputText>
 											
-											<span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="More details." title="Popover on hover">?</span>
+											
 											<span class="input-icon input-icon-right">
-											<!-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Tooltip on hover" title="Hello Tooltip!" data-placement="bottom" /> -->
-
-												<i class="ace-icon fa fa-leaf green"></i>
+											<h:commandLink  id="bar"><f:ajax event="click"  render="barcode" /><i class="ace-icon fa fa-refresh green"></i></h:commandLink>
 											</span>
+											<h:panelGroup id="changebarcode" rendered="#{ControllerProduit.barcode.toString().length()==13}" >
+											<p:barcode  value="#{ControllerProduit.barcodeImage()}" type="ean13" />
+											</h:panelGroup>
 										</div>
+										</h:panelGroup>
 									</div>
 									
 												<div class="form-group" >

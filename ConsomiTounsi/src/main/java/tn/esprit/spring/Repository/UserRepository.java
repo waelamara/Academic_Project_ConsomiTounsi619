@@ -35,7 +35,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public void ConfirmerLiv(String etat1, long id);
 	
 	@Query(value = "SELECT `user_id` FROM `user` WHERE `etat`=?1 and `disponible`=?2 and `lieux_travail`=?3 ORDER BY RAND() LIMIT 1", nativeQuery = true)
-	public long findparhasard(String etat,String dispo,String lieuxTravail);	
+	public Long findparhasard(String etat,String dispo,String lieuxTravail);	
 	
 	/* Selon Sexe */
 	@Query(value = "SELECT COUNT(*) FROM user WHERE `sexe`=?1", nativeQuery = true)
@@ -68,4 +68,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public int nombreUsersbyPointfideletSup300();
 	@Query(value = "SELECT Avg(`point_fidelite`) FROM user",nativeQuery=true)
 	public float moyenneNpointFidelet();
+	//Livreur Par hasard2
+	@Query(value = "SELECT `user_id` FROM `user` WHERE `etat`=?1 and `lieux_travail`=?2 ORDER BY RAND() LIMIT 1", nativeQuery = true)
+	public long findparhasard2(String etat,String lieuxTravail);	
 }

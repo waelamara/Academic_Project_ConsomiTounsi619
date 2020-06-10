@@ -10,273 +10,315 @@
 	<ui:define name="EventAdmin">
 		<h:head>
 			<meta name="description" content="overview &amp; stats" />
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>List Events - Dash ConsommiTounsi</title>
-<!-- Font Awesome -->
+			<meta name="viewport"
+				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+			<title>List Events - Dash ConsommiTounsi</title>
+			<!-- Font Awesome -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js">
-  </link>
- 
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  </link>
-<!-- overlayScrollbars -->
-<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+			<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js">
+			</link>
 
-<!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
-  </link>
+			<link rel="stylesheet"
+				href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+			</link>
+			<!-- overlayScrollbars -->
+			<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+
+			<!-- Google Font: Source Sans Pro -->
+			<link rel="stylesheet"
+				href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
+			</link>
 		</h:head>
 		<h:body>
-			  
-  
- <h:form>
-		  
-    <h:inputText id="search1" value="#{ControllerAfficheEvents.titre}"></h:inputText>
-    
-    <h:commandButton value="Search" action="#{ControllerAfficheEvents.findLikeNameM(ControllerAfficheEvents.titre)}">
-<!--          <f:ajax execute="search" render="output"></f:ajax>   -->
-    </h:commandButton>
-    	<h:panelGroup rendered="#{not empty ControllerAfficheEvents.titre}">
-				<center>
-				<section class="blog_area">
-        <div class="container">
-		<div class="row">
-							<div class="col-xs-12">
-			<div class="event">
-			
-							
-				
-									<ui:repeat var="event"
-										value="#{ControllerAfficheEvents.findLikeNameM(ControllerAfficheEvents.titre)}">
-										 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                    <div class="card w-300">
-                        <div class="card-header text-muted border-bottom-0">
-                        </div>
-                        <div class="card-body text-success">
-                            <div class="row">
-                                <div class="col-7">
-                                   <h2 class="lead"><b>#{event.titre} </b></h2>
-                                    <p class="text-muted text-sm"><b>Date : </b> #{event.dateE} </p>
-                                    <p class="text-muted text-sm"><b>Number of place : </b> #{event.nbplace} </p>
-                                     <p class="text-muted text-sm"><b>Number of participant : </b> #{event.nbparticipant} </p>
-                                    
-                                    <p class="text-muted text-sm"><b>Description :  </b> #{event.description} </p>
-													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
-											                                    <p class="text-muted text-sm"><b>Location : </b> #{endroit.emplacement} </p>
-																							</ui:repeat>
-											
-												
-											                                    <p class="text-muted text-sm"><b>publicity : </b> #{event.publicite.nom} </p>
-											
-												
-											
-                                    
-                                </div>
-                                <div class="col-5 text-center">
-                                
-						<h:graphicImage class="img-circle img-fluid" alt="avatar" value="#{event.image}" rendered="#{not empty event.image}" />
-						
-                                </div>
-                            </div>
-                        </div>
-													<div class="card-footer">
-														<div class="text-right">
-															<h:commandButton style="margin:2px;" class="btn btn-xs btn-danger"
-																action="#{ControllerEvents.delete(event.id)}"
-																value="Supprimer" />
 
-															<h:commandButton style="margin:2px;" class="btn btn-xs btn-warning"
-																value="Update"
-																action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
-															
+
+			<h:form>
+
+				<h:inputText id="search1" value="#{ControllerAfficheEvents.titre}"></h:inputText>
+
+				<h:commandButton value="Search"
+					action="#{ControllerAfficheEvents.findLikeNameM(ControllerAfficheEvents.titre)}">
+					<!--          <f:ajax execute="search" render="output"></f:ajax>   -->
+				</h:commandButton>
+				<br></br>
+				<h:panelGroup rendered="#{not empty ControllerAfficheEvents.titre}">
+					<center>
+						<section class="blog_area">
+						<div class="container">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="event">
+
+
+
+										<ui:repeat var="event"
+											value="#{ControllerAfficheEvents.findLikeNameM(ControllerAfficheEvents.titre)}">
+											<div
+												class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+												<div class="card w-300">
+													<div class="card-header text-muted border-bottom-0">
+													</div>
+													<div class="card-body text-success">
+														<div class="row">
+															<div class="col-7">
+																<h2 class="lead">
+																	<b>#{event.titre} </b>
+																</h2>
+																<p class="text-muted text-sm">
+																	<b>Date : </b> #{event.dateE}
+																</p>
+																<p class="text-muted text-sm">
+																	<b>Number of place : </b> #{event.nbplace}
+																</p>
+																<p class="text-muted text-sm">
+																	<b>Number of participant : </b> #{event.nbparticipant}
+																</p>
+
+																<p class="text-muted text-sm">
+																	<b>Description : </b> #{event.description}
+																</p>
+																<ui:repeat var="endroit"
+																	value="#{ControllerEvents.getAllEndroitE(event.id)}"
+																	varStatus="status">
+																	<p class="text-muted text-sm">
+																		<b>Location : </b> #{endroit.emplacement}
+																	</p>
+																</ui:repeat>
+
+
+																<p class="text-muted text-sm">
+																	<b>publicity : </b> #{event.publicite.nom}
+																</p>
+
+
+
+
+															</div>
+															<div class="col-5 text-center">
+
+																<h:graphicImage class="img-circle img-fluid"
+																	alt="avatar" value="#{event.image}"
+																	rendered="#{not empty event.image}" />
+
+															</div>
 														</div>
 													</div>
 													<div class="card-footer">
 														<div class="text-right">
-															
+															<h:commandButton style="margin:2px;"
+																class="btn btn-xs btn-danger"
+																action="#{ControllerEvents.delete(event.id)}"
+																value="Supprimer" />
 
-															<h:commandButton style="margin:2px;" class="btn btn-xs btn-success"
+															<h:commandButton style="margin:2px;"
+																class="btn btn-xs btn-warning" value="Update"
+																action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
+
+														</div>
+													</div>
+													<div class="card-footer">
+														<div class="text-right">
+
+
+															<h:commandButton style="margin:2px;"
+																class="btn btn-xs btn-success"
 																action="#{ControllerEndroit.reserveE(event.id)}"
 																value="Reserve" />
-															
-															<h:commandButton style="margin:2px;" class="btn btn-xs btn-info"
-																value="Publicity"
+
+															<h:commandButton style="margin:2px;"
+																class="btn btn-xs btn-info" value="Publicity"
 																action="#{ControllerPub.addPubEvent(event.id)}" />
 
 														</div>
 													</div>
 												</div>
-                    </div></ui:repeat>
-                </div>
-							</div>
+											</div>
+										</ui:repeat>
 									</div>
-</div></section></center>
-</h:panelGroup>
-</h:form>
-<!-- hhhh -->
-		<h:panelGroup rendered="#{empty ControllerAfficheEvents.titre}">
-		<center>
-		<section class="blog_area">
-        <div class="container">
-		<div class="row">
+								</div>
+							</div>
+						</div>
+						</section>
+					</center>
+				</h:panelGroup>
+			</h:form>
+			<!-- hhhh -->
+			<h:panelGroup rendered="#{empty ControllerAfficheEvents.titre}">
+				<center>
+					<section class="blog_area">
+					<div class="container">
+						<div class="row">
 							<div class="col-xs-12">
-			
-							
-				
-									<ui:repeat var="event"
-										value="#{ControllerEvents.paginatorRec.model}" varStatus="status">
-										<div class="Event_content">
-										
-											<div
-												class="event_image d-flex flex-column align-items-center justify-content-center">
-												<img src="#{event.image}" style="width: 40%; height: 60%"
-													class="avatar img-circle img-thumbnail" alt="avatar"/>
-											</div>
-										
-											<div class="form-group">
-												<label style="color: #df3b3b">Title
-													:</label>
 
-												<div class="Event_title" style="color: #000000">
-													<h:outputText value="#{event.titre}" />
+
+
+								<ui:repeat var="event"
+									value="#{ControllerEvents.paginatorRec.model}"
+									varStatus="status">
+									<div class="Event_content">
+
+										<div
+											class="event_image d-flex flex-column align-items-center justify-content-center">
+											<img src="#{event.image}" style="width: 40%; height: 60%"
+												class="avatar img-circle img-thumbnail" alt="avatar" />
+										</div>
+
+										<div class="form-group">
+											<label style="color: #df3b3b">Title :</label>
+
+											<div class="Event_title" style="color: #000000">
+												<h:outputText value="#{event.titre}" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label style="color: #df3b3b">Date :</label>
+											<div class="Event_date" style="color: #000000">
+												<div>
+													<h:outputText value="#{event.dateE}" />
 												</div>
 											</div>
-											<div class="form-group">
-												<label  style="color: #df3b3b">Date
-													:</label>
-												<div class="Event_date" style="color: #000000">
-													<div>
-														<h:outputText value="#{event.dateE}" />
-													</div>
+										</div>
+										<div class="form-group">
+											<label style="color: #df3b3b">places :</label>
+											<div class="numbre_of_places" style="color: #000000">
+												<div>
+													<h:outputText value="#{event.nbplace}" />
 												</div>
 											</div>
-											<div class="form-group">
-												<label  style="color: #df3b3b">places :</label>
-												<div class="numbre_of_places" style="color: #000000">
-													<div>
-														<h:outputText value="#{event.nbplace}" />
-													</div>
+										</div>
+										<div class="form-group">
+											<label style="color: #df3b3b">participant :</label>
+											<div class="numbre_of_participants" style="color: #000000">
+												<div>
+													<h:outputText value="#{event.nbparticipant}" />
 												</div>
 											</div>
-											<div class="form-group">
-												<label  style="color: #df3b3b">participant :</label>
-												<div class="numbre_of_participants" style="color: #000000">
-													<div>
-														<h:outputText value="#{event.nbparticipant}" />
-													</div>
+										</div>
+										<div class="form-group">
+											<label style="color: #df3b3b">Description :</label>
+											<div class="Descreption" style="color: #000000">
+												<div>
+													<h:outputText value="#{event.description}" />
 												</div>
 											</div>
-											<div class="form-group">
-												<label style="color: #df3b3b">Description :</label>
-												<div class="Descreption" style="color: #000000">
-													<div>
-														<h:outputText value="#{event.description}" />
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
-													<ui:repeat var="endroit" value="#{ControllerEvents.getAllEndroitE(event.id)}" varStatus="status">
-											
-												<label style="color: #df3b3b">Location
-													:</label>
+										</div>
+										<div class="form-group">
+											<ui:repeat var="endroit"
+												value="#{ControllerEvents.getAllEndroitE(event.id)}"
+												varStatus="status">
+
+												<label style="color: #df3b3b">Location :</label>
 												<div class="Event_date" style="color: #000000">
 													<div>
 														<h:outputText value="#{endroit.emplacement}" />
 													</div>
 												</div>
-												</ui:repeat>
-											</div>
-											<div class="form-group">
-												<label style="color: #df3b3b">Publicity :</label>
-												<div class="Descreption" style="color: #000000">
-													<div>
-														<h:outputText value="#{event.publicite.nom}" />
-													</div>
+											</ui:repeat>
+										</div>
+										<div class="form-group">
+											<label style="color: #df3b3b">Publicity :</label>
+											<div class="Descreption" style="color: #000000">
+												<div>
+													<h:outputText value="#{event.publicite.nom}" />
 												</div>
 											</div>
-											
-
-											<div>
-												<h:form>
-													<h:commandButton class="btn btn-xs btn-danger"
-														action="#{ControllerEvents.delete(event.id)}"
-														value="Supprimer" />
-												
-													<h:commandButton class="btn btn-xs btn-success"
-														action="#{ControllerEndroit.reserveE(event.id)}"
-														value="Reserve" />
-														<h:commandButton class="btn btn-xs btn-warning"
-														value="Update" action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
-												<h:commandButton class="btn btn-xs btn-info"
-														value="Publicity" action="#{ControllerPub.addPubEvent(event.id)}" />
-														
-													
-												</h:form>
-											</div>
-											<br> </br>
-
 										</div>
-									</ui:repeat>
-									
-									<h:form><nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                  <h:commandLink action="#{ControllerEvents.paginatorRec.prev()}" class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">
-                                            <span class="lnr lnr-chevron-left"></span>
-                                        </span>
-                                    </h:commandLink>
-                                </li>
-                                
-								<c:forEach var = "i" begin = "1" end = "#{ControllerEvents.paginatorRec.pages}"  >
-								<c:if
-						             test="#{i==ControllerEvents.paginatorRec.pageIndex}">
-                                <li class="page-item active"> <h:commandLink action="#{ControllerEvents.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li></c:if>
-                                <c:if test="#{i!=ControllerEvents.paginatorRec.pageIndex}">
-                                <li class="page-item "><h:commandLink action="#{ControllerEvents.paginatorRec.page(i)}" class="page-link"><h:outputText value="#{i}"/></h:commandLink></li> </c:if>
-                                </c:forEach>
-                                <li class="page-item">
- 							  
- 							  <h:commandLink action="#{ControllerEvents.paginatorRec.next()}" class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">
-                                            <span class="lnr lnr-chevron-right"></span>
-                                        </span>
-                                    </h:commandLink>
-                                    
-                                </li>
-                            </ul>
-                        </nav></h:form>
-
-</div>
-</div>
-</div>
-</section>
-
-	</center></h:panelGroup>
-
-							
-							
 
 
+										<div>
+											<h:form>
+												<h:commandButton class="btn btn-xs btn-danger"
+													action="#{ControllerEvents.delete(event.id)}"
+													value="Supprimer" />
+
+												<h:commandButton class="btn btn-xs btn-success"
+													action="#{ControllerEndroit.reserveE(event.id)}"
+													value="Reserve" />
+												<h:commandButton class="btn btn-xs btn-warning"
+													value="Update"
+													action="#{ControllerEventsUpdate.updateEvent(event,event.id)}" />
+												<h:commandButton class="btn btn-xs btn-info"
+													value="Publicity"
+													action="#{ControllerPub.addPubEvent(event.id)}" />
 
 
-<script src="acceuil/js/jquery-3.3.1.min.js"></script>
-<script src="acceuil/styles/bootstrap4/popper.js"></script>
-<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
-<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
-<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
-<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="acceuil/plugins/easing/easing.js"></script>
-<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
-<script src="acceuil/js/shop_custom.js"></script>
-	
-	
+											</h:form>
+										</div>
+										<br> </br>
+
+									</div>
+								</ui:repeat>
+
+								<h:form>
+									<nav class="blog-pagination justify-content-center d-flex">
+									<ul class="pagination">
+										<li class="page-item"><h:commandLink
+												action="#{ControllerEvents.paginatorRec.prev()}"
+												class="page-link" aria-label="Previous">
+												<span aria-hidden="true"> <span
+													class="lnr lnr-chevron-left"></span>
+												</span>
+											</h:commandLink></li>
+
+										<c:forEach var="i" begin="1"
+											end="#{ControllerEvents.paginatorRec.pages}">
+											<c:if test="#{i==ControllerEvents.paginatorRec.pageIndex}">
+												<li class="page-item active"><h:commandLink
+														action="#{ControllerEvents.paginatorRec.page(i)}"
+														class="page-link">
+														<h:outputText value="#{i}" />
+													</h:commandLink></li>
+											</c:if>
+											<c:if test="#{i!=ControllerEvents.paginatorRec.pageIndex}">
+												<li class="page-item "><h:commandLink
+														action="#{ControllerEvents.paginatorRec.page(i)}"
+														class="page-link">
+														<h:outputText value="#{i}" />
+													</h:commandLink></li>
+											</c:if>
+										</c:forEach>
+										<li class="page-item"><h:commandLink
+												action="#{ControllerEvents.paginatorRec.next()}"
+												class="page-link" aria-label="Next">
+												<span aria-hidden="true"> <span
+													class="lnr lnr-chevron-right"></span>
+												</span>
+											</h:commandLink></li>
+									</ul>
+									</nav>
+								</h:form>
+
+							</div>
+						</div>
+					</div>
+					</section>
+
+				</center>
+			</h:panelGroup>
+
+
+
+
+
+
+
+			<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+			<script src="acceuil/styles/bootstrap4/popper.js"></script>
+			<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+			<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+			<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+			<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+			<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+			<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+			<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+			<script src="acceuil/plugins/easing/easing.js"></script>
+			<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+			<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+			<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+			<script src="acceuil/js/shop_custom.js"></script>
+
+
 
 
 		</h:body>

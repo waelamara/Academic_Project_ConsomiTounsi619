@@ -277,12 +277,12 @@ public void facturepdf (long id_facture){
 		//System.out.println("/////////"+commandes);
 	//	List<Commande>commandes=commandeRepository.findAll();
 		List<lignecommandeproduit>commandes=ligneCommandeRepository.factureParIdclient(f.getCommande().getIdUser().getId(),f.getCommande().getId());
-	String file_name="C:\\Users\\Iheb\\Desktop\\Nouveau dossier\\my_facture"+f.getId()+".pdf";
+	String file_name="C:\\Users\\Iheb\\Desktop\\Facture\\my_facture"+f.getId()+".pdf";
 	Document document=new Document(PageSize.A4,15,15,45,30);
 		PdfWriter.getInstance(document, new FileOutputStream(file_name));
  document.open();
  ////////////////
- Image img=Image.getInstance("C:\\Users\\Iheb\\Desktop\\Nouveau dossier\\logo.png");
+ Image img=Image.getInstance("C:\\Users\\Iheb\\Desktop\\Facture\\logo.PNG");
  img.setAlignment(Element.ALIGN_CENTER);
  img.setIndentationLeft(10);
  img.setIndentationRight(10);

@@ -260,7 +260,11 @@ public void deleteLigne(long idLigneCommande) {
 				LivraisonService.AjouterLivraison(idCommande, q,iduser);
 				commandeDao.PayerPorteaPorte(idCommande,iduser);
 			}
-		
+		public float calculerFraisLivraison(String q1, long idCommande)
+		{
+			System.out.println(LivraisonService.CalculerFraisLivraison(q,idCommande));
+			return LivraisonService.CalculerFraisLivraison(q,idCommande);
+		}
 			
 			
 

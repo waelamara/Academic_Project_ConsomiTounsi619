@@ -158,21 +158,27 @@ public class SignupDeliveryController {
 			double distanceAriana=L.calculedistanceArianna(adresse);
 			double distanceSousse=L.calculedistanceSousse(adresse);
 			double distanceGabes=L.calculedistanceGabes(adresse);
-	        double Mindistance =Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes));
+			double distanceTouzeurr =L.calculedistanceTozeur(adresse);
+			double Mindistance = Math.min((Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes))),
+					distanceTouzeurr);
 		    if(Mindistance==distanceAriana){   user.setLieuxTravail("Arianna");}
 		    else if (Mindistance==distanceSousse) { 
 		    	user.setLieuxTravail("Sousse");
+		    }
+		    else if (Mindistance==distanceTouzeurr) { 
+		    	user.setLieuxTravail("Tozeur");
 		    }
 		    else {user.setLieuxTravail("Gabes"); }
 		    //fin
 		
 		user.setNbMission(0);
 		user.setEtatD("waiting");
+		user.setSexe(sexe.HOMME);
 			userRepository.save(user);
 			String appUrl = "";
 			User registered= user;
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
-			navigateTo="login.xhtml?faces-redirect=true";
+			navigateTo="loginDelivery.xhtml?faces-redirect=true";
 			FacesMessage facesMessage =
 
 					new FacesMessage("Registered successfully, please verify your account!");
