@@ -21,6 +21,7 @@ import tn.esprit.spring.Model.CadeauUser;
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Event;
 import tn.esprit.spring.Model.LigneCommande;
+import tn.esprit.spring.Model.Livraison;
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
@@ -303,6 +304,10 @@ public class CommandeImpl implements ICommande {
 	public void payerApresLivraison(long idCommande)
 	{
 		commandeRepository.payerApresLivraison(idCommande);	
+	}
+	public Livraison getlivraisionParIdCommande(long idCommande)
+	{
+		return commandeRepository.getlivraisionParIdCommande(idCommande);
 	}
 	
 	

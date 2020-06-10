@@ -11,4 +11,5 @@ public interface ICategorieService {
 	public void Delete(Long id);
 	public Categorie findOne(Long id);
 	public String GetNameById(Long id);
+	public Categorie MostPopularCategorie();
 }

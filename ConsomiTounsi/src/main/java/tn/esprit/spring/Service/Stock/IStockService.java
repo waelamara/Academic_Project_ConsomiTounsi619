@@ -36,6 +36,6 @@ public interface IStockService {
 
 	Stock updateStock(Stock stock);
 	
-//	public List<StockByProd> quantiteByProd();
+	public List<StockByProd> quantiteByProd();
 }
 

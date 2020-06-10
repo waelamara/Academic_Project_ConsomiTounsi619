@@ -82,15 +82,15 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-    <groupId>net.glxn</groupId>
-    <artifactId>qrgen</artifactId>
-    <version>1.4</version>
-</dependency>
-<dependency>
-    <groupId>net.sf.barcode4j</groupId>
-    <artifactId>barcode4j</artifactId>
-    <version>2.0</version>
-</dependency>
+			<groupId>net.glxn</groupId>
+			<artifactId>qrgen</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+			<version>2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -169,15 +169,21 @@
 		</dependency>
 
 		<dependency>
-                         <groupId>org.highfaces</groupId>
-                         <artifactId>highfaces</artifactId>
-                         <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-</dependency>
+			<groupId>org.highfaces</groupId>
+			<artifactId>highfaces</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.restfb</groupId>
+			<artifactId>restfb</artifactId>
+			<version>1.24.0</version>
+		</dependency>
+
 
 
 	</dependencies>

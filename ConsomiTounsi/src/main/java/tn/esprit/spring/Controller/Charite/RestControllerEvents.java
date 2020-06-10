@@ -70,8 +70,8 @@ public class RestControllerEvents {
 	FileStorageServiceImpl fileStorageServiceImpl;
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
-	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
+	public static final String ACCOUNT_SID = "ACc175ca36e782887ed7bf1fed9915084f";
+	  public static final String AUTH_TOKEN = "6cba54a73ba1df6bed005ae00960daad";
 	  
 	/* ajouter charité si vous avez ajouter un charité vous avez participer */
 	@PostMapping("/Part/{idevents}/{iduser}")
@@ -367,8 +367,8 @@ public class RestControllerEvents {
 			int nb = e1.getNbplace();
 			int nbP = e1.getNbparticipant();
 			float S ;
-			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-					&&(Charite.getTypeCharite().equals("cagnotte"))) {			
+			//&&(u2.getSolde()>Charite.getMontantPaye())
+			if ((e1.getNbplace() > 0)&&(Charite.getTypeCharite().equals("cagnotte"))) {			
 				e1.setTitre(e1.getTitre());
 				e1.setDateE(e1.getDateE());
 				e1.setEndroit(e1.getEndroit());
@@ -378,28 +378,27 @@ public class RestControllerEvents {
 				e1.setCharite(e1.getCharite());
 				e1.setDescription(e1.getDescription());
 				e1.setImage(e1.getImage());
-				S=u2.getSolde()-Charite.getMontantPaye();
-				u2.setSolde(S);
+				/*S=u2.getSolde()-Charite.getMontantPaye();
+				u2.setSolde(S);*/
 				eventDAO.saveEvents(e1);
 				userDAO.save(u2);
 				chariteDAO.saveCharite1(e1.getId(), u1.getId(), Charite);
-				Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+			/*	Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 			    Message message = Message.creator(new PhoneNumber("+21629651973"),
-			        new PhoneNumber("+18654261966"), 
+			        new PhoneNumber("+12058131360"), 
 			        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
 			        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
 			        +" , "+"donate money"+" "+Charite.getMontantPaye()+"       "+"thank you so much").create();
 
-			    System.out.println(message.getSid());
+			    System.out.println(message.getSid());*/
 				//eventDAO.sendSms();
 				
 				
 				return "Successful Donate money thank you";
 
-			} 
-			if ((e1.getNbplace() > 0)&&(u2.getSolde()>Charite.getMontantPaye())
-					&&(Charite.getTypeCharite().equals("dons"))&&(Charite.getCommande_id()!=0)) {
+			} //&&(u2.getSolde()>Charite.getMontantPaye())
+			if ((e1.getNbplace() > 0)&&(Charite.getTypeCharite().equals("dons"))&&(Charite.getCommande_id()!=0)) {
 				Commande c1= commandeDao.findOne(Charite.getCommande_id());
 				Set<Commande> c= new HashSet<Commande>();
 				c.add(c1);
@@ -412,8 +411,8 @@ public class RestControllerEvents {
 				e1.setCharite(e1.getCharite());
 				e1.setDescription(e1.getDescription());
 				e1.setImage(e1.getImage());
-				S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
-				u2.setSolde(S);
+				/*S=u2.getSolde()-c1.getMontant()-Charite.getMontantPaye();
+				u2.setSolde(S);*/
 				
 				Charite.setCommandeCharite(c);
 				eventDAO.saveEvents(e1);
@@ -421,16 +420,16 @@ public class RestControllerEvents {
 				commandeDao.save(c1);
 				chariteDAO.saveCharitee(e1.getId(), u1.getId(),c1.getId(), Charite);
 				//eventDAO.sendSms();
-				
+				/*
 				Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 			    Message message = Message.creator(new PhoneNumber("+21629651973"),
-			        new PhoneNumber("+18654261966"), 
+			        new PhoneNumber("+12058131360"), 
 			        u1.getFirstName()+" "+u1.getLastName()+" "+"I registered for this event "+" "
 			        +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
 			        +" , "+"donate ordered ID="+" "+c1.getId()+"       "+"thank you so much").create();
 
-			    System.out.println(message.getSid());
+			    System.out.println(message.getSid());*/
 				
 				return "Successful Donated a ordered";
 

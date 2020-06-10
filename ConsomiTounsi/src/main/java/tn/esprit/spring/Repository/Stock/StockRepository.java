@@ -30,7 +30,7 @@ public interface StockRepository extends JpaRepository <Stock, Long>  {
 	@Query(value = "SELECT * FROM Stock WHERE produit_id LIKE ?1%", nativeQuery = true)
 	public List<Stock> stockparproduit(Long idproduit);
 	
-//	@Query(value = "SELECT NEW tn.esprit.spring.Model.Stock.StockByProd(SUM(quantite),p.nomProduit) FROM Stock s JOIN s.idProduit p ")
-//	public List<StockByProd> QuantiteByProduit();
+	@Query(value = "SELECT NEW tn.esprit.spring.Model.Stock.StockByProd(SUM(s.quantite),p.nomProduit) FROM Stock s JOIN s.idProduit p GROUP BY s.idProduit")
+	public List<StockByProd> QuantiteByProduit();
 //	JOIN s.idProduit p
 }

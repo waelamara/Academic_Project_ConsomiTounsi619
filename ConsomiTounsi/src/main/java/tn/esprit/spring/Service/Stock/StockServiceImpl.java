@@ -149,10 +149,10 @@ public class StockServiceImpl implements IStockService {
 	}
 
 
-//	@Override
-//	public List<StockByProd> quantiteByProd() {
-//		
-//		return stockRepository.QuantiteByProduit();
-//	}
+	@Override
+	public List<StockByProd> quantiteByProd() {
+		
+		return stockRepository.QuantiteByProduit();
+	}
 
 }

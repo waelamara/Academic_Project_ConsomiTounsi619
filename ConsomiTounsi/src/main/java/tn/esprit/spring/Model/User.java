@@ -518,7 +518,7 @@ public class User implements Serializable {
 	}
 
 	/*** Oussama Livreur relation ****/
-
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Delivery")
 	private Set<Livraison> Livraison;
 
