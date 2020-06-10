@@ -3,14 +3,11 @@ package tn.esprit.spring.Controller;
 import java.util.List;
 
 import javax.mail.MessagingException;
-import javax.transaction.Transactional;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
@@ -22,6 +19,7 @@ import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Facture;
 import tn.esprit.spring.Model.LigneCommande;
 import tn.esprit.spring.Model.lignecommandeproduit;
+import tn.esprit.spring.Service.Livraison.LivraisonService;
 import tn.esprit.spring.Service.Panier.CadeauUserImpl;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Panier.FactureImpl;
@@ -44,6 +42,8 @@ public class CartController {
 	StripeService stripeService;
 	@Autowired
 	FactureImpl factureImpl;
+	@Autowired
+	LivraisonService LivraisonService;
 	private long id;
 	
 	private int qty;
@@ -60,6 +60,9 @@ public class CartController {
 	
 	private Facture facture;
 	
+	public String q;
+	
+	
 	
 	
 	
@@ -71,6 +74,19 @@ public class CartController {
 
 	public void setCarta(String carta) {
 		this.carta = carta;
+	}
+
+
+	
+
+
+	public String getQ() {
+		return q;
+	}
+
+
+	public void setQ(String q) {
+		this.q = q;
 	}
 
 
@@ -205,12 +221,17 @@ public void deleteLigne(long idLigneCommande) {
 		 }
 		 
 			public String  Pay( int idUser, String carta1,
-			int expMonth1, int expYear1, String cvc1,long idCommande) throws AuthenticationException, InvalidRequestException, CardException, StripeException
+			int expMonth1, int expYear1, String cvc1,long idCommande,String q1) throws AuthenticationException, InvalidRequestException, CardException, StripeException
 				{
 				String navigateTo  = "facture.xhtml?faces-redirect=true";
 					stripeService.Pay(idUser,carta,expMonth,expYear,cvc);
+					float prixfinal = LivraisonService.CalculerFraisLivraison(q, idCommande);
+
+					
+					LivraisonService.AjouterLivraison(idCommande, q,idUser);
 					
 					facture= factureImpl.Ajouter(idCommande);
+					
 					return navigateTo;
 					
 				}
@@ -230,6 +251,14 @@ public void deleteLigne(long idLigneCommande) {
 			public String cadeauUser(Long idUser) throws MessagingException
 			{
 				return cadeauUserImpl.CadeauUser(idUser);
+			}
+			public void payerPorteaPorte(long idCommande,int iduser,String q1)
+			{
+				float prixfinal = LivraisonService.CalculerFraisLivraison(q, idCommande);
+
+				
+				LivraisonService.AjouterLivraison(idCommande, q,iduser);
+				commandeDao.PayerPorteaPorte(idCommande,iduser);
 			}
 		
 			

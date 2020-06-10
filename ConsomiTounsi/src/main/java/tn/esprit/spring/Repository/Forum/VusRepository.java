@@ -1,5 +1,7 @@
 package tn.esprit.spring.Repository.Forum;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,5 +11,6 @@ public interface VusRepository extends JpaRepository<Vus, Long> {
 	public Vus getVusBySujetAndUser(Long sujetId, Long userId);
 	@Query(value = "select sum(nb_vus) from vus where  id_sujet= ?1", nativeQuery = true)
 	 public Integer countVus(Long sujetId);
-
+	@Query(value="select id_sujet from vus where MONTH(date_ajout)=MONTH(NOW())and YEAR(date_ajout)=YEAR(NOW()) GROUP BY id_sujet ORDER by  sum(nb_vus) DESC LIMIT 4",nativeQuery = true)
+	public List <Long> mostidsujetviews();
 }

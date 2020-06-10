@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -8,23 +9,223 @@
 	xmlns:hf="http://highfaces.org"
 	xmlns:b="http://primefaces.org/ui"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-	>
-	<h:head>
-		<script src="login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="Chart">
 	
+	<h:head>
 	<script src="login/vendor/bootstrap/js/popper.js"></script>
 	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="http://code.highcharts.com/highcharts.js"></script>
-	
+	<!-- Font Awesome -->
+<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+			rel="stylesheet" />
+ 
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  </link>
+<!-- overlayScrollbars -->
+
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
+  </link>
 	</h:head>
 	
 	<h:body>
-	  	<div ><h1>#{chartController.getUserSelonSexe()}</h1></div>
+	<div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>#{chartController.getNombrOrders()}</h3>
+
+                <p>Pending Orders</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>#{chartController.getTotalSales()}<sup style="font-size: 20px">TND</sup></h3>
+
+                <p>Sales</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>#{chartController.getNombrUsers()}</h3>
+
+                <p>User Registrations</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>#{chartController.getTotalDonation()}<sup style="font-size: 20px">TND</sup></h3>
+
+                <p>Donations</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
 	
- <hf:chart type="pie" title="Users Selon Sexe" alpha3d="45" beta3d="0">
+	  	<div ><h1>#{chartController.getUserSelonSexe()}</h1></div>
+	  	<!-- USERS LIST -->
+	  	
+
+        <div class="row">
+	  	
+	  	<div class="col-md-6">
+	  	
+                <div class="card">
+                  <div class="card-header">
+                  <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                      </button>
+                    </div>
+                    <h3 class="card-title">Users Gender</h3>
+					<hf:chart type="pie" title="Users Gender" alpha3d="45" beta3d="0">
     <hf:chartSerie name="Sexe" value="#{chartController.sexes}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
   </hf:chart>  
+  </div></div></div>
+
+              <div class="col-md-6">
+	  	
+                <div class="card">
+                  <div class="card-header">
+                  
+                    <div class="card-tools">
+                      <span class="badge badge-danger">8 New Members</span>
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                      </button>
+                      
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <ul class="users-list clearfix">
+  <ui:repeat var="user" value="#{listUsersController.getNeufUsers()}" varStatus="status">
+                    
+                      <li>
+                <h:graphicImage height="50px" width="50px" alt="User Image" value="https://img.icons8.com/plasticine/2x/user.png" rendered="#{empty ImageUserController.getImageUser(user.id)}" />
+                      
+                      <ui:repeat var="ImagesUser" value="#{ImageUserController.getImageUser(user.id)}" varStatus="status">
+						
+						<h:graphicImage height="50px" width="50px" alt="User Image" value="#{ImagesUser.image}" rendered="#{not empty ImagesUser.image}" />
+						
+
+						</ui:repeat>
+                        <a class="users-list-name" href="#">#{user.firstName} #{user.lastName}</a>
+                        <span class="users-list-date">#{user.signupDay}</span>
+                      </li>
+                      </ui:repeat>
+                    </ul>
+                    <!-- /.users-list -->
+                  </div>
+                  </div>
+                  
+                  </div>
+                   <div class="col-md-6">
+                  <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">5 Best-Selling Products</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="chart-responsive">
+                      <canvas id="pieChart" height="150"></canvas>
+                    </div>
+                    <!-- ./chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer bg-white p-0">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      United States of America
+                      <span class="float-right text-danger">
+                        <i class="fa fa-arrow-down text-sm"></i>
+                        12%</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      India
+                      <span class="float-right text-success">
+                        <i class="fa fa-arrow-up text-sm"></i> 4%
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      China
+                      <span class="float-right text-warning">
+                        <i class="fa fa-arrow-left text-sm"></i> 0%
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.footer -->
+            </div>
+            <!-- /.card -->
+            </div>
+                  </div>
+                 
+                  
+	  	
+	<!-- jQuery -->
+
+<!-- Bootstrap 4 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="login/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="login/dist/js/demo.js"></script>
+ 
 	
 	</h:body>
-	
+
+	</ui:define>
 	</ui:composition>
+	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.reclamation;
+import tn.esprit.spring.Repository.CommandeRepository;
 import tn.esprit.spring.Repository.reclamationRepository;
 import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.Service.Livreur.LivreurService;
@@ -22,6 +23,8 @@ public class ReclamationService {
 	
 	@Autowired
 	UserService UserDAO;
+	@Autowired
+	CommandeRepository CommandeRepository;
 	
 	private static final Logger L =LogManager.getLogger(LivreurService.class);
 	
@@ -40,7 +43,6 @@ public class ReclamationService {
 		rec.setReponse(null);
 		rec.setTraiter(false); 
 		rec.setEtat("En_attente");
-		rec.setCommande(null);
 		return reclamationRepository.save(rec);
 
 	}
@@ -79,6 +81,13 @@ return reclamationRepository.getOne(rec_id);}
 		
 		return reclamationRepository.save(rec);
 
+	}
+	
+	/*Determiner Liste des commandes pour les nikomou*/
+	public List<Long> ListeCommandeparuser(Long iduser)
+	{
+		return CommandeRepository.ListeCommandePariduser(iduser);
+		
 	}
 	
 	

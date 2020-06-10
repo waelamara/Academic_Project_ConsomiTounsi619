@@ -35,6 +35,7 @@ public class UserDetailsImpl implements OAuth2User, UserDetails {
 	private String address;
 	private String tel;
 	private Date dateN;
+	private String disponible;
 
     private Boolean EtatAcc=true;
 
@@ -44,7 +45,7 @@ public class UserDetailsImpl implements OAuth2User, UserDetails {
 
 	public UserDetailsImpl(Long id, String username, String email, String password,String firstName, String lastName, String address,
 			Date dateN,String tel,Boolean EtatAcc,
-			Collection<? extends GrantedAuthority> authorities) {
+			Collection<? extends GrantedAuthority> authorities,String disponible) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
@@ -56,6 +57,7 @@ public class UserDetailsImpl implements OAuth2User, UserDetails {
 		this.tel=tel;
 		this.EtatAcc=EtatAcc;
 		this.authorities = authorities;
+		this.disponible=disponible;
 	}
 	
 	
@@ -77,7 +79,8 @@ public class UserDetailsImpl implements OAuth2User, UserDetails {
 				user.getDateN(),
 				user.getTel(),
 				user.getEtatAcc(),
-				authorities);
+				authorities,
+				user.getDisponible());
 	}
 	
 	public static UserDetailsImpl create(User user, Map<String, Object> attributes) {
@@ -214,5 +217,20 @@ public class UserDetailsImpl implements OAuth2User, UserDetails {
 		// TODO Auto-generated method stub
 		return String.valueOf(id);
 	}
+
+
+
+
+	public String getDisponible() {
+		return disponible;
+	}
+
+
+
+
+	public void setDisponible(String disponible) {
+		this.disponible = disponible;
+	}
+	
 
 }

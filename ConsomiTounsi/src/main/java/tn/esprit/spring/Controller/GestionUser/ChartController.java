@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import tn.esprit.spring.Model.Chart.SexeC;
+import tn.esprit.spring.Repository.UserRepository;
+import tn.esprit.spring.Service.GestionUser.ChartService;
 import tn.esprit.spring.Service.GestionUser.UserService;
 
 @Controller(value = "chartController")
@@ -21,7 +23,10 @@ public class ChartController {
 
 	@Autowired
 	UserService userService;
-	
+	@Autowired
+	UserRepository UserRepository;
+	@Autowired
+	ChartService chartService;
 	protected List<SexeC> sexes ;
 	
 	public void getUserSelonSexe()
@@ -33,6 +38,22 @@ public class ChartController {
 
 		//System.out.println(userService.getNombresUsersSelonSexe("HOMME"));
 		
+	}
+	public int getNombrUsers()
+	{
+		return UserRepository.NombreUsers();
+	}
+	public Long getNombrOrders()
+	{
+		return chartService.getNombreOrders();
+	}
+	public float getTotalSales()
+	{
+		return chartService.getTotalSales();
+	}
+	public float getTotalDonation()
+	{
+		return chartService.getTotalDonation();
 	}
 	
 

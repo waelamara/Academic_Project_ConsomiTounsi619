@@ -8,12 +8,13 @@ import java.util.List;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Rayon.Rayon;
 import tn.esprit.spring.Model.Stock.Stock;
+import tn.esprit.spring.Model.Stock.StockByProd;
 
 public interface IStockService {
 	
 	Stock saveStock(Stock stock);
 
-	Stock updateStock(Stock stock);
+	
 	
 	void deleteStockById(Long idstock);
 	public void ajouterStockbyProd(Stock stock,Long idprod);
@@ -29,5 +30,12 @@ public interface IStockService {
     public List<Produit> getProduits() ;
     
     public void displayStock();
+    public Long addorupdate(Stock stock);
+
+    public Stock getStockbyId(Long idstock);
+
+	Stock updateStock(Stock stock);
+	
+//	public List<StockByProd> quantiteByProd();
 }
 

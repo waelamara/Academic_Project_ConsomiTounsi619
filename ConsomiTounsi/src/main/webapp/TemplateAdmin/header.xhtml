@@ -12,12 +12,15 @@
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
-		<h:outputStylesheet library="dash" name="css/bootstrap.min.css" />
-		<!-- 		<h:outputStylesheet library="dash" name="font-awesome/4.5.0/css/font-awesome.min.css" /> -->
 		<link
 			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
 			rel="stylesheet" />
+<!-- 		<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" /> -->
+
+
+		<h:outputStylesheet library="dash" name="css/bootstrap.min.css" />
+		<!-- 		<h:outputStylesheet library="dash" name="font-awesome/4.5.0/css/font-awesome.min.css" /> -->
+
 		<h:outputStylesheet library="dash" name="css/fonts.googleapis.com.css" />
 		<h:outputStylesheet library="dash" name="css/ace.min.css"
 			class="ace-main-stylesheet" id="main-ace-style" />
@@ -26,6 +29,7 @@
 		<h:outputStylesheet library="dash" name="css/ace-skins.min.css" />
 		<h:outputStylesheet library="dash" name="css/ace-rtl.min.css" />
 		<h:outputStylesheet library="dash" name="css/ace-ie.min.css" />
+
 		<script src="dash/js/ace-extra.min.js"></script>
 
 
@@ -46,8 +50,7 @@
 					</button>
 
 					<div class="navbar-header pull-left">
-						<a href="index.html" class="navbar-brand"> <small> 
-						<i
+						<a href="index.html" class="navbar-brand"> <small> <i
 								class="fa fa-leaf"></i> ConsommiTounsi
 						</small>
 						</a>
@@ -335,8 +338,8 @@
 						</a> <b class="arrow"></b></li>
 
 						<li class="active"><a href="#" class="dropdown-toggle"> <i
-								class=" menu-icon fa fa-users"></i> <span class="menu-text"> User
-									Management </span> <b class="arrow fa fa-angle-down"></b>
+								class=" menu-icon fa fa-users"></i> <span class="menu-text">
+									User Management </span> <b class="arrow fa fa-angle-down"></b>
 						</a> <b class="arrow"></b>
 
 							<ul class="submenu">
@@ -460,34 +463,30 @@
 							</ul></li>
 
 						<li class=""><a href="#" class="dropdown-toggle"> <i
-								class=" menu-icon fa fa-product-hunt"></i> <span class="menu-text">
-									Product Management </span> <b class="arrow fa fa-angle-down"></b>
+								class=" menu-icon fa fa-product-hunt"></i> <span
+								class="menu-text"> Product Management </span> <b
+								class="arrow fa fa-angle-down"></b>
 						</a> <b class="arrow"></b>
 
 							<ul class="submenu">
-								<li class="">
-								<h:link outcome="/pages/AdminFormProduit">
-								<i class="menu-icon fa fa-caret-right"></i> Add Product
+								<li class=""><h:link outcome="/pages/AdminFormProduit">
+										<i class="menu-icon fa fa-caret-right"></i> Add Product
 								</h:link> <b class="arrow"></b></li>
 
-								<li class="">
-								<h:link outcome="/pages/AffichageProduitAdmin">
-								 <i
-										class="menu-icon fa fa-caret-right"></i> All Prodcuts
+								<li class=""><h:link outcome="/pages/AffichageProduitAdmin">
+										<i class="menu-icon fa fa-caret-right"></i> All Prodcuts
 								</h:link> <b class="arrow"></b></li>
 
-								<li class="">
-								<h:link outcome="/pages/CategorieForm">
-								 <i class="menu-icon fa fa-caret-right"></i> Add Categories
+								<li class=""><h:link outcome="/pages/CategorieForm">
+										<i class="menu-icon fa fa-caret-right"></i> Add Categories
 								</h:link> <b class="arrow"></b></li>
 
 								<li class=""><h:link outcome="/pages/AffichageCategories">
-								 <i class="menu-icon fa fa-caret-right"></i> All Categories
+										<i class="menu-icon fa fa-caret-right"></i> All Categories
 								</h:link> <b class="arrow"></b></li>
 
-								
-						</ul>
-						</li>
+
+							</ul></li>
 						<li class=""><a href="#" class="dropdown-toggle"> <i
 								class="menu-icon fa  fa-bullhorn"></i> <span class="menu-text">
 									Publicity Management </span> <b class="arrow fa fa-angle-down"></b>
@@ -495,183 +494,125 @@
 
 
 							<ul class="submenu">
-								<li class="">
-								<h:link outcome="/pages/PublicityForm">
-								<i class="menu-icon fa fa-caret-right"></i> Add Publicity
+								<li class=""><h:link outcome="/pages/PublicityForm">
+										<i class="menu-icon fa fa-caret-right"></i> Add Publicity
 								</h:link> <b class="arrow"></b></li>
 
-								<li class="">
-								<h:link outcome="/pages/AllPublicities">
-								 <i
-										class="menu-icon fa fa-caret-right"></i> All Publicity
+								<li class=""><h:link outcome="/pages/AllPublicities">
+										<i class="menu-icon fa fa-caret-right"></i> All Publicity
 								</h:link> <b class="arrow"></b></li>
-								
-						</ul>
-						</li>
-						<li class=""><a href="calendar.html"> <i
+
+							</ul></li>
+						<!-- 				khayat  -->
+						<li class=""><a href="#" class="dropdown-toggle"> <i
 								class="menu-icon fa fa-calendar"></i> <span class="menu-text">
-									Events Management <span
-									class="badge badge-transparent tooltip-error"
-									title="2 Important Events"> <i
-										class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
-								</span>
-							</span>
-						</a> <b class="arrow"></b></li>
+									Events Management </span> <b class="arrow fa fa-angle-down"></b>
+						</a> <b class="arrow"></b>
 
-				<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-calendar"></i>
-							<span class="menu-text"> Events Management </span>
+							<ul class="submenu">
+								<li class=""><a href="AddEvent"> <i
+										class="menu-icon fa fa-caret-right"></i> Events Add
+								</a> <b class="arrow"></b></li>
 
-						<li class=""><a href="gallery.html"> <i
-								class="menu-icon fa fa-truck"></i> <span class="menu-text">
-									Delivery Manager </span>
-						</a> <b class="arrow"></b></li>
+								<li class=""><a href="afficheEvent"> <i
+										class="menu-icon fa fa-caret-right"></i> List Events
+								</a> <b class="arrow"></b></li>
 
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
 
-						<b class="arrow"></b>
 
-						<ul class="submenu">
-							<li class="">
-								<a href="AddEvent">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Events Add
-								</a>
 
-								<b class="arrow"></b>
-							</li>
+								<li class=""><a href="Charity.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Charity
+								</a> <b class="arrow"></b></li>
+								<li class=""><a href="EventPub.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Advertising List
+								</a> <b class="arrow"></b></li>
+								<li class=""><a href="endroit"> <i
+										class="menu-icon fa fa-caret-right"></i> Endroit
+								</a> <b class="arrow"></b></li>
+								<li class=""><a href="EndroitReserve.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Endroit Reserve
+								</a> <b class="arrow"></b></li>
+							</ul></li>
+						<!-- 				5555 -->
 
-							<li class="">
-								<a href="afficheEvent">
-									<i class="menu-icon fa fa-caret-right"></i>
-									List Events
-								</a>
 
-								<b class="arrow"></b>
-							</li>
 
-							
+						<li class=""><a href="#" class="dropdown-toggle"> <i
+								class="fa fa-truck"></i> <span class="menu-text">
+									Delivery Manager
+							</span> <b class="arrow fa fa-angle-down"></b>
+						</a> <b class="arrow"></b>
 
-							
-							<li class="">
-								<a href="Charity.jsf">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Charity
-								</a>
+							<ul class="submenu">
+								<li class=""><a href="/LivreurAdmin"> <i
+										class="menu-icon fa fa-caret-right"></i> Show all requests
+								</a> <b class="arrow"></b></li>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="EventPub.jsf">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Advertising List
-								</a>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="endroit">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Endroit 
-								</a>
+								<li class=""><a href="/LivreurDispo"> <i
+										class="menu-icon fa fa-caret-right"></i> Show free DeliveryMan
+								</a> <b class="arrow"></b></li>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="EndroitReserve.jsf">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Endroit Reserve
-								</a>
 
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-<li class=""><a href="#" class="dropdown-toggle"> <i
-						class="fa fa-truck"></i> <span class="menu-text">
-							Delivery Manager </span>
-				</a> <b class="arrow"></b>
+								<li class=""><a href="/StatLiv"> <i
+										class="menu-icon fa fa-caret-right"></i> Show Best 10
+										DeliveryMan
+								</a> <b class="arrow"></b></li>
 
-					<ul class="submenu">
-						<li class=""><a href="/LivreurAdmin"> <i
-								class="menu-icon fa fa-caret-right"></i> Show all requests
-						</a> <b class="arrow"></b></li>
+
+							</ul></li>
+
+
+
+
+
+
+
+						<li class=""><a href="#" class="dropdown-toggle"> <i
+								class="menu-icon fa fa-tag"></i> <span class="menu-text">
+									Stock Management </span> <b class="arrow fa fa-angle-down"></b>
+						</a> <b class="arrow"></b>
+
+							<ul class="submenu">
+								<li class=""><a href="stock.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Show Stock
+								</a> <b class="arrow"></b></li>
+
+
+
+								<li class=""><a href="addstock.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Add Stock
+								</a> <b class="arrow"></b></li>
+
+
+							</ul></li>
 
 
 
 
 						<li class=""><a href="" class="dropdown-toggle"> <i
-						class="menu-icon fa fa-tag"></i> <span class="menu-text">
-							Stock Management </span> <b class="arrow fa fa-angle-down"></b>
-				</a> <b class="arrow"></b>
-
-
-
-						<li class=""><a href="/LivreurDispo"> <i
-								class="menu-icon fa fa-caret-right"></i> Show free DeliveryMan
-						</a> <b class="arrow"></b></li>
-
-
-						<li class=""><a href="/StatLiv"> <i
-								class="menu-icon fa fa-caret-right"></i> Show Best 10 DeliveryMan
-						</a> <b class="arrow"></b></li>
-
-
-</li>
-
-					</ul></li>
-					
-
-					
-					
-					
-						<li class=""><a href="#" class="dropdown-toggle"> <i
-								class="menu-icon fa fa-tag"></i> 
-								<span class="menu-text"> Stock Management </span> <b class="arrow fa fa-angle-down"></b>
+								class="menu-icon fa fa-tag"></i> <span class="menu-text">Ray
+									Management </span> <b class="arrow fa fa-angle-down"></b>
 						</a> <b class="arrow"></b>
 
-					<ul class="submenu">
-						<li class=""><a href="stock.jsf"> <i
-								class="menu-icon fa fa-caret-right"></i> Show Stock
-						</a> <b class="arrow"></b></li>
+							<ul class="submenu">
+								<li class=""><a href="rayon.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Show Rays
+								</a> <b class="arrow"></b></li>
 
-						
 
-						<li class=""><a href="addstock.jsf"> <i
-								class="menu-icon fa fa-caret-right"></i> Add Stock
-						</a> <b class="arrow"></b></li>
 
+								<li class=""><a href="addrayon.jsf"> <i
+										class="menu-icon fa fa-caret-right"></i> Add Ray
+								</a> <b class="arrow"></b></li>
 
 							</ul></li>
-							
-							
-							
-							
-							<li class=""><a href="" class="dropdown-toggle"> <i
-						class="menu-icon fa fa-tag"></i> 
-						<span class="menu-text">Ray Management </span> 
-						<b class="arrow fa fa-angle-down"></b>
-				</a> <b class="arrow"></b>
 
-					<ul class="submenu">
-						<li class=""><a href="rayon.jsf"> <i
-								class="menu-icon fa fa-caret-right"></i> Show Rays
-						</a> <b class="arrow"></b></li>
 
-						
 
-						<li class=""><a href="addrayon.jsf"> <i
-								class="menu-icon fa fa-caret-right"></i> Add Ray
-						</a> <b class="arrow"></b></li>
-		
-					</ul></li>
-							
-							
-							
-							
-							
+
+
 
 						<li class=""><a href="#" class="dropdown-toggle"> <i
 								class="menu-icon fa fa-file-o"></i> <span class="menu-text">
@@ -728,17 +669,17 @@
 								</a> <b class="arrow"></b></li>
 							</ul></li>
 					</ul>
-					
+
 				</div>
 			</div>
-				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 				<i id="sidebar-toggle-icon"
 					class="ace-icon fa fa-angle-double-left ace-save-state"
 					data-icon1="ace-icon fa fa-angle-double-left"
 					data-icon2="ace-icon fa fa-angle-double-right"></i>
 			</div>
 		</div>
-		
+
 		<script src="dash/js/jquery-2.1.4.min.js"></script>
 		<script src="dash/js/jquery-1.11.3.min.js"></script>
 		<script src="dash/js/bootstrap.min.js"></script>
@@ -753,8 +694,8 @@
 		<!-- ace scripts -->
 		<script src="dash/js/ace-elements.min.js"></script>
 		<script src="dash/js/ace.min.js"></script>
-		
-		
+
+
 	</h:body>
 </ui:composition>
 

@@ -3,7 +3,9 @@ package tn.esprit.spring.Controller.Stock;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -34,7 +36,6 @@ public class JsfStockController {
 	IStockService stockservice;
 	@Autowired
 	IProduitService iproduitService;
-	
 	private Long idstock;
 	private String nom_stock;
 	private int quantite;
@@ -42,11 +43,19 @@ public class JsfStockController {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date validite;
 	private float prixdevente;
+	private Long stockIdToBeUpdated;
+	
+
+
+
 	
 	
-
-
-
+	public Long getStockIdToBeUpdated() {
+		return stockIdToBeUpdated;
+	}
+	public void setStockIdToBeUpdated(Long stockIdToBeUpdated) {
+		this.stockIdToBeUpdated = stockIdToBeUpdated;
+	}
 	public Long getIdstock() {
 		return idstock;
 	}
@@ -106,11 +115,17 @@ public int getQuantite() {
 		return "/addstock.xhtml?faces-redirect=true&idprod=" + idprod.toString();
 	}
 	
+public String gopagestock(Long idstock){
+	
+		return "/updatestock.xhtml?faces-redirect=true&idstock=" + idstock.toString();
+	}
 	
 	
-	public void addstock(long idprod) {
-		
+	
+	public String addstock(long idprod) {
+		String navigateTo = "/stock";
 		 stockservice.ajouterStockbyProd(new Stock(nom_stock,quantite,validite,prixdevente) ,idprod);
+		return navigateTo;
 
 		}
 	
@@ -128,13 +143,42 @@ public void deletestock(Long idstock) {
 }
 
 
-public void displayStock(){
-	
-	
-	
+public void displayStock(Stock stock){
+	this.setNom_stock(stock.getNom_stock());
+	this.setQuantite(stock.getQuantite());
+	this.setValidite(stock.getValidite());
+	this.setPrixdevente(stock.getPrixdevente());
+	this.setStockIdToBeUpdated(stock.getIdstock());
 	
 }
 
+public String updateStockjsf(Long idstock){
+	String navigateTo = "/stock";
+	Stock s=stockservice.getStockbyId(idstock);
+	
+	s.setNom_stock(nom_stock);
+	System.out.println("****************"+nom_stock);
+	s.setPrixdevente(prixdevente);
+	System.out.println("****************"+prixdevente);
+	s.setQuantite(quantite);
+	s.setValidite(validite);
+	stockservice.saveStock(s);
+	return navigateTo;
+}
 
+String a;
+
+private String getCountryFromJSF(FacesContext context) {
+	Map<String, String> parameters = context.getExternalContext().getRequestParameterMap();
+	return parameters.get("idstock");
+}
+
+public Long outcome() {
+	FacesContext context = FacesContext.getCurrentInstance();
+	a = getCountryFromJSF(context);
+	System.out.println("****************"+a);
+	return Long.parseLong(a);
+
+}
 
 }

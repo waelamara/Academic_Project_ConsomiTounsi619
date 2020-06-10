@@ -1,4 +1,3 @@
-
 package tn.esprit.spring.Repository;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Boolean existsByEmail(String email);
 
-	@Query(value = "SELECT user_id FROM user WHERE  point_fidelite >=100 ", nativeQuery = true)
-	public List<String> findClient_pt_100();
+	@Query(value = "SELECT u.`user_id` FROM `user` u join user_roles r on u.`user_id`=r.user_id WHERE r.role_id=1 ", nativeQuery = true)
+	public List<String> findClient_pt_100(int nbpoint);
 
 	/* liste des livreur */
 	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=4", nativeQuery = true)
@@ -54,7 +53,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT * FROM `user` WHERE `email` LIKE ?1%", nativeQuery = true)
 	public List<User> getUserSelonEmail(String cle);
 	
+	@Query(value = "SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 8", nativeQuery = true)
+	public List<User> getNewUsers();
 	
-    //SELECT `user_id` FROM `user`  ORDER BY `nb_mission` DESC LIMIT 10
-
+	@Query(value = "SELECT COUNT(*) FROM user ", nativeQuery = true)
+	public int NombreUsers();
+	
+	@Query(value = "SELECT count(*) from user where point_fidelite <100 ",nativeQuery = true)
+	public int nombreUsersbyPointfideletInf100();
+    //SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 3
+	@Query(value = " SELECT count(*) from user where point_fidelite BETWEEN 100 and 300  ",nativeQuery = true)
+	public int nombreUsersbyPointfideletbetwen100et300();
+	@Query(value = " SELECT count(*)from user where point_fidelite >=300",nativeQuery=true)
+	public int nombreUsersbyPointfideletSup300();
+	@Query(value = "SELECT Avg(`point_fidelite`) FROM user",nativeQuery=true)
+	public float moyenneNpointFidelet();
 }
