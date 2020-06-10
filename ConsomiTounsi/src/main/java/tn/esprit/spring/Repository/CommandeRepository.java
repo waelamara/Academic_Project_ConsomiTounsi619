@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Event;
+import tn.esprit.spring.Model.Livraison;
 @Repository
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	
@@ -32,7 +33,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public void PayerEnLigne( @Param("id")long idCommande);
 	
 	
-	@Query(value ="UPDATE commande c set c.status='en livraison',c.typede_payment='a domcilie'where c.id=?1",nativeQuery = true)
+	@Query(value ="UPDATE commande c set c.status='en livraison',c.typede_payment='porteaporte'where c.id=?1",nativeQuery = true)
 	   @Modifying
 	  @Transactional
 	public void PayerPorteaPorte( @Param("id")long idCommande);
@@ -63,6 +64,8 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	
 	@Query(value = "SELECT `id` FROM `commande` WHERE `id_user`=?1", nativeQuery = true)
 	public List<Long> ListeCommandePariduser(Long Iduser);
+	@Query(value = "SELECT * FROM livraison WHERE commande_id=?1 ", nativeQuery = true)
+	public Livraison getlivraisionParIdCommande(long idCommande) ;
 	
 	////Raed
 	@Query(value = "SELECT COUNT(*) FROM commande c WHERE c.status='en cours' ", nativeQuery = true)

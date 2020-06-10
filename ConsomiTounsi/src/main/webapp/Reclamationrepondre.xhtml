@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="RepondreRec">
+		<head>
+
+<title>Contact</title>
+<meta charset="utf-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="OneTech shop project" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+		</head>
+		<h:form>
+			<ui:repeat var="rec"
+				value="#{ReclamationAdminRController.retourReclamation(idrec)}"
+				varStatus="status">
+
+
+						<div >
+							<div >
+								<div>
+									<label > Title<small
+										></small>
+									</label>
+
+									<div >
+										<h:outputText  value="#{rec.titre}" />
+									
+									</div>
+								</div>
+								<hr></hr>
+								<div>
+									<label > Description
+									</label>
+
+									<div >
+										<h:outputText  value="#{rec.description}" />
+										
+									</div>
+								</div>
+								<hr></hr>
+								<div>
+									<label> Date of Complaint 
+									</label>
+
+									<div>
+										<h:outputText  value="#{rec.dateRec}" />
+										
+									</div>
+								</div>
+
+								<hr />
+								<div>
+									<label> Phone </label>
+
+									<div >
+										
+										<h:outputText value="#{rec.user.tel}" />
+									</div>
+								</div>
+
+								<hr />
+								<div>
+									<label> User Name </label>
+
+									<div>
+										<h:outputText  
+											value="#{rec.user.firstName}" />
+									</div>
+								</div>
+								<hr></hr>
+								<hr></hr>
+								<div>
+									<label> Reply </label>
+									<div>
+										<h:inputText 
+											value="#{ReclamationAdminRController.reponse}"></h:inputText>
+									</div>
+								</div>
+								<br></br>
+
+								<h:commandButton value="Save"
+									action="#{ReclamationAdminRController.reponseReclamation(rec.id)}"></h:commandButton>
+
+							</div>
+						</div>
+				
+
+			</ui:repeat>
+		</h:form>
+	</ui:define>
+</ui:composition>

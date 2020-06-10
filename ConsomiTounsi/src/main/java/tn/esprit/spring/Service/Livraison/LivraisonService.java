@@ -1,11 +1,11 @@
 
 package tn.esprit.spring.Service.Livraison;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,38 +74,100 @@ public class LivraisonService {
 		return LivraisonRepository.getOne(liv);
 	}
 
-	public void AjouterLivraison(long id_commande, String Lieux,int user_id) {
+	public void AjouterLivraison(long id_commande, String Lieux, int user_id) {
 
 		Commande c = CommandeRepository.getOne(id_commande);
 		Livraison L = new Livraison();
 		L.setCommande(c);
-		L.setDateAffecLivr(LocalDate.now().plusDays(2));
+		// Test sur l'heure de livraison
+		LocalDateTime a = new LocalDateTime();
+
+		a = LocalDateTime.now();
+		Integer heuredeliv = a.getHourOfDay();
+
+		// finTest sur localdate time
 		L.setLieux(Lieux);
 		// calcule le mindistance et affectation local de livraison
 		double distanceAriana = calculedistanceArianna(Lieux);
 		double distanceSousse = calculedistanceSousse(Lieux);
 		double distanceGabes = calculedistanceGabes(Lieux);
+		double distanceTouzeurr = calculedistanceTozeur(Lieux);
 		User DeliveryMa = new User();
-		double Mindistance = Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes));
+
+		double Mindistance = Math.min((Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes))),
+				distanceTouzeurr);
+		System.out.println("athya l distance" + Mindistance);
 		if (Mindistance == distanceAriana) {
-			L.setLocaldistribu("Arianna");
-			// affecter livreur adéquat dispo de arianna
-			long DeliveryM = UserRepository.findparhasard("accepted", "free", "Arianna");
-			DeliveryMa=UserService.findOne(DeliveryM);
-			L.setDelivery(DeliveryMa);
-		} else if (Mindistance == distanceSousse) {
-			L.setLocaldistribu("Sousse");
-			// affecter livreur adéquat dispo de sousse
-			long DeliveryM = UserRepository.findparhasard("accepted", "free", "Sousse");
-			DeliveryMa=UserService.findOne(DeliveryM);
-			L.setDelivery(DeliveryMa);;
-		} else {
-			L.setLocaldistribu("Gabes");
-			// affecter livreur adéquat dispo de Gabes
-			long DeliveryM = UserRepository.findparhasard("accepted", "free", "Gabes");
-			DeliveryMa=UserService.findOne(DeliveryM);
-			L.setDelivery(DeliveryMa);
+
+			// test sur date Apres midi et minimum de 15 Km
+			if ((heuredeliv > 14) & (Mindistance < 15)) {
+
+				Long DeliveryM = UserRepository.findparhasard("accepted", "free", "Arianna");
+				if (DeliveryM == null) {
+					Long DeliveryM1 = UserRepository.findparhasard2("accepted", "Arianna");
+					DeliveryMa = UserService.findOne(DeliveryM1);
+					L.setDelivery(DeliveryMa);
+					L.setDateAffecLivr(java.time.LocalDateTime.now().plusDays(1));
+					L.setLocaldistribu("Arianna");
+
+				} else {
+					L.setLocaldistribu("Arianna");
+					DeliveryMa = UserService.findOne(DeliveryM);
+					L.setDelivery(DeliveryMa);
+					L.setDateAffecLivr(java.time.LocalDateTime.now());
+
+				}
+
+			}
+			///////////////////////////////// Test sur date Matin et entre 15 et
+			///////////////////////////////// 200
+			else if ((heuredeliv > 12) & (Mindistance < 200)) {
+				Long DeliveryM = UserRepository.findparhasard("accepted", "free", "Arianna");
+				// si on trouve pas un livreur dispo de arianna on affect un de sousse si nn le lendemain de arianna
+				if (DeliveryM == null) {
+					Long DeliveryM2 = UserRepository.findparhasard("accepted", "free", "Sousse");
+					// Affecter un livreur de sousse
+					if (DeliveryM2 != null) {
+						DeliveryMa = UserService.findOne(DeliveryM2);
+						L.setDelivery(DeliveryMa);
+						L.setLocaldistribu("Sousse");
+						L.setDateAffecLivr(java.time.LocalDateTime.now());
+						// Affecter un livreur de ariana le lendemain
+					} else {
+						Long DeliveryM1 = UserRepository.findparhasard2("accepted", "Arianna");
+						DeliveryMa = UserService.findOne(DeliveryM1);
+						L.setDelivery(DeliveryMa);
+						L.setDateAffecLivr(java.time.LocalDateTime.now().plusDays(1));
+						L.setLocaldistribu("Arianna");
+
+					}
+				} else {
+					DeliveryMa = UserService.findOne(DeliveryM);
+					L.setLocaldistribu("Arianna");
+					L.setDelivery(DeliveryMa);
+					L.setDateAffecLivr(java.time.LocalDateTime.now());
+				}
+
+			}
+
 		}
+		////////////////// affecter livreur adéquat dispo de sousse
+		// test sur date
+		else if (Mindistance == distanceSousse) {
+
+		}
+
+		// affecter livreur adéquat dispo de Tozeur
+		// test sur date
+		else if (Mindistance == distanceTouzeurr) {
+
+		}
+		// affecter livreur adéquat dispo de Gabes
+		// test sur date
+		else {
+
+		}
+
 		// affectation moyen transport
 		if (Mindistance > 15) {
 			L.setMoyenTL(EMoyenTransportL.Voiture);
@@ -115,11 +177,11 @@ public class LivraisonService {
 		}
 
 		L.setEtat(false);
-		//determiner le nom de l'utilisateur et son num
+		// determiner le nom de l'utilisateur et son num
 		User u = new User();
-		u=UserService.findOne(user_id);
-		String nameuser=u.getFirstName();
-		String teluser=u.getTel();
+		u = UserService.findOne(user_id);
+		String nameuser = u.getFirstName();
+		String teluser = u.getTel();
 		L.setUser_id_demande(nameuser);
 		L.setTel_user_commande(teluser);
 
@@ -132,12 +194,14 @@ public class LivraisonService {
 		double distanceAriana = calculedistanceArianna(adresse);
 		double distanceSousse = calculedistanceSousse(adresse);
 		double distanceGabes = calculedistanceGabes(adresse);
+		double distanceTouzeurr = calculedistanceTozeur(adresse);
 		double fraisdeliv;
-		double Mindistance = Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes));
+		double Mindistance = Math.min((Math.min(distanceAriana, Math.min(distanceSousse, distanceGabes))),
+				distanceTouzeurr);
 		if (Mindistance > 15) {
-			fraisdeliv = (Mindistance * 0.5) + 3;
+			fraisdeliv = (Mindistance * 0.35) + 3;
 		} else {
-			fraisdeliv = Mindistance * 0.5;
+			fraisdeliv = Mindistance * 0.35;
 		}
 		float fraisdepoid = CalculCommandepoid(idc);
 		return (float) (fraisdepoid + fraisdeliv);
@@ -222,6 +286,25 @@ public class LivraisonService {
 		return distanceGabes;
 
 	}
+
+	public double calculedistanceTozeur(String adresse) {
+		double lat = Double.parseDouble(getlatitudelieu(adresse));
+		double Long = Double.parseDouble(getlongitudelieu(adresse));
+		double latlocalTozeur = 33.920572;
+		double longlocalTozeur = 8.125076;
+		double R = 6378137;
+		double lat_a = convertRad(lat);
+		double lon_a = convertRad(Long);
+		double lat_Tozeur = convertRad(latlocalTozeur);
+		double lon_Tozeur = convertRad(longlocalTozeur);
+		double DG;
+		DG = Math.acos((Math.sin(lat_Tozeur) * Math.sin(lat_a))
+				+ Math.cos(lat_Tozeur) * Math.cos(lat_a) * (Math.cos(lon_a - lon_Tozeur)));
+		double distanceTozeur = DG * R / 1000;
+		return distanceTozeur;
+
+	}
+	// Distance Tozeur 33.920572, 8.125076
 
 	public double convertRad(double input) {
 		return (Math.PI * input) / 180;

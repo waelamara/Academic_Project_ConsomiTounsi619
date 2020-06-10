@@ -3,6 +3,8 @@ package tn.esprit.spring.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "Livraison")
@@ -36,10 +42,11 @@ public class Livraison implements Serializable {
 	long commande_id;
 	@Transient
 	long livreur_id;
+	
 	@Column(name = "DateAffecLivr")
-	// @Temporal(TemporalType.DATE)
 
-	private LocalDate dateAffecLivr;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime dateAffecLivr;
 	private String localdistribu;
 	private String user_id_demande; 
 	public String tel_user_commande;
@@ -142,14 +149,16 @@ public class Livraison implements Serializable {
 		this.livreur_id = livreur_id;
 	}
 
-	public LocalDate getDateAffecLivr() {
+	
+
+
+	public LocalDateTime getDateAffecLivr() {
 		return dateAffecLivr;
 	}
 
-	public void setDateAffecLivr(LocalDate dateAffecLivr) {
+	public void setDateAffecLivr(LocalDateTime dateAffecLivr) {
 		this.dateAffecLivr = dateAffecLivr;
 	}
-
 
 	public String getLocaldistribu() {
 		return localdistribu;
