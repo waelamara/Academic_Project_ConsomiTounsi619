@@ -33,6 +33,7 @@ public class ShopController {
 	private String nomCategorie;
 	private Long idSCategorie;
 	private Long id;
+	private String nomRechercheProduit;
 
 
 	
@@ -123,6 +124,14 @@ public class ShopController {
 
 	public void setNomSCategorie(String nomSCategorie) {
 		this.nomSCategorie = nomSCategorie;
+	}
+
+	public String getNomRechercheProduit() {
+		return nomRechercheProduit;
+	}
+
+	public void setNomRechercheProduit(String nomRechercheProduit) {
+		this.nomRechercheProduit = nomRechercheProduit;
 	}
 
 

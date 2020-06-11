@@ -179,5 +179,17 @@ public class ProduitServiceImpl implements IProduitService {
 	public List<Produit> MostPopularCategorieProducts(Long idCategorie) {
 		return produitRepository.MostPopularCategorieProducts(idCategorie);
 	}
+	@Override
+	public List<Produit> findProduitCategorieAndName(Long idCategorie, String Name) {
+		return produitRepository.findProduitCategorieAndName(idCategorie, Name);
+	}
+	@Override
+	public List<Produit> findProduitSsCategorieAndName(Long idSsCategorie, String Name) {
+		return produitRepository.findProduitSsCategorieAndName(idSsCategorie, Name);
+	}
+	@Override
+	public List<Produit> findProduitSCategorieAndName(Long idSCategorie, String Name) {
+		return produitRepository.findProduitSCategorieAndName(idSCategorie, Name);
+	}
 	
 }

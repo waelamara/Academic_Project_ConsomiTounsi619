@@ -91,7 +91,49 @@
 		</div>
 	</div>
 
-	<!-- Recently Viewed -->
+	<h:panelGroup rendered="#{loginController.userDetails.id==null}">
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForAll()!=null}" >
+<ui:repeat var="Publicite" value="#{ControllerPublicite.incrementNrbVuePublicité(ControllerPublicite.getPubForAll())}" varStatus="status">
+	<h:panelGroup rendered="#{Publicite.image!=null}">
+	<div class="banner" style="height: 60%">
+			<div class="banner_background"><img src="#{Publicite.image}" style="height: 100%;width: 70%;display: block;margin-left: auto; margin-right: auto;" />
+			</div>
+	</div>
+	</h:panelGroup>
+			<h:panelGroup rendered="#{Publicite.video!=null}"  >
+			<div class="banner" style="height: 80%">
+			<div style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;background-repeat: no-repeat;background-size: cover;background-position: center center;position: absolute;top: 0;left: 0;">
+			 <video style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;"    onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4" style="height: 100%;width: 100%;"/>
+			</video> 
+			</div>
+			</div>
+			</h:panelGroup>
+</ui:repeat>
+</h:panelGroup>
+</h:panelGroup>
+
+<h:panelGroup rendered="#{loginController.userDetails.id!=null}">
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForUserConnecter(loginController.userDetails.id)!=null}">
+<ui:repeat var="Publicite" value="#{ControllerPublicite.incrementNrbVuePublicité(ControllerPublicite.getPubForUserConnecter(loginController.userDetails.id))}" varStatus="status">
+	<h:panelGroup rendered="#{Publicite.image!=null}">
+	<div class="banner" style="height: 60%">
+			<div class="banner_background"><img src="#{Publicite.image}" style="height: 100%;width: 70%;display: block;margin-left: auto; margin-right: auto;" />
+			</div>
+	</div>
+	</h:panelGroup>
+			<h:panelGroup rendered="#{Publicite.video!=null}"  >
+			<div class="banner" style="height: 80%">
+			<div style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;background-repeat: no-repeat;background-size: cover;background-position: center center;position: absolute;top: 0;left: 0;">
+			 <video style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;"    onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4" style="height: 100%;width: 100%;"/>
+			</video> 
+			</div>
+			</div>
+			</h:panelGroup>
+</ui:repeat>
+</h:panelGroup>
+</h:panelGroup>
 
 	<div class="viewed">
 		<div class="container">

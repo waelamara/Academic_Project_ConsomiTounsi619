@@ -27,4 +27,7 @@ public interface IProduitService {
 	public List<Produit> MostPopularProductsOfMonth();
 	public int QuantiteProduitdeMoisVendu(Long idProduit);
 	public List<Produit> MostPopularCategorieProducts(Long idCategorie);
+	public List<Produit> findProduitCategorieAndName(Long idCategorie,String Name);
+	public List<Produit> findProduitSsCategorieAndName(Long idSsCategorie,String Name);
+	public List<Produit> findProduitSCategorieAndName(Long idSCategorie,String Name);
 }

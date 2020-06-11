@@ -132,9 +132,12 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Product </label>
 
 										<div class="col-sm-9">
-											<h:inputText value="#{ControllerProduit.nomProduit}" placeholder="Nom produit" class="col-xs-10 col-sm-5"></h:inputText>
+											<h:inputText id="name" value="#{ControllerProduit.nomProduit}" placeholder="Nom produit" class="col-xs-10 col-sm-5" required="true" requiredMessage="Name required *">
+											<f:ajax event="keyup" execute="name" render="msgname" />
+											</h:inputText>
 											
 										</div>
+										<h:message id="msgname" for="name" style="color:red;margin-left: 26%" />
 									</div>
 
 						
@@ -146,13 +149,14 @@
 										<div class="col-sm-9">
 								
 									
-									<h:selectOneMenu id="catego" value="#{AdminFormProduit.nomCategorie}" style="width:150px">             
+									<h:selectOneMenu id="catego" value="#{AdminFormProduit.nomCategorie}" style="width:150px" required="true" requiredMessage="Categorie required *">             
                 					<f:selectItem itemLabel="Select Categorie" itemValue="" noSelectionOption="true" />
              					   <f:selectItems value="#{AdminFormProduit.getAllCategorieName()}" />
-                					 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="scategorie" />
+                					 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="scategorie msgcatego" />
             						</h:selectOneMenu>
 						
 										</div>
+										<h:message id="msgcatego" for="catego" style="color:red;margin-left: 1%" />
 										
 										</div>
 										
@@ -161,13 +165,14 @@
 
 										<div class="col-sm-9">
 								
-            							<h:selectOneMenu  id="scategorie" value="#{AdminFormProduit.nomSCategorie}" style="width:150px">
+            							<h:selectOneMenu  id="scategorie" value="#{AdminFormProduit.nomSCategorie}" style="width:150px" required="true" requiredMessage="SCategorie required *">
                							 <f:selectItem itemLabel="Select S/Categorie" itemValue="" noSelectionOption="block" />
                 						<f:selectItems value="#{AdminFormProduit.listNomScateg}" />
-               							 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="sscategorie" />
+               							 <f:ajax event="change" listener="#{AdminFormProduit.onCountryChange()}" render="sscategorie msgscategorie" />
            								 </h:selectOneMenu>
 						
 										</div>
+										<h:message id="msgscategorie" for="scategorie" style="color:red;margin-left: 1%" />
 										</div>
 										
 											<div class="form-group">
@@ -176,25 +181,28 @@
 										<div class="col-sm-9">
 							
 									
-									 <h:selectOneMenu  id="sscategorie" value="#{sscategorieController.nomSsCategorie}" style="width:150px" >
+									 <h:selectOneMenu  id="sscategorie" value="#{sscategorieController.nomSsCategorie}" style="width:150px" required="true" requiredMessage="SsCategorie required *">
                						 <f:selectItem itemLabel="Select SS/Categorie" itemValue="" noSelectionOption="true" />
                 					<f:selectItems value="#{AdminFormProduit.listNomSsouscateg}"/>
+                					<f:ajax event="change" execute="sscategorie" render="sscategorie msgsscategorie " />
             						</h:selectOneMenu>
 						
 										</div>
+										<h:message id="msgsscategorie" for="sscategorie" style="color:red;margin-left: 1%" />
 										</div>
 								
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right">Prix d'achat</label>
-
+										
 										<div class="col-sm-9">
-										<h:inputText value="#{ControllerProduit.prixAchat}"  placeholder="Prix d'achat /dt" class="input-sm"></h:inputText>/DT
+										<h:inputText id="prixachat" value="#{ControllerProduit.prixAchat}"  a:placeholder="Prix d'achat /dt" required="true" requiredMessage="SsCategorie required *" >
+										<f:ajax event="keyup" execute="prixachat" render="msgsprixachat" />
+										</h:inputText>/DT
 											<div class="space-2"></div>
-											
 											<div class="help-block" id="input-size-slider"></div>
 										</div>
-										  
+										 <h:message id="msgsprixachat" for="prixachat" style="color:red;margin-left: 26%" /> 
 										
  
 										  
@@ -204,12 +212,15 @@
 										<label class="col-sm-3 control-label no-padding-right" >Prix de vente</label>
 
 										<div class="col-sm-9">
-										<h:inputText value="#{ControllerProduit.prix}"  placeholder="Prix de vente /dt" class="input-sm"></h:inputText>/DT
+										<h:inputText id="prixvente" value="#{ControllerProduit.prix}"  a:placeholder="Prix de vente /dt" required="true" requiredMessage="SsCategorie required *" >
+										<f:ajax event="keyup" execute="prixvente" render="msgprixvente" />
+										</h:inputText>/DT
 									
 											<div class="space-2"></div>
 												
 											<div class="help-block" id="input-size-slider"></div>
 										</div>
+										 <h:message id="msgprixvente" for="prixvente" style="color:red;margin-left: 26%" /> 
 									</div>
 
 									<div class="form-group">
@@ -218,14 +229,17 @@
 
 										<div class="col-sm-9">
 											<div class="clearfix">
-											<h:inputText value="#{ControllerProduit.poids}" id="form-field-5" placeholder="Poids /Kg" class="col-xs-1"></h:inputText> /KG
-												
+											<h:inputText  value="#{ControllerProduit.poids}" id="form-field-5" a:placeholder="Poids /Kg" required="true" requiredMessage="SsCategorie required *" >
+											<f:ajax event="keyup" execute="form-field-5" render="msgpoids" />
+											</h:inputText> /KG	
 											</div>
 
 											<div class="space-2"></div>
                                             
 											<div class="help-block" id="input-span-slider"></div>
 										</div>
+										 <h:message id="msgpoids" for="form-field-5" style="color:red;margin-left: 26%" /> 
+										
 									</div>
 
 								<div class="form-group">
@@ -245,8 +259,9 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-6">Barcode</label>
 										<h:panelGroup id="barcode">
 										<div class="col-sm-9">
-										<h:inputText value="#{ControllerProduit.barcode}" id="codeabarre" a:placeholder="619-xxx-xxx-xxx-x" >
-										<f:ajax event="keyup" execute="codeabarre"  render="changebarcode" />
+										<h:inputText  value="#{ControllerProduit.barcode}" id="codeabarre" a:placeholder="619-xxx-xxx-xxx-x" required="true" requiredMessage="Barcode required *" validatorMessage="Error Barcode" >
+										<f:validateRegex  pattern="^[0-9]{1,8}$"/>
+										<f:ajax event="keyup" execute="codeabarre"  render="msgbarcode changebarcode" />
 										</h:inputText>
 											
 											
@@ -258,15 +273,20 @@
 											</h:panelGroup>
 										</div>
 										</h:panelGroup>
+										 <h:message id="msgbarcode" for="codeabarre" style="color:red;margin-left: 26%" /> 
 									</div>
 									
 												<div class="form-group" >
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Description </label>
 
 										<div class="col-sm-9">
-										<h:inputTextarea value="#{ControllerProduit.description}" style="width:50%;height:80px" id="form-field-1-1" placeholder="Description" class="form-control"></h:inputTextarea>
+										<h:inputTextarea value="#{ControllerProduit.description}" style="width:50%;height:80px" id="form-field-1-1" a:placeholder="Description" class="form-control" required="true" requiredMessage="Descripion required *">
+										<f:ajax event="keyup" execute="form-field-1-1"  render="msgdesc" />
+										</h:inputTextarea>
 										</div>
-										
+										 <h:message id="msgdesc" for="form-field-1-1" style="color:red;margin-left: 26%" /> 
+										 
+										 
 										<div>
 									
 										<div class="fallback">
