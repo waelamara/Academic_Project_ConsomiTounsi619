@@ -60,6 +60,7 @@ public class ControllerProduit {
 	private UploadedFiles files;
 	private List<Produit> listRechercheProduits;
 	private String nomRechercheProduit;
+	private String nomRechercheProduitInShopPage="";
 	private Long idToUpdate;
 	private String nomCategorie;
 	private String nomSCategorie;
@@ -123,12 +124,21 @@ public class ControllerProduit {
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
 		setFiltrageProfuit(Integer.parseInt(params.get("filtrageProduit")));
 		setIdFiltrageProfuit(Long.parseLong(params.get("idRecherhceProduit")));
+
+//		if (filtrageProduit == 0) {
+//			return iproduitService.findProduitCategorie(idFiltrageProduit);
+//		} else if (filtrageProduit == 1) {
+//			return iproduitService.findProduitSCategorie(idFiltrageProduit);
+//		} else if (filtrageProduit == 2) {
+//			return iproduitService.findProduitSsCategorie(idFiltrageProduit);
+//		} else
+//			return null;
 		if (filtrageProduit == 0) {
-			return iproduitService.findProduitCategorie(idFiltrageProduit);
+			return iproduitService.findProduitCategorieAndName(idFiltrageProduit,nomRechercheProduitInShopPage);
 		} else if (filtrageProduit == 1) {
-			return iproduitService.findProduitSCategorie(idFiltrageProduit);
+			return iproduitService.findProduitSCategorieAndName(idFiltrageProduit,nomRechercheProduitInShopPage);
 		} else if (filtrageProduit == 2) {
-			return iproduitService.findProduitSsCategorie(idFiltrageProduit);
+			return iproduitService.findProduitSsCategorieAndName(idFiltrageProduit, nomRechercheProduitInShopPage);
 		} else
 			return null;
 	}
@@ -506,6 +516,14 @@ public class ControllerProduit {
 
 	public void setRecentlyViewed(List <Produit> recentlyViewed) {
 		this.recentlyViewed = recentlyViewed;
+	}
+
+	public String getNomRechercheProduitInShopPage() {
+		return nomRechercheProduitInShopPage;
+	}
+
+	public void setNomRechercheProduitInShopPage(String nomRechercheProduitInShopPage) {
+		this.nomRechercheProduitInShopPage = nomRechercheProduitInShopPage;
 	}
 	
 	

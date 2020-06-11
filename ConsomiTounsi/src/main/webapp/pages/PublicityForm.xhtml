@@ -138,25 +138,37 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Publicité</b> </label>
 
 										<div class="col-sm-9">
-											<h:inputText value="#{ControllerPublicite.nom}" a:placeholder="Nom produit" class="col-xs-10 col-sm-5"></h:inputText>
+											<h:inputText id="nomP" value="#{ControllerPublicite.nom}" required="true" requiredMessage="Name required *" a:placeholder="Nom produit" class="col-xs-10 col-sm-5">
+											 <f:ajax event="keyup" execute="nomP"  render="msgNom" />
+											</h:inputText>
 											
 										</div>
+										<h:message id="msgNom" for="nomP" style="color:red;margin-left: 26%" />
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Email Proprietaire</b> </label>
 
 										<div class="col-sm-9">
-											<h:inputText value="#{ControllerPublicite.emailProprietaire}" a:placeholder="example@example.exp" class="col-xs-10 col-sm-5"></h:inputText>
-											
+											<h:inputText id="email" value="#{ControllerPublicite.emailProprietaire}" required="true" a:placeholder="example@example.exp" class="col-xs-10 col-sm-5" requiredMessage="Adress required *" validatorMessage="Error mail">
+            				 					 <f:validateRegex  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"/>
+            				 					 <f:ajax event="keyup" execute="email"  render="msg" />
+            				 					</h:inputText>
 										</div>
+										
+										<h:message id="msg" for="email" style="color:red;margin-left: 26%" />
+										
 									</div>
 										<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"><b> Tel</b> </label>
 
 										<div class="col-sm-9">
-											<h:inputText value="#{ControllerPublicite.numeroProprietaire}" a:placeholder="+216-xx-xxx-xxx" ></h:inputText>
+											<h:inputText id="tel" value="#{ControllerPublicite.numeroProprietaire}" a:placeholder="+216-xx-xxx-xxx" required="true" requiredMessage="Tel required *" validatorMessage="Tel must contains only 8 numbers" >
+											<f:validateRegex  pattern="^[0-9]{1,8}$"/>
+            				 				<f:ajax event="keyup" execute="tel"  render="msgTel" />
+											</h:inputText>
 											
 										</div>
+										<h:message id="msgTel" for="tel" style="color:red;margin-left: 26%" />
 									</div>
 
 								
@@ -167,15 +179,16 @@
 										<label class="col-sm-3 control-label no-padding-right"><b>Canal</b></label>
 
 										<div class="col-sm-9">
-										<h:selectOneMenu id="canal" value="#{ControllerPublicite.canal}">
+										<h:selectOneMenu id="canal" value="#{ControllerPublicite.canal}" required="true" requiredMessage="Canal required *">
 									<f:selectItem itemLabel="Choisir le Canal" itemValue="#{null}" />
 									<f:selectItems value="#{ControllerPublicite.canals}" />
-									<f:ajax event="change" execute="canal" render="cout" />
+									<f:ajax event="change" execute="canal" render="cout msgCanal" />
 								</h:selectOneMenu>
 											<div class="space-2"></div>
 											
 											<div class="help-block" id="input-size-slider"></div>
 										</div>
+										<h:message id="msgCanal" for="canal" style="color:red;margin-left: 26%" />
 										  
 										
 									</div>
@@ -189,7 +202,7 @@
 												<div class="row">
 															<div class="col-xs-8 col-sm-11">
 																<div class="input-daterange input-group">
-																	<h:inputText id="datedebut" type="text" value="#{ControllerPublicite.dateDebutString}" a:placeholder="MM/dd/YYYY" class="input-sm form-control" name="start">
+																	<h:inputText id="datedebut" type="text" value="#{ControllerPublicite.dateDebutString}" a:placeholder="MM/dd/YYYY" class="input-sm form-control" name="start"  >
 																	<f:ajax event="change" execute="datedebut" render="cout" />
 																	</h:inputText>
 																	
@@ -197,17 +210,20 @@
 																		<i class="fa fa-exchange"></i>
 																	</span>
 
-																	<h:inputText id="datefin" type="text" value="#{ControllerPublicite.dateFinString}" a:placeholder="MM/dd/YYYY" class="input-sm form-control" name="end" >
-																	<f:ajax event="change" execute="datefin" render="cout" />
+																	<h:inputText id="datefin" type="text" value="#{ControllerPublicite.dateFinString}" a:placeholder="MM/dd/YYYY" class="input-sm form-control" name="end" required="true" requiredMessage="Date required *" >
+																	<f:ajax event="change" execute="datefin " render="cout " />
 																	</h:inputText>
 																</div>
 															</div>
+															
 														</div>
+														
 										
 											<div class="space-2"></div>
 												
 											<div class="help-block" id="input-size-slider"></div>
 										</div>
+										<h:message id="msgdatefin" for="datefin" style="color:red;margin-left: 26%" />
 									</div>
 
 									<div class="form-group">
@@ -217,11 +233,11 @@
 										<div class="col-sm-9">
 											<div class="clearfix">
 											<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-        									<p:selectOneRadio id="gender" value="#{ControllerPublicite.genderCible}" unselectable="true" >
+        									<p:selectOneRadio id="gender" value="#{ControllerPublicite.genderCible}" unselectable="true" required="true" requiredMessage="Gender cible required *" >
            									<f:selectItem itemLabel="Homme" itemValue="HOMME"  />
             								<f:selectItem itemLabel="Femme" itemValue="FEMME" />
            									<f:selectItem itemLabel="All" itemValue="TOUS" />
-           									<f:ajax event="change" execute="gender" render="cout" />
+           									<f:ajax event="change" execute="gender" render="cout msgdatefin msggender" />
        										</p:selectOneRadio>
     										</h:panelGrid>
 												
@@ -231,6 +247,7 @@
                                             
 											<div class="help-block" id="input-span-slider"></div>
 										</div>
+										<h:message id="msggender" for="gender" style="color:red;margin-left: 26%" />
 									</div>
 
 								<div class="form-group">
@@ -243,13 +260,15 @@
             								<f:selectItem itemLabel="Video" itemValue="Video" />
            									<f:ajax event="change" execute="typefile" render="cout" />
        										</p:selectOneRadio>
-       										<p:fileUpload  value="#{ControllerPublicite.file}" mode="simple" skinSimple="true"/>
+       										<p:fileUpload id="fileupload"  value="#{ControllerPublicite.file}" mode="simple" skinSimple="true" required="true" requiredMessage="Gender cible required *">
+       										</p:fileUpload>
     										</h:panelGrid>
 								
 								
 								
 								
 								</div>
+								<h:message  for="fileupload" style="color:red;margin-left: 26%" />
 								</div>
 								</div>
 								

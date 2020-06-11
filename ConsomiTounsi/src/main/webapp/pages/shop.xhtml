@@ -4,6 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	template="/Template/template.xhtml">
 	<ui:define name="shop">
 	
@@ -25,9 +26,9 @@
 	
 	
 	
-	<h:body>
+	<h:body >
 	<!-- Home -->
-
+<h:panelGroup id="listproduit">
 	<div class="home">
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
@@ -38,8 +39,9 @@
 
 	<!-- Shop -->
 
-	<div class="shop">
+	<div class="shop" >
 		<div class="container">
+		<h:form >
 			<div class="row">
 				<div class="col-lg-3">
 				
@@ -76,8 +78,15 @@
 						
 							
 						</div>
+						
 						<div class="sidebar_section filter_by_section">
 							<div class="sidebar_title">Filter By</div>
+							<div class="sidebar_section">
+							<div class="sidebar_subtitle color_subtitle">Name</div>
+							<h:inputText id="nomProduitIn" value="#{ControllerProduit.nomRechercheProduitInShopPage}"  type="text" class="form-control"  a:placeholder="Search ..">
+							<f:ajax event="keyup" execute="nomProduitIn" render="listproduit" />
+							</h:inputText>
+						</div>
 							<div class="sidebar_subtitle">Price</div>
 							<div class="filter_price">
 								<div id="slider-range" class="slider_range"></div>
@@ -85,36 +94,13 @@
 								<p><input type="text" id="amount" class="amount"  style="border:0; font-weight:bold;"/></p>
 							</div>
 						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle color_subtitle">Color</div>
-							<ul class="colors_list">
-								<li class="color"><a href="#" style="background: #b19c83;"></a></li>
-								<li class="color"><a href="#" style="background: #000000;"></a></li>
-								<li class="color"><a href="#" style="background: #999999;"></a></li>
-								<li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
-								<li class="color"><a href="#" style="background: #df3b3b;"></a></li>
-								<li class="color"><a href="#" style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
-							</ul>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle brands_subtitle">Brands</div>
-							<ul class="brands_list">
-								<li class="brand"><a href="#">Apple</a></li>
-								<li class="brand"><a href="#">Beoplay</a></li>
-								<li class="brand"><a href="#">Google</a></li>
-								<li class="brand"><a href="#">Meizu</a></li>
-								<li class="brand"><a href="#">OnePlus</a></li>
-								<li class="brand"><a href="#">Samsung</a></li>
-								<li class="brand"><a href="#">Sony</a></li>
-								<li class="brand"><a href="#">Xiaomi</a></li>
-							</ul>
-						</div>
+						
+						
 					</div>
 
 				</div>
-
+				
 				<div class="col-lg-9">
-					
 					<!-- Shop Content -->
 
 					<div class="shop_content">
@@ -135,7 +121,7 @@
 							</div>
 						</div>
 						
-
+						
 						<div class="product_grid">
 							<div class="product_grid_border"></div>
 
@@ -170,7 +156,7 @@
 							
 
 						</div>
-
+					
 						<!-- Shop Page Navigation -->
 
 						<div class="shop_page_nav d-flex flex-row">
@@ -186,13 +172,56 @@
 						</div>
 
 					</div>
-
 				</div>
+				
 			</div>
+			</h:form>
 		</div>
 	</div>
 
-	<!-- Recently Viewed -->
+	<h:panelGroup rendered="#{loginController.userDetails.id==null}">
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForAll()!=null}" >
+<ui:repeat var="Publicite" value="#{ControllerPublicite.incrementNrbVuePublicité(ControllerPublicite.getPubForAll())}" varStatus="status">
+	<h:panelGroup rendered="#{Publicite.image!=null}">
+	<div class="banner" style="height: 60%">
+			<div class="banner_background"><img src="#{Publicite.image}" style="height: 100%;width: 70%;display: block;margin-left: auto; margin-right: auto;" />
+			</div>
+	</div>
+	</h:panelGroup>
+			<h:panelGroup rendered="#{Publicite.video!=null}"  >
+			<div class="banner" style="height: 80%">
+			<div style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;background-repeat: no-repeat;background-size: cover;background-position: center center;position: absolute;top: 0;left: 0;">
+			 <video style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;"    onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4" style="height: 100%;width: 100%;"/>
+			</video> 
+			</div>
+			</div>
+			</h:panelGroup>
+</ui:repeat>
+</h:panelGroup>
+</h:panelGroup>
+
+<h:panelGroup rendered="#{loginController.userDetails.id!=null}">
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForUserConnecter(loginController.userDetails.id)!=null}">
+<ui:repeat var="Publicite" value="#{ControllerPublicite.incrementNrbVuePublicité(ControllerPublicite.getPubForUserConnecter(loginController.userDetails.id))}" varStatus="status">
+	<h:panelGroup rendered="#{Publicite.image!=null}">
+	<div class="banner" style="height: 60%">
+			<div class="banner_background"><img src="#{Publicite.image}" style="height: 100%;width: 70%;display: block;margin-left: auto; margin-right: auto;" />
+			</div>
+	</div>
+	</h:panelGroup>
+			<h:panelGroup rendered="#{Publicite.video!=null}"  >
+			<div class="banner" style="height: 80%">
+			<div style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;background-repeat: no-repeat;background-size: cover;background-position: center center;position: absolute;top: 0;left: 0;">
+			 <video style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;"    onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4" style="height: 100%;width: 100%;"/>
+			</video> 
+			</div>
+			</div>
+			</h:panelGroup>
+</ui:repeat>
+</h:panelGroup>
+</h:panelGroup>
 
 	<div class="viewed">
 		<div class="container">
@@ -316,7 +345,7 @@
 	
 	
 	
-	
+	</h:panelGroup>
 	</h:body>
 	</ui:define>
 	</ui:composition>
