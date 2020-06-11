@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.mail.javamail.JavaMailSender;
-
+import org.springframework.scheduling.annotation.Scheduled;
 
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
@@ -114,7 +114,7 @@ public class EventsDAOImpl implements EventsDAO {
 		  }
 
  //@Scheduled(cron="0 0 0 * * ?")
-//@Scheduled(fixedRate = 2000L)
+    @Scheduled(fixedRate = 2000L)
 	public void removeOldItems() {
 
 			eventsRepository.removeOlder();

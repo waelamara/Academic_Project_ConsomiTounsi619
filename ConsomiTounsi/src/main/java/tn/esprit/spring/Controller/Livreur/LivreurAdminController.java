@@ -9,6 +9,7 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Repository.UserRepository;
 import tn.esprit.spring.Service.GestionUser.UserService;
@@ -48,6 +49,10 @@ public class LivreurAdminController {
 	public String accepterliv(long id){
 		String navigateTo = "/LivreurAdmin.xhtml"; 
 		UserRepository.ConfirmerLiv("accepted", id);
+		User deli = new User();
+		deli=UserService.findOne(id);
+		deli.setEnabled(true);
+		UserRepository.save(deli);
 		return navigateTo;
 		
 		

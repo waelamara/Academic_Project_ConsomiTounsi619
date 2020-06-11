@@ -57,8 +57,13 @@
 								Event</label>
 
 							<div class="col-sm-9">
+								<h:message for="validateDate" style="color:red"></h:message>
+
 								<p:inputText value="#{ControllerEvents.dateE}"
+									id="validateDate" required="true"
+									requiredMessage="enter Date of event"
 									p:placeholder="yyyy-MM-dd" styleClass="form-input">
+								
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 								</p:inputText>
 
@@ -89,12 +94,20 @@
 						</div>
 
 						<div class="form-group">
+						
 							<label class="col-sm-3 control-label no-padding-right">Number
 								of participants</label>
 
 							<div class="col-sm-9">
-								<p:inputNumber value="#{ControllerEvents.nbparticipant}"
-									p:placeholder="Number of participants" styleClass="form-input"></p:inputNumber>
+						<h:message for="validateNbP" style="color:red"></h:message>
+							
+								<p:inputNumber value="#{ControllerEvents.nbparticipant}" 
+								id="validateNb"
+								required="true" requiredMessage="enter number of palce"
+								validatorMessage="Number of participants minimum 0"
+								p:placeholder="Number of participants" styleClass="form-input">
+								<f:validateDoubleRange minimum="0" for="validateNbP"></f:validateDoubleRange>				
+								</p:inputNumber>
 								<div class="space-2"></div>
 
 								<div class="help-block" id="input-size-slider"></div>

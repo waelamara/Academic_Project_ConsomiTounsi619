@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.Model.Commande;
 import tn.esprit.spring.Model.Event;
+import tn.esprit.spring.Model.Livraison;
 import tn.esprit.spring.Model.lignecommandeproduit;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.LigneCommandeRepository;
@@ -137,6 +138,11 @@ public class RestControllerCommande {
 	public void payerApresLivraison(@PathVariable(value = "idCommande")long idCommande)
 	{
 		commandeDao.payerApresLivraison(idCommande);	
+	}
+	@GetMapping("livraison/{idCommande}")
+	public Livraison getlivraisionParIdCommande(@PathVariable(value = "idCommande")long idCommande)
+	{
+		return commandeDao.getlivraisionParIdCommande(idCommande);
 	}
 
 	
