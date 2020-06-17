@@ -2,7 +2,6 @@ package tn.esprit.spring.Service.Forum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Forum.CategorieSujet;
-import tn.esprit.spring.Model.Forum.NbSujetbyCat;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Repository.UserRepository;
@@ -53,6 +51,7 @@ public  class SujetServiceImpl implements ISujetService {
 		s.setDateAjout(java.sql.Date.valueOf(localDate));
 		s.setNbLike(0);
 		s.setNbDislike(0);
+		s.setEtat("Waiting");
 		sujetRepository.save(s);
 		return s.getId().intValue();	
 	}
@@ -66,13 +65,9 @@ public  class SujetServiceImpl implements ISujetService {
 	
 
 	@Override
-	public int deleteSujetById(Long sujetId,Long userId) {
+	public int deleteSujetById(Long sujetId) {
 		Sujet sujet = sujetRepository.findById(sujetId).get();
-		if(sujet.getIdUser().getId()== userId)
-		{
-			 sujetRepository.deleteById(sujetId);	 
-			 return 1;
-		}
+			 sujetRepository.delete(sujet);	 
 			 return 0;  
 	}
 
@@ -133,8 +128,8 @@ public  class SujetServiceImpl implements ISujetService {
 	}
 	
 	@Override
-	public User client_gangnant() {
-		List<String> ids = userRepository.findClient_pt_100();
+	public User client_gangnant(int nbpoint) {
+		List<String> ids = userRepository.findClient_pt_100(nbpoint);
 		String separ = ",";
 		String res = String.join(separ, ids);
 		String motcommentaire1[] = res.split(",");
@@ -159,8 +154,8 @@ public  class SujetServiceImpl implements ISujetService {
 	}
 	
 	@Override
-	public Produit produit_gangnant() throws MessagingException {
-		User clientgagnant= client_gangnant();
+	public Produit produit_gangnant(int nbpoint) throws MessagingException {
+		User clientgagnant= client_gangnant(nbpoint);
 		String interets = clientgagnant.getInteret();
 		String linterets[] = interets.split(",");
 		int r = (int) (Math.random() * (linterets.length));
@@ -174,6 +169,8 @@ public  class SujetServiceImpl implements ISujetService {
 		String name2 = lproduits[r2];
 		long random = Long.parseLong(name2);
 		Produit p1 = produitRepository.findById(random).get();
+	   clientgagnant.setPointFidelite(clientgagnant.getPointFidelite()/4);
+	    userRepository.save(clientgagnant);
 ////////////mail
 	SimpleMailMessage mail = new SimpleMailMessage();
 	//// *******************************/////
@@ -344,6 +341,26 @@ public  class SujetServiceImpl implements ISujetService {
    helper.setText(messaage, messaage);
    javaMailSender.send(message);
    return p1;		
+	}
+
+	@Override
+	public void accpeterSujet(Long sujetId) {
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		sujet.setEtat("Accpted");
+		sujetRepository.save(sujet);
+		
+	}
+
+	@Override
+	public void RefuserSujet(Long sujetId) {
+		Sujet sujet=sujetRepository.findById(sujetId).get();
+		sujet.setEtat("Refused");
+		sujetRepository.save(sujet);
+	}
+
+	@Override
+	public List<Sujet> getAllSujetEtatWaiting() {
+		return sujetRepository.findAllbyEtatWaiting();
 	}
 
 	

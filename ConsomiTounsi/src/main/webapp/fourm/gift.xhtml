@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:hf="http://highfaces.org"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="gift">
+		<h:head>
+		<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+<script src="login/vendor/bootstrap/js/popper.js"></script>
+	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+			rel="stylesheet" />
+ 
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  </link>
+<!-- overlayScrollbars -->
+
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
+  </link>
+		</h:head>
+		<h:body>
+			<h:form>
+<div class="row">
+
+<div style="float:left;
+  padding: 10px;">
+<h:graphicImage value="../img/gift.jpg" style=" width:30%"/>
+</div>
+
+<div ><h1>#{ControllerGift.getUserSelonSexe()}</h1></div>
+
+<div class="col-md-6">
+                <!-- USERS LIST -->
+                <div class="card">
+                  <div class="card-header">
+                    
+                    <div class="card-tools">
+                      <h:outputText class="badge badge-danger" value="Members:&#160 #{ControllerGift.nmbureOfuser()} | Loyalty point Average:&#160#{ControllerGift.moyenneNombrefidelet()} " />
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                  <hf:chart type="pie" title="Loyalty point" alpha3d="45" beta3d="0">
+    <hf:chartSerie name="Loyalty point" value="#{ControllerGift.listnbpoints}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+  </hf:chart>  
+                    <!-- /.users-list -->
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer text-center">
+                   <h:inputText value="#{ControllerGift.nbpoint}"
+								placeholder="number" class="col-xs-10 col-sm-5"></h:inputText>
+								<h:commandLink value="Gift Offer "
+									action="#{ControllerGift.produit_gangnant()}"
+									class="btn btn-lg ">
+									<i class="ace-icon fa fa-gift"></i>
+								</h:commandLink>
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!-- /.col -->
+            </div>
+			</h:form>
+		</h:body>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="login/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="login/dist/js/demo.js"></script>
+	</ui:define>
+</ui:composition>

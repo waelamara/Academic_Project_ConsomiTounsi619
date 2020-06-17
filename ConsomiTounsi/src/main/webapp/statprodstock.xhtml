@@ -1,0 +1,66 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:hf="http://highfaces.org"
+	xmlns:b="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="statprodstock">
+	<h:head>
+	<script src="login/vendor/bootstrap/js/popper.js"></script>
+	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+			rel="stylesheet" />
+ 
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  </link>
+<!-- overlayScrollbars -->
+
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"/>
+
+	<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+	
+	</h:head>
+	
+	<h:body>
+	<div class="row">
+<div ><h1>#{StatProdStockController.StatStock()}</h1></div>
+
+<div class="col-md-6">
+                <!-- USERS LIST -->
+                <div class="card">
+                  <div class="card-header">
+                    
+                    <div class="card-tools">
+                      <h:outputText class="badge badge-danger"  />
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" value="hhhhhhh"><i class="fa fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                   <hf:chart type="pie" title="Our Stock" alpha3d="45" beta3d="0">
+    <hf:chartSerie name="Stock By Product" value="#{StatProdStockController.stockbyprod}" var="point" point="#{point.n}"  tickLabel="#{point.nomproduit}"/>
+  </hf:chart> 
+     
+                  </div>
+
+</div>
+</div>
+</div>
+	</h:body>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="login/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="login/dist/js/demo.js"></script>
+	</ui:define>
+	</ui:composition>

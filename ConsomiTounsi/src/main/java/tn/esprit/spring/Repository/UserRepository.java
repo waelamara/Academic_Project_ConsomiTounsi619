@@ -1,4 +1,3 @@
-
 package tn.esprit.spring.Repository;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Boolean existsByEmail(String email);
 
-	@Query(value = "SELECT user_id FROM user WHERE  point_fidelite >=100 ", nativeQuery = true)
-	public List<String> findClient_pt_100();
+	@Query(value = "SELECT u.`user_id` FROM `user` u join user_roles r on u.`user_id`=r.user_id WHERE r.role_id=1 ", nativeQuery = true)
+	public List<String> findClient_pt_100(int nbpoint);
 
 	/* liste des livreur */
 	@Query(value = "SELECT user_id FROM user_roles WHERE role_id=4", nativeQuery = true)
@@ -36,7 +35,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public void ConfirmerLiv(String etat1, long id);
 	
 	@Query(value = "SELECT `user_id` FROM `user` WHERE `etat`=?1 and `disponible`=?2 and `lieux_travail`=?3 ORDER BY RAND() LIMIT 1", nativeQuery = true)
-	public long findparhasard(String etat,String dispo,String lieuxTravail);	
+	public Long findparhasard(String etat,String dispo,String lieuxTravail);	
 	
 	/* Selon Sexe */
 	@Query(value = "SELECT COUNT(*) FROM user WHERE `sexe`=?1", nativeQuery = true)
@@ -72,4 +71,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT SUM(salaire_brut) FROM `salaire`", nativeQuery = true)
 	public float TotalSalaries();
 
+	@Query(value = "SELECT count(*) from user where point_fidelite <100 ",nativeQuery = true)
+	public int nombreUsersbyPointfideletInf100();
+    //SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 3
+	@Query(value = " SELECT count(*) from user where point_fidelite BETWEEN 100 and 300  ",nativeQuery = true)
+	public int nombreUsersbyPointfideletbetwen100et300();
+	@Query(value = " SELECT count(*)from user where point_fidelite >=300",nativeQuery=true)
+	public int nombreUsersbyPointfideletSup300();
+	@Query(value = "SELECT Avg(`point_fidelite`) FROM user",nativeQuery=true)
+	public float moyenneNpointFidelet();
+	//Livreur Par hasard2
+	@Query(value = "SELECT `user_id` FROM `user` WHERE `etat`=?1 and `lieux_travail`=?2 ORDER BY RAND() LIMIT 1", nativeQuery = true)
+	public long findparhasard2(String etat,String lieuxTravail);	
 }

@@ -24,6 +24,9 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 import tn.esprit.spring.Controller.GestionUser.LoginController;
 import tn.esprit.spring.Model.Commande;
@@ -56,6 +59,8 @@ public class ControllerCharite {
 	private int expYear;
 
 	private String cvc;
+	public static final String ACCOUNT_SID = "ACc175ca36e782887ed7bf1fed9915084f";
+	  public static final String AUTH_TOKEN = "6cba54a73ba1df6bed005ae00960daad";
 
 	// private static List<Long> ch ;
 
@@ -247,26 +252,23 @@ public class ControllerCharite {
 			ch.setIdevents(e1);
 			ch.setIduser(u2);
 			ch.setCommandeCharite(c);
-			// ch.setMontantPaye(montantPaye);
 			ch.setTypeCharite("dons");
-			// userDAO.save(u2);
-			// commandeDao.save(c1);
 			chariteDAO.saveCharitee(e1.getId(), u2.getId(), c1.getId(), ch);
-			// eventDAO.sendSms();
+			
 
-			/*
-			  Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+			
+			/*  Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			  
 			  Message message = Message.creator(new
-			  PhoneNumber("+21629651973"), new PhoneNumber("+18654261966"),
-			  u1.getFirstName()+" "+u1.getLastName()+" "
+			  PhoneNumber("+21629651973"), new PhoneNumber("+12058131360"),
+			  u2.getFirstName()+" "+u2.getLastName()+" "
 			  +"I registered for this event "+" "
 			  +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
 			  +" , "+"donate ordered ID="+" "+c1.getId()+"       "
 			  +"thank you so much").create();
 			  
-			  System.out.println(message.getSid());
-			 */
+			  System.out.println(message.getSid());*/
+			 
 
 			return "/CharityUser.xhtml?faces-redirect=true";
 
@@ -341,20 +343,19 @@ public class ControllerCharite {
 			// userDAO.save(u2);
 			chariteDAO.saveCharite5(ide, ch);
 			chariteDAO.Pay(ch.getId(), carta, expMonth, expYear, cvc);
-			/*
-			 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+			
+			/* Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			  
 			  Message message = Message.creator(new
-			  PhoneNumber("+21629651973"), new PhoneNumber("+18654261966"),
-			  u1.getFirstName()+" "+u1.getLastName()+" "
+			  PhoneNumber("+21629651973"), new PhoneNumber("+12058131360"),
+			  u2.getFirstName()+" "+u2.getLastName()+" "
 			  +"I registered for this event "+" "
 			  +e1.getTitre()+" ,"+"the date"+" "+e1.getDateE()
-			  +" , "+"donate money"+" "+Charite.getMontantPaye()+"       "
+			  +" , "+"donate money"+" "+ch.getMontantPaye()+"       "
 			  +"thank you so much").create();
 			  
 			  System.out.println(message.getSid());*/
 			
-			// eventDAO.sendSms(); 
 
 			return "/CharityUser.xhtml?faces-redirect=true";
 

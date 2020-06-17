@@ -28,7 +28,7 @@ public class Rayon implements Serializable{
 	private Long Idrayon;
 	private String nom_rayon;
 	
-	//@Column(name = "type_rayon")
+	
 	//@Enumerated(EnumType.STRING)
 	private Type_rayon type_rayon;
 	

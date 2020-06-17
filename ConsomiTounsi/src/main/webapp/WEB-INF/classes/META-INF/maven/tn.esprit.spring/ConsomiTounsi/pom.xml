@@ -82,15 +82,15 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-    <groupId>net.glxn</groupId>
-    <artifactId>qrgen</artifactId>
-    <version>1.4</version>
-</dependency>
-<dependency>
-    <groupId>net.sf.barcode4j</groupId>
-    <artifactId>barcode4j</artifactId>
-    <version>2.0</version>
-</dependency>
+			<groupId>net.glxn</groupId>
+			<artifactId>qrgen</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+			<version>2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -163,16 +163,27 @@
 			<version>5.13.0</version>
 		</dependency>
 
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
 		<dependency>
-                         <groupId>org.highfaces</groupId>
-                         <artifactId>highfaces</artifactId>
-                         <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-</dependency>
+			<groupId>org.highfaces</groupId>
+			<artifactId>highfaces</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.restfb</groupId>
+			<artifactId>restfb</artifactId>
+			<version>1.24.0</version>
+		</dependency>
+
 
 
 	</dependencies>
@@ -184,6 +195,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<configuration>
+					<!-- replace `callicoder` with your docker id-->
+					<repository>callicoder/spring-boot-websocket-chat-demo</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> 
 		</plugins>
 	</build>
 

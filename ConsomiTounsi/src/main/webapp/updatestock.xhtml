@@ -26,19 +26,21 @@
 				<h1>Update Stock</h1>
 			</div>
 			<!-- /.page-header -->
+				
 			<ui:repeat var="stock"
 				value="#{UpdateStockController.getStockbyId(JsfStockController.outcome())}">
 				<!-- /.page-header -->
 				<div class="row">
 					<div class="col-xs-12">
+				<h:form class="form-horizontal">
 
-						<h:form class="form-horizontal">
+						
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"
 									for="form-field-1"> Stock Name </label>
 
 								<div class="col-sm-9">
-									<h:inputText value="#{stock.nom_stock}" />
+									<h:inputText value="#{UpdateStockController.nom_stock}" />
 
 								</div>
 							</div>
@@ -49,7 +51,7 @@
 								<label class="col-sm-3 control-label no-padding-right">Quantity</label>
 
 								<div class="col-sm-9">
-									<p:inputNumber value="#{stock.quantite}" styleClass="form-input"></p:inputNumber>
+									<p:inputNumber value="#{UpdateStockController.quantite}" styleClass="form-input"></p:inputNumber>
 									<div class="space-2"></div>
 
 									<div class="help-block" id="input-size-slider"></div>
@@ -63,7 +65,7 @@
 								<label class="col-sm-3 control-label no-padding-right">validity</label>
 
 								<div class="col-sm-9">
-									<p:inputText value="#{stock.validite}" styleClass="form-input">
+									<p:inputText value="#{UpdateStockController.validite}" styleClass="form-input">
 										<f:convertDateTime pattern="yyyy-MM-dd" />
 									</p:inputText>
 
@@ -84,7 +86,7 @@
 
 
 								<div class="col-sm-9">
-									<p:inputNumber value="#{stock.prixdevente}"
+									<p:inputNumber value="#{UpdateStockController.prixdevente}"
 										p:placeholder="price" styleClass="form-input"></p:inputNumber>
 									<div class="space-2"></div>
 
@@ -97,18 +99,18 @@
 								<div class="col-md-offset-3 col-md-9">
 									<h:commandButton class="btn btn-info" value="Save"
 										type="submit"
-										action="#{JsfStockController.updateStockjsf()}"></h:commandButton>
+										action="#{UpdateStockController.updateStockjsf(stock.idstock)}"></h:commandButton>
 
 
 								</div>
 							</div>
-
-						</h:form>
+</h:form>
+			
 			
 			</div>
 			</div>
-</ui:repeat>
-
+</ui:repeat>	
+		
 			<script src="dash/js/jquery-2.1.4.min.js"></script>
 
 			<!-- <![endif]-->

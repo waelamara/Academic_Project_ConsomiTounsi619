@@ -163,5 +163,33 @@ public class ProduitServiceImpl implements IProduitService {
 			
 		}
 	}
+	@Override
+	public List<Produit> findProduitByBarcode(String barcode) {
+		return produitRepository.findProduitByBarcode(barcode);
+	}
+	@Override
+	public List<Produit> MostPopularProductsOfMonth() {
+		return produitRepository.MostPopularProducts();
+	}
+	@Override
+	public int QuantiteProduitdeMoisVendu(Long idProduit) {
+		return produitRepository.QuantiteProduitdeMoisVendu(idProduit);
+	}
+	@Override
+	public List<Produit> MostPopularCategorieProducts(Long idCategorie) {
+		return produitRepository.MostPopularCategorieProducts(idCategorie);
+	}
+	@Override
+	public List<Produit> findProduitCategorieAndName(Long idCategorie, String Name) {
+		return produitRepository.findProduitCategorieAndName(idCategorie, Name);
+	}
+	@Override
+	public List<Produit> findProduitSsCategorieAndName(Long idSsCategorie, String Name) {
+		return produitRepository.findProduitSsCategorieAndName(idSsCategorie, Name);
+	}
+	@Override
+	public List<Produit> findProduitSCategorieAndName(Long idSCategorie, String Name) {
+		return produitRepository.findProduitSCategorieAndName(idSCategorie, Name);
+	}
 	
 }

@@ -3,6 +3,8 @@ package tn.esprit.spring.Controller.Charite;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -53,11 +55,13 @@ import tn.esprit.spring.Model.User;
 import tn.esprit.spring.Model.Charite.Charite;
 import tn.esprit.spring.Model.Charite.Endroit;
 import tn.esprit.spring.Model.Charite.Events;
+import tn.esprit.spring.Model.Charite.Pub;
 import tn.esprit.spring.Model.Forum.Sujet;
 import tn.esprit.spring.Repository.Charite.EndroitRepository;
 import tn.esprit.spring.Service.Charite.ChariteDAO;
 import tn.esprit.spring.Service.Charite.EndroitDAO;
 import tn.esprit.spring.Service.Charite.EventsDAO;
+import tn.esprit.spring.Service.Charite.PubDAO;
 import tn.esprit.spring.Service.GestionUser.UserService;
 import tn.esprit.spring.Service.Panier.CommandeImpl;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
@@ -79,9 +83,11 @@ public class ControllerEvents {
 	@Autowired
 	UserService userDAO;
 	@Autowired
+	PubDAO publiciteDAO;
+	@Autowired
 	FileStorageServiceImpl fileStorageServiceImpl;
-	public static final String ACCOUNT_SID = "AC25eeab7c940f79dd272d5bc2d7337437";
-	  public static final String AUTH_TOKEN = "cf00808dd9240106de0943465ae7408e";
+	public static final String ACCOUNT_SID = "ACc175ca36e782887ed7bf1fed9915084f";
+	  public static final String AUTH_TOKEN = "6cba54a73ba1df6bed005ae00960daad";
 	
 	private Long Id;
 	private String titre;
@@ -203,7 +209,7 @@ public class ControllerEvents {
 		return "/EventAdmin.xhtml?faces-redirect=true";
 
 	}
-	public List<Events> findLikeNameM(String titre) {
+	public List<Events> findLikeNameM(String title) {
 		return eventDAO.findLikeName(titre);
 	}
 	/*****evenement du jour*********/
@@ -228,7 +234,6 @@ public class ControllerEvents {
 		return endroitDAO.saveEndroit1(Endroit);
 	}
 	public String addEv() {
-	
 		eventDAO.saveEventss(new Events(titre, description, dateE, nbplace, nbparticipant), files);
 		return "/EventAdmin.xhtml?faces-redirect=true";
 	}
@@ -258,6 +263,6 @@ public class ControllerEvents {
 			List<Events> c= getAllEvents();
 		paginatorRec = new RepeatPaginator2(c);
 	}
-	
+		
 }
 

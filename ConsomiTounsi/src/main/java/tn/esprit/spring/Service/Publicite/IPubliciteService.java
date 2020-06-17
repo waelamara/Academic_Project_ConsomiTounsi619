@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,7 @@ public interface IPubliciteService {
 	public List<Publicite> findAll();
 	public Publicite Update(Publicite p,Long id);
 	public Publicite UpdatePubWithoutImage(Publicite pub) throws IOException, ParseException;
+	public Publicite UpdatePubWithImage(Publicite pub, UploadedFile file) throws IOException, ParseException;
 	public void Delete(Long id);
 	public Publicite findOne(Long id);
 	public float CalculeCoutTotalPub(String gender, String canal, int ageCibledebut, int ageCibleFin, String dateDebut,
@@ -32,7 +35,10 @@ public interface IPubliciteService {
 	public Publicite AffecterImageVideoPub(Publicite pub, MultipartFile file) throws IOException;
 	public List<Publicite> findLikeName(String nom);
 	public List<Publicite> findByCanal(String canal);
+	public List<Publicite> findByCanalAndName(String canal,String nom);
 	public Date ConvertirDate(String date) throws ParseException;
 	public String TypeFile(UploadedFile file) throws IOException;
 	public List<Publicite> findPubForAll();
+	public List<Publicite> getPubForUserConnecter(Date UserDateNaissance,String gender);
+	public void PublicityFinished() throws MessagingException;
 }

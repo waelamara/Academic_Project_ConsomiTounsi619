@@ -1,7 +1,9 @@
 package tn.esprit.spring.Controller.Charite;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Utils.AppConstants;
 import tn.esprit.spring.Model.Charite.Events;
 import tn.esprit.spring.Model.Charite.Pub;
+import tn.esprit.spring.Model.Publicite.Publicite;
 import tn.esprit.spring.Service.Charite.EventsDAO;
 import tn.esprit.spring.Service.Charite.PubDAO;
 import tn.esprit.spring.Service.Produit.FileStorageServiceImpl;
@@ -49,22 +52,32 @@ public class ControllerPub {
 	EventsDAO eventDAO;
 	private Long Id;
 	private String nom;
-	
 	private Date dateDebut;
 	
 	private Date dateFin;
 	private String image;
 	private UploadedFiles files;
 	 public static Long ide ;
+	 private String nomRecherchePub;
+	 
 	 private RepeatPaginator2 paginatorRec;
-	 public RepeatPaginator2 getPaginatorRec() {
+	 
+	 
+	
+	public String getNomRecherchePub() {
+		return nomRecherchePub;
+	}
+	public void setNomRecherchePub(String nomRecherchePub) {
+		this.nomRecherchePub = nomRecherchePub;
+	}
+	public RepeatPaginator2 getPaginatorRec() {
 			return paginatorRec;
 		}
 		public void setPaginatorRec(RepeatPaginator2 paginatorRec) {
 			this.paginatorRec = paginatorRec;
 		}
 		@PostConstruct
-		//@Scheduled(cron="0 * * ? * *")
+		@Scheduled(cron="*/10 * * * * *")
 		public void init(){
 			paginatorRec=new RepeatPaginator2(AfficherPub());
 		}
@@ -132,6 +145,7 @@ public class ControllerPub {
 
 	public String DeletePub(Long idPub) {
 		Pub p = publiciteDAO.findOne(idPub);
+		p.setEvents(null);
 
 		publiciteDAO.Delete(p);
 		return "/EventPub.xhtml?faces-redirect=true";
@@ -151,10 +165,28 @@ public class ControllerPub {
 	}
 	@Transactional
 	public String addPub() {
+	//	this.dateDebut=publiciteDAO.ConvertirDate(dateDebutString);
+     //   this.dateFin=publiciteDAO.ConvertirDate(dateFinString);
 		Events e = eventDAO.findOne(ide);
 		
 		publiciteDAO.savePub(ide, new Pub(nom, dateDebut, dateFin, e), files);
-		return "/EventAdmin.xhtml?faces-redirect=true";
+		return "/EventPub.xhtml?faces-redirect=true";
+	}
+	public List<Pub> getAllPub(){
+		
+			return publiciteDAO.findLikeName(nomRecherchePub);
+		
+	}
+	public String DisplayPublicite(Pub p){
+		this.nom=p.getNom();
+		this.dateDebut=p.getDateDebut();
+		this.dateFin=p.getDateFin();
+		
+		this.image=p.getImage();
+		return "AddPub.xhtml?faces-redirect=true";
+	}
+	public List<Pub> findLikeNameM(String name) {
+		return publiciteDAO.findLikeName(nom);
 	}
 
 }

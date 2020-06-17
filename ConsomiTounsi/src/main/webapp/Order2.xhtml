@@ -5,13 +5,25 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.prime.com.tr/ui"
-	 xmlns:pe="http://primefaces.org/ui/extensions"
-	template="/TemplateAdmin/template.xhtml"> 
+	xmlns:hf="http://highfaces.org"
+	template="/TemplateAdmin/template.xhtml">
 	<ui:define name="Order2">
 
 
 <h:head>
+	<script src="login/vendor/bootstrap/js/popper.js"></script>
+	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+			rel="stylesheet" />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"/>
+
+	<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+	<script src="login/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="login/dist/js/demo.js"></script>
+ 
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
 		<h:outputStylesheet library="Calender" name="core/main.css" /> 
 		<h:outputStylesheet library="Calender" name="daygrid/main.css" /> 
 			<h:outputStylesheet library="Calender" name="timegrid/main.css" /> 
@@ -47,8 +59,42 @@
 
     </script>
       <h:body>
-      <br/> <br/> <br/> <br/>
-       <div id='calendar'></div>
+      
+        
+<!--        <div id='calendar'></div> -->
+<center>
+<h1 class="header smaller lighter blue">SALES STATISTICS</h1>
+
+</center>
+<br/>
+	<div class="row">
+<div ><h1>#{OrderStatistiqueController.cat()}</h1></div>
+
+<div class="col-md-6">
+                <!-- USERS LIST -->
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Category Statistics</h2>
+                    <div class="card-tools">
+                      <h:outputText class="badge badge-danger"  />
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" value="hhhhhhh"><i class="fa fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                   <hf:chart type="pie" title="top Vente of Categories" alpha3d="45" beta3d="0" >
+    <hf:chartSerie name="Number Vente of Categories" value="#{OrderStatistiqueController.cs}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+  </hf:chart> 
+     
+                  </div>
+
+                 <div style="position: absolute;left:100%;padding:20px;width:600px;" id='calendar'></div>
+
+</div>
+</div>
+</div>
+ 
   </h:body>
  
 

@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Template/template.xhtml">
+	<ui:define name="shop">
+	
+	<h:head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="description" content="OneTech shop project"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<h:outputStylesheet library="acceuil" name="styles/bootstrap4/bootstrap.min.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/OwlCarousel2-2.2.1/animate.css" />
+	<h:outputStylesheet library="acceuil" name="plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_styles.css" />
+	<h:outputStylesheet library="acceuil" name="styles/shop_responsive.css" />
+
+	</h:head>
+	
+	
+	
+	<h:body >
+	<!-- Home -->
+<h:panelGroup id="listproduit">
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
+		<div class="home_overlay"></div>
+		<div class="home_content d-flex flex-column align-items-center justify-content-center">
+			<h2 class="home_title"><h:outputText  value="#{ControllerProduit.nameRecherche()}"/></h2>
+		</div>
+	</div>
+
+	<!-- Shop -->
+
+	<div class="shop" >
+		<div class="container">
+		<h:form >
+			<div class="row">
+				<div class="col-lg-3">
+				
+					<!-- Shop Sidebar -->
+					<div class="shop_sidebar">
+						<div class="sidebar_section">
+							<div class="sidebar_title">Categories</div>
+				<ul class="sidebar_categories">		
+				<h:dataTable value="#{shopController.getAllSousCategorie()}" var="scategorie" >
+				<h:column>
+				<li><h:link outcome="/pages/shop">
+				<f:param name="idRecherhceProduit" value="#{scategorie.id}"/>
+				<f:param name="filtrageProduit" value="1"/>
+				<h:outputText  value="#{scategorie.nomSCategorie}"/>
+				</h:link>
+				</li>
+				</h:column>	
+				</h:dataTable>	
+				
+				
+				<h:dataTable value="#{shopController.getAllSousSousCategorie()}" var="sscategorie" >
+				<h:column>
+				<li>
+				<h:link outcome="/pages/shop">
+				<f:param name="idRecherhceProduit" value="#{sscategorie.id}"/>
+				<f:param name="filtrageProduit" value="2"/>
+				<f:param name="idscategorie" value="#{sscategorie.idSCategorie.id}"/>
+				<h:outputText  value="#{sscategorie.nomSsCategorie}"/>
+				</h:link>
+				</li>
+				</h:column>	
+				</h:dataTable>		
+                </ul>
+						
+							
+						</div>
+						
+						<div class="sidebar_section filter_by_section">
+							<div class="sidebar_title">Filter By</div>
+							<div class="sidebar_section">
+							<div class="sidebar_subtitle color_subtitle">Name</div>
+							<h:inputText id="nomProduitIn" value="#{ControllerProduit.nomRechercheProduitInShopPage}"  type="text" class="form-control"  a:placeholder="Search ..">
+							<f:ajax event="keyup" execute="nomProduitIn" render="listproduit" />
+							</h:inputText>
+						</div>
+							<div class="sidebar_subtitle">Price</div>
+							<div class="filter_price">
+								<div id="slider-range" class="slider_range"></div>
+								<p>Range: </p>
+								<p><input type="text" id="amount" class="amount"  style="border:0; font-weight:bold;"/></p>
+							</div>
+						</div>
+						
+						
+					</div>
+
+				</div>
+				
+				<div class="col-lg-9">
+					<!-- Shop Content -->
+
+					<div class="shop_content">
+						<div class="shop_bar clearfix">
+							<div class="shop_product_count"><span>186</span> products found</div>
+							<div class="shop_sorting">
+								<span>Sort by:</span>
+								<ul>
+									<li>
+										<span class="sorting_text">highest rated<i class="fas fa-chevron-down"/></span>
+										<ul>
+											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
+											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
+											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "price" }'>price</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						
+						
+						<div class="product_grid">
+							<div class="product_grid_border"></div>
+
+							<!-- Product Item -->
+							
+							<ui:repeat var="Produit" value="#{ControllerProduit.getProduits()}" varStatus="status">
+							<h:link outcome="/pages/produit">
+								<f:param name="idProduit" value="#{Produit.id}"/>
+								<div class="product_item is_new">
+								<div class="product_border"></div>
+								
+								<ui:repeat value="#{ControllerImagesProduit.getImageProduits(Produit.id)}" var="ImageProduit" varStatus="status">		
+								<div class="product_image d-flex flex-column align-items-center justify-content-center">					
+								<img src="#{ImageProduit.image}" style="width:80%;height:100%" alt="" />
+							    </div>
+								</ui:repeat>
+								
+								<div class="product_content">
+									<div class="product_price" style="color: #000000"><h:outputText  value="#{Produit.prix}"/></div>
+									<div class="product_name" style="color: #000000"><div><h:outputText  value="#{Produit.nomProduit}"/></div></div>
+									<div class="product_name" style="color: #000000"><div><h:outputText  value="#{cartController.numProduitVendu(Produit.id)} Ventes"/></div></div>
+								</div>
+								<div class="product_fav"><i class="fas fa-heart"></i></div>
+								<ul class="product_marks">
+									<li class="product_mark product_discount">-25%</li>
+									<li class="product_mark product_new">new</li>
+								</ul>
+							</div>
+							<br></br>
+							</h:link>
+							</ui:repeat>
+							
+
+						</div>
+					
+						<!-- Shop Page Navigation -->
+
+						<div class="shop_page_nav d-flex flex-row">
+							<div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+							<ul class="page_nav d-flex flex-row">
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">...</a></li>
+								<li><a href="#">21</a></li>
+							</ul>
+							<div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+						</div>
+
+					</div>
+				</div>
+				
+			</div>
+			</h:form>
+		</div>
+	</div>
+
+	<h:panelGroup rendered="#{loginController.userDetails.id==null}">
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForAll()!=null}" >
+<ui:repeat var="Publicite" value="#{ControllerPublicite.incrementNrbVuePublicité(ControllerPublicite.getPubForAll())}" varStatus="status">
+	<h:panelGroup rendered="#{Publicite.image!=null}">
+	<div class="banner" style="height: 60%">
+			<div class="banner_background"><img src="#{Publicite.image}" style="height: 100%;width: 70%;display: block;margin-left: auto; margin-right: auto;" />
+			</div>
+	</div>
+	</h:panelGroup>
+			<h:panelGroup rendered="#{Publicite.video!=null}"  >
+			<div class="banner" style="height: 80%">
+			<div style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;background-repeat: no-repeat;background-size: cover;background-position: center center;position: absolute;top: 0;left: 0;">
+			 <video style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;"    onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4" style="height: 100%;width: 100%;"/>
+			</video> 
+			</div>
+			</div>
+			</h:panelGroup>
+</ui:repeat>
+</h:panelGroup>
+</h:panelGroup>
+
+<h:panelGroup rendered="#{loginController.userDetails.id!=null}">
+	<h:panelGroup rendered="#{ControllerPublicite.getPubForUserConnecter(loginController.userDetails.id)!=null}">
+<ui:repeat var="Publicite" value="#{ControllerPublicite.incrementNrbVuePublicité(ControllerPublicite.getPubForUserConnecter(loginController.userDetails.id))}" varStatus="status">
+	<h:panelGroup rendered="#{Publicite.image!=null}">
+	<div class="banner" style="height: 60%">
+			<div class="banner_background"><img src="#{Publicite.image}" style="height: 100%;width: 70%;display: block;margin-left: auto; margin-right: auto;" />
+			</div>
+	</div>
+	</h:panelGroup>
+			<h:panelGroup rendered="#{Publicite.video!=null}"  >
+			<div class="banner" style="height: 80%">
+			<div style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;background-repeat: no-repeat;background-size: cover;background-position: center center;position: absolute;top: 0;left: 0;">
+			 <video style="height: 100%;width: 100%;display: block;margin-left: auto; margin-right: auto;"    onmouseover="this.play()" onmouseout="this.pause()">
+			<source src="#{Publicite.video}" type="video/mp4" style="height: 100%;width: 100%;"/>
+			</video> 
+			</div>
+			</div>
+			</h:panelGroup>
+</ui:repeat>
+</h:panelGroup>
+</h:panelGroup>
+
+	<div class="viewed">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="viewed_title_container">
+						<h3 class="viewed_title">Recently Viewed</h3>
+						<div class="viewed_nav_container">
+							<div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+						</div>
+					</div>
+
+					<div class="viewed_slider_container">
+						
+						<!-- Recently Viewed Slider -->
+
+						<div class="owl-carousel owl-theme viewed_slider">
+						<ui:repeat var="Produit" value="#{ControllerProduit.recentlyViewed}" varStatus="status">
+							<div class="owl-item">
+								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+									<ui:repeat value="#{ControllerImagesProduit.getImageProduits(Produit.id)}" var="ImageProduit" varStatus="status">		
+									<h:link outcome="/pages/produit">
+								<f:param name="idProduit" value="#{Produit.id}"/>
+									<div class="viewed_image">
+									<img src="#{ImageProduit.image}" style="width:80%;height:100%" alt=""/>
+									</div>
+									</h:link>
+									</ui:repeat>
+									<div class="viewed_content text-center">
+										<div class="viewed_price"><h:outputText  value="#{Produit.prix}"/></div>
+										<div class="viewed_name"><a href="#"><h:outputText  value="#{Produit.nomProduit}"/></a></div>
+									</div>
+									<ul class="item_marks">
+								
+									</ul>
+								</div>
+							</div>
+							</ui:repeat>
+
+							
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Brands -->
+
+	<div class="brands">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="brands_slider_container">
+						
+						<!-- Brands Slider -->
+
+						<div class="owl-carousel owl-theme brands_slider">
+							
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_1.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_2.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_3.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_4.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_5.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_6.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_7.jpg" alt=""/></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_8.jpg" alt=""/></div></div>
+
+						</div>
+						
+						<!-- Brands Slider Navigation -->
+						<div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+						<div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+						<div class="newsletter_title_container">
+							<div class="newsletter_icon"><img src="images/send.png" alt=""/></div>
+							<div class="newsletter_title">Sign up for Newsletter</div>
+							<div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
+						</div>
+						<div class="newsletter_content clearfix">
+							<form action="#" class="newsletter_form">
+								<input type="email" class="newsletter_input" required="required" placeholder="Enter your email address"/>
+								<button class="newsletter_button">Subscribe</button>
+							</form>
+							<div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="acceuil/js/jquery-3.3.1.min.js"></script>
+<script src="acceuil/styles/bootstrap4/popper.js"></script>
+<script src="acceuil/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="acceuil/plugins/greensock/TweenMax.min.js"></script>
+<script src="acceuil/plugins/greensock/TimelineMax.min.js"></script>
+<script src="acceuil/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="acceuil/plugins/greensock/animation.gsap.min.js"></script>
+<script src="acceuil/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="acceuil/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="acceuil/plugins/easing/easing.js"></script>
+<script src="acceuil/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="acceuil/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="acceuil/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="acceuil/js/shop_custom.js"></script>
+	
+	
+	
+	</h:panelGroup>
+	</h:body>
+	</ui:define>
+	</ui:composition>

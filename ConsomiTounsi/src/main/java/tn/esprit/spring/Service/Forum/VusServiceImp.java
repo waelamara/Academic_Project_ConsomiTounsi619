@@ -1,6 +1,7 @@
 package tn.esprit.spring.Service.Forum;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,6 +97,12 @@ public class VusServiceImp implements IVusService {
 		if (v == null)
 			return false;
 		return true;
+	}
+
+	@Override
+	public List<Long> mostPopularPost() {
+		
+		return vusRepository.mostidsujetviews();
 	}
 
 }

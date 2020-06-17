@@ -112,7 +112,7 @@
 													style="color:black ;font-family:arial,sans-serif;font-weight: normal;font-size:90%;"
 													class=" contact_form_phone input_field fas fa-chevron-down">
 													<ul class="custom_list clc">
-														<f:selectItem itemLabel="All Commande :" />
+														<f:selectItem itemLabel="All Commande :" itemValue='0' />
 														<c:forEach var="idc"
 															items="#{ContactController.findIdCommande(loginController.userDetails.id)}"
 															varStatus="status">
