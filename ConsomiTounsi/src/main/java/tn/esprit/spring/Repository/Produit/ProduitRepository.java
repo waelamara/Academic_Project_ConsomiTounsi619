@@ -31,4 +31,8 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 	@Query(value = "SELECT * FROM produit WHERE id=?1", nativeQuery = true)
 	public Produit findProduit(Long idProduit);
 	
+	@Query(value = "SELECT * FROM `produit` ORDER by id DESC LIMIT 3", nativeQuery = true)
+	public List<Produit> getLast5Products();
+	
+	
 }

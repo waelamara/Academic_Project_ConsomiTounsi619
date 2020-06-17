@@ -17,7 +17,17 @@
 			<script src="dash/js/ace-extra.min.js"></script>
 		</h:head>
 		<h:body>
-		
+		<h:selectOneMenu id="search" value ="#{listUsersController.choix}">
+   <f:selectItem itemValue = "username"  itemLabel ="Username"  /> 
+   <f:selectItem itemValue ="email" itemLabel ="Email"  /> 
+</h:selectOneMenu> 
+
+		  
+    <h:inputText id="search1" value="#{listUsersController.cle}"></h:inputText>
+    
+    <h:commandButton value="Search" action="#{listUsersController.getUserSelonChoix(listUsersController.choix,listUsersController.cle)}">
+<!--          <f:ajax execute="search" render="output"></f:ajax>   -->
+    </h:commandButton>
 		<center>
 		<section class="blog_area">
         <div class="container">

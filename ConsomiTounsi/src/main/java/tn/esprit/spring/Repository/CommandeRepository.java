@@ -72,4 +72,10 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	public Float TotalSales();
 	
 	
+	@Query(value = "SELECT p.nom_produit, SUM(l.quantity) AS TotalQuantity FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE c.status='payee' GROUP BY p.id ORDER BY SUM(l.quantity) DESC LIMIT 5", nativeQuery = true)
+	public List<Object[]> Top5Product();
+	
+	@Query(value = "SELECT SUM(p.prix_achat*l.quantity) AS Total FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE c.status='payee' ", nativeQuery = true)
+	public Float CoutSales();
+	
 }

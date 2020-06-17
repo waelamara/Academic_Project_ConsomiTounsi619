@@ -167,6 +167,11 @@ System.out.println("Role"+U.getRoles().stream().findFirst().get().getId());
 				navigateTo = "acceuil.xhtml?faces-redirect=true";
 			loggedIn = true; 
 			}
+			else if(U.getRoles().stream().findFirst().get().getId()==2)
+			{
+				navigateTo = "Chart.xhtml?faces-redirect=true";
+			loggedIn = true; 
+			}
 			else if(U.getRoles().stream().findFirst().get().getId()==4)
 			{
 				navigateTo = "LoginDeliveryController.xhtml?faces-redirect=true";
