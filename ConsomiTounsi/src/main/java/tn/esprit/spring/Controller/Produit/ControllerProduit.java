@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jayway.jsonpath.ParseContext;
+
 import tn.esprit.spring.Model.Produit.Categorie;
 import tn.esprit.spring.Model.Produit.Produit;
 import tn.esprit.spring.Model.Produit.SCategorie;
@@ -52,7 +54,7 @@ public class ControllerProduit {
 	private String nomProduit;
 	private float prix;
 	private String description;
-	public  Long barcode;
+	//public  Long barcode;
 	private float poids;
 	private float prixAchat;
 	private int filtrageProduit;
@@ -71,6 +73,8 @@ public class ControllerProduit {
 	private SsCategorie idSsCategorie;
 	private int quantiteProduitdeMoisVendu;
 	private List <Produit> recentlyViewed=new ArrayList<Produit>();
+	private String barcodeValidator;
+	private String alert=null;
 	
 	public List<Produit> getProduitsByCategorie(Long idCategorie) {
 		return iproduitService.findProduitCategorie(idCategorie);
@@ -173,15 +177,18 @@ public class ControllerProduit {
 	
 	
 	public String addProduit() {
-	if(idToUpdate!=null){
+	
+		if(idToUpdate!=null){
 
-		iproduitService.UpdateProduit(new Produit(idToUpdate ,nomProduit,  prix,  description,  barcode,  poids,  prixAchat));
+		iproduitService.UpdateProduit(new Produit(idToUpdate ,nomProduit,  prix,  description,  Long.parseLong(barcodeValidator),  poids,  prixAchat));
 		idToUpdate=null;
+		alert="modifier";
 		HideProduits();
 		return "/pages/AffichageProduitAdmin.xhtml?faces-redirect=true";
 		}
 	else {
-			iproduitService.addProduitWithImage(new Produit( nomProduit,  prix,  description,  barcode,  poids,  prixAchat),files);
+			iproduitService.addProduitWithImage(new Produit( nomProduit,  prix,  description,  Long.parseLong(barcodeValidator),  poids,  prixAchat),files);
+			alert="ajouter";
 			HideProduits();
 			return "/pages/AffichageProduitAdmin.xhtml?faces-redirect=true";
 		}
@@ -204,7 +211,7 @@ public class ControllerProduit {
 		this.prix=0;
 		this.poids=0;
 		this.prixAchat=0;
-		this.barcode=null;
+		this.barcodeValidator=null;
 		this.nomSsCategorie=null;
 	}
 	
@@ -219,7 +226,7 @@ public class ControllerProduit {
 		this.prix=p.getPrix();
 		this.poids=p.getPoids();
 		this.prixAchat=p.getPrixAchat();
-		this.barcode=p.getBarcode();
+		this.barcodeValidator=p.getBarcode().toString();
 		
 		return "/pages/AdminFormProduit.xhtml?faces-redirect=true";
 	}
@@ -277,8 +284,8 @@ public class ControllerProduit {
 	}
 	
 	public String barcodeImage(){
-		System.out.println(barcode.toString().substring(0, 13));
-		return barcode.toString().substring(0, 13);
+		System.out.println(barcodeValidator);
+		return barcodeValidator.substring(0, 13);
 	}
 	
 	
@@ -335,7 +342,10 @@ public class ControllerProduit {
 		    else
 		    	listNomSsouscateg = new ArrayList<String>(); ;
 	    }
-	
+	 public void vider()
+		{
+			alert=null;
+		}
 	
 	
 	public UploadedFiles getFiles() {
@@ -382,13 +392,13 @@ public class ControllerProduit {
 
 
 
-	public Long getBarcode() {
-		return barcode;
-	}
-
-	public void setBarcode(Long barcode) {
-		this.barcode = barcode;
-	}
+//	public Long getBarcode() {
+//		return barcode;
+//	}
+//
+//	public void setBarcode(Long barcode) {
+//		this.barcode = barcode;
+//	}
 
 	public float getPoids() {
 		return poids;
@@ -524,6 +534,22 @@ public class ControllerProduit {
 
 	public void setNomRechercheProduitInShopPage(String nomRechercheProduitInShopPage) {
 		this.nomRechercheProduitInShopPage = nomRechercheProduitInShopPage;
+	}
+
+	public String getBarcodeValidator() {
+		return barcodeValidator;
+	}
+
+	public void setBarcodeValidator(String barcodeValidator) {
+		this.barcodeValidator = barcodeValidator;
+	}
+
+	public String getAlert() {
+		return alert;
+	}
+
+	public void setAlert(String alert) {
+		this.alert = alert;
 	}
 	
 	

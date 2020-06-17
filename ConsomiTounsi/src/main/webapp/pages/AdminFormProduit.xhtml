@@ -259,16 +259,16 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-6">Barcode</label>
 										<h:panelGroup id="barcode">
 										<div class="col-sm-9">
-										<h:inputText  value="#{ControllerProduit.barcode}" id="codeabarre" a:placeholder="619-xxx-xxx-xxx-x" required="true" requiredMessage="Barcode required *" validatorMessage="Error Barcode" >
-										<f:validateRegex  pattern="^[0-9]{1,8}$"/>
+										<h:inputText  value="#{ControllerProduit.barcodeValidator}" id="codeabarre" a:placeholder="619-xxx-xxx-xxx-x" required="true" requiredMessage="Barcode required *" validatorMessage="Error Barcode" >
+										<f:validateRegex  pattern="^619[0-9]{1,10}$"/>
 										<f:ajax event="keyup" execute="codeabarre"  render="msgbarcode changebarcode" />
 										</h:inputText>
 											
 											
 											<span class="input-icon input-icon-right">
-											<h:commandLink  id="bar"><f:ajax event="click"  render="barcode" /><i class="ace-icon fa fa-refresh green"></i></h:commandLink>
+											<h:commandLink  id="bar"><f:ajax event="click"  render="barcode codeabarre msgbarcode" /><i class="ace-icon fa fa-refresh green"></i></h:commandLink>
 											</span>
-											<h:panelGroup id="changebarcode" rendered="#{ControllerProduit.barcode.toString().length()==13}" >
+											<h:panelGroup id="changebarcode" rendered="#{ControllerProduit.barcodeValidator.length()==13}" >
 											<p:barcode  value="#{ControllerProduit.barcodeImage()}" type="ean13" />
 											</h:panelGroup>
 										</div>
@@ -319,7 +319,7 @@
   
 					</h:form>
 		
-			
+
 
                       
                  
@@ -343,8 +343,8 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="dash/js/jquery-2.1.4.min.js"></script>
-
+		
+	
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -352,7 +352,7 @@
 <![endif]-->
 
 		<script src="dash/js/bootstrap.min.js"></script>
-
+<script src="dash/js/jquery-2.1.4.min.js"></script>
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>

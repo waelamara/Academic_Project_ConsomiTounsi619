@@ -319,7 +319,19 @@
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div></div></div></div>
-
+		<script src="dash/js/sweetalert.min.js"></script>
+	<h:panelGroup rendered="#{ControllerProduit.alert eq ('ajouter')}"> 
+ 	<script>swal("Add successfully  ", "Your Product has been added", "success");</script>
+  	<h:panelGroup rendered="#{ControllerProduit.vider()}">
+			</h:panelGroup>
+			</h:panelGroup>
+			
+				
+	<h:panelGroup rendered="#{ControllerProduit.alert eq ('modifier')}"> 
+ 	<script>swal("Update successfully  ", "Your Product has been updated", "success");</script>
+  	<h:panelGroup rendered="#{ControllerProduit.vider()}">
+			</h:panelGroup>
+			</h:panelGroup>
 
 
 

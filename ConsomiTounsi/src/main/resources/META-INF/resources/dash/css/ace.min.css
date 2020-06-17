@@ -20846,7 +20846,7 @@ transform
 
 .no-skin .nav-list>li.active>a {
 	font-weight: 700;
-	color: #2B7DBC
+	color: #eb141a
 }
 
 .no-skin .nav-list>li.active>a, .no-skin .nav-list>li.active>a:focus,
@@ -20871,7 +20871,7 @@ transform
 }
 
 .no-skin .nav-list>li .submenu>li.active>a {
-	color: #2B7DBC
+	color: #eb141a
 }
 
 .no-skin .nav-list>li .submenu>li.active>a>.menu-icon {
@@ -20966,7 +20966,7 @@ transform
 }
 
 .no-skin .nav-list li.active>a:after {
-	border-right-color: #2B7DBC
+	border-right-color: #eb141a
 }
 
 .no-skin .nav-list>li.active:after {
@@ -20977,7 +20977,7 @@ transform
 	top: -1px;
 	bottom: 0;
 	z-index: 1;
-	border: 2px solid #2B7DBC;
+	border: 2px solid #eb141a;
 	border-width: 0 2px 0 0
 }
 
@@ -21181,7 +21181,7 @@ transform
 		border-right-color: #79B0CE
 	}
 	.no-skin .sidebar.h-sidebar .nav-list>li.active:before {
-		background-color: #2B7DBC
+		background-color: #eb141a
 	}
 	.no-skin .sidebar.h-sidebar .nav-list>li.active>a:after {
 		border-width: 0 0 2px;

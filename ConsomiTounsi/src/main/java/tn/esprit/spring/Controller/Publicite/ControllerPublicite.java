@@ -56,6 +56,7 @@ public class ControllerPublicite {
 	private Random rand = new Random();
 	private Publicite publicite;
 	private Publicite publiciteForUserConnecter;
+	private String alert=null;
 	
 	public String addPublicite() throws IOException, ParseException {
 
@@ -65,6 +66,7 @@ public class ControllerPublicite {
 			iPubliciteService.UpdatePubWithoutImage(new Publicite( idToUpdate,nom,  canal,  genderCible,dateDebut,dateFin,nbrFinalVue,  debutAgeCible,finAgeCible,video,image,emailProprietaire,numeroProprietaire,status));
 			HidePub();
 			idToUpdate=null;
+			alert="modifier";
 			 return "/pages/AllPublicities.xhtml?faces-redirect=true";
 		}
 		else if(idToUpdate!=null && file.getSize()!=0)
@@ -72,12 +74,14 @@ public class ControllerPublicite {
 			iPubliciteService.UpdatePubWithImage(new Publicite( idToUpdate,nom,  canal,  genderCible,dateDebut,dateFin,nbrFinalVue,  debutAgeCible,finAgeCible,emailProprietaire,numeroProprietaire,status), file);
 			HidePub();
 			idToUpdate=null;
+			alert="modifier";
 			 return "/pages/AllPublicities.xhtml?faces-redirect=true";
 		}
 		
 		else{
 			iPubliciteService.AddPub(new Publicite( nom,  canal,  genderCible,dateDebut,dateFin,  debutAgeCible,finAgeCible,emailProprietaire,numeroProprietaire), file);
 		HidePub();
+		alert="ajouter";
 		 return "/pages/AllPublicities.xhtml?faces-redirect=true";
 		}
 	}
@@ -196,7 +200,10 @@ public class ControllerPublicite {
 		return pub;
 	}
 	
-	
+	 public void vider()
+		{
+			alert=null;
+		}
 	
 	
 	
@@ -466,6 +473,16 @@ public class ControllerPublicite {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+
+	public String getAlert() {
+		return alert;
+	}
+
+
+	public void setAlert(String alert) {
+		this.alert = alert;
 	}
 	
 	

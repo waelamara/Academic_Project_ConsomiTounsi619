@@ -95,7 +95,9 @@ public class RestControllerProduit {
 		System.out.println(Bcode);
 		System.out.println(Bcode);
 		setBarcodeWithPhone(Bcode);
-		controllerProduit.setBarcode(Bcode);
+		controllerProduit.setBarcodeValidator(Bcode.toString());
+		System.out.println(controllerProduit.getBarcodeValidator());
+		System.out.println(Bcode.toString());
 		return Bcode;
 		
 	}

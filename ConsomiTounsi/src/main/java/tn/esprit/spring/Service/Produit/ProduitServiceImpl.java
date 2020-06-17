@@ -3,6 +3,8 @@ package tn.esprit.spring.Service.Produit;
 import java.io.IOException;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.primefaces.model.file.UploadedFile;
 import org.primefaces.model.file.UploadedFiles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,7 +142,7 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 
-
+	@Transactional
 	public void addProduitWithImage(Produit p, UploadedFiles files) {
 		SsCategorie ssc = sousSousCategorieRepository.findSsCategorieByName(controllerSousSousCategorie.getNomSsCategorie());
 		p.setIdSsCategorie(ssc);

@@ -36,14 +36,14 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 	
 	@Query(value = "SELECT * FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE c.status='payee' GROUP BY p.id ORDER BY SUM(l.quantity) DESC LIMIT 16", nativeQuery = true)
 	public List<Produit> MostPopularProducts();
-	@Query(value = "SELECT Sum(l.quantity) as n FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE p.id=2 and c.status='payee'", nativeQuery = true)
+	@Query(value = "SELECT Sum(l.quantity) as n FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE p.id=?1 and c.status='payee'", nativeQuery = true)
 	public int QuantiteProduitdeMoisVendu(Long idProduit);
 	@Query(value = "SELECT * FROM produit p JOIN ss_categorie ssc ON p.id_ss_categorie_id=ssc.id JOIN scategorie sc ON ssc.idscategorie_id=sc.id JOIN categorie c ON sc.id_categorie_id=c.id WHERE c.id=?1 LIMIT 12", nativeQuery = true)
 	public List<Produit> MostPopularCategorieProducts(Long idCategorie);
 	
 	@Query(value = "SELECT * FROM produit p JOIN ss_categorie ssc ON p.id_ss_categorie_id=ssc.id JOIN scategorie sc ON ssc.idscategorie_id=sc.id JOIN categorie c ON sc.id_categorie_id=c.id WHERE c.id=?1 and p.nom_produit LIKE ?2%", nativeQuery = true)
 	public List<Produit> findProduitCategorieAndName(Long idCategorie,String Name);
-	@Query(value = "SELECT * FROM produit  WHERE id_ss_categorie_id=?1 and p.nom_produit LIKE ?2%", nativeQuery = true)
+	@Query(value = "SELECT * FROM produit  WHERE id_ss_categorie_id=?1 and nom_produit LIKE ?2%", nativeQuery = true)
 	public List<Produit> findProduitSsCategorieAndName(Long idSsCategorie,String Name);
 	@Query(value = "SELECT * FROM produit p JOIN ss_categorie ssc ON p.id_ss_categorie_id=ssc.id JOIN scategorie sc ON ssc.idscategorie_id=sc.id WHERE sc.id=?1 and p.nom_produit LIKE ?2%", nativeQuery = true)
 	public List<Produit> findProduitSCategorieAndName(Long idSCategorie,String Name);

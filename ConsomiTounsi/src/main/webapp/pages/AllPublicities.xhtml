@@ -292,7 +292,19 @@
 					</div><!-- /.page-content -->
 				</div></div></div></div>
 
-
+	<script src="dash/js/sweetalert.min.js"></script>
+	<h:panelGroup rendered="#{ControllerPublicite.alert eq ('ajouter')}"> 
+ 	<script>swal("Add successfully  ", "Your Publicity has been added", "success");</script>
+  	<h:panelGroup rendered="#{ControllerPublicite.vider()}">
+			</h:panelGroup>
+			</h:panelGroup>
+			
+				
+	<h:panelGroup rendered="#{ControllerPublicite.alert eq ('modifier')}"> 
+ 	<script>swal("Update successfully  ", "Your Publicity has been updated", "success");</script>
+  	<h:panelGroup rendered="#{ControllerPublicite.vider()}">
+			</h:panelGroup>
+			</h:panelGroup>
 
 
 		<script src="dash/js/jquery-2.1.4.min.js"></script>
