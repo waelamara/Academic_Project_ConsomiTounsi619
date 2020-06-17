@@ -20,6 +20,10 @@ public interface SujetRepository extends JpaRepository<Sujet, Long> {
 	
 	@Query(value="SELECT count(*) FROM `sujet` WHERE `id_categorie_sujet`=?1",nativeQuery=true)
 	public int countSujetbycatId(Long categId);
+	
+	////Raed
+	@Query(value = "SELECT cs.nom_categorie, count(*) AS nb_suj FROM sujet s JOIN categorie_sujet cs ON s.id_categorie_sujet=cs.id GROUP BY cs.id LIMIT 10", nativeQuery = true)
+	public List<Object[]> SujetByCategoty();
 
 	@Query(value = "SELECT DISTINCT * FROM sujet where etat='waiting' ORDER BY date_ajout DESC", nativeQuery = true)
 	public List<Sujet> findAllbyEtatWaiting();

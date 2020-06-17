@@ -34,6 +34,10 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 	@Query(value = "SELECT * FROM produit WHERE barcode LIKE ?1%", nativeQuery = true)
 	public List<Produit> findProduitByBarcode(String barcode);
 	
+	@Query(value = "SELECT * FROM `produit` ORDER by id DESC LIMIT 3", nativeQuery = true)
+	public List<Produit> getLast5Products();
+	
+	
 	@Query(value = "SELECT * FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE c.status='payee' GROUP BY p.id ORDER BY SUM(l.quantity) DESC LIMIT 16", nativeQuery = true)
 	public List<Produit> MostPopularProducts();
 	@Query(value = "SELECT Sum(l.quantity) as n FROM produit p JOIN ligne_commande l on p.id=l.produit_id JOIN commande c on l.commande_id =c.id WHERE p.id=?1 and c.status='payee'", nativeQuery = true)

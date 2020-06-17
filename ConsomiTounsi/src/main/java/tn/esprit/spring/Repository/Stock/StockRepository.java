@@ -30,6 +30,17 @@ public interface StockRepository extends JpaRepository <Stock, Long>  {
 	@Query(value = "SELECT * FROM Stock WHERE produit_id LIKE ?1%", nativeQuery = true)
 	public List<Stock> stockparproduit(Long idproduit);
 	
+	//raed
+	@Query(value = "SELECT SUM(s.quantite) FROM stock as s WHERE s.validite>Date(now()) AND s.id_produit_id=?1", nativeQuery = true)
+	public int getProduitStockNew(Long idproduit);
+	@Query(value = "SELECT SUM(s.quantite) FROM stock as s WHERE s.validite<Date(now()) AND s.id_produit_id=?1", nativeQuery = true)
+	public int getProduitStockOld(Long idproduit);
+	@Query(value = "SELECT DISTINCT s.id_produit_id FROM stock as s ", nativeQuery = true)
+	public List<Long> getListProduitStock();
+	
+	///
+
+
 	@Query(value = "SELECT NEW tn.esprit.spring.Model.Stock.StockByProd(SUM(s.quantite),p.nomProduit) FROM Stock s JOIN s.idProduit p GROUP BY s.idProduit")
 	public List<StockByProd> QuantiteByProduit();
 //	JOIN s.idProduit p

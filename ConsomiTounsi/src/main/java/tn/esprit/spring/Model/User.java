@@ -117,6 +117,8 @@ public class User implements Serializable {
 	@Column(name = "signupDay")
 	private LocalDate signupDay;
 	
+	
+	
 
 	public AuthProvider getProvider() {
 		return provider;
@@ -537,5 +539,13 @@ public class User implements Serializable {
 	public void setSignupDay(LocalDate signupDay) {
 		this.signupDay = signupDay;
 	}
+
+	
+	@OneToMany(mappedBy = "idUser", fetch = FetchType.EAGER)
+	@JsonIgnore
+	public Set<Salaire> salaire;
+	
+	
+	
 
 }

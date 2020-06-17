@@ -31,6 +31,40 @@
 			</link>
 		</h:head>
 		<h:body>
+<<<<<<< HEAD
+		<h:selectOneMenu id="search" value ="#{listUsersController.choix}">
+   <f:selectItem itemValue = "username"  itemLabel ="Username"  /> 
+   <f:selectItem itemValue ="email" itemLabel ="Email"  /> 
+</h:selectOneMenu> 
+
+		  
+    <h:inputText id="search1" value="#{listUsersController.cle}"></h:inputText>
+    
+    <h:commandButton value="Search" action="#{listUsersController.getUserSelonChoix(listUsersController.choix,listUsersController.cle)}">
+<!--          <f:ajax execute="search" render="output"></f:ajax>   -->
+    </h:commandButton>
+		<center>
+		<section class="blog_area">
+        <div class="container">
+		<div class="row">
+							<div class="col-xs-12">
+			
+							
+				
+									<ui:repeat var="event"
+										value="#{ControllerEvents.paginatorRec.model}" varStatus="status">
+										<div class="Event_content">
+										
+											<div
+												class="event_image d-flex flex-column align-items-center justify-content-center">
+												<img src="#{event.image}" style="width: 40%; height: 60%"
+													class="avatar img-circle img-thumbnail" alt="avatar"/>
+											</div>
+										
+											<div class="form-group">
+												<label style="color: #df3b3b">Title
+													:</label>
+
 
 
 			<h:form>

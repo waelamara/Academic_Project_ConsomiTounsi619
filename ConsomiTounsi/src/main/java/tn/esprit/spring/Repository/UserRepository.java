@@ -59,6 +59,18 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT COUNT(*) FROM user ", nativeQuery = true)
 	public int NombreUsers();
 	
+	
+    //Charite Event 
+	@Query(value = "SELECT e.nbplace FROM t_events as e WHERE e.id=?1", nativeQuery = true)
+	public int NombrePlacesEvent(Long idevent);
+	@Query(value = "SELECT e.nbparticipant FROM t_events as e WHERE e.id=?1", nativeQuery = true)
+	public int NombreParticpEvent(Long idevent);
+	@Query(value = "SELECT DISTINCT e.id FROM t_events as e", nativeQuery = true)
+	public List<Long> EventList();
+	
+	@Query(value = "SELECT SUM(salaire_brut) FROM `salaire`", nativeQuery = true)
+	public float TotalSalaries();
+
 	@Query(value = "SELECT count(*) from user where point_fidelite <100 ",nativeQuery = true)
 	public int nombreUsersbyPointfideletInf100();
     //SELECT * FROM `user`  ORDER BY `signup_day` DESC LIMIT 3

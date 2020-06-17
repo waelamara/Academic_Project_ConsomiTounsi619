@@ -30,6 +30,9 @@ public interface PubliciteRepository extends JpaRepository<Publicite, Long> {
 	public List<Publicite> findByCanalAndName(String canal,String nom);
 	@Query(value = "SELECT * FROM publicite WHERE gender_cible='TOUS' and debut_age_cible=10 and fin_age_cible=70 and status=1", nativeQuery = true)
 	public List<Publicite> findPubForAll();
+	
+	@Query(value = "SELECT SUM(p.cout) FROM publicite p", nativeQuery = true)
+	public float TotalProfitPub();
 	@Query(value = "SELECT * FROM publicite WHERE year(NOW())-year(?1) BETWEEN debut_age_cible AND fin_age_cible and gender_cible=?2 and status=1", nativeQuery = true)
 	public List<Publicite> getPubForUserConnecter(Date UserDateNaissance,String gender);
 	@Query(value = "SELECT * FROM publicite WHERE NOW()>date_fin and status=1", nativeQuery = true)

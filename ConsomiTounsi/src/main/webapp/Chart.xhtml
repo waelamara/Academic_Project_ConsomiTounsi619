@@ -9,7 +9,7 @@
 	xmlns:hf="http://highfaces.org"
 	xmlns:b="http://primefaces.org/ui"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-	template="/TemplateAdmin/template.xhtml">
+	template="/TemplateAdmin/template2.xhtml">
 	<ui:define name="Chart">
 	
 	<h:head>
@@ -19,6 +19,11 @@
 <link
 			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
 			rel="stylesheet" />
+			<link
+			href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+			rel="stylesheet" />
+								<h:outputStylesheet library="login" name="dist/css/adminlte.min.css" />
+			
  
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   </link>
@@ -93,26 +98,110 @@
           </div>
           <!-- ./col -->
         </div>
-	
+	<div class="row">
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fa fa-file-invoice-dollar"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Advertising Revenue</span>
+                <span class="info-box-number">
+                  #{chartController.TotalProfitPub()}
+                  <small>TND</small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fa fa-money-bill-alt"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Cost of Products Sold</span>
+                <span class="info-box-number">
+                #{chartController.TotalCouts()}
+                  <small>TND</small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-coins"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Total Salaries</span>
+                <span class="info-box-number">
+                 #{chartController.getTotalSalaries()}
+                  <small>TND</small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-hand-holding-usd"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Benefits</span>
+                <span class="info-box-number">
+                #{chartController.getBenefices()}
+                  <small>TND</small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
 	  	<div ><h1>#{chartController.getUserSelonSexe()}</h1></div>
+	  	<div ><h1>#{chartController.getTop5Products()}</h1></div>
+	  	<div ><h1>#{chartController.getNbSujetByCatg()}</h1></div>
+	  	<div ><h1>#{chartController.ReclamtionPerDayEtat()}</h1></div>
+	  	<div ><h1>#{chartController.getRecentsProducts()}</h1></div>
+	  	<div ><h1>#{chartController.StockOldNew()}</h1></div>
+	  	<div ><h1>#{chartController.EventNbpartPlaces()}</h1></div>
 	  	<!-- USERS LIST -->
 	  	
 
         <div class="row">
 	  	
-	  	<div class="col-md-6">
+	  	
+   <div class="col-md-6">
 	  	
                 <div class="card">
                   <div class="card-header">
-                  <div class="card-tools">
+                   <h3 class="card-title">Users Genders</h3>
+                    <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
                       </button>
+                      
                     </div>
-                    <h3 class="card-title">Users Gender</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
 					<hf:chart type="pie" title="Users Gender" alpha3d="45" beta3d="0">
     <hf:chartSerie name="Sexe" value="#{chartController.sexes}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
   </hf:chart>  
-  </div></div></div>
+                  </div>
+                  </div>
+                  
+                  </div>
 
               <div class="col-md-6">
 	  	
@@ -120,7 +209,8 @@
                   <div class="card-header">
                   
                     <div class="card-tools">
-                      <span class="badge badge-danger">8 New Members</span>
+                                          <span class="badge badge-danger">8 New Members</span>
+                    
                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
                       </button>
                       
@@ -136,7 +226,7 @@
                       
                       <ui:repeat var="ImagesUser" value="#{ImageUserController.getImageUser(user.id)}" varStatus="status">
 						
-						<h:graphicImage height="50px" width="50px" alt="User Image" value="#{ImagesUser.image}" rendered="#{not empty ImagesUser.image}" />
+						<h:graphicImage height="70px" width="70px" alt="User Image" value="#{ImagesUser.image}" rendered="#{not empty ImagesUser.image}" />
 						
 
 						</ui:repeat>
@@ -166,50 +256,191 @@
                 <div class="row">
                   <div class="col-md-8">
                     <div class="chart-responsive">
-                      <canvas id="pieChart" height="150"></canvas>
+                      <hf:chart type="pie" title="5 Best-Selling Products" alpha3d="35" beta3d="0">
+    <hf:chartSerie name="Sold" value="#{chartController.top5}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"
+ dataLabel="&lt;b>{point.name}&lt;/b>: {point.percentage:.1f} % &lt;i>({point.y})&lt;/i>"/>
+  </hf:chart>  
+
                     </div>
                     <!-- ./chart-responsive -->
                   </div>
                   <!-- /.col -->
-                  
+                  <div class="col-md-4">
+                    <ul class="chart-legend clearfix">
+                    <ui:repeat var="point" value="#{chartController.top5}" varStatus="status">
+                      <li style="margin-bottom: 10px;"><i class="fa fa-circle text-info">#{point.amount} Times</i> #{point.name}</li>
+                      </ui:repeat>
+                    </ul>
+                  </div>
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
               </div>
               <!-- /.card-body -->
-              <div class="card-footer bg-white p-0">
-                <ul class="nav nav-pills flex-column">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      United States of America
-                      <span class="float-right text-danger">
-                        <i class="fa fa-arrow-down text-sm"></i>
-                        12%</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      India
-                      <span class="float-right text-success">
-                        <i class="fa fa-arrow-up text-sm"></i> 4%
-                      </span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      China
-                      <span class="float-right text-warning">
-                        <i class="fa fa-arrow-left text-sm"></i> 0%
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.footer -->
             </div>
             <!-- /.card -->
             </div>
-                  </div>
+            <div class="col-md-6">
+                  <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Number of subjects by category</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                
+                 
+                    <div class="chart-responsive">
+                      <hf:chart type="line" name="Number of subjects" value="#{chartController.sujetc}" var="sujet" xaxisLabel="Categories"
+     point="#{sujet.amount}" tickLabel="#{sujet.name}" title="Number of subjects by category"/>
+
+
+                <!-- /.row -->
+              
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+            </div>
+            </div>
+             <div class="col-md-6">
+                  <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Claims per Day by State</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                    
+                    <!-- ./chart-responsive -->
+                 <hf:chart type="column" value="#{chartController.reclmations}" var="rec" stacking="normal"
+     point="#{rec.amount}" tickLabel="#{rec.name}" title="Claims per Day by State"/>
+     
+     
+                <!-- /.row -->
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Recently Added Products</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                <ui:repeat var="p" value="#{chartController.produits}" varStatus="status">
+                  <li class="item">
+                    <div class="product-img">
+                    <ui:repeat value="#{ControllerImagesProduit.getImageProduits(p.id)}" var="ImageProduit" varStatus="status">		
+												
+								<img src="#{ImageProduit.image}" alt="Product Image" class="img-size-50"  />
+							    
+								</ui:repeat>
+                    </div>
+                    <div class="product-info">
+                      <a href="javascript:void(0)" class="product-title">#{p.nomProduit}
+                        <span class="badge badge-warning float-right">TND #{p.prixAchat}</span></a>
+                      <span class="product-description">
+                        #{p.description}
+                      </span>
+                    </div>
+                  </li>
+                  </ui:repeat>
+                  <!-- /.item -->
+                  
+                  <!-- /.item -->
+                  
+                  <!-- /.item -->
+                  
+                  <!-- /.item -->
+                </ul>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer text-center">
+                <a href="javascript:void(0)" class="uppercase">View All Products</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+            </div>
+             <div class="col-md-6">
+                  <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Claims per Day by State</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                    
+                    <!-- ./chart-responsive -->
+                 
+     
+     <hf:chart type="column" model="#{chartController.model}"  
+     title="New vs Old Stocks"/>
+     
+     
+                <!-- /.row -->
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+            </div>
+            <div class="col-md-6">
+                  <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">NB Places Participants Events</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                    
+                    <!-- ./chart-responsive -->
+                 
+     
+     
+     
+     <hf:chart type="line" title="NB Places Participants Events" xaxisLabel="Event" yaxisLabel="Amount">
+    <hf:chartSerie name="Nb_Places" value="#{chartController.evnbplaces}" var="point" point="#{point.amount}"  tickLabel="#{point.name}"/>
+    <hf:chartSerie colorByPoint="true" type="column" name="Nb_Participanrs" value="#{chartController.evparticip}" var="point" point="#{point.amount}"  />
+</hf:chart>
+                <!-- /.row -->
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+            </div>
+            </div>
+                 
                  
                   
 	  	

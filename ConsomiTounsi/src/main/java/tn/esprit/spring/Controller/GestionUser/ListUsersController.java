@@ -83,6 +83,30 @@ public class ListUsersController {
 		return "/listusers.xhtml";
 		
 	}
+	@Transactional
+	public String BanUserT(Long id)
+	{
+		
+		System.out.println(id);
+		User U = UserService.findOne(id);
+		U.setEtatAcc(false);
+		
+		UserService.updateUser(U);
+		return "/listusersTab.xhtml";
+		
+	}
+	@Transactional
+	public String UnBanUserT(Long id)
+	{
+		
+		System.out.println(id);
+		User U = UserService.findOne(id);
+		U.setEtatAcc(true);
+		
+		UserService.updateUser(U);
+		return "/listusersTab.xhtml";
+		
+	}
 	public String getEtatAcc(String username)
 	{
 		
